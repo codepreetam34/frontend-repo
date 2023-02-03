@@ -1,14 +1,20 @@
 import "./App.css";
-import Homescreen from "views/homescreen/Homescreen";
+
 import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+
+import { BrowserRouter } from "react-router-dom";
 import theme from "./theme";
+import Header from "container/Header";
+
+// import Header from "container/Header";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Homescreen />
+    <BrowserRouter >
+    <Header/>
+    </BrowserRouter>
+            
     </ThemeProvider>
   );
 }
