@@ -15,7 +15,6 @@ const SearchBar = ({
 }) => {
   return (
     <Box sx={SearchStyle.searchBoxWrapper}>
-      <SearchIcon sx={SearchStyle.searchIcon} />
       <Input
         fullWidth
         placeholder={placeholder}
@@ -24,7 +23,7 @@ const SearchBar = ({
         sx={SearchStyle.inputField}
         disableUnderline
       />
-
+      <SearchIcon sx={SearchStyle.searchIcon} />
       {cancelIconRight && value.length !== 0 && (
         <CloseOutlinedIcon onClick={clearText} sx={SearchStyle.cancelIcon} />
       )}
