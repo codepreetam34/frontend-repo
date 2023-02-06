@@ -5,7 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter } from "react-router-dom";
 import theme from "./theme";
-import { LOGIN } from "Routes/Routes";
+import { FORGOTPASSWORD, LOGIN } from "Routes/Routes";
+import Login from "container/Signin/Login";
+import ForgotPassword from "container/Signin/ForgotPassword";
 
 const App = () => {
   return (
@@ -14,8 +16,8 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route index element={<LandingPage />} />
-            <Route path="LandingPage" element={<LandingPage />} />
-
+            <Route path={LOGIN} element={<Login />} />
+            <Route path={FORGOTPASSWORD} element={<ForgotPassword />} />
             {/* <Route element={<PrivateRoutes/>}>
           <Route path="home" element={<Home />} />
           <Route path="dashboard" element={<Dashboard />} />
