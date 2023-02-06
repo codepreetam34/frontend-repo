@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Grid, InputBase } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import FMButton from "components/FMButton/FMButton";
 import FMTypography from "components/FMTypography/FMTypography";
@@ -10,7 +11,14 @@ import VibezterLogo from "../../assets/VibezterLogo.svg";
 import { HeaderStyle } from "components/SearchBar/HeaderStyle";
 import { commonStyle } from "Styles/commonStyles";
 
+import { SETUP_NEW_PASSWORD } from "Routes/Routes";
+
 const ForgotPassword = () => {
+  const navigate = useNavigate();
+  const resetPasswordNavigate = () => {
+    navigate(SETUP_NEW_PASSWORD);
+  };
+
   return (
     <>
       <Box
@@ -147,6 +155,7 @@ const ForgotPassword = () => {
                       marginTop: "24px",
                     }}
                     // onClick={handleSubmit(onSubmit)}
+                    onClick={resetPasswordNavigate}
                   />
                   <input type={"submit"} hidden />
 
@@ -181,7 +190,7 @@ const ForgotPassword = () => {
                         ...commonStyle.textTransformStyle,
                         ...commonStyle.disableRippleStyle,
                       }}
-                      //   onClick={forgotPasswordNavigate}
+                      //   onClick={resetPasswordNavigate}
                     />
                   </Box>
                 </Box>

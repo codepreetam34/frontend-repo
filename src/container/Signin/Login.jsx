@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,24 +9,47 @@ import {
   InputBase,
   OutlinedInput,
 } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { FORGOTPASSWORD } from "Routes/Routes";
 
 import FMButton from "components/FMButton/FMButton";
 import FMTypography from "components/FMTypography/FMTypography";
-import Header from "components/SearchBar/Header";
+
+import monkeyLogo from "../../assets/monkeyLogo.svg";
+import VibezterLogo from "../../assets/VibezterLogo.svg";
 
 import { commonStyle } from "Styles/commonStyles";
+import { HeaderStyle } from "components/SearchBar/HeaderStyle";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [passwordType, setPasswordType] = useState(true);
+
   const forgotPasswordNavigate = () => {
     navigate(FORGOTPASSWORD);
   };
+  const passwordToggle = () => {
+    setPasswordType(!passwordType);
+  };
   return (
     <>
-      <Header />
+      <Box
+        sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
+      >
+        <img
+          src={monkeyLogo}
+          alt="monkeyLogo"
+          style={HeaderStyle.monkeyLogoStyle}
+        />
+        <img
+          src={VibezterLogo}
+          alt="VibezterLogo"
+          style={HeaderStyle.vibezterLogoStyle}
+        />
+      </Box>
       <Grid container sx={commonStyle.mainGridContainer}>
         <Grid item sx={commonStyle.innerGrid}>
           <Box sx={commonStyle.formDetailsContainer}>
@@ -64,7 +87,7 @@ const Login = () => {
               /> */}
                 <OutlinedInput
                   placeholder="Enter your password"
-                  // type={passwordType ? "password" : "text"}
+                  type={passwordType ? "password" : "text"}
                   sx={{
                     ...commonStyle.inputFieldStyle,
                     ...commonStyle.paddingZero,
@@ -76,11 +99,11 @@ const Login = () => {
                     <InputAdornment position="start">
                       <IconButton
                         aria-label="toggle password visibility"
-                        //   onClick={passwordToggle}
+                        onClick={passwordToggle}
                         edge="end"
                         disableRipple={true}
                       >
-                        {/* {passwordType ? <VisibilityOff /> : <Visibility />} */}
+                        {passwordType ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   }

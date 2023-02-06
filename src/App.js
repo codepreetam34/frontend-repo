@@ -5,9 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter } from "react-router-dom";
 import theme from "./theme";
-import { FORGOTPASSWORD, LOGIN } from "Routes/Routes";
+import { FORGOTPASSWORD, LOGIN, SETUP_NEW_PASSWORD } from "Routes/Routes";
 import Login from "container/Signin/Login";
 import ForgotPassword from "container/Signin/ForgotPassword";
+import SetupNewPassword from "container/Signin/SetupNewPassword";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route index element={<LandingPage />} />
             <Route path={LOGIN} element={<Login />} />
             <Route path={FORGOTPASSWORD} element={<ForgotPassword />} />
+            <Route path={SETUP_NEW_PASSWORD} element={<SetupNewPassword />} />
             {/* <Route element={<PrivateRoutes/>}>
           <Route path="home" element={<Home />} />
           <Route path="dashboard" element={<Dashboard />} />
