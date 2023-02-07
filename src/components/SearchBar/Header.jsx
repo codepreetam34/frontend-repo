@@ -15,7 +15,7 @@ import { HeaderStyle } from "./HeaderStyle";
 import { commonStyle } from "../../Styles/commonStyles";
 import { Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import "./HeaderBootstrapMenu.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getMenuBarList } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
 
 const StyledMenu = styled((props) => (
@@ -84,8 +84,11 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(getMenuBarList());
-  });
+  }, [dispatch]);
 
+  const accountDetailData = useSelector((state) => state?.menuList);
+
+  console.log("accountDetailData", accountDetailData);
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
       <Grid sx={HeaderStyle.iconGridContainer}>
@@ -98,14 +101,18 @@ const Header = () => {
           <img
             src={VibezterLogo}
             alt="VibezterLogo"
-            style={HeaderStyle.vibezterLogoStyle}
+            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
           />
         </Box>
         <Box>
           <SearchBar placeholder={"Search gifts, experiences and more..."} />
         </Box>
-        <Box>
-          <img src={cart} alt="cart" style={HeaderStyle.cartStyle} />
+        <Box sx={{ marginTop: ".5rem" }}>
+          <img
+            src={cart}
+            alt="cart"
+            style={{ ...HeaderStyle.cartStyle, marginTop: "0" }}
+          />
           <img
             src={profileIcon}
             alt="profileIcon"

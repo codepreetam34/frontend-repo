@@ -3,9 +3,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { axiosMiddleware } from "../../axiosSettings";
 
 // Reducers from slices
-import menuListSlice from "../Slices/HeaderMenuList/HeaderMenuListSlice"
+import menuListSlice from "../Slices/HeaderMenuList/HeaderMenuListSlice";
+import authReducer from "../Slices/Login/auth.slice";
+
 const rootReducer = combineReducers({
-    menuList : menuListSlice
+  menuList: menuListSlice,
+  auth: authReducer,
 });
 
 const initializeStore = () =>

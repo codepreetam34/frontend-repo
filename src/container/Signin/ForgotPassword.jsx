@@ -12,13 +12,24 @@ import { HeaderStyle } from "components/SearchBar/HeaderStyle";
 import { commonStyle } from "Styles/commonStyles";
 
 import { SETUP_NEW_PASSWORD } from "Routes/Routes";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { forgotOtpSchema } from "validationSchema/forgotOtpSchema";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const resetPasswordNavigate = () => {
     navigate(SETUP_NEW_PASSWORD);
   };
-
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(forgotOtpSchema),
+    mode: "onChange",
+  });
   return (
     <>
       <Box
@@ -32,7 +43,7 @@ const ForgotPassword = () => {
         <img
           src={VibezterLogo}
           alt="VibezterLogo"
-          style={HeaderStyle.vibezterLogoStyle}
+          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
         />
       </Box>
       <Grid container sx={commonStyle.mainGridContainer}>

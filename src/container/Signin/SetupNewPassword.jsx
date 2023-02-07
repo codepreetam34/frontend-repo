@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Grid, InputBase } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import FMButton from "components/FMButton/FMButton";
 import FMTypography from "components/FMTypography/FMTypography";
@@ -11,12 +13,57 @@ import { commonStyle } from "Styles/commonStyles";
 import { HeaderStyle } from "components/SearchBar/HeaderStyle";
 import { useNavigate } from "react-router-dom";
 import { LOGIN } from "Routes/Routes";
+import FMOutlinedInput from "components/FMOutlinedInput/FMOutlinedInput";
+import { tests } from "constants/AppConstant";
 
 const SetupNewPassword = () => {
+  const [passwordType, setPasswordType] = useState(true);
+  const [passwordErrors, setPassowordErrors] = useState({
+    length: true,
+    upperCase: true,
+    lowerCase: true,
+    symbol: true,
+    digits: true,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    trigger,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver("setupPasswordSchema"),
+    mode: "onChange",
+  });
+
   const navigate = useNavigate();
   const afterResetPasswordNavigate = () => {
     navigate(LOGIN);
   };
+  const registerField = (field, options = {}) => {
+    const { onChange: fieldOnChange, ...restProps } = register(field);
+    const { onChange } = options;
+
+    const handleChange = (e) => {
+      onChange?.(e);
+      fieldOnChange(e);
+    };
+
+    return { onChange: handleChange, ...restProps };
+  };
+  const handelPasswordChange = (e) => {
+    const value = e.target.value;
+
+    Object.keys(tests).forEach((error) => {
+      const pattern = tests[error];
+      setPassowordErrors((prev) => ({
+        ...prev,
+        [error]: !pattern.test(value),
+      }));
+    });
+  };
+  const passwordToggle = () => setPasswordType(!passwordType);
   return (
     <>
       <Box
@@ -30,7 +77,7 @@ const SetupNewPassword = () => {
         <img
           src={VibezterLogo}
           alt="VibezterLogo"
-          style={HeaderStyle.vibezterLogoStyle}
+          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
         />
       </Box>
       <Grid container sx={commonStyle.mainGridContainer}>
@@ -48,44 +95,21 @@ const SetupNewPassword = () => {
               //   onSubmit={handleSubmit(onSubmit)}
             >
               <Box sx={commonStyle.flexStyle}>
-                <InputBase
-                  required
-                  id="userName"
-                  name="userName"
-                  placeholder="New Password"
-                  sx={{
-                    ...commonStyle.inputFieldStyle,
-                    //   ...(errors.username && commonStyle.errorStyle),
-                  }}
-                  // {...register("username")}
-                  // error={errors.username ? true : false}
-                />
-                {/* <FMTypography
-          styleData={commonStyle.errorText}
-          displayText={"errors.username?.message"}
-        /> */}
-                {/* <FMInputLabel
-        styleData={commonStyle.inputLabelStyle}
-        displayText={"Password"}
-      /> */}
-
-                {/* <FMTypography
-          styleData={commonStyle.errorText}
-          displayText={"errors.password?.message"}
-        /> */}
-
-                <InputBase
-                  required
-                  id="userName"
-                  name="userName"
-                  placeholder="Confirm New Password"
-                  sx={{
-                    ...commonStyle.inputFieldStyle,
-                    //   ...(errors.username && commonStyle.errorStyle),
-                  }}
-                  // {...register("username")}
-                  // error={errors.username ? true : false}
-                />
+                <Box>
+                  <FMOutlinedInput
+                    inputLabel="Password"
+                    placeholder="Enter your password"
+                    type={passwordType ? "password" : "text"}
+                    register={registerField("password", {
+                      onChange: handelPasswordChange,
+                    })}
+                    error={!!errors.password}
+                    passwordToggle={passwordToggle}
+                    passwordType={passwordType}
+                    errors={errors}
+                    errorKey="password"
+                  />
+                </Box>
 
                 <FMButton
                   displayText={"Reset Password"}

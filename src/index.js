@@ -4,9 +4,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { store } from "redux/store";
+import initializeStore from "Redux/Store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+const store = initializeStore();
 
 root.render(
   <React.StrictMode>

@@ -38,11 +38,13 @@ export const commonStyle = {
     boxSizing: "border-box",
     boxShadow: "0rem 0.25rem 0.5rem rgba(0,0,0,0.04)",
     borderRadius: "0.5rem",
+    color: "black",
     "& .MuiOutlinedInput-notchedOutline": {
       border: "none",
+      color: "black",
     },
     "&::placeholder": {
-      color: "#ff0000",
+      color: "black",
       opacity: 1,
     },
   },

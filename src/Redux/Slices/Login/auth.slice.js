@@ -1,0 +1,57 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// import { notify } from "Components/FMToaster";
+import axiosInstance from "services/AxiosInstance";
+import { FETCH_ACTION, LOGOUT } from "./type";
+
+export const login = createAsyncThunk(FETCH_ACTION, async (data, thunkAPI) => {
+  try {
+    const response = await axiosInstance.post("api/signin", data);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error });
+  }
+});
+
+export const logout = createAsyncThunk(LOGOUT, async (data, thunkAPI) => {
+  try {
+    const response = await axiosInstance.post("users/logout", data);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error });
+  }
+});
+
+const slice = createSlice({
+  name: "auth",
+  initialState: {
+    isLoggedIn: false,
+    isFetching: false,
+    data: {},
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(login.pending, (state) => {
+      state.data = {};
+      state.isFetching = true;
+    });
+
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.isLoggedIn = true;
+      state.isFetching = false;
+
+      // notify({ type: "success", content: "Logged in successfully" });
+    });
+    builder.addCase(login.rejected, (state, action) => {
+      state.data = {};
+      state.isLoggedIn = false;
+      state.isFetching = false;
+      // notify({
+      //   type: "error",
+      //   content: action?.payload?.error?.response?.data?.message,
+      // });
+    });
+  },
+});
+
+export default slice.reducer;

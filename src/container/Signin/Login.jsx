@@ -11,16 +11,22 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { FORGOTPASSWORD } from "Routes/Routes";
+import { FORGOTPASSWORD, LANDING_PAGE } from "Routes/Routes";
 
 import FMButton from "components/FMButton/FMButton";
 import FMTypography from "components/FMTypography/FMTypography";
 
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
+import { login } from "Redux/Slices/Login/auth.slice";
 
 import { commonStyle } from "Styles/commonStyles";
 import { HeaderStyle } from "components/SearchBar/HeaderStyle";
+import { setItem } from "services/commonService";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "validationSchema/loginSchema";
+import FMInputLabel from "components/FMInputLabel/FMInputLabel";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -28,12 +34,34 @@ const Login = () => {
 
   const [passwordType, setPasswordType] = useState(true);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+    mode: "onChange",
+  });
+
   const forgotPasswordNavigate = () => {
     navigate(FORGOTPASSWORD);
   };
   const passwordToggle = () => {
     setPasswordType(!passwordType);
   };
+
+  const onSubmit = (data) => {
+    localStorage.clear();
+    dispatch(login(data))
+      .unwrap()
+      .then((res) => {
+        if (res.success) {
+          setItem("userData", res?.data);
+          navigate(LANDING_PAGE);
+        }
+      });
+  };
+
   return (
     <>
       <Box
@@ -47,7 +75,7 @@ const Login = () => {
         <img
           src={VibezterLogo}
           alt="VibezterLogo"
-          style={HeaderStyle.vibezterLogoStyle}
+          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
         />
       </Box>
       <Grid container sx={commonStyle.mainGridContainer}>
@@ -59,42 +87,39 @@ const Login = () => {
             />
           </Box>
           <Box sx={commonStyle.formOuterBoxStyle}>
-            <Box
-              component="form"
-              xs={12}
-              //   onSubmit={handleSubmit(onSubmit)}
-            >
+            <Box component="form" xs={12} onSubmit={handleSubmit(onSubmit)}>
               <Box sx={commonStyle.flexStyle}>
                 <InputBase
                   required
-                  id="userName"
-                  name="userName"
-                  placeholder="Enter your username"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
                   sx={{
                     ...commonStyle.inputFieldStyle,
-                    //   ...(errors.username && commonStyle.errorStyle),
+
+                    ...(errors.email && commonStyle.errorStyle),
                   }}
-                  // {...register("username")}
-                  // error={errors.username ? true : false}
+                  {...register("email")}
+                  error={errors.email ? true : false}
                 />
-                {/* <FMTypography
+                <FMTypography
                   styleData={commonStyle.errorText}
-                  displayText={"errors.username?.message"}
-                /> */}
-                {/* <FMInputLabel
-                styleData={commonStyle.inputLabelStyle}
-                displayText={"Password"}
-              /> */}
+                  displayText={errors.email?.message}
+                />
+                <FMInputLabel
+                  styleData={commonStyle.inputLabelStyle}
+                  displayText={"Password"}
+                />
                 <OutlinedInput
                   placeholder="Enter your password"
                   type={passwordType ? "password" : "text"}
                   sx={{
                     ...commonStyle.inputFieldStyle,
                     ...commonStyle.paddingZero,
-                    //   ...(errors.password && commonStyle.errorStyle),
+                    ...(errors.password && commonStyle.errorStyle),
                   }}
-                  // {...register("password")}
-                  // error={errors.password ? true : false}
+                  {...register("password")}
+                  error={errors.password ? true : false}
                   endAdornment={
                     <InputAdornment position="start">
                       <IconButton
@@ -107,6 +132,10 @@ const Login = () => {
                       </IconButton>
                     </InputAdornment>
                   }
+                />
+                <FMTypography
+                  styleData={commonStyle.errorText}
+                  displayText={errors.password?.message}
                 />
                 <Box sx={commonStyle.buttonBox}>
                   <FMButton
@@ -125,7 +154,7 @@ const Login = () => {
                   styleData={{
                     ...commonStyle.buttonStyles,
                   }}
-                  // onClick={handleSubmit(onSubmit)}
+                  onClick={handleSubmit(onSubmit)}
                 />
                 <input type={"submit"} hidden />
 
