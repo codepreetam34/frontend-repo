@@ -22,7 +22,7 @@ export const SearchStyle = {
       fontFamily: "'Poppins'",
       fontStyle: "normal",
       fontWeight: "400",
-      color: "#1a1a1a66",
+      color: "black",
       fontSize: "0.875rem",
     },
   },

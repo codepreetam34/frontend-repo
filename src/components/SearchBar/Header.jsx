@@ -1,6 +1,6 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Grid, Typography } from "@mui/material";
 import SearchBar from "components/SearchBar/SearchBar";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 import cart from "../../assets/cart.svg";
@@ -15,8 +15,19 @@ import { HeaderStyle } from "./HeaderStyle";
 import { commonStyle } from "../../Styles/commonStyles";
 import { Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import "./HeaderBootstrapMenu.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getMenuBarList } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
+import orderIcon from "../../assets/orderIcon.svg";
+import contactIcon from "../../assets/contactIcon.svg";
+import faqIcon from "../../assets/faqIcon.svg";
+import logoutIcon from "../../assets/logoutIcon.svg";
+
+import FMTypography from "components/FMTypography/FMTypography";
+import { Stack } from "@mui/system";
+import FMButton from "components/FMButton/FMButton";
+import { useNavigate } from "react-router-dom";
+import { LOGIN } from "Routes/Routes";
+import { logout } from "Redux/Slices/Login/auth.slice";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -63,28 +74,69 @@ const StyledMenu = styled((props) => (
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const personLoggedIn = JSON.parse(
+    localStorage.getItem("Sidebar_Module_Assigned")
+  )?.fullName;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElSec, setAnchorElSec] = React.useState(null);
+  const [openFilter, setOpenFilter] = useState(false);
 
   const open = Boolean(anchorEl);
   const openSec = Boolean(anchorElSec);
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleClickSec = (event) => {
-  //   setAnchorElSec(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-  // const handleCloseSec = () => {
-  //   setAnchorElSec(null);
-  // };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClickSec = (event) => {
+    setAnchorElSec(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleCloseSec = () => {
+    setAnchorElSec(null);
+  };
 
   useEffect(() => {
     dispatch(getMenuBarList());
-  });
+  }, [dispatch]);
+
+  const accountDetailData = useSelector(
+    (state) => state?.menuList?.getMenuOptionsData?.categoryList
+  );
+  console.log("accountDetailData", accountDetailData);
+
+  const navigateToLogin = () => {
+    navigate(LOGIN);
+  };
+
+  const logoutPerson = () => {
+    localStorage.clear();
+    navigate(LOGIN);
+  };
+
+  const logoutHandler = () => {
+    // setDisabledLogout(true);
+    dispatch(logout())
+      .then((response) => {
+        if (response.payload.data.code === 200) {
+          setAnchorEl(null);
+          localStorage.clear();
+          navigate(LOGIN);
+        } else {
+          // setDisabledLogout(false);
+        }
+      })
+      .catch((rejectedWithValue) => {
+        // setDisabledLogout(false);
+        localStorage.clear();
+        navigate(LOGIN);
+        // notify({ type: "success", content: "Logged out successfully" });
+        throw new Error("Logout failed");
+      });
+  };
 
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
@@ -98,19 +150,156 @@ const Header = () => {
           <img
             src={VibezterLogo}
             alt="VibezterLogo"
-            style={HeaderStyle.vibezterLogoStyle}
+            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
           />
         </Box>
         <Box>
           <SearchBar placeholder={"Search gifts, experiences and more..."} />
         </Box>
-        <Box>
-          <img src={cart} alt="cart" style={HeaderStyle.cartStyle} />
+        <Box sx={{ marginTop: ".5rem" }}>
           <img
-            src={profileIcon}
-            alt="profileIcon"
-            style={HeaderStyle.profileIconStyle}
+            src={cart}
+            alt="cart"
+            style={{ ...HeaderStyle.cartStyle, marginTop: "0" }}
           />
+
+          {/* profile below */}
+          <Button
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+            style={{
+              minWidth: "0",
+              "MuiButton-root:hover": {
+                backgroundColor: "red !important",
+                borderRadius: "28px",
+              },
+            }}
+          >
+            <img
+              src={profileIcon}
+              alt="profileIcon"
+              style={HeaderStyle.profileIconStyle}
+            />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+            sx={{ padding: "2rem", ...HeaderStyle.lgjaStyle }}
+          >
+            <Box sx={{ display: "flex", marginBottom: ".5rem" }}>
+              <Stack direction="row" spacing={2} sx={{ marginLeft: "1rem" }}>
+                <Avatar src="/broken-image.jpg" />
+              </Stack>
+              {personLoggedIn ? (
+                <Box sx={{ marginLeft: "12px" }}>
+                  <FMTypography
+                    displayText={personLoggedIn}
+                    sx={{ fontSize: "14px" }}
+                  />
+                  <FMButton
+                    displayText={"See your Profile"}
+                    variant={"outlined"}
+                    styleData={{
+                      // ...commonStyle.buttonStyles,padd
+                      color: "#717171",
+                      padding: "0",
+                      fontSize: "10px",
+                      backgroundColor: "none",
+                      border: "none",
+                      "&:hover": {
+                        backgroundColor: "white",
+                        border: "none",
+                      },
+                    }}
+                  />
+                </Box>
+              ) : (
+                <Box>
+                  <FMButton
+                    displayText={"Log in"}
+                    variant={"outlined"}
+                    styleData={{
+                      textTransform: "capitalize",
+                      paddingTop: "0",
+                      color: "black",
+                      backgroundColor: "none",
+                      border: "none",
+                      "&:hover": {
+                        backgroundColor: "white",
+                        border: "none",
+                      },
+                    }}
+                    onClick={navigateToLogin}
+                  />
+                  <FMTypography
+                    displayText={"To access account"}
+                    sx={{
+                      color: "#717171",
+                      marginLeft: "12px",
+                      fontSize: "10px",
+                      color: "black",
+                    }}
+                  />
+                </Box>
+              )}
+            </Box>
+            <hr style={{ margin: "0" }} />
+            <MenuItem
+              onClick={handleClose}
+              divider
+              sx={{
+                padding: "1rem",
+              }}
+            >
+              <img
+                src={orderIcon}
+                alt="order-icon"
+                style={{ marginRight: "12px" }}
+              />{" "}
+              Orders
+            </MenuItem>
+
+            <MenuItem onClick={handleClose} divider sx={{ padding: "1rem" }}>
+              <img
+                src={contactIcon}
+                alt="contact-icon"
+                style={{ marginRight: "12px" }}
+              />
+              Contact Us
+            </MenuItem>
+
+            <MenuItem onClick={handleClose} divider sx={{ padding: "1rem" }}>
+              <img
+                src={faqIcon}
+                alt="faqIcon-icon"
+                style={{ marginRight: "12px" }}
+              />
+              FAQ's
+            </MenuItem>
+
+            {personLoggedIn && (
+              <MenuItem
+                onClick={logoutHandler}
+                divider
+                sx={{ padding: "1rem" }}
+              >
+                <img
+                  src={logoutIcon}
+                  alt="logout-icon"
+                  style={{ marginRight: "12px" }}
+                />
+                Log Out
+              </MenuItem>
+            )}
+          </Menu>
         </Box>
       </Grid>
 
@@ -120,590 +309,50 @@ const Header = () => {
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav className="" navbarScroll>
-                <NavDropdown title="Birthday" id="navbarScrollingDropdown">
-                  <Row>
-                    <Col md={4}>
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
+                {accountDetailData?.map((elem) => (
+                  <NavDropdown title={elem?.name} id="navbarScrollingDropdown">
+                    <Row>
+                      {elem?.children?.map((secElem) => (
+                        <Col md={4}>
+                          <div className="cate_area">
+                            <h3>{secElem?.name}</h3>
 
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={4}>
-                      <div className="cate_area">
-                        <h3>Gifts - By Choice</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
+                            {secElem?.children?.map((thirdElem) => (
+                              <NavDropdown.Item href="/">
+                                {thirdElem?.name}
+                              </NavDropdown.Item>
+                            ))}
 
-                      <div className="cate_area">
-                        <h3>By Cities</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={4}>
-                      <div className="cate_list_menu">
-                        <a href="/">
-                          <img
-                            src="../../../images/profile.jpg"
-                            className="img-fluid"
-                            alt=""
-                          />
-                          <h4>Cakes</h4>
-                        </a>
-                      </div>
-                    </Col>
-                  </Row>
-                </NavDropdown>
-                <NavDropdown title="Anniversary" id="navbarScrollingDropdown">
-                  <Row>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
+                            {/* <NavDropdown.Item href="/">
+                              Anniversary
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="/">
+                              Something else here
+                            </NavDropdown.Item> */}
+                          </div>
+                        </Col>
+                      ))}
 
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>Gifts - By Choice</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Cities</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_list_menu">
-                        <a href="/">
-                          <img
-                            src="../../../images/profile.jpg"
-                            className="img-fluid"
-                            alt=""
-                          />
-                          <h4>Cakes</h4>
-                        </a>
-                      </div>
-                    </Col>
-                  </Row>
-                </NavDropdown>
-                <NavDropdown title="Gift" id="navbarScrollingDropdown">
-                  <Row>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>Gifts - By Choice</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Cities</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_list_menu">
-                        <a href="/">
-                          <img
-                            src="../../../images/profile.jpg"
-                            className="img-fluid"
-                            alt=""
-                          />
-                          <h4>Cakes</h4>
-                        </a>
-                      </div>
-                    </Col>
-                  </Row>
-                </NavDropdown>
-                <NavDropdown title="Experience" id="navbarScrollingDropdown">
-                  <Row>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>Gifts - By Choice</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Cities</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_list_menu">
-                        <a href="/">
-                          <img
-                            src="../../../images/profile.jpg"
-                            className="img-fluid"
-                            alt=""
-                          />
-                          <h4>Cakes</h4>
-                        </a>
-                      </div>
-                    </Col>
-                  </Row>
-                </NavDropdown>
-                <NavDropdown title="Occasions" id="navbarScrollingDropdown">
-                  <Row>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>Gifts - By Choice</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Cities</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_list_menu">
-                        <a href="/">
-                          <img
-                            src="../../../images/profile.jpg"
-                            className="img-fluid"
-                            alt=""
-                          />
-                          <h4>Cakes</h4>
-                        </a>
-                      </div>
-                    </Col>
-                  </Row>
-                </NavDropdown>
-                <NavDropdown title="Cakes" id="navbarScrollingDropdown">
-                  <Row>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>Gifts - By Choice</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Cities</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_list_menu">
-                        <a href="/">
-                          <img
-                            src="../../../images/profile.jpg"
-                            className="img-fluid"
-                            alt=""
-                          />
-                          <h4>Cakes</h4>
-                        </a>
-                      </div>
-                    </Col>
-                  </Row>
-                </NavDropdown>
-                <NavDropdown title="Flowers" id="navbarScrollingDropdown">
-                  <Row>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>Gifts - By Choice</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Cities</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_list_menu">
-                        <a href="/">
-                          <img
-                            src="../../../images/profile.jpg"
-                            className="img-fluid"
-                            alt=""
-                          />
-                          <h4>Cakes</h4>
-                        </a>
-                      </div>
-                    </Col>
-                  </Row>
-                </NavDropdown>
-                <NavDropdown
-                  title="Combo & Hampers"
-                  id="navbarScrollingDropdown"
-                >
-                  <Row>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Features</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_area">
-                        <h3>Gifts - By Choice</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-
-                      <div className="cate_area">
-                        <h3>By Cities</h3>
-                        <NavDropdown.Item href="/">Birthday</NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Anniversary{" "}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/">
-                          Something else here
-                        </NavDropdown.Item>
-                      </div>
-                    </Col>
-                    <Col md={3}>
-                      <div className="cate_list_menu">
-                        <a href="/">
-                          <img
-                            src="../../../images/profile.jpg"
-                            className="img-fluid"
-                            alt=""
-                          />
-                          <h4>Cakes</h4>
-                        </a>
-                      </div>
-                    </Col>
-                  </Row>
-                </NavDropdown>
+                      <Col md={4}>
+                        <div className="cate_list_menu">
+                          <a href="/">
+                            <img
+                              src="../../../images/profile.jpg"
+                              className="img-fluid"
+                              alt=""
+                            />
+                            <h4>Cakes</h4>
+                          </a>
+                        </div>
+                      </Col>
+                    </Row>
+                  </NavDropdown>
+                ))}
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
       </div>
-
-      {/* menu bootstrap above */}
-
-      {/* <Grid sx={HeaderStyle.menuGridStyle}>
-        <Box sx={commonStyle.flexDisplayStyle}>
-          <Box sx={HeaderStyle.menuBtnStyle}>
-            <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-              endIcon={<KeyboardArrowDownIcon />}
-              disableRipple
-              style={commonStyle.capitalizeTextStyle}
-            >
-              Birthday
-            </Button>
-          </Box>
-          <Menu
-            id="demo-customized-menu"
-            MenuListProps={{
-              "aria-labelledby": "demo-customized-button",
-            }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-          >
-            <Grid sx={{ display: "flex" }}>
-              <Box>
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Box>
-              <Box>
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Box>
-              <Box>
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Box>
-              <Box>
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Box>
-            </Grid>
-          </Menu>
-
-          <Box sx={HeaderStyle.menuBtnStyle}>
-            <Button
-              id="demo-positioned-button2"
-              aria-controls={openSec ? "demo-positioned-menu2" : undefined}
-              aria-haspopup="true"
-              aria-expanded={openSec ? "true" : undefined}
-              onClick={handleClickSec}
-              endIcon={<KeyboardArrowDownIcon />}
-              style={commonStyle.capitalizeTextStyle}
-            >
-              Anniversary
-            </Button>
-          </Box>
-          <Menu
-            id="demo-customized-menu"
-            MenuListProps={{
-              "aria-labelledby": "demo-customized-button",
-            }}
-            anchorEl={anchorElSec}
-            open={openSec}
-            onClose={handleCloseSec}
-          >
-            <MenuItem onClick={handleCloseSec}>dusra hu</MenuItem>
-            <MenuItem onClick={handleCloseSec}>My dusra account</MenuItem>
-            <MenuItem onClick={handleCloseSec}>Logout</MenuItem>
-          </Menu>
-        </Box>
-      </Grid> */}
     </Grid>
   );
 };

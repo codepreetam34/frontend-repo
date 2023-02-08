@@ -1,7 +1,8 @@
-import Login from "Container/Signin/Login";
+import Login from "container/Signin/Login";
 import React from "react";
 import { Navigate, Outlet } from "react-router";
-import { getItem } from "Services/commonService";
+import { getItem } from "services/commonService";
+
 import { LOGIN } from "./Routes";
 
 function PrivateRoutes() {
