@@ -27,4 +27,15 @@ export const HeaderStyle = {
       borderRadius: "28px",
     },
   },
+  lgjaStyle: {
+    ".MuiMenu-list": {
+      width: "236px",
+    },
+    ".MuiPopover-paper": {
+      padding: "1rem 1rem 1rem 0",
+      borderRadius: "20px",
+      width: "236px",
+      // backgroundColor: "red",
+    },
+  },
 };

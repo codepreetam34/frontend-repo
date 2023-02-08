@@ -27,7 +27,7 @@ const App = () => {
             <Route path={FORGOTPASSWORD} element={<ForgotPassword />} />
             <Route path={SETUP_NEW_PASSWORD} element={<SetupNewPassword />} />
             <Route element={<PrivateRoutes />}>
-              <Route path={LANDING_PAGE} element={<LandingPage />} />
+              {/* <Route path={LANDING_PAGE} element={<LandingPage />} /> */}
             </Route>
             {/* <Route path="analytics" element={<Analytics />} />
             <Route path="admin" element={<Admin />} /> */}

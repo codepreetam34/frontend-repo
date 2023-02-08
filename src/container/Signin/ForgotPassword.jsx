@@ -15,16 +15,24 @@ import { SETUP_NEW_PASSWORD } from "Routes/Routes";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { forgotOtpSchema } from "validationSchema/forgotOtpSchema";
+import FMOutlinedInput from "components/FMOutlinedInput/FMOutlinedInput";
+
+import { useDispatch } from "react-redux";
+import { resetPasswordLink } from "Redux/Slices/Login/resetPasswordLink";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const resetPasswordNavigate = () => {
     navigate(SETUP_NEW_PASSWORD);
+  };
+
+  const onSubmit = (data) => {
+    dispatch(resetPasswordLink(data));
   };
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(forgotOtpSchema),
@@ -47,167 +55,48 @@ const ForgotPassword = () => {
         />
       </Box>
       <Grid container sx={commonStyle.mainGridContainer}>
-        <Grid sx={{ display: "block" }}>
-          <Grid item sx={{ ...commonStyle.innerGrid, marginTop: "4rem" }}>
-            <Box sx={commonStyle.formDetailsContainer}>
-              <FMTypography
-                displayText="Forgot Password"
-                styleData={commonStyle.headingStyle}
-              />
-            </Box>
-            <Box sx={commonStyle.formOuterBoxStyle}>
-              <Box
-                component="form"
-                xs={12}
-                //   onSubmit={handleSubmit(onSubmit)}
-              >
-                <Box sx={commonStyle.flexStyle}>
+        <Grid item sx={commonStyle.innerGrid}>
+          <Box sx={commonStyle.formDetailsContainer}>
+            <FMTypography
+              displayText="Forgot Password"
+              styleData={commonStyle.headingStyle}
+            />
+          </Box>
+          <Box sx={commonStyle.formOuterBoxStyle}>
+            <Box component="form" xs={12} onSubmit={handleSubmit(onSubmit)}>
+              <Box sx={commonStyle.flexStyle}>
+                <Box>
                   <InputBase
                     required
-                    id="userName"
-                    name="userName"
+                    id="email"
+                    name="email"
                     placeholder="Enter your email"
                     sx={{
                       ...commonStyle.inputFieldStyle,
-                      //   ...(errors.username && commonStyle.errorStyle),
-                    }}
-                    // {...register("username")}
-                    // error={errors.username ? true : false}
-                  />
-                  {/* <FMTypography
-                  styleData={commonStyle.errorText}
-                  displayText={"errors.username?.message"}
-                /> */}
-                  {/* <FMInputLabel
-                styleData={commonStyle.inputLabelStyle}
-                displayText={"Password"}
-              /> */}
 
-                  {/* <FMTypography
-                  styleData={commonStyle.errorText}
-                  displayText={"errors.password?.message"}
-                /> */}
-
-                  <FMButton
-                    displayText={"Send OTP"}
-                    variant={"contained"}
-                    styleData={{
-                      ...commonStyle.buttonStyles,
-                      marginTop: "24px",
+                      ...(errors.email && commonStyle.errorStyle),
                     }}
-                    // onClick={handleSubmit(onSubmit)}
+                    {...register("email")}
+                    error={errors.email ? true : false}
                   />
-                  <input type={"submit"} hidden />
+                  <FMTypography
+                    styleData={commonStyle.errorText}
+                    displayText={errors.email?.message}
+                  />
                 </Box>
+
+                <FMButton
+                  displayText={"Send reset link"}
+                  variant={"contained"}
+                  styleData={{
+                    ...commonStyle.buttonStyles,
+                  }}
+                  onClick={handleSubmit(onSubmit)}
+                />
+                <input type={"submit"} hidden />
               </Box>
             </Box>
-          </Grid>
-
-          {/* after getting otp screen */}
-
-          <Grid item sx={commonStyle.innerGrid}>
-            <Box sx={commonStyle.formDetailsContainer}>
-              <FMTypography
-                displayText="Forgot Password"
-                styleData={commonStyle.headingStyle}
-              />
-            </Box>
-            <Box sx={commonStyle.formOuterBoxStyle}>
-              <Box
-                component="form"
-                xs={12}
-                //   onSubmit={handleSubmit(onSubmit)}
-              >
-                <Box sx={commonStyle.flexStyle}>
-                  <InputBase
-                    required
-                    id="userName"
-                    name="userName"
-                    placeholder="Enter your email"
-                    sx={{
-                      ...commonStyle.inputFieldStyle,
-                      //   ...(errors.username && commonStyle.errorStyle),
-                    }}
-                    // {...register("username")}
-                    // error={errors.username ? true : false}
-                  />
-                  {/* <FMTypography
-                  styleData={commonStyle.errorText}
-                  displayText={"errors.username?.message"}
-                /> */}
-                  {/* <FMInputLabel
-                styleData={commonStyle.inputLabelStyle}
-                displayText={"Password"}
-              /> */}
-
-                  {/* <FMTypography
-                  styleData={commonStyle.errorText}
-                  displayText={"errors.password?.message"}
-                /> */}
-
-                  <InputBase
-                    required
-                    id="userName"
-                    name="userName"
-                    placeholder="Enter OTP"
-                    sx={{
-                      ...commonStyle.inputFieldStyle,
-                      //   ...(errors.username && commonStyle.errorStyle),
-                    }}
-                    // {...register("username")}
-                    // error={errors.username ? true : false}
-                  />
-
-                  <FMButton
-                    displayText={"Send OTP"}
-                    variant={"contained"}
-                    styleData={{
-                      ...commonStyle.buttonStyles,
-                      marginTop: "24px",
-                    }}
-                    // onClick={handleSubmit(onSubmit)}
-                    onClick={resetPasswordNavigate}
-                  />
-                  <input type={"submit"} hidden />
-
-                  <Box
-                    sx={{
-                      ...commonStyle.buttonBox,
-                      justifyContent: "center",
-                      marginBottom: "0px",
-                    }}
-                  >
-                    <FMButton
-                      displayText={"Resend OTP in 00:23 sec"}
-                      variant={"text"}
-                      styleData={{
-                        ...commonStyle.textTransformStyle,
-                        ...commonStyle.disableRippleStyle,
-                      }}
-                      //   onClick={forgotPasswordNavigate}
-                    />
-                  </Box>
-                  <Box
-                    sx={{
-                      ...commonStyle.buttonBox,
-                      justifyContent: "center",
-                      marginBottom: "0px",
-                    }}
-                  >
-                    <FMButton
-                      displayText={"Resend OTP"}
-                      variant={"text"}
-                      styleData={{
-                        ...commonStyle.textTransformStyle,
-                        ...commonStyle.disableRippleStyle,
-                      }}
-                      //   onClick={resetPasswordNavigate}
-                    />
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
+          </Box>
         </Grid>
       </Grid>
     </>

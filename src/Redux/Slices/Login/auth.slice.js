@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import { notify } from "Components/FMToaster";
 import axiosInstance from "services/AxiosInstance";
 import { FETCH_ACTION, LOGOUT } from "./type";
 
@@ -14,7 +13,7 @@ export const login = createAsyncThunk(FETCH_ACTION, async (data, thunkAPI) => {
 
 export const logout = createAsyncThunk(LOGOUT, async (data, thunkAPI) => {
   try {
-    const response = await axiosInstance.post("users/logout", data);
+    const response = await axiosInstance.post("api/signout");
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue({ error: error });
@@ -39,7 +38,10 @@ const slice = createSlice({
       state.data = action.payload;
       state.isLoggedIn = true;
       state.isFetching = false;
-
+      localStorage.setItem(
+        "Sidebar_Module_Assigned",
+        JSON.stringify(action.payload.user)
+      );
       // notify({ type: "success", content: "Logged in successfully" });
     });
     builder.addCase(login.rejected, (state, action) => {

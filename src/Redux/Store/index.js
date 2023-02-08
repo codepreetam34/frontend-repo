@@ -5,10 +5,12 @@ import { axiosMiddleware } from "../../axiosSettings";
 // Reducers from slices
 import menuListSlice from "../Slices/HeaderMenuList/HeaderMenuListSlice";
 import authReducer from "../Slices/Login/auth.slice";
+import resetPasswordSlice from "../Slices/Login/resetPasswordLink";
 
 const rootReducer = combineReducers({
   menuList: menuListSlice,
   auth: authReducer,
+  resetPassword: resetPasswordSlice,
 });
 
 const initializeStore = () =>

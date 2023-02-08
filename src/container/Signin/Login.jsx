@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   Box,
   Grid,
@@ -51,13 +51,15 @@ const Login = () => {
   };
 
   const onSubmit = (data) => {
-    localStorage.clear();
     dispatch(login(data))
       .unwrap()
       .then((res) => {
-        if (res.success) {
+        console.log(res);
+        if (res) {
+          console.log("hello");
           setItem("userData", res?.data);
-          navigate(LANDING_PAGE);
+          navigate("/");
+          // <Navigate to={}
         }
       });
   };
