@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Grid, InputBase } from "@mui/material";
 
 import { tests } from "constants/AppConstant";
-import { FORGOTPASSWORD, LOGIN } from "Routes/Routes";
+import { EMAIL_VERIFY, FORGOTPASSWORD, LOGIN } from "Routes/Routes";
 
 import FMButton from "components/FMButton/FMButton";
 import FMTypography from "components/FMTypography/FMTypography";
@@ -78,12 +78,18 @@ const Login = () => {
   };
 
   const onSubmit = (data) => {
-    dispatch(signUpUser(data))
+    const postData = {
+      firstName: data?.firstName,
+      lastName: data?.lastName,
+      email: data?.email,
+      password: data?.password,
+      contactNumber: data?.contactNumber,
+    };
+    dispatch(signUpUser(postData))
       .unwrap()
       .then((res) => {
         if (res) {
-          console.log("hello");
-          navigate(LOGIN);
+          navigate(EMAIL_VERIFY);
         }
       });
   };
@@ -154,6 +160,24 @@ const Login = () => {
                     />
                   </Box>
                 </Box>
+
+                <InputBase
+                  required
+                  id="contactNumber"
+                  name="contactNumber"
+                  placeholder="Enter your contact Number"
+                  sx={{
+                    ...commonStyle.inputFieldStyle,
+
+                    ...(errors.contactNumber && commonStyle.errorStyle),
+                  }}
+                  {...register("contactNumber")}
+                  error={errors.contactNumber ? true : false}
+                />
+                <FMTypography
+                  styleData={commonStyle.errorText}
+                  displayText={errors.contactNumber?.message}
+                />
 
                 <InputBase
                   required

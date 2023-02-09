@@ -22,8 +22,6 @@ import { useParams } from "react-router";
 import { setupPassword } from "Redux/Slices/Login/setupPassword";
 
 const SetupNewPassword = () => {
-  // const params = useParams();
-  // const { token } = params;
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const id = searchParams.get("id");
