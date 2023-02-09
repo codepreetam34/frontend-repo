@@ -11,13 +11,25 @@ import VibezterLogo from "../../assets/VibezterLogo.svg";
 
 import { commonStyle } from "Styles/commonStyles";
 import { HeaderStyle } from "components/SearchBar/HeaderStyle";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { LOGIN } from "Routes/Routes";
 import FMOutlinedInput from "components/FMOutlinedInput/FMOutlinedInput";
 import { tests } from "constants/AppConstant";
+import { setupPasswordSchema } from "validationSchema/setUpNewPassword";
+
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
+import { setupPassword } from "Redux/Slices/Login/setupPassword";
 
 const SetupNewPassword = () => {
+  // const params = useParams();
+  // const { token } = params;
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+  const id = searchParams.get("id");
+
   const [passwordType, setPasswordType] = useState(true);
+  const [confirmPasswordType, setConfirmPasswordType] = useState(true);
   const [passwordErrors, setPassowordErrors] = useState({
     length: true,
     upperCase: true,
@@ -33,14 +45,13 @@ const SetupNewPassword = () => {
     trigger,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver("setupPasswordSchema"),
+    resolver: yupResolver(setupPasswordSchema),
     mode: "onChange",
   });
 
   const navigate = useNavigate();
-  const afterResetPasswordNavigate = () => {
-    navigate(LOGIN);
-  };
+  const dispatch = useDispatch();
+
   const registerField = (field, options = {}) => {
     const { onChange: fieldOnChange, ...restProps } = register(field);
     const { onChange } = options;
@@ -64,6 +75,25 @@ const SetupNewPassword = () => {
     });
   };
   const passwordToggle = () => setPasswordType(!passwordType);
+  const confirmPasswordToggle = () =>
+    setConfirmPasswordType(!confirmPasswordType);
+
+  const onSubmit = (data) => {
+    const postData = {
+      password: data.password,
+      token: token,
+      userId: id,
+    };
+    dispatch(setupPassword(postData)).then((res) => {
+      console.log("changed pas", res);
+      // if (!res.error) {
+      // removeItem("userData");
+
+      navigate(LOGIN);
+      // }
+    });
+  };
+
   return (
     <>
       <Box
@@ -89,16 +119,12 @@ const SetupNewPassword = () => {
             />
           </Box>
           <Box sx={commonStyle.formOuterBoxStyle}>
-            <Box
-              component="form"
-              xs={12}
-              //   onSubmit={handleSubmit(onSubmit)}
-            >
+            <Box component="form" xs={12} onSubmit={handleSubmit(onSubmit)}>
               <Box sx={commonStyle.flexStyle}>
                 <Box>
                   <FMOutlinedInput
-                    inputLabel="Password"
-                    placeholder="Enter your password"
+                    // inputLabel="Password"
+                    placeholder="New Password"
                     type={passwordType ? "password" : "text"}
                     register={registerField("password", {
                       onChange: handelPasswordChange,
@@ -109,6 +135,18 @@ const SetupNewPassword = () => {
                     errors={errors}
                     errorKey="password"
                   />
+
+                  <FMOutlinedInput
+                    // inputLabel="Password"
+                    placeholder="Confirm New Password"
+                    type={confirmPasswordType ? "password" : "text"}
+                    register={registerField("confirmPassword")}
+                    error={!!errors.confirmPassword}
+                    passwordToggle={confirmPasswordToggle}
+                    passwordType={confirmPasswordType}
+                    errors={errors}
+                    errorKey="confirmPassword"
+                  />
                 </Box>
 
                 <FMButton
@@ -118,8 +156,8 @@ const SetupNewPassword = () => {
                     ...commonStyle.buttonStyles,
                     marginTop: "24px",
                   }}
-                  // onClick={handleSubmit(onSubmit)}
-                  onClick={afterResetPasswordNavigate}
+                  onClick={handleSubmit(onSubmit)}
+                  // onClick={afterResetPasswordNavigate}
                 />
                 <input type={"submit"} hidden />
               </Box>

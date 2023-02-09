@@ -10,8 +10,10 @@ import {
   LANDING_PAGE,
   LOGIN,
   SETUP_NEW_PASSWORD,
+  SIGNUP,
 } from "Routes/Routes";
 import Login from "container/Signin/Login";
+import SignUp from "container/SignUp/SignUp";
 import ForgotPassword from "container/Signin/ForgotPassword";
 import SetupNewPassword from "container/Signin/SetupNewPassword";
 import PrivateRoutes from "Routes/PrivateRoutes";
@@ -24,6 +26,7 @@ const App = () => {
           <Routes>
             <Route index element={<LandingPage />} />
             <Route path={LOGIN} element={<Login />} />
+            <Route path={SIGNUP} element={<SignUp />} />
             <Route path={FORGOTPASSWORD} element={<ForgotPassword />} />
             <Route path={SETUP_NEW_PASSWORD} element={<SetupNewPassword />} />
             <Route element={<PrivateRoutes />}>

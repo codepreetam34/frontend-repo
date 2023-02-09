@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { FORGOTPASSWORD, LANDING_PAGE } from "Routes/Routes";
+import { FORGOTPASSWORD, LANDING_PAGE, SIGNUP } from "Routes/Routes";
 
 import FMButton from "components/FMButton/FMButton";
 import FMTypography from "components/FMTypography/FMTypography";
@@ -108,10 +108,7 @@ const Login = () => {
                   styleData={commonStyle.errorText}
                   displayText={errors.email?.message}
                 />
-                <FMInputLabel
-                  styleData={commonStyle.inputLabelStyle}
-                  displayText={"Password"}
-                />
+
                 <OutlinedInput
                   placeholder="Enter your password"
                   type={passwordType ? "password" : "text"}
@@ -198,6 +195,27 @@ const Login = () => {
                   }}
 
                   // onClick={handleSubmit(onSubmit)}
+                />
+              </Box>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <FMTypography displayText={"Don’t have an account?"} />
+                <FMButton
+                  variant={"outlined"}
+                  displayText={"Sign Up"}
+                  styleData={{
+                    color: "#222222",
+                    padding: "0",
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    border: "none",
+                    marginLeft: ".5rem",
+                    marginTop: "-.1rem",
+                    "&:hover": {
+                      backgroundColor: "white",
+                      border: "none",
+                    },
+                  }}
+                  onClick={() => navigate(SIGNUP)}
                 />
               </Box>
             </Box>
