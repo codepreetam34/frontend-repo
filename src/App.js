@@ -10,6 +10,7 @@ import {
   FORGOTPASSWORD,
   LANDING_PAGE,
   LOGIN,
+  PRODUCT_PAGE,
   SETUP_NEW_PASSWORD,
   SIGNUP,
 } from "Routes/Routes";
@@ -19,6 +20,7 @@ import ForgotPassword from "container/Signin/ForgotPassword";
 import SetupNewPassword from "container/Signin/SetupNewPassword";
 import EmailVerify from "container/SignUp/EmailVerify";
 import EmailVerifyOtp from "container/SignUp/emailOtpVerification";
+import ProductPage from "container/ProductPage/ProductPage";
 
 import PrivateRoutes from "Routes/PrivateRoutes";
 
@@ -36,11 +38,13 @@ const App = () => {
             <Route path={EMAIL_VERIFY} element={<EmailVerify />} />
             <Route path={EMAIL_VERIFY_OTP} element={<EmailVerifyOtp />} />
 
-            <Route element={<PrivateRoutes />}>
-              {/* <Route path={LANDING_PAGE} element={<LandingPage />} /> */}
-            </Route>
-            {/* <Route path="analytics" element={<Analytics />} />
-            <Route path="admin" element={<Admin />} /> */}
+            {/* private routes below */}
+
+            <Route
+              path={PRODUCT_PAGE}
+              element={<PrivateRoutes Component={ProductPage} />}
+            />
+
             <Route path="*" element={<p>There's nothing here: 404!</p>} />
           </Routes>
         </BrowserRouter>

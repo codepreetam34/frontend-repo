@@ -27,6 +27,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "validationSchema/loginSchema";
 import FMInputLabel from "components/FMInputLabel/FMInputLabel";
+import { notify } from "components/FMToaster/FMToaster";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -54,12 +55,10 @@ const Login = () => {
     dispatch(login(data))
       .unwrap()
       .then((res) => {
-        console.log(res);
         if (res) {
-          console.log("hello");
           setItem("userData", res?.data);
           navigate("/");
-          // <Navigate to={}
+          notify({ type: "success", content: "Logged in successfully" });
         }
       });
   };

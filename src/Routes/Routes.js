@@ -9,3 +9,4 @@ export const FORGOT_PASSWORD_GET_OTP = "/get-otp";
 export const SETUP_NEW_PASSWORD = "/passwordReset";
 export const LANDING_PAGE = "/dashboard";
 export const TEST = "/test";
+export const PRODUCT_PAGE = "product-page";

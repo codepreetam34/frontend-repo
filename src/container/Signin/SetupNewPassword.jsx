@@ -83,7 +83,6 @@ const SetupNewPassword = () => {
       userId: id,
     };
     dispatch(setupPassword(postData)).then((res) => {
-      console.log("changed pas", res);
       // if (!res.error) {
       // removeItem("userData");
 
