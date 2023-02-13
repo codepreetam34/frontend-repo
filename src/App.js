@@ -2,7 +2,9 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import LandingPage from "container/LandingPage";
 import { ThemeProvider } from "@mui/material/styles";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import './LandingPage.css';
 import theme from "./theme";
 import {
   EMAIL_VERIFY,

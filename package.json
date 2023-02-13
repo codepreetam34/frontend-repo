@@ -33,6 +33,7 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.8.0",
     "react-scripts": "5.0.1",
+    "react-slick-slider": "^0.15.10",
     "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
     "styled-components": "^5.3.5",
