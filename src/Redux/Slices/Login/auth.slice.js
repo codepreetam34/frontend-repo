@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { notify } from "components/FMToaster/FMToaster";
 import axiosInstance from "services/AxiosInstance";
 import { FETCH_ACTION, LOGOUT } from "./type";
 
@@ -50,7 +51,7 @@ const slice = createSlice({
       state.isFetching = false;
       // notify({
       //   type: "error",
-      //   content: action?.payload?.error?.response?.data?.message,
+      //   content: "Not logged",
       // });
     });
   },

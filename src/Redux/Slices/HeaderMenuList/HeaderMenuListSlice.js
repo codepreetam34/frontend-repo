@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "services/AxiosInstance";
-// import axiosInstance from "Services/axiosInstance";
 import { GET_MENU_LIST } from "./type";
-// import { GET_MENU_LIST } from "./types";
-// import { PER_PAGE_LIMIT } from "Constants/AppConstant";
 
 export const getMenuBarList = createAsyncThunk(
   GET_MENU_LIST,

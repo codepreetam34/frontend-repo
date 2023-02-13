@@ -106,7 +106,6 @@ const Header = () => {
   const accountDetailData = useSelector(
     (state) => state?.menuList?.getMenuOptionsData?.categoryList
   );
-  console.log("accountDetailData", accountDetailData);
 
   const navigateToLogin = () => {
     navigate(LOGIN);
