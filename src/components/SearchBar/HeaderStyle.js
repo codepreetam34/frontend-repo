@@ -38,4 +38,7 @@ export const HeaderStyle = {
       // backgroundColor: "red",
     },
   },
+  openOnHover: {
+    "&:hover": { display: "block" },
+  },
 };

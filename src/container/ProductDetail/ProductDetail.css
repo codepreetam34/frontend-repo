@@ -1,0 +1,27 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.datePickerStyle{
+    width: 215px;
+    border: 1px solid grey !important;
+    border-radius: 0.5rem;
+
+    
+}
+
+.datePickerStyle:hover{
+    border: 1px solid grey !important;
+}
+
+
+
+/* "& .MuiOutlinedInput-notchedOutline": {
+    border: "none",
+  },
+  "&:hover": {
+    
+    border: "1px solid grey",
+  }, */

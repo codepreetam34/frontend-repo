@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './LandingPage.css';
+import "./LandingPage.css";
 import theme from "./theme";
 import {
   EMAIL_VERIFY,
@@ -12,6 +12,7 @@ import {
   FORGOTPASSWORD,
   LANDING_PAGE,
   LOGIN,
+  PRODUCT_DETAIL,
   PRODUCT_PAGE,
   SETUP_NEW_PASSWORD,
   SIGNUP,
@@ -23,6 +24,7 @@ import SetupNewPassword from "container/Signin/SetupNewPassword";
 import EmailVerify from "container/SignUp/EmailVerify";
 import EmailVerifyOtp from "container/SignUp/emailOtpVerification";
 import ProductPage from "container/ProductPage/ProductPage";
+import ProductDetail from "container/ProductDetail/ProductDetail";
 
 import PrivateRoutes from "Routes/PrivateRoutes";
 
@@ -45,6 +47,10 @@ const App = () => {
             <Route
               path={PRODUCT_PAGE}
               element={<PrivateRoutes Component={ProductPage} />}
+            />
+            <Route
+              path={PRODUCT_DETAIL}
+              element={<PrivateRoutes Component={ProductDetail} />}
             />
 
             <Route path="*" element={<p>There's nothing here: 404!</p>} />

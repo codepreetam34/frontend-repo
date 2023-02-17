@@ -5,10 +5,8 @@ import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 import cart from "../../assets/cart.svg";
 import profileIcon from "../../assets/profileIcon.svg";
-import menuDownArrow from "../../assets/menuDownArrow.svg";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MenuItem from "@mui/material/MenuItem";
 import { styled, alpha } from "@mui/material/styles";
 import { HeaderStyle } from "./HeaderStyle";
@@ -76,6 +74,14 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   const personLoggedIn = JSON.parse(
     localStorage.getItem("Sidebar_Module_Assigned")
   )?.fullName;
@@ -135,6 +141,23 @@ const Header = () => {
         // notify({ type: "success", content: "Logged out successfully" });
         throw new Error("Logout failed");
       });
+  };
+
+  const [hoverMenu, setHoverMenu] = useState(false);
+  const menuOpenedOnHover = () => {
+    setHoverMenu(true);
+    console.log(hoverMenu);
+    // const element = document.getElementsByClassName("rowOnHover");
+    // console.log(element);
+  };
+
+  const [show, setShow] = useState("");
+  const showDropdown = (id) => {
+    // console.log(e.target);
+    setShow(id);
+  };
+  const hideDropdown = () => {
+    setShow("");
   };
 
   return (
@@ -266,7 +289,7 @@ const Header = () => {
               Orders
             </MenuItem>
 
-            <MenuItem onClick={handleClose} divider sx={{ padding: "1rem" }}>
+            <MenuItem onHover={handleClose} divider sx={{ padding: "1rem" }}>
               <img
                 src={contactIcon}
                 alt="contact-icon"
@@ -306,13 +329,24 @@ const Header = () => {
         <Navbar bg="" expand="lg" className="p-0">
           <Container fluid>
             <Navbar.Toggle aria-controls="navbarScroll" />
-            <Navbar.Collapse id="navbarScroll">
-              <Nav className="" navbarScroll>
-                {accountDetailData?.map((elem) => (
-                  <NavDropdown title={elem?.name} id="navbarScrollingDropdown">
-                    <Row>
+            {/* <Navbar.Collapse id="navbarScroll"> */}
+            <Nav className="" navbarScroll>
+              {accountDetailData?.map((elem) => {
+                console.log("trying", show, elem?._id);
+                return (
+                  <NavDropdown
+                    title={elem?.name}
+                    key={elem?.id}
+                    id="navbarScrollingDropdown"
+                    // onMouseOver={menuOpenedOnHover}
+                    onMouseEnter={() => showDropdown(elem?._id)}
+                    onMouseLeave={hideDropdown}
+                    show={show === elem?._id}
+                    // style={{ "&:hover rowOnHover ": { display: "block" } }}
+                  >
+                    <Row className="rowOnHover" style={{ padding: "2rem" }}>
                       {elem?.children?.map((secElem) => (
-                        <Col md={4}>
+                        <Col md={3}>
                           <div className="cate_area">
                             <h3>{secElem?.name}</h3>
 
@@ -321,34 +355,28 @@ const Header = () => {
                                 {thirdElem?.name}
                               </NavDropdown.Item>
                             ))}
-
-                            {/* <NavDropdown.Item href="/">
-                              Anniversary
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="/">
-                              Something else here
-                            </NavDropdown.Item> */}
                           </div>
                         </Col>
                       ))}
 
-                      <Col md={4}>
+                      <Col md={3}>
                         <div className="cate_list_menu">
                           <a href="/">
                             <img
-                              src="../../../images/profile.jpg"
+                              src={elem?.categoryImage}
                               className="img-fluid"
                               alt=""
                             />
-                            <h4>Cakes</h4>
+                            {/* <h4>Cakes</h4> */}
                           </a>
                         </div>
                       </Col>
                     </Row>
                   </NavDropdown>
-                ))}
-              </Nav>
-            </Navbar.Collapse>
+                );
+              })}
+            </Nav>
+            {/* </Navbar.Collapse> */}
           </Container>
         </Navbar>
       </div>

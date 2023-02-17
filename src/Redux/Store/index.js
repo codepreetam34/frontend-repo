@@ -8,6 +8,7 @@ import authReducer from "../Slices/Login/auth.slice";
 import resetPasswordSlice from "../Slices/Login/resetPasswordLink";
 import passwordSetup from "../Slices/Login/setupPassword";
 import getProductsListData from "../Slices/ProductPage/ProductsPageSlice";
+import ProductDetailPageSlice from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 
 const rootReducer = combineReducers({
   menuList: menuListSlice,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   resetPassword: resetPasswordSlice,
   passwordSetup: passwordSetup,
   getProductsList: getProductsListData,
+  getProductsDetail: ProductDetailPageSlice,
 });
 
 const initializeStore = () =>
