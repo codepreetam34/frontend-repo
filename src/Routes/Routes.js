@@ -10,3 +10,4 @@ export const SETUP_NEW_PASSWORD = "/passwordReset";
 export const LANDING_PAGE = "/dashboard";
 export const TEST = "/test";
 export const PRODUCT_PAGE = "product-page";
+export const PRODUCT_DETAIL = "product-detail/:pId";

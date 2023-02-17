@@ -1,3 +1,4 @@
+import { CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
 export const commonStyle = {
   flexDisplayStyle: { display: "flex" },
   capitalizeTextStyle: { textTransform: "capitalize" },
@@ -109,5 +110,19 @@ export const commonStyle = {
     // fontFamily: " 'Poppins', sans-serif",
     fontWeight: "600",
     fontSize: "1.5rem",
+  },
+  dropdownStyle: {
+    background: "white",
+    boxShadow: `0rem 0.0625rem 0.125rem ${LIGHT_GREY_BORDER}`,
+    borderRadius: "0.5rem",
+    height: "2.75rem",
+    "& .MuiOutlinedInput-notchedOutline": {
+      border: `0.0625rem solid ${CANCEL_GREY_BORDER}`,
+    },
+    "&.Mui-focused": {
+      "& .MuiOutlinedInput-notchedOutline": {
+        border: `0.0625rem solid ${CANCEL_GREY_BORDER}`,
+      },
+    },
   },
 };

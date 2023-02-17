@@ -1,82 +1,85 @@
-import React, { forwardRef } from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-// import FMTypography from "Components/FMTypography";
-// import { commonStyles } from "Styles/commonStyles";
-// import { CANCEL_GREY_BORDER } from "Constants/Colors";
-import { commonStyle } from "Styles/commonStyles";
-import FMTypography from "components/FMTypography/FMTypography";
+import {
+  Box,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
+// import { commonStyles } from "MuiStyles";
 
-const styles = {
-  onHoverStyles: {
-    "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderRadius: "0.5rem",
-      border: `0.0625rem solid #1a1a1a1f`,
-    },
-  },
-};
-
-const FMDropdown = (props) => {
-  const {
-    styledata,
-    options,
-    dropdownvalue,
-    value,
-    placeholder,
-    size,
-    variant,
-    formControlStyles,
-    inputLabel,
-    dropDownTypographyStyle,
-  } = props;
-
+const FMDropdown = ({
+  name,
+  options,
+  id,
+  onChange,
+  onBlur,
+  error,
+  errorSx,
+  value,
+  defaultValue,
+  sx,
+  labelSx,
+  controlSx,
+  required,
+  inputTagProps,
+  inputProps,
+  label,
+  inputRef,
+  disabled,
+  IconComponent,
+}) => {
   return (
-    <>
-      <FormControl
-        // fullWidth
-        size={size}
-        variant={variant}
-        sx={formControlStyles}
-      >
-        {inputLabel && (
-          <InputLabel id="demo-simple-select-filled-label">
-            {inputLabel}
-          </InputLabel>
-        )}
-        <Select
-          inputProps={{ "aria-label": "Without label" }}
-          sx={{
-            ...styles.onHoverStyles,
-            ...styledata,
-          }}
-          value={value}
-          {...props}
-        >
-          <MenuItem disabled value="">
-            {placeholder}
-          </MenuItem>
-          {options?.length !== 0 ? (
-            options?.map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.id}>
-                  <FMTypography
-                    displayText={item[`${dropdownvalue}`]}
-                    styleData={{
-                      ...commonStyle.commonTypographyStyle,
-                      ...dropDownTypographyStyle,
-                    }}
-                  />
-                </MenuItem>
-              );
-            })
-          ) : (
-            <MenuItem disabled value="No option found">
-              {"No data found"}
-            </MenuItem>
+    <Box sx={{ ...controlSx }}>
+      {label && (
+        <InputLabel sx={labelSx}>
+          <Typography component="span">{label}</Typography>
+          {required && (
+            <Typography
+              component="span"
+              // sx={commonStyles.requiredInput}
+            >
+              *
+            </Typography>
           )}
-        </Select>
-      </FormControl>
-    </>
+        </InputLabel>
+      )}
+      <Select
+        required={required}
+        id={id || name}
+        name={name}
+        onChange={onChange}
+        onBlur={onBlur}
+        defaultValue={defaultValue}
+        value={value}
+        error={Boolean(error)}
+        inputProps={inputTagProps}
+        inputRef={inputRef}
+        disabled={disabled}
+        {...inputProps}
+        // sx={value === "" ? { color: "grey" } : sx}
+        sx={sx}
+        displayEmpty
+        notched={false}
+        IconComponent={IconComponent}
+      >
+        <MenuItem disabled value="">
+          Select
+        </MenuItem>
+        {options?.map((option) => (
+          <MenuItem key={option.id} value={option.id}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+      {typeof error === "string" &&
+        {
+          /* <FormHelperText sx={{ ...commonStyles.errorText, ...errorSx }}>
+          {error}
+        </FormHelperText> */
+        }}
+    </Box>
   );
 };
 
-export default forwardRef((props, ref) => <FMDropdown {...props} />);
+export default FMDropdown;

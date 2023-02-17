@@ -15,11 +15,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { LOGIN } from "Routes/Routes";
 import FMOutlinedInput from "components/FMOutlinedInput/FMOutlinedInput";
 import { tests } from "constants/AppConstant";
-import { setupPasswordSchema } from "validationSchema/setUpNewPassword";
+import { setupPassword } from "Redux/Slices/Login/setupPassword";
 
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { setupPassword } from "Redux/Slices/Login/setupPassword";
+import { setupPasswordSchema } from "validationSchema/setUpNewPassword";
 
 const SetupNewPassword = () => {
   const [searchParams] = useSearchParams();
