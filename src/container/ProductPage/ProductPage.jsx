@@ -22,14 +22,12 @@ const ProductPage = () => {
   const productPageData = useSelector(
     (state) => state?.getProductsList?.getProductsListData?.products
   );
-  console.log(productPageData);
 
   useEffect(() => {
     dispatch(getProductsList());
   }, [dispatch]);
 
   const onCardClick = (element) => {
-    console.log("element", element);
     let pId = element?._id;
     navigate(`/product-detail/${pId}`);
   };
@@ -101,7 +99,6 @@ const ProductPage = () => {
                     component="img"
                     height="283"
                     width="283"
-                    // image={womanCard}
                     image={elem?.productPictures[0]?.img}
                     alt="green iguana"
                   />

@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./LandingPage.css";
 import theme from "./theme";
 import {
+  ADD_TO_CART,
   EMAIL_VERIFY,
   EMAIL_VERIFY_OTP,
   FORGOTPASSWORD,
@@ -27,6 +28,7 @@ import ProductPage from "container/ProductPage/ProductPage";
 import ProductDetail from "container/ProductDetail/ProductDetail";
 
 import PrivateRoutes from "Routes/PrivateRoutes";
+import HorizontalLinearStepper from "container/CartPaymentFlow/CartPaymentStepper/CartPaymentStepper";
 
 const App = () => {
   return (
@@ -51,6 +53,11 @@ const App = () => {
             <Route
               path={PRODUCT_DETAIL}
               element={<PrivateRoutes Component={ProductDetail} />}
+            />
+
+            <Route
+              path={ADD_TO_CART}
+              element={<PrivateRoutes Component={HorizontalLinearStepper} />}
             />
 
             <Route path="*" element={<p>There's nothing here: 404!</p>} />

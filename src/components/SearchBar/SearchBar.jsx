@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 import { SearchStyle } from "./searchBarStyles";
+import "./searchBarMedia.css";
 
 const SearchBar = ({
   placeholder,
@@ -14,9 +15,9 @@ const SearchBar = ({
   cancelIconRight,
 }) => {
   return (
-    <Box sx={SearchStyle.searchBoxWrapper}>
+    <Box sx={SearchStyle.searchBoxWrapper} className="searchBoxWrapper">
       <Input
-        fullWidth
+        // fullWidth
         placeholder={placeholder}
         onChange={onChange}
         value={value}

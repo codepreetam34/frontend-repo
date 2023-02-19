@@ -146,14 +146,11 @@ const Header = () => {
   const [hoverMenu, setHoverMenu] = useState(false);
   const menuOpenedOnHover = () => {
     setHoverMenu(true);
-    console.log(hoverMenu);
     // const element = document.getElementsByClassName("rowOnHover");
-    // console.log(element);
   };
 
   const [show, setShow] = useState("");
   const showDropdown = (id) => {
-    // console.log(e.target);
     setShow(id);
   };
   const hideDropdown = () => {
@@ -162,8 +159,8 @@ const Header = () => {
 
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
-      <Grid sx={HeaderStyle.iconGridContainer}>
-        <Box sx={commonStyle.flexDisplayStyle}>
+      <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
+        <Col style={commonStyle.flexDisplayStyle}>
           <img
             src={monkeyLogo}
             alt="monkeyLogo"
@@ -174,11 +171,17 @@ const Header = () => {
             alt="VibezterLogo"
             style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
           />
-        </Box>
-        <Box>
+        </Col>
+        <Col className="searchBar-col">
           <SearchBar placeholder={"Search gifts, experiences and more..."} />
-        </Box>
-        <Box sx={{ marginTop: ".5rem" }}>
+        </Col>
+        <Col
+          style={{
+            marginTop: ".5rem",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
           <img
             src={cart}
             alt="cart"
@@ -194,6 +197,7 @@ const Header = () => {
             onClick={handleClick}
             style={{
               minWidth: "0",
+              marginTop: "-1.7rem",
               "MuiButton-root:hover": {
                 backgroundColor: "red !important",
                 borderRadius: "28px",
@@ -322,61 +326,58 @@ const Header = () => {
               </MenuItem>
             )}
           </Menu>
-        </Box>
-      </Grid>
+        </Col>
+      </Row>
 
       <div className="main_header">
         <Navbar bg="" expand="lg" className="p-0">
           <Container fluid>
             <Navbar.Toggle aria-controls="navbarScroll" />
-            {/* <Navbar.Collapse id="navbarScroll"> */}
-            <Nav className="" navbarScroll>
-              {accountDetailData?.map((elem) => {
-                console.log("trying", show, elem?._id);
-                return (
-                  <NavDropdown
-                    title={elem?.name}
-                    key={elem?.id}
-                    id="navbarScrollingDropdown"
-                    // onMouseOver={menuOpenedOnHover}
-                    onMouseEnter={() => showDropdown(elem?._id)}
-                    onMouseLeave={hideDropdown}
-                    show={show === elem?._id}
-                    // style={{ "&:hover rowOnHover ": { display: "block" } }}
-                  >
-                    <Row className="rowOnHover" style={{ padding: "2rem" }}>
-                      {elem?.children?.map((secElem) => (
-                        <Col md={3}>
-                          <div className="cate_area">
-                            <h3>{secElem?.name}</h3>
+            <Navbar.Collapse id="navbarScroll">
+              <Nav className="" navbarScroll>
+                {accountDetailData?.map((elem) => {
+                  return (
+                    <NavDropdown
+                      title={elem?.name}
+                      key={elem?.id}
+                      id="navbarScrollingDropdown"
+                      onMouseEnter={() => showDropdown(elem?._id)}
+                      onMouseLeave={hideDropdown}
+                      show={show === elem?._id}
+                    >
+                      <Row className="rowOnHover" style={{ padding: "2rem" }}>
+                        {elem?.children?.map((secElem) => (
+                          <Col md={3}>
+                            <div className="cate_area">
+                              <h3>{secElem?.name}</h3>
 
-                            {secElem?.children?.map((thirdElem) => (
-                              <NavDropdown.Item href="/">
-                                {thirdElem?.name}
-                              </NavDropdown.Item>
-                            ))}
+                              {secElem?.children?.map((thirdElem) => (
+                                <NavDropdown.Item href="/">
+                                  {thirdElem?.name}
+                                </NavDropdown.Item>
+                              ))}
+                            </div>
+                          </Col>
+                        ))}
+
+                        <Col md={3}>
+                          <div className="cate_list_menu">
+                            <a href="/">
+                              <img
+                                src={elem?.categoryImage}
+                                className="img-fluid"
+                                alt=""
+                              />
+                              {/* <h4>Cakes</h4> */}
+                            </a>
                           </div>
                         </Col>
-                      ))}
-
-                      <Col md={3}>
-                        <div className="cate_list_menu">
-                          <a href="/">
-                            <img
-                              src={elem?.categoryImage}
-                              className="img-fluid"
-                              alt=""
-                            />
-                            {/* <h4>Cakes</h4> */}
-                          </a>
-                        </div>
-                      </Col>
-                    </Row>
-                  </NavDropdown>
-                );
-              })}
-            </Nav>
-            {/* </Navbar.Collapse> */}
+                      </Row>
+                    </NavDropdown>
+                  );
+                })}
+              </Nav>
+            </Navbar.Collapse>
           </Container>
         </Navbar>
       </div>

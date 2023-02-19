@@ -1,12 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "services/AxiosInstance";
-import { PRODUCT_DETAIL_PAGE } from "./type";
+import { PRODUCT_DETAIL_PAGE, ADD_TO_CART } from "./type";
 
 export const getProductsDetail = createAsyncThunk(
   PRODUCT_DETAIL_PAGE,
   async (productId, thunkAPI) => {
     try {
       const response = await axiosInstance.get(`api/product/${productId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
+
+// add to cart api below
+
+export const addToCart = createAsyncThunk(
+  ADD_TO_CART,
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(
+        "api/user/cart/addtocart",
+        data
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -21,6 +38,7 @@ const productDetailSlice = createSlice({
     error: "",
     isFetching: false,
     isError: false,
+    data: {},
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -39,6 +57,21 @@ const productDetailSlice = createSlice({
       state.getProductsListData = [];
       state.isFetching = false;
       state.isError = true;
+    });
+
+    // add to cart cases
+    builder.addCase(addToCart.pending, (state) => {
+      state.data = {};
+      state.isFetching = true;
+    });
+
+    builder.addCase(addToCart.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.isFetching = false;
+    });
+    builder.addCase(addToCart.rejected, (state, action) => {
+      state.data = {};
+      state.isFetching = false;
     });
   },
 });
