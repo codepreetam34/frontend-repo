@@ -43,16 +43,11 @@ const slice = createSlice({
         "Sidebar_Module_Assigned",
         JSON.stringify(action.payload.user)
       );
-      // notify({ type: "success", content: "Logged in successfully" });
     });
     builder.addCase(login.rejected, (state, action) => {
       state.data = {};
       state.isLoggedIn = false;
       state.isFetching = false;
-      // notify({
-      //   type: "error",
-      //   content: "Not logged",
-      // });
     });
   },
 });

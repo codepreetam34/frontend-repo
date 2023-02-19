@@ -16,7 +16,11 @@ input::-webkit-inner-spin-button {
     border: 1px solid grey !important;
 }
 
+.right-info-box{margin-left: 3.125rem }
 
+@media screen and (max-width: 768px) {
+  .right-info-box{margin-left: 0}
+}
 
 /* "& .MuiOutlinedInput-notchedOutline": {
     border: "none",

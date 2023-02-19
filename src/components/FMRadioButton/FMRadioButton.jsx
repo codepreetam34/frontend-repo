@@ -5,12 +5,12 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { PDSL_BLUE, BORDER_GREY, GREY, BLACK } from "constants/colors";
+import { BORDER_GREY, BLACK } from "constants/colors";
 
 const styles = {
   formLabelStyles: {
     fontWeight: 500,
-    "& .MuiFormLabel-asterisk": { color: PDSL_BLUE },
+    // "& .MuiFormLabel-asterisk": { color: PDSL_BLUE },
   },
   radioButtonBox: {
     margin: "0.375rem 1rem 0.3rem 0",
@@ -27,8 +27,10 @@ const styles = {
   },
   radioStyles: {
     // marginLeft: "0.625rem",
-    color: GREY,
-    "&.Mui-checked": { color: PDSL_BLUE },
+    // color: GREY,
+    color: "#000000",
+    // "&.Mui-checked": { color: PDSL_BLUE },
+    "&.Mui-checked": { color: "#000000" },
   },
 };
 

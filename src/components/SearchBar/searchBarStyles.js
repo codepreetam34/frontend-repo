@@ -4,7 +4,7 @@ export const SearchStyle = {
     alignItems: "center",
     border: `0.06rem solid #1a1a1a1f`,
     borderRadius: "50px",
-    width: "432px",
+    width: "auto",
     height: "auto",
     padding: "0.625rem 1rem",
     // boxShadow: "0rem 0.25rem 0.5rem rgba(0, 174, 239, 0.02)",
