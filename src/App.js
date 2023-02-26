@@ -13,6 +13,7 @@ import {
   FORGOTPASSWORD,
   LANDING_PAGE,
   LOGIN,
+  PRIVACY_POLICY,
   PRODUCT_DETAIL,
   PRODUCT_PAGE,
   SETUP_NEW_PASSWORD,
@@ -29,6 +30,7 @@ import ProductDetail from "container/ProductDetail/ProductDetail";
 
 import PrivateRoutes from "Routes/PrivateRoutes";
 import HorizontalLinearStepper from "container/CartPaymentFlow/CartPaymentStepper/CartPaymentStepper";
+import PrivacyPolicy from "container/PrivacyPolicy/PrivacyPolicy";
 
 const App = () => {
   return (
@@ -43,6 +45,7 @@ const App = () => {
             <Route path={SETUP_NEW_PASSWORD} element={<SetupNewPassword />} />
             <Route path={EMAIL_VERIFY} element={<EmailVerify />} />
             <Route path={EMAIL_VERIFY_OTP} element={<EmailVerifyOtp />} />
+            <Route path={PRIVACY_POLICY} element={<PrivacyPolicy />} />
 
             {/* private routes below */}
 
