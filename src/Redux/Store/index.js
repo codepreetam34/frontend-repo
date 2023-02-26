@@ -9,6 +9,7 @@ import resetPasswordSlice from "../Slices/Login/resetPasswordLink";
 import passwordSetup from "../Slices/Login/setupPassword";
 import getProductsListData from "../Slices/ProductPage/ProductsPageSlice";
 import ProductDetailPageSlice from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
+import addToCartProductsSlice from "Redux/Slices/AddToCart/AddToCartSlice";
 
 const rootReducer = combineReducers({
   menuList: menuListSlice,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   passwordSetup: passwordSetup,
   getProductsList: getProductsListData,
   getProductsDetail: ProductDetailPageSlice,
+  addToCartProducts: addToCartProductsSlice,
 });
 
 const initializeStore = () =>

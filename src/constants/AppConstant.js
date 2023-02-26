@@ -88,3 +88,21 @@ export const ExpressDelivery = [
   { label: "8 PM - 9 PM" },
   { label: "9 PM - 10 PM" },
 ];
+
+export const locationHomeOrOffice = [
+  {
+    label: "Home",
+    value: "Home",
+  },
+
+  {
+    label: "Office",
+    value: "Office",
+  },
+];
+
+export const quantityOpt = [
+  { label: "Qty 1" },
+  { label: "Qty 2" },
+  { label: "Qty 3" },
+];

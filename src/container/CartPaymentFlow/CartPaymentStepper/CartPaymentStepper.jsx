@@ -39,9 +39,9 @@ export default function HorizontalLinearStepper() {
   };
   var dataOnStepper;
   if (activeStep === 0 || activeStep === 1) {
-    dataOnStepper = <AddToCart />;
+    dataOnStepper = <AddToCart handleNext={handleNext} />;
   } else if (activeStep === 2) {
-    dataOnStepper = <AddAddress />;
+    dataOnStepper = <AddAddress handleNext={handleNext} />;
   } else if (activeStep === 3) {
     dataOnStepper = <ProductPayment />;
   }
