@@ -80,7 +80,16 @@ const ProductDetail = () => {
   const productDetailedData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product
   );
-  // console.log("productDetailedData", productDetailedData);
+
+  const reviewsCarouselData = useSelector(
+    (state) => state?.getProductsDetail?.getProductsListData?.product?.reviews
+  );
+  console.log(productDetailedData?.rating);
+
+  const similarProductDetailedData = useSelector(
+    (state) => state?.getProductsDetail?.getProductsListData?.similarProducts
+  );
+  // console.log("similarProductDetailedData", similarProductDetailedData);
   const {
     register,
     handleSubmit,
@@ -93,7 +102,7 @@ const ProductDetail = () => {
     resolver: yupResolver(addToCartSchema),
     mode: "onChange",
   });
-  console.log("errors", errors, pincodeData);
+  // console.log("errors", errors, pincodeData);
   // console.log("getValues", getValues("cakeMessage"));
   // const onSubmit = (data) => {
   //   console.log("first", data);
@@ -102,7 +111,7 @@ const ProductDetail = () => {
   // };
 
   const onSubmit = async (data) => {
-    console.log("data", data, pincodeData);
+    // console.log("data", data, pincodeData);
     const uploadFormData = new FormData();
     console.log("uploadFormData", uploadFormData);
     uploadFormData.append("pinCode", pincodeData?.pincode);
@@ -120,11 +129,11 @@ const ProductDetail = () => {
 
   // const { onChange: onServiceChange, ...restServiceRegister } =
   //   register("service");
-  // const serviceChangeHandler = (e) => {
-  //   setServiceId(e.target.value);
-  //   setValue("service", e.target.value);
-  //   onServiceChange(e);
-  // };
+  const serviceChangeHandler = (e) => {
+    setServiceId(e.target.value);
+    setValue("service", e.target.value);
+    // onServiceChange(e);
+  };
   const apiImgs = productDetailedData?.productPictures?.map((elem) => ({
     original: elem?.img,
     thumbnail: elem?.img,
@@ -526,7 +535,7 @@ const ProductDetail = () => {
                   options={deliveryTime}
                   dropdownvalue="label"
                   placeholder="Selecttime"
-                  // onChange={serviceChangeHandler}
+                  onChange={serviceChangeHandler}
                   sx={{
                     ...commonStyle.dropdownStyle,
                     height: "2.75rem",
@@ -563,6 +572,7 @@ const ProductDetail = () => {
                       backgroundColor: "white",
                     },
                   }}
+                  onClick={handleSubmit(onSubmit)}
                 />
                 <FMButton
                   displayText={"Buy Now"}
@@ -571,7 +581,6 @@ const ProductDetail = () => {
                     ...commonStyle.buttonStyles,
                     width: "215px",
                   }}
-                  onClick={handleSubmit(onSubmit)}
                   // onClick={tempSub}
                 />
                 <input type={"submit"} hidden />
@@ -605,47 +614,137 @@ const ProductDetail = () => {
       {/*review col start */}
       <Grid sx={{ padding: "0 100px" }}>
         <Box>
-          <Box>
-            <img src={reviewBlackStar} alt="star" />{" "}
-            <FMButton
-              displayText={`${productDetailedData?.numReviews} Reviews `}
-              variant={"outlined"}
-              styleData={{
-                textDecoration: "underline",
-                fontWeight: "500",
-                textTransform: "capitalize",
-                color: "#222222",
-                border: "none",
-                fontSize: "20px",
-                marginBottom: "1rem",
-                "&:hover": {
-                  border: "none",
-                  backgroundColor: "white",
+          <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex" }}>
+              <img
+                src={reviewBlackStar}
+                alt="star"
+                style={{ paddingBottom: "19px" }}
+              />
+              <FMTypography
+                displayText={productDetailedData?.rating}
+                styleData={{ fontSize: "20px", paddingTop: "6px" }}
+              />
+              <FMButton
+                displayText={`${productDetailedData?.numReviews} Reviews `}
+                variant={"outlined"}
+                styleData={{
                   textDecoration: "underline",
-                },
-              }}
-            />
+                  fontWeight: "500",
+                  textTransform: "capitalize",
+                  color: "#222222",
+                  border: "none",
+                  fontSize: "20px",
+                  marginBottom: "1rem",
+                  "&:hover": {
+                    border: "none",
+                    backgroundColor: "white",
+                    textDecoration: "underline",
+                  },
+                }}
+              />
+            </Box>
+            <Box>
+              <FMButton
+                displayText={"Rate Product"}
+                variant="outlined"
+                styleData={{
+                  border: "1px solid #E6E6E6",
+                  borderRadius: "10px",
+                  textTransform: "capitalize",
+                }}
+              />
+            </Box>
           </Box>
-          {/* <Carousel
-            swipeable={false}
-            draggable={false}
-            showDots={true}
-            responsive={responsive}
-            // arrows={false}
-            renderButtonGroupOutside={true}
-            // ssr={true} // means to render carousel on server-side.
-            infinite={true}
-            // autoPlay={this.props.deviceType !== "mobile" ? true : false}
-            autoPlaySpeed={1000}
-            keyBoardControl={true}
-            customTransition="all .5"
-            transitionDuration={500}
-            containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            // deviceType={this.props.deviceType}
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-40-px"
-          > */}
+
+          {reviewsCarouselData && (
+            <Carousel
+              showDots={false}
+              deviceType={responsive.deviceType}
+              // arrows={false}
+              autoPlay={responsive.deviceType !== "mobile" ? true : false}
+              ssr
+              slidesToSlide={1}
+              containerClass="carousel-with-custom-dots"
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              responsive={responsive}
+              partialVisible
+              infinite
+              // customDot={<CustomDot />}
+            >
+              {reviewsCarouselData?.map((elem) => (
+                <Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      border: "1px solid #E6E6E6",
+                      // margin: "0 1rem",
+                      borderRadius: "20px",
+                      width: "283px",
+                      padding: "24px",
+                    }}
+                  >
+                    <Stack
+                      direction="row"
+                      spacing={2}
+                      sx={{ margin: " 0 12px" }}
+                    >
+                      <Avatar src="/broken-image.jpg" />
+                    </Stack>
+                    <Box>
+                      <FMTypography displayText={elem?.name} />
+                      <Box sx={{ display: "flex" }}>
+                        <FMTypography
+                          displayText={moment(elem?.createdAt).format(
+                            "DD.MM.YYYY"
+                          )}
+                        />
+                        <Box
+                          sx={{
+                            backgroundColor: "#008539",
+                            display: "flex",
+                            padding: ".3rem .5rem",
+                            width: "auto",
+                            marginLeft: "1rem",
+                            borderRadius: "4px",
+                            // marginBottom: "-.5rem",
+                          }}
+                        >
+                          <img
+                            src={ratingStart}
+                            alt="rating-star"
+                            style={{ width: "14px" }}
+                          />
+                          <FMTypography
+                            displayText={productDetailedData?.rating}
+                            styleData={{ color: "#FFFFFF", fontSize: "12px" }}
+                          />
+                        </Box>
+                      </Box>
+
+                      <p style={{ marginTop: "15px" }}>
+                        {productDetailedData?.reviews[0]?.comment}
+                      </p>
+                    </Box>
+                  </Box>
+                </Box>
+              ))}
+            </Carousel>
+          )}
+        </Box>
+      </Grid>
+
+      {/* moere suggestions */}
+      <Grid sx={{ marginTop: "80px" }}>
+        <FMTypography
+          displayText={"You may also Like"}
+          styleData={{
+            textAlign: "center",
+            fontWeight: "600",
+            fontSize: "40px",
+          }}
+        />
+        {similarProductDetailedData && (
           <Carousel
             showDots={false}
             deviceType={responsive.deviceType}
@@ -660,888 +759,94 @@ const ProductDetail = () => {
             infinite
             // customDot={<CustomDot />}
           >
-            {/* {productDetailedData?.map((elem) => ( */}
-            <Box>
-              <Box sx={{ display: "flex" }}>
-                <Stack direction="row" spacing={2} sx={{ margin: " 0 12px" }}>
-                  <Avatar src="/broken-image.jpg" />
-                </Stack>
-                <Box>
-                  <FMTypography
-                    displayText={productDetailedData?.reviews[0]?.name}
-                  />
-                  <Box sx={{ display: "flex" }}>
-                    <FMTypography
-                      displayText={moment(
-                        productDetailedData?.reviews[0]?.createdAt
-                      ).format("DD.MM.YYYY")}
+            {similarProductDetailedData?.map((elem) => (
+              <Grid
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  flexBasis: "33.333333%",
+                  justifyContent: "space-evenly",
+                }}
+              >
+                <Box
+                //  onClick={() => onCardClick(elem)}
+                >
+                  <Box
+                    sx={{
+                      backgroundColor: "#008539",
+                      display: "flex",
+                      padding: ".5rem",
+                      width: "fit-content",
+                      position: "relative",
+                      top: "3.5rem",
+                      left: "205px",
+                      zIndex: "111",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    <img
+                      src={ratingStart}
+                      alt="rating-star"
+                      style={{ width: "14px" }}
                     />
-                    <Box
-                      sx={{
-                        backgroundColor: "#008539",
-                        display: "flex",
-                        padding: ".3rem .5rem",
-                        width: "auto",
-                        marginLeft: "1rem",
-                        borderRadius: "4px",
-                        // marginBottom: "-.5rem",
-                      }}
-                    >
-                      <img
-                        src={ratingStart}
-                        alt="rating-star"
-                        style={{ width: "14px" }}
-                      />
-                      <FMTypography
-                        displayText={productDetailedData?.rating}
-                        styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                      />
-                    </Box>
-                  </Box>
-
-                  <p style={{ marginTop: "15px" }}>
-                    {productDetailedData?.reviews[0]?.comment}
-                  </p>
-                </Box>
-              </Box>
-            </Box>
-
-            {/* ))} */}
-            <Box>
-              <Box sx={{ display: "flex" }}>
-                <Stack direction="row" spacing={2} sx={{ margin: " 0 12px" }}>
-                  <Avatar src="/broken-image.jpg" />
-                </Stack>
-                <Box>
-                  <FMTypography
-                    displayText={productDetailedData?.reviews[0]?.name}
-                  />
-                  <Box sx={{ display: "flex" }}>
                     <FMTypography
-                      displayText={moment(
-                        productDetailedData?.reviews[0]?.createdAt
-                      ).format("DD.MM.YYYY")}
+                      displayText={elem?.rating}
+                      styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                     />
-                    <Box
-                      sx={{
-                        backgroundColor: "#008539",
-                        display: "flex",
-                        padding: ".3rem .5rem",
-                        width: "auto",
-                        marginLeft: "1rem",
-                        borderRadius: "4px",
-                        // marginBottom: "-.5rem",
-                      }}
-                    >
-                      <img
-                        src={ratingStart}
-                        alt="rating-star"
-                        style={{ width: "14px" }}
-                      />
-                      <FMTypography
-                        displayText={productDetailedData?.rating}
-                        styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                      />
-                    </Box>
                   </Box>
-
-                  <p style={{ marginTop: "15px" }}>
-                    {productDetailedData?.reviews[0]?.comment}
-                  </p>
+                  <Card sx={{ width: "283px", borderRadius: "20px" }}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height="283"
+                        width="283"
+                        image={elem?.productPictures[0]?.img}
+                        alt="green iguana"
+                      />
+                      <CardContent>
+                        <Typography
+                          gutterBottom
+                          variant="h5"
+                          component="div"
+                          sx={{ fontSize: "18px", color: "#222222" }}
+                        >
+                          {elem?.name}
+                        </Typography>
+                        <span style={{ display: "flex" }}>
+                          <del style={{ fontSize: "14px", color: "#717171" }}>
+                            ₹ {elem?.actualPrice}
+                          </del>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              color: "#000000",
+                              marginLeft: ".5rem",
+                            }}
+                          >
+                            ₹ {elem?.discountPrice}
+                          </Typography>
+                        </span>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Typography variant="body2" sx={{ color: "#717171" }}>
+                            {elem?.deliveryDay}
+                          </Typography>
+                          <Typography variant="body2" sx={{ color: "#008539" }}>
+                            Reviews {elem?.numReviews}
+                          </Typography>
+                        </Box>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
                 </Box>
-              </Box>
-            </Box>
-            <Box>
-              <Box sx={{ display: "flex" }}>
-                <Stack direction="row" spacing={2} sx={{ margin: " 0 12px" }}>
-                  <Avatar src="/broken-image.jpg" />
-                </Stack>
-                <Box>
-                  <FMTypography
-                    displayText={productDetailedData?.reviews[0]?.name}
-                  />
-                  <Box sx={{ display: "flex" }}>
-                    <FMTypography
-                      displayText={moment(
-                        productDetailedData?.reviews[0]?.createdAt
-                      ).format("DD.MM.YYYY")}
-                    />
-                    <Box
-                      sx={{
-                        backgroundColor: "#008539",
-                        display: "flex",
-                        padding: ".3rem .5rem",
-                        width: "auto",
-                        marginLeft: "1rem",
-                        borderRadius: "4px",
-                        // marginBottom: "-.5rem",
-                      }}
-                    >
-                      <img
-                        src={ratingStart}
-                        alt="rating-star"
-                        style={{ width: "14px" }}
-                      />
-                      <FMTypography
-                        displayText={productDetailedData?.rating}
-                        styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                      />
-                    </Box>
-                  </Box>
-
-                  <p style={{ marginTop: "15px" }}>
-                    {productDetailedData?.reviews[0]?.comment}
-                  </p>
-                </Box>
-              </Box>
-            </Box>
-            <Box>
-              <Box sx={{ display: "flex" }}>
-                <Stack direction="row" spacing={2} sx={{ margin: " 0 12px" }}>
-                  <Avatar src="/broken-image.jpg" />
-                </Stack>
-                <Box>
-                  <FMTypography
-                    displayText={productDetailedData?.reviews[0]?.name}
-                  />
-                  <Box sx={{ display: "flex" }}>
-                    <FMTypography
-                      displayText={moment(
-                        productDetailedData?.reviews[0]?.createdAt
-                      ).format("DD.MM.YYYY")}
-                    />
-                    <Box
-                      sx={{
-                        backgroundColor: "#008539",
-                        display: "flex",
-                        padding: ".3rem .5rem",
-                        width: "auto",
-                        marginLeft: "1rem",
-                        borderRadius: "4px",
-                        // marginBottom: "-.5rem",
-                      }}
-                    >
-                      <img
-                        src={ratingStart}
-                        alt="rating-star"
-                        style={{ width: "14px" }}
-                      />
-                      <FMTypography
-                        displayText={productDetailedData?.rating}
-                        styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                      />
-                    </Box>
-                  </Box>
-
-                  <p style={{ marginTop: "15px" }}>
-                    {productDetailedData?.reviews[0]?.comment}
-                  </p>
-                </Box>
-              </Box>
-            </Box>
-            <Box>
-              <Box sx={{ display: "flex" }}>
-                <Stack direction="row" spacing={2} sx={{ margin: " 0 12px" }}>
-                  <Avatar src="/broken-image.jpg" />
-                </Stack>
-                <Box>
-                  <FMTypography
-                    displayText={productDetailedData?.reviews[0]?.name}
-                  />
-                  <Box sx={{ display: "flex" }}>
-                    <FMTypography
-                      displayText={moment(
-                        productDetailedData?.reviews[0]?.createdAt
-                      ).format("DD.MM.YYYY")}
-                    />
-                    <Box
-                      sx={{
-                        backgroundColor: "#008539",
-                        display: "flex",
-                        padding: ".3rem .5rem",
-                        width: "auto",
-                        marginLeft: "1rem",
-                        borderRadius: "4px",
-                        // marginBottom: "-.5rem",
-                      }}
-                    >
-                      <img
-                        src={ratingStart}
-                        alt="rating-star"
-                        style={{ width: "14px" }}
-                      />
-                      <FMTypography
-                        displayText={productDetailedData?.rating}
-                        styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                      />
-                    </Box>
-                  </Box>
-
-                  <p style={{ marginTop: "15px" }}>{"djvksdjvkjkj"}</p>
-                </Box>
-              </Box>
-            </Box>
-            <Box>
-              <Box sx={{ display: "flex" }}>
-                <Stack direction="row" spacing={2} sx={{ margin: " 0 12px" }}>
-                  <Avatar src="/broken-image.jpg" />
-                </Stack>
-                <Box>
-                  <FMTypography
-                    displayText={productDetailedData?.reviews[0]?.name}
-                  />
-                  <Box sx={{ display: "flex" }}>
-                    <FMTypography
-                      displayText={moment(
-                        productDetailedData?.reviews[0]?.createdAt
-                      ).format("DD.MM.YYYY")}
-                    />
-                    <Box
-                      sx={{
-                        backgroundColor: "#008539",
-                        display: "flex",
-                        padding: ".3rem .5rem",
-                        width: "auto",
-                        marginLeft: "1rem",
-                        borderRadius: "4px",
-                        // marginBottom: "-.5rem",
-                      }}
-                    >
-                      <img
-                        src={ratingStart}
-                        alt="rating-star"
-                        style={{ width: "14px" }}
-                      />
-                      <FMTypography
-                        displayText={productDetailedData?.rating}
-                        styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                      />
-                    </Box>
-                  </Box>
-
-                  <p style={{ marginTop: "15px" }}>{"helpppppppp"}</p>
-                </Box>
-              </Box>
-            </Box>
-            <Box>
-              <Box sx={{ display: "flex" }}>
-                <Stack direction="row" spacing={2} sx={{ margin: " 0 12px" }}>
-                  <Avatar src="/broken-image.jpg" />
-                </Stack>
-                <Box>
-                  <FMTypography
-                    displayText={productDetailedData?.reviews[0]?.name}
-                  />
-                  <Box sx={{ display: "flex" }}>
-                    <FMTypography
-                      displayText={moment(
-                        productDetailedData?.reviews[0]?.createdAt
-                      ).format("DD.MM.YYYY")}
-                    />
-                    <Box
-                      sx={{
-                        backgroundColor: "#008539",
-                        display: "flex",
-                        padding: ".3rem .5rem",
-                        width: "auto",
-                        marginLeft: "1rem",
-                        borderRadius: "4px",
-                        // marginBottom: "-.5rem",
-                      }}
-                    >
-                      <img
-                        src={ratingStart}
-                        alt="rating-star"
-                        style={{ width: "14px" }}
-                      />
-                      <FMTypography
-                        displayText={productDetailedData?.rating}
-                        styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                      />
-                    </Box>
-                  </Box>
-
-                  <p style={{ marginTop: "15px" }}>{"hellllllll"}</p>
-                </Box>
-              </Box>
-            </Box>
-            <Box>
-              <Box sx={{ display: "flex" }}>
-                <Stack direction="row" spacing={2} sx={{ margin: " 0 12px" }}>
-                  <Avatar src="/broken-image.jpg" />
-                </Stack>
-                <Box>
-                  <FMTypography
-                    displayText={productDetailedData?.reviews[0]?.name}
-                  />
-                  <Box sx={{ display: "flex" }}>
-                    <FMTypography
-                      displayText={moment(
-                        productDetailedData?.reviews[0]?.createdAt
-                      ).format("DD.MM.YYYY")}
-                    />
-                    <Box
-                      sx={{
-                        backgroundColor: "#008539",
-                        display: "flex",
-                        padding: ".3rem .5rem",
-                        width: "auto",
-                        marginLeft: "1rem",
-                        borderRadius: "4px",
-                        // marginBottom: "-.5rem",
-                      }}
-                    >
-                      <img
-                        src={ratingStart}
-                        alt="rating-star"
-                        style={{ width: "14px" }}
-                      />
-                      <FMTypography
-                        displayText={productDetailedData?.rating}
-                        styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                      />
-                    </Box>
-                  </Box>
-
-                  <p style={{ marginTop: "15px" }}>{"productDetailedData?."}</p>
-                </Box>
-              </Box>
-            </Box>
+              </Grid>
+            ))}
           </Carousel>
-        </Box>
-      </Grid>
-
-      {/* moere suggestions */}
-      <Grid sx={{ marginTop: "80px" }}>
-        <FMTypography
-          displayText={"You may also Like"}
-          styleData={{
-            textAlign: "center",
-            fontWeight: "600",
-            fontSize: "40px",
-          }}
-        />
-        <Carousel
-          showDots={false}
-          deviceType={responsive.deviceType}
-          // arrows={false}
-          autoPlay={responsive.deviceType !== "mobile" ? true : false}
-          ssr
-          slidesToSlide={1}
-          containerClass="carousel-with-custom-dots"
-          removeArrowOnDeviceType={["tablet", "mobile"]}
-          responsive={responsive}
-          partialVisible
-          infinite
-          // customDot={<CustomDot />}
-        >
-          <Grid
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              flexBasis: "33.333333%",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {/* {productPageData?.map((elem) => ( */}
-            <Box
-            //  onClick={() => onCardClick(elem)}
-            >
-              <Box
-                sx={{
-                  backgroundColor: "#008539",
-                  display: "flex",
-                  padding: ".5rem",
-                  width: "fit-content",
-                  position: "relative",
-                  top: "3.5rem",
-                  left: "205px",
-                  zIndex: "111",
-                  borderRadius: "4px",
-                }}
-              >
-                <img
-                  src={ratingStart}
-                  alt="rating-star"
-                  style={{ width: "14px" }}
-                />
-                <FMTypography
-                  displayText={"elem?.rating"}
-                  styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                />
-              </Box>
-              <Card sx={{ width: "283px", borderRadius: "20px" }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="283"
-                    width="283"
-                    image={"elem?.productPictures[0]?.img"}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      variant="h5"
-                      component="div"
-                      sx={{ fontSize: "18px", color: "#222222" }}
-                    >
-                      {"elem?.name"}
-                    </Typography>
-                    <span style={{ display: "flex" }}>
-                      <del style={{ fontSize: "14px", color: "#717171" }}>
-                        ₹ {"elem?.actualPrice"}
-                      </del>
-                      <Typography
-                        sx={{
-                          fontSize: "14px",
-                          color: "#000000",
-                          marginLeft: ".5rem",
-                        }}
-                      >
-                        ₹ {"elem?.discountPrice"}
-                      </Typography>
-                    </span>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Typography variant="body2" sx={{ color: "#717171" }}>
-                        {"elem?.deliveryDay"}
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: "#008539" }}>
-                        Reviews {"elem?.numReviews"}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Box>
-            {/* ))} */}
-            {/* prodct box ended */}
-          </Grid>
-
-          {/* extra belw */}
-          <Grid
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              flexBasis: "33.333333%",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {/* {productPageData?.map((elem) => ( */}
-            <Box
-            //  onClick={() => onCardClick(elem)}
-            >
-              <Box
-                sx={{
-                  backgroundColor: "#008539",
-                  display: "flex",
-                  padding: ".5rem",
-                  width: "fit-content",
-                  position: "relative",
-                  top: "3.5rem",
-                  left: "205px",
-                  zIndex: "111",
-                  borderRadius: "4px",
-                }}
-              >
-                <img
-                  src={ratingStart}
-                  alt="rating-star"
-                  style={{ width: "14px" }}
-                />
-                <FMTypography
-                  displayText={"elem?.rating"}
-                  styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                />
-              </Box>
-              <Card sx={{ width: "283px", borderRadius: "20px" }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="283"
-                    width="283"
-                    image={"elem?.productPictures[0]?.img"}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      variant="h5"
-                      component="div"
-                      sx={{ fontSize: "18px", color: "#222222" }}
-                    >
-                      {"elem?.name"}
-                    </Typography>
-                    <span style={{ display: "flex" }}>
-                      <del style={{ fontSize: "14px", color: "#717171" }}>
-                        ₹ {"elem?.actualPrice"}
-                      </del>
-                      <Typography
-                        sx={{
-                          fontSize: "14px",
-                          color: "#000000",
-                          marginLeft: ".5rem",
-                        }}
-                      >
-                        ₹ {"elem?.discountPrice"}
-                      </Typography>
-                    </span>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Typography variant="body2" sx={{ color: "#717171" }}>
-                        {"elem?.deliveryDay"}
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: "#008539" }}>
-                        Reviews {"elem?.numReviews"}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Box>
-            {/* ))} */}
-            {/* prodct box ended */}
-          </Grid>
-          <Grid
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              flexBasis: "33.333333%",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {/* {productPageData?.map((elem) => ( */}
-            <Box
-            //  onClick={() => onCardClick(elem)}
-            >
-              <Box
-                sx={{
-                  backgroundColor: "#008539",
-                  display: "flex",
-                  padding: ".5rem",
-                  width: "fit-content",
-                  position: "relative",
-                  top: "3.5rem",
-                  left: "205px",
-                  zIndex: "111",
-                  borderRadius: "4px",
-                }}
-              >
-                <img
-                  src={ratingStart}
-                  alt="rating-star"
-                  style={{ width: "14px" }}
-                />
-                <FMTypography
-                  displayText={"elem?.rating"}
-                  styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                />
-              </Box>
-              <Card sx={{ width: "283px", borderRadius: "20px" }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="283"
-                    width="283"
-                    image={"elem?.productPictures[0]?.img"}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      variant="h5"
-                      component="div"
-                      sx={{ fontSize: "18px", color: "#222222" }}
-                    >
-                      {"elem?.name"}
-                    </Typography>
-                    <span style={{ display: "flex" }}>
-                      <del style={{ fontSize: "14px", color: "#717171" }}>
-                        ₹ {"elem?.actualPrice"}
-                      </del>
-                      <Typography
-                        sx={{
-                          fontSize: "14px",
-                          color: "#000000",
-                          marginLeft: ".5rem",
-                        }}
-                      >
-                        ₹ {"elem?.discountPrice"}
-                      </Typography>
-                    </span>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Typography variant="body2" sx={{ color: "#717171" }}>
-                        {"elem?.deliveryDay"}
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: "#008539" }}>
-                        Reviews {"elem?.numReviews"}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Box>
-            {/* ))} */}
-            {/* prodct box ended */}
-          </Grid>
-          <Grid
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              flexBasis: "33.333333%",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {/* {productPageData?.map((elem) => ( */}
-            <Box
-            //  onClick={() => onCardClick(elem)}
-            >
-              <Box
-                sx={{
-                  backgroundColor: "#008539",
-                  display: "flex",
-                  padding: ".5rem",
-                  width: "fit-content",
-                  position: "relative",
-                  top: "3.5rem",
-                  left: "205px",
-                  zIndex: "111",
-                  borderRadius: "4px",
-                }}
-              >
-                <img
-                  src={ratingStart}
-                  alt="rating-star"
-                  style={{ width: "14px" }}
-                />
-                <FMTypography
-                  displayText={"elem?.rating"}
-                  styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                />
-              </Box>
-              <Card sx={{ width: "283px", borderRadius: "20px" }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="283"
-                    width="283"
-                    image={"elem?.productPictures[0]?.img"}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      variant="h5"
-                      component="div"
-                      sx={{ fontSize: "18px", color: "#222222" }}
-                    >
-                      {"elem?.name"}
-                    </Typography>
-                    <span style={{ display: "flex" }}>
-                      <del style={{ fontSize: "14px", color: "#717171" }}>
-                        ₹ {"elem?.actualPrice"}
-                      </del>
-                      <Typography
-                        sx={{
-                          fontSize: "14px",
-                          color: "#000000",
-                          marginLeft: ".5rem",
-                        }}
-                      >
-                        ₹ {"elem?.discountPrice"}
-                      </Typography>
-                    </span>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Typography variant="body2" sx={{ color: "#717171" }}>
-                        {"elem?.deliveryDay"}
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: "#008539" }}>
-                        Reviews {"elem?.numReviews"}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Box>
-            {/* ))} */}
-            {/* prodct box ended */}
-          </Grid>
-          <Grid
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              flexBasis: "33.333333%",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {/* {productPageData?.map((elem) => ( */}
-            <Box
-            //  onClick={() => onCardClick(elem)}
-            >
-              <Box
-                sx={{
-                  backgroundColor: "#008539",
-                  display: "flex",
-                  padding: ".5rem",
-                  width: "fit-content",
-                  position: "relative",
-                  top: "3.5rem",
-                  left: "205px",
-                  zIndex: "111",
-                  borderRadius: "4px",
-                }}
-              >
-                <img
-                  src={ratingStart}
-                  alt="rating-star"
-                  style={{ width: "14px" }}
-                />
-                <FMTypography
-                  displayText={"elem?.rating"}
-                  styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                />
-              </Box>
-              <Card sx={{ width: "283px", borderRadius: "20px" }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="283"
-                    width="283"
-                    image={"elem?.productPictures[0]?.img"}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      variant="h5"
-                      component="div"
-                      sx={{ fontSize: "18px", color: "#222222" }}
-                    >
-                      {"elem?.name"}
-                    </Typography>
-                    <span style={{ display: "flex" }}>
-                      <del style={{ fontSize: "14px", color: "#717171" }}>
-                        ₹ {"elem?.actualPrice"}
-                      </del>
-                      <Typography
-                        sx={{
-                          fontSize: "14px",
-                          color: "#000000",
-                          marginLeft: ".5rem",
-                        }}
-                      >
-                        ₹ {"elem?.discountPrice"}
-                      </Typography>
-                    </span>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Typography variant="body2" sx={{ color: "#717171" }}>
-                        {"elem?.deliveryDay"}
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: "#008539" }}>
-                        Reviews {"elem?.numReviews"}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Box>
-            {/* ))} */}
-            {/* prodct box ended */}
-          </Grid>
-          <Grid
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              flexBasis: "33.333333%",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {/* {productPageData?.map((elem) => ( */}
-            <Box
-            //  onClick={() => onCardClick(elem)}
-            >
-              <Box
-                sx={{
-                  backgroundColor: "#008539",
-                  display: "flex",
-                  padding: ".5rem",
-                  width: "fit-content",
-                  position: "relative",
-                  top: "3.5rem",
-                  left: "205px",
-                  zIndex: "111",
-                  borderRadius: "4px",
-                }}
-              >
-                <img
-                  src={ratingStart}
-                  alt="rating-star"
-                  style={{ width: "14px" }}
-                />
-                <FMTypography
-                  displayText={"elem?.rating"}
-                  styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                />
-              </Box>
-              <Card sx={{ width: "283px", borderRadius: "20px" }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="283"
-                    width="283"
-                    image={"elem?.productPictures[0]?.img"}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      variant="h5"
-                      component="div"
-                      sx={{ fontSize: "18px", color: "#222222" }}
-                    >
-                      {"elem?.name"}
-                    </Typography>
-                    <span style={{ display: "flex" }}>
-                      <del style={{ fontSize: "14px", color: "#717171" }}>
-                        ₹ {"elem?.actualPrice"}
-                      </del>
-                      <Typography
-                        sx={{
-                          fontSize: "14px",
-                          color: "#000000",
-                          marginLeft: ".5rem",
-                        }}
-                      >
-                        ₹ {"elem?.discountPrice"}
-                      </Typography>
-                    </span>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Typography variant="body2" sx={{ color: "#717171" }}>
-                        {"elem?.deliveryDay"}
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: "#008539" }}>
-                        Reviews {"elem?.numReviews"}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Box>
-            {/* ))} */}
-            {/* prodct box ended */}
-          </Grid>
-        </Carousel>
+        )}
       </Grid>
     </>
   );

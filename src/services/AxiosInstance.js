@@ -11,9 +11,10 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
-    config.headers["authorization"] = `Bearer ${
-      JSON.parse(localStorage.getItem("Sidebar_Module_Assigned"))?.token
-    }`;
+    config.headers[
+      "authorization"
+    ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2QzYzUyMjY0YWQzNDg2NjRhZDIwZDUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY3NzA2NjA1NCwiZXhwIjoxNjc3NjcwODU0fQ.B2m2aJzn4NErl1z0E-1994Zd0j0fw0hSJzxSC6Ke2GI
+    `;
     return config;
   },
   function (error) {
