@@ -13,3 +13,4 @@ export const PRODUCT_PAGE = "product-page";
 export const PRODUCT_DETAIL = "product-detail/:pId";
 export const ADD_TO_CART = "/add-to-cart";
 export const PRIVACY_POLICY = "/privacy-policy";
+export const FAQ = "/faq";

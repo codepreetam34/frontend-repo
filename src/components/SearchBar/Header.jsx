@@ -24,7 +24,7 @@ import FMTypography from "components/FMTypography/FMTypography";
 import { Stack } from "@mui/system";
 import FMButton from "components/FMButton/FMButton";
 import { useNavigate } from "react-router-dom";
-import { LOGIN } from "Routes/Routes";
+import { FAQ, LOGIN } from "Routes/Routes";
 import { logout } from "Redux/Slices/Login/auth.slice";
 
 const StyledMenu = styled((props) => (
@@ -155,6 +155,10 @@ const Header = () => {
   };
   const hideDropdown = () => {
     setShow("");
+  };
+
+  const faqsHandler = () => {
+    navigate(FAQ);
   };
 
   return (
@@ -302,7 +306,7 @@ const Header = () => {
               Contact Us
             </MenuItem>
 
-            <MenuItem onClick={handleClose} divider sx={{ padding: "1rem" }}>
+            <MenuItem onClick={faqsHandler} divider sx={{ padding: "1rem" }}>
               <img
                 src={faqIcon}
                 alt="faqIcon-icon"
