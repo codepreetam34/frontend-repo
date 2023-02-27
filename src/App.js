@@ -10,6 +10,7 @@ import {
   ADD_TO_CART,
   EMAIL_VERIFY,
   EMAIL_VERIFY_OTP,
+  FAQ,
   FORGOTPASSWORD,
   LANDING_PAGE,
   LOGIN,
@@ -31,6 +32,7 @@ import ProductDetail from "container/ProductDetail/ProductDetail";
 import PrivateRoutes from "Routes/PrivateRoutes";
 import HorizontalLinearStepper from "container/CartPaymentFlow/CartPaymentStepper/CartPaymentStepper";
 import PrivacyPolicy from "container/PrivacyPolicy/PrivacyPolicy";
+import Faq from "container/FAQ/Faq";
 
 const App = () => {
   return (
@@ -46,6 +48,7 @@ const App = () => {
             <Route path={EMAIL_VERIFY} element={<EmailVerify />} />
             <Route path={EMAIL_VERIFY_OTP} element={<EmailVerifyOtp />} />
             <Route path={PRIVACY_POLICY} element={<PrivacyPolicy />} />
+            <Route path={FAQ} element={<Faq />} />
 
             {/* private routes below */}
 
