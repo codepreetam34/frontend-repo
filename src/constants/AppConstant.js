@@ -58,35 +58,34 @@ export const trainingAndConformanceStatus = [
 ];
 
 export const StandardDelivery = [
-  {
-    label: "10 AM - 2 PM",
-  },
-  { label: "2 PM - 6 PM" },
-  { label: "6 PM - 10 PM" },
+  { id: 1, label: "10 AM - 2 PM" },
+  { id: 2, label: "2 PM - 6 PM" },
+  { id: 3, label: "6 PM - 10 PM" },
 ];
 
 export const FixedDelivery = [
-  { label: "10 AM - 1 PM" },
-  { label: "1 PM - 4 PM" },
-  { label: "4 PM - 7 PM" },
-  { label: "7 PM - 10 PM" },
+  { id: 1, label: "10 AM - 1 PM" },
+  { id: 2, label: "1 PM - 4 PM" },
+  { id: 3, label: "4 PM - 7 PM" },
+  { id: 4, label: "7 PM - 10 PM" },
 ];
 
 export const ExpressDelivery = [
+  { id: 1, label: "10 AM - 11 AM" },
+  { id: 2, label: "11 AM - 12 PM" },
+  { id: 3, label: "12 AM - 1 PM" },
   {
-    label: "10 AM - 11 AM",
+    id: 4,
+    label: "1 PM - 2 PM",
   },
-  { label: "11 AM - 12 PM" },
-  { label: "12 AM - 1 PM" },
-  { label: "1 PM - 2 PM" },
-  { label: "2 PM - 3 PM" },
-  { label: "3 PM - 4 PM" },
-  { label: "4 PM - 5 PM" },
-  { label: "5 PM - 6 PM" },
-  { label: "6 PM - 7 PM" },
-  { label: "7 PM - 8 PM" },
-  { label: "8 PM - 9 PM" },
-  { label: "9 PM - 10 PM" },
+  { id: 5, label: "2 PM - 3 PM" },
+  { id: 6, label: "3 PM - 4 PM" },
+  { id: 7, label: "4 PM - 5 PM" },
+  { id: 8, label: "5 PM - 6 PM" },
+  { id: 9, label: "6 PM - 7 PM" },
+  { id: 10, label: "7 PM - 8 PM" },
+  { id: 11, label: "8 PM - 9 PM" },
+  { id: 12, label: "9 PM - 10 PM" },
 ];
 
 export const locationHomeOrOffice = [
@@ -102,7 +101,7 @@ export const locationHomeOrOffice = [
 ];
 
 export const quantityOpt = [
-  { label: "Qty 1" },
-  { label: "Qty 2" },
-  { label: "Qty 3" },
+  { id: 1, label: "Qty 1" },
+  { id: 2, label: "Qty 2" },
+  { id: 3, label: "Qty 3" },
 ];

@@ -81,15 +81,15 @@ const ProductDetail = () => {
     (state) => state?.getProductsDetail?.getProductsListData?.product
   );
 
+  console.log("productDetailedData", productDetailedData);
+
   const reviewsCarouselData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product?.reviews
   );
-  console.log(productDetailedData?.rating);
 
   const similarProductDetailedData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.similarProducts
   );
-  // console.log("similarProductDetailedData", similarProductDetailedData);
   const {
     register,
     handleSubmit,
@@ -102,30 +102,29 @@ const ProductDetail = () => {
     resolver: yupResolver(addToCartSchema),
     mode: "onChange",
   });
-  // console.log("errors", errors, pincodeData);
-  // console.log("getValues", getValues("cakeMessage"));
-  // const onSubmit = (data) => {
-  //   console.log("first", data);
-  //   console.log("errors2", errors);
-  //   dispatch(addToCart(data));
-  // };
-
-  const onSubmit = async (data) => {
-    // console.log("data", data, pincodeData);
-    const uploadFormData = new FormData();
-    console.log("uploadFormData", uploadFormData);
-    uploadFormData.append("pinCode", pincodeData?.pincode);
-    // uploadFormData.append("cakeMessage", data?.cakeMessage);
-    try {
-      dispatch(addToCart(uploadFormData));
-    } catch (error) {}
-  };
 
   const navigate = useNavigate();
 
-  // const tempSub = () => {
-  //   navigate(ADD_TO_CART);
-  // };
+  const onSubmit = async (data) => {
+    if (pId) {
+      const cartItems = [];
+      const payload = {
+        cartItems: [
+          {
+            product: pId,
+            quantity: 1,
+          },
+        ],
+      };
+
+      dispatch(addToCart(payload));
+      navigate(`/add-to-cart`);
+    }
+  };
+
+  const tempSub = () => {
+    navigate(`/add-to-cart?${pId}`);
+  };
 
   // const { onChange: onServiceChange, ...restServiceRegister } =
   //   register("service");
@@ -572,6 +571,7 @@ const ProductDetail = () => {
                       backgroundColor: "white",
                     },
                   }}
+                  // onClick={tempSub}
                   onClick={handleSubmit(onSubmit)}
                 />
                 <FMButton
@@ -581,7 +581,6 @@ const ProductDetail = () => {
                     ...commonStyle.buttonStyles,
                     width: "215px",
                   }}
-                  // onClick={tempSub}
                 />
                 <input type={"submit"} hidden />
               </Box>

@@ -1,4 +1,4 @@
-import { CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
+import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
 export const commonStyle = {
   flexDisplayStyle: { display: "flex" },
   capitalizeTextStyle: { textTransform: "capitalize" },
@@ -124,5 +124,22 @@ export const commonStyle = {
         border: `0.0625rem solid ${CANCEL_GREY_BORDER}`,
       },
     },
+  },
+  detailTypographyStyle: {
+    fontStyle: "normal",
+    textTransform: "capitalize",
+    fontWeight: 400,
+    fontFamily: " 'Poppins', sans-serif",
+    fontSize: "1rem",
+    // lineHeight: "1.25rem",
+    color: "rgba(26,26,26,0.4)",
+  },
+  detailTypographyStyleData: {
+    fontFamily: " 'Poppins', sans-serif",
+    fontStyle: " normal",
+    fontWeight: " 400",
+    fontSize: "1rem",
+    // lineHeight: "1.5rem",
+    color: BLACK,
   },
 };

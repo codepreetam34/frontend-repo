@@ -174,8 +174,6 @@ const Login = () => {
                       border: "2px solid #E6E6E6",
                     },
                   }}
-
-                  // onClick={handleSubmit(onSubmit)}
                 />
 
                 <FMButton
@@ -192,8 +190,6 @@ const Login = () => {
                       border: "2px solid #E6E6E6",
                     },
                   }}
-
-                  // onClick={handleSubmit(onSubmit)}
                 />
               </Box>
               <Box sx={{ display: "flex", justifyContent: "center" }}>

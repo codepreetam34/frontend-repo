@@ -17,7 +17,7 @@ export const addAddressSchema = Yup.object().shape({
     .matches(MOBILE_NUMBER_REGEX, "Phone number is invalid")
     .max(10, "Phone number should not exceed 10 digits"),
 
-  pinCode: Yup.string().required("pincode is mandatory"),
+  // pinCode: Yup.string().required("pincode is mandatory"),
   address: Yup.string().required("Address is mandatory"),
   location: Yup.string().required("Location is mandatory"),
   homeOffice: Yup.string(),
