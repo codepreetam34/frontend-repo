@@ -6,7 +6,9 @@ export const addToCartAddAddress = createAsyncThunk(
   ADD_ADDRESS,
   async (payload, thunkAPI) => {
     try {
-      const response = await axiosInstance.post(`api/user/address/create`);
+      const response = await axiosInstance.post(`api/user/address/create`, {
+        payload,
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });

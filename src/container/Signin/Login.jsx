@@ -56,7 +56,6 @@ const Login = () => {
       .unwrap()
       .then((res) => {
         if (res) {
-          setItem("userData", res?.data);
           navigate("/");
           notify({ type: "success", content: "Logged in successfully" });
         }

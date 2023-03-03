@@ -8,6 +8,8 @@ import "./LandingPage.css";
 import theme from "./theme";
 import {
   ADD_TO_CART,
+  BLOGS,
+  BLOGS_DETAIL,
   EMAIL_VERIFY,
   EMAIL_VERIFY_OTP,
   FAQ,
@@ -33,6 +35,8 @@ import PrivateRoutes from "Routes/PrivateRoutes";
 import HorizontalLinearStepper from "container/CartPaymentFlow/CartPaymentStepper/CartPaymentStepper";
 import PrivacyPolicy from "container/PrivacyPolicy/PrivacyPolicy";
 import Faq from "container/FAQ/Faq";
+import Blogs from "container/Blogs/Blogs";
+import BlogDetailedPage from "container/Blogs/BlogDetailedPage/BlogDetailedPage";
 
 const App = () => {
   return (
@@ -49,6 +53,8 @@ const App = () => {
             <Route path={EMAIL_VERIFY_OTP} element={<EmailVerifyOtp />} />
             <Route path={PRIVACY_POLICY} element={<PrivacyPolicy />} />
             <Route path={FAQ} element={<Faq />} />
+            <Route path={BLOGS} element={<Blogs />} />
+            <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
 
             {/* private routes below */}
 

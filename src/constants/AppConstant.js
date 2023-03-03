@@ -64,10 +64,10 @@ export const StandardDelivery = [
 ];
 
 export const FixedDelivery = [
-  { id: 1, label: "10 AM - 1 PM" },
-  { id: 2, label: "1 PM - 4 PM" },
-  { id: 3, label: "4 PM - 7 PM" },
-  { id: 4, label: "7 PM - 10 PM" },
+  { id: 1, label: "10 AM - 1 PM", startTime: "10", endTime: "13" },
+  { id: 2, label: "1 PM - 4 PM", startTime: "13", endTime: "16" },
+  { id: 3, label: "4 PM - 7 PM", startTime: "16", endTime: "19" },
+  { id: 4, label: "7 PM - 10 PM", startTime: "19", endTime: "22" },
 ];
 
 export const ExpressDelivery = [

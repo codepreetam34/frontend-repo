@@ -154,7 +154,7 @@ export default function FMToaster({
 }
 
 export const notify = ({ type, content, config }) => {
-  console.log("called toaster");
+  // console.log("called toaster");
   const toastId = toast(
     <FMToaster
       onClose={() => toast.dismiss(toastId)}

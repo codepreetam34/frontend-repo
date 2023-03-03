@@ -17,7 +17,6 @@ export const addToCartProductsFinal = createAsyncThunk(
 export const deleteAddToCartProducts = createAsyncThunk(
   ADDED_TO_CART,
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const response = await axiosInstance.post(
         `api/user/cart/removeItem`,

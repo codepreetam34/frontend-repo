@@ -11,9 +11,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
-    config.headers["authorization"] = `Bearer ${
-      JSON.parse(localStorage.getItem("Sidebar_Module_Assigned"))?.token
-    }`;
+    const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
+    const result = auth.substring(1, auth.length - 1);
+    config.headers["authorization"] = `Bearer ${result}`;
     return config;
   },
   function (error) {
@@ -23,7 +23,6 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    setItem("AUTH_ACCESS_TOKEN", response?.data?.token);
     return response;
   },
   function (error) {

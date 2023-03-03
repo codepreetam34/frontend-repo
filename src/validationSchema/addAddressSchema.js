@@ -9,8 +9,6 @@ import * as Yup from "yup";
 export const addAddressSchema = Yup.object().shape({
   firstName: Yup.string().required("name is mandatory"),
 
-  lastName: Yup.string().required("Last name is mandatory"),
-
   contactNumber: Yup.string()
     .required("Phone number is mandatory")
     .test("check_all_zero", "Phone number is invalid", (val) => +val > 0)

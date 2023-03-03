@@ -7,16 +7,17 @@ import {
   Typography,
 } from "@mui/material";
 // import { commonStyles } from "MuiStyles";
+import React, { useState } from "react";
 
 const FMDropdown = ({
   name,
   options,
   id,
-  onChange,
+  // onChange,
   onBlur,
   error,
   errorSx,
-  value,
+  // value,
   defaultValue,
   sx,
   labelSx,
@@ -29,6 +30,12 @@ const FMDropdown = ({
   disabled,
   IconComponent,
 }) => {
+  const [quantityOption, setQuantityOption] = useState(1);
+
+  const optionChangeHandler = (e) => {
+    setQuantityOption(e.target.value);
+  };
+
   return (
     <Box sx={{ ...controlSx }}>
       {label && (
@@ -48,10 +55,10 @@ const FMDropdown = ({
         required={required}
         id={id || name}
         name={name}
-        onChange={onChange}
+        onChange={optionChangeHandler}
         onBlur={onBlur}
         defaultValue={defaultValue}
-        value={value}
+        value={quantityOption}
         error={Boolean(error)}
         inputProps={inputTagProps}
         inputRef={inputRef}

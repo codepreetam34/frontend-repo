@@ -19,8 +19,6 @@ import {
 const AddToCart = ({ handleNext }) => {
   const dispatch = useDispatch();
 
-  const [quantityOption, setQuantityOption] = useState("Qty 1");
-
   const addedData = useSelector(
     (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
   );
@@ -29,16 +27,20 @@ const AddToCart = ({ handleNext }) => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
 
-  const deleteProductOnClick = () => {
-    dispatch(
-      deleteAddToCartProducts({ productId: "63ee0a533103fd3588201003" })
-    );
+  const deleteProductOnClick = (id) => () => {
+    dispatch(deleteAddToCartProducts({ productId: id }))
+      .unwrap()
+      .then((res) => {
+        if (res) {
+          dispatch(addToCartProductsFinal());
+        }
+      });
   };
-
-  const optionChangeHandler = (e) => {
-    setQuantityOption(e.target.value);
-  };
-
+  // let totalPrice = addedData?.reduce(function (accumulator, item) {
+  //   console.log("item");
+  //   return accumulator + item.price * item.qty;
+  // }, 0);
+  // console.log("totalPrice", totalPrice);
   return (
     <>
       <Row style={{ padding: "40px 120px" }}>
@@ -62,7 +64,7 @@ const AddToCart = ({ handleNext }) => {
                   display: "flex",
                   width: "auto",
                   padding: "32px",
-                  marginTop: "20px",
+                  // marginTop: "20px",
                 }}
               >
                 <Box>
@@ -81,7 +83,7 @@ const AddToCart = ({ handleNext }) => {
                       src={closeCrossIcon}
                       alt="close-icon"
                       style={{ cursor: "pointer" }}
-                      onClick={deleteProductOnClick}
+                      onClick={deleteProductOnClick(elem)}
                     />
                   </Box>
                   {/* dropdown row below */}
@@ -90,7 +92,7 @@ const AddToCart = ({ handleNext }) => {
                       <FMDropdown
                         options={quantityOpt}
                         dropdownvalue="label"
-                        onChange={optionChangeHandler}
+                        // onChange={optionChangeHandler}
                         sx={{
                           ...commonStyle.dropdownStyle,
                           height: "2.75rem",
@@ -102,7 +104,7 @@ const AddToCart = ({ handleNext }) => {
                         }}
                         // error={errors.service}
 
-                        value={quantityOption}
+                        // value={quantityOption}
                         // {...restServiceRegister}
                       />
                     </Col>

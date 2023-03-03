@@ -53,11 +53,14 @@ import {
 import { addToCartSchema } from "validationSchema/addToCartSchema";
 import { Col, Container, Row } from "react-bootstrap";
 import { ADD_TO_CART } from "Routes/Routes";
+import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { pId } = params;
+
+  const todaysDate = moment(new Date()).format("DDMMYY");
 
   const [productQuantity, setProductQuantity] = useState(createUserOptions);
   const [eggOrNot, setEggOrNot] = useState(egglessOrNot);
@@ -69,6 +72,13 @@ const ProductDetail = () => {
   const [deliveryTime, setDeliveryTime] = useState();
   const [serviceId, setServiceId] = useState("");
   const [date, setDate] = useState(dayjs(Date()));
+
+  const [isTodaysDate, setIsTodaysDate] = useState(true);
+
+  useEffect(() => {
+    setIsTodaysDate(() => date.format("DDMMYY") === todaysDate);
+  }, [date]);
+
   const handleChange = (newValue) => {
     setDate(newValue);
   };
@@ -81,7 +91,7 @@ const ProductDetail = () => {
     (state) => state?.getProductsDetail?.getProductsListData?.product
   );
 
-  console.log("productDetailedData", productDetailedData);
+  // console.log("productDetailedData", productDetailedData);
 
   const reviewsCarouselData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product?.reviews
@@ -117,8 +127,13 @@ const ProductDetail = () => {
         ],
       };
 
-      dispatch(addToCart(payload));
-      navigate(`/add-to-cart`);
+      dispatch(addToCart(payload)).then((res) => {
+        if (res) {
+          navigate(`/add-to-cart`);
+          dispatch(addToCartProductsFinal());
+        }
+      });
+      // navigate(`/add-to-cart`);
     }
   };
 
@@ -214,7 +229,6 @@ const ProductDetail = () => {
                 styleData={{ fontSize: "40px", fontWeight: "600" }}
               />
 
-              {/* rating and review box below */}
               <Box sx={{ display: "flex" }}>
                 <Box
                   sx={{
@@ -231,7 +245,9 @@ const ProductDetail = () => {
                     style={{ width: "14px" }}
                   />
                   <FMTypography
-                    displayText={productDetailedData?.rating}
+                    displayText={
+                      Math.round(productDetailedData?.rating * 10) / 10
+                    }
                     styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                   />
                 </Box>
@@ -355,7 +371,7 @@ const ProductDetail = () => {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DesktopDatePicker
                       // label="Date desktop"
-                      disabled={disabledDate}
+                      // disabled={disabledDate}
                       disablePast
                       inputFormat="MM/DD/YYYY"
                       value={date}
@@ -434,7 +450,11 @@ const ProductDetail = () => {
                       height: "48px",
                       left: "843px",
                       top: "703px",
-                      backgroundColor: standardActive ? "#E6E6E6" : "white",
+                      backgroundColor: isTodaysDate
+                        ? "lightgray"
+                        : standardActive
+                        ? "#E6E6E6"
+                        : "white",
                       borderRadius: "100px",
                       display: "flex",
                       flexDirection: "column",
@@ -445,10 +465,12 @@ const ProductDetail = () => {
                       "&:hover": { border: "1px solid black" },
                     }}
                     onClick={() => {
-                      setDeliveryTime(StandardDelivery);
-                      setStandardActive(!standardActive);
-                      setMidNightActive(false);
-                      setFixedActive(false);
+                      if (!isTodaysDate) {
+                        setDeliveryTime(StandardDelivery);
+                        setStandardActive(!standardActive);
+                        setMidNightActive(false);
+                        setFixedActive(false);
+                      }
                     }}
                   >
                     <FMTypography
@@ -534,7 +556,7 @@ const ProductDetail = () => {
                   options={deliveryTime}
                   dropdownvalue="label"
                   placeholder="Selecttime"
-                  onChange={serviceChangeHandler}
+                  // onChange={serviceChangeHandler}
                   sx={{
                     ...commonStyle.dropdownStyle,
                     height: "2.75rem",
@@ -548,7 +570,7 @@ const ProductDetail = () => {
                   }}
                   // error={errors.service}
 
-                  value={serviceId}
+                  // value={serviceId}
                   // {...restServiceRegister}
                 />
               </Box>
@@ -621,7 +643,7 @@ const ProductDetail = () => {
                 style={{ paddingBottom: "19px" }}
               />
               <FMTypography
-                displayText={productDetailedData?.rating}
+                displayText={Math.round(productDetailedData?.rating * 10) / 10}
                 styleData={{ fontSize: "20px", paddingTop: "6px" }}
               />
               <FMButton
@@ -715,7 +737,9 @@ const ProductDetail = () => {
                             style={{ width: "14px" }}
                           />
                           <FMTypography
-                            displayText={productDetailedData?.rating}
+                            displayText={
+                              Math.round(productDetailedData?.rating * 10) / 10
+                            }
                             styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                           />
                         </Box>
@@ -789,7 +813,7 @@ const ProductDetail = () => {
                       style={{ width: "14px" }}
                     />
                     <FMTypography
-                      displayText={elem?.rating}
+                      displayText={Math.round(elem?.rating * 10) / 10}
                       styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                     />
                   </Box>

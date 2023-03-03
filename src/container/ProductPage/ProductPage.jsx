@@ -89,7 +89,7 @@ const ProductPage = () => {
                   style={{ width: "14px" }}
                 />
                 <FMTypography
-                  displayText={elem?.rating}
+                  displayText={Math.round(elem?.rating * 10) / 10}
                   styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                 />
               </Box>
