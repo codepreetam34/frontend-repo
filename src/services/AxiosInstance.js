@@ -11,10 +11,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
-    config.headers[
-      "authorization"
-    ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2QzYzUyMjY0YWQzNDg2NjRhZDIwZDUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY3NzA2NjA1NCwiZXhwIjoxNjc3NjcwODU0fQ.B2m2aJzn4NErl1z0E-1994Zd0j0fw0hSJzxSC6Ke2GI
-    `;
+    const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
+    const result = auth.substring(1, auth.length - 1);
+    config.headers["authorization"] = `Bearer ${result}`;
     return config;
   },
   function (error) {
@@ -24,7 +23,6 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    setItem("AUTH_ACCESS_TOKEN", response?.data?.token);
     return response;
   },
   function (error) {

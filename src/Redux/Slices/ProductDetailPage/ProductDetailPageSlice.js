@@ -18,11 +18,11 @@ export const getProductsDetail = createAsyncThunk(
 
 export const addToCart = createAsyncThunk(
   ADD_TO_CART,
-  async (data, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
       const response = await axiosInstance.post(
         "api/user/cart/addtocart",
-        data
+        payload
       );
       return response.data;
     } catch (error) {

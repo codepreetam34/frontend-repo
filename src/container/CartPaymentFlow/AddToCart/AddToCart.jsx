@@ -8,7 +8,7 @@ import { commonStyle } from "Styles/commonStyles";
 import { Col, Row } from "react-bootstrap";
 import FMTypography from "components/FMTypography/FMTypography";
 import FMDropdown from "components/FMDropdown/FMDropdown";
-import { quantityOpt, StandardDelivery } from "constants/AppConstant";
+import { quantityOpt } from "constants/AppConstant";
 import FMButton from "components/FMButton/FMButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,28 +19,28 @@ import {
 const AddToCart = ({ handleNext }) => {
   const dispatch = useDispatch();
 
-  const [quantityOption, setQuantityOption] = useState("Qty 1");
-  console.log("quantityOption", quantityOption);
-
   const addedData = useSelector(
     (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
   );
-  console.log("addedData", addedData?.img);
+
   useEffect(() => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
 
-  const deleteProductOnClick = () => {
-    dispatch(
-      deleteAddToCartProducts({ productId: "63ee0a533103fd3588201003" })
-    );
+  const deleteProductOnClick = (id) => () => {
+    dispatch(deleteAddToCartProducts({ productId: id }))
+      .unwrap()
+      .then((res) => {
+        if (res) {
+          dispatch(addToCartProductsFinal());
+        }
+      });
   };
-
-  const optionChangeHandler = (e) => {
-    console.log("e", e);
-    // setQuantityOption(e.target.value);
-  };
-
+  // let totalPrice = addedData?.reduce(function (accumulator, item) {
+  //   console.log("item");
+  //   return accumulator + item.price * item.qty;
+  // }, 0);
+  // console.log("totalPrice", totalPrice);
   return (
     <>
       <Row style={{ padding: "40px 120px" }}>
@@ -54,97 +54,99 @@ const AddToCart = ({ handleNext }) => {
 
       <Row style={{ padding: "10px 120px 0 120px" }}>
         <Col>
-          {/* {addedData?.map((elem) => ( */}
-          <Box
-            sx={{
-              borderRadius: "20px",
-              boxShadow:
-                "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-              display: "flex",
-              width: "auto",
-              padding: "32px",
-              marginTop: "20px",
-            }}
-          >
-            <Box>
-              <img
-                src={addedData?.img}
-                alt="img"
-                style={{ width: "150px", height: "150px" }}
-              />
-            </Box>
-            <Box sx={{ marginLeft: "1rem", width: "100%" }}>
-              <Box sx={{ display: "fllex", justifyContent: "space-between" }}>
-                <FMTypography displayText={"Chocolate Truffle"} />
-                <img
-                  src={closeCrossIcon}
-                  alt="close-icon"
-                  style={{ cursor: "pointer" }}
-                  onClick={deleteProductOnClick}
-                />
-              </Box>
-              {/* dropdown row below */}
-              <Row>
-                <Col>
-                  <FMDropdown
-                    options={quantityOpt}
-                    dropdownvalue="label"
-                    // placeholder="Selecttime"
-                    onChange={optionChangeHandler}
-                    sx={{
-                      ...commonStyle.dropdownStyle,
-                      height: "2.75rem",
-                      width: "81px",
-                      borderRadius: "10px",
-                      backgroundColor: "#E6E6E6",
-                      marginTop: "1rem",
-                      border: "1px solid #E6E6E6",
-                    }}
-                    // error={errors.service}
-
-                    value={quantityOption}
-                    // {...restServiceRegister}
+          {addedData &&
+            Object.keys(addedData)?.map((elem) => (
+              <Box
+                sx={{
+                  borderRadius: "20px",
+                  boxShadow:
+                    "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+                  display: "flex",
+                  width: "auto",
+                  padding: "32px",
+                  // marginTop: "20px",
+                }}
+              >
+                <Box>
+                  <img
+                    src={addedData[elem]?.img}
+                    alt="img"
+                    style={{ width: "150px", height: "150px" }}
                   />
-                </Col>
-              </Row>
-              {/* dropdown row above */}
-              <Box sx={{ display: "flex" }}>
-                <del
-                  style={{
-                    fontSize: "1rem",
-                    color: "#717171",
-                    paddingTop: ".5rem",
-                  }}
-                >
-                  ₹ {500}
-                </del>
-                <Typography
-                  sx={{
-                    fontSize: "18px",
-                    color: "#000000",
-                    marginLeft: "10px",
-                    paddingTop: ".4rem",
-                  }}
-                >
-                  ₹ {234}
-                </Typography>
+                </Box>
+                <Box sx={{ marginLeft: "1rem", width: "100%" }}>
+                  <Box
+                    sx={{ display: "fllex", justifyContent: "space-between" }}
+                  >
+                    <FMTypography displayText={addedData[elem]?.name} />
+                    <img
+                      src={closeCrossIcon}
+                      alt="close-icon"
+                      style={{ cursor: "pointer" }}
+                      onClick={deleteProductOnClick(elem)}
+                    />
+                  </Box>
+                  {/* dropdown row below */}
+                  <Row>
+                    <Col>
+                      <FMDropdown
+                        options={quantityOpt}
+                        dropdownvalue="label"
+                        // onChange={optionChangeHandler}
+                        sx={{
+                          ...commonStyle.dropdownStyle,
+                          height: "2.75rem",
+                          width: "100px",
+                          borderRadius: "10px",
+                          backgroundColor: "#E6E6E6",
+                          marginTop: "1rem",
+                          border: "1px solid #E6E6E6",
+                        }}
+                        // error={errors.service}
 
-                <FMTypography
-                  displayText={`${22}% OFF`}
-                  styleData={{
-                    color: "#008539",
-                    fontSize: "12px",
-                    marginLeft: "8px",
-                    paddingTop: ".7rem",
-                  }}
-                />
+                        // value={quantityOption}
+                        // {...restServiceRegister}
+                      />
+                    </Col>
+                  </Row>
+                  {/* dropdown row above */}
+                  <Box sx={{ display: "flex" }}>
+                    <del
+                      style={{
+                        fontSize: "1rem",
+                        color: "#717171",
+                        paddingTop: ".5rem",
+                      }}
+                    >
+                      ₹ {addedData[elem]?.price}
+                    </del>
+                    <Typography
+                      sx={{
+                        fontSize: "18px",
+                        color: "#000000",
+                        marginLeft: "10px",
+                        paddingTop: ".4rem",
+                      }}
+                    >
+                      ₹ {addedData[elem]?.discountPrice}
+                    </Typography>
+
+                    <FMTypography
+                      displayText={`${addedData[elem]?.offer}% OFF`}
+                      styleData={{
+                        color: "#008539",
+                        fontSize: "12px",
+                        marginLeft: "8px",
+                        paddingTop: ".7rem",
+                      }}
+                    />
+                  </Box>
+                  <Typography variant="body2" sx={{ color: "#717171" }}>
+                    {"Same day delivery"}
+                  </Typography>
+                </Box>
               </Box>
-              <Typography variant="body2" sx={{ color: "#717171" }}>
-                {"Same day delivery"}
-              </Typography>
-            </Box>
-          </Box>
-          {/* ))} */}
+            ))}
         </Col>
 
         {/* second col */}

@@ -53,11 +53,14 @@ import {
 import { addToCartSchema } from "validationSchema/addToCartSchema";
 import { Col, Container, Row } from "react-bootstrap";
 import { ADD_TO_CART } from "Routes/Routes";
+import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { pId } = params;
+
+  const todaysDate = moment(new Date()).format("DDMMYY");
 
   const [productQuantity, setProductQuantity] = useState(createUserOptions);
   const [eggOrNot, setEggOrNot] = useState(egglessOrNot);
@@ -69,6 +72,13 @@ const ProductDetail = () => {
   const [deliveryTime, setDeliveryTime] = useState();
   const [serviceId, setServiceId] = useState("");
   const [date, setDate] = useState(dayjs(Date()));
+
+  const [isTodaysDate, setIsTodaysDate] = useState(true);
+
+  useEffect(() => {
+    setIsTodaysDate(() => date.format("DDMMYY") === todaysDate);
+  }, [date]);
+
   const handleChange = (newValue) => {
     setDate(newValue);
   };
@@ -81,15 +91,15 @@ const ProductDetail = () => {
     (state) => state?.getProductsDetail?.getProductsListData?.product
   );
 
+  // console.log("productDetailedData", productDetailedData);
+
   const reviewsCarouselData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product?.reviews
   );
-  console.log(productDetailedData?.rating);
 
   const similarProductDetailedData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.similarProducts
   );
-  // console.log("similarProductDetailedData", similarProductDetailedData);
   const {
     register,
     handleSubmit,
@@ -102,30 +112,34 @@ const ProductDetail = () => {
     resolver: yupResolver(addToCartSchema),
     mode: "onChange",
   });
-  // console.log("errors", errors, pincodeData);
-  // console.log("getValues", getValues("cakeMessage"));
-  // const onSubmit = (data) => {
-  //   console.log("first", data);
-  //   console.log("errors2", errors);
-  //   dispatch(addToCart(data));
-  // };
-
-  const onSubmit = async (data) => {
-    // console.log("data", data, pincodeData);
-    const uploadFormData = new FormData();
-    console.log("uploadFormData", uploadFormData);
-    uploadFormData.append("pinCode", pincodeData?.pincode);
-    // uploadFormData.append("cakeMessage", data?.cakeMessage);
-    try {
-      dispatch(addToCart(uploadFormData));
-    } catch (error) {}
-  };
 
   const navigate = useNavigate();
 
-  // const tempSub = () => {
-  //   navigate(ADD_TO_CART);
-  // };
+  const onSubmit = async (data) => {
+    if (pId) {
+      const cartItems = [];
+      const payload = {
+        cartItems: [
+          {
+            product: pId,
+            quantity: 1,
+          },
+        ],
+      };
+
+      dispatch(addToCart(payload)).then((res) => {
+        if (res) {
+          navigate(`/add-to-cart`);
+          dispatch(addToCartProductsFinal());
+        }
+      });
+      // navigate(`/add-to-cart`);
+    }
+  };
+
+  const tempSub = () => {
+    navigate(`/add-to-cart?${pId}`);
+  };
 
   // const { onChange: onServiceChange, ...restServiceRegister } =
   //   register("service");
@@ -215,7 +229,6 @@ const ProductDetail = () => {
                 styleData={{ fontSize: "40px", fontWeight: "600" }}
               />
 
-              {/* rating and review box below */}
               <Box sx={{ display: "flex" }}>
                 <Box
                   sx={{
@@ -232,7 +245,9 @@ const ProductDetail = () => {
                     style={{ width: "14px" }}
                   />
                   <FMTypography
-                    displayText={productDetailedData?.rating}
+                    displayText={
+                      Math.round(productDetailedData?.rating * 10) / 10
+                    }
                     styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                   />
                 </Box>
@@ -356,7 +371,7 @@ const ProductDetail = () => {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DesktopDatePicker
                       // label="Date desktop"
-                      disabled={disabledDate}
+                      // disabled={disabledDate}
                       disablePast
                       inputFormat="MM/DD/YYYY"
                       value={date}
@@ -435,7 +450,11 @@ const ProductDetail = () => {
                       height: "48px",
                       left: "843px",
                       top: "703px",
-                      backgroundColor: standardActive ? "#E6E6E6" : "white",
+                      backgroundColor: isTodaysDate
+                        ? "lightgray"
+                        : standardActive
+                        ? "#E6E6E6"
+                        : "white",
                       borderRadius: "100px",
                       display: "flex",
                       flexDirection: "column",
@@ -446,10 +465,12 @@ const ProductDetail = () => {
                       "&:hover": { border: "1px solid black" },
                     }}
                     onClick={() => {
-                      setDeliveryTime(StandardDelivery);
-                      setStandardActive(!standardActive);
-                      setMidNightActive(false);
-                      setFixedActive(false);
+                      if (!isTodaysDate) {
+                        setDeliveryTime(StandardDelivery);
+                        setStandardActive(!standardActive);
+                        setMidNightActive(false);
+                        setFixedActive(false);
+                      }
                     }}
                   >
                     <FMTypography
@@ -535,7 +556,7 @@ const ProductDetail = () => {
                   options={deliveryTime}
                   dropdownvalue="label"
                   placeholder="Selecttime"
-                  onChange={serviceChangeHandler}
+                  // onChange={serviceChangeHandler}
                   sx={{
                     ...commonStyle.dropdownStyle,
                     height: "2.75rem",
@@ -549,7 +570,7 @@ const ProductDetail = () => {
                   }}
                   // error={errors.service}
 
-                  value={serviceId}
+                  // value={serviceId}
                   // {...restServiceRegister}
                 />
               </Box>
@@ -572,6 +593,7 @@ const ProductDetail = () => {
                       backgroundColor: "white",
                     },
                   }}
+                  // onClick={tempSub}
                   onClick={handleSubmit(onSubmit)}
                 />
                 <FMButton
@@ -581,7 +603,6 @@ const ProductDetail = () => {
                     ...commonStyle.buttonStyles,
                     width: "215px",
                   }}
-                  // onClick={tempSub}
                 />
                 <input type={"submit"} hidden />
               </Box>
@@ -622,7 +643,7 @@ const ProductDetail = () => {
                 style={{ paddingBottom: "19px" }}
               />
               <FMTypography
-                displayText={productDetailedData?.rating}
+                displayText={Math.round(productDetailedData?.rating * 10) / 10}
                 styleData={{ fontSize: "20px", paddingTop: "6px" }}
               />
               <FMButton
@@ -716,7 +737,9 @@ const ProductDetail = () => {
                             style={{ width: "14px" }}
                           />
                           <FMTypography
-                            displayText={productDetailedData?.rating}
+                            displayText={
+                              Math.round(productDetailedData?.rating * 10) / 10
+                            }
                             styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                           />
                         </Box>
@@ -790,7 +813,7 @@ const ProductDetail = () => {
                       style={{ width: "14px" }}
                     />
                     <FMTypography
-                      displayText={elem?.rating}
+                      displayText={Math.round(elem?.rating * 10) / 10}
                       styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                     />
                   </Box>

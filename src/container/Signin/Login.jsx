@@ -56,7 +56,6 @@ const Login = () => {
       .unwrap()
       .then((res) => {
         if (res) {
-          setItem("userData", res?.data);
           navigate("/");
           notify({ type: "success", content: "Logged in successfully" });
         }
@@ -174,8 +173,6 @@ const Login = () => {
                       border: "2px solid #E6E6E6",
                     },
                   }}
-
-                  // onClick={handleSubmit(onSubmit)}
                 />
 
                 <FMButton
@@ -192,8 +189,6 @@ const Login = () => {
                       border: "2px solid #E6E6E6",
                     },
                   }}
-
-                  // onClick={handleSubmit(onSubmit)}
                 />
               </Box>
               <Box sx={{ display: "flex", justifyContent: "center" }}>

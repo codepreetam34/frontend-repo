@@ -14,3 +14,5 @@ export const PRODUCT_DETAIL = "product-detail/:pId";
 export const ADD_TO_CART = "/add-to-cart";
 export const PRIVACY_POLICY = "/privacy-policy";
 export const FAQ = "/faq";
+export const BLOGS = "/blogs";
+export const BLOGS_DETAIL = "/blogs-detail";
