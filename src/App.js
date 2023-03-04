@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./LandingPage.css";
 import theme from "./theme";
 import {
+  ADD_REVIEW,
   ADD_TO_CART,
   BLOGS,
   BLOGS_DETAIL,
@@ -37,6 +38,7 @@ import PrivacyPolicy from "container/PrivacyPolicy/PrivacyPolicy";
 import Faq from "container/FAQ/Faq";
 import Blogs from "container/Blogs/Blogs";
 import BlogDetailedPage from "container/Blogs/BlogDetailedPage/BlogDetailedPage";
+import AddReview from "container/AddReview/AddReview";
 
 const App = () => {
   return (
@@ -70,6 +72,10 @@ const App = () => {
             <Route
               path={ADD_TO_CART}
               element={<PrivateRoutes Component={HorizontalLinearStepper} />}
+            />
+            <Route
+              path={ADD_REVIEW}
+              element={<PrivateRoutes Component={AddReview} />}
             />
 
             <Route path="*" element={<p>There's nothing here: 404!</p>} />

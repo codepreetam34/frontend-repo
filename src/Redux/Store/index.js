@@ -12,6 +12,7 @@ import ProductDetailPageSlice from "Redux/Slices/ProductDetailPage/ProductDetail
 import addToCartProductsSlice from "Redux/Slices/AddToCart/AddToCartSlice";
 import addToCartAddressSlice from "Redux/Slices/AddToCart/AddAddress";
 import addToCartAddAddressSlice from "Redux/Slices/AddToCart/AddToCartAddAddressSlice";
+import getCarouselSlice from "Redux/Slices/LandingPageSlice/LandingPageSlice";
 
 const rootReducer = combineReducers({
   menuList: menuListSlice,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   addToCartProducts: addToCartProductsSlice,
   addToCartAddress: addToCartAddressSlice,
   addToCartAddAddress: addToCartAddAddressSlice,
+  getCarousel: getCarouselSlice,
 });
 
 const initializeStore = () =>

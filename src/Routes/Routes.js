@@ -16,3 +16,4 @@ export const PRIVACY_POLICY = "/privacy-policy";
 export const FAQ = "/faq";
 export const BLOGS = "/blogs";
 export const BLOGS_DETAIL = "/blogs-detail";
+export const ADD_REVIEW = "add-review";

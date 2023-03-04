@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 import FMTypography from "components/FMTypography/FMTypography";
 import FMButton from "components/FMButton/FMButton";
@@ -31,126 +31,130 @@ const Faq = () => {
           style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
         />
       </Box>
-      <Row style={{ width: "100%" }}>
-        <Col
-          style={{
-            backgroundColor: "#FCEDEE",
-            margin: "0 auto",
-            padding: "50px 0 20px 20%",
-            // display: "flex",
-            // justifyContent: "center",
-            // padding: "50px 0",
-          }}
-        >
-          <FMTypography
-            displayText={"Frequently Ask Questions"}
-            styleData={{ fontSize: "60px", fontWeight: "500" }}
-          />
-          <FMTypography
-            displayText={"Our FAQ’s"}
-            styleData={{
-              fontSize: "20px",
-              fontWeight: "500",
-              marginTop: "20px",
-              padding: "0 0 0 30%",
+      <Container fluid style={{ padding: "0" }}>
+        <Row style={{ width: "100%", margin: "0" }}>
+          <Col
+            style={{
+              backgroundColor: "#FCEDEE",
+              margin: "0 auto",
+              padding: "50px 0 20px 20%",
+              // display: "flex",
+              // justifyContent: "center",
+              // padding: "50px 0",
             }}
-          />
-          <FMTypography
-            displayText={"Have any questions?"}
-            styleData={{
-              fontSize: "32px",
-              fontWeight: "500",
-              marginTop: "10px",
-              padding: "0 0 0 20%",
+          >
+            <FMTypography
+              displayText={"Frequently Ask Questions"}
+              styleData={{ fontSize: "60px", fontWeight: "500" }}
+            />
+            <FMTypography
+              displayText={"Our FAQ’s"}
+              styleData={{
+                fontSize: "20px",
+                fontWeight: "500",
+                marginTop: "20px",
+                padding: "0 0 0 30%",
+              }}
+            />
+            <FMTypography
+              displayText={"Have any questions?"}
+              styleData={{
+                fontSize: "32px",
+                fontWeight: "500",
+                marginTop: "10px",
+                padding: "0 0 0 20%",
+              }}
+            />
+          </Col>
+        </Row>
+      </Container>
+      <Container>
+        <Row style={{ marginTop: "32px" }}>
+          <Col
+            style={{
+              display: "flex",
+              justifyContent: "center",
             }}
-          />
-        </Col>
-      </Row>
-      <Row style={{ marginTop: "32px" }}>
-        <Col
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <FMButton
-            displayText={"Ordering"}
-            variant="outlined"
-            styleData={{
-              border: " 1px solid #E6E6E6",
-              borderRadius: "19px",
-              marginRight: "10px",
-              color: "#717171",
-              backgroundColor: orderingActiveBtn ? "#E6E6E6" : "white",
-              "&:hover": {
+          >
+            <FMButton
+              displayText={"Ordering"}
+              variant="outlined"
+              styleData={{
+                border: " 1px solid #E6E6E6",
+                borderRadius: "19px",
+                marginRight: "10px",
+                color: "#717171",
                 backgroundColor: orderingActiveBtn ? "#E6E6E6" : "white",
-                border: " 1px solid #E6E6E6",
-              },
-            }}
-            onClick={() => {
-              setOrderingActiveBtn(true);
-              setDeliveriesActiveBtn(false);
-              setProductsActiveBtn(false);
-            }}
-          />
+                "&:hover": {
+                  backgroundColor: orderingActiveBtn ? "#E6E6E6" : "white",
+                  border: " 1px solid #E6E6E6",
+                },
+              }}
+              onClick={() => {
+                setOrderingActiveBtn(true);
+                setDeliveriesActiveBtn(false);
+                setProductsActiveBtn(false);
+              }}
+            />
 
-          <FMButton
-            displayText={"Deliveries"}
-            variant="outlined"
-            styleData={{
-              border: " 1px solid #E6E6E6",
-              borderRadius: "19px",
-              marginRight: "10px",
-              color: "#717171",
-              backgroundColor: deliveriesActiveBtn ? "#E6E6E6" : "white",
-              "&:hover": {
+            <FMButton
+              displayText={"Deliveries"}
+              variant="outlined"
+              styleData={{
+                border: " 1px solid #E6E6E6",
+                borderRadius: "19px",
+                marginRight: "10px",
+                color: "#717171",
                 backgroundColor: deliveriesActiveBtn ? "#E6E6E6" : "white",
-                border: " 1px solid #E6E6E6",
-              },
-            }}
-            onClick={() => {
-              setOrderingActiveBtn(false);
-              setDeliveriesActiveBtn(true);
-              setProductsActiveBtn(false);
-            }}
-          />
+                "&:hover": {
+                  backgroundColor: deliveriesActiveBtn ? "#E6E6E6" : "white",
+                  border: " 1px solid #E6E6E6",
+                },
+              }}
+              onClick={() => {
+                setOrderingActiveBtn(false);
+                setDeliveriesActiveBtn(true);
+                setProductsActiveBtn(false);
+              }}
+            />
 
-          <FMButton
-            displayText={"Products"}
-            variant="outlined"
-            styleData={{
-              border: " 1px solid #E6E6E6",
-              backgroundColor: productsActiveBtn ? "#E6E6E6" : "white",
-              borderRadius: "19px",
-              marginRight: "10px",
-              color: "#717171",
-              "&:hover": {
+            <FMButton
+              displayText={"Products"}
+              variant="outlined"
+              styleData={{
+                border: " 1px solid #E6E6E6",
                 backgroundColor: productsActiveBtn ? "#E6E6E6" : "white",
-                border: " 1px solid #E6E6E6",
-              },
-            }}
-            onClick={() => {
-              setOrderingActiveBtn(false);
-              setDeliveriesActiveBtn(false);
-              setProductsActiveBtn(true);
-            }}
-          />
-        </Col>
-      </Row>
+                borderRadius: "19px",
+                marginRight: "10px",
+                color: "#717171",
+                "&:hover": {
+                  backgroundColor: productsActiveBtn ? "#E6E6E6" : "white",
+                  border: " 1px solid #E6E6E6",
+                },
+              }}
+              onClick={() => {
+                setOrderingActiveBtn(false);
+                setDeliveriesActiveBtn(false);
+                setProductsActiveBtn(true);
+              }}
+            />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col>
-          <FaqsComponent
-            type={
-              orderingActiveBtn
-                ? "Ordering"
-                : deliveriesActiveBtn
-                ? "Delivery"
-                : "Products"
-            }
-          />
-        </Col>
-      </Row>
+        <Row>
+          <Col>
+            <FaqsComponent
+              type={
+                orderingActiveBtn
+                  ? "Ordering"
+                  : deliveriesActiveBtn
+                  ? "Delivery"
+                  : "Products"
+              }
+            />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };
