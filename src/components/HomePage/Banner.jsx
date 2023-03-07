@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
-import BData from "../../JsonDatas/BannerData";
 import { useDispatch, useSelector } from "react-redux";
 import { getCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
 
@@ -9,14 +8,13 @@ const Banner = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("calleedddd");
     dispatch(getCarousel());
   }, [dispatch]);
 
   const allCarousels = useSelector(
     (state) => state?.getCarousel?.getCarouselData?.banners?.[0]?.banners
   );
-  console.log("allCarousels", allCarousels);
-  //   const [bannerdata, setBannerData] = useState(BData);
 
   const settings = {
     dots: true,

@@ -17,7 +17,7 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src="../../../images/one.png"
+                      src="../../../images/firstRectangle.svg"
                       className="img-fluid"
                       alt=""
                     />
@@ -27,7 +27,7 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src="../../../images/one.png"
+                      src="../../../images/secondRectangle.svg"
                       className="img-fluid"
                       alt=""
                     />
@@ -37,11 +37,11 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src="../../../images/one.png"
+                      src="../../../images/thirdRectangle.svg"
                       className="img-fluid"
                       alt=""
                     />
-                    <p>Best Wishes</p>
+                    <p>Baby Shower</p>
                   </a>
                 </div>
               </Col>
@@ -50,17 +50,7 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src="../../../images/one.png"
-                      className="img-fluid"
-                      alt=""
-                    />
-                    <p>Baby Shower</p>
-                  </a>
-                </div>
-                <div className="heighautoimg">
-                  <a href="/" className="overlay">
-                    <img
-                      src="../../../images/one.png"
+                      src="../../../images/fourthRectangle.svg"
                       className="img-fluid"
                       alt=""
                     />
@@ -70,11 +60,21 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src="../../../images/one.png"
+                      src="../../../images/fifthRectangle.svg"
                       className="img-fluid"
                       alt=""
                     />
                     <p>Holi</p>
+                  </a>
+                </div>
+                <div className="heighautoimg">
+                  <a href="/" className="overlay">
+                    <img
+                      src="../../../images/sixthRectangle.svg"
+                      className="img-fluid"
+                      alt=""
+                    />
+                    <p>House Warming</p>
                   </a>
                 </div>
               </Col>
@@ -82,21 +82,21 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg forth_row">
                   <a href="/" className="overlay">
                     <img
-                      src="../../../images/one.png"
+                      src="../../../images/seventhRectangle.svg"
                       className="img-fluid"
                       alt=""
                     />
-                    <p>House Warming</p>
+                    <p>Anniversary</p>
                   </a>
                 </div>
                 <div className="heighautoimg forth_row">
                   <a href="/" className="overlay">
                     <img
-                      src="../../../images/one.png"
+                      src="../../../images/eighthRectangle.svg"
                       className="img-fluid"
                       alt=""
                     />
-                    <p>Anniversary</p>
+                    <p>Best Wishes</p>
                   </a>
                 </div>
               </Col>
@@ -104,7 +104,7 @@ const ShopByOccasion = () => {
           </Col>
           <Col md={6}>
             <div className="overlay position-relative">
-              <img src="../../../images/one.png" alt="" />
+              <img src="../../../images/bigRectangle.svg" alt="" />
               <div className="twobandata">
                 <h4>Birthday Celebration</h4>
                 <a href="/">Gift Now</a>

@@ -24,7 +24,7 @@ import FMTypography from "components/FMTypography/FMTypography";
 import { Stack } from "@mui/system";
 import FMButton from "components/FMButton/FMButton";
 import { useNavigate } from "react-router-dom";
-import { FAQ, LOGIN } from "Routes/Routes";
+import { FAQ, LOGIN, MY_PROFILE } from "Routes/Routes";
 import { logout } from "Redux/Slices/Login/auth.slice";
 
 const StyledMenu = styled((props) => (
@@ -120,6 +120,13 @@ const Header = () => {
   const logoutPerson = () => {
     localStorage.clear();
     navigate(LOGIN);
+  };
+
+  const personLoggedInId = JSON.parse(
+    localStorage.getItem("Sidebar_Module_Assigned")
+  )?._id;
+  const profileNavigation = () => {
+    navigate(`/my-profile/${personLoggedInId}`);
   };
 
   const logoutHandler = () => {
@@ -249,6 +256,7 @@ const Header = () => {
                         border: "none",
                       },
                     }}
+                    onClick={profileNavigation}
                   />
                 </Box>
               ) : (

@@ -1,13 +1,71 @@
-import { PhotoCamera } from "@material-ui/icons";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, IconButton, Rating, TextField } from "@mui/material";
+import FMButton from "components/FMButton/FMButton";
 import FMTypography from "components/FMTypography/FMTypography";
 import Header from "components/SearchBar/Header";
 import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addReviews } from "Redux/Slices/AddReviewSlice/AddReviewSlice";
+import { commonStyle } from "Styles/commonStyles";
 import uploadReview from "../../assets/upload-review.svg";
+import { addReviewsSchema } from "../../validationSchema/addReviewsSchema";
+import StarIcon from "@mui/icons-material/Star";
 
 const AddReview = () => {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { pId } = params;
   const [value, setValue] = useState(0);
+  const [hover, setHover] = React.useState(-1);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(addReviewsSchema),
+    mode: "onChange",
+  });
+
+  const onSubmit = (data) => {
+    // console.log("Data", data);
+    const personLoggedIn = JSON.parse(
+      localStorage.getItem("Sidebar_Module_Assigned")
+    )?.fullName;
+    let payload = {
+      rating: value,
+      comment: data.review,
+      name: personLoggedIn,
+      id: pId,
+    };
+    console.log("payload", payload);
+    dispatch(addReviews({ payload }))
+      .unwrap()
+      .then((res) => {
+        if (res) {
+          // navigate("/");
+        }
+      });
+  };
+
+  const labels = {
+    // 0.5: 'Useless',
+    1: "Useless",
+    // 1.5: 'Poor',
+    2: "Poor",
+    // 2.5: 'Ok',
+    3: "Ok",
+    // 3.5: 'Good',
+    4: "Good",
+    // 4.5: 'Excellent',
+    5: "Excellent",
+  };
+
+  function getLabelText(value) {
+    return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
+  }
 
   return (
     <>
@@ -69,16 +127,44 @@ const AddReview = () => {
                 displayText={"Rate this product"}
                 styleData={{ fontSize: "32px" }}
               />
-              <Rating
-                name="simple-controlled"
-                value={value}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
+
+              <Box
+                sx={{
+                  width: 200,
+                  display: "flex",
+                  alignItems: "center",
                 }}
-                size="large"
-                precision={0.5}
+              >
+                <Rating
+                  name="hover-feedback"
+                  value={value}
+                  // precision={0.5}
+                  getLabelText={getLabelText}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                  onChangeActive={(event, newHover) => {
+                    setHover(newHover);
+                  }}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                  }
+                />
+                {value !== null && (
+                  <Box sx={{ ml: 2 }}>
+                    {labels[hover !== -1 ? hover : value]}
+                  </Box>
+                )}
+                <FMTypography
+                  styleData={commonStyle.errorText}
+                  displayText={errors.rating?.message}
+                />
+              </Box>
+
+              <FMTypography
+                displayText={"Review this product"}
+                styleData={{ fontSize: "32px", marginTop: "80px" }}
               />
-              <FMTypography displayText={"Review this product"} />
               <TextField
                 id="outlined-multiline-static"
                 // label="Multiline"
@@ -92,6 +178,12 @@ const AddReview = () => {
                   borderRadius: "10px",
                   //   "&:hover": { border: "1px solid #C4C4C4" },
                 }}
+                {...register("review")}
+                error={errors.review ? true : false}
+              />
+              <FMTypography
+                styleData={commonStyle.errorText}
+                displayText={errors.review?.message}
               />
               <IconButton
                 color="primary"
@@ -107,6 +199,19 @@ const AddReview = () => {
                 />
               </IconButton>
             </Box>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <FMButton
+              displayText={"Submit"}
+              variant={"contained"}
+              styleData={{
+                ...commonStyle.buttonStyles,
+              }}
+              onClick={handleSubmit(onSubmit)}
+            />
+            <input type={"submit"} hidden />
           </Col>
         </Row>
       </Container>

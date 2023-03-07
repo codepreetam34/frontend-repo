@@ -176,6 +176,10 @@ const ProductDetail = () => {
     }
   };
 
+  const reviewNavHandler = () => {
+    navigate(`/add-review/${pId}`);
+  };
+
   const responsive = {
     desktop: {
       breakpoint: {
@@ -635,7 +639,7 @@ const ProductDetail = () => {
       {/*review col start */}
       <Grid sx={{ padding: "0 100px" }}>
         <Box>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box sx={{ display: "flex" }}>
               <img
                 src={reviewBlackStar}
@@ -673,7 +677,14 @@ const ProductDetail = () => {
                   border: "1px solid #E6E6E6",
                   borderRadius: "10px",
                   textTransform: "capitalize",
+                  color: "black",
+                  fontWeight: "600",
+                  "&:hover": {
+                    backgroundColor: "white",
+                    border: "1px solid #E6E6E6",
+                  },
                 }}
+                onClick={reviewNavHandler}
               />
             </Box>
           </Box>
@@ -728,7 +739,6 @@ const ProductDetail = () => {
                             width: "auto",
                             marginLeft: "1rem",
                             borderRadius: "4px",
-                            // marginBottom: "-.5rem",
                           }}
                         >
                           <img
@@ -745,9 +755,7 @@ const ProductDetail = () => {
                         </Box>
                       </Box>
 
-                      <p style={{ marginTop: "15px" }}>
-                        {productDetailedData?.reviews[0]?.comment}
-                      </p>
+                      <p style={{ marginTop: "15px" }}>{elem?.comment}</p>
                     </Box>
                   </Box>
                 </Box>

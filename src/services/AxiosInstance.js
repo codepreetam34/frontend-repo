@@ -12,7 +12,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   function (config) {
     const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
-    const result = auth.substring(1, auth.length - 1);
+    const result = auth?.substring(1, auth.length - 1);
     config.headers["authorization"] = `Bearer ${result}`;
     return config;
   },
