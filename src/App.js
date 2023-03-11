@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./LandingPage.css";
 import theme from "./theme";
 import {
+  ADD_REVIEW,
   ADD_TO_CART,
   BLOGS,
   BLOGS_DETAIL,
@@ -16,6 +17,7 @@ import {
   FORGOTPASSWORD,
   LANDING_PAGE,
   LOGIN,
+  MY_PROFILE,
   PRIVACY_POLICY,
   PRODUCT_DETAIL,
   PRODUCT_PAGE,
@@ -37,6 +39,9 @@ import PrivacyPolicy from "container/PrivacyPolicy/PrivacyPolicy";
 import Faq from "container/FAQ/Faq";
 import Blogs from "container/Blogs/Blogs";
 import BlogDetailedPage from "container/Blogs/BlogDetailedPage/BlogDetailedPage";
+import AddReview from "container/AddReview/AddReview";
+import Profile from "container/ProfileSection/Profile";
+import PageNotFound from "container/PageNotFound/PageNotFound";
 
 const App = () => {
   return (
@@ -56,6 +61,7 @@ const App = () => {
             <Route path={BLOGS} element={<Blogs />} />
             <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
 
+            <Route path="*" element={<PageNotFound />} />
             {/* private routes below */}
 
             <Route
@@ -71,8 +77,14 @@ const App = () => {
               path={ADD_TO_CART}
               element={<PrivateRoutes Component={HorizontalLinearStepper} />}
             />
-
-            <Route path="*" element={<p>There's nothing here: 404!</p>} />
+            <Route
+              path={ADD_REVIEW}
+              element={<PrivateRoutes Component={AddReview} />}
+            />
+            <Route
+              path={MY_PROFILE}
+              element={<PrivateRoutes Component={Profile} />}
+            />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

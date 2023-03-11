@@ -32,7 +32,6 @@ const AddAddress = ({ handleNext }) => {
     (state) =>
       state?.addToCartAddress?.getAddToCartAddress?.userAddress?.address
   );
-  // console.log("addressDetailsAdded", addressDetailsAdded);
 
   const {
     register,
@@ -42,8 +41,6 @@ const AddAddress = ({ handleNext }) => {
     resolver: yupResolver(addAddressSchema),
     mode: "onChange",
   });
-
-  // console.log("error", errors);
 
   const getDataFunc = (data) => {
     setPincodeData(data);
@@ -498,7 +495,6 @@ const AddAddress = ({ handleNext }) => {
                 width: "100%",
                 marginTop: "32px",
               }}
-              // onClick={() => console.log("hello")}
               // onClick={handleSubmit(onSubmit)}
             />
           </Box>

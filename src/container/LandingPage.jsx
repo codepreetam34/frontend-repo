@@ -1,3 +1,4 @@
+import Footer from "components/Footer/Footer";
 import Header from "components/SearchBar/Header";
 import React from "react";
 import Banner from "../components/HomePage/Banner";
@@ -23,7 +24,7 @@ const LandingPage = () => {
         <PamperZone />
         <ThreePoint />
       </div>
-    
+      <Footer />
     </>
   );
 };
