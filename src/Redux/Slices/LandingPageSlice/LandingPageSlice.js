@@ -6,12 +6,9 @@ export const getCarousel = createAsyncThunk(
   FIRST_CAROUSEL,
   async (payload, thunkAPI) => {
     try {
-      console.log("comingggg");
       const response = await axiosInstance.post(`api/banner/getBanners`);
-      console.log("response");
       return response.data;
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue({ error: error });
     }
   }

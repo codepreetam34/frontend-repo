@@ -12,7 +12,7 @@ const CategorySlider = () => {
   }, [dispatch]);
 
   const cateogryCarousels = useSelector(
-    (state) => state?.getCarousel?.getProductCarouselData?.sliders?.[2]?.sliders
+    (state) => state?.getCarousel?.getProductCarouselData?.silders?.[0]?.sliders
   );
 
   const category_settings = {
@@ -36,7 +36,11 @@ const CategorySlider = () => {
           <Col md={12}>
             <Slider {...category_settings}>
               {cateogryCarousels?.map((elem) => (
-                <div className="banner_img text-center" key={elem?._id}>
+                <div
+                  className="banner_img text-center"
+                  key={elem?._id}
+                  style={{ padding: "0 8px" }}
+                >
                   <a href="/">
                     <img src={elem?.img} className="img-fluid" alt="" />
                     <h4>Cake</h4>

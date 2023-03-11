@@ -178,7 +178,7 @@ p {
 }
 .twobandata {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 35px;
   transform: translateY(-50%);
   width: 50%;

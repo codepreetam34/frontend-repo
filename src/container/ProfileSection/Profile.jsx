@@ -10,10 +10,18 @@ import { commonStyle } from "Styles/commonStyles";
 import Pincode from "react-pincode";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileDetail } from "Redux/Slices/MyProfileSlice/MyProfile";
+import FMLoader from "components/FMLoader/FMLoader";
+import FMButton from "components/FMButton/FMButton";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const [pincodeData, setPincodeData] = useState("");
+  const [showLoader, setShowLoader] = useState(false);
+
+  const [data, setData] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const getDataFunc = (data) => {
     setPincodeData(data);
@@ -28,16 +36,23 @@ const Profile = () => {
   const myProfileData = useSelector(
     (state) => state?.myProfile?.getProfileData?.user
   );
-  console.log("myProfileData", myProfileData?.firstName);
 
-  const [firstName, setFirstName] = useState(myProfileData?.firstName);
   useEffect(() => {
-    console.log("first", firstName);
-  }, [myProfileData?.firstName, firstName]);
+    if (!myProfileData) {
+      setShowLoader(true);
+    } else setShowLoader(false);
+  }, [myProfileData]);
 
-  const setFirstNameFunc = (e) => {
-    setFirstName(e.target.value);
-  };
+  useEffect(() => {
+    setData(myProfileData);
+    setFirstName(myProfileData?.firstName);
+    setLastName(myProfileData?.lastName);
+    setPhoneNumber(myProfileData?.contactNumber);
+  }, [myProfileData]);
+  console.log("firstName", lastName);
+  // const setFirstNameFunc = (e) => {
+  //   setFirstName(e.target.value);
+  // };
 
   return (
     <>
@@ -147,7 +162,10 @@ const Profile = () => {
 
                             // ...(errors.firstName && commonStyle.errorStyle),
                           }}
-                          value={firstName}
+                          defaultValue={
+                            firstName
+                            // firstName ? firstName : myProfileData?.firstName
+                          }
                           // onChange={setFirstNameFunc}
                           // {...register("firstName")}
                           // error={errors.firstName ? true : false}
@@ -171,6 +189,7 @@ const Profile = () => {
 
                             // ...(errors.lastName && commonStyle.errorStyle),
                           }}
+                          defaultValue={lastName && lastName}
                           // {...register("lastName")}
                           // error={errors.lastName ? true : false}
                         />
@@ -288,11 +307,29 @@ const Profile = () => {
                       />
                     </Box>
                   </Box>
+
+                  <FMButton
+                    displayText={"Change Password"}
+                    variant="outlined"
+                    styleData={{
+                      color: "black",
+                      fontWeight: "600",
+                      borderRadius: "10px",
+                      backgroundColor: "white",
+                      border: "1px solid #E6E6E6",
+                      marginTop: "2rem",
+                      "&:hover": {
+                        backgroundColor: "white",
+                        border: "1px solid #E6E6E6",
+                      },
+                    }}
+                  />
                 </Box>
               </Col>
             </Row>
           </Col>
         </Row>
+        <FMLoader showLoader={showLoader} />
       </Container>
     </>
   );

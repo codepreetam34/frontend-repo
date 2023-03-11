@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
-import Data from "../../JsonDatas/JsonData";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryCarousel } from "Redux/Slices/LandingPageSlice/LandingPageSlice";
 
@@ -13,7 +12,7 @@ const BestSeller = () => {
   }, [dispatch]);
 
   const bestSellerCarousels = useSelector(
-    (state) => state?.getCarousel?.getProductCarouselData?.sliders?.[1]?.sliders
+    (state) => state?.getCarousel?.getProductCarouselData?.silders?.[2]?.sliders
   );
 
   const category_settings = {
@@ -41,7 +40,11 @@ const BestSeller = () => {
           <Col md={12}>
             <Slider {...category_settings}>
               {bestSellerCarousels?.map((elem) => (
-                <div className="banner_img text-center" key={elem?._id}>
+                <div
+                  className="banner_img text-center"
+                  key={elem?._id}
+                  style={{ padding: "0 8px" }}
+                >
                   <a href="/">
                     <img src={elem?.img} className="img-fluid" alt="" />
                     <div className="card_name">

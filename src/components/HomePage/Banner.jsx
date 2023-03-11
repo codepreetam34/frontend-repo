@@ -8,7 +8,6 @@ const Banner = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("calleedddd");
     dispatch(getCarousel());
   }, [dispatch]);
 

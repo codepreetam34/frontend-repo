@@ -44,7 +44,6 @@ const Login = () => {
     mode: "onChange",
   });
 
-  console.log("errors", errors);
   const forgotPasswordNavigate = () => {
     navigate(FORGOTPASSWORD);
   };

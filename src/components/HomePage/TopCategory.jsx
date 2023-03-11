@@ -13,10 +13,8 @@ const TopCategory = () => {
   }, [dispatch]);
 
   const topCategoriesCarousels = useSelector(
-    (state) => state?.getCarousel?.getProductCarouselData?.sliders?.[0]?.sliders
+    (state) => state?.getCarousel?.getProductCarouselData?.silders?.[1]?.sliders
   );
-
-  console.log("topCategoriesCarousels", topCategoriesCarousels);
 
   const category_settings = {
     dots: false,
@@ -44,7 +42,11 @@ const TopCategory = () => {
           <Col md={12}>
             <Slider {...category_settings}>
               {topCategoriesCarousels?.map((elem) => (
-                <div className="banner_img text-center" key={elem?._id}>
+                <div
+                  className="banner_img text-center"
+                  key={elem?._id}
+                  style={{ padding: "0 8px" }}
+                >
                   <a href="/">
                     <img src={elem?.img} className="img-fluid" alt="" />
                     <div className="card_name">

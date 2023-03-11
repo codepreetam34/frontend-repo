@@ -177,7 +177,13 @@ const ProductDetail = () => {
   };
 
   const reviewNavHandler = () => {
-    navigate(`/add-review/${pId}`);
+    navigate(`/add-review/${pId}`, {
+      state: {
+        productName: productDetailedData?.name,
+        totalReviews: productDetailedData?.numReviews,
+        totalRating: (productDetailedData?.rating * 10) / 10,
+      },
+    });
   };
 
   const responsive = {

@@ -6,8 +6,8 @@ import Header from "components/SearchBar/Header";
 import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
 import { addReviews } from "Redux/Slices/AddReviewSlice/AddReviewSlice";
 import { commonStyle } from "Styles/commonStyles";
 import uploadReview from "../../assets/upload-review.svg";
@@ -16,8 +16,13 @@ import StarIcon from "@mui/icons-material/Star";
 
 const AddReview = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const params = useParams();
   const { pId } = params;
+  const productName = location.state.productName;
+  const totalReviews = location.state.totalReviews;
+  const totalRating = location.state.totalRating;
+  // console.log("datassss", productName, totalReviews, totalRating);
   const [value, setValue] = useState(0);
   const [hover, setHover] = React.useState(-1);
   const {
@@ -40,7 +45,6 @@ const AddReview = () => {
       name: personLoggedIn,
       id: pId,
     };
-    console.log("payload", payload);
     dispatch(addReviews({ payload }))
       .unwrap()
       .then((res) => {
@@ -91,16 +95,16 @@ const AddReview = () => {
               />
               <Box>
                 <FMTypography
-                  displayText={"Chocolate truffle"}
+                  displayText={productName}
                   styleData={{ fontSize: "24px" }}
                 />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <FMTypography
-                    displayText={"5.0"}
+                    displayText={totalRating}
                     styleData={{ fontSize: "20px" }}
                   />
                   <FMTypography
-                    displayText={"3 reviews"}
+                    displayText={`${totalReviews} reviews `}
                     styleData={{ fontSize: "20px" }}
                   />
                 </Box>
