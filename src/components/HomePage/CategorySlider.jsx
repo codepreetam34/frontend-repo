@@ -12,7 +12,7 @@ const CategorySlider = () => {
   }, [dispatch]);
 
   const cateogryCarousels = useSelector(
-    (state) => state?.getCarousel?.getProductCarouselData?.silders?.[0]?.sliders
+    (state) => state?.getCarousel?.getProductCarouselData?.silders?.[3]?.sliders
   );
 
   const category_settings = {

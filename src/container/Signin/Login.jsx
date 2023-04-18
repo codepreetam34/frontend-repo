@@ -57,7 +57,7 @@ const Login = () => {
       .then((res) => {
         if (res) {
           navigate("/");
-          // notify({ type: "success", content: "Logged in successfully" });
+          notify({ type: "success", content: "Logged in successfully" });
         }
       });
   };

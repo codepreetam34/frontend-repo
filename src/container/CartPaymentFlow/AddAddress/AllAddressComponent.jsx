@@ -9,6 +9,7 @@ const AllAddressComponent = ({ styleData }) => {
     (state) =>
       state?.addToCartAddress?.getAddToCartAddress?.userAddress?.address
   );
+
   return (
     <>
       <Grid>
@@ -20,15 +21,16 @@ const AllAddressComponent = ({ styleData }) => {
               borderRadius: "20px",
               padding: "40px",
               ...styleData,
-              //   display: displayFormData ? "none" : "block",
             }}
           >
-            <Box sx={{ marginBottom: "2rem" }}>
-              <FMTypography
-                displayText={"Default Address"}
-                styleData={{ fontSize: "20px", fontWeight: "400" }}
-              />
-            </Box>
+            {addressDetailsAdded[0] && (
+              <Box sx={{ marginBottom: "2rem" }}>
+                <FMTypography
+                  displayText={"Default Address"}
+                  styleData={{ fontSize: "20px", fontWeight: "400" }}
+                />
+              </Box>
+            )}
             <Box sx={{ display: "flex", marginBottom: "1rem" }}>
               <FMTypography
                 displayText={elem?.name}

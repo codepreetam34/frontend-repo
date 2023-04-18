@@ -40,7 +40,7 @@ import Faq from "container/FAQ/Faq";
 import Blogs from "container/Blogs/Blogs";
 import BlogDetailedPage from "container/Blogs/BlogDetailedPage/BlogDetailedPage";
 import AddReview from "container/AddReview/AddReview";
-import Profile from "container/ProfileSection/Profile";
+import Profile from "container/ProfileSection/AllViewsFile/AllViewsFile";
 import PageNotFound from "container/PageNotFound/PageNotFound";
 
 const App = () => {

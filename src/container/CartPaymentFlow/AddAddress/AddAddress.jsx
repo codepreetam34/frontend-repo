@@ -66,12 +66,6 @@ const AddAddress = ({ handleNext }) => {
 
     dispatch(addToCartAddAddress(payload));
     setDisplayFormData(false);
-
-    // .unwrap()
-    // .then((res) => {
-    //   if (res) {
-    //   }
-    // });
   };
 
   const displayForm = () => {
