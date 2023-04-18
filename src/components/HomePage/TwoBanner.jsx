@@ -14,7 +14,6 @@ const TwoBanner = () => {
   const twoBannerData = useSelector(
     (state) => state?.getCarousel?.getCarouselData?.banners?.[2]?.banners
   );
-  console.log("twoBannerData?.[0]?.banners?.img", twoBannerData?.[0]?.img);
   return (
     <div className="twobannersection">
       <Container fluid>
