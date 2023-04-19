@@ -51,7 +51,6 @@ export const commonStyle = {
   },
   errorStyle: {
     border: "0.125rem solid red",
-
     "&:hover": {
       border: "0.125rem solid red",
     },
