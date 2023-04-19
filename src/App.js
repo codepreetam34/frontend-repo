@@ -61,7 +61,6 @@ const App = () => {
             <Route path={BLOGS} element={<Blogs />} />
             <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
 
-            <Route path="*" element={<PageNotFound />} />
             {/* private routes below */}
 
             <Route
@@ -85,6 +84,8 @@ const App = () => {
               path={MY_PROFILE}
               element={<PrivateRoutes Component={Profile} />}
             />
+
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

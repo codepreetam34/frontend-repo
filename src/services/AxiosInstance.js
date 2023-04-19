@@ -3,7 +3,7 @@ import { LOGIN } from "Routes/Routes";
 import { setItem } from "./commonService";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "https://vibezterbackend-gevj28-microtica.microtica.rocks/",
   headers: {
     "Content-Type": "application/json",
   },
