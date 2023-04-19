@@ -47,7 +47,7 @@ const TopCategory = () => {
                   key={elem?._id}
                   style={{ padding: "0 8px" }}
                 >
-                  <a href="/">
+                  <a href="/product-page">
                     <img src={elem?.img} className="img-fluid" alt="" />
                     <div className="card_name">
                       <h4>Decoration</h4>

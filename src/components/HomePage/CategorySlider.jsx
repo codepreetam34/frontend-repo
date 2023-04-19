@@ -41,7 +41,7 @@ const CategorySlider = () => {
                   key={elem?._id}
                   style={{ padding: "0 8px" }}
                 >
-                  <a href="/">
+                  <a href="/product-page">
                     <img src={elem?.img} className="img-fluid" alt="" />
                     <h4>Cake</h4>
                   </a>

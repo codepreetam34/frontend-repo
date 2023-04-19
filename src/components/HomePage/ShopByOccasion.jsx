@@ -27,7 +27,7 @@ const ShopByOccasion = () => {
             <Row>
               <Col md={4}>
                 <div className="heighautoimg">
-                  <a href="/" className="overlay">
+                  <a href="/product-page" className="overlay">
                     <img
                       src={ShopByOccasionCarousels?.[0]?.img}
                       className="img-fluid"
