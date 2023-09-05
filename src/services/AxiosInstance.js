@@ -3,7 +3,7 @@ import { LOGIN } from "Routes/Routes";
 import { setItem } from "./commonService";
 
 const axiosInstance = axios.create({
-  baseURL: "https://backend-repo-vibezt.onrender.com/",
+  baseURL: "https://backend-repo-vibezter-prod.onrender.com/",
   headers: {
     "Content-Type": "application/json",
   },
