@@ -1,6 +1,7 @@
 export const SearchStyle = {
   searchBoxWrapper: {
     display: "flex",
+    justifyContent: "space-between",
     alignItems: "center",
     border: `0.06rem solid #1a1a1a1f`,
     borderRadius: "50px",

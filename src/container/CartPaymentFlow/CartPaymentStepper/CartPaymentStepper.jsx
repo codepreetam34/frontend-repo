@@ -12,6 +12,7 @@ import { Grid } from "@mui/material";
 import { Col, Row } from "react-bootstrap";
 import { commonStyle } from "Styles/commonStyles";
 import { HeaderStyle } from "components/SearchBar/HeaderStyle";
+import { Link } from "react-router-dom";
 
 const steps = ["Cart", "Address", "Payment"];
 
@@ -51,16 +52,18 @@ export default function HorizontalLinearStepper() {
       <Col
         style={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
       >
-        <img
-          src={monkeyLogo}
-          alt="monkeyLogo"
-          style={HeaderStyle.monkeyLogoStyle}
-        />
-        <img
-          src={VibezterLogo}
-          alt="VibezterLogo"
-          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-        />
+        <Link to="/">
+          <img
+            src={monkeyLogo}
+            alt="monkeyLogo"
+            style={HeaderStyle.monkeyLogoStyle}
+          />
+          <img
+            src={VibezterLogo}
+            alt="VibezterLogo"
+            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
+          />
+        </Link>
       </Col>
 
       <Col style={{ width: "30%", margin: "2rem auto " }}>

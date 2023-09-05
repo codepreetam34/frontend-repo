@@ -16,7 +16,7 @@ const FMFilter = () => {
 
   return (
     <>
-      <Grid sx={{ display: "flex" }}>
+      <Grid sx={{ display: "flex", gap: "1rem" }}>
         <FMDropdown
           name="department_id"
           options={departmentOptions}

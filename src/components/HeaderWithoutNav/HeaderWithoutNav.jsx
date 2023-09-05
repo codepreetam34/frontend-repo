@@ -15,7 +15,7 @@ import orderIcon from "../../assets/orderIcon.svg";
 import contactIcon from "../../assets/contactIcon.svg";
 import faqIcon from "../../assets/faqIcon.svg";
 import logoutIcon from "../../assets/logoutIcon.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FAQ, LOGIN } from "Routes/Routes";
 import { logout } from "Redux/Slices/Login/auth.slice";
 import { useDispatch } from "react-redux";
@@ -74,16 +74,21 @@ const HeaderWithoutNav = () => {
       <Grid sx={HeaderStyle.headerFullStyle}>
         <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
           <Col style={commonStyle.flexDisplayStyle}>
-            <img
-              src={monkeyLogo}
-              alt="monkeyLogo"
-              style={HeaderStyle.monkeyLogoStyle}
-            />
-            <img
-              src={VibezterLogo}
-              alt="VibezterLogo"
-              style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-            />
+            <Link to="/">
+              <img
+                src={monkeyLogo}
+                alt="monkeyLogo"
+                style={HeaderStyle.monkeyLogoStyle}
+              />
+              <img
+                src={VibezterLogo}
+                alt="VibezterLogo"
+                style={{
+                  ...HeaderStyle.vibezterLogoStyle,
+                  marginTop: "0.6rem",
+                }}
+              />{" "}
+            </Link>
           </Col>
           <Col className="searchBar-col">
             <SearchBar placeholder={"Search gifts, experiences and more..."} />

@@ -23,7 +23,7 @@ import logoutIcon from "../../assets/logoutIcon.svg";
 import FMTypography from "components/FMTypography/FMTypography";
 import { Stack } from "@mui/system";
 import FMButton from "components/FMButton/FMButton";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FAQ, LOGIN, MY_PROFILE } from "Routes/Routes";
 import { logout } from "Redux/Slices/Login/auth.slice";
 
@@ -172,16 +172,18 @@ const Header = () => {
     <Grid sx={HeaderStyle.headerFullStyle}>
       <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
         <Col style={commonStyle.flexDisplayStyle}>
-          <img
-            src={monkeyLogo}
-            alt="monkeyLogo"
-            style={HeaderStyle.monkeyLogoStyle}
-          />
-          <img
-            src={VibezterLogo}
-            alt="VibezterLogo"
-            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-          />
+          <Link to="/">
+            <img
+              src={monkeyLogo}
+              alt="monkeyLogo"
+              style={HeaderStyle.monkeyLogoStyle}
+            />
+            <img
+              src={VibezterLogo}
+              alt="VibezterLogo"
+              style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
+            />
+          </Link>
         </Col>
         <Col className="searchBar-col">
           <SearchBar placeholder={"Search gifts, experiences and more..."} />
@@ -356,6 +358,7 @@ const Header = () => {
                       onMouseEnter={() => showDropdown(elem?._id)}
                       onMouseLeave={hideDropdown}
                       show={show === elem?._id}
+                      style={{ textTransform: "capitalize" }}
                     >
                       <Row className="rowOnHover" style={{ padding: "2rem" }}>
                         {elem?.children?.map((secElem) => (
