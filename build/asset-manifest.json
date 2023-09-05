@@ -1,0 +1,42 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ccfe95c3.css",
+    "main.js": "/static/js/main.ec103ea2.js",
+    "static/js/787.a0a16d07.chunk.js": "/static/js/787.a0a16d07.chunk.js",
+    "static/media/notFoundDog.svg": "/static/media/notFoundDog.a7137b859a07dde1157b24d60c8e903d.svg",
+    "static/media/womanCard.svg": "/static/media/womanCard.a01001a9686e0ad43cf287cbe4550e04.svg",
+    "static/media/BlogDummy.svg": "/static/media/BlogDummy.bf2170c8dbe71ce1e4c3dd558b080045.svg",
+    "static/media/monkeyLogo.svg": "/static/media/monkeyLogo.44983d94048b2f79ba87df2754e8369f.svg",
+    "static/media/VibezterLogo.svg": "/static/media/VibezterLogo.3d04a08e8ec7c183b00fb193d55ffbd9.svg",
+    "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
+    "static/media/orderIcon.svg": "/static/media/orderIcon.6d773d9b5b48bcb5f0af4f9dfb52ed69.svg",
+    "static/media/contactIcon.svg": "/static/media/contactIcon.7e05ee940cec5b11f0c9214ff7eda348.svg",
+    "static/media/androidIcon.svg": "/static/media/androidIcon.db41264f2749ce04a3ec3d999c6ae012.svg",
+    "static/media/cart.svg": "/static/media/cart.71ed975c6b02495168848e9713cf2d16.svg",
+    "static/media/locationIcon.svg": "/static/media/locationIcon.affc2911fe4db82354eee3c6d7743b6d.svg",
+    "static/media/upload-review.svg": "/static/media/upload-review.f1879d1277e27561a026f35b8f19ba95.svg",
+    "static/media/faqIcon.svg": "/static/media/faqIcon.a91b369e2aeaad36784414fd03bf3141.svg",
+    "static/media/telephoneIcon.svg": "/static/media/telephoneIcon.bf36b2c608d39b4e275ca963633551b7.svg",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/closeCrossIcon.svg": "/static/media/closeCrossIcon.b01679715c2fcb00267522b3b58d6e79.svg",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "static/media/mailIcon.svg": "/static/media/mailIcon.87f0a67796f92b42007d8539800ea049.svg",
+    "static/media/ratingStart.svg": "/static/media/ratingStart.a7aa68a1d99a086a9419fb5fff24d270.svg",
+    "static/media/profileIcon.svg": "/static/media/profileIcon.147095e4903b4716f34f8eb523659365.svg",
+    "static/media/reviewBlackStar.svg": "/static/media/reviewBlackStar.cb9f8d8542564c077067d42d14a02026.svg",
+    "index.html": "/index.html",
+    "static/media/appleIcon.svg": "/static/media/appleIcon.a8a4337103ba343830aba18a3b01cead.svg",
+    "static/media/logoutIcon.svg": "/static/media/logoutIcon.8f0c6470830b4f331c119539424f179d.svg",
+    "main.ccfe95c3.css.map": "/static/css/main.ccfe95c3.css.map",
+    "main.ec103ea2.js.map": "/static/js/main.ec103ea2.js.map",
+    "787.a0a16d07.chunk.js.map": "/static/js/787.a0a16d07.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ccfe95c3.css",
+    "static/js/main.ec103ea2.js"
+  ]
+}
