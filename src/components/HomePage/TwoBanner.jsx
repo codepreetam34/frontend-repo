@@ -11,9 +11,21 @@ const TwoBanner = () => {
     dispatch(getCarousel());
   }, [dispatch]);
 
-  const twoBannerData = useSelector(
+  const data = useSelector(
     (state) => state?.getCarousel?.getCarouselData?.banners?.[2]?.banners
   );
+
+  // Function to replace the URLs in the data
+function replaceUrls(data) {
+  return data?.map(item => ({
+    _id: item?._id,
+    img: item?.img.replace("http://localhost:5000", "https://backend-repo-vibezter-prod.onrender.com")
+  }));
+}
+
+// Call the function to replace URLs in the data
+const twoBannerData = replaceUrls(data);
+  console.log("twoBannerData ", twoBannerData);
   return (
     <div className="twobannersection">
       <Container fluid>

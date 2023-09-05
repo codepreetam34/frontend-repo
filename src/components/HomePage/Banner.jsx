@@ -11,9 +11,22 @@ const Banner = () => {
     dispatch(getCarousel());
   }, [dispatch]);
 
-  const allCarousels = useSelector(
+  const data = useSelector(
     (state) => state?.getCarousel?.getCarouselData?.banners?.[0]?.banners
   );
+  function replaceUrls(data) {
+    return data?.map((item) => ({
+      _id: item?._id,
+      img: item?.img.replace(
+        "http://localhost:5000",
+        "https://backend-repo-vibezter-prod.onrender.com"
+      ),
+    }));
+  }
+
+  // Call the function to replace URLs in the data
+  const allCarousels = replaceUrls(data);
+
 
   const settings = {
     dots: true,

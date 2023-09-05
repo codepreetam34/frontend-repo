@@ -12,10 +12,21 @@ const TopCategory = () => {
     dispatch(getCategoryCarousel());
   }, [dispatch]);
 
-  const topCategoriesCarousels = useSelector(
+  const data = useSelector(
     (state) => state?.getCarousel?.getProductCarouselData?.silders?.[1]?.sliders
   );
+  function replaceUrls(data) {
+    return data?.map((item) => ({
+      _id: item?._id,
+      img: item?.img.replace(
+        "http://localhost:5000",
+        "https://backend-repo-vibezter-prod.onrender.com"
+      ),
+    }));
+  }
 
+  // Call the function to replace URLs in the data
+  const topCategoriesCarousels = replaceUrls(data);
   const category_settings = {
     dots: false,
     infinite: true,
