@@ -10,21 +10,22 @@ const PamperZone = () => {
     dispatch(getCarousel());
   }, [dispatch]);
 
-  const data = useSelector(
-    (state) => state?.getCarousel?.getCarouselData?.banners?.[1]?.banners
+  const pamperZoneData = useSelector(
+    (state) => state?.getCarousel?.getCarouselData?.homePageBanners
   );
-  function replaceUrls(data) {
-    return data?.map((item) => ({
-      _id: item?._id,
-      img: item?.img.replace(
-        "http://localhost:5000",
-        "https://backend-repo-vibezter-prod.onrender.com"
-      ),
-    }));
-  }
 
-  // Call the function to replace URLs in the data
-  const pamperZoneData = replaceUrls(data);
+  // function replaceUrls(data) {
+  //   return data?.map((item) => ({
+  //     _id: item?._id,
+  //     img: item?.img.replace(
+  //       "http://localhost:5000",
+  //       "https://backend-repo-vibezter-prod.onrender.com"
+  //     ),
+  //   }));
+  // }
+
+  // // Call the function to replace URLs in the data
+  // const pamperZoneData = replaceUrls(data);
   return (
     <div className="pamperzone">
       <Container fluid>
@@ -37,7 +38,7 @@ const PamperZone = () => {
           <Col md={6}>
             <div className="position-relative">
               <img
-                src={pamperZoneData?.[0]?.img}
+                src={pamperZoneData && pamperZoneData[2]?.banners[0]?.img}
                 className="img-fluid"
                 alt=""
               />
@@ -50,7 +51,7 @@ const PamperZone = () => {
           <Col md={6}>
             <div className="position-relative">
               <img
-                src={pamperZoneData?.[1]?.img}
+                src={pamperZoneData && pamperZoneData[2]?.banners[1]?.img}
                 className="img-fluid"
                 alt=""
               />

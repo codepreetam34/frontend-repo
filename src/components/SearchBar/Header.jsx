@@ -19,7 +19,6 @@ import orderIcon from "../../assets/orderIcon.svg";
 import contactIcon from "../../assets/contactIcon.svg";
 import faqIcon from "../../assets/faqIcon.svg";
 import logoutIcon from "../../assets/logoutIcon.svg";
-
 import FMTypography from "components/FMTypography/FMTypography";
 import { Stack } from "@mui/system";
 import FMButton from "components/FMButton/FMButton";
@@ -95,12 +94,15 @@ const Header = () => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClickSec = (event) => {
     setAnchorElSec(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleCloseSec = () => {
     setAnchorElSec(null);
   };
@@ -303,7 +305,7 @@ const Header = () => {
                 src={orderIcon}
                 alt="order-icon"
                 style={{ marginRight: "12px" }}
-              />{" "}
+              />
               Orders
             </MenuItem>
 
@@ -344,53 +346,72 @@ const Header = () => {
       </Row>
 
       <div className="main_header">
-        <Navbar bg="" expand="lg" className="p-0">
-          <Container fluid>
+        <Navbar bg="" expand="lg" className="p-0" style={{paddingBottom:"5px"}}>
+          <Container
+            fluid
+            className="d-flex flex-wrap n-0 p-0 justify-content-start"
+          >
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
-              <Nav className="" navbarScroll>
-                {accountDetailData?.map((elem) => {
-                  return (
-                    <NavDropdown
-                      title={elem?.name}
-                      key={elem?.id}
-                      id="navbarScrollingDropdown"
-                      onMouseEnter={() => showDropdown(elem?._id)}
-                      onMouseLeave={hideDropdown}
-                      show={show === elem?._id}
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      <Row className="rowOnHover" style={{ padding: "2rem" }}>
-                        {elem?.children?.map((secElem) => (
-                          <Col md={3}>
-                            <div className="cate_area">
-                              <h3>{secElem?.name}</h3>
+              <Nav navbarScroll style={{ paddingLeft: "4rem" }}>
+                {accountDetailData &&
+                  accountDetailData?.map((elem) => {
+                    return (
+                      <NavDropdown
+                        title={elem?.name}
+                        key={elem?.id}
+                        id="navbarScrollingDropdown"
+                        onMouseEnter={() => showDropdown(elem?._id)}
+                        onMouseLeave={hideDropdown}
+                        show={show === elem?._id}
+                        style={{ textTransform: "capitalize" }}
+                      >
+                        <Row className="rowOnHover" style={{ padding: "2rem" }}>
+                          {elem?.children
+                            ?.slice()
+                            .reverse()
+                            .map((secElem) => (
+                              <Col md={3}>
+                                <div className="cate_area">
+                                  <Link
+                                    to={`/category-page/${secElem?._id}`}
+                                    style={{ textDecoration: "none" }}
+                                  >
+                                    <h3>{secElem?.name}</h3>
+                                  </Link>
+                                  {secElem?.children
+                                    ?.slice()
+                                    .reverse()
+                                    .map((thirdElem) => (
+                                      <Link
+                                        to={`/product-page/${thirdElem?._id}`}
+                                        style={{ textDecoration: "none" }}
+                                      >
+                                        <NavDropdown.Item href="/">
+                                          {thirdElem?.name}
+                                        </NavDropdown.Item>
+                                      </Link>
+                                    ))}
+                                </div>
+                              </Col>
+                            ))}
 
-                              {secElem?.children?.map((thirdElem) => (
-                                <NavDropdown.Item href="/">
-                                  {thirdElem?.name}
-                                </NavDropdown.Item>
-                              ))}
+                          <Col md={3}>
+                            <div className="cate_list_menu">
+                              <a href="/">
+                                <img
+                                  src={elem?.categoryImage}
+                                  className="img-fluid"
+                                  alt=""
+                                />
+                                {/* <h4>Cakes</h4> */}
+                              </a>
                             </div>
                           </Col>
-                        ))}
-
-                        <Col md={3}>
-                          <div className="cate_list_menu">
-                            <a href="/">
-                              <img
-                                src={elem?.categoryImage}
-                                className="img-fluid"
-                                alt=""
-                              />
-                              {/* <h4>Cakes</h4> */}
-                            </a>
-                          </div>
-                        </Col>
-                      </Row>
-                    </NavDropdown>
-                  );
-                })}
+                        </Row>
+                      </NavDropdown>
+                    );
+                  })}
               </Nav>
             </Navbar.Collapse>
           </Container>

@@ -91,7 +91,6 @@ const ProductDetail = () => {
     (state) => state?.getProductsDetail?.getProductsListData?.product
   );
 
-  // console.log("productDetailedData", productDetailedData);
 
   const reviewsCarouselData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product?.reviews

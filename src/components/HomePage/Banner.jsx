@@ -11,22 +11,19 @@ const Banner = () => {
     dispatch(getCarousel());
   }, [dispatch]);
 
-  const data = useSelector(
-    (state) => state?.getCarousel?.getCarouselData?.banners?.[0]?.banners
+  const allCarousels = useSelector(
+    (state) => state?.getCarousel?.getCarouselData?.homePageBanners
   );
-  function replaceUrls(data) {
-    return data?.map((item) => ({
-      _id: item?._id,
-      img: item?.img.replace(
-        "http://localhost:5000",
-        "https://backend-repo-vibezter-prod.onrender.com"
-      ),
-    }));
-  }
 
-  // Call the function to replace URLs in the data
-  const allCarousels = replaceUrls(data);
+  // function replaceUrls(data) {
+  //   return data?.map((item) => ({
+  //     _id: item?._id,
+  //     img: item?.img,
+  //   }));
+  // }
 
+  // // Call the function to replace URLs in the data
+  //const allCarousels = replaceUrls(data);
 
   const settings = {
     dots: true,
@@ -46,7 +43,7 @@ const Banner = () => {
         <Row>
           <Col md={12}>
             <Slider {...settings}>
-              {allCarousels?.map((item) => (
+              {allCarousels && allCarousels[3]?.banners.map((item) => (
                 <div className="banner_img" key={item?._id}>
                   <img src={item?.img} className="img-fluid" alt="" />
                   {/* <div className="banner_content">

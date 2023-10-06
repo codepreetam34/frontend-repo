@@ -11,6 +11,7 @@ import {
   ADD_TO_CART,
   BLOGS,
   BLOGS_DETAIL,
+  CATEGORY_PAGE,
   EMAIL_VERIFY,
   EMAIL_VERIFY_OTP,
   FAQ,
@@ -42,6 +43,7 @@ import BlogDetailedPage from "container/Blogs/BlogDetailedPage/BlogDetailedPage"
 import AddReview from "container/AddReview/AddReview";
 import Profile from "container/ProfileSection/AllViewsFile/AllViewsFile";
 import PageNotFound from "container/PageNotFound/PageNotFound";
+import CategoryPage from "container/CategoryPage";
 
 const App = () => {
   return (
@@ -62,7 +64,7 @@ const App = () => {
             <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
 
             {/* private routes below */}
-
+            <Route path={CATEGORY_PAGE}   element={<PrivateRoutes Component={CategoryPage} />} />
             <Route
               path={PRODUCT_PAGE}
               element={<PrivateRoutes Component={ProductPage} />}
@@ -71,6 +73,7 @@ const App = () => {
               path={PRODUCT_DETAIL}
               element={<PrivateRoutes Component={ProductDetail} />}
             />
+
 
             <Route
               path={ADD_TO_CART}

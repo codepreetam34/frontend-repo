@@ -11,27 +11,33 @@ import {
 import FMTypography from "components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import Header from "components/SearchBar/Header";
-import { getProductsList } from "Redux/Slices/ProductPage/ProductsPageSlice";
+import {
+  getProductByCategoryId,
+  getProductsList,
+} from "Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FMFilter from "components/FMFilters/FMFilter";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const ProductPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const params = useParams();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true); // Start loading
-    dispatch(getProductsList()).then(() => {
+    dispatch(getProductByCategoryId(params)).then(() => {
       setLoading(false); // Stop loading after API call finishes
     });
   }, [dispatch]);
 
   const productPageData = useSelector(
-    (state) => state?.getProductsList?.getProductsListData?.products
+    (state) => state?.getProductsList?.getProductsListByCategoryId?.products
+  );
+  const pageTitle = useSelector(
+    (state) => state?.getProductsList?.getProductsListByCategoryId?.pageTitle
   );
   const onCardClick = (element) => {
     let pId = element?._id;
@@ -44,11 +50,15 @@ const ProductPage = () => {
       <Grid sx={{ padding: "0 100px" }}>
         <Box sx={{ display: "flex" }}>
           <FMTypography
-            displayText={"Birthday Cakes"}
-            styleData={{ fontWeight: "500", fontSize: "40px" }}
+            displayText={`${pageTitle} Products`}
+            styleData={{
+              fontWeight: "500",
+              fontSize: "40px",
+              textTransform: "capitalize"
+            }}
           />
           <Box
-            sx={{ display: "flex", alignItems: "center", marginLeft: "24px" }}
+            sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
           >
             <FMTypography
               displayText={`(${productPageData?.length} Products)`}
@@ -124,7 +134,7 @@ const ProductPage = () => {
                       image={elem?.productPictures[0]?.img}
                       alt="green iguana"
                     />
-                    <CardContent>
+                    <CardContent style={{ height: "8rem" }}>
                       <Typography
                         gutterBottom
                         variant="h5"

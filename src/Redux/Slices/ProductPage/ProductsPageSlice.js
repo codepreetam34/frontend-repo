@@ -1,6 +1,37 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "services/AxiosInstance";
-import { GET_PRODUCTS_LIST } from "./type";
+import {
+  GET_PRODUCTS_LIST,
+  GET_PRODUCT_DETAIL,
+  GET_PRODUCTS_LIST_BY_CATEGORY_ID,
+} from "./type";
+
+export const getProductPageDetail = createAsyncThunk(
+  GET_PRODUCT_DETAIL,
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get(`api/product/${payload.id}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
+
+export const getProductByCategoryId = createAsyncThunk(
+  GET_PRODUCTS_LIST_BY_CATEGORY_ID,
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(
+        "api/product/getProducts/categoryid",
+        { id: payload.id }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
 
 export const getProductsList = createAsyncThunk(
   GET_PRODUCTS_LIST,
@@ -18,6 +49,8 @@ const productListSlice = createSlice({
   name: "productListSlice",
   initialState: {
     getProductsListData: [],
+    getProductsListByCategoryId: [],
+    getProductDetails: [],
     error: "",
     isFetching: false,
     isError: false,
@@ -37,6 +70,41 @@ const productListSlice = createSlice({
     });
     builder.addCase(getProductsList.rejected, (state, action) => {
       state.getProductsListData = [];
+      state.isFetching = false;
+      state.isError = true;
+    });
+
+    builder.addCase(getProductByCategoryId.pending, (state) => {
+      state.getProductsListByCategoryId = {};
+      state.isFetching = true;
+      state.isError = false;
+    });
+
+    builder.addCase(getProductByCategoryId.fulfilled, (state, action) => {
+      state.getProductsListByCategoryId = action.payload;
+      state.isFetching = false;
+      state.isError = false;
+    });
+    
+    builder.addCase(getProductByCategoryId.rejected, (state, action) => {
+      state.getProductsListByCategoryId = {};
+      state.isFetching = false;
+      state.isError = true;
+    });
+
+    builder.addCase(getProductPageDetail.pending, (state) => {
+      state.getProductDetails = {};
+      state.isFetching = true;
+      state.isError = false;
+    });
+
+    builder.addCase(getProductPageDetail.fulfilled, (state, action) => {
+      state.getProductDetails = action.payload;
+      state.isFetching = false;
+      state.isError = false;
+    });
+    builder.addCase(getProductPageDetail.rejected, (state, action) => {
+      state.getProductDetails = {};
       state.isFetching = false;
       state.isError = true;
     });

@@ -37,10 +37,9 @@ const AddToCart = ({ handleNext }) => {
       });
   };
   // let totalPrice = addedData?.reduce(function (accumulator, item) {
-  //   console.log("item");
   //   return accumulator + item.price * item.qty;
   // }, 0);
-  // console.log("totalPrice", totalPrice);
+
   return (
     <>
       <Row style={{ padding: "40px 120px" }}>

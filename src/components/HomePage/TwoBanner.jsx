@@ -11,28 +11,28 @@ const TwoBanner = () => {
     dispatch(getCarousel());
   }, [dispatch]);
 
-  const data = useSelector(
-    (state) => state?.getCarousel?.getCarouselData?.banners?.[2]?.banners
+  const twoBannerData = useSelector(
+    (state) => state?.getCarousel?.getCarouselData?.homePageBanners
   );
 
   // Function to replace the URLs in the data
-function replaceUrls(data) {
-  return data?.map(item => ({
-    _id: item?._id,
-    img: item?.img.replace("http://localhost:5000", "https://backend-repo-vibezter-prod.onrender.com")
-  }));
-}
+// function replaceUrls(data) {
+//   return data?.map(item => ({
+//     _id: item?._id,
+//     img: item?.img.replace("http://localhost:5000", "https://backend-repo-vibezter-prod.onrender.com")
+//   }));
+// }
 
-// Call the function to replace URLs in the data
-const twoBannerData = replaceUrls(data);
-  console.log("twoBannerData ", twoBannerData);
+// // Call the function to replace URLs in the data
+// const twoBannerData = replaceUrls(data);
+
   return (
     <div className="twobannersection">
       <Container fluid>
         <Row>
           <Col md={6}>
             <div className="overlay position-relative">
-              <img src={twoBannerData?.[0]?.img} className="img-fluid" alt="" />
+              <img src={twoBannerData && twoBannerData[1]?.banners[0]?.img} className="img-fluid" alt="" />
               <div className="twobandata">
                 <h4 style={{ fontSize: "24px" }}>The Anniversary Edit</h4>
                 <p style={{ fontSize: "14px" }}>
@@ -52,7 +52,7 @@ const twoBannerData = replaceUrls(data);
           </Col>
           <Col md={6}>
             <div className="overlay position-relative">
-              <img src={twoBannerData?.[1]?.img} className="img-fluid" alt="" />
+              <img src={twoBannerData && twoBannerData[1]?.banners[1]?.img} className="img-fluid" alt="" />
               <div className="twobandata">
                 <h4 style={{ fontSize: "24px" }}>Bespoke Hampers</h4>
                 <p style={{ fontSize: "14px" }}>

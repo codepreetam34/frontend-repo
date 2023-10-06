@@ -22,7 +22,6 @@ const AddReview = () => {
   const productName = location.state.productName;
   const totalReviews = location.state.totalReviews;
   const totalRating = location.state.totalRating;
-  // console.log("datassss", productName, totalReviews, totalRating);
   const [value, setValue] = useState(0);
   const [hover, setHover] = React.useState(-1);
   const {
@@ -35,7 +34,6 @@ const AddReview = () => {
   });
 
   const onSubmit = (data) => {
-    // console.log("Data", data);
     const personLoggedIn = JSON.parse(
       localStorage.getItem("Sidebar_Module_Assigned")
     )?.fullName;
