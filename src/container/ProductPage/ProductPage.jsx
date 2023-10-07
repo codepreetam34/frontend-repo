@@ -54,7 +54,7 @@ const ProductPage = () => {
             styleData={{
               fontWeight: "500",
               fontSize: "40px",
-              textTransform: "capitalize"
+              textTransform: "capitalize",
             }}
           />
           <Box
@@ -98,8 +98,7 @@ const ProductPage = () => {
             >
               <CircularProgress color="primary" />
             </div>
-          ) : (
-            productPageData &&
+          ) : productPageData && productPageData.length > 0 ? (
             productPageData?.map((elem) => (
               <Box onClick={() => onCardClick(elem)}>
                 <Box
@@ -109,8 +108,8 @@ const ProductPage = () => {
                     padding: ".5rem",
                     width: "fit-content",
                     position: "relative",
-                    top: "3.5rem",
-                    left: "205px",
+                    top: "3.4rem",
+                    left: "32.5rem",
                     zIndex: "111",
                     borderRadius: "4px",
                   }}
@@ -175,6 +174,26 @@ const ProductPage = () => {
                 </Card>
               </Box>
             ))
+          ) : (
+            <Box>
+              <Card
+                sx={{
+                  width: "260px",
+                  borderRadius: "20px",
+                }}
+              >
+                <CardContent style={{ height: "4rem", textAlign: "center" }}>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    sx={{ fontSize: "18px", color: "#801317" }}
+                  >
+                    No data available !
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
           )}
           {/* prodct box ended */}
         </Grid>

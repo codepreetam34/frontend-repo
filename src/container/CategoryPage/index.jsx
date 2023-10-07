@@ -69,7 +69,7 @@ const CategoryPage = () => {
       <Grid sx={{ padding: "0 100px" }}>
         <Box sx={{ display: "flex" }}>
           <FMTypography
-            displayText={`${productPageData?.pageTitle} Products`}
+            displayText={`${productPageData?.pageTitle} Category`}
             styleData={{
               fontWeight: "500",
               fontSize: "40px",
@@ -116,8 +116,7 @@ const CategoryPage = () => {
             >
               <CircularProgress color="primary" />
             </div>
-          ) : (
-            subCategoryList &&
+          ) : subCategoryList && subCategoryList.length > 0 ? (
             subCategoryList?.map((elem) => (
               <Box onClick={() => onCardClick(elem?._id)}>
                 <Card
@@ -158,6 +157,26 @@ const CategoryPage = () => {
                 </Card>
               </Box>
             ))
+          ) : (
+            <Box>
+              <Card
+                sx={{
+                  width: "260px",
+                  borderRadius: "20px",
+                }}
+              >
+                <CardContent style={{ height: "4rem", textAlign: "center" }}>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    sx={{ fontSize: "18px", color: "#801317" }}
+                  >
+                    No data available !
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
           )}
         </Grid>
       </Grid>

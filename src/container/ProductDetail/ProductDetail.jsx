@@ -91,7 +91,6 @@ const ProductDetail = () => {
     (state) => state?.getProductsDetail?.getProductsListData?.product
   );
 
-
   const reviewsCarouselData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product?.reviews
   );
@@ -99,6 +98,11 @@ const ProductDetail = () => {
   const similarProductDetailedData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.similarProducts
   );
+
+  const categoryName = useSelector(
+    (state) => state?.getProductsDetail?.getProductsListData?.categoryName
+  );
+
   const {
     register,
     handleSubmit,
@@ -311,67 +315,70 @@ const ProductDetail = () => {
               </Box>
 
               {/* weight radio */}
-              {productDetailedData?.category === "63e7408c4d118f475c8542c2" && (
-                <Box sx={{ marginTop: "17px" }}>
-                  <FMRadioButtons
-                    formLabel="Select Weight"
-                    radioButtons={createUserOptions}
-                    onChecked={(option) =>
-                      option === "0.5 Kg"
-                        ? setProductQuantity("0.5 Kg")
-                        : option === "1 Kg"
-                        ? setProductQuantity("1 Kg")
-                        : setProductQuantity("2 Kg")
-                    }
-                    formLabelStyling={{
-                      radioButtonStyle: {
-                        fontWeight: "600",
-                        lineHeight: "1.3125rem",
-                        fontSize: "0.875rem",
-                        // color: `BLACK !important`,
+              {(categoryName && categoryName?.toLowerCase() === "cakes") ||
+                (categoryName?.toLowerCase() === "cake" && (
+                  <Box sx={{ marginTop: "17px" }}>
+                    <FMRadioButtons
+                      formLabel="Select Weight"
+                      radioButtons={createUserOptions}
+                      onChecked={(option) =>
+                        option === "0.5 Kg"
+                          ? setProductQuantity("0.5 Kg")
+                          : option === "1 Kg"
+                          ? setProductQuantity("1 Kg")
+                          : setProductQuantity("2 Kg")
+                      }
+                      formLabelStyling={{
+                        radioButtonStyle: {
+                          fontWeight: "600",
+                          lineHeight: "1.3125rem",
+                          fontSize: "0.875rem",
+                          // color: `BLACK !important`,
+                          color: "black !important",
+                        },
+                      }}
+                      labelStyle={{
                         color: "black !important",
-                      },
-                    }}
-                    labelStyle={{
-                      color: "black !important",
-                      fontSize: "20px !important",
-                      fontWeight: "500 !important",
-                    }}
-                    value={productQuantity}
-                    required={true}
-                  />
-                </Box>
-              )}
+                        fontSize: "20px !important",
+                        fontWeight: "500 !important",
+                      }}
+                      value={productQuantity}
+                      required={true}
+                    />
+                  </Box>
+                ))}
 
               {/* pincode and date selector */}
               <Box sx={{ marginTop: "1rem", display: "flex" }}>
-                <Pincode
-                  showCity={false}
-                  showDistrict={false}
-                  showState={false}
-                  invalidError="Please check pincode"
-                  // lengthError="check length"
-                  // lengthError={() => console.log("hellooooooo")}
-                  // getData={(data) => {
-                  //   setPincodeData(data);
-                  // }}
-                  getData={getDataFunc}
-                  showArea={pincodeData ? true : false}
-                  pincodeInput={{
-                    borderRadius: "10px",
-                    width: "215px",
-                    border: "1px solid grey",
-                    height: "55px",
-                    padding: "16.5px 14px",
-                    marginRight: "1.7rem",
-                  }}
-                  areaInput={{
-                    backgroundColor: "white",
-                    border: "none",
-                    color: "red",
-                    fontSize: "12px",
-                  }}
-                />
+                <Box>
+                  <Pincode
+                    showCity={false}
+                    showDistrict={false}
+                    showState={false}
+                    invalidError="Please check pincode"
+                    // lengthError="check length"
+                    // lengthError={() => console.log("hellooooooo")}
+                    // getData={(data) => {
+                    //   setPincodeData(data);
+                    // }}
+                    getData={getDataFunc}
+                    showArea={pincodeData ? true : false}
+                    pincodeInput={{
+                      borderRadius: "10px",
+                      width: "215px",
+                      border: "1px solid grey",
+                      height: "55px",
+                      padding: "16.5px 14px",
+                      marginRight: "1.7rem",
+                    }}
+                    areaInput={{
+                      backgroundColor: "white",
+                      border: "none",
+                      color: "red",
+                      fontSize: "12px",
+                    }}
+                  />
+                </Box>
                 {/* <FMTypography
                 styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
                 displayText={errors.pinCode?.message}
@@ -382,7 +389,7 @@ const ProductDetail = () => {
                       // label="Date desktop"
                       // disabled={disabledDate}
                       disablePast
-                      inputFormat="MM/DD/YYYY"
+                      inputFormat="DD/MM/YYYY"
                       value={date}
                       onChange={handleChange}
                       renderInput={(params) => <TextField {...params} />}
@@ -684,6 +691,7 @@ const ProductDetail = () => {
                   textTransform: "capitalize",
                   color: "black",
                   fontWeight: "600",
+
                   "&:hover": {
                     backgroundColor: "white",
                     border: "1px solid #E6E6E6",
@@ -710,7 +718,7 @@ const ProductDetail = () => {
               // customDot={<CustomDot />}
             >
               {reviewsCarouselData?.map((elem) => (
-                <Box>
+                <Box style={{ paddingBottom: "1rem"}}>
                   <Box
                     sx={{
                       display: "flex",
@@ -814,8 +822,8 @@ const ProductDetail = () => {
                       padding: ".5rem",
                       width: "fit-content",
                       position: "relative",
-                      top: "3.5rem",
-                      left: "205px",
+                      top: "3.1rem",
+                      left: "14rem",
                       zIndex: "111",
                       borderRadius: "4px",
                     }}
