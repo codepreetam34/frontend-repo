@@ -33,7 +33,7 @@ const CategorySlider = () => {
     infinite: true,
     speed: 500,
     draggable: true,
-    Margin: "100px",
+    margin: "100px",
     centerMode: true,
     centerPadding: "0px",
     autoplay: false,
@@ -41,6 +41,8 @@ const CategorySlider = () => {
     slidesToShow: 6,
     slidesToScroll: 1,
   };
+
+  
 
   return (
     <div className="category_slider">

@@ -9,17 +9,27 @@ import ShopByOccasion from "../components/HomePage/ShopByOccasion";
 import ThreePoint from "../components/HomePage/ThreePoint";
 import TopCategory from "../components/HomePage/TopCategory";
 import TwoBanner from "../components/HomePage/TwoBanner";
+import { Box } from "@mui/material";
 
 const LandingPage = () => {
   return (
     <>
       <Header />
       <div>
-        <Banner />
-        <CategorySlider />
+        <Box>
+          <Banner />
+        </Box>
+        <Box>
+          <CategorySlider />
+        </Box>
+
         <TwoBanner />
-        <BestSeller />
-        <TopCategory />
+        <Box>
+          <BestSeller />
+        </Box>
+        <Box>
+          <TopCategory />
+        </Box>
         <ShopByOccasion />
         <PamperZone />
         <ThreePoint />

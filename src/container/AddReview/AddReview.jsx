@@ -13,6 +13,7 @@ import { commonStyle } from "Styles/commonStyles";
 import uploadReview from "../../assets/upload-review.svg";
 import { addReviewsSchema } from "../../validationSchema/addReviewsSchema";
 import StarIcon from "@mui/icons-material/Star";
+import Footer from "components/Footer/Footer";
 
 const AddReview = () => {
   const dispatch = useDispatch();
@@ -217,6 +218,7 @@ const AddReview = () => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

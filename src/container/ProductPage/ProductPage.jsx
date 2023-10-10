@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FMFilter from "components/FMFilters/FMFilter";
 import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
+import Footer from "components/Footer/Footer";
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -83,6 +84,7 @@ const ProductPage = () => {
             flexBasis: "33.333333%",
             justifyContent: "space-evenly",
             gap: "1rem",
+            padding: "3rem 0",
           }}
         >
           {" "}
@@ -100,16 +102,21 @@ const ProductPage = () => {
             </div>
           ) : productPageData && productPageData.length > 0 ? (
             productPageData?.map((elem) => (
-              <Box onClick={() => onCardClick(elem)}>
+              <Box
+                onClick={() => onCardClick(elem)}
+                style={{ position: "relative" }}
+              >
                 <Box
                   sx={{
                     backgroundColor: "#008539",
+                    top: "3%",
                     display: "flex",
-                    padding: ".5rem",
-                    width: "fit-content",
-                    position: "relative",
-                    top: "3.4rem",
-                    left: "32.5rem",
+                    alignItems: "center",
+                    width: "40px",
+                    height: "30px",
+                    justifyContent: "center",
+                    position: "absolute",
+                    left: "83%",
                     zIndex: "111",
                     borderRadius: "4px",
                   }}
@@ -133,7 +140,7 @@ const ProductPage = () => {
                       image={elem?.productPictures[0]?.img}
                       alt="green iguana"
                     />
-                    <CardContent style={{ height: "8rem" }}>
+                    <CardContent style={{ height: "7rem" }}>
                       <Typography
                         gutterBottom
                         variant="h5"
@@ -146,6 +153,7 @@ const ProductPage = () => {
                         <del style={{ fontSize: "14px", color: "#717171" }}>
                           ₹ {elem?.actualPrice}
                         </del>
+
                         <Typography
                           sx={{
                             fontSize: "14px",
@@ -197,7 +205,8 @@ const ProductPage = () => {
           )}
           {/* prodct box ended */}
         </Grid>
-      </Grid>
+      </Grid>{" "}
+      <Footer />
     </>
   );
 };

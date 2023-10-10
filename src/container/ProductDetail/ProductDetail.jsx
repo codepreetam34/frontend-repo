@@ -54,6 +54,7 @@ import { addToCartSchema } from "validationSchema/addToCartSchema";
 import { Col, Container, Row } from "react-bootstrap";
 import { ADD_TO_CART } from "Routes/Routes";
 import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
+import Footer from "components/Footer/Footer";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -400,43 +401,44 @@ const ProductDetail = () => {
                 </Box>
               </Box>
               {/* msg box */}
-              {productDetailedData?.category === "63e7408c4d118f475c8542c2" && (
-                <Box sx={{ display: "flex", marginTop: "1rem" }}>
-                  <FMRadioButtons
-                    radioButtons={egglessOrNot}
-                    onChecked={(option) =>
-                      option === "Eggless"
-                        ? setEggOrNot("Eggless")
-                        : setEggOrNot("With Egg")
-                    }
-                    formLabelStyling={{
-                      radioButtonStyle: {
-                        fontWeight: "600",
-                        lineHeight: "1.3125rem",
-                        fontSize: "0.875rem",
-                        color: BLACK,
-                      },
-                    }}
-                    value={eggOrNot}
-                    required={false}
-                  />
-                  <InputBase
-                    required
-                    id="text"
-                    name="text"
-                    placeholder="Message on Cake"
-                    sx={{
-                      ...commonStyle.inputFieldStyle,
-                      width: "215px",
-                      marginLeft: "1rem",
+              {categoryName?.toLowerCase() === "cakes" ||
+                (categoryName?.toLowerCase() === "cake" && (
+                  <Box sx={{ display: "flex", marginTop: "1rem" }}>
+                    <FMRadioButtons
+                      radioButtons={egglessOrNot}
+                      onChecked={(option) =>
+                        option === "Eggless"
+                          ? setEggOrNot("Eggless")
+                          : setEggOrNot("With Egg")
+                      }
+                      formLabelStyling={{
+                        radioButtonStyle: {
+                          fontWeight: "600",
+                          lineHeight: "1.3125rem",
+                          fontSize: "0.875rem",
+                          color: BLACK,
+                        },
+                      }}
+                      value={eggOrNot}
+                      required={false}
+                    />
+                    <InputBase
+                      required
+                      id="text"
+                      name="text"
+                      placeholder="Message on Cake"
+                      sx={{
+                        ...commonStyle.inputFieldStyle,
+                        width: "215px",
+                        marginLeft: "1rem",
 
-                      ...(errors.cakeMessage && commonStyle.errorStyle),
-                    }}
-                    {...register("cakeMessage")}
-                    error={errors.cakeMessage ? true : false}
-                  />
-                </Box>
-              )}
+                        ...(errors.cakeMessage && commonStyle.errorStyle),
+                      }}
+                      {...register("cakeMessage")}
+                      error={errors.cakeMessage ? true : false}
+                    />
+                  </Box>
+                ))}
 
               {/* delivery type */}
               <Box>
@@ -591,7 +593,7 @@ const ProductDetail = () => {
                 />
               </Box>
               {/* cart and buy btns */}
-              <Box sx={{ marginTop: "40px" }}>
+              <Box sx={{ marginTop: "50px" }}>
                 <FMButton
                   displayText={"Add To Cart"}
                   variant="outlined"
@@ -649,7 +651,137 @@ const ProductDetail = () => {
       </Container>
 
       {/*review col start */}
-      <Grid sx={{ padding: "0 100px" }}>
+      {/* <Grid sx={{ padding: "50px 100px" }}>
+        <Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box sx={{ display: "flex" }}>
+              <img
+                src={reviewBlackStar}
+                alt="star"
+                style={{ paddingBottom: "19px" }}
+              />
+              <FMTypography
+                displayText={Math.round(productDetailedData?.rating * 10) / 10}
+                styleData={{ fontSize: "20px", paddingTop: "6px" }}
+              />
+              <FMButton
+                displayText={`${productDetailedData?.numReviews} Reviews `}
+                variant={"outlined"}
+                styleData={{
+                  textDecoration: "underline",
+                  fontWeight: "500",
+                  textTransform: "capitalize",
+                  color: "#222222",
+                  border: "none",
+                  fontSize: "20px",
+                  marginBottom: "1rem",
+                  "&:hover": {
+                    border: "none",
+                    backgroundColor: "white",
+                    textDecoration: "underline",
+                  },
+                }}
+              />
+            </Box>
+            <Box>
+              <FMButton
+                displayText={"Rate Product"}
+                variant="outlined"
+                styleData={{
+                  border: "1px solid #E6E6E6",
+                  borderRadius: "10px",
+                  textTransform: "capitalize",
+                  color: "black",
+                  fontWeight: "600",
+
+                  "&:hover": {
+                    backgroundColor: "white",
+                    border: "1px solid #E6E6E6",
+                  },
+                }}
+                onClick={reviewNavHandler}
+              />
+            </Box>
+          </Box>
+
+          {reviewsCarouselData && (
+            <Carousel
+              showDots={false}
+              deviceType={responsive.deviceType}
+              // arrows={false}
+              // autoPlay={responsive.deviceType !== "mobile" ? true : false}
+              ssr
+              slidesToSlide={1}
+              containerClass="carousel-with-custom-dots"
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              responsive={responsive}
+              partialVisible
+              infinite
+              // customDot={<CustomDot />}
+            >
+              {reviewsCarouselData?.map((elem) => (
+                <Box
+                  style={{
+                    paddingBottom: "1rem",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      border: "1px solid #E6E6E6",
+                      borderRadius: "20px",
+                      width: "100%",
+                      padding: "24px",
+                    }}
+                  >
+                    <Stack
+                      direction="row"
+                      spacing={2}
+                      sx={{ margin: " 0 12px" }}
+                    >
+                      <Avatar src="/broken-image.jpg" />
+                    </Stack>
+                    <Box>
+                      <FMTypography displayText={elem?.name} />
+                      <Box sx={{ display: "flex" }}>
+                        <FMTypography
+                          displayText={moment(elem?.createdAt).format(
+                            "DD.MM.YYYY"
+                          )}
+                        />
+                        <Box
+                          sx={{
+                            backgroundColor: "#008539",
+                            display: "flex",
+                            padding: ".3rem .5rem",
+                            width: "auto",
+                            marginLeft: "1rem",
+                            borderRadius: "4px",
+                          }}
+                        >
+                          <img
+                            src={ratingStart}
+                            alt="rating-star"
+                            style={{ width: "14px" }}
+                          />
+                          <FMTypography
+                            displayText={
+                              Math.round(productDetailedData?.rating * 10) / 10
+                            }
+                            styleData={{ color: "#FFFFFF", fontSize: "12px" }}
+                          />
+                        </Box>
+                      </Box>
+                    </Box>
+
+                    <p style={{ marginTop: "15px" }}>{elem?.comment}</p>
+                  </Box>
+                </Box>
+              ))}
+            </Carousel>
+          )}
+        </Box>
+      </Grid> */}
+     <Grid sx={{ padding: "0 100px" }}>
         <Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box sx={{ display: "flex" }}>
@@ -777,9 +909,8 @@ const ProductDetail = () => {
           )}
         </Box>
       </Grid>
-
       {/* moere suggestions */}
-      <Grid sx={{ marginTop: "80px" }}>
+      <Grid sx={{ padding: "80px 0" }}>
         <FMTypography
           displayText={"You may also Like"}
           styleData={{
@@ -810,6 +941,7 @@ const ProductDetail = () => {
                   flexWrap: "wrap",
                   flexBasis: "33.333333%",
                   justifyContent: "space-evenly",
+                  padding: "0px 0px 10px 0px",
                 }}
               >
                 <Box
@@ -892,6 +1024,7 @@ const ProductDetail = () => {
           </Carousel>
         )}
       </Grid>
+      <Footer />
     </>
   );
 };

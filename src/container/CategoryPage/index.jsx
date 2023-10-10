@@ -17,6 +17,7 @@ import FMFilter from "components/FMFilters/FMFilter";
 import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getCategoryChildrens } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
+import Footer from "components/Footer/Footer";
 
 const CategoryPage = () => {
   const navigate = useNavigate();
@@ -103,6 +104,7 @@ const CategoryPage = () => {
             justifyContent: "space-evenly",
             gap: "2rem",
             paddingTop: "2rem",
+            paddingBottom: "2rem",
           }}
         >
           {loading ? (
@@ -121,12 +123,13 @@ const CategoryPage = () => {
               <Box onClick={() => onCardClick(elem?._id)}>
                 <Card
                   sx={{
-                    width: "260px",
+                    width: "280px",
+                    height: "21.5rem",
                     borderRadius: "20px",
-                    paddingBottom: "1rem",
+    //               paddingBottom: "1rem",
                   }}
                 >
-                  <CardActionArea>
+                  <CardActionArea style={{ height: "100%" }}>
                     <CardMedia
                       component="img"
                       height="260"
@@ -161,7 +164,7 @@ const CategoryPage = () => {
             <Box>
               <Card
                 sx={{
-                  width: "260px",
+                  width: "280px",
                   borderRadius: "20px",
                 }}
               >
@@ -180,6 +183,7 @@ const CategoryPage = () => {
           )}
         </Grid>
       </Grid>
+      <Footer />
     </>
   );
 };
