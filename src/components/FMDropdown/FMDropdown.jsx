@@ -30,7 +30,7 @@ const FMDropdown = ({
   disabled,
   IconComponent,
 }) => {
-  const [quantityOption, setQuantityOption] = useState(1);
+  const [quantityOption, setQuantityOption] = useState(defaultValue);
 
   const optionChangeHandler = (e) => {
     setQuantityOption(e.target.value);
@@ -69,13 +69,14 @@ const FMDropdown = ({
         displayEmpty
         notched={false}
         IconComponent={IconComponent}
+
       >
-        <MenuItem disabled value="">
-          Select
+        <MenuItem disabled value="Sort By">
+          Sort By
         </MenuItem>
         {options?.map((option) => (
-          <MenuItem key={option.id} value={option.id}>
-            {option.label}
+          <MenuItem key={option} value={option}>
+            {option}
           </MenuItem>
         ))}
       </Select>

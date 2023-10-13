@@ -14,9 +14,9 @@ export const PRIVACY_POLICY = "/privacy-policy";
 export const FAQ = "/faq";
 export const BLOGS = "/blogs";
 export const BLOGS_DETAIL = "/blogs-detail";
-export const ADD_REVIEW = "add-review/:pId";
-export const MY_PROFILE = "my-profile/:id";
+export const ADD_REVIEW = "/add-review/:pId";
+export const MY_PROFILE = "/my-profile/:id";
 
 export const CATEGORY_PAGE = "/category-page/:id";
-export const PRODUCT_PAGE = "product-page/:id";
-export const PRODUCT_DETAIL = "product-detail/:pId";
+export const PRODUCT_PAGE = "/product-page/:id";
+export const PRODUCT_DETAIL = "/product-detail/:pId";

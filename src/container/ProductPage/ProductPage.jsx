@@ -13,11 +13,12 @@ import ratingStart from "../../assets/ratingStart.svg";
 import Header from "components/SearchBar/Header";
 import {
   getProductByCategoryId,
+  getProductByCategoryIdAndTags,
   getProductsList,
 } from "Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FMFilter from "components/FMFilters/FMFilter";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "components/Footer/Footer";
 
@@ -25,21 +26,44 @@ const ProductPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const location = useLocation();
+  const payload = location?.state?.payload;
+
+  const pageTitle = useSelector(
+    (state) =>
+      state?.getProductsList?.getProductsListByCategoryIdAndTags?.pageTitle
+  );
+  const productPageData = useSelector(
+    (state) =>
+      state?.getProductsList?.getProductsListByCategoryIdAndTags?.products
+  );
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(getProductByCategoryId(params)).then(() => {
-      setLoading(false);
-    });
-  }, [dispatch]);
+    try {
+      dispatch(getProductByCategoryIdAndTags(payload));
+    } catch (error) {
+      // Handle any error, e.g., show an error message.
+    } finally {
+      setIsLoading(false);
+    }
+  }, [dispatch,payload]);
 
-  const productPageData = useSelector(
-    (state) => state?.getProductsList?.getProductsListByCategoryId?.products
-  );
-  const pageTitle = useSelector(
-    (state) => state?.getProductsList?.getProductsListByCategoryId?.pageTitle
-  );
+  // useEffect(() => {
+  //   setLoading(true);
+  //   dispatch(getProductByCategoryId(params)).then(() => {
+  //     setLoading(false);
+  //   });
+  // }, [dispatch]);
+
+  // const productPageData = useSelector(
+  //   (state) => state?.getProductsList?.getProductsListByCategoryId?.products
+  // );
+
+  // const pageTitle = useSelector(
+  //   (state) => state?.getProductsList?.getProductsListByCategoryId?.pageTitle
+  // );
   const onCardClick = (element) => {
     let pId = element?._id;
     navigate(`/product-detail/${pId}`);
@@ -51,11 +75,12 @@ const ProductPage = () => {
       <Grid sx={{ padding: "0 100px" }}>
         <Box sx={{ display: "flex" }}>
           <FMTypography
-            displayText={`${pageTitle} Products`}
+            displayText={`${pageTitle}`}
             styleData={{
               fontWeight: "500",
               fontSize: "40px",
               textTransform: "capitalize",
+              paddingBottom: "1rem",
             }}
           />
           <Box
@@ -86,8 +111,7 @@ const ProductPage = () => {
             padding: "3rem 0",
           }}
         >
-          
-          {loading ? (
+          {isLoading ? (
             <div
               style={{
                 display: "flex",

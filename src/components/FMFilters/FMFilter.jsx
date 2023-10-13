@@ -12,40 +12,45 @@ const FMFilter = () => {
     // departmentOnChange(e);
   };
 
-  const departmentOptions = ["Best Seller", "Birthday Cake"];
+  const sortByOptions = [
+    "New to Old",
+    "Old to New",
+    "High to Low",
+    "Low to High",
+  ];
+
+  const TagOptions = ["Best Seller", "Birthday", "Anniversary", "Wedding"];
 
   return (
     <>
       <Grid sx={{ display: "flex", gap: "1rem" }}>
         <FMDropdown
           name="department_id"
-          options={departmentOptions}
+          defaultValue={"Sort By"}
+          options={sortByOptions}
           dropdownvalue="departmentName"
+          sx={{ width: "10rem" }}
           placeholder="Please select department"
           onChange={departmentChangeHandler}
         />
-        <FMButton
-          displayText={"Best Seller"}
-          variant={"outlined"}
-          styleData={{
-            border: "1px solid #E6E6E6",
-            borderRadius: "19px",
-            "&:hover": {
-              border: "1px solid #E6E6E6",
-            },
-          }}
-        />
-        <FMButton
-          displayText={"Best Seller"}
-          variant={"outlined"}
-          styleData={{
-            border: "1px solid #E6E6E6",
-            borderRadius: "19px",
-            "&:hover": {
-              border: "1px solid #E6E6E6",
-            },
-          }}
-        />
+        {TagOptions &&
+          TagOptions?.map((tag) => {
+            return (
+              <>
+                <FMButton
+                  displayText={tag}
+                  variant={"outlined"}
+                  styleData={{
+                    border: "1px solid #E6E6E6",
+                    borderRadius: "19px",
+                    "&:hover": {
+                      border: "1px solid #E6E6E6",
+                    },
+                  }}
+                />
+              </>
+            );
+          })}
       </Grid>
     </>
   );

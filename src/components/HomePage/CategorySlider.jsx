@@ -3,12 +3,12 @@ import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryCarousel } from "Redux/Slices/LandingPageSlice/LandingPageSlice";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const CategorySlider = () => {
   const dispatch = useDispatch();
   const params = useParams();
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getCategoryCarousel());
   }, [dispatch]);
@@ -42,7 +42,9 @@ const CategorySlider = () => {
     slidesToScroll: 1,
   };
 
-  
+  const handleTag = async (categoryId) => {
+    navigate(`/category-page/${categoryId}`);
+  };
 
   return (
     <div className="category_slider">
@@ -56,10 +58,10 @@ const CategorySlider = () => {
                   key={elem?._id}
                   style={{ padding: "0 8px" }}
                 >
-                  <Link to={`/product-page/63e7408c4d118f475c8542c2`}>
+                  <div onClick={() => handleTag(elem?._id)}>
                     <img src={elem?.img} className="img-fluid" alt="" />
                     <h4>Cake</h4>
-                  </Link>
+                  </div>
                 </div>
               ))}
             </Slider>

@@ -4,6 +4,7 @@ import {
   GET_PRODUCTS_LIST,
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_LIST_BY_CATEGORY_ID,
+  GET_PRODUCTS_LIST_BY_CATEGORY_ID_AND_TAGS,
 } from "./type";
 
 export const getProductPageDetail = createAsyncThunk(
@@ -32,6 +33,20 @@ export const getProductByCategoryId = createAsyncThunk(
     }
   }
 );
+export const getProductByCategoryIdAndTags = createAsyncThunk(
+  GET_PRODUCTS_LIST_BY_CATEGORY_ID_AND_TAGS,
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(
+        `api/product/getProductsByTagName`,
+        payload
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
 
 export const getProductsList = createAsyncThunk(
   GET_PRODUCTS_LIST,
@@ -50,6 +65,7 @@ const productListSlice = createSlice({
   initialState: {
     getProductsListData: [],
     getProductsListByCategoryId: [],
+    getProductsListByCategoryIdAndTags: [],
     getProductDetails: [],
     error: "",
     isFetching: false,
@@ -85,9 +101,30 @@ const productListSlice = createSlice({
       state.isFetching = false;
       state.isError = false;
     });
-    
+
     builder.addCase(getProductByCategoryId.rejected, (state, action) => {
       state.getProductsListByCategoryId = {};
+      state.isFetching = false;
+      state.isError = true;
+    });
+
+    builder.addCase(getProductByCategoryIdAndTags.pending, (state) => {
+      state.getProductsListByCategoryIdAndTags = {};
+      state.isFetching = true;
+      state.isError = false;
+    });
+
+    builder.addCase(
+      getProductByCategoryIdAndTags.fulfilled,
+      (state, action) => {
+        state.getProductsListByCategoryIdAndTags = action.payload;
+        state.isFetching = false;
+        state.isError = false;
+      }
+    );
+
+    builder.addCase(getProductByCategoryIdAndTags.rejected, (state, action) => {
+      state.getProductsListByCategoryIdAndTags = {};
       state.isFetching = false;
       state.isError = true;
     });

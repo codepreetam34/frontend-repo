@@ -23,7 +23,7 @@ const CategoryPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [productPageData, setProductPageData] = useState(null);
-  const [subCategoryList, setSubCategoryList] = useState(null);
+  const [categoryProducts, setCategoryProducts] = useState(null);
   const params = useParams();
   const [loading, setLoading] = useState(false);
 
@@ -49,10 +49,10 @@ const CategoryPage = () => {
   }, [params]);
 
   useEffect(() => {
-    dispatch(getCategoryChildrens(params))
+    dispatch(getProductByCategoryId(params))
       .then((response) => {
         setProductPageData(response?.payload);
-        setSubCategoryList(response?.payload?.subCategoryList);
+        setCategoryProducts(response?.payload?.products);
         setLoading(false);
       })
       .catch((error) => {
@@ -70,18 +70,27 @@ const CategoryPage = () => {
       <Grid sx={{ padding: "0 100px" }}>
         <Box sx={{ display: "flex" }}>
           <FMTypography
-            displayText={`${productPageData?.pageTitle} Category`}
+            displayText={
+              productPageData?.pageTitle
+                ? `${productPageData?.pageTitle} Products`
+                : "No Category Products"
+            }
             styleData={{
               fontWeight: "500",
               fontSize: "40px",
               textTransform: "capitalize",
+              paddingBottom: "1rem",
             }}
           />
           <Box
             sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
           >
             <FMTypography
-              displayText={`(${productPageData?.totalProductCount} Products)`}
+              displayText={
+                categoryProducts?.length
+                  ? `(${categoryProducts?.length} Products)`
+                  : "0 Product"
+              }
               styleData={{
                 fontWeight: "300",
                 fontSize: "20px",
@@ -91,10 +100,10 @@ const CategoryPage = () => {
             />
           </Box>
         </Box>
-        {/* 
+
         <Box>
           <FMFilter />
-        </Box> */}
+        </Box>
 
         <Grid
           sx={{
@@ -103,8 +112,7 @@ const CategoryPage = () => {
             flexBasis: "33.333333%",
             justifyContent: "space-evenly",
             gap: "2rem",
-            paddingTop: "2rem",
-            paddingBottom: "2rem",
+            padding: "3rem 0",
           }}
         >
           {loading ? (
@@ -118,28 +126,81 @@ const CategoryPage = () => {
             >
               <CircularProgress color="primary" />
             </div>
-          ) : subCategoryList && subCategoryList.length > 0 ? (
-            subCategoryList?.map((elem) => (
-              <Box onClick={() => onCardClick(elem?._id)}>
-                <Card
+          ) : categoryProducts && categoryProducts.length > 0 ? (
+            categoryProducts?.map((elem) => (
+              // <Box onClick={() => onCardClick(elem?._id)}>
+              //   <Card
+              //     sx={{
+              //       width: "280px",
+              //       height: "21.5rem",
+              //       borderRadius: "20px",
+              //       //               paddingBottom: "1rem",
+              //     }}
+              //   >
+              //     <CardActionArea style={{ height: "100%" }}>
+              //       <CardMedia
+              //         component="img"
+              //         height="260"
+              //         width="100%"
+              //         image={elem?.productPictures[0]?.img}
+              //         alt="green iguana"
+              //       />
+              //       <CardContent
+              //         style={{ height: "4rem", textAlign: "center" }}
+              //       >
+              //         <Typography
+              //           gutterBottom
+              //           variant="h5"
+              //           component="div"
+              //           sx={{ fontSize: "18px", color: "#222222" }}
+              //         >
+              //           {elem?.name}
+              //         </Typography>
+
+              //       </CardContent>
+              //     </CardActionArea>
+              //   </Card>
+              // </Box>
+
+              <Box
+                onClick={() => onCardClick(elem)}
+                style={{ position: "relative" }}
+              >
+                <Box
                   sx={{
-                    width: "280px",
-                    height: "21.5rem",
-                    borderRadius: "20px",
-    //               paddingBottom: "1rem",
+                    backgroundColor: "#008539",
+                    top: "3%",
+                    display: "flex",
+                    alignItems: "center",
+                    width: "40px",
+                    height: "30px",
+                    justifyContent: "center",
+                    position: "absolute",
+                    left: "83%",
+                    zIndex: "111",
+                    borderRadius: "4px",
                   }}
                 >
-                  <CardActionArea style={{ height: "100%" }}>
+                  <img
+                    src={ratingStart}
+                    alt="rating-star"
+                    style={{ width: "14px" }}
+                  />
+                  <FMTypography
+                    displayText={Math.round(elem?.rating * 10) / 10}
+                    styleData={{ color: "#FFFFFF", fontSize: "12px" }}
+                  />
+                </Box>
+                <Card sx={{ width: "283px", borderRadius: "20px" }}>
+                  <CardActionArea>
                     <CardMedia
                       component="img"
-                      height="260"
-                      width="100%"
-                      image={elem?.categoryImage}
+                      height="283"
+                      width="283"
+                      image={elem?.productPictures[0]?.img}
                       alt="green iguana"
                     />
-                    <CardContent
-                      style={{ height: "4rem", textAlign: "center" }}
-                    >
+                    <CardContent style={{ height: "7rem" }}>
                       <Typography
                         gutterBottom
                         variant="h5"
@@ -148,13 +209,34 @@ const CategoryPage = () => {
                       >
                         {elem?.name}
                       </Typography>
-                      <Typography
-                        gutterBottom
-                        component="div"
-                        sx={{ fontSize: "14px", color: "#222222" }}
+                      <span style={{ display: "flex" }}>
+                        <del style={{ fontSize: "14px", color: "#717171" }}>
+                          ₹ {elem?.actualPrice}
+                        </del>
+
+                        <Typography
+                          sx={{
+                            fontSize: "14px",
+                            color: "#000000",
+                            marginLeft: ".5rem",
+                          }}
+                        >
+                          ₹ {elem?.discountPrice}
+                        </Typography>
+                      </span>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
                       >
-                        {`(${elem?.productCount} Products)`}
-                      </Typography>
+                        <Typography variant="body2" sx={{ color: "#717171" }}>
+                          {elem?.deliveryDay}
+                        </Typography>
+                        <Typography variant="body2" sx={{ color: "#008539" }}>
+                          Reviews {elem?.numReviews}
+                        </Typography>
+                      </Box>
                     </CardContent>
                   </CardActionArea>
                 </Card>

@@ -170,6 +170,17 @@ const Header = () => {
     navigate(FAQ);
   };
 
+  const handleTag = (tagName, categoryId) => {
+    const payload = {
+      tagName,
+      categoryId: categoryId,
+    };
+    navigate(`/product-page/${tagName}`, { state: { payload: payload } });
+  };
+  const handleCategoryClick = (categoryId) => {
+    navigate(`/category-page/${categoryId}`);
+  };
+
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
       <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
@@ -346,7 +357,12 @@ const Header = () => {
       </Row>
 
       <div className="main_header">
-        <Navbar bg="" expand="lg" className="p-0" style={{paddingBottom:"5px"}}>
+        <Navbar
+          bg=""
+          expand="lg"
+          className="p-0"
+          style={{ paddingBottom: "5px" }}
+        >
           <Container
             fluid
             className="d-flex flex-wrap n-0 p-0 justify-content-start"
@@ -358,7 +374,18 @@ const Header = () => {
                   accountDetailData?.map((elem) => {
                     return (
                       <NavDropdown
-                        title={elem?.name}
+                        title={
+                          <div
+                            className="main-heading-clickable fw-bold"
+                            onClick={() => handleCategoryClick(elem?._id)}
+                          >
+                            <span>{elem?.name}</span>
+                            <i
+                              className="fas fa-caret-down"
+                              style={{ marginLeft: "0.5rem" }}
+                            ></i>
+                          </div>
+                        }
                         key={elem?.id}
                         id="navbarScrollingDropdown"
                         onMouseEnter={() => showDropdown(elem?._id)}
@@ -366,7 +393,61 @@ const Header = () => {
                         show={show === elem?._id}
                         style={{ textTransform: "capitalize" }}
                       >
-                        <Row className="rowOnHover" style={{ padding: "2rem" }}>
+                        <Col md={12}>
+                          <div>
+                            <Row>
+                              {elem?.tags?.map((tag) => {
+                                return (
+                                  <Col
+                                    md={2}
+                                    style={{
+                                      paddingBottom: "0.7rem",
+                                      paddingTop: "0.2rem",
+                                    }}
+                                  >
+                                    <div
+                                      className="fw-bold pb-2"
+                                      style={{ fontSize: "1.1rem" }}
+                                    >
+                                      {tag?.tagType}
+                                    </div>
+                                    <div>
+                                      {tag?.names?.map((name) => {
+                                        return (
+                                          <div
+                                            className="pb-2"
+                                            style={{
+                                              fontSize: "0.9rem",
+                                              cursor: "pointer",
+                                            }}
+                                            onClick={() =>
+                                              handleTag(name, elem?._id)
+                                            }
+                                          >
+                                            {name}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </Col>
+                                );
+                              })}
+                              <Col md={4}>
+                                <div className="cate_list_menu pb-3">
+                                  <img
+                                    src={elem?.categoryImage}
+                                    className="img-fluid"
+                                    alt=""
+                                  />
+                                  <h4>{elem?.name}</h4>
+                                </div>
+                              </Col>
+                            </Row>
+                          </div>
+                        </Col>
+
+                        {/*
+                         <Row className="rowOnHover" style={{ padding: "2rem" }}>
                           {elem?.children
                             ?.slice()
                             .reverse()
@@ -379,7 +460,10 @@ const Header = () => {
                                   >
                                     <h3>{secElem?.name}</h3>
                                   </Link>
-                                  {secElem?.children
+
+
+                                  
+                                  {secElem?.tags
                                     ?.slice()
                                     .reverse()
                                     .map((thirdElem) => (
@@ -388,10 +472,13 @@ const Header = () => {
                                         style={{ textDecoration: "none" }}
                                       >
                                         <NavDropdown.Item href="/">
-                                          {thirdElem?.name}
+                                          {thirdElem?.}
                                         </NavDropdown.Item>
                                       </Link>
                                     ))}
+
+
+
                                 </div>
                               </Col>
                             ))}
@@ -404,11 +491,11 @@ const Header = () => {
                                   className="img-fluid"
                                   alt=""
                                 />
-                                {/* <h4>Cakes</h4> */}
+                            <h4>Cakes</h4> 
                               </a>
                             </div>
                           </Col>
-                        </Row>
+                        </Row> */}
                       </NavDropdown>
                     );
                   })}
