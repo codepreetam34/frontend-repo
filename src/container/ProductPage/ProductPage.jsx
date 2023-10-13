@@ -28,9 +28,9 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true); // Start loading
+    setLoading(true);
     dispatch(getProductByCategoryId(params)).then(() => {
-      setLoading(false); // Stop loading after API call finishes
+      setLoading(false);
     });
   }, [dispatch]);
 
@@ -76,7 +76,6 @@ const ProductPage = () => {
           <FMFilter />
         </Box>
 
-        {/* product box below */}
         <Grid
           sx={{
             display: "flex",
@@ -87,9 +86,8 @@ const ProductPage = () => {
             padding: "3rem 0",
           }}
         >
-          {" "}
+          
           {loading ? (
-            // Display a loader while API calls are in progress
             <div
               style={{
                 display: "flex",
@@ -203,9 +201,8 @@ const ProductPage = () => {
               </Card>
             </Box>
           )}
-          {/* prodct box ended */}
         </Grid>
-      </Grid>{" "}
+      </Grid>
       <Footer />
     </>
   );

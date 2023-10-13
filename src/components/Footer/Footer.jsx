@@ -58,7 +58,7 @@ const Footer = () => {
                 marginTop: "25px",
               }}
             >
-              All Copyrght reserved by © Webgross Pvt Ltd.
+              All Copyright reserved by © Webgross Pvt Ltd.
             </li>
           </ul>
         </Col>
