@@ -396,7 +396,7 @@ const Header = () => {
                         <Col md={12}>
                           <div>
                             <Row>
-                              <Col md={8} className="d-lg-flex gap-5 flex-wrap">
+                              <Col md={8} className="d-lg-flex flex-wrap" style={{gap:"7rem"}}>
                                 {elem?.tags?.map((tag) => {
                                   return (
                                     <Box
