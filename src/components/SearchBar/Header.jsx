@@ -111,7 +111,7 @@ const Header = () => {
     dispatch(getMenuBarList());
   }, [dispatch]);
 
-  const accountDetailData = useSelector(
+  const categoryList = useSelector(
     (state) => state?.menuList?.getMenuOptionsData?.categoryList
   );
 
@@ -370,8 +370,8 @@ const Header = () => {
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav navbarScroll style={{ paddingLeft: "4rem" }}>
-                {accountDetailData &&
-                  accountDetailData?.map((elem) => {
+                {categoryList &&
+                  categoryList?.map((elem) => {
                     return (
                       <NavDropdown
                         title={
@@ -396,42 +396,43 @@ const Header = () => {
                         <Col md={12}>
                           <div>
                             <Row>
-                              {elem?.tags?.map((tag) => {
-                                return (
-                                  <Col
-                                    md={2}
-                                    style={{
-                                      paddingBottom: "0.7rem",
-                                      paddingTop: "0.2rem",
-                                    }}
-                                  >
-                                    <div
-                                      className="fw-bold pb-2"
-                                      style={{ fontSize: "1.1rem" }}
+                              <Col md={8} className="d-lg-flex gap-5 flex-wrap">
+                                {elem?.tags?.map((tag) => {
+                                  return (
+                                    <Box
+                                      style={{
+                                        paddingBottom: "0.7rem",
+                                        paddingTop: "0.2rem",
+                                      }}
                                     >
-                                      {tag?.tagType}
-                                    </div>
-                                    <div>
-                                      {tag?.names?.map((name) => {
-                                        return (
-                                          <div
-                                            className="pb-2"
-                                            style={{
-                                              fontSize: "0.9rem",
-                                              cursor: "pointer",
-                                            }}
-                                            onClick={() =>
-                                              handleTag(name, elem?._id)
-                                            }
-                                          >
-                                            {name}
-                                          </div>
-                                        );
-                                      })}
-                                    </div>
-                                  </Col>
-                                );
-                              })}
+                                      <div
+                                        className="fw-bold pb-2"
+                                        style={{ fontSize: "1.1rem" }}
+                                      >
+                                        {tag?.tagType}
+                                      </div>
+                                      <div>
+                                        {tag?.names?.map((name) => {
+                                          return (
+                                            <div
+                                              className="pb-2"
+                                              style={{
+                                                fontSize: "0.9rem",
+                                                cursor: "pointer",
+                                              }}
+                                              onClick={() =>
+                                                handleTag(name, elem?._id)
+                                              }
+                                            >
+                                              {name}
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                    </Box>
+                                  );
+                                })}
+                              </Col>{" "}
                               <Col md={4}>
                                 <div className="cate_list_menu pb-3">
                                   <img

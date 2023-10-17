@@ -128,39 +128,6 @@ const CategoryPage = () => {
             </div>
           ) : categoryProducts && categoryProducts.length > 0 ? (
             categoryProducts?.map((elem) => (
-              // <Box onClick={() => onCardClick(elem?._id)}>
-              //   <Card
-              //     sx={{
-              //       width: "280px",
-              //       height: "21.5rem",
-              //       borderRadius: "20px",
-              //       //               paddingBottom: "1rem",
-              //     }}
-              //   >
-              //     <CardActionArea style={{ height: "100%" }}>
-              //       <CardMedia
-              //         component="img"
-              //         height="260"
-              //         width="100%"
-              //         image={elem?.productPictures[0]?.img}
-              //         alt="green iguana"
-              //       />
-              //       <CardContent
-              //         style={{ height: "4rem", textAlign: "center" }}
-              //       >
-              //         <Typography
-              //           gutterBottom
-              //           variant="h5"
-              //           component="div"
-              //           sx={{ fontSize: "18px", color: "#222222" }}
-              //         >
-              //           {elem?.name}
-              //         </Typography>
-
-              //       </CardContent>
-              //     </CardActionArea>
-              //   </Card>
-              // </Box>
 
               <Box
                 onClick={() => onCardClick(elem)}
