@@ -41,7 +41,7 @@ const CategoryPage = () => {
   // );
 
   const onCardClick = (id) => {
-    navigate(`/product-page/${id}`);
+    navigate(`/product-detail/${id}`);
   };
 
   useEffect(() => {
