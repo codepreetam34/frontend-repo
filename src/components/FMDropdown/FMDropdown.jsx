@@ -1,75 +1,27 @@
-import {
-  Box,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
-// import { commonStyles } from "MuiStyles";
 import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
-const FMDropdown = ({
-  name,
-  options,
-  id,
-  // onChange,
-  onBlur,
-  error,
-  errorSx,
-  // value,
-  defaultValue,
-  sx,
-  labelSx,
-  controlSx,
-  required,
-  inputTagProps,
-  inputProps,
-  label,
-  inputRef,
-  disabled,
-  IconComponent,
-}) => {
+const FMDropdown = ({ name, options, id, onChange, sx, defaultValue }) => {
   const [quantityOption, setQuantityOption] = useState(defaultValue);
 
   const optionChangeHandler = (e) => {
     setQuantityOption(e.target.value);
+    console.log("e.target.value", e.target.value);
+    onChange(e);
   };
 
   return (
-    <Box sx={{ ...controlSx }}>
-      {label && (
-        <InputLabel sx={labelSx}>
-          <Typography component="span">{label}</Typography>
-          {required && (
-            <Typography
-              component="span"
-              // sx={commonStyles.requiredInput}
-            >
-              *
-            </Typography>
-          )}
-        </InputLabel>
-      )}
+    <Box sx={{ ...sx }}>
       <Select
-        required={required}
         id={id || name}
         name={name}
         onChange={optionChangeHandler}
-        onBlur={onBlur}
         defaultValue={defaultValue}
         value={quantityOption}
-        error={Boolean(error)}
-        inputProps={inputTagProps}
-        inputRef={inputRef}
-        disabled={disabled}
-        {...inputProps}
-        // sx={value === "" ? { color: "grey" } : sx}
         sx={sx}
         displayEmpty
-        notched={false}
-        IconComponent={IconComponent}
-
       >
         <MenuItem disabled value="Sort By">
           Sort By
@@ -80,12 +32,6 @@ const FMDropdown = ({
           </MenuItem>
         ))}
       </Select>
-      {typeof error === "string" &&
-        {
-          /* <FormHelperText sx={{ ...commonStyles.errorText, ...errorSx }}>
-          {error}
-        </FormHelperText> */
-        }}
     </Box>
   );
 };

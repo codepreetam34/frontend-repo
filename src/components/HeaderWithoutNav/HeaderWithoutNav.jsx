@@ -74,7 +74,7 @@ const HeaderWithoutNav = () => {
       <Grid sx={HeaderStyle.headerFullStyle}>
         <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
           <Col style={commonStyle.flexDisplayStyle}>
-            <Link to="/">
+            <Link to={"/"}>
               <img
                 src={monkeyLogo}
                 alt="monkeyLogo"

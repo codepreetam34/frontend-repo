@@ -317,7 +317,6 @@ p {
 .shopbyocca .heighautoimg a img {
   width: 100%;
   height: 260px;
-  object-fit: cover;
 }
 .shopbyocca .heighautoimg a p {
   position: absolute;

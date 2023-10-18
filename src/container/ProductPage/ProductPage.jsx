@@ -27,36 +27,41 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [displayedProducts, setDisplayedProducts] = useState();
+  const [categoryProducts, setCategoryProducts] = useState(null);
+  const [categoryId, setCategoryId] = useState(false);
+  const [pageTitle, setPageTitle] = useState(false);
   const location = useLocation();
   const payload = location?.state?.payload;
 
-  const pageTitle = useSelector(
-    (state) =>
-      state?.getProductsList?.getProductsListByCategoryIdAndTags?.pageTitle
-  );
-  const productPageData = useSelector(
-    (state) =>
-      state?.getProductsList?.getProductsListByCategoryIdAndTags?.products
-  );
+  useEffect(() => {
+    dispatch(getProductByCategoryIdAndTags(payload))
+      .then((response) => {
+        setPageTitle(response?.payload?.pageTitle);
+        setCategoryId(response?.payload?.categoryId);
+        setCategoryProducts(response?.payload?.products);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [dispatch, payload]);
 
   useEffect(() => {
-    try {
-      dispatch(getProductByCategoryIdAndTags(payload));
-    } catch (error) {
-      // Handle any error, e.g., show an error message.
-    } finally {
-      setIsLoading(false);
+    setDisplayedProducts(categoryProducts);
+  }, [categoryProducts]);
+  useEffect(() => {
+    setCategoryId(categoryId);
+  }, [categoryId]);
+
+  const switchProducts = (showCategory) => {
+    if (showCategory) {
+      setDisplayedProducts(categoryProducts);
     }
-  }, [dispatch,payload]);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   dispatch(getProductByCategoryId(params)).then(() => {
-  //     setLoading(false);
-  //   });
-  // }, [dispatch]);
-
+  };
   // const productPageData = useSelector(
   //   (state) => state?.getProductsList?.getProductsListByCategoryId?.products
   // );
@@ -87,7 +92,7 @@ const ProductPage = () => {
             sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
           >
             <FMTypography
-              displayText={`(${productPageData?.length} Products)`}
+              displayText={`(${displayedProducts?.length} Products)`}
               styleData={{
                 fontWeight: "300",
                 fontSize: "20px",
@@ -98,7 +103,13 @@ const ProductPage = () => {
           </Box>
         </Box>
         <Box>
-          <FMFilter />
+          <FMFilter
+            setCategoryId={setCategoryId}
+            setIsLoading={setIsLoading}
+            switchProducts={switchProducts}
+            setPageTitle={setPageTitle}
+            setDisplayedProducts={setDisplayedProducts}
+          />
         </Box>
 
         <Grid
@@ -122,8 +133,8 @@ const ProductPage = () => {
             >
               <CircularProgress color="primary" />
             </div>
-          ) : productPageData && productPageData.length > 0 ? (
-            productPageData?.map((elem) => (
+          ) : displayedProducts && displayedProducts.length > 0 ? (
+            displayedProducts?.map((elem) => (
               <Box
                 onClick={() => onCardClick(elem)}
                 style={{ position: "relative" }}

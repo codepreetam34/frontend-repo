@@ -22,46 +22,49 @@ import Footer from "components/Footer/Footer";
 const CategoryPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [productPageData, setProductPageData] = useState(null);
-  const [categoryProducts, setCategoryProducts] = useState(null);
   const params = useParams();
-  const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   dispatch(getProductsList()).then(() => {
-  //     setLoading(false);
-  //   });
-  // }, [dispatch]);
-
-  // const productPageData = useSelector(
-  //   (state) =>
-  //     state?.getCategoryProductsList?.getCategoryProductsListData
-  //       ?.categoryProducts
-  // );
+  const [categoryProducts, setCategoryProducts] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [categoryId, setCategoryId] = useState(false); // New state for showing filters
+  const [pageTitle, setPageTitle] = useState(false); // New state for showing filters
+  const [displayedProducts, setDisplayedProducts] = useState(categoryProducts);
 
   const onCardClick = (id) => {
     navigate(`/product-detail/${id}`);
   };
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
   }, [params]);
+
+  useEffect(() => {
+    setDisplayedProducts(categoryProducts);
+  }, [categoryProducts]);
+  useEffect(() => {
+    setCategoryId(categoryId);
+  }, [categoryId]);
 
   useEffect(() => {
     dispatch(getProductByCategoryId(params))
       .then((response) => {
-        setProductPageData(response?.payload);
+        setPageTitle(response?.payload?.pageTitle);
+        setCategoryId(response?.payload?.categoryId);
         setCategoryProducts(response?.payload?.products);
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       })
       .finally(() => {
-        setLoading(false);
+        setIsLoading(false);
       });
   }, [dispatch, params]);
+
+  const switchProducts = (showCategory) => {
+    if (showCategory) {
+      setDisplayedProducts(categoryProducts);
+    }
+  };
 
   return (
     <>
@@ -71,9 +74,7 @@ const CategoryPage = () => {
         <Box sx={{ display: "flex" }}>
           <FMTypography
             displayText={
-              productPageData?.pageTitle
-                ? `${productPageData?.pageTitle} Products`
-                : "No Category Products"
+              pageTitle ? `${pageTitle} Products` : `No ${pageTitle} Products`
             }
             styleData={{
               fontWeight: "500",
@@ -102,7 +103,13 @@ const CategoryPage = () => {
         </Box>
 
         <Box>
-          <FMFilter />
+          <FMFilter
+            setCategoryId={setCategoryId}
+            setIsLoading={setIsLoading}
+            switchProducts={switchProducts}
+            setPageTitle={setPageTitle}
+            setDisplayedProducts={setDisplayedProducts}
+          />
         </Box>
 
         <Grid
@@ -115,7 +122,7 @@ const CategoryPage = () => {
             padding: "3rem 0",
           }}
         >
-          {loading ? (
+          {isLoading ? (
             <div
               style={{
                 display: "flex",
@@ -126,11 +133,10 @@ const CategoryPage = () => {
             >
               <CircularProgress color="primary" />
             </div>
-          ) : categoryProducts && categoryProducts.length > 0 ? (
-            categoryProducts?.map((elem) => (
-
+          ) : displayedProducts && displayedProducts.length > 0 ? (
+            displayedProducts?.map((elem) => (
               <Box
-                onClick={() => onCardClick(elem)}
+                onClick={() => onCardClick(elem._id)}
                 style={{ position: "relative" }}
               >
                 <Box

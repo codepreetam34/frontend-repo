@@ -22,7 +22,6 @@ const LandingPage = () => {
         <Box>
           <CategorySlider />
         </Box>
-
         <TwoBanner />
         <Box>
           <BestSeller />

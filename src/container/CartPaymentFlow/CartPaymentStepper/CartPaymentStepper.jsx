@@ -52,7 +52,7 @@ export default function HorizontalLinearStepper() {
       <Col
         style={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
       >
-        <Link to="/">
+        <Link to={"/"}>
           <img
             src={monkeyLogo}
             alt="monkeyLogo"
