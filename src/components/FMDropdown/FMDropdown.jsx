@@ -8,7 +8,6 @@ const FMDropdown = ({ name, options, id, onChange, sx, defaultValue }) => {
 
   const optionChangeHandler = (e) => {
     setQuantityOption(e.target.value);
-    console.log("e.target.value", e.target.value);
     onChange(e);
   };
 
@@ -23,12 +22,12 @@ const FMDropdown = ({ name, options, id, onChange, sx, defaultValue }) => {
         sx={sx}
         displayEmpty
       >
-        <MenuItem disabled value="Sort By">
-          Sort By
+        <MenuItem disabled value="">
+          Select Time Slot
         </MenuItem>
         {options?.map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
+          <MenuItem key={option.id} value={option.label}>
+            {option.label}
           </MenuItem>
         ))}
       </Select>

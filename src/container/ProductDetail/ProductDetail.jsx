@@ -150,8 +150,9 @@ const ProductDetail = () => {
   const serviceChangeHandler = (e) => {
     setServiceId(e.target.value);
     setValue("service", e.target.value);
-    // onServiceChange(e);
+    //onServiceChange(e);
   };
+
   const apiImgs = productDetailedData?.productPictures?.map((elem) => ({
     original: elem?.img,
     thumbnail: elem?.img,
@@ -220,6 +221,15 @@ const ProductDetail = () => {
     },
   };
 
+  const handleWeightChange = (option) => {
+    console.log(option)
+    setProductQuantity(option)
+  }
+  const [selectedTime, setSelectedTime] = useState(""); // State to track selected time
+
+  const handleTimeChange = (e) => {
+    setSelectedTime(e.target.value);
+  };
   return (
     <>
       <Header />
@@ -301,7 +311,7 @@ const ProductDetail = () => {
                     marginLeft: "1rem",
                   }}
                 >
-                  ₹ {productDetailedData?.discountPrice}
+                  ₹ {productQuantity == "0.5 Kg" ? productDetailedData?.halfkgprice : productQuantity == "1 Kg" ? productDetailedData?.onekgprice : productQuantity == "2 Kg" ? productDetailedData?.twokgprice : productDetailedData?.discountPrice}
                 </Typography>
 
                 <FMTypography
@@ -316,38 +326,39 @@ const ProductDetail = () => {
               </Box>
 
               {/* weight radio */}
-              {(categoryName && categoryName?.toLowerCase() === "cakes") ||
-                (categoryName?.toLowerCase() === "cake" && (
-                  <Box sx={{ marginTop: "17px" }}>
-                    <FMRadioButtons
-                      formLabel="Select Weight"
-                      radioButtons={createUserOptions}
-                      onChecked={(option) =>
-                        option === "0.5 Kg"
-                          ? setProductQuantity("0.5 Kg")
-                          : option === "1 Kg"
-                          ? setProductQuantity("1 Kg")
-                          : setProductQuantity("2 Kg")
-                      }
-                      formLabelStyling={{
-                        radioButtonStyle: {
-                          fontWeight: "600",
-                          lineHeight: "1.3125rem",
-                          fontSize: "0.875rem",
-                          // color: `BLACK !important`,
-                          color: "black !important",
-                        },
-                      }}
-                      labelStyle={{
+              {(categoryName && categoryName?.toLowerCase() === "cakes") ? (
+                <Box sx={{ marginTop: "17px" }}>
+                  <FMRadioButtons
+                    formLabel="Select Weight"
+                    radioButtons={createUserOptions}
+                    onChecked={(option) =>
+                      handleWeightChange(option)
+
+                      // option === "0.5 Kg"
+                      //   ? setProductQuantity("0.5 Kg")
+                      //   : option === "1 Kg"
+                      //     ? setProductQuantity("1 Kg")
+                      //     : setProductQuantity("2 Kg")
+                    }
+                    formLabelStyling={{
+                      radioButtonStyle: {
+                        fontWeight: "600",
+                        lineHeight: "1.3125rem",
+                        fontSize: "0.875rem",
+                        // color: `BLACK !important`,
                         color: "black !important",
-                        fontSize: "20px !important",
-                        fontWeight: "500 !important",
-                      }}
-                      value={productQuantity}
-                      required={true}
-                    />
-                  </Box>
-                ))}
+                      },
+                    }}
+                    labelStyle={{
+                      color: "black !important",
+                      fontSize: "20px !important",
+                      fontWeight: "500 !important",
+                    }}
+                    value={productQuantity}
+                    required={true}
+                  />
+                </Box>
+              ) : <></>}
 
               {/* pincode and date selector */}
               <Box sx={{ marginTop: "1rem", display: "flex" }}>
@@ -401,8 +412,8 @@ const ProductDetail = () => {
                 </Box>
               </Box>
               {/* msg box */}
-              {categoryName?.toLowerCase() === "cakes" ||
-                (categoryName?.toLowerCase() === "cake" && (
+              {categoryName?.toLowerCase() === "cakes" ?
+                (
                   <Box sx={{ display: "flex", marginTop: "1rem" }}>
                     <FMRadioButtons
                       radioButtons={egglessOrNot}
@@ -438,7 +449,7 @@ const ProductDetail = () => {
                       error={errors.cakeMessage ? true : false}
                     />
                   </Box>
-                ))}
+                ) : <></>}
 
               {/* delivery type */}
               <Box>
@@ -468,19 +479,18 @@ const ProductDetail = () => {
                       height: "48px",
                       left: "843px",
                       top: "703px",
-                      backgroundColor: isTodaysDate
-                        ? "lightgray"
-                        : standardActive
-                        ? "#E6E6E6"
-                        : "white",
+                      backgroundColor: standardActive ? "#E6E6E6" : "white",
                       borderRadius: "100px",
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
                       alignItems: "center",
-                      cursor: "pointer",
+                      cursor: isTodaysDate ? "not-allowed" : "pointer", // Change cursor style
                       border: "1px solid #E6E6E6",
-                      "&:hover": { border: "1px solid black" },
+                      "&:hover": {
+                        border: isTodaysDate ? "1px solid #E6E6E6" : "1px solid black", // Adjust border on hover
+                      },
+                      opacity: isTodaysDate ? 0.5 : 1, // Adjust opacity for disabled state
                     }}
                     onClick={() => {
                       if (!isTodaysDate) {
@@ -491,15 +501,13 @@ const ProductDetail = () => {
                       }
                     }}
                   >
-                    <FMTypography
-                      displayText={"Standard "}
-                      styleData={{ fontSize: "12px" }}
-                    />
+                    <FMTypography displayText={"Standard"} styleData={{ fontSize: "12px" }} />
                     <FMTypography
                       displayText={"(Free)"}
                       styleData={{ fontSize: "10px", color: "#178013" }}
                     />
                   </Box>
+
 
                   <Box
                     sx={{
@@ -568,30 +576,24 @@ const ProductDetail = () => {
                   </Box>
                 </Box>
               </Box>
-              {/* time dropdown */}
-              <Box>
-                <FMDropdown
-                  options={deliveryTime}
-                  dropdownvalue="label"
-                  placeholder="Selecttime"
-                  // onChange={serviceChangeHandler}
-                  sx={{
-                    ...commonStyle.dropdownStyle,
-                    height: "2.75rem",
-                    width: "215px",
-                    borderRadius: "0.5rem",
-                    marginTop: "1rem",
-                    border: "1px solid #E6E6E6",
-                    "&:hover": {
-                      border: "1px solid black",
-                    },
-                  }}
-                  // error={errors.service}
+              {deliveryTime ?
+                <Box>
+                  <FMDropdown
+                    options={deliveryTime}
+                    name="deliveryTime"
+                    id="deliveryTime"
+                    onChange={handleTimeChange}
+                    sx={{
+                      ...commonStyle.dropdownStyle,
+                      width: "215px",
+                      marginTop: "1rem",
 
-                  // value={serviceId}
-                  // {...restServiceRegister}
-                />
-              </Box>
+                    }}
+                    defaultValue=""
+                  />
+                </Box>
+                : <></>
+              }
               {/* cart and buy btns */}
               <Box sx={{ marginTop: "50px" }}>
                 <FMButton
@@ -648,7 +650,7 @@ const ProductDetail = () => {
             </Col>
           </Row>
         </Grid>
-      </Container>
+      </Container >
 
       {/*review col start */}
       {/* <Grid sx={{ padding: "50px 100px" }}>
@@ -781,7 +783,7 @@ const ProductDetail = () => {
           )}
         </Box>
       </Grid> */}
-     <Grid sx={{ padding: "0 100px" }}>
+      <Grid sx={{ padding: "0 100px" }}>
         <Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box sx={{ display: "flex" }}>
@@ -847,10 +849,10 @@ const ProductDetail = () => {
               responsive={responsive}
               partialVisible
               infinite
-              // customDot={<CustomDot />}
+            // customDot={<CustomDot />}
             >
               {reviewsCarouselData?.map((elem) => (
-                <Box style={{ paddingBottom: "1rem"}}>
+                <Box style={{ paddingBottom: "1rem" }}>
                   <Box
                     sx={{
                       display: "flex",
@@ -932,7 +934,7 @@ const ProductDetail = () => {
             responsive={responsive}
             partialVisible
             infinite
-            // customDot={<CustomDot />}
+          // customDot={<CustomDot />}
           >
             {similarProductDetailedData?.map((elem) => (
               <Grid
