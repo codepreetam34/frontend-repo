@@ -19,6 +19,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { getCategoryChildrens } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
 import Footer from "components/Footer/Footer";
 
+
+
+
 const CategoryPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -65,7 +65,14 @@ const FMFilter = ({
     (state) =>
       state?.getProductsList?.getProductsListByCategoryIdAndTags?.products
   );
+  const sortedProducts = useSelector(
+    (state) =>
+      state?.getProductsList?.getSortedProducts?.sortedProducts
+  );
 
+  useEffect(() => {
+    setDisplayedProducts(sortedProducts);
+  }, [sortedProducts]);
   useEffect(() => {
     setDisplayedProducts(tagsCategoryProducts);
   }, [tagsCategoryProducts]);
@@ -101,7 +108,7 @@ const FMFilter = ({
           options={sortByOptions}
           sx={{ width: "10rem" }}
           placeholder="Please select department"
-          onChange={sortByOptionsChangeHandler} // Ensure this is correctly set
+        //  onChange={sortByOptionsChangeHandler} // Ensure this is correctly set
         />
 
         {TagOptions &&
@@ -109,7 +116,7 @@ const FMFilter = ({
             return (
               <>
                 <FMButton
-                  onClick={() => tagOptionsChangeHandler(tag)}
+           //       onClick={() => tagOptionsChangeHandler(tag)}
                   displayText={tag}
                   variant={"outlined"}
                   styleData={{

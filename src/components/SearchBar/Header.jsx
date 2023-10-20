@@ -25,6 +25,7 @@ import FMButton from "components/FMButton/FMButton";
 import { Link, useNavigate } from "react-router-dom";
 import { FAQ, LOGIN, MY_PROFILE } from "Routes/Routes";
 import { logout } from "Redux/Slices/Login/auth.slice";
+import { makeStyles } from "@mui/styles";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -69,10 +70,28 @@ const StyledMenu = styled((props) => (
   },
 }));
 
+
+const useStyles = makeStyles((theme) => ({
+
+  commonStyle: {
+    [theme.breakpoints.down('xs')]: {
+      gap: '2rem',
+    }, [theme.breakpoints.down('sm')]: {
+      gap: '2rem',
+    }, [theme.breakpoints.up('md')]: {
+      gap: '3rem',
+    }, [theme.breakpoints.up('lg')]: {
+      gap: '3rem',
+    },
+    [theme.breakpoints.up('xl')]: {
+      gap: '7rem',
+    },
+  }
+}));
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const classes = useStyles();
   var settings = {
     dots: true,
     infinite: true,
@@ -173,7 +192,7 @@ const Header = () => {
   const handleTag = (tagName, categoryId) => {
     const payload = {
       tagName,
-      categoryId: categoryId,
+      categoryId,
     };
     navigate(`/product-page/${tagName}`, { state: { payload: payload } });
   };
@@ -396,7 +415,7 @@ const Header = () => {
                         <Col md={12}>
                           <div>
                             <Row>
-                              <Col md={8} className="d-lg-flex flex-wrap" style={{gap:"7rem"}}>
+                              <Col md={8} className={`${classes.commonStyle} d-lg-flex flex-wrap`} >
                                 {elem?.tags?.map((tag) => {
                                   return (
                                     <Box

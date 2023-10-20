@@ -47,6 +47,7 @@ export const getProductByCategoryIdAndTags = createAsyncThunk(
     }
   }
 );
+
 export const getProductsBySorting = createAsyncThunk(
   GET_PRODUCTS_LIST_BY_SORTING,
   async (payload, thunkAPI) => {
@@ -81,6 +82,7 @@ const productListSlice = createSlice({
     getProductsListByCategoryId: [],
     getProductsListByCategoryIdAndTags: [],
     getProductDetails: [],
+    getSortedProducts: [],
     error: "",
     isFetching: false,
     isError: false,
@@ -142,6 +144,40 @@ const productListSlice = createSlice({
       state.isFetching = false;
       state.isError = true;
     });
+
+
+
+
+    builder.addCase(getProductsBySorting.pending, (state) => {
+      state.getSortedProducts = {};
+      state.isFetching = true;
+      state.isError = false;
+    });
+
+    builder.addCase(
+      getProductsBySorting.fulfilled,
+      (state, action) => {
+        state.getSortedProducts = action.payload;
+        state.isFetching = false;
+        state.isError = false;
+      }
+    );
+
+    builder.addCase(getProductsBySorting.rejected, (state, action) => {
+      state.getSortedProducts = {};
+      state.isFetching = false;
+      state.isError = true;
+    });
+
+
+
+
+
+
+
+
+
+
 
     builder.addCase(getProductPageDetail.pending, (state) => {
       state.getProductDetails = {};
