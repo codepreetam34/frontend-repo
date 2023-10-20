@@ -3,6 +3,7 @@ import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryCarousel } from "Redux/Slices/LandingPageSlice/LandingPageSlice";
+import { Link } from "react-router-dom";
 
 const BestSeller = () => {
   const dispatch = useDispatch();
@@ -14,9 +15,6 @@ const BestSeller = () => {
   const bestSellerCarousels = useSelector(
     (state) => state?.getCarousel?.getProductCarouselData?.silders?.[2]?.sliders
   );
-
-
-
 
   // function replaceUrls(data) {
   //   return data?.map((item) => ({
@@ -30,6 +28,7 @@ const BestSeller = () => {
 
   // // Call the function to replace URLs in the data
   // const bestSellerCarousels = replaceUrls(data);
+
   const category_settings = {
     dots: false,
     infinite: true,
@@ -60,13 +59,13 @@ const BestSeller = () => {
                   key={elem?._id}
                   style={{ padding: "0 8px" }}
                 >
-                  <a href="/product-page">
+                  <Link href="/product-page">
                     <img src={elem?.img} className="img-fluid" alt="" />
                     <div className="card_name">
                       <h4>Decoration</h4>
                       <p>start from INR 2999</p>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               ))}
             </Slider>

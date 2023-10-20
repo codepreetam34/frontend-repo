@@ -4,7 +4,7 @@ import {
   GET_PRODUCTS_LIST,
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_LIST_BY_CATEGORY_ID,
-  GET_PRODUCTS_LIST_BY_CATEGORY_ID_AND_TAGS,
+  GET_PRODUCTS_LIST_BY_CATEGORY_ID_AND_TAGS, GET_PRODUCTS_LIST_BY_SORTING
 } from "./type";
 
 export const getProductPageDetail = createAsyncThunk(
@@ -39,6 +39,20 @@ export const getProductByCategoryIdAndTags = createAsyncThunk(
     try {
       const response = await axiosInstance.post(
         `api/product/getProductsByTagName`,
+        payload
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
+export const getProductsBySorting = createAsyncThunk(
+  GET_PRODUCTS_LIST_BY_SORTING,
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(
+        `api/product/getProductsBySorting`,
         payload
       );
       return response.data;

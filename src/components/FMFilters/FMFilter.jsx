@@ -1,11 +1,13 @@
 import { Grid } from "@mui/material";
-import { getProductByCategoryIdAndTags } from "Redux/Slices/ProductPage/ProductsPageSlice";
+import { getProductByCategoryIdAndTags, getProductsBySorting } from "Redux/Slices/ProductPage/ProductsPageSlice";
 import FMButton from "components/FMButton/FMButton";
 import FMDropdown from "components/FMDropdown/FMDropdown";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const FMFilter = ({
+  pageInfo,
   setCategoryId,
+  tagName,
   setIsLoading,
   switchProducts,
   setPageTitle,
@@ -13,7 +15,24 @@ const FMFilter = ({
 }) => {
   const dispatch = useDispatch();
   const sortByOptionsChangeHandler = (e) => {
-    console.log("departmentId: ", e.target.value);
+
+    const payload = {
+      sort: e.target.value,
+      pageInfo,
+      categoryId,
+      tagName
+    };
+    dispatch(getProductsBySorting(payload))
+      .then((response) => {
+        setIsLoading(false);
+        switchProducts(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
   const tagOptionsChangeHandler = (tag) => {
     const payload = {
@@ -95,6 +114,7 @@ const FMFilter = ({
                   variant={"outlined"}
                   styleData={{
                     border: "1px solid #E6E6E6",
+                    fontWeight: '600',
                     borderRadius: "19px",
                     "&:hover": {
                       border: "1px solid #E6E6E6",

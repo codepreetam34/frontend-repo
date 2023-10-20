@@ -90,7 +90,7 @@ const CategoryPage = () => {
               displayText={
                 categoryProducts?.length
                   ? `(${categoryProducts?.length} Products)`
-                  : "0 Product"
+                  : "(0 Product)"
               }
               styleData={{
                 fontWeight: "300",
@@ -104,6 +104,7 @@ const CategoryPage = () => {
 
         <Box>
           <FMFilter
+            pageInfo={"categoryPage"}
             setCategoryId={setCategoryId}
             setIsLoading={setIsLoading}
             switchProducts={switchProducts}
@@ -161,7 +162,7 @@ const CategoryPage = () => {
                   />
                   <FMTypography
                     displayText={Math.round(elem?.rating * 10) / 10}
-                    styleData={{ color: "#FFFFFF", fontSize: "12px" }}
+                    styleData={{ color: "#FFFFFF", fontSize: "12px", fontWeight: "600" }}
                   />
                 </Box>
                 <Card sx={{ width: "283px", borderRadius: "20px" }}>
@@ -178,7 +179,8 @@ const CategoryPage = () => {
                         gutterBottom
                         variant="h5"
                         component="div"
-                        sx={{ fontSize: "18px", color: "#222222" }}
+
+                        sx={{ fontSize: "18px", color: "#222222", fontWeight: "300" }}
                       >
                         {elem?.name}
                       </Typography>
@@ -191,7 +193,7 @@ const CategoryPage = () => {
                           sx={{
                             fontSize: "14px",
                             color: "#000000",
-                            marginLeft: ".5rem",
+                            marginLeft: ".5rem", fontWeight: "600"
                           }}
                         >
                           ₹ {elem?.discountPrice}
@@ -203,10 +205,10 @@ const CategoryPage = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Typography variant="body2" sx={{ color: "#717171" }}>
+                        <Typography variant="body2" sx={{ color: "#717171", fontWeight: "300", textTransform: 'capitalize' }}>
                           {elem?.deliveryDay}
                         </Typography>
-                        <Typography variant="body2" sx={{ color: "#008539" }}>
+                        <Typography variant="body2" sx={{ color: "#008539", fontWeight: "300" }}>
                           Reviews {elem?.numReviews}
                         </Typography>
                       </Box>
