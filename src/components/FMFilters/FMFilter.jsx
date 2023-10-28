@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const FMFilter = ({
   pageInfo,
+  pincodeData,
   setCategoryId,
   tagName,
   sendCategoryId,
@@ -22,7 +23,8 @@ const FMFilter = ({
       sort: e.target.value,
       pageInfo,
       categoryId: sendCategoryId,
-      tagName
+      tagName,
+      pincodeData
     };
     dispatch(getProductsBySorting(payload))
       .then((response) => {
@@ -40,6 +42,7 @@ const FMFilter = ({
     const payload = {
       tagName: tag,
       categoryId: sendCategoryId,
+      pincodeData
     };
 
     dispatch(getProductByCategoryIdAndTags(payload))

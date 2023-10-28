@@ -55,6 +55,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { ADD_TO_CART } from "Routes/Routes";
 import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
 import Footer from "components/Footer/Footer";
+import Layout from "components/Layout";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -173,13 +174,25 @@ const ProductDetail = () => {
   // useEffect(()=>{
 
   // })
+  const [showArea, setShowArea] = useState(false);
 
   const getDataFunc = (data) => {
-    setPincodeData(data);
-    if (data?.pincode.length === 6) {
+    if (data?.pincode.length === 6 && data?.pincode.length > 0) {
+      console.log("if ", data)
+      setPincodeData(data);
       setDisabledDate(false);
+      // Show area when a valid PIN code is entered
+      setShowArea(true);
+    } else {
+      console.log("else ", data)
+      setPincodeData(null);
+      setDisabledDate(true);
+      // Hide area when the PIN code is not valid or empty
+      setShowArea(false);
     }
   };
+
+
 
   const reviewNavHandler = () => {
     navigate(`/add-review/${pId}`, {
@@ -230,431 +243,436 @@ const ProductDetail = () => {
   const handleTimeChange = (e) => {
     setSelectedTime(e.target.value);
   };
+  const title = productDetailedData?.name || "Vibezter";
+  const description = 'This is the home page of our MERN application.';
+
+
   return (
     <>
-      <Header />
-      <Container>
-        <Grid sx={{ display: "flex" }}>
-          <Row>
-            <Col style={{ display: "flex" }}>
-              <ImageGallery {...properties} />
-            </Col>
+      <Layout title={title} description={description}>
+        <Header />
+        <Container>
+          <Grid sx={{ display: "flex" }}>
+            <Row>
+              <Col style={{ display: "flex" }}>
+                <ImageGallery {...properties} />
+              </Col>
 
-            {/* info box right */}
-            <Col
-              // xs={6}
-              component="form"
-              className="right-info-box"
-              // style={{ marginLeft: "3.125rem" }}
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <FMTypography
-                displayText={productDetailedData?.name}
-                styleData={{ fontSize: "40px", fontWeight: "600" }}
-              />
-
-              <Box sx={{ display: "flex" }}>
-                <Box
-                  sx={{
-                    backgroundColor: "#008539",
-                    display: "flex",
-                    padding: ".5rem",
-                    width: "auto",
-                    borderRadius: "4px",
-                  }}
-                >
-                  <img
-                    src={ratingStart}
-                    alt="rating-star"
-                    style={{ width: "14px" }}
-                  />
-                  <FMTypography
-                    displayText={
-                      Math.round(productDetailedData?.rating * 10) / 10
-                    }
-                    styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                  />
-                </Box>
-                <FMButton
-                  displayText={`Reviews ${productDetailedData?.numReviews}`}
-                  variant={"outlined"}
-                  styleData={{
-                    textDecoration: "underline",
-                    lineHeight: "0.3px",
-                    textTransform: "capitalize",
-                    color: "#717171",
-                    border: "none",
-                    fontSize: "18px",
-                    "&:hover": {
-                      border: "none",
-                      backgroundColor: "white",
-                      textDecoration: "underline",
-                    },
-                  }}
-                />
-              </Box>
-              {/* price below */}
-              <Box sx={{ display: "flex" }}>
-                <del
-                  style={{
-                    fontSize: "24px",
-                    color: "#717171",
-                    paddingTop: ".5rem",
-                  }}
-                >
-                  ₹ {productDetailedData?.actualPrice}
-                </del>
-                <Typography
-                  sx={{
-                    fontSize: "32px",
-                    color: "#000000",
-                    marginLeft: "1rem",
-                  }}
-                >
-                  ₹ {productQuantity == "0.5 Kg" ? productDetailedData?.halfkgprice : productQuantity == "1 Kg" ? productDetailedData?.onekgprice : productQuantity == "2 Kg" ? productDetailedData?.twokgprice : productDetailedData?.discountPrice}
-                </Typography>
-
+              {/* info box right */}
+              <Col
+                // xs={6}
+                component="form"
+                className="right-info-box"
+                // style={{ marginLeft: "3.125rem" }}
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <FMTypography
-                  displayText={`${productDetailedData?.offer}% OFF`}
-                  styleData={{
-                    color: "#008539",
-                    fontSize: "18px",
-                    marginLeft: "1rem",
-                    paddingTop: ".7rem",
-                  }}
+                  displayText={productDetailedData?.name}
+                  styleData={{ fontSize: "40px", fontWeight: "600" }}
                 />
-              </Box>
 
-              {/* weight radio */}
-              {(categoryName && categoryName?.toLowerCase() === "cakes") ? (
-                <Box sx={{ marginTop: "17px" }}>
-                  <FMRadioButtons
-                    formLabel="Select Weight"
-                    radioButtons={createUserOptions}
-                    onChecked={(option) =>
-                      handleWeightChange(option)
-
-                      // option === "0.5 Kg"
-                      //   ? setProductQuantity("0.5 Kg")
-                      //   : option === "1 Kg"
-                      //     ? setProductQuantity("1 Kg")
-                      //     : setProductQuantity("2 Kg")
-                    }
-                    formLabelStyling={{
-                      radioButtonStyle: {
-                        fontWeight: "600",
-                        lineHeight: "1.3125rem",
-                        fontSize: "0.875rem",
-                        // color: `BLACK !important`,
-                        color: "black !important",
+                <Box sx={{ display: "flex" }}>
+                  <Box
+                    sx={{
+                      backgroundColor: "#008539",
+                      display: "flex",
+                      padding: ".5rem",
+                      width: "auto",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    <img
+                      src={ratingStart}
+                      alt="rating-star"
+                      style={{ width: "14px" }}
+                    />
+                    <FMTypography
+                      displayText={
+                        Math.round(productDetailedData?.rating * 10) / 10
+                      }
+                      styleData={{ color: "#FFFFFF", fontSize: "12px" }}
+                    />
+                  </Box>
+                  <FMButton
+                    displayText={`Reviews ${productDetailedData?.numReviews}`}
+                    variant={"outlined"}
+                    styleData={{
+                      textDecoration: "underline",
+                      lineHeight: "0.3px",
+                      textTransform: "capitalize",
+                      color: "#717171",
+                      border: "none",
+                      fontSize: "18px",
+                      "&:hover": {
+                        border: "none",
+                        backgroundColor: "white",
+                        textDecoration: "underline",
                       },
                     }}
-                    labelStyle={{
-                      color: "black !important",
-                      fontSize: "20px !important",
-                      fontWeight: "500 !important",
-                    }}
-                    value={productQuantity}
-                    required={true}
                   />
                 </Box>
-              ) : <></>}
+                {/* price below */}
+                <Box sx={{ display: "flex" }}>
+                  <del
+                    style={{
+                      fontSize: "24px",
+                      color: "#717171",
+                      paddingTop: ".5rem",
+                    }}
+                  >
+                    ₹ {productDetailedData?.actualPrice}
+                  </del>
+                  <Typography
+                    sx={{
+                      fontSize: "32px",
+                      color: "#000000",
+                      marginLeft: "1rem",
+                    }}
+                  >
+                    ₹ {productQuantity == "0.5 Kg" ? productDetailedData?.halfkgprice : productQuantity == "1 Kg" ? productDetailedData?.onekgprice : productQuantity == "2 Kg" ? productDetailedData?.twokgprice : productDetailedData?.discountPrice}
+                  </Typography>
 
-              {/* pincode and date selector */}
-              <Box sx={{ marginTop: "1rem", display: "flex" }}>
-                <Box>
-                  <Pincode
-                    showCity={false}
-                    showDistrict={false}
-                    showState={false}
-                    invalidError="Please check pincode"
-                    // lengthError="check length"
-                    // lengthError={() => console.log("hellooooooo")}
-                    // getData={(data) => {
-                    //   setPincodeData(data);
-                    // }}
-                    getData={getDataFunc}
-                    showArea={pincodeData ? true : false}
-                    pincodeInput={{
-                      borderRadius: "10px",
-                      width: "215px",
-                      border: "1px solid grey",
-                      height: "55px",
-                      padding: "16.5px 14px",
-                      marginRight: "1.7rem",
-                    }}
-                    areaInput={{
-                      backgroundColor: "white",
-                      border: "none",
-                      color: "red",
-                      fontSize: "12px",
+                  <FMTypography
+                    displayText={`${productDetailedData?.offer}% OFF`}
+                    styleData={{
+                      color: "#008539",
+                      fontSize: "18px",
+                      marginLeft: "1rem",
+                      paddingTop: ".7rem",
                     }}
                   />
                 </Box>
-                {/* <FMTypography
-                styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
-                displayText={errors.pinCode?.message}
-              /> */}
-                <Box>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DesktopDatePicker
-                      // label="Date desktop"
-                      // disabled={disabledDate}
-                      disablePast
-                      inputFormat="DD/MM/YYYY"
-                      value={date}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
-                      className="datePickerStyle"
-                      sx={{ height: "48px" }}
-                    />
-                  </LocalizationProvider>
-                </Box>
-              </Box>
-              {/* msg box */}
-              {categoryName?.toLowerCase() === "cakes" ?
-                (
-                  <Box sx={{ display: "flex", marginTop: "1rem" }}>
+
+                {/* weight radio */}
+                {(categoryName && categoryName?.toLowerCase() === "cakes") ? (
+                  <Box sx={{ marginTop: "17px" }}>
                     <FMRadioButtons
-                      radioButtons={egglessOrNot}
+                      formLabel="Select Weight"
+                      radioButtons={createUserOptions}
                       onChecked={(option) =>
-                        option === "Eggless"
-                          ? setEggOrNot("Eggless")
-                          : setEggOrNot("With Egg")
+                        handleWeightChange(option)
+
+                        // option === "0.5 Kg"
+                        //   ? setProductQuantity("0.5 Kg")
+                        //   : option === "1 Kg"
+                        //     ? setProductQuantity("1 Kg")
+                        //     : setProductQuantity("2 Kg")
                       }
                       formLabelStyling={{
                         radioButtonStyle: {
                           fontWeight: "600",
                           lineHeight: "1.3125rem",
                           fontSize: "0.875rem",
-                          color: BLACK,
+                          // color: `BLACK !important`,
+                          color: "black !important",
                         },
                       }}
-                      value={eggOrNot}
-                      required={false}
-                    />
-                    <InputBase
-                      required
-                      id="text"
-                      name="text"
-                      placeholder="Message on Cake"
-                      sx={{
-                        ...commonStyle.inputFieldStyle,
-                        width: "215px",
-                        marginLeft: "1rem",
-
-                        ...(errors.cakeMessage && commonStyle.errorStyle),
+                      labelStyle={{
+                        color: "black !important",
+                        fontSize: "20px !important",
+                        fontWeight: "500 !important",
                       }}
-                      {...register("cakeMessage")}
-                      error={errors.cakeMessage ? true : false}
+                      value={productQuantity}
+                      required={true}
                     />
                   </Box>
                 ) : <></>}
 
-              {/* delivery type */}
-              <Box>
-                <FMTypography
-                  displayText={"Select Delivery Type"}
-                  styleData={{
-                    fontSize: "20px",
-                    fontWeight: "500",
-                    marginTop: "1rem",
-                    marginBottom: "1rem",
-                  }}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    padding: "8px 16px",
-                    border: "1px solid #E6E6E6",
-                    borderRadius: "10px",
-                  }}
-                  {...register("cakeMessage")}
-                  error={errors.cakeMessage ? true : false}
-                >
-                  <Box
-                    sx={{
-                      width: "132px",
-                      height: "48px",
-                      left: "843px",
-                      top: "703px",
-                      backgroundColor: standardActive ? "#E6E6E6" : "white",
-                      borderRadius: "100px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cursor: isTodaysDate ? "not-allowed" : "pointer", // Change cursor style
-                      border: "1px solid #E6E6E6",
-                      "&:hover": {
-                        border: isTodaysDate ? "1px solid #E6E6E6" : "1px solid black", // Adjust border on hover
-                      },
-                      opacity: isTodaysDate ? 0.5 : 1, // Adjust opacity for disabled state
-                    }}
-                    onClick={() => {
-                      if (!isTodaysDate) {
-                        setDeliveryTime(StandardDelivery);
-                        setStandardActive(!standardActive);
-                        setMidNightActive(false);
-                        setFixedActive(false);
-                      }
-                    }}
-                  >
-                    <FMTypography displayText={"Standard"} styleData={{ fontSize: "12px" }} />
-                    <FMTypography
-                      displayText={"(Free)"}
-                      styleData={{ fontSize: "10px", color: "#178013" }}
+                {/* pincode and date selector */}
+                <Box sx={{ marginTop: "1rem", display: "flex" }}>
+                  <Box>
+                    <Pincode
+                      showCity={false}
+                      showDistrict={false}
+                      showState={false}
+                      invalidError="Please check pincode"
+                      // lengthError="check length"
+                      // lengthError={() => console.log("hellooooooo")}
+                      // getData={(data) => {
+                      //   setPincodeData(data);
+                      // }}
+                      getData={getDataFunc}
+                      showArea={showArea}
+                      pincodeInput={{
+                        borderRadius: "10px",
+                        width: "215px",
+                        border: "1px solid grey",
+                        height: "55px",
+                        padding: "16.5px 14px",
+                        marginRight: "1.7rem",
+                      }}
+                      areaInput={{
+                        backgroundColor: "white",
+                        border: "none",
+                        color: "red",
+                        fontSize: "12px",
+                      }}
                     />
                   </Box>
-
-
-                  <Box
-                    sx={{
-                      width: "132px",
-                      height: "48px",
-                      left: "843px",
-                      top: "703px",
-                      backgroundColor: fixedActive ? "#E6E6E6" : "white",
-                      borderRadius: "100px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cursor: "pointer",
-                      border: "1px solid #E6E6E6",
-                      "&:hover": { border: "1px solid black" },
-                    }}
-                    onClick={() => {
-                      setDeliveryTime(FixedDelivery);
-                      setFixedActive(!fixedActive);
-                      setMidNightActive(false);
-                      setStandardActive(false);
-                    }}
-                  >
-                    <FMTypography
-                      displayText={"Fixed time"}
-                      styleData={{ fontSize: "12px" }}
-                    />
-                    <FMTypography
-                      displayText={"₹ 200"}
-                      styleData={{ fontSize: "10px", color: "#178013" }}
-                    />
-                  </Box>
-
-                  <Box
-                    sx={{
-                      width: "132px",
-                      height: "48px",
-                      left: "843px",
-                      top: "703px",
-                      backgroundColor: midNightActive ? "#E6E6E6" : "white",
-                      borderRadius: "100px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cursor: "pointer",
-                      border: "1px solid #E6E6E6",
-                      "&:hover": { border: "1px solid black" },
-                    }}
-                    onClick={() => {
-                      setDeliveryTime(ExpressDelivery);
-                      setMidNightActive(!midNightActive);
-                      setStandardActive(false);
-                      setFixedActive(false);
-                    }}
-                  >
-                    <FMTypography
-                      displayText={"Mid night"}
-                      styleData={{ fontSize: "12px" }}
-                    />
-                    <FMTypography
-                      displayText={"₹ 250"}
-                      styleData={{ fontSize: "10px", color: "#178013" }}
-                    />
+                  {/* <FMTypography
+                styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
+                displayText={errors.pinCode?.message}
+              /> */}
+                  <Box>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DesktopDatePicker
+                        // label="Date desktop"
+                        disabled={disabledDate}
+                        disablePast
+                        inputFormat="DD/MM/YYYY"
+                        value={date}
+                        onChange={handleChange}
+                        renderInput={(params) => <TextField {...params} />}
+                        className="datePickerStyle"
+                        sx={{ height: "48px" }}
+                      />
+                    </LocalizationProvider>
                   </Box>
                 </Box>
-              </Box>
-              {deliveryTime ?
+                {/* msg box */}
+                {categoryName?.toLowerCase() === "cakes" ?
+                  (
+                    <Box sx={{ display: "flex", marginTop: "1rem" }}>
+                      <FMRadioButtons
+                        radioButtons={egglessOrNot}
+                        onChecked={(option) =>
+                          option === "Eggless"
+                            ? setEggOrNot("Eggless")
+                            : setEggOrNot("With Egg")
+                        }
+                        formLabelStyling={{
+                          radioButtonStyle: {
+                            fontWeight: "600",
+                            lineHeight: "1.3125rem",
+                            fontSize: "0.875rem",
+                            color: BLACK,
+                          },
+                        }}
+                        value={eggOrNot}
+                        required={false}
+                      />
+                      <InputBase
+                        required
+                        id="text"
+                        name="text"
+                        placeholder="Message on Cake"
+                        sx={{
+                          ...commonStyle.inputFieldStyle,
+                          width: "215px",
+                          marginLeft: "1rem",
+
+                          ...(errors.cakeMessage && commonStyle.errorStyle),
+                        }}
+                        {...register("cakeMessage")}
+                        error={errors.cakeMessage ? true : false}
+                      />
+                    </Box>
+                  ) : <></>}
+
+                {/* delivery type */}
                 <Box>
-
-                  <FMDropdown
-                    options={deliveryTime}
-                    name="deliveryTime"
-                    id="deliveryTime"
-                    onChange={handleTimeChange}
-                    sx={{
-                      ...commonStyle.dropdownStyle,
-                      width: "215px",
+                  <FMTypography
+                    displayText={"Select Delivery Type"}
+                    styleData={{
+                      fontSize: "20px",
+                      fontWeight: "500",
                       marginTop: "1rem",
-
+                      marginBottom: "1rem",
                     }}
-                    defaultValue={deliveryTime[0].label}
                   />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "8px 16px",
+                      border: "1px solid #E6E6E6",
+                      borderRadius: "10px",
+                    }}
+                    {...register("cakeMessage")}
+                    error={errors.cakeMessage ? true : false}
+                  >
+                    <Box
+                      sx={{
+                        width: "132px",
+                        height: "48px",
+                        left: "843px",
+                        top: "703px",
+                        backgroundColor: standardActive ? "#E6E6E6" : "white",
+                        borderRadius: "100px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        cursor: isTodaysDate ? "not-allowed" : "pointer", // Change cursor style
+                        border: "1px solid #E6E6E6",
+                        "&:hover": {
+                          border: isTodaysDate ? "1px solid #E6E6E6" : "1px solid black", // Adjust border on hover
+                        },
+                        opacity: isTodaysDate ? 0.5 : 1, // Adjust opacity for disabled state
+                      }}
+                      onClick={() => {
+                        if (!isTodaysDate) {
+                          setDeliveryTime(StandardDelivery);
+                          setStandardActive(!standardActive);
+                          setMidNightActive(false);
+                          setFixedActive(false);
+                        }
+                      }}
+                    >
+                      <FMTypography displayText={"Standard"} styleData={{ fontSize: "12px" }} />
+                      <FMTypography
+                        displayText={"(Free)"}
+                        styleData={{ fontSize: "10px", color: "#178013" }}
+                      />
+                    </Box>
+
+
+                    <Box
+                      sx={{
+                        width: "132px",
+                        height: "48px",
+                        left: "843px",
+                        top: "703px",
+                        backgroundColor: fixedActive ? "#E6E6E6" : "white",
+                        borderRadius: "100px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        border: "1px solid #E6E6E6",
+                        "&:hover": { border: "1px solid black" },
+                      }}
+                      onClick={() => {
+                        setDeliveryTime(FixedDelivery);
+                        setFixedActive(!fixedActive);
+                        setMidNightActive(false);
+                        setStandardActive(false);
+                      }}
+                    >
+                      <FMTypography
+                        displayText={"Fixed time"}
+                        styleData={{ fontSize: "12px" }}
+                      />
+                      <FMTypography
+                        displayText={"₹ 200"}
+                        styleData={{ fontSize: "10px", color: "#178013" }}
+                      />
+                    </Box>
+
+                    <Box
+                      sx={{
+                        width: "132px",
+                        height: "48px",
+                        left: "843px",
+                        top: "703px",
+                        backgroundColor: midNightActive ? "#E6E6E6" : "white",
+                        borderRadius: "100px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        border: "1px solid #E6E6E6",
+                        "&:hover": { border: "1px solid black" },
+                      }}
+                      onClick={() => {
+                        setDeliveryTime(ExpressDelivery);
+                        setMidNightActive(!midNightActive);
+                        setStandardActive(false);
+                        setFixedActive(false);
+                      }}
+                    >
+                      <FMTypography
+                        displayText={"Mid night"}
+                        styleData={{ fontSize: "12px" }}
+                      />
+                      <FMTypography
+                        displayText={"₹ 250"}
+                        styleData={{ fontSize: "10px", color: "#178013" }}
+                      />
+                    </Box>
+                  </Box>
                 </Box>
-                : <></>
-              }
-              {/* cart and buy btns */}
-              <Box sx={{ marginTop: "50px" }}>
-                <FMButton
-                  displayText={"Add To Cart"}
-                  variant="outlined"
-                  styleData={{
-                    borderRadius: "10px",
-                    border: "1px solid #E6E6E6",
-                    width: "215px",
-                    color: "black",
-                    fontWeight: "600",
-                    fontSize: "1rem",
-                    textTransform: "capitalize",
-                    marginRight: "27px",
-                    "&:hover": {
-                      border: "1px solid black",
-                      backgroundColor: "white",
-                    },
-                  }}
-                  // onClick={tempSub}
-                  onClick={handleSubmit(onSubmit)}
-                />
-                <FMButton
-                  displayText={"Buy Now"}
-                  variant={"contained"}
-                  styleData={{
-                    ...commonStyle.buttonStyles,
-                    width: "215px",
-                  }}
-                />
-                <input type={"submit"} hidden />
-              </Box>
+                {deliveryTime ?
+                  <Box>
 
-              {/* prod desc */}
-              <Box sx={{ marginTop: "50px" }}>
-                <FMTypography
-                  displayText={"Product Description"}
-                  styleData={{ fontSize: "20px", fontWeight: "500" }}
-                />
-                <p
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: "300",
-                    color: "#717171",
-                  }}
-                >
-                  {productDetailedData?.description}
-                </p>
-              </Box>
+                    <FMDropdown
+                      options={deliveryTime}
+                      name="deliveryTime"
+                      id="deliveryTime"
+                      onChange={handleTimeChange}
+                      sx={{
+                        ...commonStyle.dropdownStyle,
+                        width: "215px",
+                        marginTop: "1rem",
 
-              {/* reviews scrolls */}
+                      }}
+                      defaultValue={deliveryTime[0].label}
+                    />
+                  </Box>
+                  : <></>
+                }
+                {/* cart and buy btns */}
+                <Box sx={{ marginTop: "50px" }}>
+                  <FMButton
+                    displayText={"Add To Cart"}
+                    variant="outlined"
+                    styleData={{
+                      borderRadius: "10px",
+                      border: "1px solid #E6E6E6",
+                      width: "215px",
+                      color: "black",
+                      fontWeight: "600",
+                      fontSize: "1rem",
+                      textTransform: "capitalize",
+                      marginRight: "27px",
+                      "&:hover": {
+                        border: "1px solid black",
+                        backgroundColor: "white",
+                      },
+                    }}
+                    // onClick={tempSub}
+                    onClick={handleSubmit(onSubmit)}
+                  />
+                  <FMButton
+                    displayText={"Buy Now"}
+                    variant={"contained"}
+                    styleData={{
+                      ...commonStyle.buttonStyles,
+                      width: "215px",
+                    }}
+                  />
+                  <input type={"submit"} hidden />
+                </Box>
 
-              {/* right box end below */}
-            </Col>
-          </Row>
-        </Grid>
-      </Container >
+                {/* prod desc */}
+                <Box sx={{ marginTop: "50px" }}>
+                  <FMTypography
+                    displayText={"Product Description"}
+                    styleData={{ fontSize: "20px", fontWeight: "500" }}
+                  />
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: "300",
+                      color: "#717171",
+                    }}
+                  >
+                    {productDetailedData?.description}
+                  </p>
+                </Box>
 
-      {/*review col start */}
-      {/* <Grid sx={{ padding: "50px 100px" }}>
+                {/* reviews scrolls */}
+
+                {/* right box end below */}
+              </Col>
+            </Row>
+          </Grid>
+        </Container >
+
+        {/*review col start */}
+        {/* <Grid sx={{ padding: "50px 100px" }}>
         <Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box sx={{ display: "flex" }}>
@@ -784,60 +802,145 @@ const ProductDetail = () => {
           )}
         </Box>
       </Grid> */}
-      <Grid sx={{ padding: "0 100px" }}>
-        <Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Box sx={{ display: "flex" }}>
-              <img
-                src={reviewBlackStar}
-                alt="star"
-                style={{ paddingBottom: "19px" }}
-              />
-              <FMTypography
-                displayText={Math.round(productDetailedData?.rating * 10) / 10}
-                styleData={{ fontSize: "20px", paddingTop: "6px" }}
-              />
-              <FMButton
-                displayText={`${productDetailedData?.numReviews} Reviews `}
-                variant={"outlined"}
-                styleData={{
-                  textDecoration: "underline",
-                  fontWeight: "500",
-                  textTransform: "capitalize",
-                  color: "#222222",
-                  border: "none",
-                  fontSize: "20px",
-                  marginBottom: "1rem",
-                  "&:hover": {
-                    border: "none",
-                    backgroundColor: "white",
+        <Grid sx={{ padding: "0 100px" }}>
+          <Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box sx={{ display: "flex" }}>
+                <img
+                  src={reviewBlackStar}
+                  alt="star"
+                  style={{ paddingBottom: "19px" }}
+                />
+                <FMTypography
+                  displayText={Math.round(productDetailedData?.rating * 10) / 10}
+                  styleData={{ fontSize: "20px", paddingTop: "6px" }}
+                />
+                <FMButton
+                  displayText={`${productDetailedData?.numReviews} Reviews `}
+                  variant={"outlined"}
+                  styleData={{
                     textDecoration: "underline",
-                  },
-                }}
-              />
-            </Box>
-            <Box>
-              <FMButton
-                displayText={"Rate Product"}
-                variant="outlined"
-                styleData={{
-                  border: "1px solid #E6E6E6",
-                  borderRadius: "10px",
-                  textTransform: "capitalize",
-                  color: "black",
-                  fontWeight: "600",
-
-                  "&:hover": {
-                    backgroundColor: "white",
+                    fontWeight: "500",
+                    textTransform: "capitalize",
+                    color: "#222222",
+                    border: "none",
+                    fontSize: "20px",
+                    marginBottom: "1rem",
+                    "&:hover": {
+                      border: "none",
+                      backgroundColor: "white",
+                      textDecoration: "underline",
+                    },
+                  }}
+                />
+              </Box>
+              <Box>
+                <FMButton
+                  displayText={"Rate Product"}
+                  variant="outlined"
+                  styleData={{
                     border: "1px solid #E6E6E6",
-                  },
-                }}
-                onClick={reviewNavHandler}
-              />
-            </Box>
-          </Box>
+                    borderRadius: "10px",
+                    textTransform: "capitalize",
+                    color: "black",
+                    fontWeight: "600",
 
-          {reviewsCarouselData && (
+                    "&:hover": {
+                      backgroundColor: "white",
+                      border: "1px solid #E6E6E6",
+                    },
+                  }}
+                  onClick={reviewNavHandler}
+                />
+              </Box>
+            </Box>
+
+            {reviewsCarouselData && (
+              <Carousel
+                showDots={false}
+                deviceType={responsive.deviceType}
+                // arrows={false}
+                autoPlay={responsive.deviceType !== "mobile" ? true : false}
+                ssr
+                slidesToSlide={1}
+                containerClass="carousel-with-custom-dots"
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                responsive={responsive}
+                partialVisible
+                infinite
+              // customDot={<CustomDot />}
+              >
+                {reviewsCarouselData?.map((elem) => (
+                  <Box style={{ paddingBottom: "1rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        border: "1px solid #E6E6E6",
+                        // margin: "0 1rem",
+                        borderRadius: "20px",
+                        width: "283px",
+                        padding: "24px",
+                      }}
+                    >
+                      <Stack
+                        direction="row"
+                        spacing={2}
+                        sx={{ margin: " 0 12px" }}
+                      >
+                        <Avatar src="/broken-image.jpg" />
+                      </Stack>
+                      <Box>
+                        <FMTypography displayText={elem?.name} />
+                        <Box sx={{ display: "flex" }}>
+                          <FMTypography
+                            displayText={moment(elem?.createdAt).format(
+                              "DD.MM.YYYY"
+                            )}
+                          />
+                          <Box
+                            sx={{
+                              backgroundColor: "#008539",
+                              display: "flex",
+                              padding: ".3rem .5rem",
+                              width: "auto",
+                              marginLeft: "1rem",
+                              borderRadius: "4px",
+                            }}
+                          >
+                            <img
+                              src={ratingStart}
+                              alt="rating-star"
+                              style={{ width: "14px" }}
+                            />
+                            <FMTypography
+                              displayText={
+                                Math.round(productDetailedData?.rating * 10) / 10
+                              }
+                              styleData={{ color: "#FFFFFF", fontSize: "12px" }}
+                            />
+                          </Box>
+                        </Box>
+
+                        <p style={{ marginTop: "15px" }}>{elem?.comment}</p>
+                      </Box>
+                    </Box>
+                  </Box>
+                ))}
+              </Carousel>
+            )}
+          </Box>
+        </Grid>
+        {/* moere suggestions */}
+        <Grid sx={{ padding: "80px 0" }}>
+          <FMTypography
+            displayText={"You may also Like"}
+            styleData={{
+              textAlign: "center",
+              fontWeight: "600",
+              fontSize: "40px",
+            }}
+          />
+          {similarProductDetailedData && (
             <Carousel
               showDots={false}
               deviceType={responsive.deviceType}
@@ -852,182 +955,98 @@ const ProductDetail = () => {
               infinite
             // customDot={<CustomDot />}
             >
-              {reviewsCarouselData?.map((elem) => (
-                <Box style={{ paddingBottom: "1rem" }}>
+              {similarProductDetailedData?.map((elem) => (
+                <Grid
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    flexBasis: "33.333333%",
+                    justifyContent: "space-evenly",
+                    padding: "0px 0px 10px 0px",
+                  }}
+                >
                   <Box
-                    sx={{
-                      display: "flex",
-                      border: "1px solid #E6E6E6",
-                      // margin: "0 1rem",
-                      borderRadius: "20px",
-                      width: "283px",
-                      padding: "24px",
-                    }}
+                  //  onClick={() => onCardClick(elem)}
                   >
-                    <Stack
-                      direction="row"
-                      spacing={2}
-                      sx={{ margin: " 0 12px" }}
+                    <Box
+                      sx={{
+                        backgroundColor: "#008539",
+                        display: "flex",
+                        padding: ".5rem",
+                        width: "fit-content",
+                        position: "relative",
+                        top: "3.1rem",
+                        left: "14rem",
+                        zIndex: "111",
+                        borderRadius: "4px",
+                      }}
                     >
-                      <Avatar src="/broken-image.jpg" />
-                    </Stack>
-                    <Box>
-                      <FMTypography displayText={elem?.name} />
-                      <Box sx={{ display: "flex" }}>
-                        <FMTypography
-                          displayText={moment(elem?.createdAt).format(
-                            "DD.MM.YYYY"
-                          )}
-                        />
-                        <Box
-                          sx={{
-                            backgroundColor: "#008539",
-                            display: "flex",
-                            padding: ".3rem .5rem",
-                            width: "auto",
-                            marginLeft: "1rem",
-                            borderRadius: "4px",
-                          }}
-                        >
-                          <img
-                            src={ratingStart}
-                            alt="rating-star"
-                            style={{ width: "14px" }}
-                          />
-                          <FMTypography
-                            displayText={
-                              Math.round(productDetailedData?.rating * 10) / 10
-                            }
-                            styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                          />
-                        </Box>
-                      </Box>
-
-                      <p style={{ marginTop: "15px" }}>{elem?.comment}</p>
+                      <img
+                        src={ratingStart}
+                        alt="rating-star"
+                        style={{ width: "14px" }}
+                      />
+                      <FMTypography
+                        displayText={Math.round(elem?.rating * 10) / 10}
+                        styleData={{ color: "#FFFFFF", fontSize: "12px" }}
+                      />
                     </Box>
+                    <Card sx={{ width: "283px", borderRadius: "20px" }}>
+                      <CardActionArea>
+                        <CardMedia
+                          component="img"
+                          height="283"
+                          width="283"
+                          image={elem?.productPictures[0]?.img}
+                          alt="green iguana"
+                        />
+                        <CardContent>
+                          <Typography
+                            gutterBottom
+                            variant="h5"
+                            component="div"
+                            sx={{ fontSize: "18px", color: "#222222" }}
+                          >
+                            {elem?.name}
+                          </Typography>
+                          <span style={{ display: "flex" }}>
+                            <del style={{ fontSize: "14px", color: "#717171" }}>
+                              ₹ {elem?.actualPrice}
+                            </del>
+                            <Typography
+                              sx={{
+                                fontSize: "14px",
+                                color: "#000000",
+                                marginLeft: ".5rem",
+                              }}
+                            >
+                              ₹ {elem?.discountPrice}
+                            </Typography>
+                          </span>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <Typography variant="body2" sx={{ color: "#717171" }}>
+                              {elem?.deliveryDay}
+                            </Typography>
+                            <Typography variant="body2" sx={{ color: "#008539" }}>
+                              Reviews {elem?.numReviews}
+                            </Typography>
+                          </Box>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
                   </Box>
-                </Box>
+                </Grid>
               ))}
             </Carousel>
           )}
-        </Box>
-      </Grid>
-      {/* moere suggestions */}
-      <Grid sx={{ padding: "80px 0" }}>
-        <FMTypography
-          displayText={"You may also Like"}
-          styleData={{
-            textAlign: "center",
-            fontWeight: "600",
-            fontSize: "40px",
-          }}
-        />
-        {similarProductDetailedData && (
-          <Carousel
-            showDots={false}
-            deviceType={responsive.deviceType}
-            // arrows={false}
-            autoPlay={responsive.deviceType !== "mobile" ? true : false}
-            ssr
-            slidesToSlide={1}
-            containerClass="carousel-with-custom-dots"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            responsive={responsive}
-            partialVisible
-            infinite
-          // customDot={<CustomDot />}
-          >
-            {similarProductDetailedData?.map((elem) => (
-              <Grid
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  flexBasis: "33.333333%",
-                  justifyContent: "space-evenly",
-                  padding: "0px 0px 10px 0px",
-                }}
-              >
-                <Box
-                //  onClick={() => onCardClick(elem)}
-                >
-                  <Box
-                    sx={{
-                      backgroundColor: "#008539",
-                      display: "flex",
-                      padding: ".5rem",
-                      width: "fit-content",
-                      position: "relative",
-                      top: "3.1rem",
-                      left: "14rem",
-                      zIndex: "111",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    <img
-                      src={ratingStart}
-                      alt="rating-star"
-                      style={{ width: "14px" }}
-                    />
-                    <FMTypography
-                      displayText={Math.round(elem?.rating * 10) / 10}
-                      styleData={{ color: "#FFFFFF", fontSize: "12px" }}
-                    />
-                  </Box>
-                  <Card sx={{ width: "283px", borderRadius: "20px" }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="283"
-                        width="283"
-                        image={elem?.productPictures[0]?.img}
-                        alt="green iguana"
-                      />
-                      <CardContent>
-                        <Typography
-                          gutterBottom
-                          variant="h5"
-                          component="div"
-                          sx={{ fontSize: "18px", color: "#222222" }}
-                        >
-                          {elem?.name}
-                        </Typography>
-                        <span style={{ display: "flex" }}>
-                          <del style={{ fontSize: "14px", color: "#717171" }}>
-                            ₹ {elem?.actualPrice}
-                          </del>
-                          <Typography
-                            sx={{
-                              fontSize: "14px",
-                              color: "#000000",
-                              marginLeft: ".5rem",
-                            }}
-                          >
-                            ₹ {elem?.discountPrice}
-                          </Typography>
-                        </span>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <Typography variant="body2" sx={{ color: "#717171" }}>
-                            {elem?.deliveryDay}
-                          </Typography>
-                          <Typography variant="body2" sx={{ color: "#008539" }}>
-                            Reviews {elem?.numReviews}
-                          </Typography>
-                        </Box>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Box>
-              </Grid>
-            ))}
-          </Carousel>
-        )}
-      </Grid>
-      <Footer />
+        </Grid>
+        <Footer />
+      </Layout>
     </>
   );
 };

@@ -14,7 +14,7 @@ import Header from "components/SearchBar/Header";
 import { getProductByCategoryId } from "Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FMFilter from "components/FMFilters/FMFilter";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getCategoryChildrens } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
 import Footer from "components/Footer/Footer";
@@ -31,7 +31,8 @@ const CategoryPage = () => {
   const [categoryId, setCategoryId] = useState(false); // New state for showing filters
   const [pageTitle, setPageTitle] = useState(false); // New state for showing filters
   const [displayedProducts, setDisplayedProducts] = useState(categoryProducts);
-
+  const location = useLocation();
+  const pincodeData = location?.state?.pincodeData;
   const onCardClick = (id) => {
     navigate(`/product-detail/${id}`);
   };
@@ -48,7 +49,10 @@ const CategoryPage = () => {
   }, [categoryId]);
 
   useEffect(() => {
-    dispatch(getProductByCategoryId(params))
+    const payload = {
+      id: params.id, pincodeData
+    }
+    dispatch(getProductByCategoryId(payload))
       .then((response) => {
         setPageTitle(response?.payload?.pageTitle);
         setCategoryId(response?.payload?.categoryId);
@@ -109,6 +113,7 @@ const CategoryPage = () => {
           <FMFilter
             pageInfo={"categoryPage"}
             setCategoryId={setCategoryId}
+            pincodeData={pincodeData}
             sendCategoryId={params.id}
             setIsLoading={setIsLoading}
             switchProducts={switchProducts}

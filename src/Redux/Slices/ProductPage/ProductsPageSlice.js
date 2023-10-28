@@ -25,7 +25,7 @@ export const getProductByCategoryId = createAsyncThunk(
     try {
       const response = await axiosInstance.post(
         "api/product/getProducts/categoryid",
-        { id: payload.id }
+        { id: payload.id, pincodeData: payload.pincodeData }
       );
       return response.data;
     } catch (error) {

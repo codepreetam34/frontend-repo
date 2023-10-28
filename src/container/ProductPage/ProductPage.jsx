@@ -21,6 +21,7 @@ import FMFilter from "components/FMFilters/FMFilter";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "components/Footer/Footer";
+import Pincode from "components/Pincode";
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const ProductPage = () => {
   const [categoryProducts, setCategoryProducts] = useState(null);
   const [categoryId, setCategoryId] = useState(false);
   const [pageTitle, setPageTitle] = useState(false);
+  const [pincodeValue, setPincodeValue] = useState();
   const location = useLocation();
   const payload = location?.state?.payload;
 
@@ -74,6 +76,8 @@ const ProductPage = () => {
     navigate(`/product-detail/${pId}`);
   };
 
+
+
   return (
     <>
       <Header />
@@ -108,6 +112,7 @@ const ProductPage = () => {
         </Box>
         <Box>
           <FMFilter
+            pincodeData={payload.pincodeData}
             tagName={payload.tagName}
             sendCategoryId={payload.categoryId}
             pageInfo={"productPage"}

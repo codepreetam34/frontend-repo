@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }
 }));
-const Header = () => {
+const Header = ({ pincodeData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -193,11 +193,12 @@ const Header = () => {
     const payload = {
       tagName,
       categoryId,
+      pincodeData
     };
     navigate(`/product-page/${tagName}`, { state: { payload: payload } });
   };
   const handleCategoryClick = (categoryId) => {
-    navigate(`/category-page/${categoryId}`);
+    navigate(`/category-page/${categoryId}`, { state: { pincodeData: pincodeData } });
   };
 
   return (
