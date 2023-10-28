@@ -578,6 +578,7 @@ const ProductDetail = () => {
               </Box>
               {deliveryTime ?
                 <Box>
+
                   <FMDropdown
                     options={deliveryTime}
                     name="deliveryTime"
@@ -589,7 +590,7 @@ const ProductDetail = () => {
                       marginTop: "1rem",
 
                     }}
-                    defaultValue=""
+                    defaultValue={deliveryTime[0].label}
                   />
                 </Box>
                 : <></>

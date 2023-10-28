@@ -58,12 +58,14 @@ export const trainingAndConformanceStatus = [
 ];
 
 export const StandardDelivery = [
+  { id: 0, label: "Standard Delivery" },
   { id: 1, label: "10 AM - 2 PM" },
   { id: 2, label: "2 PM - 6 PM" },
   { id: 3, label: "6 PM - 10 PM" },
 ];
 
 export const FixedDelivery = [
+  { id: 0, label: "Fixed Delivery" },
   { id: 1, label: "10 AM - 1 PM", startTime: "10", endTime: "13" },
   { id: 2, label: "1 PM - 4 PM", startTime: "13", endTime: "16" },
   { id: 3, label: "4 PM - 7 PM", startTime: "16", endTime: "19" },
@@ -71,6 +73,7 @@ export const FixedDelivery = [
 ];
 
 export const ExpressDelivery = [
+  { id: 0, label: "Express Delivery" },
   { id: 1, label: "10 AM - 11 AM" },
   { id: 2, label: "11 AM - 12 PM" },
   { id: 3, label: "12 AM - 1 PM" },

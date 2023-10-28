@@ -92,8 +92,8 @@ const CategoryPage = () => {
             <FMTypography
               displayText={
                 categoryProducts?.length
-                  ? `(${categoryProducts?.length} Products)`
-                  : "(0 Product)"
+                  ? `| ${categoryProducts?.length} Gifts`
+                  : "| 0 Gift"
               }
               styleData={{
                 fontWeight: "300",
@@ -109,6 +109,7 @@ const CategoryPage = () => {
           <FMFilter
             pageInfo={"categoryPage"}
             setCategoryId={setCategoryId}
+            sendCategoryId={params.id}
             setIsLoading={setIsLoading}
             switchProducts={switchProducts}
             setPageTitle={setPageTitle}
@@ -183,7 +184,7 @@ const CategoryPage = () => {
                         variant="h5"
                         component="div"
 
-                        sx={{ fontSize: "18px", color: "#222222", fontWeight: "300" }}
+                        sx={{ fontSize: "18px", color: "#222222", fontWeight: "300", textTransform: 'capitalize' }}
                       >
                         {elem?.name}
                       </Typography>

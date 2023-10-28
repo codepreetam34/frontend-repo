@@ -8,18 +8,20 @@ const FMFilter = ({
   pageInfo,
   setCategoryId,
   tagName,
+  sendCategoryId,
   setIsLoading,
   switchProducts,
   setPageTitle,
   setDisplayedProducts,
 }) => {
   const dispatch = useDispatch();
+  console.log("category id : ", sendCategoryId)
   const sortByOptionsChangeHandler = (e) => {
 
     const payload = {
       sort: e.target.value,
       pageInfo,
-      categoryId,
+      categoryId: sendCategoryId,
       tagName
     };
     dispatch(getProductsBySorting(payload))
@@ -37,7 +39,7 @@ const FMFilter = ({
   const tagOptionsChangeHandler = (tag) => {
     const payload = {
       tagName: tag,
-      categoryId,
+      categoryId: sendCategoryId,
     };
 
     dispatch(getProductByCategoryIdAndTags(payload))
@@ -86,10 +88,12 @@ const FMFilter = ({
   }, [pageTitle]);
 
   const sortByOptions = [
-    "New to Old",
-    "Old to New",
-    "High to Low",
-    "Low to High",
+    { id: 0, label: "Sort By" },
+    { id: 1, label: "New to Old" },
+    { id: 1, label: "Old to New" },
+    { id: 1, label: "High to Low" },
+    { id: 1, label: "Low to High" },
+
   ];
 
   const TagOptions = [
@@ -108,7 +112,7 @@ const FMFilter = ({
           options={sortByOptions}
           sx={{ width: "10rem" }}
           placeholder="Please select department"
-        //  onChange={sortByOptionsChangeHandler} // Ensure this is correctly set
+          onChange={sortByOptionsChangeHandler} // Ensure this is correctly set
         />
 
         {TagOptions &&
@@ -116,7 +120,7 @@ const FMFilter = ({
             return (
               <>
                 <FMButton
-           //       onClick={() => tagOptionsChangeHandler(tag)}
+                  onClick={() => tagOptionsChangeHandler(tag)}
                   displayText={tag}
                   variant={"outlined"}
                   styleData={{
