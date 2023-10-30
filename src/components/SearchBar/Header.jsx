@@ -416,7 +416,7 @@ const Header = ({ pincodeData }) => {
                         <Col md={12}>
                           <div>
                             <Row>
-                              <Col md={8} className={`${classes.commonStyle} d-lg-flex flex-wrap`} >
+                              <Col md={9} className={`${classes.commonStyle} d-lg-flex flex-wrap`} >
                                 {elem?.tags?.map((tag) => {
                                   return (
                                     <Box
@@ -453,7 +453,7 @@ const Header = ({ pincodeData }) => {
                                   );
                                 })}
                               </Col>{" "}
-                              <Col md={4}>
+                              <Col md={3}>
                                 <div className="cate_list_menu pb-3">
                                   <img
                                     src={elem?.categoryImage}
