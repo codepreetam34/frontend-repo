@@ -7,7 +7,7 @@ export const HeaderStyle = {
     background:"rgb(252, 237, 238)"
   },
   monkeyLogoStyle: { width: "50px", height: "50px" },
-  vibezterLogoStyle: { width: "150px", height: "30px", marginTop: "1rem" },
+  vibezterLogoStyle: { width: "150px", height: "30px"},
   cartStyle: {
     width: "20px",
     height: "18px",
