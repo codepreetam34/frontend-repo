@@ -3,7 +3,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import Input from "@mui/material/Input";
 import Box from "@mui/material/Box";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-
 import { SearchStyle } from "./searchBarStyles";
 import "./searchBarMedia.css";
 

@@ -10,7 +10,7 @@ import ShopByOccasion from "../components/HomePage/ShopByOccasion";
 import PamperZone from "../components/HomePage/PamperZone";
 import ThreePoint from "../components/HomePage/ThreePoint";
 import Footer from "components/Footer/Footer";
-import { Box, Modal, TextField, Button, Typography } from "@mui/material";
+import { Box, Modal, Button, Typography } from "@mui/material";
 import Layout from "components/Layout";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -33,22 +33,17 @@ const LandingPage = () => {
 
     if (data?.pincode.length === 6 && data?.pincode.length > 0) {
       setPincodeData(data?.pincode);
-      // Show area when a valid PIN code is entered
       setShowArea(true);
     } else {
       setPincodeData(null);
-      // Hide area when the PIN code is not valid or empty
       setShowArea(false);
     }
   };
 
   useEffect(() => {
-    // Check if a PIN code is stored in sessionStorage
     const storedPincode = sessionStorage.getItem("pincode");
     if (storedPincode) {
-      // If a PIN code is found in sessionStorage, set it as the initial value
       setPincodeData(storedPincode);
-      // Close the modal
       setPincodeModalOpen(false);
     }
   }, []);

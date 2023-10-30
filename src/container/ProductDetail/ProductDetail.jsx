@@ -246,7 +246,6 @@ const ProductDetail = () => {
   const title = productDetailedData?.name || "Vibezter";
   const description = 'This is the home page of our MERN application.';
 
-
   return (
     <>
       <Layout title={title} description={description}>

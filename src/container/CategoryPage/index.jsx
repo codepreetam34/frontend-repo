@@ -14,13 +14,9 @@ import Header from "components/SearchBar/Header";
 import { getProductByCategoryId } from "Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FMFilter from "components/FMFilters/FMFilter";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
-import { getCategoryChildrens } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
 import Footer from "components/Footer/Footer";
-
-
-
 
 const CategoryPage = () => {
   const navigate = useNavigate();
@@ -31,20 +27,12 @@ const CategoryPage = () => {
   const [categoryId, setCategoryId] = useState(false); // New state for showing filters
   const [pageTitle, setPageTitle] = useState(false); // New state for showing filters
   const [displayedProducts, setDisplayedProducts] = useState(categoryProducts);
-  const location = useLocation();
-  const pincodeData = location?.state?.pincodeData;
+  // const location = useLocation();
+  // const pincodeData = location?.state?.pincodeData;
+  const pincodeData = sessionStorage.getItem("pincode");
   const onCardClick = (id) => {
     navigate(`/product-detail/${id}`);
   };
-  console.log("pincode ",pincodeData)
-
-  useEffect(() => {
-    setIsLoading(true);
-  }, [params]);
-
-  useEffect(() => {
-    setDisplayedProducts(categoryProducts);
-  }, [categoryProducts]);
 
   useEffect(() => {
     setDisplayedProducts(displayedProducts);
@@ -54,30 +42,59 @@ const CategoryPage = () => {
     setCategoryId(categoryId);
   }, [categoryId]);
 
+  // useEffect(() => {
+  //   const payload = {
+  //     id: params.id, pincodeData: pincodeData
+  //   }
+  //   setIsLoading(true);
+  //   dispatch(getProductByCategoryId(payload))
+  //     .then((response) => {
+  //       setPageTitle(response?.payload?.pageTitle);
+  //       setCategoryId(response?.payload?.categoryId);
+  //       setCategoryProducts(response?.payload?.products);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // }, [params.id]);
+
+
   useEffect(() => {
-    const payload = {
-      id: params.id, pincodeData: pincodeData
+    if (params.id) {
+      const payload = {
+        id: params.id,
+        pincodeData: pincodeData,
+      };
+      setIsLoading(true);
+      dispatch(getProductByCategoryId(payload))
+        .then((response) => {
+          setPageTitle(response?.payload?.pageTitle);
+          setCategoryId(response?.payload?.categoryId);
+          setCategoryProducts(response?.payload?.products);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          setIsLoading(false);
+        });
     }
-    dispatch(getProductByCategoryId(payload))
-      .then((response) => {
-        setPageTitle(response?.payload?.pageTitle);
-        setCategoryId(response?.payload?.categoryId);
-        setCategoryProducts(response?.payload?.products);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [dispatch, params]);
+  }, [params.id]);
+  
+
 
   const switchProducts = (showCategory) => {
     if (showCategory) {
       setDisplayedProducts(categoryProducts);
     }
   };
+
+  useEffect(() => {
+    setDisplayedProducts(categoryProducts);
+  }, [categoryProducts]);
 
   return (
     <>
