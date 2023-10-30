@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pincode from "react-pincode";
 import Header from "components/SearchBar/Header";
 import Banner from "../components/HomePage/Banner";
@@ -26,12 +26,13 @@ const LandingPage = () => {
 
   const handleModalClose = () => {
     setPincodeModalOpen(false);
+    sessionStorage.setItem("pincode", pincodeData);
   };
 
   const getDataFunc = (data) => {
 
     if (data?.pincode.length === 6 && data?.pincode.length > 0) {
-      setPincodeData(data);
+      setPincodeData(data?.pincode);
       // Show area when a valid PIN code is entered
       setShowArea(true);
     } else {
@@ -41,12 +42,21 @@ const LandingPage = () => {
     }
   };
 
-
+  useEffect(() => {
+    // Check if a PIN code is stored in sessionStorage
+    const storedPincode = sessionStorage.getItem("pincode");
+    if (storedPincode) {
+      // If a PIN code is found in sessionStorage, set it as the initial value
+      setPincodeData(storedPincode);
+      // Close the modal
+      setPincodeModalOpen(false);
+    }
+  }, []);
   return (
     <>
 
       <Layout title={title} description={description}>
-        <Header pincodeData={pincodeData}/>
+        <Header pincodeData={pincodeData} />
         <div>
           <Box>
             <Banner />

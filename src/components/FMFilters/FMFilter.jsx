@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import { getProductByCategoryIdAndTags, getProductsBySorting } from "Redux/Slices/ProductPage/ProductsPageSlice";
 import FMButton from "components/FMButton/FMButton";
 import FMDropdown from "components/FMDropdown/FMDropdown";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const FMFilter = ({
   pageInfo,
@@ -16,9 +16,10 @@ const FMFilter = ({
   setDisplayedProducts,
 }) => {
   const dispatch = useDispatch();
+  const [sortingValue, setSortingValue] = useState()
   console.log("category id : ", sendCategoryId)
   const sortByOptionsChangeHandler = (e) => {
-
+    setSortingValue(e.target.value)
     const payload = {
       sort: e.target.value,
       pageInfo,
@@ -26,6 +27,7 @@ const FMFilter = ({
       tagName,
       pincodeData
     };
+    setIsLoading(true);
     dispatch(getProductsBySorting(payload))
       .then((response) => {
         setIsLoading(false);
@@ -42,7 +44,8 @@ const FMFilter = ({
     const payload = {
       tagName: tag,
       categoryId: sendCategoryId,
-      pincodeData
+      pincodeData,
+      sort: sortingValue,
     };
 
     dispatch(getProductByCategoryIdAndTags(payload))
@@ -77,10 +80,10 @@ const FMFilter = ({
 
   useEffect(() => {
     setDisplayedProducts(sortedProducts);
-  }, [sortedProducts]);
+  }, [dispatch,sortedProducts]);
   useEffect(() => {
     setDisplayedProducts(tagsCategoryProducts);
-  }, [tagsCategoryProducts]);
+  }, [dispatch,tagsCategoryProducts]);
 
   useEffect(() => {
     setCategoryId(categoryId);

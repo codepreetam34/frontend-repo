@@ -4,6 +4,7 @@ export const HeaderStyle = {
     display: "flex",
     justifyContent: "space-between",
     padding: "1rem 50px",
+    background:"rgb(252, 237, 238)"
   },
   monkeyLogoStyle: { width: "50px", height: "50px" },
   vibezterLogoStyle: { width: "150px", height: "30px", marginTop: "1rem" },

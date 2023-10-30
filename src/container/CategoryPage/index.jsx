@@ -36,6 +36,7 @@ const CategoryPage = () => {
   const onCardClick = (id) => {
     navigate(`/product-detail/${id}`);
   };
+  console.log("pincode ",pincodeData)
 
   useEffect(() => {
     setIsLoading(true);
@@ -44,13 +45,18 @@ const CategoryPage = () => {
   useEffect(() => {
     setDisplayedProducts(categoryProducts);
   }, [categoryProducts]);
+
+  useEffect(() => {
+    setDisplayedProducts(displayedProducts);
+  }, [displayedProducts]);
+
   useEffect(() => {
     setCategoryId(categoryId);
   }, [categoryId]);
 
   useEffect(() => {
     const payload = {
-      id: params.id, pincodeData
+      id: params.id, pincodeData: pincodeData
     }
     dispatch(getProductByCategoryId(payload))
       .then((response) => {

@@ -193,7 +193,7 @@ const Header = ({ pincodeData }) => {
     const payload = {
       tagName,
       categoryId,
-      pincodeData
+      pincodeData:pincodeData
     };
     navigate(`/product-page/${tagName}`, { state: { payload: payload } });
   };
@@ -203,7 +203,7 @@ const Header = ({ pincodeData }) => {
 
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
-      <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
+      <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }} >
         <Col style={commonStyle.flexDisplayStyle}>
           <Link to={"/"}>
             <img
