@@ -134,7 +134,7 @@ const ProductDetail = () => {
 
       dispatch(addToCart(payload)).then((res) => {
         if (res) {
-          navigate(`/add-to-cart`);
+          //navigate(`/add-to-cart`);
           dispatch(addToCartProductsFinal());
         }
       });

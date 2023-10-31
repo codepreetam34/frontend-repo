@@ -26,6 +26,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FAQ, LOGIN, MY_PROFILE } from "Routes/Routes";
 import { logout } from "Redux/Slices/Login/auth.slice";
 import { makeStyles } from "@mui/styles";
+import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -86,7 +87,19 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('xl')]: {
       gap: '7rem',
     },
-  }
+  },
+
+  cartItemCountStyle: {
+    position: 'absolute',
+    top: '-8px',
+    right: '-8px',
+    backgroundColor: '#801317',
+    color: 'white',
+    borderRadius: '50%',
+    padding: '4px 8px',
+    fontSize: '12px',
+  },
+
 }));
 const Header = ({ pincodeData }) => {
   const dispatch = useDispatch();
@@ -201,6 +214,16 @@ const Header = ({ pincodeData }) => {
     navigate(`/category-page/${categoryId}`, { state: { pincodeData: pincodeData } });
   };
 
+
+
+
+  useEffect(() => {
+    dispatch(addToCartProductsFinal());
+  }, [dispatch]);
+  const addedData = useSelector(
+    (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
+  );
+  console.log("added Data ", addedData)
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
       <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }} >
@@ -226,14 +249,24 @@ const Header = ({ pincodeData }) => {
             marginTop: ".5rem",
             display: "flex",
             justifyContent: "flex-end",
+            gap: "2rem",
           }}
         >
           <Box>
-            <img
-              src={cart}
-              alt="cart"
-              style={{ ...HeaderStyle.cartStyle, marginTop: "0" }}
-            />
+            <Link to={`/add-to-cart`} style={{ textDecoration: 'none' }}>
+              <div style={{ position: 'relative' }}>
+                <img
+                  src={cart}
+                  alt="cart"
+                  style={HeaderStyle.cartStyle}
+                />
+                {addedData && Object.keys(addedData).length > 0 && (
+                  <div class={classes.cartItemCountStyle}>
+                    {Object.keys(addedData).length}
+                  </div>
+                )}
+              </div>
+            </Link>
           </Box>
           {/* profile below */}
           <Box>

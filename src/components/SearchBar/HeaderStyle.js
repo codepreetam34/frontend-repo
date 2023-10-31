@@ -11,7 +11,7 @@ export const HeaderStyle = {
   cartStyle: {
     width: "20px",
     height: "18px",
-    margin: "1rem 2rem 0 0",
+    margin: "0rem 1rem",
   },
   profileIconStyle: { width: "20px", height: "18px" },
 

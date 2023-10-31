@@ -15,8 +15,6 @@ import Layout from "components/Layout";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-
-
 const LandingPage = () => {
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
   const [showArea, setShowArea] = useState(false);
