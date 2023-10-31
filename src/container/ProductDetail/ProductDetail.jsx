@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import ImageGallery from "react-image-gallery";
 import Pincode from "react-pincode";
-import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -22,7 +21,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import moment from "moment";
@@ -56,7 +55,9 @@ import { ADD_TO_CART } from "Routes/Routes";
 import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
 import Footer from "components/Footer/Footer";
 import Layout from "components/Layout";
-
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import FMDeliveryDropdown from "components/FMDeliveryDropdown";
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -178,13 +179,13 @@ const ProductDetail = () => {
 
   const getDataFunc = (data) => {
     if (data?.pincode.length === 6 && data?.pincode.length > 0) {
-      console.log("if ", data)
+  
       setPincodeData(data);
       setDisabledDate(false);
       // Show area when a valid PIN code is entered
       setShowArea(true);
     } else {
-      console.log("else ", data)
+  
       setPincodeData(null);
       setDisabledDate(true);
       // Hide area when the PIN code is not valid or empty
@@ -235,7 +236,6 @@ const ProductDetail = () => {
   };
 
   const handleWeightChange = (option) => {
-    console.log(option)
     setProductQuantity(option)
   }
   const [selectedTime, setSelectedTime] = useState(""); // State to track selected time
@@ -245,6 +245,196 @@ const ProductDetail = () => {
   };
   const title = productDetailedData?.name || "Vibezter";
   const description = 'This is the home page of our MERN application.';
+
+  ///////////
+
+  dayjs.extend(customParseFormat);
+
+  //datepicker
+  const [filterFixedOptions, setFilterFixedOptions] = useState([]);
+  const [filterStandardOptions, setFilterStandardOptions] = useState([]);
+  const [insertDate, setInsertDate] = useState(false);
+  const [currentTime, setCurrentTime] = useState();
+  const [filterExpressOptions, setFilterExpressOptions] = useState([]);
+
+  const [selectTodayDate, setSelectTodayDate] = useState(false);
+
+  const [standard, setStandard] = useState(false);
+  const [fixed, setFixed] = useState(false);
+  const [express, setExpress] = useState(false);
+  const [dateString, setDateString] = useState("");
+  // const onDateChange = (date) => {
+  //   console.log("date ", date)
+  //   setDate(date);
+  //   const newdate = new Date();
+  //   let day = newdate.getDate();
+  //   let newDay = day < 10 ? "0" + day : day;
+
+  //   let month = newdate.getMonth() + 1;
+  //   let newMonth = month < 10 ? (month = "0" + month) : month;
+
+  //   let year = newdate.getFullYear();
+
+  //   let curTime = newdate.getHours();
+  //   setCurrentTime(curTime);
+  //   console.log("current time ", curTime);
+
+
+
+
+  //   // const selectedDate = new Date(newDate);
+  //   // const year = selectedDate.getFullYear();
+  //   // const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
+  //   // const day = selectedDate.getDate().toString().padStart(2, "0");
+  //   const formattedDate = `${newDay}/${newMonth}/${year}`;
+
+  //   setDateString(formattedDate);
+
+
+  //   console.log("dateString ", dateString)
+  //   let newFixedArray = FixedDelivery.filter(function (el) {
+  //     return el.value > curTime + 1;
+  //   });
+
+  //   let newExpressArray = ExpressDelivery.filter(function (el) {
+  //     return el.value > curTime + 1;
+  //   });
+
+  //   setFilterExpressOptions(newExpressArray);
+  //   setFilterFixedOptions(newFixedArray);
+  //   // console.log("new", newFixedArray);
+
+  //   // This arrangement can be altered based on how we want the date's format to appear.
+  //   let currentDate = `${newDay}/${newMonth}/${year}`;
+  //   console.log("today", currentDate, "=", dateString);
+
+  //   if (currentDate === date) {
+  //     setSelectTodayDate(true);
+  //     console.log(
+  //       "cur date ",
+  //       currentDate,
+  //       "today date ",
+  //       selectTodayDate,
+  //       "datestring ",
+  //       dateString
+  //     );
+  //   } else {
+  //     setSelectTodayDate(false);
+  //   }
+
+  //   dateString ? setInsertDate(true) : setInsertDate(false);
+
+  //   console.log("date", date, dateString);
+  // };
+
+  const onDateChange = (date) => {
+
+    setDate(date);
+    const newdate = new Date();
+    let day = newdate.getDate();
+    let newDay = day < 10 ? "0" + day : day;
+
+    let month = newdate.getMonth() + 1;
+    let newMonth = month < 10 ? "0" + month : month;
+
+    let year = newdate.getFullYear();
+
+    let curTime = newdate.getHours();
+    setCurrentTime(curTime);
+
+    const todayDate = `${newDay}/${newMonth}/${year}`;
+    setDateString(todayDate);
+    let currentDate;
+
+    if (date) {
+      const selectedDate = new Date(date);
+      const selectedDay = selectedDate.getDate();
+      const selectedMonth = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
+      const selectedYear = selectedDate.getFullYear();
+      const selectedDateFormatted = `${selectedDay}/${selectedMonth}/${selectedYear}`;
+
+      // Set currentDate to the selected date in DD/MM/YYYY format
+      currentDate = selectedDateFormatted;
+
+    }
+
+    let newFixedArray = FixedDelivery.filter(function (el) {
+      return el.value > curTime + 1;
+    });
+
+    let newExpressArray = ExpressDelivery.filter(function (el) {
+      return el.value > curTime + 1;
+    });
+
+    let newStandardArray = StandardDelivery.filter(function (el) {
+      return el.value >= curTime;
+    });
+
+    if (currentDate === todayDate) {
+      setFilterExpressOptions(newExpressArray);
+      setFilterFixedOptions(newFixedArray);
+      setFilterStandardOptions(newStandardArray);
+      setSelectTodayDate(true);
+    } else {
+      setSelectTodayDate(false);
+    }
+    todayDate ? setInsertDate(true) : setInsertDate(false);
+  };
+
+
+  const disabledDateHandle = (current) => {
+    //console.log('disabled ',current);
+    // Can not select days before today and today
+    //console.log("current Date", current);
+    return current && current.add(1, "d") < dayjs().endOf("day");
+  };
+
+  //end
+
+  const standardDelivery = () => {
+    setStandard(true);
+    setExpress(false);
+    setFixed(false);
+    setMidNightActive(false);
+    setStandardActive(true);
+    setFixedActive(false);
+  };
+
+  const fixedDelivery = () => {
+    setStandard(false);
+    setExpress(false);
+    setFixed(true);
+    setMidNightActive(false);
+    setStandardActive(false);
+    setFixedActive(true);
+  };
+
+  const expressDelivery = () => {
+    setStandard(false);
+    setExpress(true);
+    setFixed(false);
+    setMidNightActive(true);
+    setStandardActive(false);
+    setFixedActive(false);
+  };
+
+  const onStandardDeliveryChange = (e) => {
+    console.log(`onStandardDeliveryChange ${e.target.value}`);
+    setSelectedTime(e.target.value)
+  };
+
+  const onFixedDeliveryChange = (e) => {
+    console.log(`onFixedDeliveryChange ${e.target.value}`);
+    setSelectedTime(e.target.value)
+  };
+  const onExpressDeliveryChange = (e) => {
+    console.log(`onExpressDeliveryChange ${e.target.value}`);
+    setSelectedTime(e.target.value)
+  };
+
+
+
+
 
   return (
     <>
@@ -420,7 +610,8 @@ const ProductDetail = () => {
                         disablePast
                         inputFormat="DD/MM/YYYY"
                         value={date}
-                        onChange={handleChange}
+                     //   onChange={onDateChange}
+                        onChange={(e) => console.log(e)}
                         renderInput={(params) => <TextField {...params} />}
                         className="datePickerStyle"
                         sx={{ height: "48px" }}
@@ -468,8 +659,8 @@ const ProductDetail = () => {
                     </Box>
                   ) : <></>}
 
-                {/* delivery type */}
-                <Box>
+
+                {/* <Box>
                   <FMTypography
                     displayText={"Select Delivery Type"}
                     styleData={{
@@ -591,16 +782,25 @@ const ProductDetail = () => {
                         styleData={{ fontSize: "10px", color: "#178013" }}
                       />
                     </Box>
+
+
                   </Box>
-                </Box>
-                {deliveryTime ?
+                </Box> */}
+
+                {/* {deliveryTime ?
                   <Box>
 
                     <FMDropdown
                       options={deliveryTime}
                       name="deliveryTime"
                       id="deliveryTime"
-                      onChange={handleTimeChange}
+                     onChange={handleTimeChange}
+                      onChange={onExpressDeliveryChange}
+                      options={
+                        selectTodayDate
+                          ? filterExpressOptions
+                          : expressOptions
+                      }
                       sx={{
                         ...commonStyle.dropdownStyle,
                         width: "215px",
@@ -611,7 +811,242 @@ const ProductDetail = () => {
                     />
                   </Box>
                   : <></>
-                }
+                }  */}
+
+
+
+
+                {insertDate ? (
+                  <Row className="my-2">
+                    <Col md={12}>
+                      <Box>
+                        <FMTypography
+                          displayText={"Select Delivery Type"}
+                          styleData={{
+                            fontSize: "20px",
+                            fontWeight: "500",
+                            marginTop: "1rem",
+                            marginBottom: "1rem",
+                          }}
+                        />
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            padding: "8px 16px",
+                            border: "1px solid #E6E6E6",
+                            borderRadius: "10px",
+                          }}
+                          {...register("cakeMessage")}
+                          error={errors.cakeMessage ? true : false}
+                        >
+                          <Box
+
+                            className={
+                              selectTodayDate ? "standard-is-disabled" : ""
+                            }
+
+                            sx={{
+                              width: "132px",
+                              height: "48px",
+                              left: "843px",
+                              top: "703px",
+                              backgroundColor: standardActive ? "#E6E6E6" : "white",
+                              borderRadius: "100px",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              cursor: isTodaysDate ? "not-allowed" : "pointer", // Change cursor style
+                              border: "1px solid #E6E6E6",
+                              "&:hover": {
+                                border: isTodaysDate ? "1px solid #E6E6E6" : "1px solid black", // Adjust border on hover
+                              },
+                              opacity: isTodaysDate ? 0.5 : 1, // Adjust opacity for disabled state
+                            }}
+                            onClick={standardDelivery}
+                          >
+                            <FMTypography displayText={"Standard"} styleData={{ fontSize: "12px" }} />
+                            <FMTypography
+                              displayText={"(Free)"}
+                              styleData={{ fontSize: "10px", color: "#178013" }}
+                            />
+                          </Box>
+
+
+                          <Box
+                            sx={{
+                              width: "132px",
+                              height: "48px",
+                              left: "843px",
+                              top: "703px",
+                              backgroundColor: fixedActive ? "#E6E6E6" : "white",
+                              borderRadius: "100px",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              cursor: "pointer",
+                              border: "1px solid #E6E6E6",
+                              "&:hover": { border: "1px solid black" },
+                            }}
+                            onClick={fixedDelivery}
+                          >
+                            <FMTypography
+                              displayText={"Fixed time"}
+                              styleData={{ fontSize: "12px" }}
+                            />
+                            <FMTypography
+                              displayText={"₹ 200"}
+                              styleData={{ fontSize: "10px", color: "#178013" }}
+                            />
+                          </Box>
+
+                          <Box
+                            sx={{
+                              width: "132px",
+                              height: "48px",
+                              left: "843px",
+                              top: "703px",
+                              backgroundColor: midNightActive ? "#E6E6E6" : "white",
+                              borderRadius: "100px",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              cursor: "pointer",
+                              border: "1px solid #E6E6E6",
+                              "&:hover": { border: "1px solid black" },
+                            }}
+                            onClick={expressDelivery}
+                          >
+                            <FMTypography
+                              displayText={"Mid night"}
+                              styleData={{ fontSize: "12px" }}
+                            />
+                            <FMTypography
+                              displayText={"₹ 250"}
+                              styleData={{ fontSize: "10px", color: "#178013" }}
+                            />
+                          </Box>
+
+
+                        </Box>
+                      </Box>
+
+
+                    </Col>
+
+
+                    <Col>
+                      {selectTodayDate && !fixed && !express ? (
+                        <div
+                          class="my-2 alert alert-danger"
+                          role="alert"
+                          style={{ width: "150px" }}
+                        >
+                          Not Applicable for Standard Delivery!
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+
+                      {standard && !selectTodayDate ? (
+                        <>
+                          <div className="mt-3">
+                            <div className="fw-bold">
+                              <h6 style={{ color: "#636363", fontSize: "18px" }}>
+                                Select Standard Time Slot
+                              </h6>
+                            </div>
+                          </div>
+                          <FMDeliveryDropdown
+                            sx={{
+                              ...commonStyle.dropdownStyle,
+                              width: "15rem",
+                              marginTop: ".5rem",
+                            }}
+                            defaultValue={"Select Time Slot"}
+                            onChange={onStandardDeliveryChange}
+                            options={selectTodayDate
+                              ? filterStandardOptions
+                              : StandardDelivery}
+                          />
+                        </>
+                      ) : fixed ? (
+                        <>
+                          <div className="mt-3">
+                            <div className="fw-bold">
+                              <h6 style={{ color: "#636363", fontSize: "18px" }}>
+                                Select Fixed Time Slot
+                              </h6>
+                            </div>
+                          </div>
+                          <FMDeliveryDropdown
+                            sx={{
+                              ...commonStyle.dropdownStyle,
+                              width: "15rem",
+                              marginTop: ".5rem",
+                            }}
+                            defaultValue="Select Time Slot"
+                            onChange={onFixedDeliveryChange}
+                            options={
+                              selectTodayDate ? filterFixedOptions : FixedDelivery
+                            }
+                          />
+                        </>
+                      ) : express ? (
+                        <>
+                          <div className="mt-3">
+                            <div className="fw-bold">
+                              <h6 style={{ color: "#636363", fontSize: "18px" }}>
+                                Select Express Time Slot
+                              </h6>
+                            </div>
+                          </div>
+
+                          <FMDeliveryDropdown
+                            sx={{
+                              ...commonStyle.dropdownStyle,
+                              width: "15rem",
+                              marginTop: ".5rem",
+                            }}
+                            defaultValue={"Select Time Slot"}
+                            onChange={onExpressDeliveryChange}
+                            options={
+                              selectTodayDate
+                                ? filterExpressOptions
+                                : ExpressDelivery
+                            }
+
+                          />
+
+
+                          {/* <FMDropdown
+                            style={{ width: "10rem" }}
+                            className="mb-2"
+                            placeholder="Select Time Slot"
+                            optionFilterProp="children"
+                            onChange={onExpressDeliveryChange}
+                            options={
+                              selectTodayDate
+                                ? filterExpressOptions
+                                : ExpressDelivery
+                            }
+                          />{" "} */}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </Col>
+                  </Row>
+                ) : (
+                  <></>
+                )}
+
+
+
+
                 {/* cart and buy btns */}
                 <Box sx={{ marginTop: "50px" }}>
                   <FMButton
@@ -631,9 +1066,10 @@ const ProductDetail = () => {
                         backgroundColor: "white",
                       },
                     }}
-                    // onClick={tempSub}
-                    onClick={handleSubmit(onSubmit)}
+                  // onClick={tempSub}
+                  //   onClick={handleSubmit(onSubmit)}
                   />
+                  <Link to={'/add-to-cart'}>   </Link>
                   <FMButton
                     displayText={"Buy Now"}
                     variant={"contained"}
@@ -642,6 +1078,7 @@ const ProductDetail = () => {
                       width: "215px",
                     }}
                   />
+
                   <input type={"submit"} hidden />
                 </Box>
 

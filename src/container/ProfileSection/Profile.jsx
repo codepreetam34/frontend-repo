@@ -87,7 +87,7 @@ const Profile = () => {
             <img
               src={mailIcon}
               alt="mail-icon"
-              // style={{ marginTop: "-1rem" }}
+            // style={{ marginTop: "-1rem" }}
             />
             <FMTypography
               displayText={myProfileData?.email}
@@ -101,7 +101,7 @@ const Profile = () => {
           <Box sx={{ display: "flex", marginBottom: ".5rem" }}>
             <img src={telephoneIcon} alt="telephone-icon" />
             <FMTypography
-              displayText={myProfileData?.contactNumber}
+              displayText={myProfileData?.contactNumber ? myProfileData?.contactNumber : "Enter Mobile"}
               styleData={{
                 marginLeft: "1rem",
                 fontSize: "1rem",
@@ -137,7 +137,7 @@ const Profile = () => {
             component="form"
             xs={12}
             sx={{ width: "350px" }}
-            // onSubmit={handleSubmit(onSubmit)}
+          // onSubmit={handleSubmit(onSubmit)}
           >
             <Box sx={commonStyle.flexStyle}>
               <Box sx={{ display: "flex" }}>
@@ -153,12 +153,12 @@ const Profile = () => {
                       // ...(errors.firstName && commonStyle.errorStyle),
                     }}
                     defaultValue={
-                      firstName
-                      // firstName ? firstName : myProfileData?.firstName
+
+                      firstName ? firstName : myProfileData?.firstName
                     }
-                    // onChange={setFirstNameFunc}
-                    // {...register("firstName")}
-                    // error={errors.firstName ? true : false}
+                  // onChange={setFirstNameFunc}
+                  // {...register("firstName")}
+                  // error={errors.firstName ? true : false}
                   />
                   {/* <FMTypography
                       styleData={{
@@ -179,9 +179,9 @@ const Profile = () => {
 
                       // ...(errors.lastName && commonStyle.errorStyle),
                     }}
-                    defaultValue={lastName && lastName}
-                    // {...register("lastName")}
-                    // error={errors.lastName ? true : false}
+                    defaultValue={myProfileData?.lastName}
+                  // {...register("lastName")}
+                  // error={errors.lastName ? true : false}
                   />
                   {/* <FMTypography
                       styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
@@ -195,13 +195,14 @@ const Profile = () => {
                   id="Dob"
                   name="Dob"
                   placeholder="Dob"
+
                   sx={{
                     ...commonStyle.inputFieldStyle,
 
                     // ...(errors.Dob && commonStyle.errorStyle),
                   }}
-                  // {...register("Dob")}
-                  // error={errors.Dob ? true : false}
+                // {...register("Dob")}
+                // error={errors.Dob ? true : false}
                 />
                 {/* <FMTypography
                       styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
@@ -214,13 +215,17 @@ const Profile = () => {
                   id="alternateNum"
                   name="alternateNum"
                   placeholder="Contact Num"
+                  defaultValue={
+
+                    myProfileData?.contactNumber
+                  }
                   sx={{
                     ...commonStyle.inputFieldStyle,
 
                     // ...(errors.alternateNum && commonStyle.errorStyle),
                   }}
-                  // {...register("alternateNum")}
-                  // error={errors.alternateNum ? true : false}
+                // {...register("alternateNum")}
+                // error={errors.alternateNum ? true : false}
                 />
                 {/* <FMTypography
                         styleData={{
@@ -237,13 +242,17 @@ const Profile = () => {
                   id="email"
                   name="email"
                   placeholder="Email"
+                  defaultValue={
+
+                    myProfileData?.email
+                  }
                   sx={{
                     ...commonStyle.inputFieldStyle,
 
                     // ...(errors.email && commonStyle.errorStyle),
                   }}
-                  // {...register("email")}
-                  // error={errors.email ? true : false}
+                // {...register("email")}
+                // error={errors.email ? true : false}
                 />
                 {/* <FMTypography
                       styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
@@ -261,8 +270,8 @@ const Profile = () => {
 
                     // ...(errors.Nationality* && commonStyle.errorStyle),
                   }}
-                  // {...register("Nationality*")}
-                  // error={errors.Nationality* ? true : false}
+                // {...register("Nationality*")}
+                // error={errors.Nationality* ? true : false}
                 />
                 {/* <FMTypography
                       styleData={{ ...commonStyle.errorText, fontSize: "11px" }}

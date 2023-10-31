@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
-
-import womanCard from "../../../assets/womanCard.svg";
 import closeCrossIcon from "../../../assets/closeCrossIcon.svg";
-
 import { commonStyle } from "Styles/commonStyles";
 import { Col, Row } from "react-bootstrap";
 import FMTypography from "components/FMTypography/FMTypography";
@@ -15,6 +12,8 @@ import {
   addToCartProductsFinal,
   deleteAddToCartProducts,
 } from "Redux/Slices/AddToCart/AddToCartSlice";
+import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
+import { addToCart } from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 
 const AddToCart = ({ handleNext }) => {
   const dispatch = useDispatch();
@@ -40,12 +39,32 @@ const AddToCart = ({ handleNext }) => {
   //   return accumulator + item.price * item.qty;
   // }, 0);
 
+  const optionChangeHandler = (e, pId) => {
+    const quantity = e.target.value;
+    const payload = {
+      cartItems: [
+        {
+          product: pId,
+          quantity: quantity,
+        },
+      ],
+    };
+
+    dispatch(addToCart(payload)).then((res) => {
+      if (res) {
+        //navigate(`/add-to-cart`);
+        dispatch(addToCartProductsFinal());
+      }
+    });
+  };
+
+  
   return (
     <>
       <Row style={{ padding: "40px 120px" }}>
         <Col>
           <FMTypography
-            displayText={"Cart"}
+            displayText={`Cart Items (${addedData && Object.keys(addedData)?.length})`}
             styleData={{ fontSize: "40px", fontWeight: "500" }}
           />
         </Col>
@@ -87,25 +106,30 @@ const AddToCart = ({ handleNext }) => {
                   </Box>
                   {/* dropdown row below */}
                   <Row>
-                    <Col>
+                    <Col style={{ marginTop: "0.3rem" }}>
                       <FMDropdown
+                        name="department_id"
+                        defaultValue={`${addedData && addedData[elem]?.qty}`}
                         options={quantityOpt}
                         dropdownvalue="label"
-                        // onChange={optionChangeHandler}
                         sx={{
-                          ...commonStyle.dropdownStyle,
+                          boxShadow: `0rem 0.0625rem 0.125rem ${LIGHT_GREY_BORDER}`,
+                          borderRadius: "0.5rem",
                           height: "2.75rem",
-                          width: "100px",
-                          borderRadius: "10px",
-                          backgroundColor: "#E6E6E6",
-                          marginTop: "1rem",
-                          border: "1px solid #E6E6E6",
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            border: `0.0625rem solid ${CANCEL_GREY_BORDER}`,
+                          },
+                          "&.Mui-focused": {
+                            "& .MuiOutlinedInput-notchedOutline": {
+                              border: `0.0625rem solid ${CANCEL_GREY_BORDER}`,
+                            },
+                          },
+                          width: "10rem",
+                          background: "#E6E6E6",
                         }}
-                        // error={errors.service}
-
-                        // value={quantityOption}
-                        // {...restServiceRegister}
+                        onChange={(e) => { optionChangeHandler(e, elem) }}
                       />
+
                     </Col>
                   </Row>
                   {/* dropdown row above */}
@@ -114,7 +138,7 @@ const AddToCart = ({ handleNext }) => {
                       style={{
                         fontSize: "1rem",
                         color: "#717171",
-                        paddingTop: ".5rem",
+                        paddingTop: ".3rem",
                       }}
                     >
                       ₹ {addedData[elem]?.price}
@@ -140,8 +164,8 @@ const AddToCart = ({ handleNext }) => {
                       }}
                     />
                   </Box>
-                  <Typography variant="body2" sx={{ color: "#717171" }}>
-                    {"Same day delivery"}
+                  <Typography variant="body2" sx={{ color: "#717171", textTransform: 'capitalize' }}>
+                    {`${addedData[elem]?.deliveryDay}`}
                   </Typography>
                 </Box>
               </Box>
@@ -176,7 +200,7 @@ const AddToCart = ({ handleNext }) => {
             </Box>
             <hr />
             <Box>
-              <FMTypography displayText={"Price Details (3 Iteams)"} />
+              <FMTypography displayText={`Price Details ${addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length + " Items" : addedData && Object.keys(addedData)?.length === 1 ? "1 Item" : " 0 Item"}`} />
             </Box>
 
             <Box
@@ -238,7 +262,7 @@ const AddToCart = ({ handleNext }) => {
                 marginTop: "32px",
               }}
               onClick={handleNext}
-              //   onClick={handleSubmit(onSubmit)}
+            //   onClick={handleSubmit(onSubmit)}
             />
           </Box>
         </Col>
