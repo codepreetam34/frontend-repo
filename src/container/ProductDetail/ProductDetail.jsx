@@ -179,21 +179,17 @@ const ProductDetail = () => {
 
   const getDataFunc = (data) => {
     if (data?.pincode.length === 6 && data?.pincode.length > 0) {
-  
       setPincodeData(data);
       setDisabledDate(false);
       // Show area when a valid PIN code is entered
       setShowArea(true);
     } else {
-  
       setPincodeData(null);
       setDisabledDate(true);
       // Hide area when the PIN code is not valid or empty
       setShowArea(false);
     }
   };
-
-
 
   const reviewNavHandler = () => {
     navigate(`/add-review/${pId}`, {
@@ -236,15 +232,15 @@ const ProductDetail = () => {
   };
 
   const handleWeightChange = (option) => {
-    setProductQuantity(option)
-  }
+    setProductQuantity(option);
+  };
   const [selectedTime, setSelectedTime] = useState(""); // State to track selected time
 
   const handleTimeChange = (e) => {
     setSelectedTime(e.target.value);
   };
   const title = productDetailedData?.name || "Vibezter";
-  const description = 'This is the home page of our MERN application.';
+  const description = "This is the home page of our MERN application.";
 
   ///////////
 
@@ -279,9 +275,6 @@ const ProductDetail = () => {
   //   setCurrentTime(curTime);
   //   console.log("current time ", curTime);
 
-
-
-
   //   // const selectedDate = new Date(newDate);
   //   // const year = selectedDate.getFullYear();
   //   // const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
@@ -289,7 +282,6 @@ const ProductDetail = () => {
   //   const formattedDate = `${newDay}/${newMonth}/${year}`;
 
   //   setDateString(formattedDate);
-
 
   //   console.log("dateString ", dateString)
   //   let newFixedArray = FixedDelivery.filter(function (el) {
@@ -328,7 +320,6 @@ const ProductDetail = () => {
   // };
 
   const onDateChange = (date) => {
-
     setDate(date);
     const newdate = new Date();
     let day = newdate.getDate();
@@ -349,13 +340,14 @@ const ProductDetail = () => {
     if (date) {
       const selectedDate = new Date(date);
       const selectedDay = selectedDate.getDate();
-      const selectedMonth = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
+      const selectedMonth = (selectedDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0");
       const selectedYear = selectedDate.getFullYear();
       const selectedDateFormatted = `${selectedDay}/${selectedMonth}/${selectedYear}`;
 
       // Set currentDate to the selected date in DD/MM/YYYY format
       currentDate = selectedDateFormatted;
-
     }
 
     let newFixedArray = FixedDelivery.filter(function (el) {
@@ -380,7 +372,6 @@ const ProductDetail = () => {
     }
     todayDate ? setInsertDate(true) : setInsertDate(false);
   };
-
 
   const disabledDateHandle = (current) => {
     //console.log('disabled ',current);
@@ -420,21 +411,17 @@ const ProductDetail = () => {
 
   const onStandardDeliveryChange = (e) => {
     console.log(`onStandardDeliveryChange ${e.target.value}`);
-    setSelectedTime(e.target.value)
+    setSelectedTime(e.target.value);
   };
 
   const onFixedDeliveryChange = (e) => {
     console.log(`onFixedDeliveryChange ${e.target.value}`);
-    setSelectedTime(e.target.value)
+    setSelectedTime(e.target.value);
   };
   const onExpressDeliveryChange = (e) => {
     console.log(`onExpressDeliveryChange ${e.target.value}`);
-    setSelectedTime(e.target.value)
+    setSelectedTime(e.target.value);
   };
-
-
-
-
 
   return (
     <>
@@ -518,7 +505,14 @@ const ProductDetail = () => {
                       marginLeft: "1rem",
                     }}
                   >
-                    ₹ {productQuantity == "0.5 Kg" ? productDetailedData?.halfkgprice : productQuantity == "1 Kg" ? productDetailedData?.onekgprice : productQuantity == "2 Kg" ? productDetailedData?.twokgprice : productDetailedData?.discountPrice}
+                    ₹{" "}
+                    {productQuantity == "0.5 Kg"
+                      ? productDetailedData?.halfkgprice
+                      : productQuantity == "1 Kg"
+                      ? productDetailedData?.onekgprice
+                      : productQuantity == "2 Kg"
+                      ? productDetailedData?.twokgprice
+                      : productDetailedData?.discountPrice}
                   </Typography>
 
                   <FMTypography
@@ -533,13 +527,13 @@ const ProductDetail = () => {
                 </Box>
 
                 {/* weight radio */}
-                {(categoryName && categoryName?.toLowerCase() === "cakes") ? (
+                {categoryName && categoryName?.toLowerCase() === "cakes" ? (
                   <Box sx={{ marginTop: "17px" }}>
                     <FMRadioButtons
                       formLabel="Select Weight"
                       radioButtons={createUserOptions}
-                      onChecked={(option) =>
-                        handleWeightChange(option)
+                      onChecked={
+                        (option) => handleWeightChange(option)
 
                         // option === "0.5 Kg"
                         //   ? setProductQuantity("0.5 Kg")
@@ -565,7 +559,9 @@ const ProductDetail = () => {
                       required={true}
                     />
                   </Box>
-                ) : <></>}
+                ) : (
+                  <></>
+                )}
 
                 {/* pincode and date selector */}
                 <Box sx={{ marginTop: "1rem", display: "flex" }}>
@@ -610,8 +606,8 @@ const ProductDetail = () => {
                         disablePast
                         inputFormat="DD/MM/YYYY"
                         value={date}
-                     //   onChange={onDateChange}
-                        onChange={(e) => console.log(e)}
+                        onChange={onDateChange}
+                        //   onChange={(e) => console.log(e)}
                         renderInput={(params) => <TextField {...params} />}
                         className="datePickerStyle"
                         sx={{ height: "48px" }}
@@ -620,45 +616,45 @@ const ProductDetail = () => {
                   </Box>
                 </Box>
                 {/* msg box */}
-                {categoryName?.toLowerCase() === "cakes" ?
-                  (
-                    <Box sx={{ display: "flex", marginTop: "1rem" }}>
-                      <FMRadioButtons
-                        radioButtons={egglessOrNot}
-                        onChecked={(option) =>
-                          option === "Eggless"
-                            ? setEggOrNot("Eggless")
-                            : setEggOrNot("With Egg")
-                        }
-                        formLabelStyling={{
-                          radioButtonStyle: {
-                            fontWeight: "600",
-                            lineHeight: "1.3125rem",
-                            fontSize: "0.875rem",
-                            color: BLACK,
-                          },
-                        }}
-                        value={eggOrNot}
-                        required={false}
-                      />
-                      <InputBase
-                        required
-                        id="text"
-                        name="text"
-                        placeholder="Message on Cake"
-                        sx={{
-                          ...commonStyle.inputFieldStyle,
-                          width: "215px",
-                          marginLeft: "1rem",
+                {categoryName?.toLowerCase() === "cakes" ? (
+                  <Box sx={{ display: "flex", marginTop: "1rem" }}>
+                    <FMRadioButtons
+                      radioButtons={egglessOrNot}
+                      onChecked={(option) =>
+                        option === "Eggless"
+                          ? setEggOrNot("Eggless")
+                          : setEggOrNot("With Egg")
+                      }
+                      formLabelStyling={{
+                        radioButtonStyle: {
+                          fontWeight: "600",
+                          lineHeight: "1.3125rem",
+                          fontSize: "0.875rem",
+                          color: BLACK,
+                        },
+                      }}
+                      value={eggOrNot}
+                      required={false}
+                    />
+                    <InputBase
+                      required
+                      id="text"
+                      name="text"
+                      placeholder="Message on Cake"
+                      sx={{
+                        ...commonStyle.inputFieldStyle,
+                        width: "215px",
+                        marginLeft: "1rem",
 
-                          ...(errors.cakeMessage && commonStyle.errorStyle),
-                        }}
-                        {...register("cakeMessage")}
-                        error={errors.cakeMessage ? true : false}
-                      />
-                    </Box>
-                  ) : <></>}
-
+                        ...(errors.cakeMessage && commonStyle.errorStyle),
+                      }}
+                      {...register("cakeMessage")}
+                      error={errors.cakeMessage ? true : false}
+                    />
+                  </Box>
+                ) : (
+                  <></>
+                )}
 
                 {/* <Box>
                   <FMTypography
@@ -813,9 +809,6 @@ const ProductDetail = () => {
                   : <></>
                 }  */}
 
-
-
-
                 {insertDate ? (
                   <Row className="my-2">
                     <Col md={12}>
@@ -841,17 +834,17 @@ const ProductDetail = () => {
                           error={errors.cakeMessage ? true : false}
                         >
                           <Box
-
                             className={
                               selectTodayDate ? "standard-is-disabled" : ""
                             }
-
                             sx={{
                               width: "132px",
                               height: "48px",
                               left: "843px",
                               top: "703px",
-                              backgroundColor: standardActive ? "#E6E6E6" : "white",
+                              backgroundColor: standardActive
+                                ? "#E6E6E6"
+                                : "white",
                               borderRadius: "100px",
                               display: "flex",
                               flexDirection: "column",
@@ -860,19 +853,23 @@ const ProductDetail = () => {
                               cursor: isTodaysDate ? "not-allowed" : "pointer", // Change cursor style
                               border: "1px solid #E6E6E6",
                               "&:hover": {
-                                border: isTodaysDate ? "1px solid #E6E6E6" : "1px solid black", // Adjust border on hover
+                                border: isTodaysDate
+                                  ? "1px solid #E6E6E6"
+                                  : "1px solid black", // Adjust border on hover
                               },
                               opacity: isTodaysDate ? 0.5 : 1, // Adjust opacity for disabled state
                             }}
                             onClick={standardDelivery}
                           >
-                            <FMTypography displayText={"Standard"} styleData={{ fontSize: "12px" }} />
+                            <FMTypography
+                              displayText={"Standard"}
+                              styleData={{ fontSize: "12px" }}
+                            />
                             <FMTypography
                               displayText={"(Free)"}
                               styleData={{ fontSize: "10px", color: "#178013" }}
                             />
                           </Box>
-
 
                           <Box
                             sx={{
@@ -880,7 +877,9 @@ const ProductDetail = () => {
                               height: "48px",
                               left: "843px",
                               top: "703px",
-                              backgroundColor: fixedActive ? "#E6E6E6" : "white",
+                              backgroundColor: fixedActive
+                                ? "#E6E6E6"
+                                : "white",
                               borderRadius: "100px",
                               display: "flex",
                               flexDirection: "column",
@@ -908,7 +907,9 @@ const ProductDetail = () => {
                               height: "48px",
                               left: "843px",
                               top: "703px",
-                              backgroundColor: midNightActive ? "#E6E6E6" : "white",
+                              backgroundColor: midNightActive
+                                ? "#E6E6E6"
+                                : "white",
                               borderRadius: "100px",
                               display: "flex",
                               flexDirection: "column",
@@ -929,14 +930,9 @@ const ProductDetail = () => {
                               styleData={{ fontSize: "10px", color: "#178013" }}
                             />
                           </Box>
-
-
                         </Box>
                       </Box>
-
-
                     </Col>
-
 
                     <Col>
                       {selectTodayDate && !fixed && !express ? (
@@ -955,7 +951,9 @@ const ProductDetail = () => {
                         <>
                           <div className="mt-3">
                             <div className="fw-bold">
-                              <h6 style={{ color: "#636363", fontSize: "18px" }}>
+                              <h6
+                                style={{ color: "#636363", fontSize: "18px" }}
+                              >
                                 Select Standard Time Slot
                               </h6>
                             </div>
@@ -968,16 +966,20 @@ const ProductDetail = () => {
                             }}
                             defaultValue={"Select Time Slot"}
                             onChange={onStandardDeliveryChange}
-                            options={selectTodayDate
-                              ? filterStandardOptions
-                              : StandardDelivery}
+                            options={
+                              selectTodayDate
+                                ? filterStandardOptions
+                                : StandardDelivery
+                            }
                           />
                         </>
                       ) : fixed ? (
                         <>
                           <div className="mt-3">
                             <div className="fw-bold">
-                              <h6 style={{ color: "#636363", fontSize: "18px" }}>
+                              <h6
+                                style={{ color: "#636363", fontSize: "18px" }}
+                              >
                                 Select Fixed Time Slot
                               </h6>
                             </div>
@@ -991,7 +993,9 @@ const ProductDetail = () => {
                             defaultValue="Select Time Slot"
                             onChange={onFixedDeliveryChange}
                             options={
-                              selectTodayDate ? filterFixedOptions : FixedDelivery
+                              selectTodayDate
+                                ? filterFixedOptions
+                                : FixedDelivery
                             }
                           />
                         </>
@@ -999,7 +1003,9 @@ const ProductDetail = () => {
                         <>
                           <div className="mt-3">
                             <div className="fw-bold">
-                              <h6 style={{ color: "#636363", fontSize: "18px" }}>
+                              <h6
+                                style={{ color: "#636363", fontSize: "18px" }}
+                              >
                                 Select Express Time Slot
                               </h6>
                             </div>
@@ -1018,9 +1024,7 @@ const ProductDetail = () => {
                                 ? filterExpressOptions
                                 : ExpressDelivery
                             }
-
                           />
-
 
                           {/* <FMDropdown
                             style={{ width: "10rem" }}
@@ -1044,9 +1048,6 @@ const ProductDetail = () => {
                   <></>
                 )}
 
-
-
-
                 {/* cart and buy btns */}
                 <Box sx={{ marginTop: "50px" }}>
                   <FMButton
@@ -1066,19 +1067,19 @@ const ProductDetail = () => {
                         backgroundColor: "white",
                       },
                     }}
-                  // onClick={tempSub}
-                  //   onClick={handleSubmit(onSubmit)}
+                    // onClick={tempSub}
+                    onClick={handleSubmit(onSubmit)}
                   />
-                  <Link to={'/add-to-cart'}>   </Link>
-                  <FMButton
-                    displayText={"Buy Now"}
-                    variant={"contained"}
-                    styleData={{
-                      ...commonStyle.buttonStyles,
-                      width: "215px",
-                    }}
-                  />
-
+                  <Link to={"/add-to-cart"}>
+                    <FMButton
+                      displayText={"Buy Now"}
+                      variant={"contained"}
+                      styleData={{
+                        ...commonStyle.buttonStyles,
+                        width: "215px",
+                      }}
+                    />
+                  </Link>
                   <input type={"submit"} hidden />
                 </Box>
 
@@ -1105,7 +1106,7 @@ const ProductDetail = () => {
               </Col>
             </Row>
           </Grid>
-        </Container >
+        </Container>
 
         {/*review col start */}
         {/* <Grid sx={{ padding: "50px 100px" }}>
@@ -1248,7 +1249,9 @@ const ProductDetail = () => {
                   style={{ paddingBottom: "19px" }}
                 />
                 <FMTypography
-                  displayText={Math.round(productDetailedData?.rating * 10) / 10}
+                  displayText={
+                    Math.round(productDetailedData?.rating * 10) / 10
+                  }
                   styleData={{ fontSize: "20px", paddingTop: "6px" }}
                 />
                 <FMButton
@@ -1304,7 +1307,7 @@ const ProductDetail = () => {
                 responsive={responsive}
                 partialVisible
                 infinite
-              // customDot={<CustomDot />}
+                // customDot={<CustomDot />}
               >
                 {reviewsCarouselData?.map((elem) => (
                   <Box style={{ paddingBottom: "1rem" }}>
@@ -1350,7 +1353,8 @@ const ProductDetail = () => {
                             />
                             <FMTypography
                               displayText={
-                                Math.round(productDetailedData?.rating * 10) / 10
+                                Math.round(productDetailedData?.rating * 10) /
+                                10
                               }
                               styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                             />
@@ -1389,7 +1393,7 @@ const ProductDetail = () => {
               responsive={responsive}
               partialVisible
               infinite
-            // customDot={<CustomDot />}
+              // customDot={<CustomDot />}
             >
               {similarProductDetailedData?.map((elem) => (
                 <Grid
@@ -1465,10 +1469,16 @@ const ProductDetail = () => {
                               justifyContent: "space-between",
                             }}
                           >
-                            <Typography variant="body2" sx={{ color: "#717171" }}>
+                            <Typography
+                              variant="body2"
+                              sx={{ color: "#717171" }}
+                            >
                               {elem?.deliveryDay}
                             </Typography>
-                            <Typography variant="body2" sx={{ color: "#008539" }}>
+                            <Typography
+                              variant="body2"
+                              sx={{ color: "#008539" }}
+                            >
                               Reviews {elem?.numReviews}
                             </Typography>
                           </Box>

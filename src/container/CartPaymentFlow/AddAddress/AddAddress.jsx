@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
 import { addToCartAddAddress } from "Redux/Slices/AddToCart/AddToCartAddAddressSlice";
 import AllAddressComponent from "./AllAddressComponent";
+import PriceDetails from "../AddToCart/PriceDetails";
+import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
 
 const AddAddress = ({ handleNext }) => {
   const dispatch = useDispatch();
@@ -71,6 +73,14 @@ const AddAddress = ({ handleNext }) => {
   const displayForm = () => {
     setDisplayFormData(true);
   };
+
+  const addedData = useSelector(
+    (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
+  );
+
+  useEffect(() => {
+    dispatch(addToCartProductsFinal());
+  }, [dispatch]);
 
   return (
     <>
@@ -427,7 +437,7 @@ const AddAddress = ({ handleNext }) => {
               />
             </Box>
             <hr />
-            <Box>
+            {/* <Box>
               <FMTypography displayText={"Price Details (3 Iteams)"} />
             </Box>
 
@@ -480,7 +490,13 @@ const AddAddress = ({ handleNext }) => {
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <FMTypography displayText={"Total Amount"} />
               <FMTypography displayText={"₹1999"} />
-            </Box>
+            </Box> */}
+
+            <Col style={{ marginLeft: "87px" }}>
+              {/* Render the PriceDetails component and pass the addedData prop */}
+              <PriceDetails addedData={addedData} handleNext={handleNext} />
+            </Col>
+
             <FMButton
               displayText={"Continue"}
               variant={"contained"}

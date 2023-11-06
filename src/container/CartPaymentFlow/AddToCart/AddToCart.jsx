@@ -14,7 +14,7 @@ import {
 } from "Redux/Slices/AddToCart/AddToCartSlice";
 import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
 import { addToCart } from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
-
+import PriceDetails from "./PriceDetails";
 const AddToCart = ({ handleNext }) => {
   const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ const AddToCart = ({ handleNext }) => {
   useEffect(() => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
-
+  console.log("added data ", addedData);
   const deleteProductOnClick = (id) => () => {
     dispatch(deleteAddToCartProducts({ productId: id }))
       .unwrap()
@@ -58,13 +58,45 @@ const AddToCart = ({ handleNext }) => {
     });
   };
 
-  
+  const calculateTotalMRP = () => {
+    let totalMRP = 0;
+    for (const elem in addedData) {
+      totalMRP += addedData[elem]?.actualPrice;
+    }
+    return totalMRP;
+  };
+
+  const calculateDiscountOnMRP = () => {
+    let discountOnMRP = 0;
+    for (const elem in addedData) {
+      discountOnMRP +=
+        addedData[elem]?.actualPrice - addedData[elem]?.discountPrice;
+    }
+    return discountOnMRP;
+  };
+
+  const calculateConvenienceFee = () => {
+    // Calculate the convenience fee based on your logic
+    // You may need to fetch it from an API or calculate it in a different way
+    return 40; // Example value, replace with your logic
+  };
+
+  const calculateTotalAmount = () => {
+    const totalMRP = calculateTotalMRP();
+    const discountOnMRP = calculateDiscountOnMRP();
+    const convenienceFee = calculateConvenienceFee();
+
+    return totalMRP - discountOnMRP + convenienceFee;
+  };
+
   return (
     <>
       <Row style={{ padding: "40px 120px" }}>
         <Col>
           <FMTypography
-            displayText={`Cart Items (${addedData && Object.keys(addedData)?.length})`}
+            displayText={`Cart Items (${
+              addedData && Object.keys(addedData)?.length
+            })`}
             styleData={{ fontSize: "40px", fontWeight: "500" }}
           />
         </Col>
@@ -127,9 +159,10 @@ const AddToCart = ({ handleNext }) => {
                           width: "10rem",
                           background: "#E6E6E6",
                         }}
-                        onChange={(e) => { optionChangeHandler(e, elem) }}
+                        onChange={(e) => {
+                          optionChangeHandler(e, elem);
+                        }}
                       />
-
                     </Col>
                   </Row>
                   {/* dropdown row above */}
@@ -141,7 +174,7 @@ const AddToCart = ({ handleNext }) => {
                         paddingTop: ".3rem",
                       }}
                     >
-                      ₹ {addedData[elem]?.price}
+                      ₹ {addedData[elem]?.actualPrice}
                     </del>
                     <Typography
                       sx={{
@@ -164,7 +197,10 @@ const AddToCart = ({ handleNext }) => {
                       }}
                     />
                   </Box>
-                  <Typography variant="body2" sx={{ color: "#717171", textTransform: 'capitalize' }}>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "#717171", textTransform: "capitalize" }}
+                  >
                     {`${addedData[elem]?.deliveryDay}`}
                   </Typography>
                 </Box>
@@ -174,97 +210,8 @@ const AddToCart = ({ handleNext }) => {
 
         {/* second col */}
         <Col style={{ marginLeft: "87px" }}>
-          <Box
-            sx={{
-              boxShadow:
-                "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-              borderRadius: "20px",
-              padding: "40px",
-            }}
-          >
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography displayText={"Apply Coupons"} />
-              <FMButton
-                displayText={"Apply"}
-                variant={"outlined"}
-                styleData={{
-                  border: " 1px solid #E6E6E6",
-                  borderRadius: "10px",
-                  color: "black",
-                  "&:hover": {
-                    border: " 1px solid #E6E6E6",
-                    backgroundColor: "white",
-                  },
-                }}
-              />
-            </Box>
-            <hr />
-            <Box>
-              <FMTypography displayText={`Price Details ${addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length + " Items" : addedData && Object.keys(addedData)?.length === 1 ? "1 Item" : " 0 Item"}`} />
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <FMTypography
-                displayText={"Total MRP"}
-                styleData={{ color: "#717171" }}
-              />
-              <FMTypography
-                displayText={"₹1999"}
-                styleData={{ color: "#717171" }}
-              />
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography
-                displayText={"Discount on MRP"}
-                styleData={{ color: "#717171" }}
-              />
-              <FMTypography
-                displayText={"₹1999"}
-                styleData={{ color: "#717171" }}
-              />
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography
-                displayText={"Coupon Discount"}
-                styleData={{ color: "#717171" }}
-              />
-              <FMTypography
-                displayText={"₹1999"}
-                styleData={{ color: "#717171" }}
-              />
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography
-                displayText={"Convenience Fee"}
-                styleData={{ color: "#717171" }}
-              />
-              <FMTypography
-                displayText={"₹1999"}
-                styleData={{ color: "#717171" }}
-              />
-            </Box>
-            <hr />
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography displayText={"Total Amount"} />
-              <FMTypography displayText={"₹1999"} />
-            </Box>
-            <FMButton
-              displayText={"Place Order"}
-              variant={"contained"}
-              styleData={{
-                ...commonStyle.buttonStyles,
-                width: "100%",
-                marginTop: "32px",
-              }}
-              onClick={handleNext}
-            //   onClick={handleSubmit(onSubmit)}
-            />
-          </Box>
+          {/* Render the PriceDetails component and pass the addedData prop */}
+          <PriceDetails addedData={addedData} handleNext={handleNext} />
         </Col>
       </Row>
     </>
