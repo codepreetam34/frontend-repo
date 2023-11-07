@@ -18,7 +18,7 @@ import Footer from "components/Footer/Footer";
 const steps = ["Cart", "Address", "Payment"];
 
 export default function HorizontalLinearStepper() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(1);
   const [skipped, setSkipped] = React.useState(new Set());
 
   const isStepSkipped = (step) => {

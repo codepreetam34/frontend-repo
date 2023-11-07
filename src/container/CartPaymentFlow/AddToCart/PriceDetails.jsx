@@ -1,29 +1,43 @@
-// PriceDetails.js
-
-import React from "react";
-import { Box } from "@mui/material";
+import React, { useState } from "react";
+import { Box, TextField } from "@mui/material";
 import FMTypography from "components/FMTypography/FMTypography";
 import FMButton from "components/FMButton/FMButton";
 import { commonStyle } from "Styles/commonStyles";
 
 const PriceDetails = ({ addedData, handleNext }) => {
+
+  const [couponCode, setCouponCode] = useState(""); // State to store entered coupon code
+  const [discountMRP, setDiscountMRP] = useState(0); // State to store coupon discount value
+
+  const applyCoupon = async () => {
+    try {
+      // Make an API call to fetch the coupon discount value based on the entered coupon code
+      const response = await fetch(`/api/coupon?code=${couponCode}`);
+      const data = await response.json();
+
+      if (data.discount) {
+        setDiscountMRP(data.discount); // Set the discount value received from the API
+      } else {
+        setDiscountMRP(0); // Set discount to 0 if no discount is available for the entered code
+      }
+    } catch (error) {
+      console.error("Error applying coupon:", error);
+    }
+  };
+
+
+
   const calculateTotalMRP = () => {
     let totalMRP = 0;
     for (const elem in addedData) {
-      totalMRP += addedData[elem]?.actualPrice;
+      totalMRP += addedData[elem]?.discountPrice;
     }
     return totalMRP;
   };
 
   const calculateDiscountOnMRP = () => {
-    let discountOnMRP = 0;
-    for (const elem in addedData) {
-      discountOnMRP +=
-        addedData[elem]?.actualPrice - addedData[elem]?.discountPrice;
-    }
-    return discountOnMRP;
+    return discountMRP; // Use the discount value from the API
   };
-
   const calculateConvenienceFee = () => {
     // Calculate the convenience fee based on your logic
     // You may need to fetch it from an API or calculate it in a different way
@@ -47,7 +61,36 @@ const PriceDetails = ({ addedData, handleNext }) => {
         padding: "40px",
       }}
     >
-      <hr />
+      {/* <FMTypography displayText={"Apply Coupons"} sx={{paddingBottom:"10px"}} />
+      <Box sx={{ display: "flex", justifyContent: "space-between" ,alignItems:'center'}}>
+
+        <Box>
+          <TextField
+            label="Coupon Code"
+            variant="outlined"
+            value={couponCode}
+            onChange={(e) => setCouponCode(e.target.value)}
+          />
+             </Box>
+             <Box>
+          <FMButton
+            displayText="Apply"
+            variant="outlined"
+            styleData={{
+              border: " 1px solid #E6E6E6",
+              borderRadius: "10px",
+              color: "black",
+              "&:hover": {
+                border: " 1px solid #E6E6E6",
+                backgroundColor: "white",
+              },
+            }}
+            onClick={applyCoupon}
+          />
+        </Box>
+      </Box>
+
+      <hr /> */}
       <Box>
         <FMTypography
           displayText={`Price Details ${addedData && Object.keys(addedData)?.length > 0
@@ -59,8 +102,6 @@ const PriceDetails = ({ addedData, handleNext }) => {
         />
       </Box>
 
-
-
       {addedData &&
         Object.keys(addedData)?.map((elem, index) => (
           <Box
@@ -68,6 +109,7 @@ const PriceDetails = ({ addedData, handleNext }) => {
               display: "flex",
               justifyContent: "space-between",
             }}
+            key={elem}
           >
             <FMTypography
               displayText={`${index + 1} ${addedData[elem]?.name}`}
@@ -126,7 +168,6 @@ const PriceDetails = ({ addedData, handleNext }) => {
           marginTop: "32px",
         }}
         onClick={handleNext}
-      // onClick={handleSubmit(onSubmit)}
       />
     </Box>
   );

@@ -107,7 +107,7 @@ const AddAddress = ({ handleNext }) => {
               component="form"
               xs={12}
 
-              // onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={handleSubmit(onSubmit)}
             >
               <Box sx={commonStyle.flexStyle}>
                 <Box sx={{ display: "flex" }}>
@@ -343,7 +343,7 @@ const AddAddress = ({ handleNext }) => {
                     fontWeight: "500 !important",
                   }}
                   value={homeOfficeLocation}
-                  // required={true}
+                // required={true}
                 />
               </Box>
               <Box
@@ -411,103 +411,13 @@ const AddAddress = ({ handleNext }) => {
             />
           </Box>
         </Col>
-        <Col style={{ marginLeft: "87px" }}>
-          <Box
-            sx={{
-              boxShadow:
-                "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-              borderRadius: "20px",
-              padding: "40px",
-            }}
-          >
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography displayText={"Apply Coupons"} />
-              <FMButton
-                displayText={"Apply"}
-                variant={"outlined"}
-                styleData={{
-                  border: " 1px solid #E6E6E6",
-                  borderRadius: "10px",
-                  color: "black",
-                  "&:hover": {
-                    border: " 1px solid #E6E6E6",
-                    backgroundColor: "white",
-                  },
-                }}
-              />
-            </Box>
-            <hr />
-            {/* <Box>
-              <FMTypography displayText={"Price Details (3 Iteams)"} />
-            </Box>
+        <Col style={{ marginLeft: "87px", paddingBottom: '2rem' }}>
 
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <FMTypography
-                displayText={"Total MRP"}
-                styleData={{ color: "#717171" }}
-              />
-              <FMTypography
-                displayText={"₹1999"}
-                styleData={{ color: "#717171" }}
-              />
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography
-                displayText={"Discount on MRP"}
-                styleData={{ color: "#717171" }}
-              />
-              <FMTypography
-                displayText={"₹1999"}
-                styleData={{ color: "#717171" }}
-              />
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography
-                displayText={"Coupon Discount"}
-                styleData={{ color: "#717171" }}
-              />
-              <FMTypography
-                displayText={"₹1999"}
-                styleData={{ color: "#717171" }}
-              />
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography
-                displayText={"Convenience Fee"}
-                styleData={{ color: "#717171" }}
-              />
-              <FMTypography
-                displayText={"₹1999"}
-                styleData={{ color: "#717171" }}
-              />
-            </Box>
-            <hr />
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <FMTypography displayText={"Total Amount"} />
-              <FMTypography displayText={"₹1999"} />
-            </Box> */}
 
-            <Col style={{ marginLeft: "87px" }}>
-              {/* Render the PriceDetails component and pass the addedData prop */}
-              <PriceDetails addedData={addedData} handleNext={handleNext} />
-            </Col>
 
-            <FMButton
-              displayText={"Continue"}
-              variant={"contained"}
-              styleData={{
-                ...commonStyle.buttonStyles,
-                width: "100%",
-                marginTop: "32px",
-              }}
-              // onClick={handleSubmit(onSubmit)}
-            />
-          </Box>
+          {/* Render the PriceDetails component and pass the addedData prop */}
+          <PriceDetails addedData={addedData} handleNext={handleNext} />
+
         </Col>
       </Row>
     </>
