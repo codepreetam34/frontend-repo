@@ -17,7 +17,7 @@ const FMDetailTypography = (props) => {
     seperator,
   } = props;
   return (
-    <Box sx={{ ...styleData, display: "flex" }}>
+    <Box sx={{ ...styleData, display: "flex", gap:"1rem" }}>
       <FMTypography
         styleData={{
           ...commonStyle.detailTypographyStyle,

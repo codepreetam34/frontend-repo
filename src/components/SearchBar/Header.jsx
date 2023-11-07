@@ -223,7 +223,7 @@ const Header = ({ pincodeData }) => {
   const addedData = useSelector(
     (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
   );
-  console.log("added Data ", addedData)
+
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
       <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }} >

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import closeCrossIcon from "../../../assets/closeCrossIcon.svg";
-import { commonStyle } from "Styles/commonStyles";
 import { Col, Row } from "react-bootstrap";
 import FMTypography from "components/FMTypography/FMTypography";
 import FMDropdown from "components/FMDropdown/FMDropdown";
 import { quantityOpt } from "constants/AppConstant";
-import FMButton from "components/FMButton/FMButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCartProductsFinal,
@@ -15,7 +13,6 @@ import {
 import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
 import { addToCart } from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 import PriceDetails from "./PriceDetails";
-import Footer from "components/Footer/Footer";
 const AddToCart = ({ handleNext }) => {
   const dispatch = useDispatch();
 
@@ -26,7 +23,6 @@ const AddToCart = ({ handleNext }) => {
   useEffect(() => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
-  console.log("added data ", addedData);
   const deleteProductOnClick = (id) => () => {
     dispatch(deleteAddToCartProducts({ productId: id }))
       .unwrap()
@@ -101,7 +97,7 @@ const AddToCart = ({ handleNext }) => {
                     <img
                       src={closeCrossIcon}
                       alt="close-icon"
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer"}}
                       onClick={deleteProductOnClick(elem)}
                     />
                   </Box>

@@ -4,7 +4,7 @@ import FMTypography from "components/FMTypography/FMTypography";
 import FMButton from "components/FMButton/FMButton";
 import { commonStyle } from "Styles/commonStyles";
 
-const PriceDetails = ({ addedData, handleNext }) => {
+const PriceDetails = ({ addedData, handleNext, activeStep, steps }) => {
 
   const [couponCode, setCouponCode] = useState(""); // State to store entered coupon code
   const [discountMRP, setDiscountMRP] = useState(0); // State to store coupon discount value
@@ -51,6 +51,7 @@ const PriceDetails = ({ addedData, handleNext }) => {
 
     return totalMRP - discountOnMRP + convenienceFee;
   };
+ 
 
   return (
     <Box
@@ -112,7 +113,7 @@ const PriceDetails = ({ addedData, handleNext }) => {
             key={elem}
           >
             <FMTypography
-              displayText={`${index + 1} ${addedData[elem]?.name}`}
+              displayText={`${index + 1}. ${addedData[elem]?.name}`}
               styleData={{ color: "#717171" }}
             />
             <FMTypography
@@ -160,7 +161,8 @@ const PriceDetails = ({ addedData, handleNext }) => {
         <FMTypography displayText={`₹${calculateTotalAmount()}`} />
       </Box>
       <FMButton
-        displayText={"Place Order"}
+        displayText={'Continue'}
+
         variant={"contained"}
         styleData={{
           ...commonStyle.buttonStyles,

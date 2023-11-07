@@ -55,18 +55,20 @@ const AddAddress = ({ handleNext }) => {
       address: {
         name: data?.firstName,
         mobileNumber: data?.contactNumber,
-        pinCode: "110091",
+        pinCode: pincodeData?.pincode,
         locality: data?.location,
         address: data?.address,
         cityDistrictTown: data?.cityDistrict,
         state: data?.state,
         landmark: data?.landmark,
         alternatePhone: data?.alternateNum,
-        addressType: "Home",
+        addressType: homeOfficeLocation,
       },
     };
 
+
     dispatch(addToCartAddAddress(payload));
+    dispatch(addToCartProductsFinal());
     setDisplayFormData(false);
   };
 
@@ -87,6 +89,7 @@ const AddAddress = ({ handleNext }) => {
       <Row style={{ padding: "10px 120px 0 120px" }}>
         <Col>
           <AllAddressComponent
+            addressDetailsAdded={addressDetailsAdded}
             styleData={{ display: displayFormData ? "none" : "block" }}
           />
 
@@ -407,7 +410,7 @@ const AddAddress = ({ handleNext }) => {
                 color: "#000000",
                 "&:hover": { border: "none", backgroundColor: "white" },
               }}
-              onClick={displayForm}
+            // onClick={displayForm}
             />
           </Box>
         </Col>

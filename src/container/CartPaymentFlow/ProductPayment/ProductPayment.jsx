@@ -5,7 +5,7 @@ import { Col, Row } from "react-bootstrap";
 const ProductPayment = () => {
   return (
     <Row style={{ padding: "10px 120px 0 120px" }}>
-      <Col className="col-sm-4">
+      <Col className="col-sm-4" style={{padding:"1rem 1rem"}}>
         <FMButton
           displayText={"Cash On Delivery"}
           variant="outlined"
