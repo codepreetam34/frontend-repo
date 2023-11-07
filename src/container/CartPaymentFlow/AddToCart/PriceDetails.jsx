@@ -50,15 +50,36 @@ const PriceDetails = ({ addedData, handleNext }) => {
       <hr />
       <Box>
         <FMTypography
-          displayText={`Price Details ${
-            addedData && Object.keys(addedData)?.length > 0
-              ? Object.keys(addedData).length + " Items"
-              : addedData && Object.keys(addedData)?.length === 1
+          displayText={`Price Details ${addedData && Object.keys(addedData)?.length > 0
+            ? Object.keys(addedData).length + " Items"
+            : addedData && Object.keys(addedData)?.length === 1
               ? "1 Item"
               : " 0 Item"
-          }`}
+            }`}
         />
       </Box>
+
+
+
+      {addedData &&
+        Object.keys(addedData)?.map((elem, index) => (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <FMTypography
+              displayText={`${index + 1} ${addedData[elem]?.name}`}
+              styleData={{ color: "#717171" }}
+            />
+            <FMTypography
+              displayText={`₹${addedData[elem]?.discountPrice}`}
+              styleData={{ color: "#717171" }}
+            />
+          </Box>
+        ))}
+      <hr />
       <Box
         sx={{
           display: "flex",
@@ -105,7 +126,7 @@ const PriceDetails = ({ addedData, handleNext }) => {
           marginTop: "32px",
         }}
         onClick={handleNext}
-        // onClick={handleSubmit(onSubmit)}
+      // onClick={handleSubmit(onSubmit)}
       />
     </Box>
   );

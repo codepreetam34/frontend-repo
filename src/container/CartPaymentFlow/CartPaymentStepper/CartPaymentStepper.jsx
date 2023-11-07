@@ -12,6 +12,8 @@ import { Col, Row } from "react-bootstrap";
 import { commonStyle } from "Styles/commonStyles";
 import { HeaderStyle } from "components/SearchBar/HeaderStyle";
 import { Link } from "react-router-dom";
+import Header from "components/SearchBar/Header";
+import Footer from "components/Footer/Footer";
 
 const steps = ["Cart", "Address", "Payment"];
 
@@ -43,63 +45,50 @@ export default function HorizontalLinearStepper() {
     dataOnStepper = <AddToCart handleNext={handleNext} />;
   } else if (activeStep === 2) {
     dataOnStepper = (
-      <AddAddress handleNext={handleNext}  />
+      <AddAddress handleNext={handleNext} />
     );
   } else if (activeStep === 3) {
     dataOnStepper = <ProductPayment />;
   }
 
   return (
-    <Row style={{ width: "100%" }}>
-      <Col
-        style={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
-      >
-        <Link to={"/"}>
-          <img
-            src={monkeyLogo}
-            alt="monkeyLogo"
-            style={HeaderStyle.monkeyLogoStyle}
-          />
-          <img
-            src={VibezterLogo}
-            alt="VibezterLogo"
-            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-          />
-        </Link>
-      </Col>
+    <>
+      <Header />
+      <Row style={{ width: "100%" }}>
 
-      <Col style={{ width: "30%", margin: "2rem auto " }}>
-        <Stepper
-          activeStep={activeStep}
-          sx={{
-            ".MuiStepConnector-root": {
-              top: 0,
-            },
-            ".MuiStepConnector-root span": {
-              borderColor: "transparent",
-            },
-            ".MuiStepConnector-root span::before": {
-              display: "flex",
-              justifyContent: "center",
-              content: '">"',
-            },
-          }}
-        >
-          {steps.map((label, index) => {
-            const stepProps = {};
-            const labelProps = {};
+        <Col style={{ margin: "2rem auto", display: "flex", justifyContent: 'center' }}>
+          <Stepper
+            activeStep={activeStep}
+            sx={{
+              ".MuiStepConnector-root": {
+                top: 0,
+              },
+              ".MuiStepConnector-root span": {
+                borderColor: "transparent",
+              },
+              ".MuiStepConnector-root span::before": {
+                display: "flex",
+                justifyContent: "center",
+                content: '">"',
+              },
+            }}
+          >
+            {steps.map((label, index) => {
+              const stepProps = {};
+              const labelProps = {};
 
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
-      </Col>
-      <Col></Col>
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel {...labelProps}>{label}</StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
+        </Col>
 
-      {dataOnStepper}
-    </Row>
+        {dataOnStepper}
+      </Row>
+      <Footer />
+    </>
   );
 }

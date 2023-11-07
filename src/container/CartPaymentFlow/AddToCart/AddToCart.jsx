@@ -15,6 +15,7 @@ import {
 import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
 import { addToCart } from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 import PriceDetails from "./PriceDetails";
+import Footer from "components/Footer/Footer";
 const AddToCart = ({ handleNext }) => {
   const dispatch = useDispatch();
 
@@ -58,45 +59,13 @@ const AddToCart = ({ handleNext }) => {
     });
   };
 
-  const calculateTotalMRP = () => {
-    let totalMRP = 0;
-    for (const elem in addedData) {
-      totalMRP += addedData[elem]?.actualPrice;
-    }
-    return totalMRP;
-  };
-
-  const calculateDiscountOnMRP = () => {
-    let discountOnMRP = 0;
-    for (const elem in addedData) {
-      discountOnMRP +=
-        addedData[elem]?.actualPrice - addedData[elem]?.discountPrice;
-    }
-    return discountOnMRP;
-  };
-
-  const calculateConvenienceFee = () => {
-    // Calculate the convenience fee based on your logic
-    // You may need to fetch it from an API or calculate it in a different way
-    return 40; // Example value, replace with your logic
-  };
-
-  const calculateTotalAmount = () => {
-    const totalMRP = calculateTotalMRP();
-    const discountOnMRP = calculateDiscountOnMRP();
-    const convenienceFee = calculateConvenienceFee();
-
-    return totalMRP - discountOnMRP + convenienceFee;
-  };
-
   return (
     <>
-      <Row style={{ padding: "40px 120px" }}>
+      <Row style={{ padding: "1rem 8rem" }}>
         <Col>
           <FMTypography
-            displayText={`Cart Items (${
-              addedData && Object.keys(addedData)?.length
-            })`}
+            displayText={`Cart Items (${addedData && Object.keys(addedData)?.length
+              })`}
             styleData={{ fontSize: "40px", fontWeight: "500" }}
           />
         </Col>
@@ -114,7 +83,7 @@ const AddToCart = ({ handleNext }) => {
                   display: "flex",
                   width: "auto",
                   padding: "32px",
-                  // marginTop: "20px",
+                  marginBottom: "1rem",
                 }}
               >
                 <Box>
@@ -126,9 +95,9 @@ const AddToCart = ({ handleNext }) => {
                 </Box>
                 <Box sx={{ marginLeft: "1rem", width: "100%" }}>
                   <Box
-                    sx={{ display: "fllex", justifyContent: "space-between" }}
+                    sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <FMTypography displayText={addedData[elem]?.name} />
+                    <FMTypography displayText={addedData[elem]?.name} sx={{ textTransform: 'capitalize' }} />
                     <img
                       src={closeCrossIcon}
                       alt="close-icon"
@@ -214,6 +183,7 @@ const AddToCart = ({ handleNext }) => {
           <PriceDetails addedData={addedData} handleNext={handleNext} />
         </Col>
       </Row>
+
     </>
   );
 };
