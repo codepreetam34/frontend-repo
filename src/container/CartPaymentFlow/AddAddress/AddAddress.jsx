@@ -65,10 +65,9 @@ const AddAddress = ({ handleNext }) => {
         addressType: homeOfficeLocation,
       },
     };
-
-
     dispatch(addToCartAddAddress(payload));
     dispatch(addToCartProductsFinal());
+    dispatch(addToCartAddress());
     setDisplayFormData(false);
   };
 
@@ -410,7 +409,7 @@ const AddAddress = ({ handleNext }) => {
                 color: "#000000",
                 "&:hover": { border: "none", backgroundColor: "white" },
               }}
-            // onClick={displayForm}
+              onClick={displayForm}
             />
           </Box>
         </Col>

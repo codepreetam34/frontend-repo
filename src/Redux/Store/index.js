@@ -15,7 +15,7 @@ import addToCartAddAddressSlice from "Redux/Slices/AddToCart/AddToCartAddAddress
 import getCarouselSlice from "Redux/Slices/LandingPageSlice/LandingPageSlice";
 import addReviewsSlice from "Redux/Slices/AddReviewSlice/AddReviewSlice";
 import myProfileSlice from "Redux/Slices/MyProfileSlice/MyProfile";
-
+import deleteAddressSlice from "Redux/Slices/AddToCart/DeleteAddress";
 const rootReducer = combineReducers({
   menuList: menuListSlice,
   auth: authReducer,
@@ -29,6 +29,7 @@ const rootReducer = combineReducers({
   getCarousel: getCarouselSlice,
   addReviews: addReviewsSlice,
   myProfile: myProfileSlice,
+  deleteAddress: deleteAddressSlice,
 });
 
 const initializeStore = () =>

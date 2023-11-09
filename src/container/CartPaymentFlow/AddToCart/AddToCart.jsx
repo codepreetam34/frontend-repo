@@ -13,6 +13,7 @@ import {
 import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
 import { addToCart } from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 import PriceDetails from "./PriceDetails";
+
 const AddToCart = ({ handleNext }) => {
   const dispatch = useDispatch();
 
@@ -23,6 +24,7 @@ const AddToCart = ({ handleNext }) => {
   useEffect(() => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
+  
   const deleteProductOnClick = (id) => () => {
     dispatch(deleteAddToCartProducts({ productId: id }))
       .unwrap()
@@ -32,6 +34,7 @@ const AddToCart = ({ handleNext }) => {
         }
       });
   };
+
   // let totalPrice = addedData?.reduce(function (accumulator, item) {
   //   return accumulator + item.price * item.qty;
   // }, 0);
@@ -97,7 +100,7 @@ const AddToCart = ({ handleNext }) => {
                     <img
                       src={closeCrossIcon}
                       alt="close-icon"
-                      style={{ cursor: "pointer"}}
+                      style={{ cursor: "pointer" }}
                       onClick={deleteProductOnClick(elem)}
                     />
                   </Box>

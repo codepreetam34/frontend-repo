@@ -3,55 +3,70 @@ import { Box, Grid, Radio, RadioGroup, FormControlLabel, IconButton, CircularPro
 import FMDetailTypography from "components/FMDetailTypography/FMDetailTypography";
 import FMTypography from "components/FMTypography/FMTypography";
 import { useSelector, useDispatch } from "react-redux";
-//import { setDefaultAddress } from "yourAddressActions";
+
 import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteAddress } from "Redux/Slices/AddToCart/DeleteAddress";
+import { notify } from "components/FMToaster/FMToaster";
+import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
+import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
 const AllAddressComponent = ({ styleData, addressDetailsAdded }) => {
   const dispatch = useDispatch();
-  const [selectedAddress, setSelectedAddress] = useState(getInitialSelectedAddress());
+  const [selectedAddress, setSelectedAddress] = useState(() => {
+    const storedSelectedAddress = localStorage.getItem("selectedAddress");
+    return storedSelectedAddress || getInitialSelectedAddress();
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleRemoveAddress = (addressId) => {
+    dispatch(deleteAddress(addressId))
+      .then((resultAction) => {
+        if (deleteAddress.fulfilled.match(resultAction)) {
+          if (selectedAddress === addressId) {
+            localStorage.removeItem("selectedAddress");
+          }
+          const deletedAddress = resultAction.payload; // Assuming the action payload contains information about the deleted address
+          notify({ type: "success", content: `Address for ${deletedAddress.address} deleted successfully` });
+          dispatch(addToCartAddress());
+        } else if (deleteAddress.rejected.match(resultAction)) {
+          const error = resultAction.payload; // Access the error message from the payload
+          notify({ type: "error", content: `Failed to delete the address: ${error}` });
+        }
+      });
+
+  };
 
   function getInitialSelectedAddress() {
     return addressDetailsAdded && addressDetailsAdded.length > 0
       ? addressDetailsAdded[0]?._id
-      : undefined;
+      : null;
   }
-
-  const handleRemoveAddress = (addressId) => {
-
-    // Perform the API call to remove the address with the given addressId
-
-    // Update the Redux store if needed
-
-  };
-
   const handleRadioChange = (id) => {
     setSelectedAddress(id);
+    localStorage.setItem("selectedAddress", id);
   };
 
-  const [isLoading, setIsLoading] = useState(true); // State to manage loading state
-
   useEffect(() => {
-    // Simulate loading delay (You can replace this with an API call)
-    // Set the selected address when addressDetailsAdded is available
     if (addressDetailsAdded && addressDetailsAdded.length > 0) {
-      setSelectedAddress(addressDetailsAdded[0]._id);
+      const storedSelectedAddress = localStorage.getItem("selectedAddress");
+      setSelectedAddress(storedSelectedAddress || getInitialSelectedAddress());
       setIsLoading(false);
     }
   }, [addressDetailsAdded]);
-  // if (isLoading) {
-  //   // Display a loader while loading
-  //   return (
-  //     <div>
-  //       <CircularProgress />
-  //     </div>
-  //   );
-  // }
+
+  if (isLoading) {
+    return (
+      <Grid style={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Grid>
+    );
+  }
   return (
     <>
       <Grid>
-        <RadioGroup value={selectedAddress} onChange={handleRadioChange}>
+        <RadioGroup value={selectedAddress} onChange={(event) => handleRadioChange(event.target.value)}>
           {addressDetailsAdded && addressDetailsAdded.length > 0 ? addressDetailsAdded?.map((elem, index) => (
             <Box
-              key={elem?._id} // Make sure each address has a unique identifier (e.g., id)
+              key={elem?._id}
               sx={{
                 position: 'relative',
                 boxShadow:
@@ -94,8 +109,9 @@ const AllAddressComponent = ({ styleData, addressDetailsAdded }) => {
                 value={elem?._id}
                 control={<Radio />}
                 label={`${elem?.name} (${elem?.addressType})`}
-                onChange={() => handleRadioChange(elem?._id)} // Pass elem to the function
+              // No need to pass elem?._id here, it's already set in the value prop
               />
+
 
               <FMTypography
                 displayText={elem?.address}
