@@ -12,10 +12,11 @@ import { forgotOtpSchema } from "validationSchema/forgotOtpSchema";
 import { verifyOtp } from "Redux/Slices/SignUp/SignUp";
 import { useDispatch } from "react-redux";
 import { verifyEmailSchema } from "validationSchema/verifyemailSchema";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const EmailOtpVerification = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
 
@@ -24,7 +25,24 @@ const EmailOtpVerification = () => {
       otp: data?.otp,
       id: id,
     };
-    dispatch(verifyOtp(postData));
+    dispatch(verifyOtp(postData))
+
+      .then((response) => {
+        if (response.payload.user.verified) {
+          navigate("/login")
+
+        } else {
+
+        }
+      })
+      .catch((error) => {
+
+      })
+      .finally(() => {
+
+      });
+
+
   };
   const {
     register,

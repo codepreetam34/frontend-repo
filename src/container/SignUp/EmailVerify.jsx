@@ -6,32 +6,50 @@ import { HeaderStyle } from "components/SearchBar/HeaderStyle";
 import React from "react";
 import { commonStyle } from "Styles/commonStyles";
 import { Box } from "@mui/system";
+import { Link, useNavigate } from "react-router-dom";
+import FMButton from "components/FMButton/FMButton";
 
 const EmailVerify = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Box
         sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
       >
-        <img
-          src={monkeyLogo}
-          alt="monkeyLogo"
-          style={HeaderStyle.monkeyLogoStyle}
-        />
-        <img
-          src={VibezterLogo}
-          alt="VibezterLogo"
-          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-        />
+        <Link to={"/"}>
+          <img
+            src={monkeyLogo}
+            alt="monkeyLogo"
+            style={HeaderStyle.monkeyLogoStyle}
+          />
+          <img
+            src={VibezterLogo}
+            alt="VibezterLogo"
+            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
+          />
+        </Link>
       </Box>
       <Grid container sx={{ display: "flex", justifyContent: "center" }}>
-        <Grid item sx={commonStyle.innerGrid}>
+        <Grid item sx={{ ...commonStyle.innerGrid }}>
           <FMTypography
             displayText={
               "Please verify mail by clicking on link sent on your email id"
             }
             sx={{ fontWeight: "600" }}
           />
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <FMButton
+              displayText={"Go to Login Page"}
+              variant={"contained"}
+              styleData={{
+                ...commonStyle.buttonStyles,
+                width: "247px",
+                marginTop: "32px",
+
+              }}
+              onClick={navigate('/login')}
+            />
+          </Box>
         </Grid>
       </Grid>
     </>

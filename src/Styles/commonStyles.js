@@ -69,7 +69,7 @@ export const commonStyle = {
   buttonBox: {
     display: "flex",
     justifyContent: "flex-start",
-    marginBottom: "1.625rem",
+    marginBottom: "1rem",
   },
   buttonStyles: {
     width: "auto",

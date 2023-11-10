@@ -78,8 +78,23 @@ const Login = () => {
           style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
         />
       </Box>
-      <Grid container sx={commonStyle.mainGridContainer}>
-        <Grid item sx={commonStyle.innerGrid}>
+      <Grid container sx={{
+        display: "flex",
+        alignItems: "center",
+        background: "white",
+        justifyContent: "center",
+      }}>
+        <Grid item sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "2rem",
+          marginTop: "3rem",
+          marginBottom: '3rem',
+          borderRadius: "20px",
+          boxShadow:
+            " 0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+        }}>
           <Box sx={commonStyle.formDetailsContainer}>
             <FMTypography
               displayText="Log In"
@@ -102,11 +117,12 @@ const Login = () => {
                   {...register("email")}
                   error={errors.email ? true : false}
                 />
-                <FMTypography
-                  styleData={commonStyle.errorText}
-                  displayText={errors.email?.message}
-                />
-
+                {errors.email?.message &&
+                  <FMTypography
+                    styleData={commonStyle.errorText}
+                    displayText={errors.email?.message}
+                  />
+                }
                 <OutlinedInput
                   placeholder="Enter your password"
                   type={passwordType ? "password" : "text"}
@@ -130,10 +146,11 @@ const Login = () => {
                     </InputAdornment>
                   }
                 />
-                <FMTypography
-                  styleData={commonStyle.errorText}
-                  displayText={errors.password?.message}
-                />
+                {errors.password?.message &&
+                  <FMTypography
+                    styleData={commonStyle.errorText}
+                    displayText={errors.password?.message}
+                  />}
                 <Box sx={commonStyle.buttonBox}>
                   <FMButton
                     displayText={"Forgot Password?"}
@@ -165,7 +182,7 @@ const Login = () => {
                   styleData={{
                     ...commonStyle.buttonStyles,
                     backgroundColor: "none",
-                    marginTop: "29px",
+                    marginTop: "1rem",
                     color: "#222222",
                     border: "2px solid #E6E6E6",
                     "&:hover": {
@@ -181,7 +198,7 @@ const Login = () => {
                   styleData={{
                     ...commonStyle.buttonStyles,
                     backgroundColor: "none",
-                    marginTop: "29px",
+                    marginTop: "1rem",
                     color: "#222222",
                     border: "2px solid #E6E6E6",
                     "&:hover": {
@@ -191,7 +208,7 @@ const Login = () => {
                   }}
                 />
               </Box>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Box sx={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
                 <FMTypography displayText={"Don’t have an account?"} />
                 <FMButton
                   variant={"outlined"}
