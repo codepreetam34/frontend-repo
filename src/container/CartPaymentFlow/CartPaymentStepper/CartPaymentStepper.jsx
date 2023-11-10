@@ -19,6 +19,8 @@ export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
+  const [totalAmount, setTotalAmount] = React.useState();
+
   const isStepOptional = (step) => {
     return step === 1;
   };
@@ -27,7 +29,8 @@ export default function HorizontalLinearStepper() {
     return skipped.has(step);
   };
 
-  const handleNext = () => {
+  const handleNext = (totalAmt) => {
+    setTotalAmount(totalAmt)
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -69,7 +72,7 @@ export default function HorizontalLinearStepper() {
     } else if (activeStep === 1) {
       return (<AddAddress handleNext={handleNext} />);
     } else if (activeStep === 2) {
-      return (<ProductPayment />);
+      return (<ProductPayment totalAmount={totalAmount} />);
     }
   }
 

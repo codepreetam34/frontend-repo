@@ -169,7 +169,7 @@ const PriceDetails = ({ addedData, handleNext, activeStep, steps }) => {
           width: "100%",
           marginTop: "32px",
         }}
-        onClick={handleNext}
+        onClick={() => handleNext(calculateTotalAmount())}
       />
     </Box>
   );
