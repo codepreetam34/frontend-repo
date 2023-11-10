@@ -33,6 +33,7 @@
     "path-alias-resolver": "^1.0.3-alpha",
     "postcss": "^8.4.24",
     "prop-types": "^15.8.1",
+    "razorpay": "^2.9.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",

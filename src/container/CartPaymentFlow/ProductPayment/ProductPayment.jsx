@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 //import { LoadScript } from 'react-load-script';
 
-import Razorpay from 'razorpay';
+//import Razorpay from 'razorpay';
 import axios from "axios";
 const ProductPayment = ({ totalAmount }) => {
   // useEffect(() => {
@@ -12,34 +12,73 @@ const ProductPayment = ({ totalAmount }) => {
 
   // }, []);
 
+  // const handleRazorpayPayment = async () => {
+  //   // try {
+  //   //   // Fetch order details from your backend using Axios
+  //   //   const response = await axios.post("http://localhost:5000/api/create-order", {
+  //   //     totalAmount,
+  //   //   });
+
+  //   //   const order = response.data;
+
+  //   //   // Create a Razorpay instance with the order details
+  //   //   const razorpay = new Razorpay({
+  //   //     key_id: 'rzp_test_lUsErTdW0CPEb7',
+  //   //     amount: order.amount,
+  //   //     currency: order.currency,
+  //   //     name: 'Vibezter',
+  //   //     description: 'Purchase description',
+  //   //     order_id: order.id,
+  //   //     handler: function (response) {
+  //   //       // Handle successful payment response
+  //   //       console.log("response Razor ", response);
+  //   //     },
+  //   //   });
+
+  //   //   // Open the Razorpay payment window
+  //   //   razorpay.open();
+  //   // } catch (error) {
+  //   //   console.error("Error during Razorpay payment:", error);
+  //   // }
+  // };
+
   const handleRazorpayPayment = async () => {
-    // try {
-    //   // Fetch order details from your backend using Axios
-    //   const response = await axios.post("http://localhost:5000/api/create-order", {
-    //     totalAmount,
-    //   });
+    try {
+      // Fetch order details from your backend using Axios
+      const response = await axios.post("http://localhost:5000/api/create-order", {
+        totalAmount,
+      });
 
-    //   const order = response.data;
+      const order = response.data;
 
-    //   // Create a Razorpay instance with the order details
-    //   const razorpay = new Razorpay({
-    //     key_id: 'rzp_test_lUsErTdW0CPEb7',
-    //     amount: order.amount,
-    //     currency: order.currency,
-    //     name: 'Vibezter',
-    //     description: 'Purchase description',
-    //     order_id: order.id,
-    //     handler: function (response) {
-    //       // Handle successful payment response
-    //       console.log("response Razor ", response);
-    //     },
-    //   });
+      // Dynamically create a script tag for Razorpay
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      script.onload = () => {
+        // Create a Razorpay instance with the order details
+        const razorpay = new window.Razorpay({
+          key_id: 'rzp_test_lUsErTdW0CPEb7',
+          amount: order.amount,
+          currency: order.currency,
+          name: 'Vibezter',
+          description: 'Purchase description',
+          order_id: order.id,
+          handler: function (response) {
+            // Handle successful payment response
+            console.log("response Razor ", response);
+          },
+        });
 
-    //   // Open the Razorpay payment window
-    //   razorpay.open();
-    // } catch (error) {
-    //   console.error("Error during Razorpay payment:", error);
-    // }
+        // Open the Razorpay payment window
+        razorpay.open();
+      };
+
+      // Append the script tag to the document's head
+      document.head.appendChild(script);
+    } catch (error) {
+      console.error("Error during Razorpay payment:", error);
+    }
   };
 
   return (
