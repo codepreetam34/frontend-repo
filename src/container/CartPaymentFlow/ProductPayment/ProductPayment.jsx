@@ -67,6 +67,10 @@ const ProductPayment = ({ totalAmount }) => {
           handler: function (response) {
             // Handle successful payment response
             console.log("response Razor ", response);
+            // razorpay_order_id: "order_MymSF2e9XWGPyU"
+            // razorpay_payment_id: "pay_MymSakRYkJLUsB"
+            // razorpay_signature: "0dd30084c3fda56d49d915a8bf48b3988ef59ea63681742174d35ad103f18384"
+
           },
         });
 
