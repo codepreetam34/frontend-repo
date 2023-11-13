@@ -14,7 +14,7 @@ import { Box, Modal, Button, Typography } from "@mui/material";
 import Layout from "components/Layout";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-
+import adsBanner from "assets/adsBanner.png"
 const LandingPage = () => {
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
   const [showArea, setShowArea] = useState(false);
@@ -36,6 +36,7 @@ const LandingPage = () => {
       setPincodeData(null);
       setShowArea(false);
     }
+
   };
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const LandingPage = () => {
       setPincodeModalOpen(false);
     }
   }, []);
+
   return (
     <>
 
@@ -64,14 +66,14 @@ const LandingPage = () => {
           <Box>
             <TopCategory />
           </Box>
+          <Box>
+            <img src={adsBanner} alt="" />
+          </Box>
           <ShopByOccasion />
           <PamperZone />
           <ThreePoint />
         </div>
         <Footer />
-
-
-
 
         <Modal open={pincodeModalOpen}>
           <Box

@@ -64,6 +64,7 @@ const ProductPage = () => {
       setDisplayedProducts(categoryProducts);
     }
   };
+  
   // const productPageData = useSelector(
   //   (state) => state?.getProductsList?.getProductsListByCategoryId?.products
   // );
@@ -71,12 +72,11 @@ const ProductPage = () => {
   // const pageTitle = useSelector(
   //   (state) => state?.getProductsList?.getProductsListByCategoryId?.pageTitle
   // );
+
   const onCardClick = (element) => {
     let pId = element?._id;
     navigate(`/product-detail/${pId}`);
   };
-
-
 
   return (
     <>

@@ -62,9 +62,9 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { pId } = params;
+  const [storedPincode, setStoredPincode] = useState(sessionStorage.getItem("pincode"));
 
-  const todaysDate = moment(new Date()).format("DDMMYY");
-
+  console.log("storedPincode ", storedPincode)
   const [productQuantity, setProductQuantity] = useState(createUserOptions);
   const [eggOrNot, setEggOrNot] = useState(egglessOrNot);
   const [pincodeData, setPincodeData] = useState("");
@@ -74,13 +74,15 @@ const ProductDetail = () => {
   const [midNightActive, setMidNightActive] = useState(false);
   const [deliveryTime, setDeliveryTime] = useState();
   const [serviceId, setServiceId] = useState("");
-  const [date, setDate] = useState(dayjs(Date()));
 
+  const todaysDate = moment(new Date()).format("DDMMYY");
+  const [date, setDate] = useState(null);
   const [isTodaysDate, setIsTodaysDate] = useState(true);
-
   useEffect(() => {
-    setIsTodaysDate(() => date.format("DDMMYY") === todaysDate);
+    setIsTodaysDate(() => date && date.format && date.format("DDMMYY") === todaysDate);
   }, [date]);
+
+
 
   const handleChange = (newValue) => {
     setDate(newValue);
@@ -509,10 +511,10 @@ const ProductDetail = () => {
                     {productQuantity == "0.5 Kg"
                       ? productDetailedData?.halfkgprice
                       : productQuantity == "1 Kg"
-                      ? productDetailedData?.onekgprice
-                      : productQuantity == "2 Kg"
-                      ? productDetailedData?.twokgprice
-                      : productDetailedData?.discountPrice}
+                        ? productDetailedData?.onekgprice
+                        : productQuantity == "2 Kg"
+                          ? productDetailedData?.twokgprice
+                          : productDetailedData?.discountPrice}
                   </Typography>
 
                   <FMTypography
@@ -567,6 +569,8 @@ const ProductDetail = () => {
                 <Box sx={{ marginTop: "1rem", display: "flex" }}>
                   <Box>
                     <Pincode
+
+                      value={storedPincode}
                       showCity={false}
                       showDistrict={false}
                       showState={false}
@@ -601,14 +605,22 @@ const ProductDetail = () => {
                   <Box>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DesktopDatePicker
-                        // label="Date desktop"
+                        label="Select Date"
                         disabled={disabledDate}
                         disablePast
                         inputFormat="DD/MM/YYYY"
                         value={date}
                         onChange={onDateChange}
-                        //   onChange={(e) => console.log(e)}
-                        renderInput={(params) => <TextField {...params} />}
+                        //onChange={(e) => console.log(e)}
+                        renderInput={(startProps) => (
+                          <>
+                            <TextField
+                              {...startProps}
+                              id="date-picker"
+
+                            />
+                          </>
+                        )}
                         className="datePickerStyle"
                         sx={{ height: "48px" }}
                       />
@@ -1049,8 +1061,10 @@ const ProductDetail = () => {
                 )}
 
                 {/* cart and buy btns */}
+
                 <Box sx={{ marginTop: "50px" }}>
                   <FMButton
+                    disabled={disabledDate}
                     displayText={"Add To Cart"}
                     variant="outlined"
                     styleData={{
@@ -1072,6 +1086,7 @@ const ProductDetail = () => {
                   />
                   <Link to={"/add-to-cart"}>
                     <FMButton
+                      disabled={disabledDate}
                       displayText={"Buy Now"}
                       variant={"contained"}
                       styleData={{
@@ -1082,6 +1097,7 @@ const ProductDetail = () => {
                   </Link>
                   <input type={"submit"} hidden />
                 </Box>
+
 
                 {/* prod desc */}
                 <Box sx={{ marginTop: "50px" }}>
@@ -1307,7 +1323,7 @@ const ProductDetail = () => {
                 responsive={responsive}
                 partialVisible
                 infinite
-                // customDot={<CustomDot />}
+              // customDot={<CustomDot />}
               >
                 {reviewsCarouselData?.map((elem) => (
                   <Box style={{ paddingBottom: "1rem" }}>
@@ -1393,7 +1409,7 @@ const ProductDetail = () => {
               responsive={responsive}
               partialVisible
               infinite
-              // customDot={<CustomDot />}
+            // customDot={<CustomDot />}
             >
               {similarProductDetailedData?.map((elem) => (
                 <Grid
@@ -1445,7 +1461,7 @@ const ProductDetail = () => {
                             gutterBottom
                             variant="h5"
                             component="div"
-                            sx={{ fontSize: "18px", color: "#222222" }}
+                            sx={{ fontSize: "18px", color: "#222222", textTransform: 'capitalize' }}
                           >
                             {elem?.name}
                           </Typography>
@@ -1471,7 +1487,7 @@ const ProductDetail = () => {
                           >
                             <Typography
                               variant="body2"
-                              sx={{ color: "#717171" }}
+                              sx={{ color: "#717171", textTransform: 'capitalize' }}
                             >
                               {elem?.deliveryDay}
                             </Typography>

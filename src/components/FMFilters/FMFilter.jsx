@@ -17,7 +17,6 @@ const FMFilter = ({
 }) => {
   const dispatch = useDispatch();
   const [sortingValue, setSortingValue] = useState()
-  console.log("category id : ", sendCategoryId)
   const sortByOptionsChangeHandler = (e) => {
     setSortingValue(e.target.value)
     const payload = {
