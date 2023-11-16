@@ -31,12 +31,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-    preferRelative: true,
     fallback: {
       https: require.resolve('https-browserify'),
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
-      http: require.resolve('stream-http'),
+      http: require.resolve('http-browserify'),
     },
     alias: {
       '@material-ui/core/esm/Popper': path.resolve(__dirname, 'node_modules/@material-ui/core/esm/popper.js'),
