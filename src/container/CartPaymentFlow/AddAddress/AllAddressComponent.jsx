@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid, Radio, RadioGroup, FormControlLabel, IconButton, CircularProgress } from "@mui/material";
-import FMDetailTypography from "components/FMDetailTypography/FMDetailTypography";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMDetailTypography from "../../../components/FMDetailTypography/FMDetailTypography";
+import FMTypography from "../../../components/FMTypography/FMTypography";
 import { useSelector, useDispatch } from "react-redux";
 
 import DeleteIcon from "@mui/icons-material/Delete";
-import { deleteAddress } from "Redux/Slices/AddToCart/DeleteAddress";
-import { notify } from "components/FMToaster/FMToaster";
-import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
-import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
+import { deleteAddress } from "../../../Redux/Slices/AddToCart/DeleteAddress";
+import { notify } from "../../../components/FMToaster/FMToaster";
+//import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
+import { addToCartAddress } from "../../../Redux/Slices/AddToCart/AddAddress";
 const AllAddressComponent = ({ styleData, addressDetailsAdded }) => {
   const dispatch = useDispatch();
   const [selectedAddress, setSelectedAddress] = useState(() => {

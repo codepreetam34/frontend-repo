@@ -8,14 +8,14 @@ import authReducer from "../Slices/Login/auth.slice";
 import resetPasswordSlice from "../Slices/Login/resetPasswordLink";
 import passwordSetup from "../Slices/Login/setupPassword";
 import getProductsListData from "../Slices/ProductPage/ProductsPageSlice";
-import ProductDetailPageSlice from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
-import addToCartProductsSlice from "Redux/Slices/AddToCart/AddToCartSlice";
-import addToCartAddressSlice from "Redux/Slices/AddToCart/AddAddress";
-import addToCartAddAddressSlice from "Redux/Slices/AddToCart/AddToCartAddAddressSlice";
-import getCarouselSlice from "Redux/Slices/LandingPageSlice/LandingPageSlice";
-import addReviewsSlice from "Redux/Slices/AddReviewSlice/AddReviewSlice";
-import myProfileSlice from "Redux/Slices/MyProfileSlice/MyProfile";
-import deleteAddressSlice from "Redux/Slices/AddToCart/DeleteAddress";
+import ProductDetailPageSlice from "../Slices/ProductDetailPage/ProductDetailPageSlice";
+import addToCartProductsSlice from "../Slices/AddToCart/AddToCartSlice";
+import addToCartAddressSlice from "../Slices/AddToCart/AddAddress";
+import addToCartAddAddressSlice from "../Slices/AddToCart/AddToCartAddAddressSlice";
+import getCarouselSlice from "../Slices/LandingPageSlice/LandingPageSlice";
+import addReviewsSlice from "../Slices/AddReviewSlice/AddReviewSlice";
+import myProfileSlice from "../Slices/MyProfileSlice/MyProfile";
+import deleteAddressSlice from "../Slices/AddToCart/DeleteAddress";
 const rootReducer = combineReducers({
   menuList: menuListSlice,
   auth: authReducer,

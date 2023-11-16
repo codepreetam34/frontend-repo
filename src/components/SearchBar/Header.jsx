@@ -1,10 +1,11 @@
-import { Avatar, Box, Grid, Typography } from "@mui/material";
-import SearchBar from "components/SearchBar/SearchBar";
+import { Avatar, Box, Grid, IconButton, Typography } from "@mui/material";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import React, { useEffect, useState } from "react";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 import cart from "../../assets/cart.svg";
 import profileIcon from "../../assets/profileIcon.svg";
+import headerLocationIcon from "../../assets/headerLocationIcon.svg";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -14,20 +15,21 @@ import { commonStyle } from "../../Styles/commonStyles";
 import { Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import "./HeaderBootstrapMenu.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getMenuBarList } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
+import { getMenuBarList } from "../../Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
 import orderIcon from "../../assets/orderIcon.svg";
 import contactIcon from "../../assets/contactIcon.svg";
 import faqIcon from "../../assets/faqIcon.svg";
 import logoutIcon from "../../assets/logoutIcon.svg";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMTypography from "../../components/FMTypography/FMTypography";
 import { Stack } from "@mui/system";
-import FMButton from "components/FMButton/FMButton";
+import FMButton from "../../components/FMButton/FMButton";
 import { Link, useNavigate } from "react-router-dom";
-import { FAQ, LOGIN, MY_PROFILE } from "Routes/Routes";
-import { logout } from "Redux/Slices/Login/auth.slice";
+import { FAQ, LOGIN, MY_PROFILE } from "../../Routes/Routes";
+import { logout } from "../../Redux/Slices/Login/auth.slice";
 import { makeStyles } from "@mui/styles";
-import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
-
+import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send'
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -99,9 +101,19 @@ const useStyles = makeStyles((theme) => ({
     padding: '4px 8px',
     fontSize: '12px',
   },
+  pincodeItemCountStyle: {
+    position: 'absolute',
+    top: '0',
+    right: '1.5rem',
+    backgroundColor: '#801317',
+    color: 'white',
+    borderRadius: '50%',
+    padding: '4px 8px',
+    fontSize: '12px',
+  },
 
 }));
-const Header = ({ pincodeData }) => {
+const Header = ({ pincodeData, handleModalOpenController }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -224,6 +236,8 @@ const Header = ({ pincodeData }) => {
     (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
   );
 
+
+
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
       <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }} >
@@ -249,9 +263,39 @@ const Header = ({ pincodeData }) => {
             marginTop: ".5rem",
             display: "flex",
             justifyContent: "flex-end",
-            gap: "2rem",
+            gap: "1rem",
           }}
         >
+          <Box>
+
+            <Button
+              onClick={handleModalOpenController}
+              style={{
+                minWidth: "0",
+                "MuiButton-root:hover": {
+                  backgroundColor: "red !important",
+                  borderRadius: "28px",
+                },
+              }}
+            >
+
+
+              <div style={{ position: 'relative' }}>
+                <img
+                  src={headerLocationIcon}
+                  alt="headerLocationIcon"
+                  style={HeaderStyle.profileIconStyle}
+                />
+                {pincodeData && pincodeData ?
+                  <div class={classes.pincodeItemCountStyle}>
+                    {pincodeData}
+                  </div> : <></>
+                }
+              </div>
+
+
+            </Button>
+          </Box>
           <Box>
             <Link to={`/add-to-cart`} style={{ textDecoration: 'none' }}>
               <div style={{ position: 'relative' }}>

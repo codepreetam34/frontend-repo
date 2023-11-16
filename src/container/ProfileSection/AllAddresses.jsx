@@ -1,12 +1,12 @@
 import { Box } from "@material-ui/core";
 import { Container } from "@mui/system";
-import FMButton from "components/FMButton/FMButton";
-import FMDetailTypography from "components/FMDetailTypography/FMDetailTypography";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMButton from "../../components/FMButton/FMButton";
+import FMDetailTypography from "../../components/FMDetailTypography/FMDetailTypography";
+import FMTypography from "../../components/FMTypography/FMTypography";
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
+import { addToCartAddress } from "../../Redux/Slices/AddToCart/AddAddress";
 
 const AllAddresses = () => {
   const dispatch = useDispatch();

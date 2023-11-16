@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "services/AxiosInstance";
+import axiosInstance from "../../../services/AxiosInstance";
 import { FIRST_CAROUSEL, CATEGORY_CAROUSEL } from "./type";
 
 export const getCarousel = createAsyncThunk(

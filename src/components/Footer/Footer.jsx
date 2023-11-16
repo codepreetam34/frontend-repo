@@ -1,11 +1,11 @@
-import FMTypography from "components/FMTypography/FMTypography";
+import FMTypography from "../../components/FMTypography/FMTypography";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import androidIcon from "../../assets/androidIcon.svg";
 import appleIcon from "../../assets/appleIcon.svg";
 import footerLogo from "../../assets/FooterLogo.png"
 import { Box, InputBase } from "@mui/material";
-import FMButton from "components/FMButton/FMButton";
+import FMButton from "../../components/FMButton/FMButton";
 const Footer = () => {
   return (
     <Container fluid>

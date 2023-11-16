@@ -1,4 +1,4 @@
-import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
+import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "../constants/colors";
 export const commonStyle = {
   flexDisplayStyle: { display: "flex" },
   capitalizeTextStyle: { textTransform: "capitalize" },

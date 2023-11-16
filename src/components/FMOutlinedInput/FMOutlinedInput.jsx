@@ -4,9 +4,9 @@ import { Box, IconButton, InputAdornment, OutlinedInput } from "@mui/material";
 
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-import { commonStyle } from "Styles/commonStyles";
-import FMInputLabel from "components/FMInputLabel/FMInputLabel";
-import FMTypography from "components/FMTypography/FMTypography";
+import { commonStyle } from "../../Styles/commonStyles";
+import FMInputLabel from "../../components/FMInputLabel/FMInputLabel";
+import FMTypography from "../../components/FMTypography/FMTypography";
 
 function FMOutlinedInput({
   // This component is specifically used for password input

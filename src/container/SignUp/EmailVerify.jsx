@@ -1,13 +1,13 @@
 import { Grid } from "@mui/material";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMTypography from "../../components/FMTypography/FMTypography";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
-import { HeaderStyle } from "components/SearchBar/HeaderStyle";
+import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
 import React from "react";
-import { commonStyle } from "Styles/commonStyles";
+import { commonStyle } from "../../Styles/commonStyles";
 import { Box } from "@mui/system";
 import { Link, useNavigate } from "react-router-dom";
-import FMButton from "components/FMButton/FMButton";
+import FMButton from "../../components/FMButton/FMButton";
 
 const EmailVerify = () => {
   const navigate = useNavigate();

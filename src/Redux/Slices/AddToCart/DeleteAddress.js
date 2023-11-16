@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "services/AxiosInstance";
+import axiosInstance from "../../../services/AxiosInstance";
 import { DELETE_ADDRESS } from "./type"; // Define the DELETE_ADDRESS action type
 
 // Create an async thunk for deleting an address

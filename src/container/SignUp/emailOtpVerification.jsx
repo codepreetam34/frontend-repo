@@ -1,17 +1,17 @@
 import { Box, Grid, InputBase } from "@mui/material";
-import FMButton from "components/FMButton/FMButton";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMButton from "../../components/FMButton/FMButton";
+import FMTypography from "../../components/FMTypography/FMTypography";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
-import { HeaderStyle } from "components/SearchBar/HeaderStyle";
+import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
 import React from "react";
-import { commonStyle } from "Styles/commonStyles";
+import { commonStyle } from "../../Styles/commonStyles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { forgotOtpSchema } from "validationSchema/forgotOtpSchema";
-import { verifyOtp } from "Redux/Slices/SignUp/SignUp";
+import { forgotOtpSchema } from "../../validationSchema/forgotOtpSchema";
+import { verifyOtp } from "../../Redux/Slices/SignUp/SignUp";
 import { useDispatch } from "react-redux";
-import { verifyEmailSchema } from "validationSchema/verifyemailSchema";
+import { verifyEmailSchema } from "../../validationSchema/verifyemailSchema";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const EmailOtpVerification = () => {

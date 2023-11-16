@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoryCarousel } from "Redux/Slices/LandingPageSlice/LandingPageSlice";
+import { getCategoryCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
 import { Link } from "react-router-dom";
 
 const BestSeller = () => {

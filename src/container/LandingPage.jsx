@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Pincode from "react-pincode";
-import Header from "components/SearchBar/Header";
+import Header from "../components/SearchBar/Header";
 import Banner from "../components/HomePage/Banner";
 import CategorySlider from "../components/HomePage/CategorySlider";
 import TwoBanner from "../components/HomePage/TwoBanner";
@@ -9,12 +9,12 @@ import TopCategory from "../components/HomePage/TopCategory";
 import ShopByOccasion from "../components/HomePage/ShopByOccasion";
 import PamperZone from "../components/HomePage/PamperZone";
 import ThreePoint from "../components/HomePage/ThreePoint";
-import Footer from "components/Footer/Footer";
+import Footer from "../components/Footer/Footer";
 import { Box, Modal, Button, Typography } from "@mui/material";
-import Layout from "components/Layout";
+import Layout from "../components/Layout";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import adsBanner from "assets/adsBanner.png"
+import adsBanner from "../assets/adsBanner.png"
 const LandingPage = () => {
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
   const [showArea, setShowArea] = useState(false);
@@ -25,6 +25,9 @@ const LandingPage = () => {
   const handleModalClose = () => {
     setPincodeModalOpen(false);
     sessionStorage.setItem("pincode", pincodeData);
+  };
+  const handleModalOpenController = () => {
+    setPincodeModalOpen(true);
   };
 
   const getDataFunc = (data) => {
@@ -51,7 +54,7 @@ const LandingPage = () => {
     <>
 
       <Layout title={title} description={description}>
-        <Header pincodeData={pincodeData} />
+        <Header pincodeData={pincodeData} handleModalOpenController={handleModalOpenController} />
         <div>
           <Box>
             <Banner />

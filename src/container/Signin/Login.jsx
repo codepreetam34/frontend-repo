@@ -11,23 +11,23 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { FORGOTPASSWORD, LANDING_PAGE, SIGNUP } from "Routes/Routes";
+import { FORGOTPASSWORD, LANDING_PAGE, SIGNUP } from "../../Routes/Routes";
 
-import FMButton from "components/FMButton/FMButton";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMButton from "../../components/FMButton/FMButton";
+import FMTypography from "../../components/FMTypography/FMTypography";
 
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
-import { login } from "Redux/Slices/Login/auth.slice";
+import { login } from "../../Redux/Slices/Login/auth.slice";
 
-import { commonStyle } from "Styles/commonStyles";
-import { HeaderStyle } from "components/SearchBar/HeaderStyle";
-import { setItem } from "services/commonService";
+import { commonStyle } from "../../Styles/commonStyles";
+import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
+import { setItem } from "../../services/commonService";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "validationSchema/loginSchema";
-import FMInputLabel from "components/FMInputLabel/FMInputLabel";
-import { notify } from "components/FMToaster/FMToaster";
+import { loginSchema } from "../../validationSchema/loginSchema";
+import FMInputLabel from "../../components/FMInputLabel/FMInputLabel";
+import { notify } from "../../components/FMToaster/FMToaster";
 
 const Login = () => {
   const dispatch = useDispatch();

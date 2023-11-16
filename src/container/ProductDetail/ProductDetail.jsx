@@ -26,11 +26,11 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import moment from "moment";
 
-import Header from "components/SearchBar/Header";
-import FMTypography from "components/FMTypography/FMTypography";
-import FMButton from "components/FMButton/FMButton";
-import FMRadioButtons from "components/FMRadioButton/FMRadioButton";
-import FMDropdown from "components/FMDropdown/FMDropdown";
+import Header from "../../components/SearchBar/Header";
+import FMTypography from "../../components/FMTypography/FMTypography";
+import FMButton from "../../components/FMButton/FMButton";
+import FMRadioButtons from "../../components/FMRadioButton/FMRadioButton";
+//import FMDropdown from "../../components/FMDropdown/FMDropdown";
 
 import ratingStart from "../../assets/ratingStart.svg";
 import reviewBlackStar from "../../assets/reviewBlackStar.svg";
@@ -41,23 +41,23 @@ import {
   ExpressDelivery,
   FixedDelivery,
   StandardDelivery,
-} from "constants/AppConstant";
-import { BLACK } from "constants/colors";
+} from "../../constants/AppConstant";
+import { BLACK } from "../../constants/colors";
 import "./ProductDetail.css";
-import { commonStyle } from "Styles/commonStyles";
+import { commonStyle } from "../../Styles/commonStyles";
 import {
   addToCart,
   getProductsDetail,
-} from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
-import { addToCartSchema } from "validationSchema/addToCartSchema";
+} from "../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
+import { addToCartSchema } from "../../validationSchema/addToCartSchema";
 import { Col, Container, Row } from "react-bootstrap";
-import { ADD_TO_CART } from "Routes/Routes";
-import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
-import Footer from "components/Footer/Footer";
-import Layout from "components/Layout";
+import { ADD_TO_CART } from "../../Routes/Routes";
+import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
+import Footer from "../../components/Footer/Footer";
+import Layout from "../../components/Layout";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import FMDeliveryDropdown from "components/FMDeliveryDropdown";
+import FMDeliveryDropdown from "../../components/FMDeliveryDropdown";
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -254,13 +254,13 @@ const ProductDetail = () => {
   const [insertDate, setInsertDate] = useState(false);
   const [currentTime, setCurrentTime] = useState();
   const [filterExpressOptions, setFilterExpressOptions] = useState([]);
-
   const [selectTodayDate, setSelectTodayDate] = useState(false);
 
   const [standard, setStandard] = useState(false);
   const [fixed, setFixed] = useState(false);
   const [express, setExpress] = useState(false);
   const [dateString, setDateString] = useState("");
+
   // const onDateChange = (date) => {
   //   console.log("date ", date)
   //   setDate(date);

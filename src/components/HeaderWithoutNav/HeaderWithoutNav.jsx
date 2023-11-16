@@ -2,13 +2,13 @@ import { Avatar, Box, Grid, Menu, MenuItem } from "@mui/material";
 import React from "react";
 import { Button, Col, Row, Stack } from "react-bootstrap";
 
-import SearchBar from "components/SearchBar/SearchBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import { HeaderStyle } from "../SearchBar/HeaderStyle";
 import { commonStyle } from "../../Styles/commonStyles";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
-import FMTypography from "components/FMTypography/FMTypography";
-import FMButton from "components/FMButton/FMButton";
+import FMTypography from "../../components/FMTypography/FMTypography";
+import FMButton from "../../components/FMButton/FMButton";
 import cart from "../../assets/cart.svg";
 import profileIcon from "../../assets/profileIcon.svg";
 import orderIcon from "../../assets/orderIcon.svg";
@@ -16,8 +16,8 @@ import contactIcon from "../../assets/contactIcon.svg";
 import faqIcon from "../../assets/faqIcon.svg";
 import logoutIcon from "../../assets/logoutIcon.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { FAQ, LOGIN } from "Routes/Routes";
-import { logout } from "Redux/Slices/Login/auth.slice";
+import { FAQ, LOGIN } from "../../Routes/Routes";
+import { logout } from "../../Redux/Slices/Login/auth.slice";
 import { useDispatch } from "react-redux";
 
 const HeaderWithoutNav = () => {

@@ -3,23 +3,23 @@ import { Box, Grid, InputBase } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import FMButton from "components/FMButton/FMButton";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMButton from "../../components/FMButton/FMButton";
+import FMTypography from "../../components/FMTypography/FMTypography";
 
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 
-import { commonStyle } from "Styles/commonStyles";
-import { HeaderStyle } from "components/SearchBar/HeaderStyle";
+import { commonStyle } from "../../Styles/commonStyles";
+import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { LOGIN } from "Routes/Routes";
-import FMOutlinedInput from "components/FMOutlinedInput/FMOutlinedInput";
-import { tests } from "constants/AppConstant";
-import { setupPassword } from "Redux/Slices/Login/setupPassword";
+import { LOGIN } from "../../Routes/Routes";
+import FMOutlinedInput from "../../components/FMOutlinedInput/FMOutlinedInput";
+import { tests } from "../../constants/AppConstant";
+import { setupPassword } from "../../Redux/Slices/Login/setupPassword";
 
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { setupPasswordSchema } from "validationSchema/setUpNewPassword";
+import { setupPasswordSchema } from "../../validationSchema/setUpNewPassword";
 
 const SetupNewPassword = () => {
   const [searchParams] = useSearchParams();

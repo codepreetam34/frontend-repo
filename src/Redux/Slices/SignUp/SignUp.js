@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "services/AxiosInstance";
+import axiosInstance from "../../../services/AxiosInstance";
 import { SIGN_UP, VERIFY_OTP } from "./type";
 
 export const signUpUser = createAsyncThunk(SIGN_UP, async (data, thunkAPI) => {

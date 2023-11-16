@@ -2,23 +2,23 @@ import React from "react";
 import { Box, Grid, InputBase } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import FMButton from "components/FMButton/FMButton";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMButton from "../../components/FMButton/FMButton";
+import FMTypography from "../../components/FMTypography/FMTypography";
 
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 
-import { HeaderStyle } from "components/SearchBar/HeaderStyle";
-import { commonStyle } from "Styles/commonStyles";
+import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
+import { commonStyle } from "../../Styles/commonStyles";
 
-import { SETUP_NEW_PASSWORD } from "Routes/Routes";
+import { SETUP_NEW_PASSWORD } from "../../Routes/Routes";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { forgotOtpSchema } from "validationSchema/forgotOtpSchema";
-import FMOutlinedInput from "components/FMOutlinedInput/FMOutlinedInput";
+import { forgotOtpSchema } from "../../validationSchema/forgotOtpSchema";
+import FMOutlinedInput from "../../components/FMOutlinedInput/FMOutlinedInput";
 
 import { useDispatch } from "react-redux";
-import { resetPasswordLink } from "Redux/Slices/Login/resetPasswordLink";
+import { resetPasswordLink } from "../../Redux/Slices/Login/resetPasswordLink";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();

@@ -3,25 +3,25 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Box, Grid, InputBase } from "@mui/material";
 
-import { tests } from "constants/AppConstant";
-import { EMAIL_VERIFY, FORGOTPASSWORD, LOGIN } from "Routes/Routes";
+import { tests } from "../../constants/AppConstant";
+import { EMAIL_VERIFY, FORGOTPASSWORD, LOGIN } from "../../Routes/Routes";
 
-import FMButton from "components/FMButton/FMButton";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMButton from "../../components/FMButton/FMButton";
+import FMTypography from "../../components/FMTypography/FMTypography";
 
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
-import { login } from "Redux/Slices/Login/auth.slice";
+import { login } from "../../Redux/Slices/Login/auth.slice";
 
-import { commonStyle } from "Styles/commonStyles";
-import { HeaderStyle } from "components/SearchBar/HeaderStyle";
-import { setItem } from "services/commonService";
+import { commonStyle } from "../../Styles/commonStyles";
+import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
+import { setItem } from "../../services/commonService";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "validationSchema/loginSchema";
-import FMOutlinedInput from "components/FMOutlinedInput/FMOutlinedInput";
-import { signUpSchema } from "validationSchema/signupSchema";
-import { signUpUser } from "Redux/Slices/SignUp/SignUp";
+import { loginSchema } from "../../validationSchema/loginSchema";
+import FMOutlinedInput from "../../components/FMOutlinedInput/FMOutlinedInput";
+import { signUpSchema } from "../../validationSchema/signupSchema";
+import { signUpUser } from "../../Redux/Slices/SignUp/SignUp";
 
 const Login = () => {
   const dispatch = useDispatch();

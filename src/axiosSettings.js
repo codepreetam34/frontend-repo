@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_ACTION } from "Redux/Slices/Login/type";
+import { FETCH_ACTION } from "./Redux/Slices/Login/type";
 
 export const axiosMiddleware = (store) => (next) => (action) => {
   if (action.type === `${FETCH_ACTION}/fulfilled`) {

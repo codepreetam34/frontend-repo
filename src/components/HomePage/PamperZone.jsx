@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCarousel } from "Redux/Slices/LandingPageSlice/LandingPageSlice";
+import { getCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
 
 const PamperZone = () => {
   const dispatch = useDispatch();

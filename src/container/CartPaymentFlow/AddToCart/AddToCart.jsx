@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import closeCrossIcon from "../../../assets/closeCrossIcon.svg";
 import { Col, Row } from "react-bootstrap";
-import FMTypography from "components/FMTypography/FMTypography";
-import FMDropdown from "components/FMDropdown/FMDropdown";
-import { quantityOpt } from "constants/AppConstant";
+import FMTypography from "../../../components/FMTypography/FMTypography";
+import FMDropdown from "../../../components/FMDropdown/FMDropdown";
+import { quantityOpt } from "../../../constants/AppConstant";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCartProductsFinal,
   deleteAddToCartProducts,
-} from "Redux/Slices/AddToCart/AddToCartSlice";
-import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "constants/colors";
-import { addToCart } from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
+} from "../../../Redux/Slices/AddToCart/AddToCartSlice";
+import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "../../../constants/colors";
+import { addToCart } from "../../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 import PriceDetails from "./PriceDetails";
 
 const AddToCart = ({ handleNext }) => {

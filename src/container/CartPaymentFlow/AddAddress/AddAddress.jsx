@@ -3,22 +3,22 @@ import { Box, InputBase } from "@mui/material";
 import { Col, Row } from "react-bootstrap";
 import Pincode from "react-pincode";
 
-import FMButton from "components/FMButton/FMButton";
-import FMTypography from "components/FMTypography/FMTypography";
-import FMRadioButtons from "components/FMRadioButton/FMRadioButton";
-import FMDetailTypography from "components/FMDetailTypography/FMDetailTypography";
+import FMButton from "../../../components/FMButton/FMButton";
+import FMTypography from "../../../components/FMTypography/FMTypography";
+import FMRadioButtons from "../../../components/FMRadioButton/FMRadioButton";
+//import FMDetailTypography from "components/FMDetailTypography/FMDetailTypography";
 
-import { commonStyle } from "Styles/commonStyles";
-import { locationHomeOrOffice } from "constants/AppConstant";
+import { commonStyle } from "../../../Styles/commonStyles";
+import { locationHomeOrOffice } from "../../../constants/AppConstant";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { addAddressSchema } from "validationSchema/addAddressSchema";
+import { addAddressSchema } from "../../../validationSchema/addAddressSchema";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
-import { addToCartAddAddress } from "Redux/Slices/AddToCart/AddToCartAddAddressSlice";
+import { addToCartAddress } from "../../../Redux/Slices/AddToCart/AddAddress";
+import { addToCartAddAddress } from "../../../Redux/Slices/AddToCart/AddToCartAddAddressSlice";
 import AllAddressComponent from "./AllAddressComponent";
 import PriceDetails from "../AddToCart/PriceDetails";
-import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
+import { addToCartProductsFinal } from "../../../Redux/Slices/AddToCart/AddToCartSlice";
 
 const AddAddress = ({ handleNext }) => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN } from "Routes/Routes";
+import { LOGIN } from "../Routes/Routes";
 import { setItem } from "./commonService";
 
 const axiosInstance = axios.create({

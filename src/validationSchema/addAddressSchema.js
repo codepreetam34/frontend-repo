@@ -3,7 +3,7 @@ import {
   EMAIL_REGEX,
   NEW_PASSWORD_REGEX,
   MOBILE_NUMBER_REGEX,
-} from "constants/AppConstant";
+} from "../constants/AppConstant";
 import * as Yup from "yup";
 
 export const addAddressSchema = Yup.object().shape({

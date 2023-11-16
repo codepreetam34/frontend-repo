@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "services/AxiosInstance";
+import axiosInstance from "../../../services/AxiosInstance";
 import { RESET_PASSWORD_LINK } from "./type";
 
 export const resetPasswordLink = createAsyncThunk(

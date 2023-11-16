@@ -5,14 +5,14 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Footer from 'components/Footer/Footer';
-import Header from 'components/SearchBar/Header';
+import Footer from '../../../components/Footer/Footer';
+import Header from '../../../components/SearchBar/Header';
 import AddToCart from "../AddToCart/AddToCart";
 import ProductPayment from "../ProductPayment/ProductPayment";
 import AddAddress from "../AddAddress/AddAddress";
 import { Col, Row } from "react-bootstrap";
-import FMButton from 'components/FMButton/FMButton';
-import { commonStyle } from 'Styles/commonStyles';
+import FMButton from '../../../components/FMButton/FMButton';
+import { commonStyle } from '../../../Styles/commonStyles';
 import { ArrowBack } from '@material-ui/icons';
 const steps = ["Cart", "Address", "Payment"];
 export default function HorizontalLinearStepper() {

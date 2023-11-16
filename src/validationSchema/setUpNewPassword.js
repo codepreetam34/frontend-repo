@@ -1,7 +1,7 @@
 import {
   WHITE_SPACES_REGEX_PASSWORD,
   NEW_PASSWORD_REGEX,
-} from "constants/AppConstant";
+} from "../constants/AppConstant";
 
 import * as Yup from "yup";
 export const setupPasswordSchema = Yup.object().shape({

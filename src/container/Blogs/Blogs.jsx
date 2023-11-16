@@ -1,11 +1,11 @@
 import React from "react";
-import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
+import HeaderWithoutNav from "../../components/HeaderWithoutNav/HeaderWithoutNav";
 import { Col, Container, Row } from "react-bootstrap";
-import FMTypography from "components/FMTypography/FMTypography";
-import BlogsComponent from "components/BlogsComponent/BlogsComponent";
+import FMTypography from "../../components/FMTypography/FMTypography";
+import BlogsComponent from "../../components/BlogsComponent/BlogsComponent";
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { BLOGS_DETAIL } from "Routes/Routes";
+import { BLOGS_DETAIL } from "../../Routes/Routes";
 
 const Blogs = () => {
   const navigate = useNavigate();

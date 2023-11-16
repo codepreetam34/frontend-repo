@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Profile from "../Profile";
-import Header from "components/SearchBar/Header";
+import Header from "../../../components/SearchBar/Header";
 import { Col, Container, Row } from "react-bootstrap";
 import { makeStyles } from "@mui/styles";
 import { AllViewsFileStyle } from "./AllViewsFileStyle";

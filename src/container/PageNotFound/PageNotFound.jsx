@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 
-import FMTypography from "components/FMTypography/FMTypography";
-import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
+import FMTypography from "../../components/FMTypography/FMTypography";
+import HeaderWithoutNav from "../../components/HeaderWithoutNav/HeaderWithoutNav";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { LANDING_PAGE } from "Routes/Routes";
+import { LANDING_PAGE } from "../../Routes/Routes";
 import notFoundDog from "../../assets/notFoundDog.svg";
 
 const PageNotFound = () => {

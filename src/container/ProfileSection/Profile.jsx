@@ -1,17 +1,17 @@
 import { Avatar, Box, InputBase } from "@mui/material";
-import FMTypography from "components/FMTypography/FMTypography";
-import Header from "components/SearchBar/Header";
+import FMTypography from "../../components/FMTypography/FMTypography";
+import Header from "../../components/SearchBar/Header";
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Stack } from "react-bootstrap";
 import mailIcon from "../../assets/mailIcon.svg";
 import telephoneIcon from "../../assets/telephoneIcon.svg";
 import locationIcon from "../../assets/locationIcon.svg";
-import { commonStyle } from "Styles/commonStyles";
+import { commonStyle } from "../../Styles/commonStyles";
 import Pincode from "react-pincode";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileDetail } from "Redux/Slices/MyProfileSlice/MyProfile";
-import FMLoader from "components/FMLoader/FMLoader";
-import FMButton from "components/FMButton/FMButton";
+import { getProfileDetail } from "../../Redux/Slices/MyProfileSlice/MyProfile";
+import FMLoader from "../../components/FMLoader/FMLoader";
+import FMButton from "../../components/FMButton/FMButton";
 
 const Profile = () => {
   const dispatch = useDispatch();

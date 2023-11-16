@@ -1,8 +1,8 @@
 import { Box, InputBase, TextField } from "@mui/material";
-import FMButton from "components/FMButton/FMButton";
+import FMButton from "../../components/FMButton/FMButton";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { commonStyle } from "Styles/commonStyles";
+import { commonStyle } from "../../Styles/commonStyles";
 
 const Reminder = () => {
   return (

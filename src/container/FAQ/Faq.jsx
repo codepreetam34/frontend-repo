@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { Col, Container, Row } from "react-bootstrap";
 
-import FMTypography from "components/FMTypography/FMTypography";
-import FMButton from "components/FMButton/FMButton";
-import FaqsComponent from "components/FMFaqs/FaqsComponent";
+import FMTypography from "../../components/FMTypography/FMTypography";
+import FMButton from "../../components/FMButton/FMButton";
+import FaqsComponent from "../../components/FMFaqs/FaqsComponent";
 
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
-import { commonStyle } from "Styles/commonStyles";
-import { HeaderStyle } from "components/SearchBar/HeaderStyle";
+import { commonStyle } from "../../Styles/commonStyles";
+import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
 
 const Faq = () => {
   const [orderingActiveBtn, setOrderingActiveBtn] = useState(true);

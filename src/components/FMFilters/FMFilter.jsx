@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
-import { getProductByCategoryIdAndTags, getProductsBySorting } from "Redux/Slices/ProductPage/ProductsPageSlice";
-import FMButton from "components/FMButton/FMButton";
-import FMDropdown from "components/FMDropdown/FMDropdown";
+import { getProductByCategoryIdAndTags, getProductsBySorting } from "../../Redux/Slices/ProductPage/ProductsPageSlice";
+import FMButton from "../../components/FMButton/FMButton";
+import FMDropdown from "../../components/FMDropdown/FMDropdown";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const FMFilter = ({

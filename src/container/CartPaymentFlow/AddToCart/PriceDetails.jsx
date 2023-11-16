@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box, TextField } from "@mui/material";
-import FMTypography from "components/FMTypography/FMTypography";
-import FMButton from "components/FMButton/FMButton";
-import { commonStyle } from "Styles/commonStyles";
+import FMTypography from "../../../components/FMTypography/FMTypography";
+import FMButton from "../../../components/FMButton/FMButton";
+import { commonStyle } from "../../../Styles/commonStyles";
 
 const PriceDetails = ({ addedData, handleNext, activeStep, steps }) => {
 

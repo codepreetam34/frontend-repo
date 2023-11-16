@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { notify } from "components/FMToaster/FMToaster";
-import axiosInstance from "services/AxiosInstance";
+//import { notify } from "components/FMToaster/FMToaster";
+import axiosInstance from "../../../services/AxiosInstance";
 import { FETCH_ACTION, LOGOUT } from "./type";
 
 export const login = createAsyncThunk(FETCH_ACTION, async (data, thunkAPI) => {

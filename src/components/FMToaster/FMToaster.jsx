@@ -13,11 +13,11 @@ import {
   LIGHT_GREEN,
   LIGHT_RED,
   SUCCESS_GREEN,
-} from "constants/colors";
+} from "../../constants/colors";
 // import FMTypography from "./FMTypography";
 import { Bounce, toast } from "react-toastify";
 import { Box } from "@mui/system";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMTypography from "../../components/FMTypography/FMTypography";
 
 const toastConfig = {
   position: "top-right",

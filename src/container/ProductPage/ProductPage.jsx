@@ -8,20 +8,20 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import FMTypography from "components/FMTypography/FMTypography";
+import FMTypography from "../../components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
-import Header from "components/SearchBar/Header";
+import Header from "../../components/SearchBar/Header";
 import {
   getProductByCategoryId,
   getProductByCategoryIdAndTags,
   getProductsList,
-} from "Redux/Slices/ProductPage/ProductsPageSlice";
+} from "../../Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch, useSelector } from "react-redux";
-import FMFilter from "components/FMFilters/FMFilter";
+import FMFilter from "../../components/FMFilters/FMFilter";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
-import Footer from "components/Footer/Footer";
-import Pincode from "components/Pincode";
+import Footer from "../../components/Footer/Footer";
+import Pincode from "../../components/Pincode";
 
 const ProductPage = () => {
   const navigate = useNavigate();

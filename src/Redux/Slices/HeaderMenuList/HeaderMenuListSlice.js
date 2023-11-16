@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "services/AxiosInstance";
+import axiosInstance from "../../../services/AxiosInstance";
 import { GET_MENU_LIST } from "./type";
 import { GET_CATEGORY_CHILDREN } from "../ProductPage/type";
 

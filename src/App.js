@@ -1,5 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import LandingPage from "container/LandingPage";
+import LandingPage from "./container/LandingPage";
 import { ThemeProvider } from "@mui/material/styles";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
@@ -24,26 +24,26 @@ import {
   PRODUCT_PAGE,
   SETUP_NEW_PASSWORD,
   SIGNUP,
-} from "Routes/Routes";
-import Login from "container/Signin/Login";
-import SignUp from "container/SignUp/SignUp";
-import ForgotPassword from "container/Signin/ForgotPassword";
-import SetupNewPassword from "container/Signin/SetupNewPassword";
-import EmailVerify from "container/SignUp/EmailVerify";
-import EmailVerifyOtp from "container/SignUp/emailOtpVerification";
-import ProductPage from "container/ProductPage/ProductPage";
-import ProductDetail from "container/ProductDetail/ProductDetail";
+} from "./Routes/Routes";
+import Login from "./container/Signin/Login";
+import SignUp from "./container/SignUp/SignUp";
+import ForgotPassword from "./container/Signin/ForgotPassword";
+import SetupNewPassword from "./container/Signin/SetupNewPassword";
+import EmailVerify from "./container/SignUp/EmailVerify";
+import EmailVerifyOtp from "./container/SignUp/emailOtpVerification";
+import ProductPage from "./container/ProductPage/ProductPage";
+import ProductDetail from "./container/ProductDetail/ProductDetail";
 
-import PrivateRoutes from "Routes/PrivateRoutes";
-import HorizontalLinearStepper from "container/CartPaymentFlow/CartPaymentStepper/CartPaymentStepper";
-import PrivacyPolicy from "container/PrivacyPolicy/PrivacyPolicy";
-import Faq from "container/FAQ/Faq";
-import Blogs from "container/Blogs/Blogs";
-import BlogDetailedPage from "container/Blogs/BlogDetailedPage/BlogDetailedPage";
-import AddReview from "container/AddReview/AddReview";
-import Profile from "container/ProfileSection/AllViewsFile/AllViewsFile";
-import PageNotFound from "container/PageNotFound/PageNotFound";
-import CategoryPage from "container/CategoryPage";
+import PrivateRoutes from "./Routes/PrivateRoutes";
+import HorizontalLinearStepper from "./container/CartPaymentFlow/CartPaymentStepper/CartPaymentStepper";
+import PrivacyPolicy from "./container/PrivacyPolicy/PrivacyPolicy";
+import Faq from "./container/FAQ/Faq";
+import Blogs from "./container/Blogs/Blogs";
+import BlogDetailedPage from "./container/Blogs/BlogDetailedPage/BlogDetailedPage";
+import AddReview from "./container/AddReview/AddReview";
+import Profile from "./container/ProfileSection/AllViewsFile/AllViewsFile";
+import PageNotFound from "./container/PageNotFound/PageNotFound";
+import CategoryPage from "./container/CategoryPage";
 
 const App = () => {
   return (

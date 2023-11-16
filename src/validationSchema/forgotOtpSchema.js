@@ -1,4 +1,4 @@
-import { EMAIL_REGEX } from "constants/AppConstant";
+import { EMAIL_REGEX } from "../constants/AppConstant";
 import * as Yup from "yup";
 
 export const forgotOtpSchema = Yup.object().shape({

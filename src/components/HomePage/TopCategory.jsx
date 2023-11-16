@@ -3,7 +3,7 @@ import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
 import Data from "../../JsonDatas/JsonData";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoryCarousel } from "Redux/Slices/LandingPageSlice/LandingPageSlice";
+import { getCategoryCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
 
 const TopCategory = () => {
   const dispatch = useDispatch();

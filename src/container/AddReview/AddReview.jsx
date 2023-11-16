@@ -1,19 +1,19 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, IconButton, Rating, TextField } from "@mui/material";
-import FMButton from "components/FMButton/FMButton";
-import FMTypography from "components/FMTypography/FMTypography";
-import Header from "components/SearchBar/Header";
+import FMButton from "../../components/FMButton/FMButton";
+import FMTypography from "../../components/FMTypography/FMTypography";
+import Header from "../../components/SearchBar/Header";
 import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
-import { addReviews } from "Redux/Slices/AddReviewSlice/AddReviewSlice";
-import { commonStyle } from "Styles/commonStyles";
+import { addReviews } from "../../Redux/Slices/AddReviewSlice/AddReviewSlice";
+import { commonStyle } from "../../Styles/commonStyles";
 import uploadReview from "../../assets/upload-review.svg";
 import { addReviewsSchema } from "../../validationSchema/addReviewsSchema";
 import StarIcon from "@mui/icons-material/Star";
-import Footer from "components/Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 
 const AddReview = () => {
   const dispatch = useDispatch();
