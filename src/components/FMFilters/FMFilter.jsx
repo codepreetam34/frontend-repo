@@ -79,10 +79,10 @@ const FMFilter = ({
 
   useEffect(() => {
     setDisplayedProducts(sortedProducts);
-  }, [dispatch,sortedProducts]);
+  }, [dispatch, sortedProducts]);
   useEffect(() => {
     setDisplayedProducts(tagsCategoryProducts);
-  }, [dispatch,tagsCategoryProducts]);
+  }, [dispatch, tagsCategoryProducts]);
 
   useEffect(() => {
     setCategoryId(categoryId);
@@ -131,6 +131,7 @@ const FMFilter = ({
                   styleData={{
                     border: "1px solid #E6E6E6",
                     fontWeight: '600',
+                    color: '#801317',
                     borderRadius: "19px",
                     "&:hover": {
                       border: "1px solid #E6E6E6",

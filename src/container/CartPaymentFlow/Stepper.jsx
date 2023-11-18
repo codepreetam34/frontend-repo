@@ -69,10 +69,16 @@ export default function HorizontalLinearStepper() {
     } else if (activeStep === 3) {
         dataOnStepper = <ProductPayment />;
     }
-
+    const [pincodeData, setPincodeData] = useState("");
+    useEffect(() => {
+        const storedPincode = sessionStorage.getItem("pincode");
+        if (storedPincode) {
+            setPincodeData(storedPincode);
+        }
+    }, []);
     return (
         <>
-            <Header />
+            <Header pincodeData={pincodeData} setPincodeData={setPincodeData} />
             <Box sx={{ width: '100%' }}>
                 <Stepper activeStep={activeStep}>
                     {steps.map((label, index) => {

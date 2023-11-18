@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid, IconButton, Typography } from "@mui/material";
+import { Avatar, Box, Grid, IconButton, Typography, Modal } from "@mui/material";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import React, { useEffect, useState } from "react";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
@@ -30,6 +30,8 @@ import { makeStyles } from "@mui/styles";
 import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send'
+import CloseIcon from "@mui/icons-material/Close";
+import Pincode from "react-pincode";
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -113,10 +115,12 @@ const useStyles = makeStyles((theme) => ({
   },
 
 }));
-const Header = ({ pincodeData, handleModalOpenController }) => {
+const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
+  const [showArea, setShowArea] = useState(false);
+
   var settings = {
     dots: true,
     infinite: true,
@@ -226,9 +230,6 @@ const Header = ({ pincodeData, handleModalOpenController }) => {
     navigate(`/category-page/${categoryId}`, { state: { pincodeData: pincodeData } });
   };
 
-
-
-
   useEffect(() => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
@@ -236,6 +237,45 @@ const Header = ({ pincodeData, handleModalOpenController }) => {
     (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
   );
 
+  const [isInitialRender, setIsInitialRender] = useState(true);
+  const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
+  const [pincodeData, setPincodeData] = useState("");
+
+  const [checkedStoredPincode, setCheckedStoredPincode] = useState(true);
+  useEffect(() => {
+    const storedPincode = sessionStorage.getItem("pincode");
+
+    if (storedPincode) {
+      setPincodeData(storedPincode);
+      // Set pincodeModalOpen to false after processing stored pincode
+      setPincodeModalOpen(false);
+    } else if (checkedStoredPincode) {
+      // Set pincodeModalOpen to true only during the initial render
+      setCheckedStoredPincode(false)
+    }
+    else {
+      setPincodeModalOpen(false)
+    }
+  }, []); 
+  const handleModalClose = () => {
+    setPincodeModalOpen(false);
+    sessionStorage.setItem("pincode", pincodeData);
+  };
+  const handleModalOpenController = () => {
+    setPincodeModalOpen(true);
+  };
+
+  const getDataFunc = (data) => {
+
+    if (data?.pincode.length === 6 && data?.pincode.length > 0) {
+      setPincodeData(data?.pincode);
+      setShowArea(true);
+    } else {
+      setPincodeData(null);
+      setShowArea(false);
+    }
+
+  };
 
 
   return (
@@ -604,6 +644,82 @@ const Header = ({ pincodeData, handleModalOpenController }) => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+
+
+        <Modal open={pincodeModalOpen}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "30rem",
+              bgcolor: "white",
+              borderRadius: 4,
+            }}
+          >
+            {/* Header */}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "1rem",
+                borderBottom: "1px solid #ccc",
+              }}
+            >
+              <Typography variant="h6">Select Delivery Location</Typography>
+              <IconButton onClick={handleModalClose}>
+                <CloseIcon />
+              </IconButton>
+            </Box>
+
+            {/* Content */}
+            <Box sx={{ padding: "2rem" }}>
+              <Pincode
+                showCity={false}
+                showDistrict={false}
+                showState={false}
+                invalidError="Please check pincode"
+                getData={getDataFunc}
+                showArea={showArea}
+                pincodeInput={{
+                  borderRadius: "10px",
+                  width: "100%",
+                  border: "1px solid grey",
+                  height: "55px",
+                  padding: "2rem 1rem",
+                  marginRight: "1.7rem",
+                }}
+                areaInput={{
+                  backgroundColor: "white",
+                  border: "none",
+                  color: "red",
+                  fontSize: "12px",
+                }}
+              />
+            </Box>
+
+            {/* Footer */}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                padding: "1rem",
+                borderTop: "1px solid #ccc",
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                disabled={!pincodeData}
+                onClick={handleModalClose}
+              >
+                Continue Shopping
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
       </div>
     </Grid>
   );

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -75,10 +75,21 @@ export default function HorizontalLinearStepper() {
       return (<ProductPayment totalAmount={totalAmount} />);
     }
   }
+  const [pincodeData, setPincodeData] = useState("");
+  useEffect(() => {
+    const storedPincode = sessionStorage.getItem("pincode");
+    if (storedPincode) {
+      setPincodeData(storedPincode);
+    }
+  }, []);
 
+  const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
+  const handleModalOpenController = () => {
+    setPincodeModalOpen(true);
+  };
   return (
     <>
-      <Header />
+      <Header/>
       <Row style={{ width: "100%" }}>
 
         <Col style={{ padding: "1rem 0", display: "flex", justifyContent: 'center', gap: "1rem" }}>

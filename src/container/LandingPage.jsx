@@ -22,14 +22,6 @@ const LandingPage = () => {
   const title = 'Home Page';
   const description = 'This is the home page of our MERN application.';
 
-  const handleModalClose = () => {
-    setPincodeModalOpen(false);
-    sessionStorage.setItem("pincode", pincodeData);
-  };
-  const handleModalOpenController = () => {
-    setPincodeModalOpen(true);
-  };
-
   const getDataFunc = (data) => {
 
     if (data?.pincode.length === 6 && data?.pincode.length > 0) {
@@ -42,19 +34,13 @@ const LandingPage = () => {
 
   };
 
-  useEffect(() => {
-    const storedPincode = sessionStorage.getItem("pincode");
-    if (storedPincode) {
-      setPincodeData(storedPincode);
-      setPincodeModalOpen(false);
-    }
-  }, []);
+
 
   return (
     <>
 
       <Layout title={title} description={description}>
-        <Header pincodeData={pincodeData} handleModalOpenController={handleModalOpenController} />
+        <Header />
         <div>
           <Box>
             <Banner />
@@ -77,81 +63,6 @@ const LandingPage = () => {
           <ThreePoint />
         </div>
         <Footer />
-
-        <Modal open={pincodeModalOpen}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "30rem",
-              bgcolor: "white",
-              borderRadius: 4,
-            }}
-          >
-            {/* Header */}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "1rem",
-                borderBottom: "1px solid #ccc",
-              }}
-            >
-              <Typography variant="h6">Select Delivery Location</Typography>
-              <IconButton onClick={handleModalClose}>
-                <CloseIcon />
-              </IconButton>
-            </Box>
-
-            {/* Content */}
-            <Box sx={{ padding: "2rem" }}>
-              <Pincode
-                showCity={false}
-                showDistrict={false}
-                showState={false}
-                invalidError="Please check pincode"
-                getData={getDataFunc}
-                showArea={showArea}
-                pincodeInput={{
-                  borderRadius: "10px",
-                  width: "100%",
-                  border: "1px solid grey",
-                  height: "55px",
-                  padding: "2rem 1rem",
-                  marginRight: "1.7rem",
-                }}
-                areaInput={{
-                  backgroundColor: "white",
-                  border: "none",
-                  color: "red",
-                  fontSize: "12px",
-                }}
-              />
-            </Box>
-
-            {/* Footer */}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-                padding: "1rem",
-                borderTop: "1px solid #ccc",
-              }}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={!pincodeData}
-                onClick={handleModalClose}
-              >
-                Continue Shopping
-              </Button>
-            </Box>
-          </Box>
-        </Modal>
 
 
 

@@ -5,12 +5,12 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   typography: {
     fontFamily: ["Poppins"],
-    color: "red",
+    color: "#801317",
     fontSize: 14,
   },
   palette: {
     primary: {
-      main: "#556cd6",
+      main: "#801317",
     },
     secondary: {
       main: "#19857b",
