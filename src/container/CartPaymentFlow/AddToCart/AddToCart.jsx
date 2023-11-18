@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import {
+  Box, Typography, 
+  Card,
+  CardContent,
+} from "@mui/material";
 import closeCrossIcon from "../../../assets/closeCrossIcon.svg";
 import { Col, Row } from "react-bootstrap";
 import FMTypography from "../../../components/FMTypography/FMTypography";
@@ -24,7 +28,7 @@ const AddToCart = ({ handleNext }) => {
   useEffect(() => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
-  
+
   const deleteProductOnClick = (id) => () => {
     dispatch(deleteAddToCartProducts({ productId: id }))
       .unwrap()
@@ -63,7 +67,7 @@ const AddToCart = ({ handleNext }) => {
       <Row style={{ padding: "1rem 8rem" }}>
         <Col>
           <FMTypography
-            displayText={`Cart Items (${addedData && Object.keys(addedData)?.length
+            displayText={`Cart Items (${addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : "0"
               })`}
             styleData={{ fontSize: "40px", fontWeight: "500" }}
           />
@@ -72,7 +76,7 @@ const AddToCart = ({ handleNext }) => {
 
       <Row style={{ padding: "10px 120px 0 120px" }}>
         <Col>
-          {addedData &&
+          {addedData && Object.keys(addedData)?.length > 0 ?
             Object.keys(addedData)?.map((elem) => (
               <Box
                 sx={{
@@ -173,14 +177,34 @@ const AddToCart = ({ handleNext }) => {
                   </Typography>
                 </Box>
               </Box>
-            ))}
+            )) : <Box        className="d-flex justify-content-center pb-4">
+              <Card
+       
+                sx={{
+                  width: "280px",
+                  borderRadius: "20px",
+                }}
+              >
+                <CardContent style={{ height: "4rem", textAlign: "center" }}>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    sx={{ fontSize: "18px", color: "#801317" }}
+                  >
+                    Cart is empty!
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
+          }
         </Col>
-
-        {/* second col */}
-        <Col style={{ marginLeft: "87px" }}>
+        {addedData && Object.keys(addedData)?.length > 0 ? <Col style={{ marginLeft: "87px" }}>
           {/* Render the PriceDetails component and pass the addedData prop */}
-          <PriceDetails addedData={addedData} handleNext={handleNext} />
-        </Col>
+          <PriceDetails cartList={addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : 0} addedData={addedData} handleNext={handleNext} />
+        </Col> : <></>}
+        {/* second col */}
+
       </Row>
 
     </>

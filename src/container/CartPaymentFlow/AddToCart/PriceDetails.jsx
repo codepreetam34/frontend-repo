@@ -4,7 +4,7 @@ import FMTypography from "../../../components/FMTypography/FMTypography";
 import FMButton from "../../../components/FMButton/FMButton";
 import { commonStyle } from "../../../Styles/commonStyles";
 
-const PriceDetails = ({ addedData, handleNext, activeStep, steps }) => {
+const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) => {
 
   const [couponCode, setCouponCode] = useState(""); // State to store entered coupon code
   const [discountMRP, setDiscountMRP] = useState(0); // State to store coupon discount value
@@ -39,9 +39,11 @@ const PriceDetails = ({ addedData, handleNext, activeStep, steps }) => {
     return discountMRP; // Use the discount value from the API
   };
   const calculateConvenienceFee = () => {
+
     // Calculate the convenience fee based on your logic
     // You may need to fetch it from an API or calculate it in a different way
-    return 40; // Example value, replace with your logic
+    const fee = cartList && cartList > 0 ? 40 : 0; // Example value, replace with your logic
+    return fee;
   };
 
   const calculateTotalAmount = () => {
@@ -51,7 +53,7 @@ const PriceDetails = ({ addedData, handleNext, activeStep, steps }) => {
 
     return totalMRP - discountOnMRP + convenienceFee;
   };
- 
+
 
   return (
     <Box
