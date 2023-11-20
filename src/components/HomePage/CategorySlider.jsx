@@ -2,31 +2,20 @@ import React, { useEffect } from "react";
 import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoryCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getMenuBarList } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
 
 const CategorySlider = () => {
   const dispatch = useDispatch();
-  const params = useParams();
   const navigate = useNavigate();
+
   useEffect(() => {
-    dispatch(getCategoryCarousel());
+    dispatch(getMenuBarList());
   }, [dispatch]);
 
-  const cateogryCarousels = useSelector(
-    (state) => state?.getCarousel?.getProductCarouselData?.silders?.[3]?.sliders
+  const categoryList = useSelector(
+    (state) => state?.menuList?.getMenuOptionsData?.categoryList
   );
-
-  //  Function to replace the URLs in the data
-  // function replaceUrls(data) {
-  //   return data?.map(item => ({
-  //     _id: item?._id,
-  //     img: item?.img.replace("http://localhost:5000", "https://backend-repo-vibezter-prod.onrender.com")
-  //   }));
-  // }
-
-  //  Call the function to replace URLs in the data
-  // const cateogryCarousels = replaceUrls(data);
 
   const category_settings = {
     dots: false,
@@ -42,7 +31,9 @@ const CategorySlider = () => {
     slidesToScroll: 1,
   };
 
-  const handleTag = async (categoryId) => {
+  console.log("category List ", categoryList)
+
+  const handleCategoryClick = async (categoryId) => {
     navigate(`/category-page/${categoryId}`);
   };
 
@@ -52,15 +43,15 @@ const CategorySlider = () => {
         <Row>
           <Col md={12}>
             <Slider {...category_settings}>
-              {cateogryCarousels?.map((elem) => (
+              {categoryList && categoryList?.map((elem) => (
                 <div
                   className="banner_img text-center"
                   key={elem?._id}
                   style={{ padding: "0 8px" }}
                 >
-                  <div onClick={() => handleTag(elem?._id)}>
-                    <img src={elem?.img} className="img-fluid" alt="" />
-                    <h4>Cake</h4>
+                  <div onClick={() => handleCategoryClick(elem?._id)}>
+                    <img src={elem?.categoryImage} className="img-fluid" alt="" />
+                    <h4>{elem?.name}</h4>
                   </div>
                 </div>
               ))}

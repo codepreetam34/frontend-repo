@@ -172,18 +172,7 @@ const Footer = () => {
                 >
                   About Us
                 </div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: '5px'
-                  }}
-                >
-                  WebGross Team
-                </div>
+
                 <div
                   style={{
                     fontSize: "14px",
@@ -195,6 +184,18 @@ const Footer = () => {
                   }}
                 >
                   Disclaimer
+                </div>
+                <div
+                  style={{
+                    fontSize: "14px",
+                    color: "#717171",
+                    fontWeight: "400",
+                    listStyle: "none",
+                    textAlign: "center",
+                    paddingBottom: '5px'
+                  }}
+                >
+                  WebGross Team
                 </div>
               </div>
             </Col>
@@ -220,17 +221,7 @@ const Footer = () => {
                 />
               </div>
               <div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center", paddingBottom: '5px'
-                  }}
-                >
-                  Policy & Terms
-                </div>
+
                 <div
                   style={{
                     fontSize: "14px",
@@ -242,6 +233,7 @@ const Footer = () => {
                 >
                   Careers
                 </div>
+
                 <div
                   style={{
                     fontSize: "14px",
@@ -252,6 +244,17 @@ const Footer = () => {
                   }}
                 >
                   Franchise
+                </div>
+                <div
+                  style={{
+                    fontSize: "14px",
+                    color: "#717171",
+                    fontWeight: "400",
+                    listStyle: "none",
+                    textAlign: "center", paddingBottom: '5px'
+                  }}
+                >
+                  Policy & Terms
                 </div>
               </div>
             </Col>
