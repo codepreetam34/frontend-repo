@@ -64,20 +64,20 @@ const App = () => {
             <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
 
             {/* private routes below */}
-            <Route path={CATEGORY_PAGE}   element={<PrivateRoutes Component={CategoryPage} />} />
+            <Route path={CATEGORY_PAGE} element={<CategoryPage />} />
             <Route
               path={PRODUCT_PAGE}
-              element={<PrivateRoutes Component={ProductPage} />}
+              element={<ProductPage />}
             />
             <Route
               path={PRODUCT_DETAIL}
-              element={<PrivateRoutes Component={ProductDetail} />}
+              element={<ProductDetail />}
             />
 
 
             <Route
               path={ADD_TO_CART}
-              element={<PrivateRoutes Component={HorizontalLinearStepper} />}
+              element={<HorizontalLinearStepper />}
             />
             <Route
               path={ADD_REVIEW}
