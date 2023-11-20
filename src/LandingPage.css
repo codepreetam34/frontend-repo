@@ -93,7 +93,7 @@ p {
 
 /* start css for category slider section */
 .category_slider {
-  padding: 50px 100px 0;
+  padding: 50px 50px 0;
 }
 
 .slick-slide a {
@@ -105,7 +105,7 @@ p {
   height: 250px;
   border-radius: 104px;
   object-fit: cover;
-  margin: 0 35px 0;
+  margin: 0 2rem 0;
 }
 .slick-slide h4 {
   font-size: 1.125rem;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Grid,
@@ -12,29 +12,29 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { FORGOTPASSWORD, LANDING_PAGE, SIGNUP } from "../../Routes/Routes";
-
 import FMButton from "../../components/FMButton/FMButton";
 import FMTypography from "../../components/FMTypography/FMTypography";
-
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 import { login } from "../../Redux/Slices/Login/auth.slice";
-
 import { commonStyle } from "../../Styles/commonStyles";
 import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
-import { setItem } from "../../services/commonService";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validationSchema/loginSchema";
-import FMInputLabel from "../../components/FMInputLabel/FMInputLabel";
 import { notify } from "../../components/FMToaster/FMToaster";
+import { ErrorToaster, SuccessToaster } from "constants/util";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const showToastMessage = location?.state?.showToastMessage;
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const [showErrorToastMessage, setShowErrorToastMessage] = useState();
+  const [showToast, setShowToast] = useState(false);
 
   const [passwordType, setPasswordType] = useState(true);
-
   const {
     register,
     handleSubmit,
@@ -56,9 +56,13 @@ const Login = () => {
       .unwrap()
       .then((res) => {
         if (res) {
-          navigate("/");
+          navigate(LANDING_PAGE, { state: { showToastMessage: res?.user?.fullName } });
           notify({ type: "success", content: "Logged in successfully" });
         }
+      })
+      .catch((err) => {
+        setShowErrorToast(true);
+        setShowErrorToastMessage(err?.error?.response?.data?.message);
       });
   };
 
@@ -232,6 +236,24 @@ const Login = () => {
             </Box>
           </Box>
         </Grid>
+        {showErrorToast &&
+          <ErrorToaster
+            showErrorToast={showErrorToast}
+            setShowErrorToast={setShowErrorToast}
+            showErrorToastMessage={showErrorToastMessage}
+            customErrorMessage={
+              "Incorrect login credentials. Please verify and retry."
+            }
+          />
+        }
+        {showToast && (
+          <SuccessToaster
+            showToast={showToast}
+            setShowToast={setShowToast}
+            showToastMessage={showToastMessage}
+            customMessage={`Logout successful. Have a great day! `}
+          />
+        )}
       </Grid>
     </>
   );

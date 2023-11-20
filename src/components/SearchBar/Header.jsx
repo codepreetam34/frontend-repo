@@ -23,15 +23,15 @@ import logoutIcon from "../../assets/logoutIcon.svg";
 import FMTypography from "../../components/FMTypography/FMTypography";
 import { Stack } from "@mui/system";
 import FMButton from "../../components/FMButton/FMButton";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FAQ, LOGIN, MY_PROFILE } from "../../Routes/Routes";
 import { logout } from "../../Redux/Slices/Login/auth.slice";
 import { makeStyles } from "@mui/styles";
 import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send'
+import { ErrorToaster, SuccessToaster } from "constants/util";
 import CloseIcon from "@mui/icons-material/Close";
 import Pincode from "react-pincode";
+
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -120,6 +120,11 @@ const Header = () => {
   const navigate = useNavigate();
   const classes = useStyles();
   const [showArea, setShowArea] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const [showErrorToastMessage, setShowErrorToastMessage] = useState();
+  const [showToast, setShowToast] = useState(false);
+  const location = useLocation();
+  const showToastMessage = location?.state?.showToastMessage;
 
   var settings = {
     dots: true,
@@ -167,11 +172,6 @@ const Header = () => {
     navigate(LOGIN);
   };
 
-  const logoutPerson = () => {
-    localStorage.clear();
-    navigate(LOGIN);
-  };
-
   const personLoggedInId = JSON.parse(
     localStorage.getItem("Sidebar_Module_Assigned")
   )?._id;
@@ -180,23 +180,31 @@ const Header = () => {
   };
 
   const logoutHandler = () => {
-    // setDisabledLogout(true);
     dispatch(logout())
       .then((response) => {
-        if (response.payload.data.code === 200) {
+        if (
+          (response && response?.meta?.requestStatus === "fulfilled") ||
+          !response
+        ) {
           setAnchorEl(null);
           localStorage.clear();
-          navigate(LOGIN);
-        } else {
-          // setDisabledLogout(false);
+          navigate("/login", {
+            state: {
+              showToastMessage: response?.payload?.message
+                ? response?.payload?.message
+                : "Logout successful. Have a great day!",
+            },
+          });
+        }
+        else {
+          setShowErrorToast(true);
+          setShowErrorToastMessage(response.paylaod.error.message);
+
         }
       })
-      .catch((rejectedWithValue) => {
-        // setDisabledLogout(false);
-        localStorage.clear();
-        navigate(LOGIN);
-        // notify({ type: "success", content: "Logged out successfully" });
-        throw new Error("Logout failed");
+      .catch((err) => {
+        setShowErrorToast(true);
+        setShowErrorToastMessage(err?.error?.response?.data?.message);
       });
   };
 
@@ -256,7 +264,7 @@ const Header = () => {
     else {
       setPincodeModalOpen(false)
     }
-  }, []); 
+  }, []);
   const handleModalClose = () => {
     setPincodeModalOpen(false);
     sessionStorage.setItem("pincode", pincodeData);
@@ -720,6 +728,24 @@ const Header = () => {
             </Box>
           </Box>
         </Modal>
+        {showErrorToast &&
+          <ErrorToaster
+            showErrorToast={showErrorToast}
+            setShowErrorToast={setShowErrorToast}
+            showErrorToastMessage={showErrorToastMessage}
+            customErrorMessage={
+              "Incorrect login credentials. Please verify and retry."
+            }
+          />
+        }
+        {showToast && (
+          <SuccessToaster
+            showToast={showToast}
+            setShowToast={setShowToast}
+            showToastMessage={showToastMessage}
+            customMessage={`Logout successful. Have a great day! `}
+          />
+        )}
       </div>
     </Grid>
   );
