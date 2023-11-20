@@ -61,9 +61,6 @@ const LandingPage = () => {
           <ThreePoint />
         </div>
         <Footer />
-
-
-
       </Layout>
     </>
   );
