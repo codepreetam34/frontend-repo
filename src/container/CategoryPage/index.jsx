@@ -25,7 +25,7 @@ const CategoryPage = () => {
   const [categoryProducts, setCategoryProducts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [categoryId, setCategoryId] = useState(false); // New state for showing filters
-  const [pageTitle, setPageTitle] = useState(false); // New state for showing filters
+  const [pageTitle, setPageTitle] = useState(); // New state for showing filters
   const [displayedProducts, setDisplayedProducts] = useState(categoryProducts);
   // const location = useLocation();
   // const pincodeData = location?.state?.pincodeData;
@@ -72,20 +72,23 @@ const CategoryPage = () => {
       setIsLoading(true);
       dispatch(getProductByCategoryId(payload))
         .then((response) => {
+
+          console.log("response ", response)
           setPageTitle(response?.payload?.pageTitle);
           setCategoryId(response?.payload?.categoryId);
           setCategoryProducts(response?.payload?.products);
           setIsLoading(false);
         })
         .catch((error) => {
+          console.log("error ", error)
           console.error("Error fetching data:", error);
           setIsLoading(false);
         });
     }
   }, [params.id]);
-  
 
 
+  console.log("pageTitle ", pageTitle)
   const switchProducts = (showCategory) => {
     if (showCategory) {
       setDisplayedProducts(categoryProducts);
@@ -118,7 +121,7 @@ const CategoryPage = () => {
           >
             <FMTypography
               displayText={
-                categoryProducts?.length
+                categoryProducts?.length > 0
                   ? `| ${categoryProducts?.length} Gifts`
                   : "| 0 Gift"
               }

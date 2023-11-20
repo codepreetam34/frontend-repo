@@ -1115,6 +1115,21 @@ const ProductDetail = () => {
                     {productDetailedData?.description}
                   </p>
                 </Box>
+                <Box sx={{ marginTop: "50px",marginBottom: "50px" }}>
+                  <FMTypography
+                    displayText={"Product Specifications"}
+                    styleData={{ fontSize: "20px", fontWeight: "500" }}
+                  />
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: "300",
+                      color: "#717171",
+                    }}
+                  >
+                    {productDetailedData?.specifications}
+                  </p>
+                </Box>
 
                 {/* reviews scrolls */}
 

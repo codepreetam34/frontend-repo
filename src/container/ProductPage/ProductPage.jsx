@@ -39,6 +39,7 @@ const ProductPage = () => {
   useEffect(() => {
     dispatch(getProductByCategoryIdAndTags(payload))
       .then((response) => {
+        console.log("response pp ", response)
         setPageTitle(response?.payload?.pageTitle);
         setCategoryId(response?.payload?.categoryId);
         setCategoryProducts(response?.payload?.products);
@@ -64,7 +65,7 @@ const ProductPage = () => {
       setDisplayedProducts(categoryProducts);
     }
   };
-  
+
   // const productPageData = useSelector(
   //   (state) => state?.getProductsList?.getProductsListByCategoryId?.products
   // );
