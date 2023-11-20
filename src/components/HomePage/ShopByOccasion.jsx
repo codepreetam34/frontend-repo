@@ -43,7 +43,7 @@ const ShopByOccasion = () => {
                     <img
                       src={
                         ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[0]?.banners[0]?.img
+                        ShopByOccasionCarousels.banner
                       }
                       className="img-fluid"
                       alt="first-img"
@@ -56,7 +56,7 @@ const ShopByOccasion = () => {
                     <img
                       src={
                         ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[0]?.banners[1]?.img
+                        ShopByOccasionCarousels?.banner
                       }
                       className="img-fluid"
                       alt=""
@@ -69,7 +69,7 @@ const ShopByOccasion = () => {
                     <img
                       src={
                         ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[0]?.banners[2]?.img
+                        ShopByOccasionCarousels?.banner
                       }
                       className="img-fluid"
                       alt=""
@@ -85,7 +85,7 @@ const ShopByOccasion = () => {
                     <img
                       src={
                         ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[0]?.banners[3]?.img
+                        ShopByOccasionCarousels?.banner
                       }
                       className="img-fluid"
                       alt=""
@@ -98,7 +98,7 @@ const ShopByOccasion = () => {
                     <img
                       src={
                         ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[0]?.banners[4]?.img
+                        ShopByOccasionCarousels?.banner
                       }
                       className="img-fluid"
                       alt=""
@@ -111,7 +111,7 @@ const ShopByOccasion = () => {
                     <img
                       src={
                         ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[0]?.banners[5]?.img
+                        ShopByOccasionCarousels?.banner
                       }
                       className="img-fluid"
                       alt=""
@@ -126,7 +126,7 @@ const ShopByOccasion = () => {
                     <img
                       src={
                         ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[0]?.banners[6]?.img
+                        ShopByOccasionCarousels?.banner
                       }
                       className="img-fluid"
                       alt=""
@@ -139,7 +139,7 @@ const ShopByOccasion = () => {
                     <img
                       src={
                         ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[0]?.banners[7]?.img
+                        ShopByOccasionCarousels?.banner
                       }
                       className="img-fluid"
                       alt=""
@@ -155,7 +155,7 @@ const ShopByOccasion = () => {
               <img
                 src={
                   ShopByOccasionCarousels &&
-                  ShopByOccasionCarousels[0]?.banners[8]?.img
+                  ShopByOccasionCarousels?.banner
                 }
                 alt=""
               />

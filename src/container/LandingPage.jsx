@@ -10,10 +10,8 @@ import ShopByOccasion from "../components/HomePage/ShopByOccasion";
 import PamperZone from "../components/HomePage/PamperZone";
 import ThreePoint from "../components/HomePage/ThreePoint";
 import Footer from "../components/Footer/Footer";
-import { Box, Modal, Button, Typography } from "@mui/material";
+import { Box} from "@mui/material";
 import Layout from "../components/Layout";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import adsBanner from "../assets/adsBanner.png"
 const LandingPage = () => {
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
