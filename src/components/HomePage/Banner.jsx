@@ -27,8 +27,7 @@ const Banner = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
-  const finalData = allCarousels && allCarousels[3]?.banners || [];
+  const finalData = allCarousels && allCarousels || [];
 
   return (
     <div className="banner_slider">
@@ -39,7 +38,7 @@ const Banner = () => {
               finalData?.map((imageName, index) => (
                 <Box className="banner_img">
                   <img
-                    src={imageName?.img}
+                    src={imageName?.banner}
                     alt=""
                     style={{
                       width: "100%",
