@@ -1,4 +1,3 @@
-
 h1,
 h2,
 h3,
@@ -65,6 +64,7 @@ p {
   width: 45%;
   transform: translateY(-50%);
 }
+
 .banner_slider .banner_img .banner_content h3 {
   font-size: 40px;
   font-weight: 600;
@@ -73,6 +73,7 @@ p {
   margin: 0;
   padding: 0;
 }
+
 .banner_slider .banner_img .banner_content p {
   font-size: 1.25rem;
   font-weight: 400;
@@ -80,6 +81,7 @@ p {
   margin: 0;
   padding: 15px 0;
 }
+
 .banner_slider .banner_img .banner_content a {
   border: 1px solid #fff;
   border-radius: 6px;
@@ -89,6 +91,7 @@ p {
   display: inline-block;
   color: #fff;
 }
+
 /* close css for banner slider section */
 
 /* start css for category slider section */
@@ -100,6 +103,7 @@ p {
   text-decoration: none;
   position: relative;
 }
+
 .slick-slide img {
   width: 200px;
   height: 250px;
@@ -107,6 +111,7 @@ p {
   object-fit: cover;
   margin: 0 2rem 0;
 }
+
 .slick-slide h4 {
   font-size: 1.125rem;
   font-weight: 400;
@@ -119,6 +124,7 @@ p {
   color: #820408;
   font-size: 1.875rem;
 }
+
 .slick-prev:before {
   content: "\f053";
   font-family: "FontAwesome";
@@ -147,6 +153,7 @@ p {
 .slick-next:focus {
   background-color: #fff;
 }
+
 .slick-prev {
   left: 17px;
   padding: 15px 20px 13px 15px;
@@ -156,26 +163,20 @@ p {
   padding: 15px 15px 13px 20px;
   right: 20px;
 }
+
 /* close css for category slider section */
 
 /* start css for two banner section */
 .twobannersection {
   padding: 50px 100px 0;
 }
+
 .twobannersection img {
   width: 100%;
   border-radius: 20px;
 }
-.overlay::before {
-  width: 100%;
-  border-radius: 20px;
-  height: 100%;
-  background-color: #00000029;
-  content: "";
-  left: 0;
-  top: 0;
-  position: absolute;
-}
+
+
 .twobandata {
   position: absolute;
   top: 55%;
@@ -183,6 +184,7 @@ p {
   transform: translateY(-50%);
   width: 50%;
 }
+
 .twobandata h4 {
   font-size: 1.875rem;
   font-weight: 600;
@@ -191,6 +193,7 @@ p {
   margin: 0;
   padding: 0;
 }
+
 .twobandata p {
   font-size: 1rem;
   font-weight: 400;
@@ -198,6 +201,7 @@ p {
   margin: 0;
   padding: 15px 0;
 }
+
 .twobandata a {
   border: 1px solid #fff;
   border-radius: 6px;
@@ -207,12 +211,14 @@ p {
   display: inline-block;
   color: #fff;
 }
+
 /* close css for two banner section */
 
 /* start css for best seller section */
 .bestseller {
   padding: 50px 100px 0;
 }
+
 .heading_text h3 {
   text-align: center;
   font-size: 2.1875rem;
@@ -220,6 +226,7 @@ p {
   margin: 0;
   padding: 0 0 35px;
 }
+
 .samecard .slick-slide img {
   width: 225px;
   height: 300px;
@@ -227,51 +234,61 @@ p {
   object-fit: cover;
   margin: 0 20px 0;
 }
+
 .samecard .slick-prev {
   left: 0;
 }
+
 .samecard .slick-next {
   right: 5px;
 }
+
 .samecard .slick-slide a {
   display: grid;
 }
+
 .samecard .slick-slide .card_name {
   position: absolute;
   bottom: -5px;
   left: 50%;
   transform: translateX(-50%);
 }
+
 .samecard .slick-slide .card_name h4 {
   color: #fff;
   padding: 0 45px;
   font-size: 1.375rem;
   font-weight: 500;
 }
+
 .samecard .slick-slide .card_name p {
   color: #fff;
   padding: 0;
   font-size: 1rem;
   font-weight: 300;
 }
+
 /* close css for best seller section */
 
 /* start css for top category section */
 .topcategory {
   padding: 50px 100px 0;
 }
+
 /* close css for top category section */
 
 /* start css for shop by occasions section */
 .shopbyocca {
   padding: 50px 100px 0;
 }
+
 .shopbyocca img {
   width: 100%;
   height: 725px;
   object-fit: cover;
   border-radius: 20px;
 }
+
 .shopbyocca .twobandata {
   position: absolute;
   top: 50%;
@@ -281,6 +298,7 @@ p {
   width: 100%;
   transform: translate(-50%, -50%);
 }
+
 .shopbyocca .twobandata h4 {
   font-size: 3.125rem;
   font-weight: 600;
@@ -290,6 +308,7 @@ p {
   margin: 0;
   padding: 0;
 }
+
 .shopbyocca .twobandata a {
   border: 1px solid #fff;
   border-radius: 6px;
@@ -299,25 +318,30 @@ p {
   display: inline-block;
   color: #fff;
 }
+
 .overlay::before {
   position: absolute;
+  border-radius: 20px;
   width: 100%;
   height: 100%;
   content: "";
   left: 0;
   top: 0;
-  background-color: #00000040;
+  background-color: rgba(0, 0, 0, 0.4);
 }
+
 .shopbyocca .heighautoimg a {
   position: relative;
   overflow: hidden;
   margin-bottom: 25px;
   display: block;
 }
+
 .shopbyocca .heighautoimg a img {
   width: 100%;
   height: 260px;
 }
+
 .shopbyocca .heighautoimg a p {
   position: absolute;
   left: 50%;
@@ -330,24 +354,31 @@ p {
   text-align: center;
   width: 100%;
 }
+
 .shopbyocca .heighautoimg:nth-child(2) a img {
   height: 220px;
 }
+
 .shopbyocca .heighautoimg:nth-child(3) a img {
   height: 195px;
 }
+
 .shopbyocca .second_row:nth-child(1) a img {
   height: 190px;
 }
+
 .shopbyocca .second_row:nth-child(2) a img {
   height: 220px;
 }
+
 .shopbyocca .second_row:nth-child(3) a img {
   height: 265px;
 }
+
 .shopbyocca .forth_row:nth-child(1) a img {
   height: 350px;
 }
+
 .shopbyocca .forth_row:nth-child(2) a img {
   height: 350px;
 }
@@ -358,12 +389,14 @@ p {
 .pamperzone {
   padding: 50px 100px 0;
 }
+
 .pamperzone .twobandata h4 {
   color: #000;
   font-size: 3.125rem;
   padding: 0 0 20px;
   font-weight: 600;
 }
+
 .pamperzone .twobandata a {
   background-color: #801317;
   color: #ffffff;
@@ -371,30 +404,36 @@ p {
   padding: 10px 25px;
   font-size: 1.25rem;
 }
+
 .pamperzone img {
   width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 20px;
 }
+
 /* close css for pamper zone section */
 
 /* start css for three point section */
 .threepoint {
   padding: 50px 100px;
 }
+
 .threepoint img {
   margin-bottom: 16px;
 }
+
 .threepoint h3 {
   font-size: 20px;
   font-weight: 500;
   margin: 0;
   padding-bottom: 4px;
 }
+
 .threepoint p {
   margin: 0;
   font-weight: 300;
   font-size: 16px;
 }
+
 /* close css for three point section */

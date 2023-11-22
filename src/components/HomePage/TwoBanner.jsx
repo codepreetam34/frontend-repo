@@ -2,39 +2,31 @@ import FMButton from "../../components/FMButton/FMButton";
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
+import { getHomePageTwoAdsBanner } from "Redux/Slices/TwoAdsBanner/TwoAdsBannerSlice";
 
 const TwoBanner = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCarousel());
+    dispatch(getHomePageTwoAdsBanner());
   }, [dispatch]);
 
   const twoBannerData = useSelector(
-    (state) => state?.getCarousel?.getCarouselData?.homePageBanners
+    (state) => state?.twoAdsBanner?.twoAdsBanners?.homepageBanner
   );
 
-  // Function to replace the URLs in the data
-  // function replaceUrls(data) {
-  //   return data?.map(item => ({
-  //     _id: item?._id,
-  //     img: item?.img.replace("http://localhost:5000", "https://backend-repo-vibezter-prod.onrender.com")
-  //   }));
-  // }
-
-  // // Call the function to replace URLs in the data
-  // const twoBannerData = replaceUrls(data);
+console.log("twoBannerData ",twoBannerData)
 
   return (
     <div className="twobannersection">
       <Container fluid>
         <Row>
           <Col md={6}>
-            <div className="overlay position-relative">
-              {/* <img src={twoBannerData && twoBannerData?.banner} className="img-fluid" alt="" /> */}
+            <div className="position-relative">
+            <div class="overlay position-absolute top-0 start-0 bottom-0 end-0"></div>
+              <img src={twoBannerData && twoBannerData[0]?.banner} className="img-fluid" alt="" />
               <div className="twobandata">
-                <h4 style={{ fontSize: "24px" }}>The Anniversary Edit</h4>
+                <h4 style={{ fontSize: "24px" }}>The Anniversary</h4>
                 <p style={{ fontSize: "14px" }}>
                   Send lots of blooms this anniversary
                 </p>
@@ -52,7 +44,7 @@ const TwoBanner = () => {
           </Col>
           <Col md={6}>
             <div className="overlay position-relative">
-              {/* <img src={twoBannerData && twoBannerData?.banner} className="img-fluid" alt="" /> */}
+              <img src={twoBannerData && twoBannerData[0]?.banner} className="img-fluid" alt="" />
               <div className="twobandata">
                 <h4 style={{ fontSize: "24px" }}>Bespoke Hampers</h4>
                 <p style={{ fontSize: "14px" }}>

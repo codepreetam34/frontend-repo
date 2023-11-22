@@ -16,6 +16,8 @@ import getCarouselSlice from "../Slices/LandingPageSlice/LandingPageSlice";
 import addReviewsSlice from "../Slices/AddReviewSlice/AddReviewSlice";
 import myProfileSlice from "../Slices/MyProfileSlice/MyProfile";
 import deleteAddressSlice from "../Slices/AddToCart/DeleteAddress";
+import TwoAdsBannerSlice from "../Slices/TwoAdsBanner/TwoAdsBannerSlice";
+
 const rootReducer = combineReducers({
   menuList: menuListSlice,
   auth: authReducer,
@@ -30,6 +32,7 @@ const rootReducer = combineReducers({
   addReviews: addReviewsSlice,
   myProfile: myProfileSlice,
   deleteAddress: deleteAddressSlice,
+  twoAdsBanner: TwoAdsBannerSlice,
 });
 
 const initializeStore = () =>

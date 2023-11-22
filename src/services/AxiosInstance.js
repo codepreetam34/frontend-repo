@@ -3,7 +3,7 @@ import { LOGIN } from "../Routes/Routes";
 import { setItem } from "./commonService";
 
 const axiosInstance = axios.create({
-  baseURL: "http://165.22.222.7:5000",
+  baseURL: "http://http://165.22.222.7:5000",
   headers: {
     "Content-Type": "application/json",
   },
