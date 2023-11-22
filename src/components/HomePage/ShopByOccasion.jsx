@@ -41,11 +41,11 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/product-page" className="overlay">
                     <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels.banner
-                      }
-                      className="img-fluid"
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels.banner
+                      // }
+                      // className="img-fluid"
                       alt="first-img"
                     />
                     <p>Wedding</p>
@@ -54,11 +54,11 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels?.banner
-                      }
-                      className="img-fluid"
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels?.banner
+                      // }
+                      // className="img-fluid"
                       alt=""
                     />
                     <p>Festivals</p>
@@ -67,11 +67,11 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels?.banner
-                      }
-                      className="img-fluid"
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels?.banner
+                      // }
+                      // className="img-fluid"
                       alt=""
                     />
                     <p>Baby Shower</p>
@@ -83,11 +83,11 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels?.banner
-                      }
-                      className="img-fluid"
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels?.banner
+                      // }
+                      // className="img-fluid"
                       alt=""
                     />
                     <p>Party</p>
@@ -96,10 +96,10 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels?.banner
-                      }
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels?.banner
+                      // }
                       className="img-fluid"
                       alt=""
                     />
@@ -109,10 +109,10 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels?.banner
-                      }
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels?.banner
+                      // }
                       className="img-fluid"
                       alt=""
                     />
@@ -124,10 +124,10 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg forth_row">
                   <a href="/" className="overlay">
                     <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels?.banner
-                      }
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels?.banner
+                      // }
                       className="img-fluid"
                       alt=""
                     />
@@ -137,11 +137,11 @@ const ShopByOccasion = () => {
                 <div className="heighautoimg forth_row">
                   <a href="/" className="overlay">
                     <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels?.banner
-                      }
-                      className="img-fluid"
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels?.banner
+                      // }
+                      // className="img-fluid"
                       alt=""
                     />
                     <p>Best Wishes</p>
@@ -153,10 +153,10 @@ const ShopByOccasion = () => {
           <Col md={6}>
             <div className="overlay position-relative">
               <img
-                src={
-                  ShopByOccasionCarousels &&
-                  ShopByOccasionCarousels?.banner
-                }
+                // src={
+                //   ShopByOccasionCarousels &&
+                //   ShopByOccasionCarousels?.banner
+                // }
                 alt=""
               />
               <div className="twobandata">

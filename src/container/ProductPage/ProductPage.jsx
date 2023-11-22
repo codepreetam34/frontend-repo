@@ -177,21 +177,21 @@ const ProductPage = () => {
                     styleData={{ color: "#FFFFFF", fontSize: "12px", fontWeight: "600" }}
                   />
                 </Box>
-                <Card sx={{ width: "283px", borderRadius: "20px" }}>
+                <Card sx={{ width: "283px", borderRadius: "20px", height: 'auto' }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
                       height="283"
                       width="283"
                       image={elem?.productPictures[0]?.img}
-                      alt="green iguana"
+                      alt={elem?.productPictures[0]?.imageAltText}
                     />
-                    <CardContent style={{ height: "7rem" }}>
+                    <CardContent>
                       <Typography
                         gutterBottom
                         variant="h5"
                         component="div"
-                        sx={{ fontSize: "18px", color: "#222222", fontWeight: "300", textTransform: 'capitalize' }}
+                        sx={{ marginBottom: "0", fontSize: "18px", color: "#222222", fontWeight: "300", textTransform: 'capitalize' }}
                       >
                         {elem?.name}
                       </Typography>
@@ -216,7 +216,7 @@ const ProductPage = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Typography variant="body2" sx={{ color: "#717171", fontWeight: "300", textTransform: 'capitalize' }}>
+                        <Typography variant="body2" sx={{ color: "#717171", fontWeight: "300", textTransform: 'capitalize', padding: "2px 0" }}>
                           {elem?.deliveryDay}
                         </Typography>
                         <Typography variant="body2" sx={{ color: "#008539", fontWeight: "300" }}>

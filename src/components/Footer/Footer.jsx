@@ -320,7 +320,7 @@ const Footer = () => {
       </Row>
       <Row style={{ background: "#EAB6B8", padding: "15px 50px 15px 50px" }}>
         <Col style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ fontSize: '12px' }}>
+          <div style={{ fontSize: '12px', color:"#801317" }}>
             All Copyrght reserved by © Webgross Pvt Ltd.
           </div>
         </Col>

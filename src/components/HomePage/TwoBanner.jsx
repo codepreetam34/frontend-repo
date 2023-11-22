@@ -32,7 +32,7 @@ const TwoBanner = () => {
         <Row>
           <Col md={6}>
             <div className="overlay position-relative">
-              <img src={twoBannerData && twoBannerData?.banner} className="img-fluid" alt="" />
+              {/* <img src={twoBannerData && twoBannerData?.banner} className="img-fluid" alt="" /> */}
               <div className="twobandata">
                 <h4 style={{ fontSize: "24px" }}>The Anniversary Edit</h4>
                 <p style={{ fontSize: "14px" }}>
@@ -52,7 +52,7 @@ const TwoBanner = () => {
           </Col>
           <Col md={6}>
             <div className="overlay position-relative">
-              <img src={twoBannerData && twoBannerData?.banner} className="img-fluid" alt="" />
+              {/* <img src={twoBannerData && twoBannerData?.banner} className="img-fluid" alt="" /> */}
               <div className="twobandata">
                 <h4 style={{ fontSize: "24px" }}>Bespoke Hampers</h4>
                 <p style={{ fontSize: "14px" }}>

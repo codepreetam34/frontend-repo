@@ -38,7 +38,7 @@ const PamperZone = () => {
           <Col md={6}>
             <div className="position-relative">
               <img
-                src={pamperZoneData && pamperZoneData[2]?.banners[0]?.img}
+             //   src={pamperZoneData && pamperZoneData[2]?.banners[0]?.img}
                 className="img-fluid"
                 alt=""
               />
@@ -51,7 +51,7 @@ const PamperZone = () => {
           <Col md={6}>
             <div className="position-relative">
               <img
-                src={pamperZoneData && pamperZoneData[2]?.banners[1]?.img}
+              //  src={pamperZoneData && pamperZoneData[2]?.banners[1]?.img}
                 className="img-fluid"
                 alt=""
               />

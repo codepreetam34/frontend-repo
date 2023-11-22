@@ -73,6 +73,7 @@ const StyledMenu = styled((props) => (
       },
     },
   },
+
 }));
 
 
@@ -92,7 +93,19 @@ const useStyles = makeStyles((theme) => ({
       gap: '7rem',
     },
   },
-
+  link: {
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
+  profileIconStyle: {
+    width: "30px",
+    height: "30px",
+  },
+  locationIconStyle: {
+    width: "20px",
+    height: "20px",
+  },
   cartItemCountStyle: {
     position: 'absolute',
     top: '-8px',
@@ -104,14 +117,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '12px',
   },
   pincodeItemCountStyle: {
-    position: 'absolute',
-    top: '0',
-    right: '1.5rem',
-    backgroundColor: '#801317',
+
     color: 'white',
-    borderRadius: '50%',
-    padding: '4px 8px',
+
     fontSize: '12px',
+    "&:hover": {
+      color: "#801317",
+    },
   },
 
 }));
@@ -125,6 +137,9 @@ const Header = () => {
   const [showToast, setShowToast] = useState(false);
   const location = useLocation();
   const showToastMessage = location?.state?.showToastMessage;
+
+  const [isHovered, setIsHovered] = useState(false);
+
 
   var settings = {
     dots: true,
@@ -315,42 +330,12 @@ const Header = () => {
           }}
         >
           <Box>
-
-            <Button
-              onClick={handleModalOpenController}
-              style={{
-                minWidth: "0",
-                "MuiButton-root:hover": {
-                  backgroundColor: "red !important",
-                  borderRadius: "28px",
-                },
-              }}
-            >
-
-
-              <div style={{ position: 'relative' }}>
-                <img
-                  src={headerLocationIcon}
-                  alt="headerLocationIcon"
-                  style={HeaderStyle.profileIconStyle}
-                />
-                {pincodeData && pincodeData ?
-                  <div class={classes.pincodeItemCountStyle}>
-                    {pincodeData}
-                  </div> : <></>
-                }
-              </div>
-
-
-            </Button>
-          </Box>
-          <Box>
             <Link to={`/add-to-cart`} style={{ textDecoration: 'none' }}>
               <div style={{ position: 'relative' }}>
                 <img
                   src={cart}
                   alt="cart"
-                  style={HeaderStyle.cartStyle}
+                  className={classes.profileIconStyle}
                 />
                 {addedData && Object.keys(addedData).length > 0 && (
                   <div class={classes.cartItemCountStyle}>
@@ -363,24 +348,14 @@ const Header = () => {
           {/* profile below */}
           <Box>
             <Button
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
-              style={{
-                minWidth: "0",
+              style={{ padding: '0' }}
 
-                "MuiButton-root:hover": {
-                  backgroundColor: "red !important",
-                  borderRadius: "28px",
-                },
-              }}
             >
               <img
                 src={profileIcon}
                 alt="profileIcon"
-                style={HeaderStyle.profileIconStyle}
+                className={classes.profileIconStyle}
               />
             </Button>
             <Menu
@@ -501,6 +476,50 @@ const Header = () => {
               )}
             </Menu>
           </Box>
+
+
+          <Box>
+
+            <div>
+              <Button
+                onClick={handleModalOpenController}
+                sx={{
+                  color: isHovered ? "#801317" : "#fff",
+                  background: isHovered ? "#fff" : "#801317",
+                  borderRadius: "100px",
+                  padding: "5px 20px",
+                  transition: "color 0.3s, background 0.3s", // Added smooth transition
+                  border: '1px solid #801317',
+                  "&:hover": {
+                    background: "#fcedee",
+                    color: "#801317",
+                    border: '1px solid #801317'
+                  },
+                }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                <svg
+                  className={classes.locationIconStyle}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                >
+                  <path
+                    d="M20 19.9999C20.9166 19.9999 21.7016 19.6733 22.355 19.0199C23.0072 18.3677 23.3333 17.5833 23.3333 16.6666C23.3333 15.7499 23.0072 14.9649 22.355 14.3116C21.7016 13.6594 20.9166 13.3333 20 13.3333C19.0833 13.3333 18.2988 13.6594 17.6466 14.3116C16.9933 14.9649 16.6666 15.7499 16.6666 16.6666C16.6666 17.5833 16.9933 18.3677 17.6466 19.0199C18.2988 19.6733 19.0833 19.9999 20 19.9999ZM20 36.6666C15.5277 32.861 12.1877 29.326 9.97996 26.0616C7.77107 22.7983 6.66663 19.7777 6.66663 16.9999C6.66663 12.8333 8.00718 9.51381 10.6883 7.04158C13.3683 4.56936 16.4722 3.33325 20 3.33325C23.5277 3.33325 26.6316 4.56936 29.3116 7.04158C31.9927 9.51381 33.3333 12.8333 33.3333 16.9999C33.3333 19.7777 32.2294 22.7983 30.0216 26.0616C27.8127 29.326 24.4722 32.861 20 36.6666Z"
+                    fill={isHovered ? '#801317' : '#fff'}
+                    transition="fill 0.3s"
+                  />
+                </svg>
+                &nbsp;{pincodeData}
+              </Button>
+            </div>
+
+
+          </Box>
+
         </Col>
       </Row>
 
