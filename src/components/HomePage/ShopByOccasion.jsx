@@ -38,7 +38,7 @@ const ShopByOccasion = () => {
           <Col md={6}>
             <Row>
               <Col md={4}>
-                <div className="heighautoimg">
+                <div className="heighautoimgfirst">
                   <a href="/product-page" className="overlay">
                     <img
                       // src={
@@ -46,7 +46,7 @@ const ShopByOccasion = () => {
                       //   ShopByOccasionCarousels.banner
                       // }
                       // className="img-fluid"
-                      alt="first-img"
+                      alt=""
                     />
                     <p>Wedding</p>
                   </a>
@@ -75,6 +75,35 @@ const ShopByOccasion = () => {
                       alt=""
                     />
                     <p>Baby Shower</p>
+                  </a>
+                </div>
+              </Col>
+
+              <Col md={4}>
+                <div className="heighautoimg forth_row">
+                  <a href="/" className="overlay">
+                    <img
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels?.banner
+                      // }
+                      className="img-fluid"
+                      alt=""
+                    />
+                    <p>Anniversary</p>
+                  </a>
+                </div>
+                <div className="heighautoimg forth_row">
+                  <a href="/" className="overlay">
+                    <img
+                      // src={
+                      //   ShopByOccasionCarousels &&
+                      //   ShopByOccasionCarousels?.banner
+                      // }
+                      // className="img-fluid"
+                      alt=""
+                    />
+                    <p>Best Wishes</p>
                   </a>
                 </div>
               </Col>
@@ -120,38 +149,12 @@ const ShopByOccasion = () => {
                   </a>
                 </div>
               </Col>
-              <Col md={4}>
-                <div className="heighautoimg forth_row">
-                  <a href="/" className="overlay">
-                    <img
-                      // src={
-                      //   ShopByOccasionCarousels &&
-                      //   ShopByOccasionCarousels?.banner
-                      // }
-                      className="img-fluid"
-                      alt=""
-                    />
-                    <p>Anniversary</p>
-                  </a>
-                </div>
-                <div className="heighautoimg forth_row">
-                  <a href="/" className="overlay">
-                    <img
-                      // src={
-                      //   ShopByOccasionCarousels &&
-                      //   ShopByOccasionCarousels?.banner
-                      // }
-                      // className="img-fluid"
-                      alt=""
-                    />
-                    <p>Best Wishes</p>
-                  </a>
-                </div>
-              </Col>
+         
             </Row>
           </Col>
           <Col md={6}>
-            <div className="overlay position-relative">
+            <div className=" position-relative">
+              <div className="overlay"></div>
               <img
                 // src={
                 //   ShopByOccasionCarousels &&
@@ -159,8 +162,9 @@ const ShopByOccasion = () => {
                 // }
                 alt=""
               />
-              <div className="twobandata">
-                <h4>Birthday Celebration</h4>
+              <div className="twobandatalowersection">
+                <h4>Birthday</h4>
+                <h4 style={{paddingBottom:'2rem'}}>Celebration</h4>
                 <a href="/">Gift Now</a>
               </div>
             </div>

@@ -42,7 +42,7 @@ const Banner = () => {
                     alt=""
                     style={{
                       width: "100%",
-                      height: "auto",
+                      height: "24rem",
                     }}
                   />
                 </Box>
@@ -51,23 +51,6 @@ const Banner = () => {
         </Col>
       </Row>
     </div>
-
-    // <div className="banner_slider">
-    //   <Container fluid>
-    //     <Row>
-    //       <Col md={12}>
-    //         <Slider {...settings}>
-    //           {allCarousels &&
-    //             allCarousels[3]?.banners.map((item) => (
-    //               <div className="banner_img" key={item?._id}>
-    //                 <img src={item?.img} className="img-fluid" alt="" />
-    //               </div>
-    //             ))}
-    //         </Slider>
-    //       </Col>
-    //     </Row>
-    //   </Container>
-    // </div>
   );
 };
 

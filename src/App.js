@@ -33,7 +33,6 @@ import EmailVerify from "./container/SignUp/EmailVerify";
 import EmailVerifyOtp from "./container/SignUp/emailOtpVerification";
 import ProductPage from "./container/ProductPage/ProductPage";
 import ProductDetail from "./container/ProductDetail/ProductDetail";
-
 import PrivateRoutes from "./Routes/PrivateRoutes";
 import HorizontalLinearStepper from "./container/CartPaymentFlow/CartPaymentStepper/CartPaymentStepper";
 import PrivacyPolicy from "./container/PrivacyPolicy/PrivacyPolicy";
@@ -73,8 +72,6 @@ const App = () => {
               path={PRODUCT_DETAIL}
               element={<ProductDetail />}
             />
-
-
             <Route
               path={ADD_TO_CART}
               element={<HorizontalLinearStepper />}
@@ -87,7 +84,6 @@ const App = () => {
               path={MY_PROFILE}
               element={<PrivateRoutes Component={Profile} />}
             />
-
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
@@ -95,25 +91,5 @@ const App = () => {
     </>
   );
 };
-
-// new code above
-
-// import "./App.css";
-
-// import { ThemeProvider } from "@mui/material/styles";
-
-// import { BrowserRouter } from "react-router-dom";
-// import theme from "./theme";
-// import LandingPage from "container/LandingPage";
-
-// function App() {
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <BrowserRouter>
-//         <LandingPage />
-//       </BrowserRouter>
-//     </ThemeProvider>
-//   );
-// }
 
 export default App;

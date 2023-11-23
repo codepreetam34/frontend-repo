@@ -5,6 +5,7 @@ export const accordionStyles = {
     lineHeight: "1.5rem",
     color: "black",
   },
+  
   boxAccordion: {
     borderRadius: "0.5rem",
     color: "#717171",

@@ -7,7 +7,6 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
 import {
   deliveriesFaqs,
   orderingFaqs,

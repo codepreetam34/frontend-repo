@@ -1,7 +1,5 @@
 import React from "react";
 import { Box } from "@mui/material";
-// import FMTypography from "Components/FMTypography";
-// import { commonStyles } from "Styles/commonStyles";
 import FMTypography from "../FMTypography/FMTypography";
 import { commonStyle } from "../../Styles/commonStyles";
 

@@ -2,6 +2,7 @@
   "name": "vibezter-frontend",
   "version": "0.1.0",
   "private": true,
+  "author": "Preetam Kumar",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",

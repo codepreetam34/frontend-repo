@@ -38,8 +38,9 @@ const Footer = () => {
               displayText={"Subscribe"}
               styleData={{
                 fontSize: "20px",
-                fontWeight: "500",
+                fontWeight: "600",
                 textAlign: "center",
+                paddingBottom: "5px",
               }}
             />
             <Box sx={{ display: "flex", paddingTop: '10px', }}>
@@ -70,7 +71,7 @@ const Footer = () => {
                 fontFamily: "Poppins",
                 fontSize: "18px",
                 fontStyle: "normal",
-                fontWeight: "400",
+                fontWeight: "500",
 
               }}
                 style={{ textTransform: "capatilize !important", }}
@@ -159,7 +160,6 @@ const Footer = () => {
                   }}
                 /> </div>
               <div>
-
                 <div
                   style={{
                     fontSize: "14px",
@@ -320,7 +320,7 @@ const Footer = () => {
       </Row>
       <Row style={{ background: "#EAB6B8", padding: "15px 50px 15px 50px" }}>
         <Col style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ fontSize: '12px', color:"#801317" }}>
+          <div style={{ fontSize: '12px', color: "#801317", fontWeight: "700" }}>
             All Copyrght reserved by © Webgross Pvt Ltd.
           </div>
         </Col>

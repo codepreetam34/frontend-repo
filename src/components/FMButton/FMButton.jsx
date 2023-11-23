@@ -6,14 +6,22 @@ export default function FMButton({
   onClick,
   styleData,
   variant,
+  onHover,
   ...restProps
 }) {
+
+  const hoverEffect = {
+    ":hover": {
+      color: onHover ? onHover : "",
+    },
+  };
+
   return (
     <Button
       variant={variant || "contained"}
       disableRipple
       disableElevation
-      sx={styleData}
+      sx={{ ...styleData, ...hoverEffect }}
       onClick={onClick}
       {...restProps}
     >

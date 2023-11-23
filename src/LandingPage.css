@@ -26,14 +26,14 @@ p {
   border-radius: 20px;
   width: 100%;
   height: 100%;
-  background-color: #00000021;
+  background-color: rgba(0, 0, 0, 0);
   content: "";
 }
 
 .banner_slider .banner_img.slick-slide img {
   border-radius: 20px;
   width: 100%;
-  height: 500px;
+  height: 24rem;
   margin: 0;
   object-fit: cover;
 }
@@ -182,9 +182,36 @@ p {
   top: 55%;
   left: 35px;
   transform: translateY(-50%);
-  width: 50%;
+  width: 100%;
+  height: 130px;
 }
-
+.twobandatalowersection {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.twobandatalowersection h4{
+  font-size: 3.125rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+  margin: 0;
+  padding: 0;
+}
+.shopbyocca .twobandatalowersection a{
+border: 1px solid #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    padding: 10px 45px;
+    font-size: 1.5rem;
+    display: inline-block;
+    color: #fff;
+}
 .twobandata h4 {
   font-size: 1.875rem;
   font-weight: 600;
@@ -290,13 +317,12 @@ p {
 }
 
 .shopbyocca .twobandata {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  padding: 100px;
-  text-align: center;
-  width: 100%;
-  transform: translate(-50%, -50%);
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+gap: 2rem;
 }
 
 .shopbyocca .twobandata h4 {
@@ -336,13 +362,27 @@ p {
   margin-bottom: 25px;
   display: block;
 }
-
-.shopbyocca .heighautoimg a img {
-  width: 100%;
+.shopbyocca .heighautoimgfirst a {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 25px;
+  display: block;
   height: 260px;
 }
 
 .shopbyocca .heighautoimg a p {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+}
+.shopbyocca .heighautoimgfirst a p {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -436,4 +476,13 @@ p {
   font-size: 16px;
 }
 
+.shopbyocca .heighautoimg a img {
+  width: 100%;
+  height: 260px;
+}
+/* close css for three point section */
+.shopbyocca .heighautoimgfirst a img {
+  width: 100%;
+  height: 260px;
+}
 /* close css for three point section */

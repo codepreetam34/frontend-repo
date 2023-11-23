@@ -15,23 +15,22 @@ const TwoBanner = () => {
     (state) => state?.twoAdsBanner?.twoAdsBanners?.homepageBanner
   );
 
-console.log("twoBannerData ",twoBannerData)
-
   return (
     <div className="twobannersection">
       <Container fluid>
         <Row>
           <Col md={6}>
             <div className="position-relative">
-            <div class="overlay position-absolute top-0 start-0 bottom-0 end-0"></div>
-              <img src={twoBannerData && twoBannerData[0]?.banner} className="img-fluid" alt="" />
+              <div class="overlay position-absolute top-0 start-0 bottom-0 end-0"></div>
+              <img src={twoBannerData && twoBannerData[0]?.banner} className="img-fluid" alt="" style={{ width: "510px", height: "200px" }} />
               <div className="twobandata">
-                <h4 style={{ fontSize: "24px" }}>The Anniversary</h4>
+                <h4 style={{ fontSize: "24px", color: '#ffd43b' }}>The Anniversary</h4>
                 <p style={{ fontSize: "14px" }}>
                   Send lots of blooms this anniversary
                 </p>
                 <FMButton
                   displayText={"Gift Now"}
+                  onHover={"white"}
                   styleData={{
                     backgroundColor: "white",
                     color: "black",
@@ -44,14 +43,15 @@ console.log("twoBannerData ",twoBannerData)
           </Col>
           <Col md={6}>
             <div className="overlay position-relative">
-              <img src={twoBannerData && twoBannerData[0]?.banner} className="img-fluid" alt="" />
+              <img src={twoBannerData && twoBannerData[1]?.banner} className="img-fluid" alt="" style={{ width: "510px", height: "200px" }} />
               <div className="twobandata">
-                <h4 style={{ fontSize: "24px" }}>Bespoke Hampers</h4>
+                <h4 style={{ fontSize: "24px", color: '#ffd43b' }}>Bespoke Hampers</h4>
                 <p style={{ fontSize: "14px" }}>
                   To elevate your gifting experience
                 </p>
                 <FMButton
                   displayText={"Gift Now"}
+                  onHover={"white"}
                   styleData={{
                     backgroundColor: "white",
                     color: "black",

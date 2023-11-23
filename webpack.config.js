@@ -46,5 +46,4 @@ module.exports = {
     static: './public',
     hot: true,
   },
-  // Other webpack configurations...
 };

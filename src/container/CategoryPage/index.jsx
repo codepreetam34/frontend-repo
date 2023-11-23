@@ -72,8 +72,6 @@ const CategoryPage = () => {
       setIsLoading(true);
       dispatch(getProductByCategoryId(payload))
         .then((response) => {
-
-          console.log("response ", response)
           setPageTitle(response?.payload?.pageTitle);
           setCategoryId(response?.payload?.categoryId);
           setCategoryProducts(response?.payload?.products);
