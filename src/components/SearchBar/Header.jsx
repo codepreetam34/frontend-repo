@@ -108,12 +108,12 @@ const useStyles = makeStyles((theme) => ({
   },
   cartItemCountStyle: {
     position: 'absolute',
-    top: '-8px',
-    right: '-8px',
+    top: '-3px',
+    right: '7px',
     backgroundColor: '#801317',
     color: 'white',
     borderRadius: '50%',
-    padding:'1px 10px',
+    padding: '1px 10px',
     fontSize: '12px',
   },
   pincodeItemCountStyle: {
@@ -289,7 +289,6 @@ const Header = () => {
   };
 
   const getDataFunc = (data) => {
-
     if (data?.pincode.length === 6 && data?.pincode.length > 0) {
       setPincodeData(data?.pincode);
       setShowArea(true);
@@ -331,11 +330,11 @@ const Header = () => {
         >
           <Box>
             <Link to={`/add-to-cart`} style={{ textDecoration: 'none' }}>
-            <Button
-              onClick={handleClick}
-         //     style={{ padding: '0' }}
+              <Button
+                onClick={handleClick}
+              //     style={{ padding: '0' }}
 
-            >
+              >
                 <img
                   src={cart}
                   alt="cart"
@@ -353,7 +352,7 @@ const Header = () => {
           <Box>
             <Button
               onClick={handleClick}
-         //     style={{ padding: '0' }}
+            //     style={{ padding: '0' }}
 
             >
               <img
@@ -562,7 +561,7 @@ const Header = () => {
         </Col>
       </Row>
 
-      <div className="main_header">
+      <div className="main_header py-1">
         <Navbar
           bg=""
           expand="lg"
@@ -582,9 +581,9 @@ const Header = () => {
                       <NavDropdown
                         title={
                           <div
-                            className="main-heading-clickable fw-bold heading-text"
+                            className="main-heading-clickable heading-text"
                             onClick={() => handleCategoryClick(elem?._id)}
-                            style={{ color: "#fff" }}
+                            style={{ color: "#fff", fontWeight:'600' }}
                           >
                             <span>{elem?.name}</span>
                             <i
@@ -603,20 +602,22 @@ const Header = () => {
 
                         }}
                       >
-                        <Col md={12} style={{
-                          padding: "0px 20px 10px 20px",
-                        }}>
-                          <div>
+                        <Row>
+                          <Col md={12}>
                             <Row>
-                              <Col md={9} className={`${classes.commonStyle} d-lg-flex flex-wrap`} >
-                                {elem?.tags?.map((tag) => {
-                                  return (
-                                    <Box
-                                      style={{
-                                        paddingBottom: "0.7rem",
-                                        paddingTop: "0.2rem",
-                                      }}
-                                    >
+
+                              {elem?.tags?.map((tag, i) => {
+                                return (
+
+                                  <Col md={2}
+                                    style={{
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      padding: "1rem",
+                                      background: i > 0 && i % 2 != 0 ? "rgba(0,0,0,.09)" : "#fff"
+                                    }}
+                                  >
+                                    <Box>
                                       <div
                                         className="fw-bold pb-2"
                                         style={{ fontSize: "1.1rem" }}
@@ -642,10 +643,11 @@ const Header = () => {
                                         })}
                                       </div>
                                     </Box>
-                                  );
-                                })}
-                              </Col>{" "}
-                              <Col md={3}>
+                                  </Col>
+                                );
+                              })}
+
+                              <Col md={{ span: 4 }} style={{ padding: " 1rem 2.5rem 0px" }}>
                                 <div className="cate_list_menu pb-3">
                                   <img
                                     src={elem?.categoryImage}
@@ -656,8 +658,9 @@ const Header = () => {
                                 </div>
                               </Col>
                             </Row>
-                          </div>
-                        </Col>
+
+                          </Col>
+                        </Row>
                       </NavDropdown>
                     );
                   })}

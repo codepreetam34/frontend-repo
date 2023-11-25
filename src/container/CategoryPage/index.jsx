@@ -120,8 +120,8 @@ const CategoryPage = () => {
             <FMTypography
               displayText={
                 categoryProducts?.length > 0
-                  ? `| ${categoryProducts?.length} Gifts`
-                  : "| 0 Gift"
+                  ? `| ${categoryProducts?.length} Products`
+                  : "| 0 Product"
               }
               styleData={{
                 fontWeight: "300",

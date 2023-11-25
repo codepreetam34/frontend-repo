@@ -39,11 +39,11 @@
 .main_header .dropdown-menu {
   width: 80%;
   left: 0px;
-  top: 47px;
+  /* top: 47px; */
   box-shadow: 0 2px 15px -3px rgb(0 0 0 / 7%), 0 10px 20px -2px rgb(0 0 0 / 4%);
   border-radius: 0;
   border: none;
-  padding: 20px 20px 0px 20px;
+  /* padding: 20px 20px 0px 20px; */
 }
 
 .main_header .dropdown-menu .dropdown-item {
@@ -95,20 +95,21 @@
 
 .main_header .navbar-expand-lg .navbar-nav .nav-link.active,
 .main_header .navbar-expand-lg .navbar-nav .show>.nav-link .heading-text {
-  color: black !important;
+  color: #801319 !important;
   /* Use !important only if needed */
   /* Add any additional styling you need for the active state */
 }
 
 .main_header .navbar-expand-lg .navbar-nav .nav-link .heading-text:hover {
-  color: black !important;
+  color: #801319 !important;
   /* You can also add hover styles if needed */
 }
 
 
 
 .dropdown-menu.show{
-  margin-left: 3.25rem;
-  width: 72rem;
+  margin-left: 3.5rem;
+  width: 73rem;
   margin-right: 3.125rem;
+  padding: 0;
 }

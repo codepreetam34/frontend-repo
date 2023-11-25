@@ -99,8 +99,8 @@ const ProductPage = () => {
             <FMTypography
               displayText={
                 displayedProducts?.length
-                  ? `| ${displayedProducts?.length} Gifts`
-                  : "| 0 Gift"
+                  ? `| ${displayedProducts?.length} Products`
+                  : "| 0 Product"
               }
               styleData={{
                 fontWeight: "300",
