@@ -2,69 +2,92 @@ import React, { useEffect } from "react";
 import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoryCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
 import { Link } from "react-router-dom";
+import { getBestSellerProducts } from "Redux/Slices/ProductPage/ProductsPageSlice";
+import { Box, useMediaQuery } from "@mui/material";
 
 const BestSeller = () => {
   const dispatch = useDispatch();
+  const responsiveMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
-    dispatch(getCategoryCarousel());
+    dispatch(getBestSellerProducts());
   }, [dispatch]);
 
   const bestSellerCarousels = useSelector(
-    (state) => state?.getCarousel?.getProductCarouselData?.silders?.[2]?.sliders
+    (state) => state?.getProductsList?.getBestSellerProducts?.products
   );
-
-  // function replaceUrls(data) {
-  //   return data?.map((item) => ({
-  //     _id: item?._id,
-  //     img: item?.img.replace(
-  //       "http://localhost:5000",
-  //       "https://backend-repo-vibezter-prod.onrender.com"
-  //     ),
-  //   }));
-  // }
-
-  // // Call the function to replace URLs in the data
-  // const bestSellerCarousels = replaceUrls(data);
-
-  const category_settings = {
+  const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     draggable: true,
     centerPadding: "0px",
-    centerMode: true,
     autoplay: false,
     arrows: true,
-    slidesToShow: 6,
+    slidesToShow: 4,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+        },
+      },
+    ],
   };
 
+  const finalData = bestSellerCarousels && bestSellerCarousels || [];
+
+
   return (
+
+
     <div className="bestseller samecard ">
       <Container fluid>
-        <Row>
+      <Row className="m-0 p-0">
           <Col md={12}>
             <div className="heading_text">
               <h3>Best Seller</h3>
             </div>
           </Col>
+
           <Col md={12}>
-            <Slider {...category_settings}>
-              {bestSellerCarousels?.map((elem) => (
-                <div
+            <Slider  {...settings}>
+              {finalData && finalData?.map((elem) => (
+                <div key={elem?._id}
                   className="banner_img text-center"
-                  key={elem?._id}
-                  style={{ padding: "0 8px" }}
+                  style={{ padding: "0 8px", display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}
                 >
-                  <Link href="/product-page">
-                    <img src={elem?.img} className="img-fluid" alt="" />
-                    <div className="card_name">
-                      <h4>Decoration</h4>
-                      <p>start from INR 2999</p>
-                    </div>
+                  <Link to={`/product-detail/${elem?._id}`}>
+                    <Box className="banner_img">
+                      <div className="overlay"></div>
+                      <img src={elem?.productPictures[0].img} className="img-fluid" alt="" />
+                      <div className="card_name">
+                        <h4>{elem?.name}</h4>
+                        <p>₹ {elem?.discountPrice}</p>
+                      </div>
+                    </Box>
                   </Link>
                 </div>
               ))}
@@ -72,8 +95,17 @@ const BestSeller = () => {
           </Col>
         </Row>
       </Container>
-    </div>
+    </div >
+
   );
 };
 
 export default BestSeller;
+
+
+
+
+
+
+
+

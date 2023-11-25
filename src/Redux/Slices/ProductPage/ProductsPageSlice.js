@@ -4,7 +4,11 @@ import {
   GET_PRODUCTS_LIST,
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_LIST_BY_CATEGORY_ID,
-  GET_PRODUCTS_LIST_BY_CATEGORY_ID_AND_TAGS, GET_PRODUCTS_LIST_BY_SORTING
+  GET_PRODUCTS_LIST_BY_CATEGORY_ID_AND_TAGS,
+  GET_PRODUCTS_LIST_BY_SORTING,
+  GET_BEST_SELLER_PRODUCTS_LIST,
+  GET_TOP_CATEGORY_PRODUCTS_LIST
+
 } from "./type";
 
 export const getProductPageDetail = createAsyncThunk(
@@ -18,7 +22,6 @@ export const getProductPageDetail = createAsyncThunk(
     }
   }
 );
-
 export const getProductByCategoryId = createAsyncThunk(
   GET_PRODUCTS_LIST_BY_CATEGORY_ID,
   async (payload, thunkAPI) => {
@@ -47,7 +50,6 @@ export const getProductByCategoryIdAndTags = createAsyncThunk(
     }
   }
 );
-
 export const getProductsBySorting = createAsyncThunk(
   GET_PRODUCTS_LIST_BY_SORTING,
   async (payload, thunkAPI) => {
@@ -62,12 +64,33 @@ export const getProductsBySorting = createAsyncThunk(
     }
   }
 );
-
 export const getProductsList = createAsyncThunk(
   GET_PRODUCTS_LIST,
   async (payload, thunkAPI) => {
     try {
       const response = await axiosInstance.post(`api/product/getProducts`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
+export const getBestSellerProducts = createAsyncThunk(
+  GET_BEST_SELLER_PRODUCTS_LIST,
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(`api/product/getBestSellerProducts`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
+export const getTopCategoryProducts = createAsyncThunk(
+  GET_TOP_CATEGORY_PRODUCTS_LIST,
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get(`api/product/getTopCategoryProducts`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -83,6 +106,8 @@ const productListSlice = createSlice({
     getProductsListByCategoryIdAndTags: [],
     getProductDetails: [],
     getSortedProducts: [],
+    getBestSellerProducts: [],
+    getTopCategoryProducts: [],
     error: "",
     isFetching: false,
     isError: false,
@@ -145,9 +170,6 @@ const productListSlice = createSlice({
       state.isError = true;
     });
 
-
-
-
     builder.addCase(getProductsBySorting.pending, (state) => {
       state.getSortedProducts = {};
       state.isFetching = true;
@@ -169,16 +191,6 @@ const productListSlice = createSlice({
       state.isError = true;
     });
 
-
-
-
-
-
-
-
-
-
-
     builder.addCase(getProductPageDetail.pending, (state) => {
       state.getProductDetails = {};
       state.isFetching = true;
@@ -190,11 +202,52 @@ const productListSlice = createSlice({
       state.isFetching = false;
       state.isError = false;
     });
+
     builder.addCase(getProductPageDetail.rejected, (state, action) => {
       state.getProductDetails = {};
       state.isFetching = false;
       state.isError = true;
     });
+
+
+    builder.addCase(getBestSellerProducts.pending, (state) => {
+      state.getBestSellerProducts = {};
+      state.isFetching = true;
+      state.isError = false;
+    });
+
+    builder.addCase(getBestSellerProducts.fulfilled, (state, action) => {
+      state.getBestSellerProducts = action.payload;
+      state.isFetching = false;
+      state.isError = false;
+    });
+
+    builder.addCase(getBestSellerProducts.rejected, (state, action) => {
+      state.getBestSellerProducts = {};
+      state.isFetching = false;
+      state.isError = true;
+    });
+
+
+    builder.addCase(getTopCategoryProducts.pending, (state) => {
+      state.getTopCategoryProducts = {};
+      state.isFetching = true;
+      state.isError = false;
+    });
+
+    builder.addCase(getTopCategoryProducts.fulfilled, (state, action) => {
+      state.getTopCategoryProducts = action.payload;
+      state.isFetching = false;
+      state.isError = false;
+    });
+
+    builder.addCase(getTopCategoryProducts.rejected, (state, action) => {
+      state.getTopCategoryProducts = {};
+      state.isFetching = false;
+      state.isError = true;
+    });
+
+
   },
 });
 

@@ -425,6 +425,10 @@ const ProductDetail = () => {
     setSelectedTime(e.target.value);
   };
 
+  const onCardClick = (productId) => {
+    navigate(`/product-detail/${productId}`)
+  }
+
   return (
     <>
       <Layout title={title} description={description}>
@@ -1115,7 +1119,7 @@ const ProductDetail = () => {
                     {productDetailedData?.description}
                   </p>
                 </Box>
-                <Box sx={{ marginTop: "50px",marginBottom: "50px" }}>
+                <Box sx={{ marginTop: "50px", marginBottom: "50px" }}>
                   <FMTypography
                     displayText={"Product Specifications"}
                     styleData={{ fontSize: "20px", fontWeight: "500" }}
@@ -1437,7 +1441,7 @@ const ProductDetail = () => {
                   }}
                 >
                   <Box
-                  //  onClick={() => onCardClick(elem)}
+                    onClick={() => onCardClick(elem?._id)}
                   >
                     <Box
                       sx={{

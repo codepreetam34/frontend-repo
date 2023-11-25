@@ -543,8 +543,9 @@ const Header = () => {
                       <NavDropdown
                         title={
                           <div
-                            className="main-heading-clickable fw-bold"
+                            className="main-heading-clickable fw-bold heading-text"
                             onClick={() => handleCategoryClick(elem?._id)}
+                            style={{ color: "#fff" }}
                           >
                             <span>{elem?.name}</span>
                             <i
@@ -558,9 +559,14 @@ const Header = () => {
                         onMouseEnter={() => showDropdown(elem?._id)}
                         onMouseLeave={hideDropdown}
                         show={show === elem?._id}
-                        style={{ textTransform: "capitalize" }}
+                        style={{
+                          textTransform: "capitalize",
+
+                        }}
                       >
-                        <Col md={12}>
+                        <Col md={12} style={{
+                          padding: "0px 20px 10px 20px",
+                        }}>
                           <div>
                             <Row>
                               <Col md={9} className={`${classes.commonStyle} d-lg-flex flex-wrap`} >
@@ -613,57 +619,6 @@ const Header = () => {
                             </Row>
                           </div>
                         </Col>
-
-                        {/*
-                         <Row className="rowOnHover" style={{ padding: "2rem" }}>
-                          {elem?.children
-                            ?.slice()
-                            .reverse()
-                            .map((secElem) => (
-                              <Col md={3}>
-                                <div className="cate_area">
-                                  <Link
-                                    to={`/category-page/${secElem?._id}`}
-                                    style={{ textDecoration: "none" }}
-                                  >
-                                    <h3>{secElem?.name}</h3>
-                                  </Link>
-
-
-                                  
-                                  {secElem?.tags
-                                    ?.slice()
-                                    .reverse()
-                                    .map((thirdElem) => (
-                                      <Link
-                                        to={`/product-page/${thirdElem?._id}`}
-                                        style={{ textDecoration: "none" }}
-                                      >
-                                        <NavDropdown.Item href="/">
-                                          {thirdElem?.}
-                                        </NavDropdown.Item>
-                                      </Link>
-                                    ))}
-
-
-
-                                </div>
-                              </Col>
-                            ))}
-
-                          <Col md={3}>
-                            <div className="cate_list_menu">
-                              <a href="/">
-                                <img
-                                  src={elem?.categoryImage}
-                                  className="img-fluid"
-                                  alt=""
-                                />
-                            <h4>Cakes</h4> 
-                              </a>
-                            </div>
-                          </Col>
-                        </Row> */}
                       </NavDropdown>
                     );
                   })}
