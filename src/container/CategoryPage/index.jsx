@@ -102,37 +102,40 @@ const CategoryPage = () => {
       <Header />
 
       <Grid sx={{ padding: "0 100px" }}>
-        <Box sx={{ display: "flex" }}>
-          <FMTypography
-            displayText={
-              pageTitle ? `${pageTitle} Products` : `No ${pageTitle} Products`
-            }
-            styleData={{
-              fontWeight: "500",
-              fontSize: "40px",
-              textTransform: "capitalize",
-              paddingBottom: "1rem",
-            }}
-          />
-          <Box
-            sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
-          >
+        {pageTitle &&
+          <Box sx={{ display: "flex",transition: "color 1s ease-in-out, background 1s ease-in-out", }}>
+
             <FMTypography
               displayText={
-                categoryProducts?.length > 0
-                  ? `| ${categoryProducts?.length} Products`
-                  : "| 0 Product"
+                pageTitle ? `${pageTitle} Products` : `No Products`
               }
               styleData={{
-                fontWeight: "300",
-                fontSize: "20px",
-                lineHeight: "30px",
-                color: "#717171",
+                fontWeight: "500",
+                fontSize: "40px",
+                textTransform: "capitalize",
+                paddingBottom: "1rem",
               }}
             />
-          </Box>
-        </Box>
 
+            <Box
+              sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
+            >
+              <FMTypography
+                displayText={
+                  categoryProducts?.length > 0
+                    ? `| ${categoryProducts?.length} Products`
+                    : "| 0 Product"
+                }
+                styleData={{
+                  fontWeight: "300",
+                  fontSize: "20px",
+                  lineHeight: "30px",
+                  color: "#717171",
+                }}
+              />
+            </Box>
+          </Box>
+        }
         <Box>
           <FMFilter
             pageInfo={"categoryPage"}

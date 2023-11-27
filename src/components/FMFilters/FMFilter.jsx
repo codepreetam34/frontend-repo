@@ -17,8 +17,10 @@ const FMFilter = ({
 }) => {
   const dispatch = useDispatch();
   const [sortingValue, setSortingValue] = useState()
+  const [activeTag, setActiveTag] = useState(null);
   const sortByOptionsChangeHandler = (e) => {
     setSortingValue(e.target.value)
+    setActiveTag(null); // Reset active tag when sorting changes
     const payload = {
       sort: e.target.value,
       pageInfo,
@@ -40,6 +42,7 @@ const FMFilter = ({
       });
   };
   const tagOptionsChangeHandler = (tag) => {
+    setActiveTag(tag);
     const payload = {
       tagName: tag,
       categoryId: sendCategoryId,
@@ -125,13 +128,16 @@ const FMFilter = ({
             return (
               <>
                 <FMButton
+                  key={tag}
                   onClick={() => tagOptionsChangeHandler(tag)}
                   displayText={tag}
                   variant={"outlined"}
                   styleData={{
                     border: "1px solid #E6E6E6",
                     fontWeight: '600',
+                    //   color: activeTag === tag ? '#801317' : '#000000', 
                     color: '#801317',
+                   background: activeTag === tag ? '#f8d7da' : 'transparent',
                     borderRadius: "19px",
                     "&:hover": {
                       border: "1px solid #E6E6E6",

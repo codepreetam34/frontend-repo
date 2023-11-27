@@ -135,7 +135,6 @@ const Header = () => {
   const [showToast, setShowToast] = useState(false);
   const location = useLocation();
   const showToastMessage = location?.state?.showToastMessage;
-
   const [isHovered, setIsHovered] = useState(false);
 
 
@@ -612,7 +611,7 @@ const Header = () => {
                                       display: 'flex',
                                       justifyContent: 'center',
                                       padding: "1rem",
-                                      background: i > 0 && i % 2 != 0 ? "rgba(0,0,0,.09)" : "#fff"
+                                      background: i > 0 && i % 2 != 0 ? "#f2f2f2" : "#fff"
                                     }}
                                   >
                                     <Box>
@@ -645,7 +644,7 @@ const Header = () => {
                                 );
                               })}
 
-                              <Col md={{ span: 4 }} style={{ padding: " 1rem 2.5rem 0px" }}>
+                              <Col md={4} style={{ padding: " 1rem 2.5rem 0px" }}>
                                 <div className="cate_list_menu pb-3">
                                   <img
                                     src={elem?.categoryImage}

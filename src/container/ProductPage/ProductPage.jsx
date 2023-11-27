@@ -39,7 +39,6 @@ const ProductPage = () => {
   useEffect(() => {
     dispatch(getProductByCategoryIdAndTags(payload))
       .then((response) => {
-        console.log("response pp ", response)
         setPageTitle(response?.payload?.pageTitle);
         setCategoryId(response?.payload?.categoryId);
         setCategoryProducts(response?.payload?.products);
@@ -83,173 +82,195 @@ const ProductPage = () => {
     <>
       <Header />
       <Grid sx={{ padding: "0 100px" }}>
-        <Box sx={{ display: "flex" }}>
-          <FMTypography
-            displayText={`${pageTitle}`}
-            styleData={{
-              fontWeight: "500",
-              fontSize: "40px",
-              textTransform: "capitalize",
-              paddingBottom: "1rem",
+        {isLoading ? <>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "300px",
             }}
-          />
-          <Box
-            sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
           >
-            <FMTypography
-              displayText={
-                displayedProducts?.length
-                  ? `| ${displayedProducts?.length} Products`
-                  : "| 0 Product"
-              }
-              styleData={{
-                fontWeight: "300",
-                fontSize: "20px",
-                lineHeight: "30px",
-                color: "#717171",
-              }}
-            />
-          </Box>
-        </Box>
-        <Box>
-          <FMFilter
-            pincodeData={payload.pincodeData}
-            tagName={payload.tagName}
-            sendCategoryId={payload.categoryId}
-            pageInfo={"productPage"}
-            setCategoryId={setCategoryId}
-            setIsLoading={setIsLoading}
-            switchProducts={switchProducts}
-            setPageTitle={setPageTitle}
-            setDisplayedProducts={setDisplayedProducts}
-          />
-        </Box>
+            <CircularProgress color="primary" />
+          </div>
+        </> : (
+          <>        
+            {pageTitle &&
+            <Box sx={{ display: "flex", transition: "color 1s ease-in-out, background 1s ease-in-out" }}>
 
-        <Grid
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            flexBasis: "33.333333%",
-            justifyContent: "space-evenly",
-            gap: "1rem",
-            padding: "3rem 0",
-          }}
-        >
-          {isLoading ? (
-            <div
-              style={{
+              <FMTypography
+                displayText={
+                  pageTitle ? `${pageTitle} Products` : `No Products`
+                }
+                styleData={{
+                  fontWeight: "500",
+                  fontSize: "40px",
+                  textTransform: "capitalize",
+                  paddingBottom: "1rem",
+                }}
+              />
+
+              <Box
+                sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
+              >
+                <FMTypography
+                  displayText={
+                    displayedProducts?.length
+                      ? `| ${displayedProducts?.length} Products`
+                      : "| 0 Product"
+                  }
+                  styleData={{
+                    fontWeight: "300",
+                    fontSize: "20px",
+                    lineHeight: "30px",
+                    color: "#717171",
+                  }}
+                />
+              </Box>
+            </Box>
+          }
+
+            <Box>
+              <FMFilter
+                pincodeData={payload.pincodeData}
+                tagName={payload.tagName}
+                sendCategoryId={payload.categoryId}
+                pageInfo={"productPage"}
+                setCategoryId={setCategoryId}
+                setIsLoading={setIsLoading}
+                switchProducts={switchProducts}
+                setPageTitle={setPageTitle}
+                setDisplayedProducts={setDisplayedProducts}
+              />
+            </Box>
+
+            <Grid
+              sx={{
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "300px",
+                flexWrap: "wrap",
+                flexBasis: "33.333333%",
+                justifyContent: "space-evenly",
+                gap: "1rem",
+                padding: "3rem 0",
               }}
             >
-              <CircularProgress color="primary" />
-            </div>
-          ) : displayedProducts && displayedProducts.length > 0 ? (
-            displayedProducts?.map((elem) => (
-              <Box
-                onClick={() => onCardClick(elem)}
-                style={{ position: "relative" }}
-              >
-                <Box
-                  sx={{
-                    backgroundColor: "#008539",
-                    top: "3%",
+              {isLoading ? (
+                <div
+                  style={{
                     display: "flex",
-                    alignItems: "center",
-                    width: "40px",
-                    height: "30px",
                     justifyContent: "center",
-                    position: "absolute",
-                    left: "83%",
-                    zIndex: "111",
-                    borderRadius: "4px",
+                    alignItems: "center",
+                    height: "300px",
                   }}
                 >
-                  <img
-                    src={ratingStart}
-                    alt="rating-star"
-                    style={{ width: "14px" }}
-                  />
-                  <FMTypography
-                    displayText={Math.round(elem?.rating * 10) / 10}
-                    styleData={{ color: "#FFFFFF", fontSize: "12px", fontWeight: "600" }}
-                  />
-                </Box>
-                <Card sx={{ width: "283px", borderRadius: "20px", height: 'auto' }}>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="283"
-                      width="283"
-                      image={elem?.productPictures[0]?.img}
-                      alt={elem?.productPictures[0]?.imageAltText}
-                    />
-                    <CardContent>
+                  <CircularProgress color="primary" />
+                </div>
+              ) : displayedProducts && displayedProducts.length > 0 ? (
+                displayedProducts?.map((elem) => (
+                  <Box
+                    onClick={() => onCardClick(elem)}
+                    style={{ position: "relative" }}
+                  >
+                    <Box
+                      sx={{
+                        backgroundColor: "#008539",
+                        top: "3%",
+                        display: "flex",
+                        alignItems: "center",
+                        width: "40px",
+                        height: "30px",
+                        justifyContent: "center",
+                        position: "absolute",
+                        left: "83%",
+                        zIndex: "111",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      <img
+                        src={ratingStart}
+                        alt="rating-star"
+                        style={{ width: "14px" }}
+                      />
+                      <FMTypography
+                        displayText={Math.round(elem?.rating * 10) / 10}
+                        styleData={{ color: "#FFFFFF", fontSize: "12px", fontWeight: "600" }}
+                      />
+                    </Box>
+                    <Card sx={{ width: "283px", borderRadius: "20px", height: 'auto' }}>
+                      <CardActionArea>
+                        <CardMedia
+                          component="img"
+                          height="283"
+                          width="283"
+                          image={elem?.productPictures[0]?.img}
+                          alt={elem?.productPictures[0]?.imageAltText}
+                        />
+                        <CardContent>
+                          <Typography
+                            gutterBottom
+                            variant="h5"
+                            component="div"
+                            sx={{ marginBottom: "0", fontSize: "18px", color: "#222222", fontWeight: "300", textTransform: 'capitalize' }}
+                          >
+                            {elem?.name}
+                          </Typography>
+                          <span style={{ display: "flex" }}>
+                            <del style={{ fontSize: "14px", color: "#717171" }}>
+                              ₹ {elem?.actualPrice}
+                            </del>
+
+                            <Typography
+                              sx={{
+                                fontSize: "14px",
+                                color: "#000000",
+                                marginLeft: ".5rem", fontWeight: "600"
+                              }}
+                            >
+                              ₹ {elem?.discountPrice}
+                            </Typography>
+                          </span>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <Typography variant="body2" sx={{ color: "#717171", fontWeight: "300", textTransform: 'capitalize', padding: "2px 0" }}>
+                              {elem?.deliveryDay}
+                            </Typography>
+                            <Typography variant="body2" sx={{ color: "#008539", fontWeight: "300" }}>
+                              Reviews {elem?.numReviews}
+                            </Typography>
+                          </Box>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Box>
+                ))
+              ) : (
+                <Box>
+                  <Card
+                    sx={{
+                      width: "260px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <CardContent style={{ height: "4rem", textAlign: "center" }}>
                       <Typography
                         gutterBottom
                         variant="h5"
                         component="div"
-                        sx={{ marginBottom: "0", fontSize: "18px", color: "#222222", fontWeight: "300", textTransform: 'capitalize' }}
+                        sx={{ fontSize: "18px", color: "#801317" }}
                       >
-                        {elem?.name}
+                        No data available !
                       </Typography>
-                      <span style={{ display: "flex" }}>
-                        <del style={{ fontSize: "14px", color: "#717171" }}>
-                          ₹ {elem?.actualPrice}
-                        </del>
-
-                        <Typography
-                          sx={{
-                            fontSize: "14px",
-                            color: "#000000",
-                            marginLeft: ".5rem", fontWeight: "600"
-                          }}
-                        >
-                          ₹ {elem?.discountPrice}
-                        </Typography>
-                      </span>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Typography variant="body2" sx={{ color: "#717171", fontWeight: "300", textTransform: 'capitalize', padding: "2px 0" }}>
-                          {elem?.deliveryDay}
-                        </Typography>
-                        <Typography variant="body2" sx={{ color: "#008539", fontWeight: "300" }}>
-                          Reviews {elem?.numReviews}
-                        </Typography>
-                      </Box>
                     </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Box>
-            ))
-          ) : (
-            <Box>
-              <Card
-                sx={{
-                  width: "260px",
-                  borderRadius: "20px",
-                }}
-              >
-                <CardContent style={{ height: "4rem", textAlign: "center" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    sx={{ fontSize: "18px", color: "#801317" }}
-                  >
-                    No data available !
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Box>
-          )}
-        </Grid>
+                  </Card>
+                </Box>
+              )}
+            </Grid>
+          </>
+        )}
       </Grid>
       <Footer />
     </>
