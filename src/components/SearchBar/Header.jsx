@@ -350,7 +350,7 @@ const Header = () => {
           <Box>
             <Button
               onClick={handleClick}
-            //     style={{ padding: '0' }}
+
 
             >
               <img
@@ -570,7 +570,7 @@ const Header = () => {
             fluid
             className="d-flex flex-wrap n-0 p-0 justify-content-start"
           >
-            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Toggle aria-controls="navbarScroll" style={{ margin: "5px 8px", background: '#FFF' }} />
             <Navbar.Collapse id="navbarScroll">
               <Nav navbarScroll style={{ paddingLeft: "4rem" }}>
                 {categoryList &&
@@ -581,7 +581,7 @@ const Header = () => {
                           <div
                             className="main-heading-clickable heading-text"
                             onClick={() => handleCategoryClick(elem?._id)}
-                            style={{ color: "#fff", fontWeight:'600' }}
+                            style={{ color: "#fff", fontWeight: '600' }}
                           >
                             <span>{elem?.name}</span>
                             <i
