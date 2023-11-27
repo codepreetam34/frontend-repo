@@ -117,9 +117,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '12px',
   },
   pincodeItemCountStyle: {
-
     color: 'white',
-
     fontSize: '12px',
     "&:hover": {
       color: "#801317",

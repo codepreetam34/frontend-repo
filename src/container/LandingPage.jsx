@@ -10,10 +10,12 @@ import ShopByOccasion from "../components/HomePage/ShopByOccasion";
 import PamperZone from "../components/HomePage/PamperZone";
 import ThreePoint from "../components/HomePage/ThreePoint";
 import Footer from "../components/Footer/Footer";
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
 import Layout from "../components/Layout";
-import adsBanner from "../assets/adsBanner.png"
+import adsBanner from "../assets/adsBanner.png";
+
 const LandingPage = () => {
+
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
   const [showArea, setShowArea] = useState(false);
   const [pincodeData, setPincodeData] = useState("");
@@ -53,8 +55,8 @@ const LandingPage = () => {
           <Box>
             <TopCategory />
           </Box>
-          <Box>
-            <img src={adsBanner} alt="" />
+          <Box sx={{ width: '100%', height: 'auto', padding: "0 100px" }}>
+            <img src={adsBanner} alt="" style={{width: '100%',}}/>
           </Box>
           <ShopByOccasion />
           <PamperZone />
@@ -63,7 +65,7 @@ const LandingPage = () => {
         <Footer />
       </Layout>
 
-      
+
     </>
   );
 };

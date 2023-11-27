@@ -90,7 +90,7 @@ export const getTopCategoryProducts = createAsyncThunk(
   GET_TOP_CATEGORY_PRODUCTS_LIST,
   async (payload, thunkAPI) => {
     try {
-      const response = await axiosInstance.get(`api/product/getTopCategoryProducts`);
+      const response = await axiosInstance.post(`api/product/getTopCategoryProducts`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });

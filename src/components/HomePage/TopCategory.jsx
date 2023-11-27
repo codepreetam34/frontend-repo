@@ -1,81 +1,113 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
-import Data from "../../JsonDatas/JsonData";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoryCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
+import { Link } from "react-router-dom";
+import { getTopCategoryProducts } from "Redux/Slices/ProductPage/ProductsPageSlice";
+import { Box, useMediaQuery } from "@mui/material";
 
 const TopCategory = () => {
   const dispatch = useDispatch();
+  const responsiveMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
-    dispatch(getCategoryCarousel());
+    dispatch(getTopCategoryProducts());
   }, [dispatch]);
 
-  const topCategoriesCarousels = useSelector(
-    (state) => state?.getCarousel?.getProductCarouselData?.silders?.[1]?.sliders
+  const topCategoryCarousels = useSelector(
+    (state) => state?.getProductsList?.getTopCategoryProducts?.products
   );
-
-
-
-  // function replaceUrls(data) {
-  //   return data?.map((item) => ({
-  //     _id: item?._id,
-  //     img: item?.img.replace(
-  //       "http://localhost:5000",
-  //       "https://backend-repo-vibezter-prod.onrender.com"
-  //     ),
-  //   }));
-  // }
-
-  // // Call the function to replace URLs in the data
-  // const topCategoriesCarousels = replaceUrls(data);
-  const category_settings = {
+  const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     draggable: true,
-    Margin: "100px",
-    centerMode: true,
     centerPadding: "0px",
     autoplay: false,
     arrows: true,
-    slidesToShow: 6,
+    slidesToShow: 4,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+        },
+      },
+    ],
   };
 
+  const finalData = topCategoryCarousels && topCategoryCarousels || [];
+
+  console.log("final Data", finalData)
+
+
   return (
-    <div className="topcategory samecard">
+
+
+    <div className="bestseller samecard ">
       <Container fluid>
-        <Row>
+        <Row className="m-0 p-0">
           <Col md={12}>
             <div className="heading_text">
               <h3>Top Categories</h3>
             </div>
           </Col>
+
           <Col md={12}>
-            <Slider {...category_settings}>
-              {topCategoriesCarousels?.map((elem) => (
-                <div
+            <Slider  {...settings}>
+              {finalData && finalData?.map((elem) => (
+                <div key={elem?._id}
                   className="banner_img text-center"
-                  key={elem?._id}
-                  style={{ padding: "0 8px" }}
+                  style={{ padding: "0 8px", display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}
                 >
-                  <a href="/product-page">
-                    <img src={elem?.img} className="img-fluid" alt="" />
-                    <div className="card_name">
-                      <h4>Decoration</h4>
-                      <p>start from INR 2999</p>
-                    </div>
-                  </a>
+                  <Link to={`/product-detail/${elem?._id}`}>
+                    <Box className="banner_img">
+                      <div className="overlay"></div>
+                      <img src={elem?.productPictures[0].img} className="img-fluid" alt="" />
+                      <div className="card_name">
+                        <h4>{elem?.name}</h4>
+                        <p>₹ {elem?.discountPrice}</p>
+                      </div>
+                    </Box>
+                  </Link>
                 </div>
               ))}
             </Slider>
           </Col>
         </Row>
       </Container>
-    </div>
+    </div >
+
   );
 };
 
 export default TopCategory;
+
+
+
+
+
+
+
+

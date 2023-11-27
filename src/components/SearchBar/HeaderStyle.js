@@ -1,10 +1,10 @@
 export const HeaderStyle = {
-  headerFullStyle: { backgroundColor: "white !important" },
+  headerFullStyle: { backgroundColor: "white !important",    boxShadow:"0 2px 4px rgba(0,0,0,.2)", },
   iconGridContainer: {
     display: "flex",
     justifyContent: "space-between",
     padding: "1rem 50px",
-    background:"rgb(252, 237, 238)"
+    background:"rgb(252, 237, 238)",
   },
   monkeyLogoStyle: { width: "50px", height: "50px" },
   vibezterLogoStyle: { width: "150px", height: "30px"},
