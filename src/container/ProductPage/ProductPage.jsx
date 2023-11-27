@@ -81,7 +81,7 @@ const ProductPage = () => {
   return (
     <>
       <Header />
-      <Grid sx={{ padding: "0 100px" }}>
+      <Grid sx={{ padding: "0 100px", transition: "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)", }}>
         {isLoading ? <>
           <div
             style={{
@@ -96,7 +96,7 @@ const ProductPage = () => {
         </> : (
           <>        
             {pageTitle &&
-            <Box sx={{ display: "flex", transition: "color 1s ease-in-out, background 1s ease-in-out" }}>
+            <Box sx={{ display: "flex",  transition: "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)", }}>
 
               <FMTypography
                 displayText={
