@@ -123,6 +123,14 @@ const useStyles = makeStyles((theme) => ({
       color: "#801317",
     },
   },
+  tagDesign: {
+    fontSize: "0.9rem",
+    cursor: "pointer",
+    paddingBottom: "0.5rem",
+    "&:hover": {
+      color: "#801317",
+    },
+  },
 
 }));
 const Header = () => {
@@ -625,11 +633,7 @@ const Header = () => {
                                         {tag?.names?.map((name) => {
                                           return (
                                             <div
-                                              className="pb-2"
-                                              style={{
-                                                fontSize: "0.9rem",
-                                                cursor: "pointer",
-                                              }}
+                                              className={`${classes.tagDesign}`}
                                               onClick={() =>
                                                 handleTag(name, elem?._id)
                                               }

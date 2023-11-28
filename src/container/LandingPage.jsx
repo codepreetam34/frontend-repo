@@ -19,6 +19,7 @@ const LandingPage = () => {
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
   const [showArea, setShowArea] = useState(false);
   const [pincodeData, setPincodeData] = useState("");
+ 
   const title = 'Home Page';
   const description = 'This is the home page of our MERN application.';
 
@@ -33,8 +34,6 @@ const LandingPage = () => {
     }
 
   };
-
-
 
   return (
     <>
@@ -64,7 +63,6 @@ const LandingPage = () => {
         </div>
         <Footer />
       </Layout>
-
 
     </>
   );
