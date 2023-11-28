@@ -648,7 +648,7 @@ const Header = () => {
                                 );
                               })}
 
-                              <Col md={4} style={{ padding: " 1rem 2.5rem 0px" }}>
+                              <Col md={{span:4}} style={{ padding: " 1rem 2.5rem 0px" }}>
                                 <div className="cate_list_menu pb-3">
                                   <img
                                     src={elem?.categoryImage}

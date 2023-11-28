@@ -13,18 +13,18 @@ const ShopByOccasion = () => {
   );
   console.log("ShopByOccasionCarousels ", ShopByOccasionCarousels);
 
-  useEffect(() => {
-    if (ShopByOccasionCarousels == [] || !ShopByOccasionCarousels || ShopByOccasionCarousels?.length === 0) {
-      setIsLoading(true);
-      dispatch(getHomePageShopByOccasion()).then((res) => {
-        setIsLoading(false);
-      }).catch((err) => {
-        setIsLoading(false);
-      });
-    } else {
-      setIsLoading(false);
-    }
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (ShopByOccasionCarousels == [] || !ShopByOccasionCarousels || ShopByOccasionCarousels?.length === 0) {
+  //     setIsLoading(true);
+  //     dispatch(getHomePageShopByOccasion()).then((res) => {
+  //       setIsLoading(false);
+  //     }).catch((err) => {
+  //       setIsLoading(false);
+  //     });
+  //   } else {
+  //     setIsLoading(false);
+  //   }
+  // }, [dispatch]);
 
   return (
     <div className="shopbyocca">
