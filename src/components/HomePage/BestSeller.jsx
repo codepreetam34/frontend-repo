@@ -81,7 +81,7 @@ const BestSeller = () => {
                 >
                   <Link to={`/product-detail/${elem?._id}`}>
                     <Box className="banner_img">
-                      <div className="overlay"></div>
+                      <div className="background-overlay"></div>
                       <img src={elem?.productPictures[0].img} className="img-fluid" alt="" />
                       <div className="card_name">
                         <h4>{elem?.name}</h4>

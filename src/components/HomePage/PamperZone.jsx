@@ -9,7 +9,7 @@ const PamperZone = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-   // dispatch(getHomePagePamperZone());
+    dispatch(getHomePagePamperZone());
   }, [dispatch]);
 
   const pamperZoneData = useSelector(

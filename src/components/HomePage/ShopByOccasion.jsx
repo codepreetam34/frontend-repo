@@ -11,27 +11,28 @@ const ShopByOccasion = () => {
   const ShopByOccasionCarousels = useSelector(
     (state) => state.shopByOccasion?.shopByOccations?.homepageBanner
   );
-  
+
   console.log("ShopByOccasionCarousels ", ShopByOccasionCarousels);
 
-  // useEffect(() => {
-  //   if (ShopByOccasionCarousels == [] || !ShopByOccasionCarousels || ShopByOccasionCarousels?.length === 0) {
-  //     setIsLoading(true);
-  //     dispatch(getHomePageShopByOccasion()).then((res) => {
-  //       setIsLoading(false);
-  //     }).catch((err) => {
-  //       setIsLoading(false);
-  //     });
-  //   } else {
-  //     setIsLoading(false);
-  //   }
-  // }, [dispatch]);
+  useEffect(() => {
+    if (ShopByOccasionCarousels == [] || !ShopByOccasionCarousels || ShopByOccasionCarousels?.length === 0) {
+      setIsLoading(true);
+      dispatch(getHomePageShopByOccasion()).then((res) => {
+        setIsLoading(false);
+      }).catch((err) => {
+        setIsLoading(false);
+      });
+    } else {
+      setIsLoading(false);
+    }
+  }, [dispatch]);
 
   return (
     <div className="shopbyocca">
       <Container fluid>
         <Row>
           <Col md={12}>
+
             <div className="heading_text">
               <h3>Shop By Occasions</h3>
             </div>
@@ -49,7 +50,7 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>Wedding</p>
+                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[8]?.title}</p>
                   </a>
                 </div>
                 <div className="heighautoimg">
@@ -62,7 +63,7 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>Festivals</p>
+                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[7]?.title}</p>
                   </a>
                 </div>
                 <div className="heighautoimg">
@@ -75,7 +76,7 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>Baby Shower</p>
+                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[6]?.title}</p>
                   </a>
                 </div>
               </Col>
@@ -91,7 +92,7 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>Anniversary</p>
+                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[5]?.title}</p>
                   </a>
                 </div>
                 <div className="heighautoimg forth_row">
@@ -104,7 +105,7 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>Best Wishes</p>
+                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[4]?.title}</p>
                   </a>
                 </div>
               </Col>
@@ -120,7 +121,7 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>Party</p>
+                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[3]?.title}</p>
                   </a>
                 </div>
                 <div className="heighautoimg">
@@ -133,7 +134,7 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>Holi</p>
+                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[2]?.title}</p>
                   </a>
                 </div>
                 <div className="heighautoimg">
@@ -146,7 +147,7 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>House Warming</p>
+                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[1]?.title}</p>
                   </a>
                 </div>
               </Col>
@@ -164,8 +165,8 @@ const ShopByOccasion = () => {
                 alt=""
               />
               <div className="twobandatalowersection">
-                <h4>Birthday</h4>
-                <h4 style={{ paddingBottom: '2rem' }}>Celebration</h4>
+                {/* <h4>Birthday</h4> */}
+                <h4 style={{ paddingBottom: '2rem' }}>{ShopByOccasionCarousels && ShopByOccasionCarousels[0]?.title}</h4>
                 <a href="/">Gift Now</a>
               </div>
             </div>
