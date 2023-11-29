@@ -11,6 +11,7 @@ const ShopByOccasion = () => {
   const ShopByOccasionCarousels = useSelector(
     (state) => state.shopByOccasion?.shopByOccations?.homepageBanner
   );
+  
   console.log("ShopByOccasionCarousels ", ShopByOccasionCarousels);
 
   // useEffect(() => {

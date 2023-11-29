@@ -309,7 +309,7 @@ const Header = () => {
     <Grid sx={HeaderStyle.headerFullStyle}>
       <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }} >
         <Col style={commonStyle.flexDisplayStyle}>
-          <Link to={"/"} style={{ display: 'flex', alignItems: 'center', }}>
+          <a href={"/"} style={{ display: 'flex', alignItems: 'center', }}>
             <img
               src={monkeyLogo}
               alt="monkeyLogo"
@@ -320,7 +320,7 @@ const Header = () => {
               alt="VibezterLogo"
               style={{ ...HeaderStyle.vibezterLogoStyle }}
             />
-          </Link>
+          </a>
         </Col>
         <Col className="searchBar-col">
           <SearchBar placeholder={"Search gifts, experiences and more..."} />

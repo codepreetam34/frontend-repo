@@ -18,7 +18,7 @@ import myProfileSlice from "../Slices/MyProfileSlice/MyProfile";
 import deleteAddressSlice from "../Slices/AddToCart/DeleteAddress";
 import TwoAdsBannerSlice from "../Slices/TwoAdsBanner/TwoAdsBannerSlice";
 import ShopByOccasionSlice from "../Slices/ShopByOccasion/ShopByOccasionSlice";
-
+import PamperZoneSlice from "../Slices/PamperZone/PamperZoneSlice";
 const rootReducer = combineReducers({
   menuList: menuListSlice,
   auth: authReducer,
@@ -35,6 +35,7 @@ const rootReducer = combineReducers({
   deleteAddress: deleteAddressSlice,
   twoAdsBanner: TwoAdsBannerSlice,
   shopByOccasion: ShopByOccasionSlice,
+  pamperZone: PamperZoneSlice,
 });
 
 const initializeStore = () =>

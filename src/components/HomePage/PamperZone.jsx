@@ -1,31 +1,23 @@
+import { Box } from "@mui/material";
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
+import { getHomePagePamperZone } from "Redux/Slices/PamperZone/PamperZoneSlice";
 
 const PamperZone = () => {
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCarousel());
+   // dispatch(getHomePagePamperZone());
   }, [dispatch]);
 
   const pamperZoneData = useSelector(
-    (state) => state?.getCarousel?.getCarouselData?.homePageBanners
+    (state) => state?.pamperZone?.pamperZoneData?.homepageBanner
   );
 
-  // function replaceUrls(data) {
-  //   return data?.map((item) => ({
-  //     _id: item?._id,
-  //     img: item?.img.replace(
-  //       "http://localhost:5000",
-  //       "https://backend-repo-vibezter-prod.onrender.com"
-  //     ),
-  //   }));
-  // }
+  console.log("Pamper zone ", pamperZoneData)
 
-  // // Call the function to replace URLs in the data
-  // const pamperZoneData = replaceUrls(data);
   return (
     <div className="pamperzone">
       <Container fluid>
@@ -35,14 +27,18 @@ const PamperZone = () => {
               <h3>Pamper Zone</h3>
             </div>
           </Col>
+        </Row>
+        <Row style={{}}>
           <Col md={6}>
-            <div className="position-relative">
-              <img
-                //   src={pamperZoneData && pamperZoneData[2]?.banners[0]?.img}
-                className="img-fluid"
-                style={{ height: "300px" }}
-                alt=""
-              />
+            <div className="position-relative" style={{ width: "31rem" }}>
+              <Box>
+                <img
+                  src={pamperZoneData && pamperZoneData[0]?.banner}
+                  className="img-fluid"
+                  style={{ height: "25rem" }}
+                  alt=""
+                />
+              </Box>
               <div className="twobandata">
                 <h4>Gift For Her</h4>
                 <a href="/">Shop Now</a>
@@ -50,13 +46,15 @@ const PamperZone = () => {
             </div>
           </Col>
           <Col md={6}>
-            <div className="position-relative">
-              <img
-                //  src={pamperZoneData && pamperZoneData[2]?.banners[1]?.img}
-                className="img-fluid"
-                alt=""
-                style={{ height: "300px" }}
-              />
+            <div className="position-relative" style={{ width: "31rem" }}>
+              <Box>
+                <img
+                  src={pamperZoneData && pamperZoneData[1]?.banner}
+                  className="img-fluid"
+                  alt=""
+                  style={{ height: "25rem" }}
+                />
+              </Box>
               <div className="twobandata">
                 <h4>Gift For Him</h4>
                 <a href="/">Shop Now</a>

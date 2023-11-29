@@ -210,7 +210,7 @@ const CategoryPage = () => {
                       image={elem?.productPictures[0]?.img}
                       alt="green iguana"
                     />
-                    <CardContent style={{ height: "7rem" }}>
+                    <CardContent>
                       <Typography
                         gutterBottom
                         variant="h5"

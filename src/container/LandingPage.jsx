@@ -26,20 +26,26 @@ const LandingPage = () => {
   const getDataFunc = (data) => {
 
     if (data?.pincode.length === 6 && data?.pincode.length > 0) {
+
       setPincodeData(data?.pincode);
       setShowArea(true);
+
     } else {
+
       setPincodeData(null);
       setShowArea(false);
+
     }
 
   };
 
   return (
-    <>
+
+<>
 
       <Layout title={title} description={description}>
         <Header />
+  
         <div>
           <Box>
             <Banner />
@@ -61,11 +67,14 @@ const LandingPage = () => {
           <PamperZone />
           <ThreePoint />
         </div>
+
         <Footer />
       </Layout>
 
     </>
-  );
+
+);
+
 };
 
 export default LandingPage;
