@@ -78,13 +78,15 @@ const TopCategory = () => {
             <Slider  {...settings}>
               {finalData && finalData?.map((elem) => (
                 <div key={elem?._id}
-                  className="banner_img text-center"
+                  className="banner_img text-center zoomin-img-hover"
                   style={{ padding: "0 8px", display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}
                 >
                   <Link to={`/product-detail/${elem?._id}`}>
                     <Box className="banner_img">
                       <div className="background-overlay"></div>
+                
                       <img src={elem?.productPictures[0].img} className="img-fluid" alt="" />
+
                       <div className="card_name">
                         <h4>{elem?.name}</h4>
                         <p>₹ {elem?.discountPrice}</p>

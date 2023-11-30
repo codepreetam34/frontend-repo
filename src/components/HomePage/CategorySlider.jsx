@@ -22,7 +22,7 @@ const CategorySlider = () => {
     centerPadding: "0px",
     autoplay: false,
     arrows: true,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     responsive: [
       {
@@ -64,6 +64,7 @@ const CategorySlider = () => {
                 categoryList?.map((elem) => {
                   return (
                     <div key={elem?._id}
+                    className="zoomin-img"
                       style={{ padding: "0 8px", display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}
                     >
                       <Link to={`/category-page/${elem?._id}`}>

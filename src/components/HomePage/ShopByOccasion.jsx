@@ -1,3 +1,4 @@
+import FMButton from "components/FMButton/FMButton";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +12,6 @@ const ShopByOccasion = () => {
   const ShopByOccasionCarousels = useSelector(
     (state) => state.shopByOccasion?.shopByOccations?.homepageBanner
   );
-
-  console.log("ShopByOccasionCarousels ", ShopByOccasionCarousels);
 
   useEffect(() => {
     if (ShopByOccasionCarousels == [] || !ShopByOccasionCarousels || ShopByOccasionCarousels?.length === 0) {
@@ -167,7 +166,17 @@ const ShopByOccasion = () => {
               <div className="twobandatalowersection">
                 {/* <h4>Birthday</h4> */}
                 <h4 style={{ paddingBottom: '2rem' }}>{ShopByOccasionCarousels && ShopByOccasionCarousels[0]?.title}</h4>
-                <a href="/">Gift Now</a>
+                {/* <a href="/">Gift Now</a> */}
+                <FMButton
+                  displayText={"Gift Now"}
+                  onHover={"white"}
+                  styleData={{
+                    backgroundColor: "white",
+                    color: "black",
+                    textTransform: "capitalize",
+                    fontWeight: "600",
+                  }}
+                />
               </div>
             </div>
           </Col>

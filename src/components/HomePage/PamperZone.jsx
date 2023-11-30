@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import FMButton from "components/FMButton/FMButton";
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,6 @@ const PamperZone = () => {
     (state) => state?.pamperZone?.pamperZoneData?.homepageBanner
   );
 
-  console.log("Pamper zone ", pamperZoneData)
 
   return (
     <div className="pamperzone">
@@ -28,7 +28,7 @@ const PamperZone = () => {
             </div>
           </Col>
         </Row>
-        <Row style={{}}>
+        <Row>
           <Col md={6}>
             <div className="position-relative" style={{ width: "31rem" }}>
               <Box>
@@ -40,8 +40,20 @@ const PamperZone = () => {
                 />
               </Box>
               <div className="twobandata">
-                <h4>Gift For Her</h4>
-                <a href="/">Shop Now</a>
+                <h4>{pamperZoneData && pamperZoneData[0]?.title}</h4>
+                {/* <a href="/">Shop Now</a> */}
+                <FMButton
+                  displayText={"Shop Now"}
+                  styleData={{
+                    backgroundColor: "#801319",
+                    color: "#ffffff",
+                    border: "1px solid #801319",
+                    padding: "10px 25px",
+                    fontSize: "1.25rem",
+                    textTransform: "capitalize",
+                    fontWeight: "600",
+                  }}
+                />
               </div>
             </div>
           </Col>
@@ -56,8 +68,20 @@ const PamperZone = () => {
                 />
               </Box>
               <div className="twobandata">
-                <h4>Gift For Him</h4>
-                <a href="/">Shop Now</a>
+                <h4>{pamperZoneData && pamperZoneData[1]?.title}</h4>
+                <FMButton
+                  displayText={"Shop Now"}
+                  styleData={{
+                    backgroundColor: "#801319",
+                    color: "#ffffff",
+                    border: "1px solid #801319",
+                    padding: "10px 25px",
+                    fontSize: "1.25rem",
+                    textTransform: "capitalize",
+                    fontWeight: "600",
+                  }}
+                />
+                {/* <a href="/">Shop Now</a> */}
               </div>
             </div>
           </Col>
