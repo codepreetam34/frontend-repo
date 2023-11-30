@@ -21,7 +21,7 @@ import FMFilter from "../../components/FMFilters/FMFilter";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
-import Pincode from "../../components/Pincode";
+import Pincode from "../../components/PincodeWrapper";
 
 const ProductPage = () => {
   const navigate = useNavigate();

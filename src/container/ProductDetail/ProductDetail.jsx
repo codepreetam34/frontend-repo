@@ -466,13 +466,13 @@ const ProductDetail = () => {
                     <img
                       src={ratingStart}
                       alt="rating-star"
-                      style={{ width: "14px" }}
+                      style={{ width: "14px",  }}
                     />
                     <FMTypography
                       displayText={
                         Math.round(productDetailedData?.rating * 10) / 10
                       }
-                      styleData={{ color: "#FFFFFF", fontSize: "12px" }}
+                      styleData={{ color: "#FFFFFF", fontSize: "12px"}}
                     />
                   </Box>
                   <FMButton
@@ -480,6 +480,7 @@ const ProductDetail = () => {
                     variant={"outlined"}
                     styleData={{
                       textDecoration: "underline",
+                      marginLeft:'6px',
                       lineHeight: "0.3px",
                       textTransform: "capitalize",
                       color: "#717171",
@@ -487,8 +488,9 @@ const ProductDetail = () => {
                       fontSize: "18px",
                       "&:hover": {
                         border: "none",
-                        backgroundColor: "white",
-                        textDecoration: "underline",
+                        color:"#fff",
+                        backgroundColor: "#801317",
+                        textDecoration: "none",
                       },
                     }}
                   />
@@ -1287,7 +1289,7 @@ const ProductDetail = () => {
                   displayText={
                     Math.round(productDetailedData?.rating * 10) / 10
                   }
-                  styleData={{ fontSize: "20px", paddingTop: "6px" }}
+                  styleData={{ fontSize: "20px", paddingTop: "6px",paddingRight: "6px" }}
                 />
                 <FMButton
                   displayText={`${productDetailedData?.numReviews} Reviews `}
@@ -1302,8 +1304,9 @@ const ProductDetail = () => {
                     marginBottom: "1rem",
                     "&:hover": {
                       border: "none",
-                      backgroundColor: "white",
-                      textDecoration: "underline",
+                      color:"#fff",
+                      backgroundColor: "#801317",
+                      textDecoration: "none",
                     },
                   }}
                 />

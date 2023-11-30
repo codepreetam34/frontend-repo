@@ -81,7 +81,7 @@ const TopCategory = () => {
                   className="banner_img text-center zoomin-img-hover"
                   style={{ padding: "0 8px", display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}
                 >
-                  <Link to={`/product-detail/${elem?._id}`}>
+                  <a href={`/product-detail/${elem?._id}`}>
                     <Box className="banner_img">
                       <div className="background-overlay"></div>
                 
@@ -92,7 +92,7 @@ const TopCategory = () => {
                         <p>₹ {elem?.discountPrice}</p>
                       </div>
                     </Box>
-                  </Link>
+                  </a>
                 </div>
               ))}
             </Slider>

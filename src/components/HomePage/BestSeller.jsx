@@ -79,7 +79,7 @@ const BestSeller = () => {
                   className="banner_img text-center"
                   style={{ padding: "0 8px", display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}
                 >
-                  <Link to={`/product-detail/${elem?._id}`}>
+                  <a href={`/product-detail/${elem?._id}`}>
                     <Box className="banner_img">
                       <div className="background-overlay"></div>
                       <img src={elem?.productPictures[0].img} className="img-fluid" alt="" />
@@ -88,7 +88,7 @@ const BestSeller = () => {
                         <p>₹ {elem?.discountPrice}</p>
                       </div>
                     </Box>
-                  </Link>
+                  </a>
                 </div>
               ))}
             </Slider>

@@ -29,8 +29,7 @@ import { logout } from "../../Redux/Slices/Login/auth.slice";
 import { makeStyles } from "@mui/styles";
 import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
 import { ErrorToaster, SuccessToaster } from "constants/util";
-import CloseIcon from "@mui/icons-material/Close";
-import Pincode from "react-pincode";
+import PincodeWrapper from "components/PincodeWrapper";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -95,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     "&:hover": {
-      textDecoration: "underline",
+      textDecoration: "none",
     },
   },
   profileIconStyle: {
@@ -137,7 +136,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
-  const [showArea, setShowArea] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [showErrorToastMessage, setShowErrorToastMessage] = useState();
   const [showToast, setShowToast] = useState(false);
@@ -235,6 +233,7 @@ const Header = () => {
   };
 
   const [show, setShow] = useState("");
+  const [pincodeData, setPincodeData] = useState("");
   const showDropdown = (id) => {
     setShow(id);
   };
@@ -265,45 +264,11 @@ const Header = () => {
     (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
   );
 
-  const [isInitialRender, setIsInitialRender] = useState(true);
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
-  const [pincodeData, setPincodeData] = useState("");
 
-  const [checkedStoredPincode, setCheckedStoredPincode] = useState(true);
-  useEffect(() => {
-    const storedPincode = sessionStorage.getItem("pincode");
-
-    if (storedPincode) {
-      setPincodeData(storedPincode);
-      // Set pincodeModalOpen to false after processing stored pincode
-      setPincodeModalOpen(false);
-    } else if (checkedStoredPincode) {
-      // Set pincodeModalOpen to true only during the initial render
-      setCheckedStoredPincode(false)
-    }
-    else {
-      setPincodeModalOpen(false)
-    }
-  }, []);
-  const handleModalClose = () => {
-    setPincodeModalOpen(false);
-    sessionStorage.setItem("pincode", pincodeData);
-  };
   const handleModalOpenController = () => {
     setPincodeModalOpen(true);
   };
-
-  const getDataFunc = (data) => {
-    if (data?.pincode.length === 6 && data?.pincode.length > 0) {
-      setPincodeData(data?.pincode);
-      setShowArea(true);
-    } else {
-      setPincodeData(null);
-      setShowArea(false);
-    }
-
-  };
-
 
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
@@ -669,82 +634,6 @@ const Header = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-
-
-        <Modal open={pincodeModalOpen}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "30rem",
-              bgcolor: "white",
-              borderRadius: 4,
-            }}
-          >
-            {/* Header */}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "1rem",
-                borderBottom: "1px solid #ccc",
-              }}
-            >
-              <Typography variant="h6">Select Delivery Location</Typography>
-              <IconButton onClick={handleModalClose}>
-                <CloseIcon />
-              </IconButton>
-            </Box>
-
-            {/* Content */}
-            <Box sx={{ padding: "2rem" }}>
-              <Pincode
-                showCity={false}
-                showDistrict={false}
-                showState={false}
-                invalidError="Please check pincode"
-                getData={getDataFunc}
-                showArea={showArea}
-                pincodeInput={{
-                  borderRadius: "10px",
-                  width: "100%",
-                  border: "1px solid grey",
-                  height: "55px",
-                  padding: "2rem 1rem",
-                  marginRight: "1.7rem",
-                }}
-                areaInput={{
-                  backgroundColor: "white",
-                  border: "none",
-                  color: "red",
-                  fontSize: "12px",
-                }}
-              />
-            </Box>
-
-            {/* Footer */}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-                padding: "1rem",
-                borderTop: "1px solid #ccc",
-              }}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={!pincodeData}
-                onClick={handleModalClose}
-              >
-                Continue Shopping
-              </Button>
-            </Box>
-          </Box>
-        </Modal>
         {showErrorToast &&
           <ErrorToaster
             showErrorToast={showErrorToast}
@@ -764,6 +653,8 @@ const Header = () => {
           />
         )}
       </div>
+
+      <PincodeWrapper setPincodeData={setPincodeData} pincodeData={pincodeData} pincodeModalOpen={pincodeModalOpen} setPincodeModalOpen={setPincodeModalOpen} />
     </Grid>
   );
 };
