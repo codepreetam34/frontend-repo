@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
 }));
-const Header = ({ setLandingPageModalOpen,landingPageModalOpen }) => {
+const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -142,6 +142,7 @@ const Header = ({ setLandingPageModalOpen,landingPageModalOpen }) => {
   const location = useLocation();
   const showToastMessage = location?.state?.showToastMessage;
   const [isHovered, setIsHovered] = useState(false);
+  const [headerPageModalOpen, setHeaderPageModalOpen] = useState(false);
 
 
   var settings = {
@@ -268,6 +269,7 @@ const Header = ({ setLandingPageModalOpen,landingPageModalOpen }) => {
 
   const handleModalOpenController = () => {
     setPincodeModalOpen(true);
+    setHeaderPageModalOpen(true);
   };
 
   return (
@@ -654,7 +656,7 @@ const Header = ({ setLandingPageModalOpen,landingPageModalOpen }) => {
         )}
       </div>
 
-      <PincodeWrapper landingPageModalOpen={landingPageModalOpen} setLandingPageModalOpen={setLandingPageModalOpen} setPincodeData={setPincodeData} pincodeData={pincodeData} pincodeModalOpen={pincodeModalOpen} setPincodeModalOpen={setPincodeModalOpen} />
+      <PincodeWrapper setHeaderPageModalOpen={setHeaderPageModalOpen} headerPageModalOpen={headerPageModalOpen} landingPageModalOpen={landingPageModalOpen} setLandingPageModalOpen={setLandingPageModalOpen} setPincodeData={setPincodeData} pincodeData={pincodeData} pincodeModalOpen={pincodeModalOpen} setPincodeModalOpen={setPincodeModalOpen} />
     </Grid>
   );
 };

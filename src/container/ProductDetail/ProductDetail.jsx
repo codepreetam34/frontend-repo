@@ -58,6 +58,7 @@ import Layout from "../../components/Layout";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import FMDeliveryDropdown from "../../components/FMDeliveryDropdown";
+import { notify } from "components/FMToaster/FMToaster";
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -139,6 +140,32 @@ const ProductDetail = () => {
         if (res) {
           //navigate(`/add-to-cart`);
           dispatch(addToCartProductsFinal());
+        }
+      });
+      // navigate(`/add-to-cart`);
+    }
+  };
+  const handleBuyNow = async (data) => {
+    if (pId) {
+      const cartItems = [];
+      const payload = {
+        cartItems: [
+          {
+            product: pId,
+            quantity: 1,
+          },
+        ],
+      };
+
+      dispatch(addToCart(payload)).then((res) => {
+        if (res?.payload?.error?.response?.status === 400 || res?.payload?.error?.response?.status === 500) {
+          console.log("res ", res)
+          notify({ type: "error", content: `Failed to add items: ${res?.payload?.error?.response?.data?.message}` });
+        } else {
+          console.log("res ", res)
+          dispatch(addToCartProductsFinal())
+          notify({ type: "success", content: `Items added successfully to cart` });
+          navigate(`/add-to-cart`);
         }
       });
       // navigate(`/add-to-cart`);
@@ -466,13 +493,13 @@ const ProductDetail = () => {
                     <img
                       src={ratingStart}
                       alt="rating-star"
-                      style={{ width: "14px",  }}
+                      style={{ width: "14px", }}
                     />
                     <FMTypography
                       displayText={
                         Math.round(productDetailedData?.rating * 10) / 10
                       }
-                      styleData={{ color: "#FFFFFF", fontSize: "12px"}}
+                      styleData={{ color: "#FFFFFF", fontSize: "12px" }}
                     />
                   </Box>
                   <FMButton
@@ -480,7 +507,7 @@ const ProductDetail = () => {
                     variant={"outlined"}
                     styleData={{
                       textDecoration: "underline",
-                      marginLeft:'6px',
+                      marginLeft: '6px',
                       lineHeight: "0.3px",
                       textTransform: "capitalize",
                       color: "#717171",
@@ -488,7 +515,7 @@ const ProductDetail = () => {
                       fontSize: "18px",
                       "&:hover": {
                         border: "none",
-                        color:"#fff",
+                        color: "#fff",
                         backgroundColor: "#801317",
                         textDecoration: "none",
                       },
@@ -1090,17 +1117,18 @@ const ProductDetail = () => {
                     // onClick={tempSub}
                     onClick={handleSubmit(onSubmit)}
                   />
-                  <Link to={"/add-to-cart"}>
-                    <FMButton
-                      disabled={disabledDate}
-                      displayText={"Buy Now"}
-                      variant={"contained"}
-                      styleData={{
-                        ...commonStyle.buttonStyles,
-                        width: "215px",
-                      }}
-                    />
-                  </Link>
+
+                  <FMButton
+                    disabled={disabledDate}
+                    displayText={"Buy Now"}
+                    variant={"contained"}
+                    styleData={{
+                      ...commonStyle.buttonStyles,
+                      width: "215px",
+                    }}
+                    onClick={handleBuyNow}
+                  />
+
                   <input type={"submit"} hidden />
                 </Box>
 
@@ -1289,7 +1317,7 @@ const ProductDetail = () => {
                   displayText={
                     Math.round(productDetailedData?.rating * 10) / 10
                   }
-                  styleData={{ fontSize: "20px", paddingTop: "6px",paddingRight: "6px" }}
+                  styleData={{ fontSize: "20px", paddingTop: "6px", paddingRight: "6px" }}
                 />
                 <FMButton
                   displayText={`${productDetailedData?.numReviews} Reviews `}
@@ -1304,7 +1332,7 @@ const ProductDetail = () => {
                     marginBottom: "1rem",
                     "&:hover": {
                       border: "none",
-                      color:"#fff",
+                      color: "#fff",
                       backgroundColor: "#801317",
                       textDecoration: "none",
                     },
@@ -1433,7 +1461,7 @@ const ProductDetail = () => {
               infinite
             // customDot={<CustomDot />}
             >
-              {similarProductDetailedData && similarProductDetailedData?.map((elem) => (
+              {similarProductDetailedData?.map((elem) => (
                 <Grid
                   sx={{
                     display: "flex",
