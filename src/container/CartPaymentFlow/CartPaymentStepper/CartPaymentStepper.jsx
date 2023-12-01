@@ -7,9 +7,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Footer from '../../../components/Footer/Footer';
 import Header from '../../../components/SearchBar/Header';
-import AddToCart from "../AddToCart/AddToCart";
-import ProductPayment from "../ProductPayment/ProductPayment";
-import AddAddress from "../AddAddress/AddAddress";
+import AddToCart from "../AddToCart";
+import ProductPayment from "../ProductPayment";
+import AddAddress from "../AddAddress";
 import { Col, Row } from "react-bootstrap";
 import FMButton from '../../../components/FMButton/FMButton';
 import { commonStyle } from '../../../Styles/commonStyles';
@@ -64,8 +64,6 @@ export default function HorizontalLinearStepper() {
     setActiveStep(0);
   };
 
-
-
   const dataOnStepper = () => {
     if (activeStep === 0) {
       return (<AddToCart handleNext={handleNext} />);
@@ -75,44 +73,35 @@ export default function HorizontalLinearStepper() {
       return (<ProductPayment totalAmount={totalAmount} />);
     }
   }
-  const [pincodeData, setPincodeData] = useState("");
-  useEffect(() => {
-    const storedPincode = sessionStorage.getItem("pincode");
-    if (storedPincode) {
-      setPincodeData(storedPincode);
-    }
-  }, []);
 
-  const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
-  const handleModalOpenController = () => {
-    setPincodeModalOpen(true);
-  };
   return (
     <>
-      <Header/>
+      <Header />
       <Row style={{ width: "100%" }}>
 
         <Col style={{ padding: "1rem 0", display: "flex", justifyContent: 'center', gap: "1rem" }}>
           <Box>
-            <FMButton
-              displayText={
-                <>
-                  <ArrowBack />&nbsp;Back
-                </>
-              }
+
+
+            <FMButton variant={'outlined'} displayText={
+              <>
+                <ArrowBack />&nbsp;Back
+              </>
+            }
               disabled={activeStep === 0}
-              variant={"contained"}
+              onHover={"#801319"}
               styleData={{
                 ...commonStyle.buttonStyles,
-                width: "100%",
+                backgroundColor: "none",
+                borderRadius: "10px",
+                fontFamily: "Poppins",
+                color: "#000",
+                fontSize: "1rem",
+                fontStyle: "normal",
+                fontWeight: "500",
 
-
-              }}
-
-              onClick={handleBack}
+              }} onClick={handleBack}
             />
-
-
           </Box>
           <Stepper activeStep={activeStep} sx={{
             ".MuiStepConnector-root": {
@@ -146,7 +135,7 @@ export default function HorizontalLinearStepper() {
               );
             })}
           </Stepper>
-          {activeStep === steps.length - 1 ?
+          {/* {activeStep === steps.length - 1 ?
             <Box>
 
               <FMButton
@@ -165,7 +154,7 @@ export default function HorizontalLinearStepper() {
 
             </Box>
             : <>
-            </>}
+            </>} */}
           {activeStep === steps.length ? (
 
             <Box>

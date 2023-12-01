@@ -7,11 +7,13 @@ export default function FMButton({
   styleData,
   variant,
   onHover,
+  background,
   ...restProps
 }) {
 
   const hoverEffect = {
     ":hover": {
+      backgound: background ? background : "",
       color: onHover ? onHover : "",
     },
   };

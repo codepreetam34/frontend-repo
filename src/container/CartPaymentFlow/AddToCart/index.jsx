@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  Box, Typography, 
+  Box, Typography,
   Card,
   CardContent,
 } from "@mui/material";
@@ -74,7 +74,7 @@ const AddToCart = ({ handleNext }) => {
         </Col>
       </Row>
 
-      <Row style={{ padding: "10px 120px 0 120px" }}>
+      <Row style={{ padding: "10px 120px 0 120px", marginBottom: "2rem" }}>
         <Col>
           {addedData && Object.keys(addedData)?.length > 0 ?
             Object.keys(addedData)?.map((elem) => (
@@ -177,9 +177,9 @@ const AddToCart = ({ handleNext }) => {
                   </Typography>
                 </Box>
               </Box>
-            )) : <Box        className="d-flex justify-content-center pb-4">
+            )) : <Box className="d-flex justify-content-center pb-4">
               <Card
-       
+
                 sx={{
                   width: "280px",
                   borderRadius: "20px",

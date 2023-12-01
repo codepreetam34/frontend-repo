@@ -67,12 +67,12 @@ const CategorySlider = () => {
                     className="zoomin-img"
                       style={{ padding: "0 8px", display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}
                     >
-                      <Link to={`/category-page/${elem?._id}`}>
+                      <a href={`/category-page/${elem?._id}`}>
                         <img
                           className="zoomin img-fluid"
                           src={elem?.categoryImage}
                         />
-                      </Link>
+                      </a>
                       <h4 className="text-center">{elem?.name}</h4>
                     </div>
                   );

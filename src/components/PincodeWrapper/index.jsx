@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ClearIcon from '@mui/icons-material/Clear';
 import { Box, IconButton, TextField, Button, Typography, Modal, Alert } from "@mui/material";
 import StartupScreen from "components/StartpScreen";
-const PincodeWrapper = ({ pincodeData, setPincodeData, pincodeModalOpen, setPincodeModalOpen }) => {
+const PincodeWrapper = ({ pincodeData, setPincodeData,landingPageModalOpen, setLandingPageModalOpen, pincodeModalOpen, setPincodeModalOpen }) => {
     const [area, setArea] = useState("");
     const [error, setError] = useState("");
     const [checkedStoredPincode, setCheckedStoredPincode] = useState(true);
@@ -40,6 +40,7 @@ const PincodeWrapper = ({ pincodeData, setPincodeData, pincodeModalOpen, setPinc
     }, []);
     const handleModalClose = () => {
         setPincodeModalOpen(false);
+        setLandingPageModalOpen(true);
         if (pincodeData) { sessionStorage.setItem("pincode", pincodeData) }
     };
 
@@ -80,7 +81,7 @@ const PincodeWrapper = ({ pincodeData, setPincodeData, pincodeModalOpen, setPinc
                 ) : (
                     <>
 
-                        <Modal open={pincodeModalOpen}>
+                        <Modal open={pincodeModalOpen && landingPageModalOpen}>
                             <Box
                                 sx={{
                                     position: "absolute",

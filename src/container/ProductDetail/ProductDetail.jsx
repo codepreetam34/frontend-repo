@@ -1433,7 +1433,7 @@ const ProductDetail = () => {
               infinite
             // customDot={<CustomDot />}
             >
-              {similarProductDetailedData?.map((elem) => (
+              {similarProductDetailedData && similarProductDetailedData?.map((elem) => (
                 <Grid
                   sx={{
                     display: "flex",

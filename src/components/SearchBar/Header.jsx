@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
 }));
-const Header = () => {
+const Header = ({ setLandingPageModalOpen,landingPageModalOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -654,7 +654,7 @@ const Header = () => {
         )}
       </div>
 
-      <PincodeWrapper setPincodeData={setPincodeData} pincodeData={pincodeData} pincodeModalOpen={pincodeModalOpen} setPincodeModalOpen={setPincodeModalOpen} />
+      <PincodeWrapper landingPageModalOpen={landingPageModalOpen} setLandingPageModalOpen={setLandingPageModalOpen} setPincodeData={setPincodeData} pincodeData={pincodeData} pincodeModalOpen={pincodeModalOpen} setPincodeModalOpen={setPincodeModalOpen} />
     </Grid>
   );
 };

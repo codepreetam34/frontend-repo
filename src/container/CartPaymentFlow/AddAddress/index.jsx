@@ -356,7 +356,7 @@ const AddAddress = ({ handleNext }) => {
                 }}
               ></Box>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box sx={{ display: "flex", justifyContent: "center", gap: '1rem' }}>
               <FMButton
                 displayText={"Save & Delivery here"}
                 variant={"contained"}
@@ -367,7 +367,23 @@ const AddAddress = ({ handleNext }) => {
                 }}
                 onClick={handleSubmit(onSubmit)}
               />
-              <FMButton
+
+              <FMButton variant={'outlined'} displayText={"Cancel"}
+                onHover={"#801319"}
+                styleData={{
+                  ...commonStyle.buttonStyles,
+                  backgroundColor: "none",
+                  borderRadius: "10px",
+                  marginTop: "32px",
+                  fontFamily: "Poppins",
+                  color: "#000",
+                  fontSize: "1rem",
+                  fontStyle: "normal",
+                  fontWeight: "500",
+
+                }} onClick={() => setDisplayFormData(false)}
+              />
+              {/* <FMButton
                 displayText={"Cancel"}
                 variant={"outlined"}
                 styleData={{
@@ -384,32 +400,26 @@ const AddAddress = ({ handleNext }) => {
                   },
                 }}
                 onClick={() => setDisplayFormData(false)}
-              />
+              /> */}
             </Box>
           </Box>
           <Box
             sx={{
-              boxShadow:
-                "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-              borderRadius: "20px",
-              marginTop: "24px",
-              marginBottom: "24px",
-              padding: "32px",
-              display: displayFormData ? "none" : "block",
+              display: displayFormData ? "none" : "grid",
+              justifyContent: 'center'
             }}
           >
-            <FMButton
-              displayText={"+ Add new Address"}
-              variant="outlined"
+            <FMButton variant={'outlined'} displayText={"+ Add new Address"}
+              onHover={"#801319"}
               styleData={{
+                borderRadius: "10px",
+                fontFamily: "Poppins",
+                color: "#000",
                 fontSize: "1rem",
+                fontStyle: "normal",
                 fontWeight: "500",
-                border: "none",
-                backgroundColor: "white",
-                color: "#000000",
-                "&:hover": { border: "none", backgroundColor: "white" },
-              }}
-              onClick={displayForm}
+
+              }} onClick={displayForm}
             />
           </Box>
         </Col>

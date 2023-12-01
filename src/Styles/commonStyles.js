@@ -80,9 +80,7 @@ export const commonStyle = {
     fontWeight: "700",
     lineHeight: "1.5rem",
     textTransform: "none",
-    "&:hover": {
-      backgroundColor: "#801317",
-    },
+
   },
   textTransformStyle: {
     textTransform: "none",

@@ -7,9 +7,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/SearchBar/Header';
-import AddToCart from "../AddToCart/AddToCart";
-import ProductPayment from "../ProductPayment/ProductPayment";
-import AddAddress from "../AddAddress/AddAddress";
+import AddToCart from "./AddToCart";
+import ProductPayment from "./ProductPayment";
+import AddAddress from "./AddAddress";
 const steps = ["Cart", "Address", "Payment"];
 export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);

@@ -17,6 +17,7 @@ import StartupScreen from "../components/StartpScreen";
 
 const LandingPage = () => {
   const [loading, setLoading] = useState(true);
+  const [landingPageModalOpen, setLandingPageModalOpen] = useState(true);
 
   useEffect(() => {
     // Simulate an asynchronous operation (e.g., fetching data) that takes some time
@@ -40,7 +41,7 @@ const LandingPage = () => {
           <StartupScreen />
         ) : (
           <>
-            <Header />
+            <Header landingPageModalOpen={landingPageModalOpen} setLandingPageModalOpen={setLandingPageModalOpen} />
 
             <div>
               <Box>
