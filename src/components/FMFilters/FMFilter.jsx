@@ -18,28 +18,56 @@ const FMFilter = ({
   const dispatch = useDispatch();
   const [sortingValue, setSortingValue] = useState()
   const [activeTag, setActiveTag] = useState(null);
+
   const sortByOptionsChangeHandler = (e) => {
-    setSortingValue(e.target.value)
-    setActiveTag(null); // Reset active tag when sorting changes
-    const payload = {
-      sort: e.target.value,
-      pageInfo,
-      categoryId: sendCategoryId,
-      tagName,
-      pincodeData
-    };
-    setIsLoading(true);
-    dispatch(getProductsBySorting(payload))
-      .then((response) => {
-        setIsLoading(false);
-        switchProducts(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    //setActiveTag(tagName);
+    console.log("tagsCategoryProducts sort ",tagsCategoryProducts)
+    if (tagsCategoryProducts) {
+      setSortingValue(e.target.value)
+      const payload = {
+        sort: e.target.value,
+        pageInfo,
+        categoryId: sendCategoryId,
+        tagName,
+        pincodeData
+      };
+      setIsLoading(true);
+      dispatch(getProductsBySorting(payload))
+        .then((response) => {
+          setIsLoading(false);
+          switchProducts(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+    else if (categoryId) {
+      setSortingValue(e.target.value)
+      const payload = {
+        sort: e.target.value,
+        pageInfo,
+        categoryId: sendCategoryId,
+        tagName,
+        pincodeData
+      };
+      setIsLoading(true);
+      dispatch(getProductsBySorting(payload))
+        .then((response) => {
+          setIsLoading(false);
+          switchProducts(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+
+
   };
   const tagOptionsChangeHandler = (tag) => {
     setActiveTag(tag);
@@ -79,7 +107,7 @@ const FMFilter = ({
     (state) =>
       state?.getProductsList?.getSortedProducts?.sortedProducts
   );
-
+  console.log("tagsCategoryProducts ",tagsCategoryProducts)
   useEffect(() => {
     setDisplayedProducts(sortedProducts);
   }, [dispatch, sortedProducts]);
@@ -137,7 +165,7 @@ const FMFilter = ({
                     fontWeight: '600',
                     //   color: activeTag === tag ? '#801317' : '#000000', 
                     color: '#801317',
-                   background: activeTag === tag ? '#f8d7da' : 'transparent',
+                    background: activeTag === tag || activeTag === tagName ? '#f8d7da' : 'transparent',
                     borderRadius: "19px",
                     "&:hover": {
                       border: "1px solid #E6E6E6",
