@@ -12,13 +12,11 @@ import FMTypography from "../../components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import Header from "../../components/SearchBar/Header";
 import {
-  getProductByCategoryId,
   getProductByCategoryIdAndTags,
-  getProductsList,
 } from "../../Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FMFilter from "../../components/FMFilters/FMFilter";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
 import Pincode from "../../components/PincodeWrapper";
@@ -26,22 +24,25 @@ import Pincode from "../../components/PincodeWrapper";
 const ProductPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const params = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [displayedProducts, setDisplayedProducts] = useState();
-  const [categoryProducts, setCategoryProducts] = useState(null);
-  const [categoryId, setCategoryId] = useState(false);
-  const [pageTitle, setPageTitle] = useState(false);
-  const [pincodeValue, setPincodeValue] = useState();
   const location = useLocation();
   const payload = location?.state?.payload;
 
+  console.log("payload --> ", payload)
+
+  const productPageData = useSelector(
+    (state) => state?.getProductsList?.getProductByCategoryIdAndTags?.products
+  );
+
+  const pageTitle = useSelector(
+    (state) => state?.getProductsList?.getProductByCategoryIdAndTags?.pageTitle
+  );
+
+  console.log("page title ", pageTitle)
   useEffect(() => {
     dispatch(getProductByCategoryIdAndTags(payload))
       .then((response) => {
-        setPageTitle(response?.payload?.pageTitle);
-        setCategoryId(response?.payload?.categoryId);
-        setCategoryProducts(response?.payload?.products);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -50,28 +51,11 @@ const ProductPage = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [dispatch, payload]);
+  }, [payload]);
 
   useEffect(() => {
-    setDisplayedProducts(categoryProducts);
-  }, [categoryProducts]);
-  useEffect(() => {
-    setCategoryId(categoryId);
-  }, [categoryId]);
-
-  const switchProducts = (showCategory) => {
-    if (showCategory) {
-      setDisplayedProducts(categoryProducts);
-    }
-  };
-
-  // const productPageData = useSelector(
-  //   (state) => state?.getProductsList?.getProductsListByCategoryId?.products
-  // );
-
-  // const pageTitle = useSelector(
-  //   (state) => state?.getProductsList?.getProductsListByCategoryId?.pageTitle
-  // );
+    setDisplayedProducts(productPageData);
+  }, [productPageData]);
 
   const onCardClick = (element) => {
     let pId = element?._id;
@@ -94,41 +78,39 @@ const ProductPage = () => {
             <CircularProgress color="primary" />
           </div>
         </> : (
-          <>        
+          <>
             {pageTitle &&
-            <Box sx={{ display: "flex",  transition: "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)", }}>
+              <Box sx={{ display: "flex", transition: "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)", }}>
 
-              <FMTypography
-                displayText={
-                  pageTitle ? `${pageTitle} Products` : `No Products`
-                }
-                styleData={{
-                  fontWeight: "500",
-                  fontSize: "40px",
-                  textTransform: "capitalize",
-                  paddingBottom: "1rem",
-                }}
-              />
-
-              <Box
-                sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
-              >
                 <FMTypography
                   displayText={
-                    displayedProducts?.length
-                      ? `| ${displayedProducts?.length} Products`
-                      : "| 0 Product"
+                    pageTitle ? `${pageTitle} Products` : `No Products`
                   }
                   styleData={{
-                    fontWeight: "300",
-                    fontSize: "20px",
-                    lineHeight: "30px",
-                    color: "#717171",
+                    fontWeight: "500",
+                    fontSize: "40px",
+                    textTransform: "capitalize",
+                    paddingBottom: "1rem",
                   }}
                 />
+
+                <Box
+                  sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
+                >
+                  <FMTypography
+                    displayText={
+                      displayedProducts && `| ${displayedProducts?.length} Products`
+                    }
+                    styleData={{
+                      fontWeight: "300",
+                      fontSize: "20px",
+                      lineHeight: "30px",
+                      color: "#717171",
+                    }}
+                  />
+                </Box>
               </Box>
-            </Box>
-          }
+            }
 
             <Box>
               <FMFilter
@@ -136,10 +118,7 @@ const ProductPage = () => {
                 tagName={payload.tagName}
                 sendCategoryId={payload.categoryId}
                 pageInfo={"productPage"}
-                setCategoryId={setCategoryId}
                 setIsLoading={setIsLoading}
-                switchProducts={switchProducts}
-                setPageTitle={setPageTitle}
                 setDisplayedProducts={setDisplayedProducts}
               />
             </Box>

@@ -22,46 +22,22 @@ const CategoryPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  const [categoryProducts, setCategoryProducts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [categoryId, setCategoryId] = useState(false); // New state for showing filters
-  const [pageTitle, setPageTitle] = useState(); // New state for showing filters
-  const [displayedProducts, setDisplayedProducts] = useState(categoryProducts);
-  // const location = useLocation();
-  // const pincodeData = location?.state?.pincodeData;
+  const [displayedProducts, setDisplayedProducts] = useState();
   const pincodeData = sessionStorage.getItem("pincode");
+
+  const pageTitle = useSelector(
+    (state) =>
+      state?.getProductsList?.getProductsListByCategoryId?.pageTitle
+  );
+  const categoryProducts = useSelector(
+    (state) =>
+      state?.getProductsList?.getProductsListByCategoryId?.products
+  );
+
   const onCardClick = (id) => {
     navigate(`/product-detail/${id}`);
   };
-
-  useEffect(() => {
-    setDisplayedProducts(displayedProducts);
-  }, [displayedProducts]);
-
-  useEffect(() => {
-    setCategoryId(categoryId);
-  }, [categoryId]);
-
-  // useEffect(() => {
-  //   const payload = {
-  //     id: params.id, pincodeData: pincodeData
-  //   }
-  //   setIsLoading(true);
-  //   dispatch(getProductByCategoryId(payload))
-  //     .then((response) => {
-  //       setPageTitle(response?.payload?.pageTitle);
-  //       setCategoryId(response?.payload?.categoryId);
-  //       setCategoryProducts(response?.payload?.products);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //     })
-  //     .finally(() => {
-  //       setIsLoading(false);
-  //     });
-  // }, [params.id]);
-
 
   useEffect(() => {
     if (params.id) {
@@ -72,26 +48,13 @@ const CategoryPage = () => {
       setIsLoading(true);
       dispatch(getProductByCategoryId(payload))
         .then((response) => {
-          setPageTitle(response?.payload?.pageTitle);
-          setCategoryId(response?.payload?.categoryId);
-          setCategoryProducts(response?.payload?.products);
           setIsLoading(false);
         })
         .catch((error) => {
-          console.log("error ", error)
-          console.error("Error fetching data:", error);
           setIsLoading(false);
         });
     }
-  }, [params.id]);
-
-
-  console.log("pageTitle ", pageTitle)
-  const switchProducts = (showCategory) => {
-    if (showCategory) {
-      setDisplayedProducts(categoryProducts);
-    }
-  };
+  }, [dispatch, params.id]);
 
   useEffect(() => {
     setDisplayedProducts(categoryProducts);
@@ -122,9 +85,8 @@ const CategoryPage = () => {
             >
               <FMTypography
                 displayText={
-                  categoryProducts?.length > 0
-                    ? `| ${categoryProducts?.length} Products`
-                    : "| 0 Product"
+                  displayedProducts
+                  && `| ${displayedProducts?.length} Products`
                 }
                 styleData={{
                   fontWeight: "300",
@@ -139,12 +101,9 @@ const CategoryPage = () => {
         <Box>
           <FMFilter
             pageInfo={"categoryPage"}
-            setCategoryId={setCategoryId}
             pincodeData={pincodeData}
             sendCategoryId={params.id}
             setIsLoading={setIsLoading}
-            switchProducts={switchProducts}
-            setPageTitle={setPageTitle}
             setDisplayedProducts={setDisplayedProducts}
           />
         </Box>

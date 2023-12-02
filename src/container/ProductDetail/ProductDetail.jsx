@@ -68,7 +68,7 @@ const ProductDetail = () => {
   console.log("storedPincode ", storedPincode)
   const [productQuantity, setProductQuantity] = useState(createUserOptions);
   const [eggOrNot, setEggOrNot] = useState(egglessOrNot);
-  const [pincodeData, setPincodeData] = useState("");
+  const [pincodeData, setPincodeData] = useState(sessionStorage.getItem("pincode"));
   const [disabledDate, setDisabledDate] = useState(true);
   const [standardActive, setStandardActive] = useState(false);
   const [fixedActive, setFixedActive] = useState(false);
@@ -79,6 +79,7 @@ const ProductDetail = () => {
   const todaysDate = moment(new Date()).format("DDMMYY");
   const [date, setDate] = useState(null);
   const [isTodaysDate, setIsTodaysDate] = useState(true);
+
   useEffect(() => {
     setIsTodaysDate(() => date && date.format && date.format("DDMMYY") === todaysDate);
   }, [date]);
@@ -159,10 +160,8 @@ const ProductDetail = () => {
 
       dispatch(addToCart(payload)).then((res) => {
         if (res?.payload?.error?.response?.status === 400 || res?.payload?.error?.response?.status === 500) {
-          console.log("res ", res)
           notify({ type: "error", content: `Failed to add items: ${res?.payload?.error?.response?.data?.message}` });
         } else {
-          console.log("res ", res)
           dispatch(addToCartProductsFinal())
           notify({ type: "success", content: `Items added successfully to cart` });
           navigate(`/add-to-cart`);

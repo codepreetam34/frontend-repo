@@ -7,65 +7,36 @@ import { useDispatch, useSelector } from "react-redux";
 const FMFilter = ({
   pageInfo,
   pincodeData,
-  setCategoryId,
   tagName,
   sendCategoryId,
   setIsLoading,
-  switchProducts,
-  setPageTitle,
   setDisplayedProducts,
 }) => {
   const dispatch = useDispatch();
   const [sortingValue, setSortingValue] = useState()
-  const [activeTag, setActiveTag] = useState(null);
+  const [activeTag, setActiveTag] = useState();
 
   const sortByOptionsChangeHandler = (e) => {
-    //setActiveTag(tagName);
-    console.log("tagsCategoryProducts sort ",tagsCategoryProducts)
-    if (tagsCategoryProducts) {
-      setSortingValue(e.target.value)
-      const payload = {
-        sort: e.target.value,
-        pageInfo,
-        categoryId: sendCategoryId,
-        tagName,
-        pincodeData
-      };
-      setIsLoading(true);
-      dispatch(getProductsBySorting(payload))
-        .then((response) => {
-          setIsLoading(false);
-          switchProducts(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
-    else if (categoryId) {
-      setSortingValue(e.target.value)
-      const payload = {
-        sort: e.target.value,
-        pageInfo,
-        categoryId: sendCategoryId,
-        tagName,
-        pincodeData
-      };
-      setIsLoading(true);
-      dispatch(getProductsBySorting(payload))
-        .then((response) => {
-          setIsLoading(false);
-          switchProducts(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
+    setSortingValue(e.target.value)
+    const payload = {
+      sort: e.target.value,
+      pageInfo,
+      categoryId: sendCategoryId,
+      tagName: activeTag ? activeTag : "",
+      pincodeData
+    };
+    setIsLoading(true);
+    dispatch(getProductsBySorting(payload))
+      .then((response) => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
 
 
   };
@@ -81,7 +52,6 @@ const FMFilter = ({
     dispatch(getProductByCategoryIdAndTags(payload))
       .then((response) => {
         setIsLoading(false);
-        switchProducts(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -91,14 +61,6 @@ const FMFilter = ({
       });
   };
 
-  const pageTitle = useSelector(
-    (state) =>
-      state?.getProductsList?.getProductsListByCategoryIdAndTags?.pageTitle
-  );
-  const categoryId = useSelector(
-    (state) =>
-      state?.getProductsList?.getProductsListByCategoryIdAndTags?.categoryId
-  );
   const tagsCategoryProducts = useSelector(
     (state) =>
       state?.getProductsList?.getProductsListByCategoryIdAndTags?.products
@@ -107,21 +69,19 @@ const FMFilter = ({
     (state) =>
       state?.getProductsList?.getSortedProducts?.sortedProducts
   );
-  console.log("tagsCategoryProducts ",tagsCategoryProducts)
+
   useEffect(() => {
     setDisplayedProducts(sortedProducts);
-  }, [dispatch, sortedProducts]);
+  }, [sortedProducts]);
+
   useEffect(() => {
     setDisplayedProducts(tagsCategoryProducts);
-  }, [dispatch, tagsCategoryProducts]);
-
+  }, [tagsCategoryProducts]);
+  
   useEffect(() => {
-    setCategoryId(categoryId);
-  }, [categoryId]);
+    setActiveTag(tagName);
+  }, [tagName]);
 
-  useEffect(() => {
-    setPageTitle(pageTitle);
-  }, [pageTitle]);
 
   const sortByOptions = [
     { id: 0, label: "Sort By" },
@@ -165,7 +125,7 @@ const FMFilter = ({
                     fontWeight: '600',
                     //   color: activeTag === tag ? '#801317' : '#000000', 
                     color: '#801317',
-                    background: activeTag === tag || activeTag === tagName ? '#f8d7da' : 'transparent',
+                    background: activeTag && activeTag == tag || tagName == tag ? '#f8d7da' : 'transparent',
                     borderRadius: "19px",
                     "&:hover": {
                       border: "1px solid #E6E6E6",
