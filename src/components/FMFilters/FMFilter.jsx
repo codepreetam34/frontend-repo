@@ -18,8 +18,8 @@ const FMFilter = ({
   const [activeTag, setActiveTag] = useState(tagName);
 
   const sortByOptionsChangeHandler = (e) => {
+    setIsLoading(true)
     const newSortingValue = e.target.value;
-
     const payload = {
       sort: newSortingValue,
       pageInfo,
@@ -35,6 +35,7 @@ const FMFilter = ({
         setActiveTag(updatedActiveTag);
         setPageTitle(response?.payload?.pageTitle);
         setDisplayedProducts(response?.payload?.sortedProducts);
+        setIsLoading(false)
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -42,6 +43,7 @@ const FMFilter = ({
   };
 
   const tagOptionsChangeHandler = (tag) => {
+    setIsLoading(true)
     const payload = {
       tagName: tag,
       categoryId: sendCategoryId,
@@ -54,6 +56,7 @@ const FMFilter = ({
         setActiveTag(updatedActiveTag);
         setPageTitle(response?.payload?.pageTitle);
         setDisplayedProducts(response?.payload?.products);
+        setIsLoading(false)
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
