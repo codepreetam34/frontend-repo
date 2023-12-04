@@ -105,8 +105,8 @@ p {
 }
 
 .slick-slide img {
-  width: 200px;
-  height: 250px;
+  width: 190px;
+  height: 190px;
   border-radius: 104px;
   object-fit: cover;
 }
@@ -492,7 +492,7 @@ p {
 }
 
 .threepoint h3 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   margin: 0;
   padding-bottom: 4px;
@@ -501,7 +501,7 @@ p {
 .threepoint p {
   margin: 0;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .shopbyocca .heighautoimg a img {
