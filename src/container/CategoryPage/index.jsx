@@ -22,18 +22,11 @@ const CategoryPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
+  console.log("params ", params)
   const [isLoading, setIsLoading] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState();
   const pincodeData = sessionStorage.getItem("pincode");
-
-  const pageTitle = useSelector(
-    (state) =>
-      state?.getProductsList?.getProductsListByCategoryId?.pageTitle
-  );
-  const categoryProducts = useSelector(
-    (state) =>
-      state?.getProductsList?.getProductsListByCategoryId?.products
-  );
+  const [pageTitle, setPageTitle] = useState();
 
   const onCardClick = (id) => {
     navigate(`/product-detail/${id}`);
@@ -49,16 +42,14 @@ const CategoryPage = () => {
       dispatch(getProductByCategoryId(payload))
         .then((response) => {
           setIsLoading(false);
+          setDisplayedProducts(response?.payload?.products);
+          setPageTitle(response?.payload?.pageTitle);
         })
         .catch((error) => {
           setIsLoading(false);
         });
     }
-  }, [dispatch, params.id]);
-
-  useEffect(() => {
-    setDisplayedProducts(categoryProducts);
-  }, [categoryProducts]);
+  }, [dispatch]);
 
   return (
     <>
@@ -100,6 +91,7 @@ const CategoryPage = () => {
         }
         <Box>
           <FMFilter
+            setPageTitle={setPageTitle}
             pageInfo={"categoryPage"}
             pincodeData={pincodeData}
             sendCategoryId={params.id}

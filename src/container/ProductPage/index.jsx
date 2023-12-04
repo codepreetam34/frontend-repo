@@ -26,24 +26,17 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [displayedProducts, setDisplayedProducts] = useState();
+  const [pageTitle, setPageTitle] = useState();
   const location = useLocation();
   const payload = location?.state?.payload;
+  console.log("payload ", payload)
 
-  console.log("payload --> ", payload)
-
-  const productPageData = useSelector(
-    (state) => state?.getProductsList?.getProductByCategoryIdAndTags?.products
-  );
-
-  const pageTitle = useSelector(
-    (state) => state?.getProductsList?.getProductByCategoryIdAndTags?.pageTitle
-  );
-
-  console.log("page title ", pageTitle)
   useEffect(() => {
     dispatch(getProductByCategoryIdAndTags(payload))
       .then((response) => {
         setIsLoading(false);
+        setPageTitle(response?.payload?.pageTitle);
+        setDisplayedProducts(response?.payload?.products)
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -52,10 +45,6 @@ const ProductPage = () => {
         setIsLoading(false);
       });
   }, [payload]);
-
-  useEffect(() => {
-    setDisplayedProducts(productPageData);
-  }, [productPageData]);
 
   const onCardClick = (element) => {
     let pId = element?._id;
@@ -114,6 +103,7 @@ const ProductPage = () => {
 
             <Box>
               <FMFilter
+                setPageTitle={setPageTitle}
                 pincodeData={payload.pincodeData}
                 tagName={payload.tagName}
                 sendCategoryId={payload.categoryId}

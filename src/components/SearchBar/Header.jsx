@@ -250,12 +250,12 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     const payload = {
       tagName,
       categoryId,
-      pincodeData: pincodeData
+      pincodeData
     };
     navigate(`/product-page/${tagName}`, { state: { payload: payload } });
   };
   const handleCategoryClick = (categoryId) => {
-    navigate(`/category-page/${categoryId}`, { state: { pincodeData: pincodeData } });
+    navigate(`/category-page/${categoryId}`);
   };
 
   useEffect(() => {

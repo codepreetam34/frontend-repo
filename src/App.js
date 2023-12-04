@@ -31,7 +31,7 @@ import ForgotPassword from "./container/Signin/ForgotPassword";
 import SetupNewPassword from "./container/Signin/SetupNewPassword";
 import EmailVerify from "./container/SignUp/EmailVerify";
 import EmailVerifyOtp from "./container/SignUp/emailOtpVerification";
-import ProductPage from "./container/ProductPage/ProductPage";
+import ProductPage from "./container/ProductPage";
 import ProductDetail from "./container/ProductDetail/ProductDetail";
 import PrivateRoutes from "./Routes/PrivateRoutes";
 import HorizontalLinearStepper from "./container/CartPaymentFlow/CartPaymentStepper/CartPaymentStepper";
