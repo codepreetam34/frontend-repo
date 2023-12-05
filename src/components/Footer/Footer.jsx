@@ -254,7 +254,7 @@ const Footer = () => {
                     textAlign: "center", paddingBottom: '5px'
                   }}
                 >
-                  Policy & Terms
+                  Terms & Policy
                 </div>
               </div>
             </Col>

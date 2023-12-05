@@ -16,3 +16,7 @@ code {
 .navbar-nav .nav-link::after {
   display: none;
 }
+
+.right-info-box.col::-webkit-scrollbar {
+  display: none;
+}
