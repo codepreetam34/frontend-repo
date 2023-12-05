@@ -13,7 +13,6 @@ import {
   Typography,
 } from "@mui/material";
 import ImageGallery from "react-image-gallery";
-import Pincode from "react-pincode";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -25,13 +24,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import moment from "moment";
-
 import Header from "../../components/SearchBar/Header";
 import FMTypography from "../../components/FMTypography/FMTypography";
 import FMButton from "../../components/FMButton/FMButton";
 import FMRadioButtons from "../../components/FMRadioButton/FMRadioButton";
-//import FMDropdown from "../../components/FMDropdown/FMDropdown";
-
 import ratingStart from "../../assets/ratingStart.svg";
 import reviewBlackStar from "../../assets/reviewBlackStar.svg";
 
@@ -51,7 +47,6 @@ import {
 } from "../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 import { addToCartSchema } from "../../validationSchema/addToCartSchema";
 import { Col, Container, Row } from "react-bootstrap";
-import { ADD_TO_CART } from "../../Routes/Routes";
 import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
 import Footer from "../../components/Footer/Footer";
 import Layout from "../../components/Layout";
@@ -59,13 +54,12 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import FMDeliveryDropdown from "../../components/FMDeliveryDropdown";
 import { notify } from "components/FMToaster/FMToaster";
+import PincodeInputWrapper from "./PincodeInputWrapper";
+
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { pId } = params;
-  const [storedPincode, setStoredPincode] = useState(sessionStorage.getItem("pincode"));
-
-  console.log("storedPincode ", storedPincode)
   const [productQuantity, setProductQuantity] = useState(createUserOptions);
   const [eggOrNot, setEggOrNot] = useState(egglessOrNot);
   const [pincodeData, setPincodeData] = useState(sessionStorage.getItem("pincode"));
@@ -73,9 +67,6 @@ const ProductDetail = () => {
   const [standardActive, setStandardActive] = useState(false);
   const [fixedActive, setFixedActive] = useState(false);
   const [midNightActive, setMidNightActive] = useState(false);
-  const [deliveryTime, setDeliveryTime] = useState();
-  const [serviceId, setServiceId] = useState("");
-
   const todaysDate = moment(new Date()).format("DDMMYY");
   const [date, setDate] = useState(null);
   const [isTodaysDate, setIsTodaysDate] = useState(true);
@@ -83,12 +74,6 @@ const ProductDetail = () => {
   useEffect(() => {
     setIsTodaysDate(() => date && date.format && date.format("DDMMYY") === todaysDate);
   }, [date]);
-
-
-
-  const handleChange = (newValue) => {
-    setDate(newValue);
-  };
 
   useEffect(() => {
     dispatch(getProductsDetail(pId));
@@ -139,11 +124,9 @@ const ProductDetail = () => {
 
       dispatch(addToCart(payload)).then((res) => {
         if (res) {
-          //navigate(`/add-to-cart`);
           dispatch(addToCartProductsFinal());
         }
       });
-      // navigate(`/add-to-cart`);
     }
   };
   const handleBuyNow = async (data) => {
@@ -167,21 +150,9 @@ const ProductDetail = () => {
           navigate(`/add-to-cart`);
         }
       });
-      // navigate(`/add-to-cart`);
     }
   };
 
-  const tempSub = () => {
-    navigate(`/add-to-cart?${pId}`);
-  };
-
-  // const { onChange: onServiceChange, ...restServiceRegister } =
-  //   register("service");
-  const serviceChangeHandler = (e) => {
-    setServiceId(e.target.value);
-    setValue("service", e.target.value);
-    //onServiceChange(e);
-  };
 
   const apiImgs = productDetailedData?.productPictures?.map((elem) => ({
     original: elem?.img,
@@ -198,25 +169,6 @@ const ProductDetail = () => {
     // renderItem: this.myRenderItem.bind(this),
     originalHeight: "100px",
     items: apiImgs || [],
-  };
-
-  // useEffect(()=>{
-
-  // })
-  const [showArea, setShowArea] = useState(false);
-
-  const getDataFunc = (data) => {
-    if (data?.pincode.length === 6 && data?.pincode.length > 0) {
-      setPincodeData(data);
-      setDisabledDate(false);
-      // Show area when a valid PIN code is entered
-      setShowArea(true);
-    } else {
-      setPincodeData(null);
-      setDisabledDate(true);
-      // Hide area when the PIN code is not valid or empty
-      setShowArea(false);
-    }
   };
 
   const reviewNavHandler = () => {
@@ -285,110 +237,28 @@ const ProductDetail = () => {
   const [standard, setStandard] = useState(false);
   const [fixed, setFixed] = useState(false);
   const [express, setExpress] = useState(false);
-  const [dateString, setDateString] = useState("");
-
-  // const onDateChange = (date) => {
-  //   console.log("date ", date)
-  //   setDate(date);
-  //   const newdate = new Date();
-  //   let day = newdate.getDate();
-  //   let newDay = day < 10 ? "0" + day : day;
-
-  //   let month = newdate.getMonth() + 1;
-  //   let newMonth = month < 10 ? (month = "0" + month) : month;
-
-  //   let year = newdate.getFullYear();
-
-  //   let curTime = newdate.getHours();
-  //   setCurrentTime(curTime);
-  //   console.log("current time ", curTime);
-
-  //   // const selectedDate = new Date(newDate);
-  //   // const year = selectedDate.getFullYear();
-  //   // const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
-  //   // const day = selectedDate.getDate().toString().padStart(2, "0");
-  //   const formattedDate = `${newDay}/${newMonth}/${year}`;
-
-  //   setDateString(formattedDate);
-
-  //   console.log("dateString ", dateString)
-  //   let newFixedArray = FixedDelivery.filter(function (el) {
-  //     return el.value > curTime + 1;
-  //   });
-
-  //   let newExpressArray = ExpressDelivery.filter(function (el) {
-  //     return el.value > curTime + 1;
-  //   });
-
-  //   setFilterExpressOptions(newExpressArray);
-  //   setFilterFixedOptions(newFixedArray);
-  //   // console.log("new", newFixedArray);
-
-  //   // This arrangement can be altered based on how we want the date's format to appear.
-  //   let currentDate = `${newDay}/${newMonth}/${year}`;
-  //   console.log("today", currentDate, "=", dateString);
-
-  //   if (currentDate === date) {
-  //     setSelectTodayDate(true);
-  //     console.log(
-  //       "cur date ",
-  //       currentDate,
-  //       "today date ",
-  //       selectTodayDate,
-  //       "datestring ",
-  //       dateString
-  //     );
-  //   } else {
-  //     setSelectTodayDate(false);
-  //   }
-
-  //   dateString ? setInsertDate(true) : setInsertDate(false);
-
-  //   console.log("date", date, dateString);
-  // };
-
   const onDateChange = (date) => {
     setDate(date);
     const newdate = new Date();
-    let day = newdate.getDate();
-    let newDay = day < 10 ? "0" + day : day;
-
-    let month = newdate.getMonth() + 1;
-    let newMonth = month < 10 ? "0" + month : month;
-
-    let year = newdate.getFullYear();
-
-    let curTime = newdate.getHours();
-    setCurrentTime(curTime);
-
-    const todayDate = `${newDay}/${newMonth}/${year}`;
-    setDateString(todayDate);
+    const curTime = newdate.getHours();
+    const formatDate = (date) => {
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const formattedDay = day < 10 ? "0" + day : day;
+      const formattedMonth = month < 10 ? "0" + month : month;
+      const year = date.getFullYear();
+      return `${formattedDay}/${formattedMonth}/${year}`;
+    };
+    const todayDate = formatDate(newdate);
     let currentDate;
-
     if (date) {
       const selectedDate = new Date(date);
-      const selectedDay = selectedDate.getDate();
-      const selectedMonth = (selectedDate.getMonth() + 1)
-        .toString()
-        .padStart(2, "0");
-      const selectedYear = selectedDate.getFullYear();
-      const selectedDateFormatted = `${selectedDay}/${selectedMonth}/${selectedYear}`;
-
-      // Set currentDate to the selected date in DD/MM/YYYY format
-      currentDate = selectedDateFormatted;
+      currentDate = formatDate(selectedDate);
     }
 
-    let newFixedArray = FixedDelivery.filter(function (el) {
-      return el.value > curTime + 1;
-    });
-
-    let newExpressArray = ExpressDelivery.filter(function (el) {
-      return el.value > curTime + 1;
-    });
-
-    let newStandardArray = StandardDelivery.filter(function (el) {
-      return el.value >= curTime;
-    });
+    const newFixedArray = FixedDelivery.filter(el => el.value > curTime + 1);
+    const newExpressArray = ExpressDelivery.filter(el => el.value > curTime + 1);
+    const newStandardArray = StandardDelivery.filter(el => el.value >= curTime);
 
     if (currentDate === todayDate) {
       setFilterExpressOptions(newExpressArray);
@@ -402,9 +272,6 @@ const ProductDetail = () => {
   };
 
   const disabledDateHandle = (current) => {
-    //console.log('disabled ',current);
-    // Can not select days before today and today
-    //console.log("current Date", current);
     return current && current.add(1, "d") < dayjs().endOf("day");
   };
 
@@ -598,42 +465,10 @@ const ProductDetail = () => {
                 )}
 
                 {/* pincode and date selector */}
-                <Box sx={{ marginTop: "1rem", display: "flex" }}>
-                  <Box>
-                    <Pincode
+                <Box sx={{ marginTop: "1rem", display: "flex", gap: "10px" }}>
 
-                      value={storedPincode}
-                      showCity={false}
-                      showDistrict={false}
-                      showState={false}
-                      invalidError="Please check pincode"
-                      // lengthError="check length"
-                      // lengthError={() => console.log("hellooooooo")}
-                      // getData={(data) => {
-                      //   setPincodeData(data);
-                      // }}
-                      getData={getDataFunc}
-                      showArea={showArea}
-                      pincodeInput={{
-                        borderRadius: "10px",
-                        width: "215px",
-                        border: "1px solid grey",
-                        height: "55px",
-                        padding: "16.5px 14px",
-                        marginRight: "1.7rem",
-                      }}
-                      areaInput={{
-                        backgroundColor: "white",
-                        border: "none",
-                        color: "red",
-                        fontSize: "12px",
-                      }}
-                    />
-                  </Box>
-                  {/* <FMTypography
-                styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
-                displayText={errors.pinCode?.message}
-              /> */}
+                  <PincodeInputWrapper setDisabledDate={setDisabledDate} setPincodeData={setPincodeData} pincodeData={pincodeData} />
+
                   <Box>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DesktopDatePicker
@@ -699,159 +534,6 @@ const ProductDetail = () => {
                 ) : (
                   <></>
                 )}
-
-                {/* <Box>
-                  <FMTypography
-                    displayText={"Select Delivery Type"}
-                    styleData={{
-                      fontSize: "20px",
-                      fontWeight: "500",
-                      marginTop: "1rem",
-                      marginBottom: "1rem",
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      padding: "8px 16px",
-                      border: "1px solid #E6E6E6",
-                      borderRadius: "10px",
-                    }}
-                    {...register("cakeMessage")}
-                    error={errors.cakeMessage ? true : false}
-                  >
-                    <Box
-                      sx={{
-                        width: "132px",
-                        height: "48px",
-                        left: "843px",
-                        top: "703px",
-                        backgroundColor: standardActive ? "#E6E6E6" : "white",
-                        borderRadius: "100px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        cursor: isTodaysDate ? "not-allowed" : "pointer", // Change cursor style
-                        border: "1px solid #E6E6E6",
-                        "&:hover": {
-                          border: isTodaysDate ? "1px solid #E6E6E6" : "1px solid black", // Adjust border on hover
-                        },
-                        opacity: isTodaysDate ? 0.5 : 1, // Adjust opacity for disabled state
-                      }}
-                      onClick={() => {
-                        if (!isTodaysDate) {
-                          setDeliveryTime(StandardDelivery);
-                          setStandardActive(!standardActive);
-                          setMidNightActive(false);
-                          setFixedActive(false);
-                        }
-                      }}
-                    >
-                      <FMTypography displayText={"Standard"} styleData={{ fontSize: "12px" }} />
-                      <FMTypography
-                        displayText={"(Free)"}
-                        styleData={{ fontSize: "10px", color: "#178013" }}
-                      />
-                    </Box>
-
-
-                    <Box
-                      sx={{
-                        width: "132px",
-                        height: "48px",
-                        left: "843px",
-                        top: "703px",
-                        backgroundColor: fixedActive ? "#E6E6E6" : "white",
-                        borderRadius: "100px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        cursor: "pointer",
-                        border: "1px solid #E6E6E6",
-                        "&:hover": { border: "1px solid black" },
-                      }}
-                      onClick={() => {
-                        setDeliveryTime(FixedDelivery);
-                        setFixedActive(!fixedActive);
-                        setMidNightActive(false);
-                        setStandardActive(false);
-                      }}
-                    >
-                      <FMTypography
-                        displayText={"Fixed time"}
-                        styleData={{ fontSize: "12px" }}
-                      />
-                      <FMTypography
-                        displayText={"₹ 200"}
-                        styleData={{ fontSize: "10px", color: "#178013" }}
-                      />
-                    </Box>
-
-                    <Box
-                      sx={{
-                        width: "132px",
-                        height: "48px",
-                        left: "843px",
-                        top: "703px",
-                        backgroundColor: midNightActive ? "#E6E6E6" : "white",
-                        borderRadius: "100px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        cursor: "pointer",
-                        border: "1px solid #E6E6E6",
-                        "&:hover": { border: "1px solid black" },
-                      }}
-                      onClick={() => {
-                        setDeliveryTime(ExpressDelivery);
-                        setMidNightActive(!midNightActive);
-                        setStandardActive(false);
-                        setFixedActive(false);
-                      }}
-                    >
-                      <FMTypography
-                        displayText={"Mid night"}
-                        styleData={{ fontSize: "12px" }}
-                      />
-                      <FMTypography
-                        displayText={"₹ 250"}
-                        styleData={{ fontSize: "10px", color: "#178013" }}
-                      />
-                    </Box>
-
-
-                  </Box>
-                </Box> */}
-
-                {/* {deliveryTime ?
-                  <Box>
-
-                    <FMDropdown
-                      options={deliveryTime}
-                      name="deliveryTime"
-                      id="deliveryTime"
-                     onChange={handleTimeChange}
-                      onChange={onExpressDeliveryChange}
-                      options={
-                        selectTodayDate
-                          ? filterExpressOptions
-                          : expressOptions
-                      }
-                      sx={{
-                        ...commonStyle.dropdownStyle,
-                        width: "215px",
-                        marginTop: "1rem",
-
-                      }}
-                      defaultValue={deliveryTime[0].label}
-                    />
-                  </Box>
-                  : <></>
-                }  */}
 
                 {insertDate ? (
                   <Row className="my-2">
@@ -993,7 +675,7 @@ const ProductDetail = () => {
 
                       {standard && !selectTodayDate ? (
                         <>
-                          <div className="mt-3">
+                          <div className="mt-3 mb-2">
                             <div className="fw-bold">
                               <h6
                                 style={{ color: "#636363", fontSize: "18px" }}
@@ -1006,7 +688,6 @@ const ProductDetail = () => {
                             sx={{
                               ...commonStyle.dropdownStyle,
                               width: "15rem",
-                              marginTop: ".5rem",
                             }}
                             defaultValue={"Select Time Slot"}
                             onChange={onStandardDeliveryChange}
@@ -1019,7 +700,7 @@ const ProductDetail = () => {
                         </>
                       ) : fixed ? (
                         <>
-                          <div className="mt-3">
+                          <div className="mt-3 mb-2">
                             <div className="fw-bold">
                               <h6
                                 style={{ color: "#636363", fontSize: "18px" }}
@@ -1032,7 +713,6 @@ const ProductDetail = () => {
                             sx={{
                               ...commonStyle.dropdownStyle,
                               width: "15rem",
-                              marginTop: ".5rem",
                             }}
                             defaultValue="Select Time Slot"
                             onChange={onFixedDeliveryChange}
@@ -1045,7 +725,7 @@ const ProductDetail = () => {
                         </>
                       ) : express ? (
                         <>
-                          <div className="mt-3">
+                          <div className="mt-3 mb-2">
                             <div className="fw-bold">
                               <h6
                                 style={{ color: "#636363", fontSize: "18px" }}
@@ -1059,7 +739,6 @@ const ProductDetail = () => {
                             sx={{
                               ...commonStyle.dropdownStyle,
                               width: "15rem",
-                              marginTop: ".5rem",
                             }}
                             defaultValue={"Select Time Slot"}
                             onChange={onExpressDeliveryChange}

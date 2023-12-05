@@ -121,7 +121,7 @@ const CategoryPage = () => {
             >
               <CircularProgress color="primary" />
             </div>
-          ) : displayedProducts && displayedProducts.length > 0 ? (
+          ) : displayedProducts && displayedProducts?.length > 0 ? (
             displayedProducts?.map((elem) => (
               <Box
                 onClick={() => onCardClick(elem._id)}
@@ -225,9 +225,11 @@ const CategoryPage = () => {
               </Card>
             </Box>
           )}
+
         </Grid>
       </Grid>
       <Footer />
+
     </>
   );
 };
