@@ -51,6 +51,13 @@ const ProductPage = () => {
     navigate(`/product-detail/${pId}`);
   };
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <>
       <Header />

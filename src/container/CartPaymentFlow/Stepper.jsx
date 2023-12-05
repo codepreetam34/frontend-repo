@@ -76,6 +76,12 @@ export default function HorizontalLinearStepper() {
             setPincodeData(storedPincode);
         }
     }, []);
+    useEffect(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }, []);
     return (
         <>
             <Header pincodeData={pincodeData} setPincodeData={setPincodeData} />

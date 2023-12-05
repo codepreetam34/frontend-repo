@@ -322,6 +322,13 @@ const ProductDetail = () => {
     navigate(`/product-detail/${productId}`)
   }
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <>
       <Layout title={title} description={description}>
