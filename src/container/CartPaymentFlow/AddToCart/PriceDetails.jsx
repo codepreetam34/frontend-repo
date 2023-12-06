@@ -3,40 +3,45 @@ import { Box, TextField } from "@mui/material";
 import FMTypography from "../../../components/FMTypography/FMTypography";
 import FMButton from "../../../components/FMButton/FMButton";
 import { commonStyle } from "../../../Styles/commonStyles";
-
+import axios from "axios";
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@mui/icons-material/Clear';
 const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) => {
 
   const [couponCode, setCouponCode] = useState(""); // State to store entered coupon code
-  const [discountMRP, setDiscountMRP] = useState(0); // State to store coupon discount value
-
+  const [discountCoupon, setDiscountCoupon] = useState(0); // State to store coupon discount value
+  const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
+  const result = auth?.substring(1, auth.length - 1);
   const applyCoupon = async () => {
     try {
       // Make an API call to fetch the coupon discount value based on the entered coupon code
-      const response = await fetch(`/api/coupon?code=${couponCode}`);
-      const data = await response.json();
-
-      if (data.discount) {
-        setDiscountMRP(data.discount); // Set the discount value received from the API
+      const response = await axios.post(`http://localhost:5000/api/applyCoupon`, { code: couponCode }, {
+        headers: {
+          Authorization: `Bearer ${result}`, // Include your token here
+        },
+      }
+      );
+      const data = await response?.data;
+      if (data?.discount) {
+        setDiscountCoupon(data?.discount); // Set the discount value received from the API
       } else {
-        setDiscountMRP(0); // Set discount to 0 if no discount is available for the entered code
+        setDiscountCoupon(0); // Set discount to 0 if no discount is available for the entered code
       }
     } catch (error) {
       console.error("Error applying coupon:", error);
     }
   };
 
-
-
   const calculateTotalMRP = () => {
     let totalMRP = 0;
     for (const elem in addedData) {
-      totalMRP += addedData[elem]?.discountPrice;
+      totalMRP += addedData[elem]?.actualPrice * addedData[elem]?.qty;
     }
     return totalMRP;
   };
 
-  const calculateDiscountOnMRP = () => {
-    return discountMRP; // Use the discount value from the API
+  const calculateDiscountOnCoupon = () => {
+    return discountCoupon; // Use the discount value from the API
   };
   const calculateConvenienceFee = () => {
 
@@ -48,12 +53,23 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
 
   const calculateTotalAmount = () => {
     const totalMRP = calculateTotalMRP();
-    const discountOnMRP = calculateDiscountOnMRP();
+    const discountOnCoupon = calculateDiscountOnCoupon();
     const convenienceFee = calculateConvenienceFee();
-
-    return totalMRP - discountOnMRP + convenienceFee;
+    return totalMRP - discountOnCoupon - resultDiscount + convenienceFee;
   };
 
+  const clearCouponCode = () => {
+    // Function to clear the coupon code
+    setCouponCode('');
+    setDiscountCoupon('')
+  };
+
+  let resultDiscount = 0;
+
+  addedData &&
+    Object.keys(addedData)?.map((elem, index) => (
+      resultDiscount += (addedData[elem]?.actualPrice * addedData[elem]?.qty) - (addedData[elem]?.discountPrice * addedData[elem]?.qty)
+    ))
 
   return (
     <Box
@@ -64,8 +80,8 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         padding: "40px",
       }}
     >
-      {/* <FMTypography displayText={"Apply Coupons"} sx={{paddingBottom:"10px"}} />
-      <Box sx={{ display: "flex", justifyContent: "space-between" ,alignItems:'center'}}>
+      <FMTypography displayText={"Apply Coupons"} sx={{ paddingBottom: "10px" }} />
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
 
         <Box>
           <TextField
@@ -73,9 +89,16 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
             variant="outlined"
             value={couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <IconButton onClick={clearCouponCode} edge="end">
+                  <ClearIcon />
+                </IconButton>
+              ),
+            }}
           />
-             </Box>
-             <Box>
+        </Box>
+        <Box>
           <FMButton
             displayText="Apply"
             variant="outlined"
@@ -93,7 +116,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         </Box>
       </Box>
 
-      <hr /> */}
+      <hr />
       <Box>
         <FMTypography
           displayText={`Price Details ${addedData && Object.keys(addedData)?.length > 0
@@ -115,11 +138,19 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
             key={elem}
           >
             <FMTypography
-              displayText={`${index + 1}. ${addedData[elem]?.name}`}
+              displayText={`${index + 1}. ${addedData[elem]?.name.slice(0, 10) + (addedData[elem]?.name.length > 10 ? '...' : '')}`}
               styleData={{ color: "#717171" }}
             />
             <FMTypography
-              displayText={`₹${addedData[elem]?.discountPrice}`}
+              displayText={`₹${addedData[elem]?.actualPrice}`}
+              styleData={{ color: "#717171" }}
+            />
+            <FMTypography
+              displayText={`x ${addedData[elem]?.qty}`}
+              styleData={{ color: "#717171" }}
+            />
+            <FMTypography
+              displayText={`= ₹${addedData[elem]?.actualPrice * addedData[elem]?.qty}`}
               styleData={{ color: "#717171" }}
             />
           </Box>
@@ -140,20 +171,65 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
           styleData={{ color: "#717171" }}
         />
       </Box>
+      <hr />
+      <Box>
+        <FMTypography
+          styleData={{ color: "#000" }}
+          displayText={`Discount on MRP`}
+        />
+        {addedData &&
+          Object.keys(addedData)?.map((elem, index) => (
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+
+              <FMTypography
+                styleData={{ color: "#717171" }}
+                displayText={`${addedData[elem]?.name.slice(0, 10) + (addedData[elem]?.name.length > 10 ? '...' : '')}`}
+              />
+              <FMTypography
+                displayText={`${addedData[elem]?.actualPrice - addedData[elem]?.discountPrice}`}
+                styleData={{ color: "#717171" }}
+              />
+              <FMTypography
+                displayText={`x ${addedData[elem]?.qty}`}
+                styleData={{ color: "#717171" }}
+              />
+              <FMTypography
+                displayText={`₹${(addedData[elem]?.actualPrice * addedData[elem]?.qty) - (addedData[elem]?.discountPrice * addedData[elem]?.qty)}`}
+                styleData={{ color: "#717171" }}
+              />
+            </Box>
+
+          ))}
+        <hr />
+      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <FMTypography
+          styleData={{ color: "#717171" }}
+          displayText={`Total Discount on MRP`}
+        />
+        <FMTypography
+          styleData={{ color: "#717171" }}
+          displayText={resultDiscount ? `- ₹${resultDiscount}` : "0"}
+        />
+
+
+
+      </Box>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <FMTypography
           styleData={{ color: "#717171" }}
-          displayText={`Discount on MRP`}
+          displayText={`Discount on Coupon`}
         />
         <FMTypography
-          displayText={`₹${calculateDiscountOnMRP()}`}
+          displayText={discountCoupon ? `- ₹${calculateDiscountOnCoupon()}` : "0"}
           styleData={{ color: "#717171" }}
         />
       </Box>
+
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <FMTypography displayText={`Convenience Fee`} />
         <FMTypography
-          displayText={`₹${calculateConvenienceFee()}`}
+          displayText={`+ ₹${calculateConvenienceFee()}`}
           styleData={{ color: "#717171" }}
         />
       </Box>
@@ -173,7 +249,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         }}
         onClick={() => handleNext(calculateTotalAmount())}
       />
-    </Box>
+    </Box >
   );
 };
 

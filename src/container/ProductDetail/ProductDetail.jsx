@@ -14,25 +14,31 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from '@mui/styles';
+import moment from "moment";
 import ImageGallery from "react-image-gallery";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import "react-image-gallery/styles/css/image-gallery.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import moment from "moment";
+import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
+import { addToCartSchema } from "../../validationSchema/addToCartSchema";
+import { Col, Container, Row } from "react-bootstrap";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import { notify } from "components/FMToaster/FMToaster";
+import PincodeInputWrapper from "./PincodeInputWrapper";
+import Footer from "../../components/Footer/Footer";
+import Layout from "../../components/Layout";
+import FMDeliveryDropdown from "../../components/FMDeliveryDropdown";
 import Header from "../../components/SearchBar/Header";
 import FMTypography from "../../components/FMTypography/FMTypography";
 import FMButton from "../../components/FMButton/FMButton";
 import FMRadioButtons from "../../components/FMRadioButton/FMRadioButton";
 import ratingStart from "../../assets/ratingStart.svg";
 import reviewBlackStar from "../../assets/reviewBlackStar.svg";
-
 import {
   createUserOptions,
   egglessOrNot,
@@ -43,20 +49,13 @@ import {
 import { BLACK } from "../../constants/colors";
 import "./ProductDetail.css";
 import { commonStyle } from "../../Styles/commonStyles";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import "react-image-gallery/styles/css/image-gallery.css";
 import {
   addToCart,
   getProductsDetail,
 } from "../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
-import { addToCartSchema } from "../../validationSchema/addToCartSchema";
-import { Col, Container, Row } from "react-bootstrap";
-import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
-import Footer from "../../components/Footer/Footer";
-import Layout from "../../components/Layout";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import FMDeliveryDropdown from "../../components/FMDeliveryDropdown";
-import { notify } from "components/FMToaster/FMToaster";
-import PincodeInputWrapper from "./PincodeInputWrapper";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,15 +63,15 @@ const useStyles = makeStyles((theme) => ({
   },
   customScrollColumn: {
     overflowY: 'scroll',
-    scrollbarWidth: 'thin', // Firefox
+    scrollbarWidth: 'thin',
     '&::-webkit-scrollbar': {
-      width: '0.4rem', // Chrome, Safari, Edge
+      width: '0.4rem',
     },
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: 'transparent', // Chrome, Safari, Edge
+      backgroundColor: 'transparent',
     },
     '&::-webkit-scrollbar-track': {
-      display: 'none', // Hide the scrollbar track
+      display: 'none',
     },
   },
 
@@ -93,15 +92,21 @@ const useStyles = makeStyles((theme) => ({
     },
     height: '100%',
   },
-}));
-  
 
+  textLimit: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 2, // Adjust the number of lines accordingly
+    '-webkit-box-orient': 'vertical',
+  },
+}));
 
 const ProductDetail = () => {
+  const classes = useStyles();
   const params = useParams();
   const { pId } = params;
-  const classes = useStyles();
-
   dayjs.extend(customParseFormat);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -126,6 +131,7 @@ const ProductDetail = () => {
   const [standard, setStandard] = useState(false);
   const [fixed, setFixed] = useState(false);
   const [express, setExpress] = useState(false);
+  const [addToCartFlag, setAddToCartFlag] = useState(false);
 
   const productDetailedData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product
@@ -232,6 +238,7 @@ const ProductDetail = () => {
 
       dispatch(addToCart(payload)).then((res) => {
         if (res) {
+          setAddToCartFlag(true)
           dispatch(addToCartProductsFinal());
         }
       });
@@ -358,6 +365,10 @@ const ProductDetail = () => {
 
   const onCardClick = (productId) => {
     navigate(`/product-detail/${productId}`)
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   useEffect(() => {
@@ -382,7 +393,6 @@ const ProductDetail = () => {
         <div className={classes.root}>
           <Container>
             <Grid container spacing={0}>
-              {/* First Column (Image Gallery) */}
               <Grid item xs={6} className={classes.customScrollColumn}>
                 <ImageGallery
                   ref={imageGalleryRef}
@@ -390,10 +400,8 @@ const ProductDetail = () => {
                   onThumbnailClick={(e, index) => { }}
                 />
               </Grid>
-
-              {/* Second Column (Product Information) */}
               <Grid item xs={6} className={`${classes.rightInfoBox} right-info-box`}>
-            <Col
+                <Col
                   component="form"
                   className="right-info-box"
                   onSubmit={handleSubmit(onSubmit)}
@@ -446,7 +454,6 @@ const ProductDetail = () => {
                       }}
                     />
                   </Box>
-                  {/* price below */}
                   <Box sx={{ display: "flex" }}>
                     <del
                       style={{
@@ -484,8 +491,6 @@ const ProductDetail = () => {
                       }}
                     />
                   </Box>
-
-                  {/* weight radio */}
                   {categoryName && categoryName?.toLowerCase() === "cakes" ? (
                     <Box sx={{ marginTop: "17px" }}>
                       <FMRadioButtons
@@ -493,19 +498,12 @@ const ProductDetail = () => {
                         radioButtons={createUserOptions}
                         onChecked={
                           (option) => handleWeightChange(option)
-
-                          // option === "0.5 Kg"
-                          //   ? setProductQuantity("0.5 Kg")
-                          //   : option === "1 Kg"
-                          //     ? setProductQuantity("1 Kg")
-                          //     : setProductQuantity("2 Kg")
                         }
                         formLabelStyling={{
                           radioButtonStyle: {
                             fontWeight: "600",
                             lineHeight: "1.3125rem",
                             fontSize: "0.875rem",
-                            // color: `BLACK !important`,
                             color: "black !important",
                           },
                         }}
@@ -521,12 +519,8 @@ const ProductDetail = () => {
                   ) : (
                     <></>
                   )}
-
-                  {/* pincode and date selector */}
                   <Box sx={{ marginTop: "1rem", display: "flex", gap: "10px" }}>
-
                     <PincodeInputWrapper setDisabledDate={setDisabledDate} setPincodeData={setPincodeData} pincodeData={pincodeData} />
-
                     <Box>
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DesktopDatePicker
@@ -536,7 +530,6 @@ const ProductDetail = () => {
                           inputFormat="DD/MM/YYYY"
                           value={date}
                           onChange={onDateChange}
-                          //onChange={(e) => console.log(e)}
                           renderInput={(startProps) => (
                             <>
                               <TextField
@@ -634,14 +627,14 @@ const ProductDetail = () => {
                                 flexDirection: "column",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                cursor: isTodaysDate ? "not-allowed" : "pointer", // Change cursor style
+                                cursor: isTodaysDate ? "not-allowed" : "pointer",
                                 border: "1px solid #E6E6E6",
                                 "&:hover": {
                                   border: isTodaysDate
                                     ? "1px solid #E6E6E6"
-                                    : "1px solid black", // Adjust border on hover
+                                    : "1px solid black",
                                 },
-                                opacity: isTodaysDate ? 0.5 : 1, // Adjust opacity for disabled state
+                                opacity: isTodaysDate ? 0.5 : 1,
                               }}
                               onClick={standardDelivery}
                             >
@@ -806,19 +799,6 @@ const ProductDetail = () => {
                                   : ExpressDelivery
                               }
                             />
-
-                            {/* <FMDropdown
-                            style={{ width: "10rem" }}
-                            className="mb-2"
-                            placeholder="Select Time Slot"
-                            optionFilterProp="children"
-                            onChange={onExpressDeliveryChange}
-                            options={
-                              selectTodayDate
-                                ? filterExpressOptions
-                                : ExpressDelivery
-                            }
-                          />{" "} */}
                           </>
                         ) : (
                           <></>
@@ -828,9 +808,6 @@ const ProductDetail = () => {
                   ) : (
                     <></>
                   )}
-
-                  {/* cart and buy btns */}
-
                   <Box sx={{ marginTop: "50px" }}>
                     <FMButton
                       disabled={disabledDate}
@@ -850,13 +827,11 @@ const ProductDetail = () => {
                           backgroundColor: "white",
                         },
                       }}
-                      // onClick={tempSub}
                       onClick={handleSubmit(onSubmit)}
                     />
-
                     <FMButton
                       disabled={disabledDate}
-                      displayText={"Buy Now"}
+                      displayText={addToCartFlag ? "Go To Cart" : "Buy Now"}
                       variant={"contained"}
                       styleData={{
                         ...commonStyle.buttonStyles,
@@ -864,11 +839,8 @@ const ProductDetail = () => {
                       }}
                       onClick={handleBuyNow}
                     />
-
                     <input type={"submit"} hidden />
                   </Box>
-
-
                   {/* prod desc */}
                   <Box sx={{ marginTop: "50px" }}>
                     <FMTypography
@@ -907,13 +879,7 @@ const ProductDetail = () => {
             </Grid>
           </Container>
         </div>
-
-
-
-
-
-
-        <Grid sx={{ padding: "0 100px" }}>
+        <Grid sx={{ padding: "20px 100px" }}>
           <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Box sx={{ display: "flex" }}>
@@ -973,7 +939,6 @@ const ProductDetail = () => {
               <Carousel
                 showDots={false}
                 deviceType={responsive.deviceType}
-                // arrows={false}
                 autoPlay={responsive.deviceType !== "mobile" ? true : false}
                 ssr
                 slidesToSlide={1}
@@ -982,7 +947,6 @@ const ProductDetail = () => {
                 responsive={responsive}
                 partialVisible
                 infinite
-              // customDot={<CustomDot />}
               >
                 {reviewsCarouselData?.map((elem) => (
                   <Box style={{ paddingBottom: "1rem" }}>
@@ -990,7 +954,6 @@ const ProductDetail = () => {
                       sx={{
                         display: "flex",
                         border: "1px solid #E6E6E6",
-                        // margin: "0 1rem",
                         borderRadius: "20px",
                         width: "283px",
                         padding: "24px",
@@ -1045,7 +1008,6 @@ const ProductDetail = () => {
             )}
           </Box>
         </Grid>
-        {/* moere suggestions */}
         <Grid sx={{ padding: "80px 0" }}>
           <FMTypography
             displayText={"You may also Like"}
@@ -1059,7 +1021,6 @@ const ProductDetail = () => {
             <Carousel
               showDots={false}
               deviceType={responsive.deviceType}
-              // arrows={false}
               autoPlay={responsive.deviceType !== "mobile" ? true : false}
               ssr
               slidesToSlide={1}
@@ -1068,7 +1029,6 @@ const ProductDetail = () => {
               responsive={responsive}
               partialVisible
               infinite
-            // customDot={<CustomDot />}
             >
               {similarProductDetailedData?.map((elem) => (
                 <Grid

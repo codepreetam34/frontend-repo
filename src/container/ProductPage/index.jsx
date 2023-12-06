@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Card,
@@ -8,6 +8,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { makeStyles } from '@mui/styles';
 import FMTypography from "../../components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import Header from "../../components/SearchBar/Header";
@@ -19,8 +20,55 @@ import FMFilter from "../../components/FMFilters/FMFilter";
 import { useLocation, useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
-import Pincode from "../../components/PincodeWrapper";
 
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    overflow: 'hidden',
+  },
+  customScrollColumn: {
+    overflowY: 'scroll',
+    scrollbarWidth: 'thin',
+    '&::-webkit-scrollbar': {
+      width: '0.4rem',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'transparent',
+    },
+    '&::-webkit-scrollbar-track': {
+      display: 'none',
+    },
+  },
+
+  rightInfoBox: {
+    overflowY: 'scroll',
+    scrollbarWidth: 'thin',
+    '&::-webkit-scrollbar': {
+      width: '0.4rem',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'transparent',
+    },
+    '&::-webkit-scrollbar-track': {
+      display: 'none',
+    },
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+    height: '100%',
+  },
+
+  textLimit: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 2,
+    '-webkit-box-orient': 'vertical',
+  },
+
+}));
 const ProductPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,7 +77,22 @@ const ProductPage = () => {
   const [pageTitle, setPageTitle] = useState();
   const location = useLocation();
   const payload = location?.state?.payload;
-  console.log("payload ", payload)
+  const classes = useStyles();
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const element = textRef.current;
+    if (element) {
+      if (element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth) {
+        element.classList.add('ellipsis'); // Add ellipsis class if overflow
+      }
+    }
+  }, []);
+
+  const onCardClick = (element) => {
+    let pId = element?._id;
+    navigate(`/product-detail/${pId}`);
+  };
 
   useEffect(() => {
     dispatch(getProductByCategoryIdAndTags(payload))
@@ -45,11 +108,6 @@ const ProductPage = () => {
         setIsLoading(false);
       });
   }, [payload]);
-
-  const onCardClick = (element) => {
-    let pId = element?._id;
-    navigate(`/product-detail/${pId}`);
-  };
 
   useEffect(() => {
     window.scrollTo({
@@ -171,6 +229,8 @@ const ProductPage = () => {
                     />
                     <CardContent>
                       <Typography
+                        ref={textRef}
+                        className={`${classes.textLimit}`}
                         gutterBottom
                         variant="h5"
                         component="div"
@@ -235,7 +295,7 @@ const ProductPage = () => {
         </Grid>
 
 
-      </Grid>
+      </Grid >
       <Footer />
     </>
   );

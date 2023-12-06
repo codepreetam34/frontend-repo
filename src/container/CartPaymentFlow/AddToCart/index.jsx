@@ -113,7 +113,7 @@ const AddToCart = ({ handleNext }) => {
                     <Col style={{ marginTop: "0.3rem" }}>
                       <FMDropdown
                         name="department_id"
-                        defaultValue={`${addedData && addedData[elem]?.qty}`}
+                        value={`${addedData && addedData[elem]?.qty}`}
                         options={quantityOpt}
                         dropdownvalue="label"
                         sx={{

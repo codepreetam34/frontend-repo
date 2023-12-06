@@ -15,7 +15,11 @@ const FMFilter = ({
 }) => {
   const dispatch = useDispatch();
   const [sortingValue, setSortingValue] = useState("Sort By"); // Default to "Sort By"
-  const [activeTag, setActiveTag] = useState(tagName);
+  const [activeTag, setActiveTag] = useState('');
+
+  useEffect(() => {
+    setActiveTag(tagName)
+  }, [tagName])
 
   const sortByOptionsChangeHandler = (e) => {
     setIsLoading(true)

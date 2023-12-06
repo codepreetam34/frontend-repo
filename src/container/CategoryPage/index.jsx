@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Box,
   Card,
@@ -8,6 +8,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { makeStyles } from '@mui/styles';
 import FMTypography from "../../components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import Header from "../../components/SearchBar/Header";
@@ -18,15 +19,72 @@ import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    overflow: 'hidden',
+  },
+  customScrollColumn: {
+    overflowY: 'scroll',
+    scrollbarWidth: 'thin',
+    '&::-webkit-scrollbar': {
+      width: '0.4rem',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'transparent',
+    },
+    '&::-webkit-scrollbar-track': {
+      display: 'none',
+    },
+  },
+
+  rightInfoBox: {
+    overflowY: 'scroll',
+    scrollbarWidth: 'thin',
+    '&::-webkit-scrollbar': {
+      width: '0.4rem',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'transparent',
+    },
+    '&::-webkit-scrollbar-track': {
+      display: 'none',
+    },
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+    height: '100%',
+  },
+
+  textLimit: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 2,
+    '-webkit-box-orient': 'vertical',
+  },
+
+}));
+
 const CategoryPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  console.log("params ", params)
   const [isLoading, setIsLoading] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState();
   const pincodeData = sessionStorage.getItem("pincode");
   const [pageTitle, setPageTitle] = useState();
+  const classes = useStyles();
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const element = textRef.current;
+    if (element) {
+      if (element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth) {
+        element.classList.add('ellipsis'); // Add ellipsis class if overflow
+      }
+    }
+  }, []);
 
   const onCardClick = (id) => {
     navigate(`/product-detail/${id}`);
@@ -49,7 +107,7 @@ const CategoryPage = () => {
           setIsLoading(false);
         });
     }
-  }, [dispatch]);
+  }, [dispatch,params.id]);
 
 
   useEffect(() => {
@@ -58,6 +116,7 @@ const CategoryPage = () => {
       behavior: "smooth",
     });
   }, []);
+
   return (
     <>
       <Header />
@@ -173,7 +232,8 @@ const CategoryPage = () => {
                         gutterBottom
                         variant="h5"
                         component="div"
-
+                        ref={textRef}
+                        className={`${classes.textLimit}`}
                         sx={{ fontSize: "18px", color: "#222222", fontWeight: "300", textTransform: 'capitalize' }}
                       >
                         {elem?.name}
