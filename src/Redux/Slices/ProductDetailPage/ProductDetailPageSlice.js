@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../services/AxiosInstance";
-import { PRODUCT_DETAIL_PAGE, ADD_TO_CART } from "./type";
+import { PRODUCT_DETAIL_PAGE, ADD_TO_CART, APPLY_COUPON } from "./type";
 
 export const getProductsDetail = createAsyncThunk(
   PRODUCT_DETAIL_PAGE,
@@ -31,10 +31,27 @@ export const addToCart = createAsyncThunk(
   }
 );
 
+
+export const applyCoupon = createAsyncThunk(
+  APPLY_COUPON,
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(
+        "api/applyCoupon",
+        {code:payload}
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
+
 const productDetailSlice = createSlice({
   name: "productListSlice",
   initialState: {
     getProductsListData: [],
+    getCouponDiscount: [],
     error: "",
     isFetching: false,
     isError: false,
@@ -55,6 +72,24 @@ const productDetailSlice = createSlice({
     });
     builder.addCase(getProductsDetail.rejected, (state, action) => {
       state.getProductsListData = [];
+      state.isFetching = false;
+      state.isError = true;
+    });
+
+
+    builder.addCase(applyCoupon.pending, (state) => {
+      state.getCouponDiscount = [];
+      state.isFetching = true;
+      state.isError = false;
+    });
+
+    builder.addCase(applyCoupon.fulfilled, (state, action) => {
+      state.getCouponDiscount = action.payload;
+      state.isFetching = false;
+      state.isError = false;
+    });
+    builder.addCase(applyCoupon.rejected, (state, action) => {
+      state.getCouponDiscount = [];
       state.isFetching = false;
       state.isError = true;
     });

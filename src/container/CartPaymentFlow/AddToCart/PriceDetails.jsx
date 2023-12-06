@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, TextField } from "@mui/material";
 import FMTypography from "../../../components/FMTypography/FMTypography";
 import FMButton from "../../../components/FMButton/FMButton";
@@ -6,31 +6,44 @@ import { commonStyle } from "../../../Styles/commonStyles";
 import axios from "axios";
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  applyCoupon,
+} from "../../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
+
 const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) => {
 
+  const dispatch = useDispatch();
   const [couponCode, setCouponCode] = useState(""); // State to store entered coupon code
   const [discountCoupon, setDiscountCoupon] = useState(0); // State to store coupon discount value
+  const [discountMessage, setDiscountMessage] = useState(''); // State to store coupon discount value
+  const [discountCouponResponseMessage, setDiscountCouponResponseMessage] = useState(''); // State to store coupon discount value
   const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
   const result = auth?.substring(1, auth.length - 1);
-  const applyCoupon = async () => {
-    try {
-      // Make an API call to fetch the coupon discount value based on the entered coupon code
-      const response = await axios.post(`http://localhost:5000/api/applyCoupon`, { code: couponCode }, {
-        headers: {
-          Authorization: `Bearer ${result}`, // Include your token here
-        },
+
+  const handleApplyCoupon = async () => {
+    await dispatch(applyCoupon(couponCode)).then((res) => {
+      if (res.payload) {
+        setDiscountCouponResponseMessage(res?.payload?.message)
       }
-      );
-      const data = await response?.data;
-      if (data?.discount) {
-        setDiscountCoupon(data?.discount); // Set the discount value received from the API
-      } else {
-        setDiscountCoupon(0); // Set discount to 0 if no discount is available for the entered code
-      }
-    } catch (error) {
-      console.error("Error applying coupon:", error);
-    }
+    })
   };
+
+  const discountCouponResponse = useSelector(
+    (state) => state?.getProductsDetail?.getCouponDiscount?.discount
+  );
+
+  const CouponCodeResponse = useSelector(
+    (state) => state?.getProductsDetail?.getCouponDiscount?.couponCode
+  );
+
+  useEffect(() => {
+    setCouponCode(CouponCodeResponse)
+  }, [CouponCodeResponse])
+
+  useEffect(() => {
+    setDiscountCoupon(discountCouponResponse)
+  }, [discountCouponResponse])
 
   const calculateTotalMRP = () => {
     let totalMRP = 0;
@@ -41,8 +54,9 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
   };
 
   const calculateDiscountOnCoupon = () => {
-    return discountCoupon; // Use the discount value from the API
+    return discountCoupon ? discountCoupon : 0; // Use the discount value from the API
   };
+
   const calculateConvenienceFee = () => {
 
     // Calculate the convenience fee based on your logic
@@ -55,7 +69,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
     const totalMRP = calculateTotalMRP();
     const discountOnCoupon = calculateDiscountOnCoupon();
     const convenienceFee = calculateConvenienceFee();
-    return totalMRP - discountOnCoupon - resultDiscount + convenienceFee;
+    return totalMRP - (discountOnCoupon ? discountOnCoupon : 0) - resultDiscount + convenienceFee;
   };
 
   const clearCouponCode = () => {
@@ -71,7 +85,12 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
       resultDiscount += (addedData[elem]?.actualPrice * addedData[elem]?.qty) - (addedData[elem]?.discountPrice * addedData[elem]?.qty)
     ))
 
+  useEffect(() => {
+    setDiscountMessage(`Congratulation ! you have saved ₹${resultDiscount + calculateDiscountOnCoupon()}`)
+  }, [resultDiscount, calculateDiscountOnCoupon()])
+
   return (
+
     <Box
       sx={{
         boxShadow:
@@ -111,7 +130,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
                 backgroundColor: "white",
               },
             }}
-            onClick={applyCoupon}
+            onClick={handleApplyCoupon}
           />
         </Box>
       </Box>
@@ -127,7 +146,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
             }`}
         />
       </Box>
-
+      <hr />
       {addedData &&
         Object.keys(addedData)?.map((elem, index) => (
           <Box
@@ -177,6 +196,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
           styleData={{ color: "#000" }}
           displayText={`Discount on MRP`}
         />
+        <hr />
         {addedData &&
           Object.keys(addedData)?.map((elem, index) => (
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -227,7 +247,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
       </Box>
 
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <FMTypography displayText={`Convenience Fee`} />
+        <FMTypography displayText={`Convenience Fee`} styleData={{ color: "#717171" }} />
         <FMTypography
           displayText={`+ ₹${calculateConvenienceFee()}`}
           styleData={{ color: "#717171" }}
@@ -238,6 +258,14 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         <FMTypography displayText={`Total Amount`} />
         <FMTypography displayText={`₹${calculateTotalAmount()}`} />
       </Box>
+      <Box>
+        {discountMessage &&
+          <FMTypography
+            styleData={commonStyle.errorText}
+            displayText={discountMessage}
+          />
+        }
+      </Box>
       <FMButton
         displayText={'Continue'}
 
@@ -247,7 +275,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
           width: "100%",
           marginTop: "32px",
         }}
-        onClick={() => handleNext(calculateTotalAmount())}
+        onClick={() => handleNext(calculateTotalAmount(), discountCoupon)}
       />
     </Box >
   );

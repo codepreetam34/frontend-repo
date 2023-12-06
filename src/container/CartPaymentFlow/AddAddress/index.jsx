@@ -20,7 +20,7 @@ import AllAddressComponent from "./AllAddressComponent";
 import PriceDetails from "../AddToCart/PriceDetails";
 import { addToCartProductsFinal } from "../../../Redux/Slices/AddToCart/AddToCartSlice";
 
-const AddAddress = ({ handleNext }) => {
+const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
   const dispatch = useDispatch();
   const [pincodeData, setPincodeData] = useState("");
   const [homeOfficeLocation, setHomeOfficeLocation] = useState("Home");
@@ -428,7 +428,7 @@ const AddAddress = ({ handleNext }) => {
 
 
           {/* Render the PriceDetails component and pass the addedData prop */}
-          <PriceDetails addedData={addedData} handleNext={handleNext} />
+          <PriceDetails addedData={addedData} handleNext={handleNext} cartList={addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : 0} />
 
         </Col>
       </Row>

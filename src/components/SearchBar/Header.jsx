@@ -305,16 +305,15 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               <Button
                 onClick={handleClick}
               //     style={{ padding: '0' }}
-
               >
                 <img
                   src={cart}
                   alt="cart"
                   className={classes.profileIconStyle}
                 />
-                {addedData && Object.keys(addedData).length > 0 && (
+                {addedData && Object.keys(addedData)?.length > 0 && (
                   <div class={classes.cartItemCountStyle}>
-                    {Object.keys(addedData).length}
+                    {Object.keys(addedData)?.length}
                   </div>
                 )}
               </Button>
@@ -324,8 +323,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           <Box>
             <Button
               onClick={handleClick}
-
-
             >
               <img
                 src={profileIcon}

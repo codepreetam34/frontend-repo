@@ -56,6 +56,7 @@ import {
   addToCart,
   getProductsDetail,
 } from "../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
+import LoginPageModal from "./LoginPageModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -132,6 +133,8 @@ const ProductDetail = () => {
   const [fixed, setFixed] = useState(false);
   const [express, setExpress] = useState(false);
   const [addToCartFlag, setAddToCartFlag] = useState(false);
+  const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
+  const [showLoginPageModal, setShowLoginPageModal] = useState();
 
   const productDetailedData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product
@@ -225,23 +228,27 @@ const ProductDetail = () => {
   });
 
   const onSubmit = async (data) => {
-    if (pId) {
-      const cartItems = [];
-      const payload = {
-        cartItems: [
-          {
-            product: pId,
-            quantity: 1,
-          },
-        ],
-      };
+    if (!auth) {
+      setShowLoginPageModal(true)
+    } else {
+      if (pId) {
+        const cartItems = [];
+        const payload = {
+          cartItems: [
+            {
+              product: pId,
+              quantity: 1,
+            },
+          ],
+        };
 
-      dispatch(addToCart(payload)).then((res) => {
-        if (res) {
-          setAddToCartFlag(true)
-          dispatch(addToCartProductsFinal());
-        }
-      });
+        dispatch(addToCart(payload)).then((res) => {
+          if (res) {
+            setAddToCartFlag(true)
+            dispatch(addToCartProductsFinal());
+          }
+        });
+      }
     }
   };
 
@@ -1126,6 +1133,7 @@ const ProductDetail = () => {
             </Carousel>
           )}
         </Grid>
+        <LoginPageModal showLoginPageModal={showLoginPageModal} setShowLoginPageModal={setShowLoginPageModal}/>
         <Footer />
       </Layout >
     </>
