@@ -1,15 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../services/AxiosInstance";
-import { ADD_REVIEW, CHECK_PRODUCT_PURCHASE } from "./type";
+import { ADD_REVIEW, CHECK_PRODUCT_PURCHASE, GET_PRODUCT_REVIEW } from "./type";
 
 export const addReviews = createAsyncThunk(
   ADD_REVIEW,
-  async ({ payload }, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
       const response = await axiosInstance.post(
-        `api/product/${payload?.id}/reviews`,
+        `api/product/reviews`,
         payload
       );
+      console.log(response.data)
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -18,10 +19,22 @@ export const addReviews = createAsyncThunk(
 );
 export const checkProductPurchase = createAsyncThunk(
   CHECK_PRODUCT_PURCHASE,
-  async (productId , thunkAPI) => {
+  async (productId, thunkAPI) => {
     try {
       const response = await axiosInstance.get(
         `api/checkProductPurchase/${productId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
+export const getProductReview = createAsyncThunk(
+  GET_PRODUCT_REVIEW,
+  async (productId, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(
+        `api/product/user/review`, {productId});
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -36,6 +49,7 @@ const addReviewsSlice = createSlice({
     isFetching: false,
     reviews: {},
     checkProductPurchase: {},
+    getProductReview: {},
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -51,6 +65,21 @@ const addReviewsSlice = createSlice({
     });
     builder.addCase(addReviews.rejected, (state, action) => {
       state.reviews = {};
+      state.isLoggedIn = false;
+      state.isFetching = false;
+    });
+    builder.addCase(getProductReview.pending, (state) => {
+      state.getProductReview = {};
+      state.isFetching = true;
+    });
+
+    builder.addCase(getProductReview.fulfilled, (state, action) => {
+      state.getProductReview = action.payload;
+      state.isLoggedIn = true;
+      state.isFetching = false;
+    });
+    builder.addCase(getProductReview.rejected, (state, action) => {
+      state.getProductReview = {};
       state.isLoggedIn = false;
       state.isFetching = false;
     });
