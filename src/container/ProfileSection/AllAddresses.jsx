@@ -81,8 +81,8 @@ const AllAddresses = () => {
                     styleData={{
                       fontSize: "12px",
                       fontWeight: "500",
-                      marginLeft: "12px",
                       marginTop: ".2rem",
+                      marginBottom: ".2rem",
                       color: "#222222",
                     }}
                   />
@@ -117,7 +117,7 @@ const AllAddresses = () => {
               styleData={{
                 fontSize: "1rem",
                 fontWeight: "500",
-                border: "none",
+                border: "1px solid #801317",
                 backgroundColor: "white",
                 color: "#000000",
                 width: "278px",
@@ -125,7 +125,6 @@ const AllAddresses = () => {
                 boxShadow:
                   "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
                 borderRadius: "20px",
-                "&:hover": { border: "none", backgroundColor: "white" },
               }}
               onClick={displayForm}
             />

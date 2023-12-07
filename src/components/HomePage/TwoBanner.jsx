@@ -17,7 +17,7 @@ const TwoBanner = () => {
 
   return (
     <div className="twobannersection">
-      <Container fluid>
+      <Container fluid className="m-0 p-0">
         <Row>
           <Col md={6}>
             <div className="position-relative">
@@ -43,7 +43,7 @@ const TwoBanner = () => {
           </Col>
           <Col md={6}>
             <div className="position-relative">
-            <div class="two-banner-background-overlay"></div>
+              <div class="two-banner-background-overlay"></div>
               <img src={twoBannerData && twoBannerData[1]?.banner} className="img-fluid" alt="" style={{ width: "510px", height: "200px" }} />
               <div className="twobandata">
                 <h4 style={{ fontSize: "24px", color: '#FFC72C' }}>Bespoke Hampers</h4>

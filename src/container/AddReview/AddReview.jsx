@@ -59,8 +59,10 @@ const AddReview = () => {
       dispatch(getProductReview(pId))
         .then((res) => {
           if (res.meta.requestStatus == "fulfilled") {
-            if (res.payload.puchased == false) {
+            if (res.payload.purchased === false) {
               setNotPurchase(res.payload.message)
+
+
             }
           }
           else {
@@ -78,7 +80,6 @@ const AddReview = () => {
   const userReview = useSelector(
     (state) => state?.addReviews?.getProductReview
   );
-  console.log("user Review ", userReview)
 
   const onSubmit = (data) => {
 
@@ -157,19 +158,43 @@ const AddReview = () => {
     });
     setImagePreview(userReview?.userReview?.image);
     setValue(userReview?.userReview?.rating)
-  }, [userReview]);
+  }, [userReview, reset]);
   return (
     <>
       <Header />
       <Container>
         <Row>
-          <Col>
+          {userReview?.userReview &&
+            <Col md={12}>
+              <Box sx={{ display: "flex", justifyContent: 'center', marginBottom: '20px' }}>
+                <div>
+                  <FMTypography
+                    displayText={userReview?.userReview?.name}
+                    styleData={{ fontSize: "32px" }}
+                  />
+                  <FMTypography
+                    styleData={{
+                      width: "100%",
+                      color: "red",
+                      fontSize: "0.875rem",
+                      textAlign: 'center'
+                    }}
+                    displayText={userReview?.message}
+                  />
+                </div>
+              </Box>
+
+            </Col>
+          }
+
+
+          <Col md={12}>
             <Box
               sx={{
                 boxShadow:
                   "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
                 borderRadius: "20px",
-                marginTop: "24px",
+                marginTop: "10px",
                 marginBottom: "24px",
                 padding: "32px",
                 display: "flex",
@@ -198,6 +223,7 @@ const AddReview = () => {
               </Box>
             </Box>
           </Col>
+
         </Row>
         {/* box below */}
         <Row>
@@ -236,24 +262,16 @@ const AddReview = () => {
                     </Card>
                   </Box>
 
-                </Box> </> : userReview && userReview ? <>
+                </Box> </> : userReview && userReview?.userReview ? <>
+
+
                   <Box sx={{
                     border: "1px solid #000",
                     borderRadius: "20px",
                     padding: "1rem"
                   }}>
-                    <Box sx={{ display: "flex", justifyContent: 'center' }}>
-                      <div>
-                        <FMTypography
-                          displayText={userReview?.userReview?.name}
-                          styleData={{ fontSize: "32px" }}
-                        />
-                        <FMTypography
-                          styleData={commonStyle.errorText}
-                          displayText={userReview?.message}
-                        />
-                      </div>
-                    </Box>
+
+
                     <FMTypography
                       displayText={"Rate this product"}
                       styleData={{ fontSize: "32px" }}

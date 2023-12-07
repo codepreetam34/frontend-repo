@@ -25,7 +25,7 @@ const Reminder = () => {
               name="firstName"
               placeholder="Name"
               sx={commonStyle.inputFieldStyle}
-              defaultValue={"firstName"}
+          //    defaultValue={"firstName"}
             />
             <InputBase
               required
@@ -33,7 +33,7 @@ const Reminder = () => {
               name="occasion"
               placeholder="Occasion"
               sx={commonStyle.inputFieldStyle}
-              defaultValue={"occasion"}
+           //   defaultValue={"occasion"}
             />
           </Col>
 
@@ -44,7 +44,7 @@ const Reminder = () => {
               name="lastName"
               placeholder="Last Name"
               sx={commonStyle.inputFieldStyle}
-              defaultValue={"lastName"}
+             // defaultValue={"lastName"}
             />
             <InputBase
               required
@@ -52,7 +52,7 @@ const Reminder = () => {
               name="date"
               placeholder="date"
               sx={commonStyle.inputFieldStyle}
-              defaultValue={"date"}
+          //    defaultValue={"date"}
             />
           </Col>
           <Col className="col-md-6">
@@ -93,10 +93,8 @@ const Reminder = () => {
               }}
             />
           </Col>
-        </Row>
-        <Row>
-          <Col></Col>
-          <Col>
+
+          <Col  style={{textAlign:'end', paddingTop:'1.5rem'}}>
             <FMButton
               displayText={"Cancel"}
               variant="outlined"
@@ -104,18 +102,15 @@ const Reminder = () => {
                 color: "black",
                 fontWeight: "600",
                 backgroundColor: "white",
-                border: "2px solid #E6E6E6",
+                border: "1px solid #801317",
                 borderRadius: "10px",
                 width: "180px",
-                "&:hover": {
-                  backgroundColor: "white",
-                  border: "2px solid #E6E6E6",
-                },
+    
               }}
             />
             <FMButton
               displayText={"Save"}
-              disabled
+              
               styleData={{
                 color: "white",
                 fontWeight: "600",
@@ -124,10 +119,7 @@ const Reminder = () => {
                 borderRadius: "10px",
                 width: "180px",
                 marginLeft: "1.5rem",
-                "&:hover": {
-                  backgroundColor: "#801317",
-                  border: "2px solid #E6E6E6",
-                },
+ 
               }}
             />
           </Col>
