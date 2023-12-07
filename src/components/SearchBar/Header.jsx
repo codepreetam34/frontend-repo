@@ -107,12 +107,12 @@ const useStyles = makeStyles((theme) => ({
   },
   cartItemCountStyle: {
     position: 'absolute',
-    top: '-3px',
+    top: '-2px',
     right: '7px',
     backgroundColor: '#801317',
     color: 'white',
     borderRadius: '50%',
-    padding: '1px 10px',
+    padding: '2px 8px',
     fontSize: '12px',
   },
   pincodeItemCountStyle: {

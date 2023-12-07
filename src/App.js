@@ -78,7 +78,7 @@ const App = () => {
             />
             <Route
               path={ADD_REVIEW}
-              element={<PrivateRoutes Component={AddReview} />}
+              element={<AddReview />}
             />
             <Route
               path={MY_PROFILE}
