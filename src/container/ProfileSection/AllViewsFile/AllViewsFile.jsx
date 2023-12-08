@@ -11,6 +11,7 @@ import { makeStyles } from "@mui/styles";
 import { AllViewsFileStyle } from "./AllViewsFileStyle";
 import Reminder from "../Reminder";
 import AllAddresses from "../AllAddresses";
+import Footer from "components/Footer/Footer";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -144,6 +145,7 @@ export default function VerticalTabs() {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 }

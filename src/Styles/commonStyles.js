@@ -49,6 +49,25 @@ export const commonStyle = {
       opacity: 1,
     },
   },
+  inputFieldPincodeStyle: {
+    width: "100%",
+    height: "3.5rem",
+    marginTop: "0.5rem",
+    marginBottom: "0.375rem",
+    border: `0.063rem solid grey`,
+    boxSizing: "border-box",
+    boxShadow: "0rem 0.25rem 0.5rem rgba(0,0,0,0.04)",
+    borderRadius: "0.5rem",
+    color: "black",
+    "& .MuiOutlinedInput-notchedOutline": {
+      border: "none",
+      color: "black",
+    },
+    "&::placeholder": {
+      color: "black",
+      opacity: 1,
+    },
+  },
   errorStyle: {
     border: "0.125rem solid red",
     "&:hover": {

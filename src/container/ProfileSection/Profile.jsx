@@ -1,8 +1,7 @@
 import { Avatar, Box, InputBase } from "@mui/material";
 import FMTypography from "../../components/FMTypography/FMTypography";
-import Header from "../../components/SearchBar/Header";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Stack } from "react-bootstrap";
+import { Col, Row, Stack } from "react-bootstrap";
 import mailIcon from "../../assets/mailIcon.svg";
 import telephoneIcon from "../../assets/telephoneIcon.svg";
 import locationIcon from "../../assets/locationIcon.svg";
@@ -10,45 +9,37 @@ import { commonStyle } from "../../Styles/commonStyles";
 import Pincode from "react-pincode";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileDetail } from "../../Redux/Slices/MyProfileSlice/MyProfile";
-import FMLoader from "../../components/FMLoader/FMLoader";
 import FMButton from "../../components/FMButton/FMButton";
+import PincodeWrapper from "components/PincodeWrapper";
+import PincodeInputWrapper from "./PincodeInputWrapper";
+import Footer from "components/Footer/Footer";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const [pincodeData, setPincodeData] = useState("");
-  const [showLoader, setShowLoader] = useState(false);
-
   const [data, setData] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
-  const getDataFunc = (data) => {
-    setPincodeData(data);
-    if (data?.pincode.length === 6) {
-    }
-  };
-
-  useEffect(() => {
-    dispatch(getProfileDetail());
-  }, [dispatch]);
+  const [pincodeData, setPincodeData] = useState(sessionStorage.getItem("pincode"));
 
   const myProfileData = useSelector(
     (state) => state?.myProfile?.getProfileData?.user
   );
 
   useEffect(() => {
-    if (!myProfileData) {
-      setShowLoader(true);
-    } else setShowLoader(false);
-  }, [myProfileData]);
+    dispatch(getProfileDetail());
+  }, [dispatch]);
 
   useEffect(() => {
     setData(myProfileData);
     setFirstName(myProfileData?.firstName);
     setLastName(myProfileData?.lastName);
     setPhoneNumber(myProfileData?.contactNumber);
-  }, [myProfileData]);
+    console.log("my profile inside ", myProfileData?.firstName)
+  }, []);
+
+  console.log("my profile data 2", myProfileData?.firstName)
+  console.log("my profile data 3", lastName)
 
   return (
     <>
@@ -149,24 +140,12 @@ const Profile = () => {
                     placeholder="Name"
                     sx={{
                       ...commonStyle.inputFieldStyle,
-
-                      // ...(errors.firstName && commonStyle.errorStyle),
                     }}
-                    defaultValue={
+                    value={
 
                       firstName ? firstName : myProfileData?.firstName
                     }
-                  // onChange={setFirstNameFunc}
-                  // {...register("firstName")}
-                  // error={errors.firstName ? true : false}
                   />
-                  {/* <FMTypography
-                      styleData={{
-                        ...commonStyle.errorText,
-                        fontSize: "11px",
-                      }}
-                      displayText={errors.firstName?.message}
-                    /> */}
                 </Box>
                 <Box>
                   <InputBase
@@ -176,17 +155,9 @@ const Profile = () => {
                     placeholder="Last name"
                     sx={{
                       ...commonStyle.inputFieldStyle,
-
-                      // ...(errors.lastName && commonStyle.errorStyle),
                     }}
-                    defaultValue={myProfileData?.lastName}
-                  // {...register("lastName")}
-                  // error={errors.lastName ? true : false}
+                    value={myProfileData?.lastName}
                   />
-                  {/* <FMTypography
-                      styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
-                      displayText={errors.lastName?.message}
-                    /> */}
                 </Box>
               </Box>
               <Box>
@@ -195,19 +166,11 @@ const Profile = () => {
                   id="Dob"
                   name="Dob"
                   placeholder="Dob"
-
+                  value={myProfileData?.dob}
                   sx={{
                     ...commonStyle.inputFieldStyle,
-
-                    // ...(errors.Dob && commonStyle.errorStyle),
                   }}
-                // {...register("Dob")}
-                // error={errors.Dob ? true : false}
                 />
-                {/* <FMTypography
-                      styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
-                      displayText={errors.Dob?.message}
-                    /> */}
               </Box>
               <Box>
                 <InputBase
@@ -215,25 +178,14 @@ const Profile = () => {
                   id="alternateNum"
                   name="alternateNum"
                   placeholder="Contact Num"
-                  defaultValue={
+                  value={
 
                     myProfileData?.contactNumber
                   }
                   sx={{
                     ...commonStyle.inputFieldStyle,
-
-                    // ...(errors.alternateNum && commonStyle.errorStyle),
                   }}
-                // {...register("alternateNum")}
-                // error={errors.alternateNum ? true : false}
                 />
-                {/* <FMTypography
-                        styleData={{
-                          ...commonStyle.errorText,
-                          fontSize: "11px",
-                        }}
-                        displayText={errors.alternateNum?.message}
-                      /> */}
               </Box>
 
               <Box>
@@ -242,68 +194,30 @@ const Profile = () => {
                   id="email"
                   name="email"
                   placeholder="Email"
-                  defaultValue={
-
+                  value={
                     myProfileData?.email
                   }
                   sx={{
                     ...commonStyle.inputFieldStyle,
-
-                    // ...(errors.email && commonStyle.errorStyle),
                   }}
-                // {...register("email")}
-                // error={errors.email ? true : false}
                 />
-                {/* <FMTypography
-                      styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
-                      displayText={errors.email?.message}
-                    /> */}
               </Box>
               <Box>
                 <InputBase
                   required
-                  id="Nationality*"
-                  name="Nationality*"
-                  placeholder="Nationality*"
+                  id="gender*"
+                  name="gender*"
+                  placeholder="gender*"
+                  value={myProfileData?.gender}
                   sx={{
                     ...commonStyle.inputFieldStyle,
-
-                    // ...(errors.Nationality* && commonStyle.errorStyle),
                   }}
-                // {...register("Nationality*")}
-                // error={errors.Nationality* ? true : false}
                 />
-                {/* <FMTypography
-                      styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
-                      displayText={errors.Nationality*?.message}
-                    /> */}
+
               </Box>
 
-              <Box sx={{ marginRight: "2rem" }}>
-                <Pincode
-                  showCity={false}
-                  showDistrict={false}
-                  showState={false}
-                  invalidError="Please check pincode"
-                  // lengthError="check length"
-                  getData={getDataFunc}
-                  showArea={pincodeData ? true : false}
-                  pincodeInput={{
-                    borderRadius: "10px",
-                    width: "110%",
-                    border: "1px solid grey",
-                    height: "40px",
-                    padding: "16.5px 14px",
-                    marginRight: "1.7rem",
-                    // marginBottom: !pincodeData && "1.1rem",
-                  }}
-                  areaInput={{
-                    backgroundColor: "white",
-                    border: "none",
-                    color: "red",
-                    fontSize: "12px",
-                  }}
-                />
+              <Box sx={{ marginTop: "1rem" }}>
+                <PincodeInputWrapper setPincodeData={setPincodeData} pincodeData={pincodeData} />
               </Box>
             </Box>
 
@@ -315,19 +229,13 @@ const Profile = () => {
                 fontWeight: "600",
                 borderRadius: "10px",
                 backgroundColor: "white",
-                border: "1px solid #E6E6E6",
                 marginTop: "2rem",
-                "&:hover": {
-                  backgroundColor: "white",
-                  border: "1px solid #E6E6E6",
-                },
               }}
             />
           </Box>
         </Col>
       </Row>
-
-      <FMLoader showLoader={showLoader} />
+      {/* <FMLoader showLoader={showLoader} /> */}
     </>
   );
 };

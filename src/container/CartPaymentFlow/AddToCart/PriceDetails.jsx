@@ -122,13 +122,8 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
             displayText="Apply"
             variant="outlined"
             styleData={{
-              border: " 1px solid #E6E6E6",
               borderRadius: "10px",
               color: "black",
-              "&:hover": {
-                border: " 1px solid #E6E6E6",
-                backgroundColor: "white",
-              },
             }}
             onClick={handleApplyCoupon}
           />
