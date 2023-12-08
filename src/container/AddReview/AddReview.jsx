@@ -159,6 +159,13 @@ const AddReview = () => {
     setImagePreview(userReview?.userReview?.image);
     setValue(userReview?.userReview?.rating)
   }, [userReview, reset]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <Header />

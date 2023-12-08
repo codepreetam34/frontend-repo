@@ -32,6 +32,12 @@ const LandingPage = () => {
   const title = 'Home Page';
   const description = 'This is the home page of our MERN application.';
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
 
     <>
