@@ -41,7 +41,7 @@ const ProductPayment = ({ totalAmount }) => {
   const handleRazorpayPayment = async () => {
     try {
       // Fetch order details from your backend using Axios
-      const response = await axios.post("http://165.22.222.7:5000/api/create-order", {
+      const response = await axios.post("http://localhost:5000/api/create-order", {
         totalAmount,
       });
 
@@ -139,14 +139,10 @@ const ProductPayment = ({ totalAmount }) => {
             boxShadow:
               '0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)',
             borderRadius: '100px',
-            border: ' 1px solid #E6E6E6',
+         //   border: ' 1px solid #801317',
             textTransform: 'capitalize',
             color: '#222222',
             marginBottom: '1.5rem',
-            '&:hover': {
-              backgroundColor: 'white',
-              border: '1px solid black',
-            },
           }}
         />
 

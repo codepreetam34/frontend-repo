@@ -230,9 +230,8 @@ const AddReview = () => {
               </Box>
             </Box>
           </Col>
-
         </Row>
-        {/* box below */}
+
         <Row>
           <Col>
             <Box
@@ -270,20 +269,15 @@ const AddReview = () => {
                   </Box>
 
                 </Box> </> : userReview && userReview?.userReview ? <>
-
-
                   <Box sx={{
                     border: "1px solid #000",
                     borderRadius: "20px",
                     padding: "1rem"
                   }}>
-
-
                     <FMTypography
                       displayText={"Rate this product"}
                       styleData={{ fontSize: "32px" }}
                     />
-
                     <Box
                       sx={{
                         width: 200,
@@ -321,7 +315,6 @@ const AddReview = () => {
                         </Box>
                       }
                     </Box>
-
                     <Box>
                       <FMTypography
                         displayText={"Review this product"}
@@ -506,9 +499,7 @@ const AddReview = () => {
                             aria-label="upload picture"
                             component="label"
                           >
-
                             <input hidden accept="image/*" type="file" onChange={handleImageChange} />
-
                             <img
                               src={uploadReview}
                               alt="upload-icon"
