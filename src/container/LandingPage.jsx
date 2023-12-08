@@ -11,11 +11,14 @@ import ThreePoint from "../components/HomePage/ThreePoint";
 import Footer from "../components/Footer/Footer";
 import { Box } from "@mui/material";
 import Layout from "../components/Layout";
-import adsBanner from "assets/adsBanner.png";
-
 import StartupScreen from "../components/StartpScreen";
 
+import adsBanner from 'assets/LandingPage/adsBanner.png';
+import { Col, Container, Row } from "react-bootstrap";
+
 const LandingPage = () => {
+  console.log("adsBanner", adsBanner);
+
   const [loading, setLoading] = useState(true);
   const [landingPageModalOpen, setLandingPageModalOpen] = useState(true);
 
@@ -63,9 +66,23 @@ const LandingPage = () => {
               <Box>
                 <TopCategory />
               </Box>
-              <Box sx={{ width: '100%', height: 'auto', padding: "0 100px", marginTop: "50px", }}>
+
+              <div className="shopbyocca">
+                <Container fluid className="m-0 p-0">
+                  <Row>
+                    <Col md={12}>
+                        <div className=''>
+                          <img src={adsBanner} className='img-fluid' alt="" style={{ width: "100%", height: "200px" }}/>
+                      </div>
+                    </Col>
+                  </Row>
+                </Container>
+
+              </div>
+
+              {/* <Box sx={{ width: '100%', height: 'auto', padding: "0 100px", marginTop: "50px", }}>
                 <img className="img-fluid" src={adsBanner} alt="adsBanner" />
-              </Box>
+              </Box> */}
               <ShopByOccasion />
               <PamperZone />
               <ThreePoint />

@@ -3,10 +3,31 @@ import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomePageTwoAdsBanner } from "Redux/Slices/TwoAdsBanner/TwoAdsBannerSlice";
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+  rowGap: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
+      gap: '2rem',
+      justifyContent: 'center'
+    }, [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+      gap: '2rem',
+      justifyContent: 'center'
+    },
+    [theme.breakpoints.down('md')]: {
+      display: 'flex',
+      gap: '2rem',
+      justifyContent: 'center'
+    },
+  },
+
+
+}));
 const TwoBanner = () => {
   const dispatch = useDispatch();
-
+  const classes = useStyles();
   useEffect(() => {
     dispatch(getHomePageTwoAdsBanner());
   }, [dispatch]);
@@ -18,7 +39,7 @@ const TwoBanner = () => {
   return (
     <div className="twobannersection">
       <Container fluid className="m-0 p-0">
-        <Row>
+      <Row className={classes.rowGap}>
           <Col md={6}>
             <div className="position-relative">
               <div class="two-banner-background-overlay"></div>
