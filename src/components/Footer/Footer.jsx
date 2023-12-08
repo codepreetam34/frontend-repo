@@ -71,7 +71,7 @@ const Footer = () => {
                 fontFamily: "Poppins",
                 fontSize: "18px",
                 fontStyle: "normal",
-                fontWeight: "500",
+                fontWeight: "600",
 
               }}
                 style={{ textTransform: "capatilize !important", }}

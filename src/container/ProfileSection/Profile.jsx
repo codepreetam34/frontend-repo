@@ -220,18 +220,29 @@ const Profile = () => {
                 <PincodeInputWrapper setPincodeData={setPincodeData} pincodeData={pincodeData} />
               </Box>
             </Box>
-
-            <FMButton
-              displayText={"Change Password"}
-              variant="outlined"
-              styleData={{
-                color: "black",
-                fontWeight: "600",
-                borderRadius: "10px",
-                backgroundColor: "white",
-                marginTop: "2rem",
-              }}
-            />
+            <Box sx={{display:'flex',justifyContent:'space-between'}}>
+              <FMButton
+                displayText={"Change Password"}
+                variant="outlined"
+                styleData={{
+                  color: "black",
+                  fontWeight: "600",
+                  borderRadius: "10px",
+                  backgroundColor: "white",
+                  marginTop: "2rem",
+                }}
+              />
+              <FMButton
+                displayText={"Update Profile"}
+                styleData={{
+                  color: "#fff",
+                  fontWeight: "600",
+                  borderRadius: "10px",
+                  background: "#801317",
+                  marginTop: "2rem",
+                }}
+              />
+            </Box>
           </Box>
         </Col>
       </Row>
