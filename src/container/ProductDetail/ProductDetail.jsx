@@ -952,8 +952,8 @@ const ProductDetail = () => {
                 partialVisible
                 infinite
               >
-                {reviewsCarouselData?.map((elem) => (
-                  <Box style={{ paddingBottom: "1rem" }}>
+                {reviewsCarouselData?.map((elem,index) => (
+                  <Box style={{ paddingBottom: "1rem" }} key={index}>
                     <Box
                       sx={{
                         display: "flex",
@@ -1034,8 +1034,9 @@ const ProductDetail = () => {
               partialVisible
               infinite
             >
-              {similarProductDetailedData?.map((elem) => (
+              {similarProductDetailedData?.map((elem, index) => (
                 <Grid
+                key={index}
                   sx={{
                     display: "flex",
                     flexWrap: "wrap",

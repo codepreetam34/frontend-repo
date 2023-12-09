@@ -19,12 +19,13 @@ const FaqsComponent = ({ type, sx, defaultExpanded }) => {
     type === "Ordering"
       ? orderingFaqs
       : type === "Delivery"
-      ? deliveriesFaqs
-      : productsFaqs;
+        ? deliveriesFaqs
+        : productsFaqs;
   return (
     <Container style={{ marginTop: "50px" }}>
       {faqsArray?.map((elem, index) => (
         <Accordion
+          key={index}
           sx={{ ...accordionStyles.boxAccordion, ...sx }}
           defaultExpanded={index === 0 ? true : false}
         >

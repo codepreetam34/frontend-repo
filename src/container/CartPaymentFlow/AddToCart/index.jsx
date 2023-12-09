@@ -77,8 +77,9 @@ const AddToCart = ({ handleNext }) => {
       <Row style={{ padding: "10px 120px 0 120px", marginBottom: "2rem" }}>
         <Col>
           {addedData && Object.keys(addedData)?.length > 0 ?
-            Object.keys(addedData)?.map((elem) => (
+            Object.keys(addedData)?.map((elem,index) => (
               <Box
+              key={index}
                 sx={{
                   borderRadius: "20px",
                   boxShadow:

@@ -49,8 +49,9 @@ const AllAddresses = () => {
               padding: "32px",
             }}
           >
-            {addressDetailsAdded?.map((elem) => (
+            {addressDetailsAdded?.map((elem, index) => (
               <Box
+                key={index}
                 sx={{
                   boxShadow:
                     "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",

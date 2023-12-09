@@ -194,7 +194,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         <hr />
         {addedData &&
           Object.keys(addedData)?.map((elem, index) => (
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box key={index} sx={{ display: "flex", justifyContent: "space-between" }}>
 
               <FMTypography
                 styleData={{ color: "#717171" }}

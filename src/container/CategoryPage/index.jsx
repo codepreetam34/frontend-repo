@@ -188,8 +188,9 @@ const CategoryPage = () => {
               <CircularProgress color="primary" />
             </div>
           ) : displayedProducts && displayedProducts?.length > 0 ? (
-            displayedProducts?.map((elem) => (
+            displayedProducts?.map((elem,index) => (
               <Box
+              key={index}
                 onClick={() => onCardClick(elem._id)}
                 style={{ position: "relative" }}
               >

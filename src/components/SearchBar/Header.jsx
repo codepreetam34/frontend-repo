@@ -545,9 +545,10 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             <Navbar.Collapse id="navbarScroll">
               <Nav navbarScroll style={{ paddingLeft: "4rem", paddingBottom: "2px" }}>
                 {categoryList &&
-                  categoryList?.map((elem) => {
+                  categoryList?.map((elem,index) => {
                     return (
                       <NavDropdown
+                      key={index}
                         title={
                           <div
                             className="main-heading-clickable heading-text"
@@ -579,6 +580,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                                 return (
 
                                   <Col md={2}
+                                  key={i}
                                     style={{
                                       display: 'flex',
                                       justifyContent: 'center',
@@ -594,9 +596,10 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                                         {tag?.tagType}
                                       </div>
                                       <div>
-                                        {tag?.names?.map((name) => {
+                                        {tag?.names?.map((name,index) => {
                                           return (
                                             <div
+                                            key={index}
                                               className={`${classes.tagDesign}`}
                                               onClick={() =>
                                                 handleTag(name, elem?._id)

@@ -36,7 +36,7 @@ const Banner = () => {
           <Slider {...settings}>
             {finalData &&
               finalData?.map((imageName, index) => (
-                <Box className="banner_img">
+                <Box className="banner_img" key={index}>
                   <img
                     src={imageName?.banner}
                     alt=""
