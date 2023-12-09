@@ -57,7 +57,6 @@ const ProductPayment = ({ totalAmount }) => {
       script.src = 'https://checkout.razorpay.com/v1/checkout.js';
       script.async = true;
       script.onload = () => {
-        // Create a Razorpay instance with the order details
         const razorpay = new window.Razorpay({
           key_id: 'rzp_test_lUsErTdW0CPEb7',
           amount: order.amount,
@@ -66,11 +65,7 @@ const ProductPayment = ({ totalAmount }) => {
           description: 'Purchase description',
           order_id: order.id,
           handler: function (response) {
-            // Handle successful payment response
             console.log("response Razor ", response);
-            // razorpay_order_id: "order_MymSF2e9XWGPyU"
-            // razorpay_payment_id: "pay_MymSakRYkJLUsB"
-            // razorpay_signature: "0dd30084c3fda56d49d915a8bf48b3988ef59ea63681742174d35ad103f18384"
           },
         });
 

@@ -84,7 +84,6 @@ const FMFilter = ({
   ];
 
 
-  console.log("Current active tag:", activeTag);
 
   return (
     <>

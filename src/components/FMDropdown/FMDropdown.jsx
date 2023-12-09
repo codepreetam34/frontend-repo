@@ -6,11 +6,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 const FMDropdown = ({ name, options, id, onChange, sx, value, placeholder }) => {
   const [quantityOption, setQuantityOption] = useState(value !== undefined ? value : '');
-
-  console.log('Options:', options);
   const optionChangeHandler = (e) => {
     setQuantityOption(e.target.value);
-    console.log('Quantity Option:', quantityOption);
     onChange(e);
   };
 

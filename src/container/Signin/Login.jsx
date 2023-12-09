@@ -56,7 +56,6 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
       dispatch(login(data))
         .unwrap()
         .then((res) => {
-          console.log(res)
           if (res?.user) {
             setShowLoginPageModal(false);
             setShowToast(true)

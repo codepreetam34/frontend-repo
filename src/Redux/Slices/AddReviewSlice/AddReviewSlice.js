@@ -10,7 +10,6 @@ export const addReviews = createAsyncThunk(
         `api/product/reviews`,
         payload
       );
-      console.log(response.data)
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -34,7 +33,7 @@ export const getProductReview = createAsyncThunk(
   async (productId, thunkAPI) => {
     try {
       const response = await axiosInstance.post(
-        `api/product/user/review`, {productId});
+        `api/product/user/review`, { productId });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });

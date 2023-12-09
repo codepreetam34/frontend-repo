@@ -35,11 +35,8 @@ const Profile = () => {
     setFirstName(myProfileData?.firstName);
     setLastName(myProfileData?.lastName);
     setPhoneNumber(myProfileData?.contactNumber);
-    console.log("my profile inside ", myProfileData?.firstName)
   }, []);
 
-  console.log("my profile data 2", myProfileData?.firstName)
-  console.log("my profile data 3", lastName)
 
   return (
     <>

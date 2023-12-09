@@ -356,17 +356,14 @@ const ProductDetail = () => {
   };
 
   const onStandardDeliveryChange = (e) => {
-    console.log(`onStandardDeliveryChange ${e.target.value}`);
     setSelectedTime(e.target.value);
   };
 
   const onFixedDeliveryChange = (e) => {
-    console.log(`onFixedDeliveryChange ${e.target.value}`);
     setSelectedTime(e.target.value);
   };
 
   const onExpressDeliveryChange = (e) => {
-    console.log(`onExpressDeliveryChange ${e.target.value}`);
     setSelectedTime(e.target.value);
   };
 
@@ -1133,7 +1130,7 @@ const ProductDetail = () => {
             </Carousel>
           )}
         </Grid>
-        <LoginPageModal showLoginPageModal={showLoginPageModal} setShowLoginPageModal={setShowLoginPageModal}/>
+        <LoginPageModal showLoginPageModal={showLoginPageModal} setShowLoginPageModal={setShowLoginPageModal} />
         <Footer />
       </Layout >
     </>
