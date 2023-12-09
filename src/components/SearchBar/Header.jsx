@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#801317',
     color: 'white',
     borderRadius: '50%',
-    padding: '2px 8px',
+    padding: '2px 10px',
     fontSize: '12px',
   },
   pincodeItemCountStyle: {

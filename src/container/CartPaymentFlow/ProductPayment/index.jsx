@@ -40,11 +40,16 @@ const ProductPayment = ({ totalAmount }) => {
 
   const handleRazorpayPayment = async () => {
     try {
-      // Fetch order details from your backend using Axios
+      const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
+      const authToken = auth?.substring(1, auth.length - 1);
       const response = await axios.post("http://localhost:5000/api/create-order", {
         totalAmount,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        }
       });
-
       const order = response.data;
 
       // Dynamically create a script tag for Razorpay
@@ -139,7 +144,7 @@ const ProductPayment = ({ totalAmount }) => {
             boxShadow:
               '0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)',
             borderRadius: '100px',
-         //   border: ' 1px solid #801317',
+            //   border: ' 1px solid #801317',
             textTransform: 'capitalize',
             color: '#222222',
             marginBottom: '1.5rem',

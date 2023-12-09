@@ -61,12 +61,10 @@ const AddReview = () => {
           if (res.meta.requestStatus == "fulfilled") {
             if (res.payload.purchased === false) {
               setNotPurchase(res.payload.message)
-
-
             }
           }
           else {
-            setNotPurchase("Something went wrong please try again")
+            setNotPurchase("Something went wrong user access denied.")
           }
         }).catch(() => {
           setNotPurchase("Internal server error please try again")
