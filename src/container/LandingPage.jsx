@@ -17,8 +17,6 @@ import adsBanner from 'assets/LandingPage/adsBanner.png';
 import { Col, Container, Row } from "react-bootstrap";
 
 const LandingPage = () => {
-  console.log("adsBanner", adsBanner);
-
   const [loading, setLoading] = useState(true);
   const [landingPageModalOpen, setLandingPageModalOpen] = useState(true);
 

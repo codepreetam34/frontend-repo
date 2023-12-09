@@ -59,9 +59,6 @@ const TopCategory = () => {
 
   const finalData = topCategoryCarousels && topCategoryCarousels || [];
 
-  console.log("final Data", finalData)
-
-
   return (
 
 

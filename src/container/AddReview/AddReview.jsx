@@ -96,7 +96,6 @@ const AddReview = () => {
 
     dispatch(addReviews(formData))
       .then((res) => {
-        console.log("res ", res)
         if (res?.payload?.error?.response?.status === 400 || res?.payload?.error?.response?.status === 500) {
           setAddShowErrorToast(true);
           setAddShowErrorToastMessage(
