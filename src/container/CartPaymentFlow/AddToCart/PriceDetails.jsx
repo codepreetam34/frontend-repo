@@ -86,7 +86,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
     ))
 
   useEffect(() => {
-    setDiscountMessage(`Congratulation ! you have saved ₹${resultDiscount + calculateDiscountOnCoupon()}`)
+    setDiscountMessage(`Congratulation ! you have saved ₹${(resultDiscount + calculateDiscountOnCoupon()).toFixed(2)}`)
   }, [resultDiscount, calculateDiscountOnCoupon()])
 
   return (
@@ -100,6 +100,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
       }}
     >
       <FMTypography displayText={"Apply Coupons"} sx={{ paddingBottom: "10px" }} />
+
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
 
         <Box>
@@ -128,8 +129,17 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
             onClick={handleApplyCoupon}
           />
         </Box>
-      </Box>
 
+
+      </Box>
+      <Box>
+        {discountCouponResponse &&
+          <FMTypography
+            styleData={commonStyle.couponText}
+            displayText={`Congratulation! you have saved ₹${(discountCouponResponse)} `}
+          />
+        }
+      </Box>
       <hr />
       <Box>
         <FMTypography
@@ -164,9 +174,10 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
               styleData={{ color: "#717171" }}
             />
             <FMTypography
-              displayText={`= ₹${addedData[elem]?.actualPrice * addedData[elem]?.qty}`}
+              displayText={`= ₹${(addedData[elem]?.actualPrice * addedData[elem]?.qty).toFixed(2)}`}
               styleData={{ color: "#717171" }}
             />
+
           </Box>
         ))}
       <hr />
@@ -201,7 +212,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
                 displayText={`${addedData[elem]?.name.slice(0, 10) + (addedData[elem]?.name.length > 10 ? '...' : '')}`}
               />
               <FMTypography
-                displayText={`${addedData[elem]?.actualPrice - addedData[elem]?.discountPrice}`}
+                displayText={`${(addedData[elem]?.actualPrice - addedData[elem]?.discountPrice).toFixed(2)}`}
                 styleData={{ color: "#717171" }}
               />
               <FMTypography
@@ -209,7 +220,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
                 styleData={{ color: "#717171" }}
               />
               <FMTypography
-                displayText={`₹${(addedData[elem]?.actualPrice * addedData[elem]?.qty) - (addedData[elem]?.discountPrice * addedData[elem]?.qty)}`}
+                displayText={`₹${((addedData[elem]?.actualPrice * addedData[elem]?.qty) - (addedData[elem]?.discountPrice * addedData[elem]?.qty)).toFixed(2)}`}
                 styleData={{ color: "#717171" }}
               />
             </Box>
@@ -224,7 +235,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         />
         <FMTypography
           styleData={{ color: "#717171" }}
-          displayText={resultDiscount ? `- ₹${resultDiscount}` : "0"}
+          displayText={resultDiscount ? `- ₹${resultDiscount.toFixed(2)}` : "0"}
         />
 
 
@@ -256,7 +267,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
       <Box>
         {discountMessage &&
           <FMTypography
-            styleData={commonStyle.errorText}
+            styleData={commonStyle.couponText}
             displayText={discountMessage}
           />
         }

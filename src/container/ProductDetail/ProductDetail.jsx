@@ -608,7 +608,7 @@ const ProductDetail = () => {
                               display: "flex",
                               justifyContent: "space-between",
                               padding: "8px 16px",
-                              border: "1px solid #E6E6E6",
+                              border: "1px solid #801317",
                               borderRadius: "10px",
                             }}
                             {...register("cakeMessage")}
@@ -618,97 +618,83 @@ const ProductDetail = () => {
                               className={
                                 selectTodayDate ? "standard-is-disabled" : ""
                               }
-                              sx={{
-                                width: "132px",
-                                height: "48px",
-                                left: "843px",
-                                top: "703px",
-                                backgroundColor: standardActive
-                                  ? "#E6E6E6"
-                                  : "white",
-                                borderRadius: "100px",
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                cursor: isTodaysDate ? "not-allowed" : "pointer",
-                                border: "1px solid #E6E6E6",
-                                "&:hover": {
-                                  border: isTodaysDate
-                                    ? "1px solid #E6E6E6"
-                                    : "1px solid black",
-                                },
-                                opacity: isTodaysDate ? 0.5 : 1,
-                              }}
-                              onClick={standardDelivery}
+
                             >
-                              <FMTypography
-                                displayText={"Standard"}
-                                styleData={{ fontSize: "12px" }}
-                              />
-                              <FMTypography
-                                displayText={"(Free)"}
-                                styleData={{ fontSize: "10px", color: "#178013" }}
+                              <FMButton
+                                displayText={
+                                  <div>
+                                    <div style={{ fontSize: "12px", fontWeight: '600' }}>Standard Time</div>
+                                    <div style={{ fontSize: "10px", color: "#178013" }}>Free</div>
+                                  </div>
+                                }
+                                variant="outlined"
+                                styleData={{
+                                  opacity: isTodaysDate ? 0.5 : 1,
+                                  borderRadius: "100px",
+                                  width: "132px",
+                                  cursor: isTodaysDate ? "not-allowed" : "pointer",
+                                  height: "48px",
+                                  color: "black",
+                                  backgroundColor: standardActive
+                                    ? "#FCEEED"
+                                    : "white",
+                                  textTransform: "capitalize",
+                                  marginRight: "27px",
+
+                                }}
+                                onClick={standardDelivery}
                               />
                             </Box>
 
-                            <Box
-                              sx={{
-                                width: "132px",
-                                height: "48px",
-                                left: "843px",
-                                top: "703px",
-                                backgroundColor: fixedActive
-                                  ? "#E6E6E6"
-                                  : "white",
-                                borderRadius: "100px",
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                cursor: "pointer",
-                                border: "1px solid #E6E6E6",
-                                "&:hover": { border: "1px solid black" },
-                              }}
-                              onClick={fixedDelivery}
-                            >
-                              <FMTypography
-                                displayText={"Fixed time"}
-                                styleData={{ fontSize: "12px" }}
-                              />
-                              <FMTypography
-                                displayText={"₹ 200"}
-                                styleData={{ fontSize: "10px", color: "#178013" }}
+
+
+                            <Box>
+                              <FMButton
+                                displayText={
+                                  <div>
+                                    <div style={{ fontSize: "12px", fontWeight: '600' }}>Fixed Time</div>
+                                    <div style={{ fontSize: "10px", color: "#178013" }}>₹ 150</div>
+                                  </div>
+                                }
+                                variant="outlined"
+                                styleData={{
+                                  borderRadius: "100px",
+                                  width: "132px",
+                                  height: "48px",
+                                  color: "black",
+                                  backgroundColor: fixedActive
+                                    ? "#FCEEED"
+                                    : "white",
+                                  textTransform: "capitalize",
+                                  marginRight: "27px",
+
+                                }}
+                                onClick={fixedDelivery}
                               />
                             </Box>
 
-                            <Box
-                              sx={{
-                                width: "132px",
-                                height: "48px",
-                                left: "843px",
-                                top: "703px",
-                                backgroundColor: midNightActive
-                                  ? "#E6E6E6"
-                                  : "white",
-                                borderRadius: "100px",
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                cursor: "pointer",
-                                border: "1px solid #E6E6E6",
-                                "&:hover": { border: "1px solid black" },
-                              }}
-                              onClick={expressDelivery}
-                            >
-                              <FMTypography
-                                displayText={"Mid night"}
-                                styleData={{ fontSize: "12px" }}
-                              />
-                              <FMTypography
-                                displayText={"₹ 250"}
-                                styleData={{ fontSize: "10px", color: "#178013" }}
+                            <Box>
+                              <FMButton
+                                displayText={
+                                  <div>
+                                    <div style={{ fontSize: "12px", fontWeight: '600' }}>Mid Night</div>
+                                    <div style={{ fontSize: "10px", color: "#178013" }}>₹ 250</div>
+                                  </div>
+                                }
+                                variant="outlined"
+                                styleData={{
+                                  borderRadius: "100px",
+                                  width: "132px",
+                                  height: "48px",
+                                  color: "black",
+                                  backgroundColor: midNightActive
+                                    ? "#FCEEED"
+                                    : "white",
+                                  textTransform: "capitalize",
+                                  marginRight: "27px",
+
+                                }}
+                                onClick={expressDelivery}
                               />
                             </Box>
                           </Box>
@@ -819,17 +805,12 @@ const ProductDetail = () => {
                       variant="outlined"
                       styleData={{
                         borderRadius: "10px",
-                        border: "1px solid #E6E6E6",
                         width: "215px",
                         color: "black",
                         fontWeight: "600",
                         fontSize: "1rem",
                         textTransform: "capitalize",
                         marginRight: "27px",
-                        "&:hover": {
-                          border: "1px solid black",
-                          backgroundColor: "white",
-                        },
                       }}
                       onClick={handleSubmit(onSubmit)}
                     />
@@ -946,12 +927,12 @@ const ProductDetail = () => {
                 partialVisible
                 infinite
               >
-                {reviewsCarouselData?.map((elem,index) => (
+                {reviewsCarouselData?.map((elem, index) => (
                   <Box style={{ paddingBottom: "1rem" }} key={index}>
                     <Box
                       sx={{
                         display: "flex",
-                        border: "1px solid #E6E6E6",
+                        border: "1px solid #801317",
                         borderRadius: "20px",
                         width: "283px",
                         padding: "24px",
@@ -1030,7 +1011,7 @@ const ProductDetail = () => {
             >
               {similarProductDetailedData?.map((elem, index) => (
                 <Grid
-                key={index}
+                  key={index}
                   sx={{
                     display: "flex",
                     flexWrap: "wrap",

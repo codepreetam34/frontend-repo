@@ -81,6 +81,13 @@ export const commonStyle = {
     fontSize: "0.875rem",
     marginTop: "0.375rem",
   },
+  couponText: {
+    width: "100%",
+    color: "#178013",
+    height: "1.25rem",
+    fontSize: "0.875rem",
+    marginTop: "0.375rem",
+  },
 
   paddingZero: {
     padding: 0,
