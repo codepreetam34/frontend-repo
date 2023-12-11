@@ -10,7 +10,7 @@ p {
 
 /* start css for banner slider section */
 .banner_slider {
-  padding: 0 50px;
+  /* padding: 0 50px; */
   margin-top: 0px;
 }
 
@@ -31,7 +31,7 @@ p {
 }
 
 .banner_slider .banner_img.slick-slide img {
-  border-radius: 20px;
+  border-radius: 0px;
   width: 100%;
   height: 24rem;
   margin: 0;

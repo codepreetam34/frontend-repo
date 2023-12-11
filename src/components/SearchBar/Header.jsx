@@ -548,7 +548,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                   categoryList?.map((elem,index) => {
                     return (
                       <NavDropdown
-                      key={index}
                         title={
                           <div
                             className="main-heading-clickable heading-text"

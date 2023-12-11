@@ -216,7 +216,7 @@ const AddReview = () => {
                 />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <FMTypography
-                    displayText={totalRating ? `${totalRating} ratings ` : "0 rating"}
+                    displayText={totalRating ? `${totalRating} ratings` : "0 rating"}
                     styleData={{ fontSize: "20px" }}
                   />
                   <FMTypography

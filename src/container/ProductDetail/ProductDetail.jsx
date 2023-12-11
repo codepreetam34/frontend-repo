@@ -923,16 +923,10 @@ const ProductDetail = () => {
                   displayText={"Rate Product"}
                   variant="outlined"
                   styleData={{
-                    border: "1px solid #E6E6E6",
                     borderRadius: "10px",
                     textTransform: "capitalize",
                     color: "black",
                     fontWeight: "600",
-
-                    "&:hover": {
-                      backgroundColor: "white",
-                      border: "1px solid #E6E6E6",
-                    },
                   }}
                   onClick={reviewNavHandler}
                 />

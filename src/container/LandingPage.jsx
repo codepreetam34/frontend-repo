@@ -51,7 +51,7 @@ const LandingPage = () => {
             <Header landingPageModalOpen={landingPageModalOpen} setLandingPageModalOpen={setLandingPageModalOpen} />
 
             <div>
-              <Box>
+              <Box>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                 <Banner />
               </Box>
               <Box>

@@ -83,8 +83,6 @@ const FMFilter = ({
     "Same Day Delivery",
   ];
 
-
-
   return (
     <>
       <Grid sx={{ display: "flex", gap: "1rem" }}>
@@ -108,15 +106,13 @@ const FMFilter = ({
                   displayText={tag}
                   variant={"outlined"}
                   styleData={{
-                    border: "1px solid #E6E6E6",
+                  //  border: "1px solid #E6E6E6",
                     fontWeight: '600',
-                    //   color: activeTag === tag ? '#801317' : '#000000', 
+                    //   color: activeTag === tag ? '#801317' : '#0B00000', 
                     color: '#801317',
                     background: activeTag != "" && activeTag == tag ? '#f8d7da' : 'transparent',
                     borderRadius: "19px",
-                    "&:hover": {
-                      border: "1px solid #E6E6E6",
-                    },
+        
                   }}
                 />
               </>
