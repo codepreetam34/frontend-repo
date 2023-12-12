@@ -86,10 +86,11 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
     ))
 
   useEffect(() => {
-    setDiscountMessage(`Congratulation ! you have saved ₹${(resultDiscount + calculateDiscountOnCoupon()).toFixed(2)}`)
+    setDiscountMessage(`Saved ₹${(resultDiscount + calculateDiscountOnCoupon()).toFixed(2)} on this order Happy Shpping!`)
   }, [resultDiscount, calculateDiscountOnCoupon()])
 
   return (
+
 
     <Box
       sx={{
@@ -136,7 +137,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         {discountCouponResponse &&
           <FMTypography
             styleData={commonStyle.couponText}
-            displayText={`Congratulation! you have saved ₹${(discountCouponResponse)} `}
+            displayText={`Congratulation! you have saved extra ₹${(discountCouponResponse)} `}
           />
         }
       </Box>
