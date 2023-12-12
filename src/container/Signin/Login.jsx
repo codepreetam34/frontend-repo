@@ -24,7 +24,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validationSchema/loginSchema";
 import { notify } from "../../components/FMToaster/FMToaster";
 import { ErrorToaster, SuccessToaster } from "constants/util";
-
+import googleButtonIcon from "../../assets/googleButtonIcon.png";
+import messageButtonIcon from "../../assets/messageButtonIcon.png";
 const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -91,6 +92,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
       <Box
         sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
       >
+        <a href={"/"}>
         <img
           src={monkeyLogo}
           alt="monkeyLogo"
@@ -101,6 +103,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
           alt="VibezterLogo"
           style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
         />
+        </a>
       </Box>
       <Grid container sx={{
         display: "flex",
@@ -300,40 +303,41 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                     {/* <img src={OptLoginIcon} alt="otp-login" /> */}
 
                     <FMButton
-                      displayText={"Log In Via OTP"}
+                      displayText={
+                        <>
+                          <img src={messageButtonIcon} alt="Message Button" />&nbsp;
+                          {" Log In Via OTP"}
+                        </>
+                      }
                       variant={"outlined"}
-                      //   startIcon={<OptLoginIcon />}
                       styleData={{
                         ...commonStyle.buttonStyles,
                         backgroundColor: "none",
                         marginTop: "1rem",
                         color: "#222222",
-                        border: "2px solid #E6E6E6",
-                        "&:hover": {
-                          backgroundColor: "white",
-                          border: "2px solid #E6E6E6",
-                        },
                       }}
                     />
 
+
                     <FMButton
-                      displayText={"Continue with Google"}
+                      displayText={
+                        <>
+                          <img src={googleButtonIcon} alt="Google Button" /> &nbsp;
+                          {" Continue with Google"}
+                        </>
+                      }
                       variant={"outlined"}
                       styleData={{
                         ...commonStyle.buttonStyles,
                         backgroundColor: "none",
                         marginTop: "1rem",
                         color: "#222222",
-                        border: "2px solid #E6E6E6",
-                        "&:hover": {
-                          backgroundColor: "white",
-                          border: "2px solid #E6E6E6",
-                        },
                       }}
                     />
+
                   </Box>
                   <Box sx={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-                    <FMTypography displayText={"Don’t have an account?"} />
+                    <FMTypography displayText={"Don’t have an account?"}  styleData={{color:"#717171"} }/>
                     <FMButton
                       variant={"outlined"}
                       displayText={"Sign Up"}

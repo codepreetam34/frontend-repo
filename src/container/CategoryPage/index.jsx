@@ -107,7 +107,7 @@ const CategoryPage = () => {
           setIsLoading(false);
         });
     }
-  }, [dispatch,params.id]);
+  }, [dispatch, params.id]);
 
 
   useEffect(() => {
@@ -188,9 +188,9 @@ const CategoryPage = () => {
               <CircularProgress color="primary" />
             </div>
           ) : displayedProducts && displayedProducts?.length > 0 ? (
-            displayedProducts?.map((elem,index) => (
+            displayedProducts?.map((elem, index) => (
               <Box
-              key={index}
+                key={index}
                 onClick={() => onCardClick(elem._id)}
                 style={{ position: "relative" }}
               >
@@ -235,7 +235,7 @@ const CategoryPage = () => {
                         component="div"
                         ref={textRef}
                         className={`${classes.textLimit}`}
-                        sx={{ fontSize: "18px", color: "#222222", fontWeight: "300", textTransform: 'capitalize' }}
+                        sx={{ fontSize: "18px", color: "#222222", fontWeight: "500", textTransform: 'capitalize' }}
                       >
                         {elem?.name}
                       </Typography>
@@ -263,7 +263,7 @@ const CategoryPage = () => {
                         <Typography variant="body2" sx={{ color: "#717171", fontWeight: "300", textTransform: 'capitalize' }}>
                           {elem?.deliveryDay}
                         </Typography>
-                        <Typography variant="body2" sx={{ color: "#008539", fontWeight: "300" }}>
+                        <Typography variant="body2" sx={{ color: "#008539", fontWeight: "400" }}>
                           Reviews {elem?.numReviews}
                         </Typography>
                       </Box>

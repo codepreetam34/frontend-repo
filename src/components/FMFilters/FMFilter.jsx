@@ -72,8 +72,8 @@ const FMFilter = ({
     { id: 0, label: "Sort By" },
     { id: 1, label: "New to Old" },
     { id: 2, label: "Old to New" },
-    { id: 3, label: "High to Low" },
-    { id: 4, label: "Low to High" },
+    { id: 3, label: "Price: High to Low" },
+    { id: 4, label: "Price: Low to High" },
   ];
 
   const TagOptions = [

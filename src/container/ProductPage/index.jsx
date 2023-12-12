@@ -235,7 +235,7 @@ const ProductPage = () => {
                         gutterBottom
                         variant="h5"
                         component="div"
-                        sx={{ marginBottom: "0", fontSize: "18px", color: "#222222", fontWeight: "300", textTransform: 'capitalize' }}
+                        sx={{ marginBottom: "0", fontSize: "18px", color: "#222222", fontWeight: "500", textTransform: 'capitalize' }}
                       >
                         {elem?.name}
                       </Typography>
@@ -263,7 +263,7 @@ const ProductPage = () => {
                         <Typography variant="body2" sx={{ color: "#717171", fontWeight: "300", textTransform: 'capitalize', padding: "2px 0" }}>
                           {elem?.deliveryDay}
                         </Typography>
-                        <Typography variant="body2" sx={{ color: "#008539", fontWeight: "300" }}>
+                        <Typography variant="body2" sx={{ color: "#008539", fontWeight: "400" }}>
                           Reviews {elem?.numReviews}
                         </Typography>
                       </Box>
