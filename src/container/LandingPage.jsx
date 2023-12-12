@@ -51,7 +51,7 @@ const LandingPage = () => {
             <Header landingPageModalOpen={landingPageModalOpen} setLandingPageModalOpen={setLandingPageModalOpen} />
 
             <div>
-              <Box>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+              <Box>
                 <Banner />
               </Box>
               <Box>
@@ -65,12 +65,12 @@ const LandingPage = () => {
                 <TopCategory />
               </Box>
 
-              <div className="shopbyocca">
+              <div style={{ padding: "50px 100px 0" }}>
                 <Container fluid className="m-0 p-0">
                   <Row>
                     <Col md={12}>
-                        <div className=''>
-                          <img src={adsBanner} className='img-fluid' alt="" style={{ width: "100%", height: "200px" }}/>
+                      <div className=''>
+                        <img src={adsBanner} className='img-fluid' alt="" style={{ width: "100%", height: "130px", borderRadius: "20px" }} />
                       </div>
                     </Col>
                   </Row>
