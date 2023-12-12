@@ -84,8 +84,8 @@ export default function HorizontalLinearStepper() {
       }, []);
     return (
         <>
-            <Header pincodeData={pincodeData} setPincodeData={setPincodeData} />
-            <Box sx={{ width: '100%' }}>
+            <Header pincodeData={pincodeData} setPincodeData={setPincodeData}/>
+            <Box sx={{ width: '100%',marginTop:'40px' }}>
                 <Stepper activeStep={activeStep}>
                     {steps.map((label, index) => {
                         const stepProps = {};

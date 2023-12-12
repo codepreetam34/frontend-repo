@@ -68,7 +68,7 @@ export default function VerticalTabs() {
     <>
       <Header />
 
-      <Container>
+      <Container style={{marginTop:'40px'}}>
         <Row>
           <Col className="col-md-2">
             <Tabs

@@ -273,7 +273,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   };
 
   return (
-    <Grid sx={HeaderStyle.headerFullStyle} style={{marginBottom:'40px'}}>
+    <Grid sx={HeaderStyle.headerFullStyle}>
       <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }} >
         <Col style={commonStyle.flexDisplayStyle}>
           <a href={"/"} style={{ display: 'flex', alignItems: 'center', }}>

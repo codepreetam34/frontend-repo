@@ -79,7 +79,7 @@ export default function HorizontalLinearStepper() {
   return (
     <>
       <Header />
-      <Row style={{ width: "100%" }}>
+      <Row style={{ width: "100%",marginTop:'40px' }}>
 
         <Col style={{ padding: "1rem 0", display: "flex", justifyContent: 'center', gap: "1rem" }}>
           <Box>

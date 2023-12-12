@@ -119,9 +119,9 @@ const CategoryPage = () => {
 
   return (
     <>
-      <Header />
+      <Header/>
 
-      <Grid sx={{ padding: "0 100px", transition: "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)", }}>
+      <Grid sx={{ padding: "0 100px", transition: "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",marginTop:'40px' }}>
         {pageTitle &&
           <Box sx={{ display: "flex", transition: "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)", }}>
 

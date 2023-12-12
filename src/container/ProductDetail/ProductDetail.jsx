@@ -394,7 +394,7 @@ const ProductDetail = () => {
     <>
       <Layout title={title} description={description}>
         <Header />
-        <div className={classes.root}>
+        <div className={classes.root}style={{marginTop:'40px'}}>
           <Container>
             <Grid container spacing={0}>
               <Grid item xs={6} className={classes.customScrollColumn}>
