@@ -6,7 +6,7 @@ export const commonStyle = {
     display: "flex",
     alignItems: "center",
     background: "white",
-    height: "75vh",
+    // height: "75vh",
     justifyContent: "center",
   },
   innerGrid: {
@@ -14,7 +14,8 @@ export const commonStyle = {
     flexDirection: "column",
     justifyContent: "center",
     padding: "2rem",
-    marginTop: "5rem",
+    marginTop: "1rem",
+    marginBottom: "2rem",
     borderRadius: "20px",
     boxShadow:
       " 0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
@@ -34,7 +35,7 @@ export const commonStyle = {
     height: "2.75rem",
     padding: "1rem",
     marginTop: "0.5rem",
-    marginBottom: "0.375rem",
+    marginBottom: "1rem",
     border: `0.063rem solid grey`,
     boxSizing: "border-box",
     boxShadow: "0rem 0.25rem 0.5rem rgba(0,0,0,0.04)",

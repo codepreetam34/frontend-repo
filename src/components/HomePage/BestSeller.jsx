@@ -25,7 +25,7 @@ const BestSeller = () => {
     centerPadding: "0px",
     autoplay: false,
     arrows: true,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     responsive: [
       {

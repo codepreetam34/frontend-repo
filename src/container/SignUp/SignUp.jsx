@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Grid, InputBase } from "@mui/material";
 
 import { tests } from "../../constants/AppConstant";
@@ -99,19 +99,21 @@ const Login = () => {
       <Box
         sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
       >
-        <img
-          src={monkeyLogo}
-          alt="monkeyLogo"
-          style={HeaderStyle.monkeyLogoStyle}
-        />
-        <img
-          src={VibezterLogo}
-          alt="VibezterLogo"
-          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-        />
+        <Link to={"/"}>
+          <img
+            src={monkeyLogo}
+            alt="monkeyLogo"
+            style={HeaderStyle.monkeyLogoStyle}
+          />
+          <img
+            src={VibezterLogo}
+            alt="VibezterLogo"
+            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
+          />
+        </Link>
       </Box>
       <Grid container sx={commonStyle.mainGridContainer}>
-        <Grid item sx={{ ...commonStyle.innerGrid, width: "400px" }}>
+        <Grid item sx={{ ...commonStyle.innerGrid, width: "25rem" }}>
           <Box sx={commonStyle.formDetailsContainer}>
             <FMTypography
               displayText="Sign Up"
@@ -136,10 +138,15 @@ const Login = () => {
                       {...register("firstName")}
                       error={errors.firstName ? true : false}
                     />
-                    <FMTypography
-                      styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
-                      displayText={errors.firstName?.message}
-                    />
+                    {errors.lastName?.message && (
+                      <FMTypography
+                        styleData={{
+                          ...commonStyle.errorText,
+                          fontSize: "11px",
+                        }}
+                        displayText={errors.firstName?.message}
+                      />
+                    )}
                   </Box>
                   <Box>
                     <InputBase
@@ -154,10 +161,15 @@ const Login = () => {
                       {...register("lastName")}
                       error={errors.lastName ? true : false}
                     />
-                    <FMTypography
-                      styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
-                      displayText={errors.lastName?.message}
-                    />
+                    {errors.lastName?.message && (
+                      <FMTypography
+                        styleData={{
+                          ...commonStyle.errorText,
+                          fontSize: "11px",
+                        }}
+                        displayText={errors.lastName?.message}
+                      />
+                    )}
                   </Box>
                 </Box>
 
@@ -174,10 +186,13 @@ const Login = () => {
                   {...register("contactNumber")}
                   error={errors.contactNumber ? true : false}
                 />
-                <FMTypography
-                  styleData={commonStyle.errorText}
-                  displayText={errors.contactNumber?.message}
-                />
+
+                {errors.contactNumber?.message && (
+                  <FMTypography
+                    styleData={commonStyle.errorText}
+                    displayText={errors.contactNumber?.message}
+                  />
+                )}
 
                 <InputBase
                   required
@@ -192,10 +207,12 @@ const Login = () => {
                   {...register("email")}
                   error={errors.email ? true : false}
                 />
-                <FMTypography
-                  styleData={commonStyle.errorText}
-                  displayText={errors.email?.message}
-                />
+                {errors.email?.message && (
+                  <FMTypography
+                    styleData={commonStyle.errorText}
+                    displayText={errors.email?.message}
+                  />
+                )}
 
                 <FMOutlinedInput
                   // inputLabel="Password"
@@ -228,6 +245,7 @@ const Login = () => {
                   variant={"contained"}
                   styleData={{
                     ...commonStyle.buttonStyles,
+                    marginTop: "5px",
                   }}
                   onClick={handleSubmit(onSubmit)}
                 />

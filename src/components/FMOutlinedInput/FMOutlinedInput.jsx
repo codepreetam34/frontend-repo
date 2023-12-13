@@ -22,10 +22,6 @@ function FMOutlinedInput({
 }) {
   return (
     <Box>
-      <FMInputLabel
-        displayText={inputLabel}
-        styleData={commonStyle.inputLabelStyle}
-      />
       <OutlinedInput
         placeholder={placeholder}
         type={type}
@@ -48,10 +44,12 @@ function FMOutlinedInput({
           </InputAdornment>
         }
       />
-      <FMTypography
-        styleData={commonStyle.errorText}
-        displayText={errors[errorKey]?.message}
-      />
+      {errors.length > 0 && (
+        <FMTypography
+          styleData={commonStyle.errorText}
+          displayText={errors[errorKey]?.message}
+        />
+      )}
     </Box>
   );
 }
