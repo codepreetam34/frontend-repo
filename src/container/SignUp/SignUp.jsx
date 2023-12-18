@@ -259,24 +259,26 @@ const Login = () => {
                 }}
               >
                 <FMTypography displayText={"Already have an acoount?"} />
-                <FMButton
-                  variant={"outlined"}
-                  displayText={"Log in"}
-                  styleData={{
-                    textTransform: "capitalize",
-                    color: "#222222",
-                    padding: "0",
-                    fontSize: "1rem",
-                    fontWeight: "600",
-                    border: "none",
-                    marginLeft: ".5rem",
-                    marginTop: "-.1rem",
-                    "&:hover": {
-                      backgroundColor: "white",
+                <Link to={"/login"}>
+                  <FMButton
+                    variant={"outlined"}
+                    displayText={"Log in"}
+                    styleData={{
+                      textTransform: "capitalize",
+                      color: "#222222",
+                      padding: "0",
+                      fontSize: "1rem",
+                      fontWeight: "600",
                       border: "none",
-                    },
-                  }}
-                />
+                      marginLeft: ".5rem",
+                      marginTop: "-.1rem",
+                      "&:hover": {
+                        backgroundColor: "white",
+                        border: "none",
+                      },
+                    }}
+                  />
+                </Link>
               </Box>
             </Box>
           </Box>

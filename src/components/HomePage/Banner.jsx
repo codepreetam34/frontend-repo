@@ -42,7 +42,7 @@ const Banner = () => {
                     alt=""
                     style={{
                       width: "100%",
-                      height: "76vh",
+                      height: "46vh",
                     }}
                   />
                 </Box>
