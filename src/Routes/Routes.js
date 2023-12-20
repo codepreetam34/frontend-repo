@@ -20,3 +20,4 @@ export const MY_PROFILE = "/my-profile/:id";
 export const CATEGORY_PAGE = "/category-page/:id";
 export const PRODUCT_PAGE = "/product-page/:id";
 export const PRODUCT_DETAIL = "/product-detail/:pId";
+export const ORDER_PAGE = "/order";

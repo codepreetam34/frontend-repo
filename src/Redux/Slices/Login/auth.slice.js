@@ -6,6 +6,7 @@ import { FETCH_ACTION, LOGOUT } from "./type";
 export const login = createAsyncThunk(FETCH_ACTION, async (data, thunkAPI) => {
   try {
     const response = await axiosInstance.post("api/signin", data);
+    
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue({ error: error });

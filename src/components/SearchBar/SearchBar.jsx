@@ -22,6 +22,7 @@ const SearchBar = ({
         value={value}
         sx={SearchStyle.inputField}
         disableUnderline
+        style={{ width: "100%" }}
       />
       <SearchIcon sx={SearchStyle.searchIcon} />
       {cancelIconRight && value.length !== 0 && (

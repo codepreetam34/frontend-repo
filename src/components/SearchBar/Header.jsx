@@ -1,4 +1,11 @@
-import { Avatar, Box, Grid, IconButton, Typography, Modal } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Grid,
+  IconButton,
+  Typography,
+  Modal,
+} from "@mui/material";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import React, { useEffect, useState } from "react";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
@@ -72,24 +79,24 @@ const StyledMenu = styled((props) => (
       },
     },
   },
-
 }));
 
-
 const useStyles = makeStyles((theme) => ({
-
   commonStyle: {
-    [theme.breakpoints.down('xs')]: {
-      gap: '2rem',
-    }, [theme.breakpoints.down('sm')]: {
-      gap: '2rem',
-    }, [theme.breakpoints.up('md')]: {
-      gap: '3rem',
-    }, [theme.breakpoints.up('lg')]: {
-      gap: '3rem',
+    [theme.breakpoints.down("xs")]: {
+      gap: "2rem",
     },
-    [theme.breakpoints.up('xl')]: {
-      gap: '7rem',
+    [theme.breakpoints.down("sm")]: {
+      gap: "2rem",
+    },
+    [theme.breakpoints.up("md")]: {
+      gap: "3rem",
+    },
+    [theme.breakpoints.up("lg")]: {
+      gap: "3rem",
+    },
+    [theme.breakpoints.up("xl")]: {
+      gap: "7rem",
     },
   },
   link: {
@@ -106,18 +113,18 @@ const useStyles = makeStyles((theme) => ({
     height: "30px",
   },
   cartItemCountStyle: {
-    position: 'absolute',
-    top: '-2px',
-    right: '7px',
-    backgroundColor: '#801317',
-    color: 'white',
-    borderRadius: '50%',
-    padding: '2px 10px',
-    fontSize: '12px',
+    position: "absolute",
+    top: "-2px",
+    right: "7px",
+    backgroundColor: "#801317",
+    color: "white",
+    borderRadius: "50%",
+    padding: "2px 10px",
+    fontSize: "12px",
   },
   pincodeItemCountStyle: {
-    color: 'white',
-    fontSize: '12px',
+    color: "white",
+    fontSize: "12px",
     "&:hover": {
       color: "#801317",
     },
@@ -130,7 +137,6 @@ const useStyles = makeStyles((theme) => ({
       color: "#801317",
     },
   },
-
 }));
 const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const dispatch = useDispatch();
@@ -143,7 +149,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const showToastMessage = location?.state?.showToastMessage;
   const [isHovered, setIsHovered] = useState(false);
   const [headerPageModalOpen, setHeaderPageModalOpen] = useState(false);
-
 
   var settings = {
     dots: true,
@@ -214,11 +219,9 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                 : "Logout successful. Have a great day!",
             },
           });
-        }
-        else {
+        } else {
           setShowErrorToast(true);
           setShowErrorToastMessage(response.paylaod.error.message);
-
         }
       })
       .catch((err) => {
@@ -250,7 +253,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     const payload = {
       tagName,
       categoryId,
-      pincodeData
+      pincodeData,
     };
     navigate(`/product-page/${tagName}`, { state: { payload: payload } });
   };
@@ -274,13 +277,13 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
 
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
-      <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }} >
+      <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
         <Col style={commonStyle.flexDisplayStyle}>
-          <a href={"/"} style={{ display: 'flex', alignItems: 'center', }}>
+          <a href={"/"} style={{ display: "flex", alignItems: "center" }}>
             <img
               src={monkeyLogo}
               alt="monkeyLogo"
-              style={HeaderStyle.monkeyLogoStyle}
+              style={HeaderStyle.monkeyLogFoStyle}
             />
             <img
               src={VibezterLogo}
@@ -301,10 +304,10 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           }}
         >
           <Box>
-            <Link to={`/add-to-cart`} style={{ textDecoration: 'none' }}>
+            <Link to={`/add-to-cart`} style={{ textDecoration: "none" }}>
               <Button
                 onClick={handleClick}
-              //     style={{ padding: '0' }}
+                //     style={{ padding: '0' }}
               >
                 <img
                   src={cart}
@@ -321,9 +324,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           </Box>
           {/* profile below */}
           <Box>
-            <Button
-              onClick={handleClick}
-            >
+            <Button onClick={handleClick}>
               <img
                 src={profileIcon}
                 alt="profileIcon"
@@ -449,9 +450,8 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             </Menu>
           </Box>
 
-
           <Box>
-            {pincodeData && pincodeData ?
+            {pincodeData && pincodeData ? (
               <div>
                 <Button
                   onClick={handleModalOpenController}
@@ -481,15 +481,15 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                   >
                     <path
                       d="M20 19.9999C20.9166 19.9999 21.7016 19.6733 22.355 19.0199C23.0072 18.3677 23.3333 17.5833 23.3333 16.6666C23.3333 15.7499 23.0072 14.9649 22.355 14.3116C21.7016 13.6594 20.9166 13.3333 20 13.3333C19.0833 13.3333 18.2988 13.6594 17.6466 14.3116C16.9933 14.9649 16.6666 15.7499 16.6666 16.6666C16.6666 17.5833 16.9933 18.3677 17.6466 19.0199C18.2988 19.6733 19.0833 19.9999 20 19.9999ZM20 36.6666C15.5277 32.861 12.1877 29.326 9.97996 26.0616C7.77107 22.7983 6.66663 19.7777 6.66663 16.9999C6.66663 12.8333 8.00718 9.51381 10.6883 7.04158C13.3683 4.56936 16.4722 3.33325 20 3.33325C23.5277 3.33325 26.6316 4.56936 29.3116 7.04158C31.9927 9.51381 33.3333 12.8333 33.3333 16.9999C33.3333 19.7777 32.2294 22.7983 30.0216 26.0616C27.8127 29.326 24.4722 32.861 20 36.6666Z"
-                      fill={isHovered ? '#801317' : '#801317'}
+                      fill={isHovered ? "#801317" : "#801317"}
                       transition="fill 0.3s"
                     />
                   </svg>
                   &nbsp;{pincodeData}
                 </Button>
               </div>
-
-              : <div>
+            ) : (
+              <div>
                 <Button
                   onClick={handleModalOpenController}
                   sx={{
@@ -524,13 +524,13 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                   </svg>
                   &nbsp;{pincodeData}
                 </Button>
-              </div>}
+              </div>
+            )}
           </Box>
-
         </Col>
       </Row>
 
-      <div className="main_header py-1">
+      <div className="main_header" style={{ padding: "0.25rem 0 0.25rem 0" }}>
         <Navbar
           bg=""
           expand="lg"
@@ -541,18 +541,21 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             fluid
             className="d-flex flex-wrap n-0 p-0 justify-content-start"
           >
-            <Navbar.Toggle aria-controls="navbarScroll" style={{ margin: "5px 8px", background: '#FFF' }} />
+            <Navbar.Toggle
+              aria-controls="navbarScroll"
+              style={{ margin: "5px 8px", background: "#FFF" }}
+            />
             <Navbar.Collapse id="navbarScroll">
-              <Nav navbarScroll style={{ paddingLeft: "4rem", paddingBottom: "2px" }}>
+              <Nav navbarScroll style={{ padding: "0px 60px" }}>
                 {categoryList &&
-                  categoryList?.map((elem,index) => {
+                  categoryList?.map((elem, index) => {
                     return (
                       <NavDropdown
                         title={
                           <div
                             className="main-heading-clickable heading-text"
                             onClick={() => handleCategoryClick(elem?._id)}
-                            style={{ color: "#fff", fontWeight: '600' }}
+                            style={{ color: "#fff", fontWeight: "600" }}
                           >
                             <span>{elem?.name}</span>
                             <i
@@ -564,27 +567,28 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                         key={elem?.id}
                         id="navbarScrollingDropdown"
                         onMouseEnter={() => showDropdown(elem?._id)}
-                        onMouseLeave={hideDropdown}
+                     //   onMouseLeave={hideDropdown}
                         show={show === elem?._id}
                         style={{
                           textTransform: "capitalize",
-
                         }}
                       >
                         <Row>
                           <Col md={12}>
                             <Row>
-
                               {elem?.tags?.map((tag, i) => {
                                 return (
-
-                                  <Col md={2}
-                                  key={i}
+                                  <Col
+                                    md={2}
+                                    key={i}
                                     style={{
-                                      display: 'flex',
-                                      justifyContent: 'center',
+                                      display: "flex",
+                                      justifyContent: "center",
                                       padding: "1rem",
-                                      background: i > 0 && i % 2 != 0 ? "#f2f2f2" : "#fff"
+                                      background:
+                                        i > 0 && i % 2 != 0
+                                          ? "#f2f2f2"
+                                          : "#fff",
                                     }}
                                   >
                                     <Box>
@@ -595,10 +599,10 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                                         {tag?.tagType}
                                       </div>
                                       <div>
-                                        {tag?.names?.map((name,index) => {
+                                        {tag?.names?.map((name, index) => {
                                           return (
                                             <div
-                                            key={index}
+                                              key={index}
                                               className={`${classes.tagDesign}`}
                                               onClick={() =>
                                                 handleTag(name, elem?._id)
@@ -614,7 +618,10 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                                 );
                               })}
 
-                              <Col md={{ span: 4 }} style={{ padding: " 1rem 2.5rem 0px" }}>
+                              <Col
+                                md={{ span: 4 }}
+                                style={{ padding: " 1rem 2.5rem 0px" }}
+                              >
                                 <div className="cate_list_menu pb-3">
                                   <img
                                     src={elem?.categoryImage}
@@ -625,7 +632,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                                 </div>
                               </Col>
                             </Row>
-
                           </Col>
                         </Row>
                       </NavDropdown>
@@ -635,7 +641,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        {showErrorToast &&
+        {showErrorToast && (
           <ErrorToaster
             showErrorToast={showErrorToast}
             setShowErrorToast={setShowErrorToast}
@@ -644,7 +650,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               "Incorrect login credentials. Please verify and retry."
             }
           />
-        }
+        )}
         {showToast && (
           <SuccessToaster
             showToast={showToast}
@@ -655,7 +661,16 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
         )}
       </div>
 
-      <PincodeWrapper setHeaderPageModalOpen={setHeaderPageModalOpen} headerPageModalOpen={headerPageModalOpen} landingPageModalOpen={landingPageModalOpen} setLandingPageModalOpen={setLandingPageModalOpen} setPincodeData={setPincodeData} pincodeData={pincodeData} pincodeModalOpen={pincodeModalOpen} setPincodeModalOpen={setPincodeModalOpen} />
+      <PincodeWrapper
+        setHeaderPageModalOpen={setHeaderPageModalOpen}
+        headerPageModalOpen={headerPageModalOpen}
+        landingPageModalOpen={landingPageModalOpen}
+        setLandingPageModalOpen={setLandingPageModalOpen}
+        setPincodeData={setPincodeData}
+        pincodeData={pincodeData}
+        pincodeModalOpen={pincodeModalOpen}
+        setPincodeModalOpen={setPincodeModalOpen}
+      />
     </Grid>
   );
 };

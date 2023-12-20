@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getHomePageShopByOccasion } from "Redux/Slices/ShopByOccasion/ShopByOccasionSlice";
 
 const ShopByOccasion = () => {
-
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState();
 
@@ -14,13 +13,19 @@ const ShopByOccasion = () => {
   );
 
   useEffect(() => {
-    if (ShopByOccasionCarousels == [] || !ShopByOccasionCarousels || ShopByOccasionCarousels?.length === 0) {
+    if (
+      ShopByOccasionCarousels == [] ||
+      !ShopByOccasionCarousels ||
+      ShopByOccasionCarousels?.length === 0
+    ) {
       setIsLoading(true);
-      dispatch(getHomePageShopByOccasion()).then((res) => {
-        setIsLoading(false);
-      }).catch((err) => {
-        setIsLoading(false);
-      });
+      dispatch(getHomePageShopByOccasion())
+        .then((res) => {
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+        });
     } else {
       setIsLoading(false);
     }
@@ -28,10 +33,9 @@ const ShopByOccasion = () => {
 
   return (
     <div className="shopbyocca">
-      <Container fluid>
+      <Container fluid className="m-0 p-0">
         <Row>
           <Col md={12}>
-
             <div className="heading_text">
               <h3>Shop By Occasions</h3>
             </div>
@@ -49,7 +53,10 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[8]?.title}</p>
+                    <p>
+                      {ShopByOccasionCarousels &&
+                        ShopByOccasionCarousels[8]?.title}
+                    </p>
                   </a>
                 </div>
                 <div className="heighautoimg">
@@ -62,7 +69,10 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[7]?.title}</p>
+                    <p>
+                      {ShopByOccasionCarousels &&
+                        ShopByOccasionCarousels[7]?.title}
+                    </p>
                   </a>
                 </div>
                 <div className="heighautoimg">
@@ -75,7 +85,10 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[6]?.title}</p>
+                    <p>
+                      {ShopByOccasionCarousels &&
+                        ShopByOccasionCarousels[6]?.title}
+                    </p>
                   </a>
                 </div>
               </Col>
@@ -91,7 +104,10 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[5]?.title}</p>
+                    <p>
+                      {ShopByOccasionCarousels &&
+                        ShopByOccasionCarousels[5]?.title}
+                    </p>
                   </a>
                 </div>
                 <div className="heighautoimg forth_row">
@@ -104,7 +120,10 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[4]?.title}</p>
+                    <p>
+                      {ShopByOccasionCarousels &&
+                        ShopByOccasionCarousels[4]?.title}
+                    </p>
                   </a>
                 </div>
               </Col>
@@ -120,7 +139,10 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[3]?.title}</p>
+                    <p>
+                      {ShopByOccasionCarousels &&
+                        ShopByOccasionCarousels[3]?.title}
+                    </p>
                   </a>
                 </div>
                 <div className="heighautoimg">
@@ -133,7 +155,10 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[2]?.title}</p>
+                    <p>
+                      {ShopByOccasionCarousels &&
+                        ShopByOccasionCarousels[2]?.title}
+                    </p>
                   </a>
                 </div>
                 <div className="heighautoimg">
@@ -146,11 +171,13 @@ const ShopByOccasion = () => {
                       className="img-fluid"
                       alt=""
                     />
-                    <p>{ShopByOccasionCarousels && ShopByOccasionCarousels[1]?.title}</p>
+                    <p>
+                      {ShopByOccasionCarousels &&
+                        ShopByOccasionCarousels[1]?.title}
+                    </p>
                   </a>
                 </div>
               </Col>
-
             </Row>
           </Col>
           <Col md={6}>
@@ -158,14 +185,15 @@ const ShopByOccasion = () => {
               <div className="overlay"></div>
               <img
                 src={
-                  ShopByOccasionCarousels &&
-                  ShopByOccasionCarousels[0]?.banner
+                  ShopByOccasionCarousels && ShopByOccasionCarousels[0]?.banner
                 }
                 alt=""
               />
               <div className="twobandatalowersection">
                 {/* <h4>Birthday</h4> */}
-                <h4 style={{ paddingBottom: '2rem' }}>{ShopByOccasionCarousels && ShopByOccasionCarousels[0]?.title}</h4>
+                <h4 style={{ paddingBottom: "2rem" }}>
+                  {ShopByOccasionCarousels && ShopByOccasionCarousels[0]?.title}
+                </h4>
                 {/* <a href="/">Gift Now</a> */}
                 <FMButton
                   displayText={"Gift Now"}

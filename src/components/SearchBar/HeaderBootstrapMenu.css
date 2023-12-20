@@ -15,9 +15,9 @@
 
 .main_header .navbar-expand-lg .navbar-nav .nav-link {
   margin: 0px 20px 0px 0px;
-  font-size: 16px;
+  font-size: 0.8rem;
   font-weight: 400;
-  padding: 8px 16px;
+  padding: 5px 10px;
 }
 
 .main_header .nav-link {
@@ -29,7 +29,7 @@
 }
 
 .main_header .navbar-expand-lg .navbar-nav .nav-link.active,
-.main_header .navbar-expand-lg .navbar-nav .show>.nav-link {
+.main_header .navbar-expand-lg .navbar-nav .show > .nav-link {
   background-color: rgb(252, 237, 238);
   border-radius: 28px;
   color: #222222;
@@ -90,10 +90,11 @@
 .searchBar-col {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .main_header .navbar-expand-lg .navbar-nav .nav-link.active,
-.main_header .navbar-expand-lg .navbar-nav .show>.nav-link .heading-text {
+.main_header .navbar-expand-lg .navbar-nav .show > .nav-link .heading-text {
   color: #801319 !important;
   /* Use !important only if needed */
   /* Add any additional styling you need for the active state */
@@ -104,9 +105,7 @@
   /* You can also add hover styles if needed */
 }
 
-
-
-.dropdown-menu.show{
+.dropdown-menu.show {
   margin-left: 3.5rem;
   width: 73rem;
   margin-right: 3.125rem;

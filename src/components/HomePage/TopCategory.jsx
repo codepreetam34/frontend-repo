@@ -63,7 +63,7 @@ const TopCategory = () => {
 
 
     <div className="bestseller samecard ">
-      <Container fluid>
+      <Container fluid className="m-0 p-0">
         <Row className="m-0 p-0">
           <Col md={12}>
             <div className="heading_text">

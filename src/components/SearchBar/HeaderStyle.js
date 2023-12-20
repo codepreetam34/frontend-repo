@@ -3,11 +3,11 @@ export const HeaderStyle = {
   iconGridContainer: {
     display: "flex",
     justifyContent: "space-between",
-    padding: "1rem 50px",
+    padding: "0.2rem 50px",
     background:"rgb(252, 237, 238)",
   },
-  monkeyLogoStyle: { width: "50px", height: "50px" },
-  vibezterLogoStyle: { width: "150px", height: "30px"},
+  monkeyLogoStyle: { width: "45px", height: "45px" },
+  vibezterLogoStyle: { width: "130px", height: "25px"},
   cartStyle: {
     width: "20px",
     height: "18px",

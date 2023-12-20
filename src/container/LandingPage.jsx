@@ -13,7 +13,7 @@ import { Box } from "@mui/material";
 import Layout from "../components/Layout";
 import StartupScreen from "../components/StartpScreen";
 
-import adsBanner from 'assets/LandingPage/adsBanner.png';
+import adsBanner from "assets/LandingPage/adsBanner.png";
 import { Col, Container, Row } from "react-bootstrap";
 
 const LandingPage = () => {
@@ -30,8 +30,8 @@ const LandingPage = () => {
 
     simulateAsyncOperation();
   }, []);
-  const title = 'Home Page';
-  const description = 'This is the home page of our MERN application.';
+  const title = "Home Page";
+  const description = "This is the home page of our MERN application.";
 
   useEffect(() => {
     window.scrollTo({
@@ -40,15 +40,16 @@ const LandingPage = () => {
     });
   }, []);
   return (
-
     <>
-
       <Layout title={title} description={description}>
         {loading ? (
           <StartupScreen />
         ) : (
           <>
-            <Header landingPageModalOpen={landingPageModalOpen} setLandingPageModalOpen={setLandingPageModalOpen} />
+            <Header
+              landingPageModalOpen={landingPageModalOpen}
+              setLandingPageModalOpen={setLandingPageModalOpen}
+            />
 
             <div>
               <Box>
@@ -68,32 +69,35 @@ const LandingPage = () => {
               <div style={{ padding: "50px 100px 0" }}>
                 <Container fluid className="m-0 p-0">
                   <Row>
-                    <Col md={12}>
-                      <div className=''>
-                        <img src={adsBanner} className='img-fluid' alt="" style={{ width: "100%", height: "130px", borderRadius: "20px" }} />
+                    <Col md={12} className="m-0 p-0">
+                      <div className="">
+                        <img
+                          src={adsBanner}
+                          className="img-fluid"
+                          alt=""
+                          style={{
+                            width: "100%",
+                            height: "130px",
+                            borderRadius: "20px",
+                          }}
+                        />
                       </div>
                     </Col>
                   </Row>
                 </Container>
-
               </div>
 
-              {/* <Box sx={{ width: '100%', height: 'auto', padding: "0 100px", marginTop: "50px", }}>
-                <img className="img-fluid" src={adsBanner} alt="adsBanner" />
-              </Box> */}
               <ShopByOccasion />
               <PamperZone />
               <ThreePoint />
             </div>
 
             <Footer />
-          </>)}
+          </>
+        )}
       </Layout>
-
     </>
-
   );
-
 };
 
 export default LandingPage;
