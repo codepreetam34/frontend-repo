@@ -83,8 +83,8 @@ const CategorySlider = () => {
 
   return (
     <div className="category_slider">
-      <Container fluid className=" m-0 p-0">
-        <Row className="m-0 p-0">
+      <Container fluid>
+        <Row>
           <Col md={12}>
             <Slider {...category_settings}>
               {categoryList && categoryList ? (

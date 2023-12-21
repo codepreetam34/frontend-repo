@@ -567,7 +567,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                         key={elem?.id}
                         id="navbarScrollingDropdown"
                         onMouseEnter={() => showDropdown(elem?._id)}
-                     //   onMouseLeave={hideDropdown}
+                        onMouseLeave={hideDropdown}
                         show={show === elem?._id}
                         style={{
                           textTransform: "capitalize",

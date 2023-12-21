@@ -64,8 +64,8 @@ const BestSeller = () => {
 
 
     <div className="bestseller samecard ">
-      <Container fluid className="m-0 p-0">
-      <Row className="m-0 p-0">
+      <Container fluid >
+      <Row>
           <Col md={12}>
             <div className="heading_text">
               <h3>Best Seller</h3>

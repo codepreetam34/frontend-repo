@@ -19,6 +19,7 @@ import {
   // LANDING_PAGE,
   LOGIN,
   MY_PROFILE,
+  ORDER_PAGE,
   PRIVACY_POLICY,
   PRODUCT_DETAIL,
   PRODUCT_PAGE,
@@ -43,6 +44,7 @@ import AddReview from "./container/AddReview/AddReview";
 import Profile from "./container/ProfileSection/AllViewsFile/AllViewsFile";
 import PageNotFound from "./container/PageNotFound/PageNotFound";
 import CategoryPage from "./container/CategoryPage";
+import OrderPage from "container/OrderPage";
 
 const App = () => {
   return (
@@ -61,9 +63,9 @@ const App = () => {
             <Route path={FAQ} element={<Faq />} />
             <Route path={BLOGS} element={<Blogs />} />
             <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
-
             {/* private routes below */}
             <Route path={CATEGORY_PAGE} element={<CategoryPage />} />
+            <Route path={ORDER_PAGE} element={<OrderPage />} />
             <Route
               path={PRODUCT_PAGE}
               element={<ProductPage />}

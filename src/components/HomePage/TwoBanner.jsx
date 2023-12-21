@@ -37,7 +37,7 @@ const TwoBanner = () => {
 
   return (
     <div className="twobannersection">
-      <Container fluid className="m-0 p-0">
+      <Container fluid>
         <Row className={classes.rowGap}>
           <Col md={6}>
             <div className="position-relative">

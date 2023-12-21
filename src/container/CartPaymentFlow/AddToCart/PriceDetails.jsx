@@ -4,29 +4,33 @@ import FMTypography from "../../../components/FMTypography/FMTypography";
 import FMButton from "../../../components/FMButton/FMButton";
 import { commonStyle } from "../../../Styles/commonStyles";
 import axios from "axios";
-import IconButton from '@mui/material/IconButton';
-import ClearIcon from '@mui/icons-material/Clear';
+import IconButton from "@mui/material/IconButton";
+import ClearIcon from "@mui/icons-material/Clear";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  applyCoupon,
-} from "../../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
+import { applyCoupon } from "../../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 
-const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) => {
-
+const PriceDetails = ({
+  cartList,
+  addedData,
+  handleNext,
+  activeStep,
+  steps,
+}) => {
   const dispatch = useDispatch();
   const [couponCode, setCouponCode] = useState(""); // State to store entered coupon code
   const [discountCoupon, setDiscountCoupon] = useState(0); // State to store coupon discount value
-  const [discountMessage, setDiscountMessage] = useState(''); // State to store coupon discount value
-  const [discountCouponResponseMessage, setDiscountCouponResponseMessage] = useState(''); // State to store coupon discount value
+  const [discountMessage, setDiscountMessage] = useState(""); // State to store coupon discount value
+  const [discountCouponResponseMessage, setDiscountCouponResponseMessage] =
+    useState(""); // State to store coupon discount value
   const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
   const result = auth?.substring(1, auth.length - 1);
 
   const handleApplyCoupon = async () => {
     await dispatch(applyCoupon(couponCode)).then((res) => {
       if (res.payload) {
-        setDiscountCouponResponseMessage(res?.payload?.message)
+        setDiscountCouponResponseMessage(res?.payload?.message);
       }
-    })
+    });
   };
 
   const discountCouponResponse = useSelector(
@@ -38,12 +42,12 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
   );
 
   useEffect(() => {
-    setCouponCode(CouponCodeResponse)
-  }, [CouponCodeResponse])
+    setCouponCode(CouponCodeResponse);
+  }, [CouponCodeResponse]);
 
   useEffect(() => {
-    setDiscountCoupon(discountCouponResponse)
-  }, [discountCouponResponse])
+    setDiscountCoupon(discountCouponResponse);
+  }, [discountCouponResponse]);
 
   const calculateTotalMRP = () => {
     let totalMRP = 0;
@@ -58,7 +62,6 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
   };
 
   const calculateConvenienceFee = () => {
-
     // Calculate the convenience fee based on your logic
     // You may need to fetch it from an API or calculate it in a different way
     const fee = cartList && cartList > 0 ? 40 : 0; // Example value, replace with your logic
@@ -69,29 +72,39 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
     const totalMRP = calculateTotalMRP();
     const discountOnCoupon = calculateDiscountOnCoupon();
     const convenienceFee = calculateConvenienceFee();
-    return totalMRP - (discountOnCoupon ? discountOnCoupon : 0) - resultDiscount + convenienceFee;
+    return (
+      totalMRP -
+      (discountOnCoupon ? discountOnCoupon : 0) -
+      resultDiscount +
+      convenienceFee
+    );
   };
 
   const clearCouponCode = () => {
     // Function to clear the coupon code
-    setCouponCode('');
-    setDiscountCoupon('')
+    setCouponCode("");
+    setDiscountCoupon("");
   };
 
   let resultDiscount = 0;
 
   addedData &&
-    Object.keys(addedData)?.map((elem, index) => (
-      resultDiscount += (addedData[elem]?.actualPrice * addedData[elem]?.qty) - (addedData[elem]?.discountPrice * addedData[elem]?.qty)
-    ))
+    Object.keys(addedData)?.map(
+      (elem, index) =>
+        (resultDiscount +=
+          addedData[elem]?.actualPrice * addedData[elem]?.qty -
+          addedData[elem]?.discountPrice * addedData[elem]?.qty)
+    );
 
   useEffect(() => {
-    setDiscountMessage(`Saved ₹${(resultDiscount + calculateDiscountOnCoupon()).toFixed(2)} on this order Happy Shpping!`)
-  }, [resultDiscount, calculateDiscountOnCoupon()])
+    setDiscountMessage(
+      `Saved ₹${(resultDiscount + calculateDiscountOnCoupon()).toFixed(
+        2
+      )} on this order Happy Shipping!`
+    );
+  }, [resultDiscount, calculateDiscountOnCoupon()]);
 
   return (
-
-
     <Box
       sx={{
         boxShadow:
@@ -100,10 +113,18 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         padding: "40px",
       }}
     >
-      <FMTypography displayText={"Apply Coupons"} sx={{ paddingBottom: "10px" }} />
+      <FMTypography
+        displayText={"Apply Coupons"}
+        sx={{ paddingBottom: "10px" }}
+      />
 
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
-
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Box>
           <TextField
             label="Coupon Code"
@@ -130,26 +151,25 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
             onClick={handleApplyCoupon}
           />
         </Box>
-
-
       </Box>
       <Box>
-        {discountCouponResponse &&
+        {discountCouponResponse && (
           <FMTypography
             styleData={commonStyle.couponText}
-            displayText={`Congratulation! you have saved extra ₹${(discountCouponResponse)} `}
+            displayText={`Congratulation! you have saved extra ₹${discountCouponResponse} `}
           />
-        }
+        )}
       </Box>
       <hr />
       <Box>
         <FMTypography
-          displayText={`Price Details ${addedData && Object.keys(addedData)?.length > 0
-            ? Object.keys(addedData).length + " Items"
-            : addedData && Object.keys(addedData)?.length === 1
+          displayText={`Price Details ${
+            addedData && Object.keys(addedData)?.length > 0
+              ? Object.keys(addedData).length + " Items"
+              : addedData && Object.keys(addedData)?.length === 1
               ? "1 Item"
               : " 0 Item"
-            }`}
+          }`}
         />
       </Box>
       <hr />
@@ -163,7 +183,10 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
             key={elem}
           >
             <FMTypography
-              displayText={`${index + 1}. ${addedData[elem]?.name.slice(0, 10) + (addedData[elem]?.name.length > 10 ? '...' : '')}`}
+              displayText={`${index + 1}. ${
+                addedData[elem]?.name.slice(0, 10) +
+                (addedData[elem]?.name.length > 10 ? "..." : "")
+              }`}
               styleData={{ color: "#717171" }}
             />
             <FMTypography
@@ -175,10 +198,11 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
               styleData={{ color: "#717171" }}
             />
             <FMTypography
-              displayText={`= ₹${(addedData[elem]?.actualPrice * addedData[elem]?.qty).toFixed(2)}`}
+              displayText={`= ₹${(
+                addedData[elem]?.actualPrice * addedData[elem]?.qty
+              ).toFixed(2)}`}
               styleData={{ color: "#717171" }}
             />
-
           </Box>
         ))}
       <hr />
@@ -206,14 +230,21 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         <hr />
         {addedData &&
           Object.keys(addedData)?.map((elem, index) => (
-            <Box key={index} sx={{ display: "flex", justifyContent: "space-between" }}>
-
+            <Box
+              key={index}
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
               <FMTypography
                 styleData={{ color: "#717171" }}
-                displayText={`${addedData[elem]?.name.slice(0, 10) + (addedData[elem]?.name.length > 10 ? '...' : '')}`}
+                displayText={`${
+                  addedData[elem]?.name.slice(0, 10) +
+                  (addedData[elem]?.name.length > 10 ? "..." : "")
+                }`}
               />
               <FMTypography
-                displayText={`${(addedData[elem]?.actualPrice - addedData[elem]?.discountPrice).toFixed(2)}`}
+                displayText={`${(
+                  addedData[elem]?.actualPrice - addedData[elem]?.discountPrice
+                ).toFixed(2)}`}
                 styleData={{ color: "#717171" }}
               />
               <FMTypography
@@ -221,15 +252,17 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
                 styleData={{ color: "#717171" }}
               />
               <FMTypography
-                displayText={`₹${((addedData[elem]?.actualPrice * addedData[elem]?.qty) - (addedData[elem]?.discountPrice * addedData[elem]?.qty)).toFixed(2)}`}
+                displayText={`₹${(
+                  addedData[elem]?.actualPrice * addedData[elem]?.qty -
+                  addedData[elem]?.discountPrice * addedData[elem]?.qty
+                ).toFixed(2)}`}
                 styleData={{ color: "#717171" }}
               />
             </Box>
-
           ))}
         <hr />
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <FMTypography
           styleData={{ color: "#717171" }}
           displayText={`Total Discount on MRP`}
@@ -238,9 +271,6 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
           styleData={{ color: "#717171" }}
           displayText={resultDiscount ? `- ₹${resultDiscount.toFixed(2)}` : "0"}
         />
-
-
-
       </Box>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <FMTypography
@@ -248,13 +278,18 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
           displayText={`Discount on Coupon`}
         />
         <FMTypography
-          displayText={discountCoupon ? `- ₹${calculateDiscountOnCoupon()}` : "0"}
+          displayText={
+            discountCoupon ? `- ₹${calculateDiscountOnCoupon()}` : "0"
+          }
           styleData={{ color: "#717171" }}
         />
       </Box>
 
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <FMTypography displayText={`Convenience Fee`} styleData={{ color: "#717171" }} />
+        <FMTypography
+          displayText={`Convenience Fee`}
+          styleData={{ color: "#717171" }}
+        />
         <FMTypography
           displayText={`+ ₹${calculateConvenienceFee()}`}
           styleData={{ color: "#717171" }}
@@ -266,16 +301,15 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         <FMTypography displayText={`₹${calculateTotalAmount()}`} />
       </Box>
       <Box>
-        {discountMessage &&
+        {discountMessage && (
           <FMTypography
             styleData={commonStyle.couponText}
             displayText={discountMessage}
           />
-        }
+        )}
       </Box>
       <FMButton
-        displayText={'Continue'}
-
+        displayText={"Continue"}
         variant={"contained"}
         styleData={{
           ...commonStyle.buttonStyles,
@@ -284,7 +318,7 @@ const PriceDetails = ({ cartList, addedData, handleNext, activeStep, steps }) =>
         }}
         onClick={() => handleNext(calculateTotalAmount(), discountCoupon)}
       />
-    </Box >
+    </Box>
   );
 };
 

@@ -35,7 +35,7 @@ const ProductPayment = ({ totalAmount }) => {
       script.async = true;
       script.onload = () => {
         const razorpay = new window.Razorpay({
-          key_id: "rzp_test_lUsErTdW0CPEb7",
+          key_id: "xoYxkw49209132372068",
           amount: order.amount,
           currency: order.currency,
           name: "Vibezter",
