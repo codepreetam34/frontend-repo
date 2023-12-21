@@ -4,11 +4,13 @@ import { Col, Row } from "react-bootstrap";
 import paytmPaymentGateway from "../../../assets/paytmPaymentGateway.svg";
 import axios from "axios";
 import razorpayPaymentGateway from "../../../assets/razorpayPaymentGateway.svg";
-import { useDispatch } from "react-redux";
-import { addOrder } from "Redux/Slices/Order/Order";
+import { useDispatch, useSelector } from "react-redux";
+import { addOrder } from "Redux/Slices/OrderSlice/Order";
 import { useNavigate } from "react-router";
+import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
+import { ORDER_PAGE } from "Routes/Routes";
 
-const ProductPayment = ({ totalAmount }) => {
+const ProductPayment = ({ totalAmount, addressId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -118,12 +120,20 @@ const ProductPayment = ({ totalAmount }) => {
     };
   }, []); // Re-run effect when data.env or data.mid changes
 
+  const addedData = useSelector(
+    (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
+  );
+
+  useEffect(() => {
+    dispatch(addToCartProductsFinal());
+  }, [dispatch]);
+
   const handleRazorPayment = async () => {
     try {
       const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
       const authToken = auth?.substring(1, auth.length - 1);
       const response = await axios.post(
-        "http://165.22.222.7:5000/api/create-order",
+        "http://localhost:5000/api/create-order",
         {
           totalAmount,
         },
@@ -150,42 +160,34 @@ const ProductPayment = ({ totalAmount }) => {
           order_id: order.id,
           handler: function (response) {
             console.log("response Razor ", response);
+            alert(JSON.stringify(response));
             // Check if the payment was successful
+
             if (response.razorpay_payment_id) {
               // Make an API call to add the order
+              const itemsArray = [];
+
+              addedData &&
+                Object.values(addedData)?.map((item, index) => {
+                  itemsArray.push({
+                    productId: item?._id,
+                    purchasedQty: item?.qty,
+                    payablePrice: item?.discountPrice,
+                  });
+                });
+
               try {
                 const orderData = {
-                  user: "user_id", // Replace with the actual user ID
-                  addressId: "address_id", // Replace with the actual address ID
+                  addressId: localStorage.getItem("selectedAddress"), // Replace with the actual address ID
                   totalAmount: totalAmount, // The total amount from your React component
-                  items: [
-                    {
-                      productId: "product_id_1", // Replace with the actual product ID
-                      payablePrice: 50.0, // Replace with the actual payable price
-                      purchasedQty: 2, // Replace with the actual purchased quantity
-                    },
-                    {
-                      productId: "product_id_2", // Replace with the actual product ID
-                      payablePrice: 30.0, // Replace with the actual payable price
-                      purchasedQty: 1, // Replace with the actual purchased quantity
-                    },
-                    // Add more items as needed
-                  ],
-                  paymentStatus: "pending", // Replace with the actual payment status
-                  paymentType: "cod", // Replace with the actual payment type
-                  orderStatus: [
-                    {
-                      type: "ordered",
-                      date: new Date(),
-                      isCompleted: false,
-                    },
-                    // Add more order status as needed
-                  ],
+                  paymentStatus: "completed",
+                  paymentType: "card",
+                  items: itemsArray,
                 };
 
                 dispatch(addOrder(orderData))
                   .then((res) => {
-                    navigate("/order");
+                    navigate(ORDER_PAGE);
                   })
                   .catch((err) => {
                     console.error("Error adding order:", err);

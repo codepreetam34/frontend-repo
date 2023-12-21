@@ -6,7 +6,7 @@ export const addOrder = createAsyncThunk(
   ADD_ORDER,
   async (payload, thunkAPI) => {
     try {
-      const response = await axiosInstance.post(`api/order/addOrder`);
+      const response = await axiosInstance.post(`api/order/addOrder`, payload);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -14,11 +14,11 @@ export const addOrder = createAsyncThunk(
   }
 );
 
-export const getOrder = createAsyncThunk(
+export const getOrders = createAsyncThunk(
   GET_ORDER,
   async (payload, thunkAPI) => {
     try {
-      const response = await axiosInstance.post(`api/order/getOrder`);
+      const response = await axiosInstance.get(`api/order/getOrders`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -50,18 +50,18 @@ const addOrderSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getOrder.pending, (state) => {
+    builder.addCase(getOrders.pending, (state) => {
       state.getOrderDetails = {};
       state.isFetching = true;
       state.isError = false;
     });
 
-    builder.addCase(getOrder.fulfilled, (state, action) => {
+    builder.addCase(getOrders.fulfilled, (state, action) => {
       state.getOrderDetails = action.payload;
       state.isFetching = false;
       state.isError = false;
     });
-    builder.addCase(getOrder.rejected, (state, action) => {
+    builder.addCase(getOrders.rejected, (state, action) => {
       state.getOrderDetails = {};
       state.isFetching = false;
       state.isError = true;

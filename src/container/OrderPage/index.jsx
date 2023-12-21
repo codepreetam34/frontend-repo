@@ -15,6 +15,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
 import FMTypography from "components/FMTypography/FMTypography";
+import { getOrders } from "Redux/Slices/OrderSlice/Order";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -24,6 +25,16 @@ const OrderPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const pincodeData = sessionStorage.getItem("pincode");
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(getOrders());
+  }, [dispatch]);
+
+  const orderData = useSelector(
+    (state) => state?.myOrders?.getOrderDetails?.orders
+  );
+
+  console.log("order data ", orderData);
 
   useEffect(() => {
     window.scrollTo({
@@ -52,7 +63,7 @@ const OrderPage = () => {
           }}
         >
           <FMTypography
-            displayText={`No Products`}
+            displayText={`Orders`}
             styleData={{
               fontWeight: "500",
               fontSize: "40px",
@@ -65,7 +76,7 @@ const OrderPage = () => {
             sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
           >
             <FMTypography
-              displayText={`| Products`}
+              displayText={`| Orders`}
               styleData={{
                 fontWeight: "300",
                 fontSize: "20px",
