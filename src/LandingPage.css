@@ -155,13 +155,13 @@ p {
 }
 
 .slick-prev {
-  left: 17px;
+  left:0px;
   padding: 15px 20px 13px 15px;
 }
 
 .slick-next {
   padding: 15px 15px 13px 20px;
-  right: 20px;
+  right: 0px;
 }
 
 /* close css for category slider section */
@@ -268,7 +268,7 @@ p {
 }
 
 .samecard .slick-next {
-  right: 5px;
+  right: 0px;
 }
 
 .samecard .slick-slide a {

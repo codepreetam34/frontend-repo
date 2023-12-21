@@ -69,7 +69,7 @@ const LandingPage = () => {
               </Box>
 
               <div style={{ padding: "50px 80px 0" }}>
-                <Container fluid className="m-0 p-0">
+                <Container fluid className="">
                   <Row>
                     <Col md={12}>
                       <div className="">

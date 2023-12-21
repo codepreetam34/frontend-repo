@@ -202,6 +202,9 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const profileNavigation = () => {
     navigate(`/my-profile/${personLoggedInId}`);
   };
+  const orderNavigation = () => {
+    navigate(`/my-order/${personLoggedInId}`);
+  };
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -401,7 +404,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               </Box>
               <hr style={{ margin: "0" }} />
               <MenuItem
-                onClick={handleClose}
+                onClick={orderNavigation}
                 divider
                 sx={{
                   padding: "1rem",

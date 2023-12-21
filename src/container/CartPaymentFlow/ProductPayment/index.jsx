@@ -11,7 +11,114 @@ import { useNavigate } from "react-router";
 const ProductPayment = ({ totalAmount }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleRazorpayPayment = async () => {
+
+  const handlePaytmPayment = async () => {
+    try {
+      // Make an API call to your server to initiate the Paytm transaction
+      const response = await axios.post(
+        "http://localhost:5000/api/paytm/initiateTransaction",
+        {
+          amount: totalAmount, // Pass the total amount to be paid
+        }
+      );
+
+      // Redirect the user to the Paytm payment page
+      //   window.location.href = response.data.paymentUrl;
+      console.log("response ", response.data.data);
+
+      openJsCheckoutPopup(
+        response.data.data.orderId,
+        response.data.data.paymentUrl,
+        totalAmount,
+        response.data.data.mid
+      );
+    } catch (error) {
+      console.error("Paytm payment initiation error:", error);
+    }
+  };
+
+  const openJsCheckoutPopup = (orderId, txnToken, amount, mid) => {
+    console.log("orderId ", orderId);
+    var config = {
+      root: "",
+      style: {
+        bodyBackgroundColor: "#fafafb",
+        bodyColor: "",
+        themeBackgroundColor: "#0FB8C9",
+        themeColor: "#ffffff",
+        headerBackgroundColor: "#284055",
+        headerColor: "#ffffff",
+        errorColor: "",
+        successColor: "",
+        card: {
+          padding: "",
+          backgroundColor: "",
+        },
+      },
+      data: {
+        orderId: orderId,
+        token: txnToken,
+        tokenType: "TXN_TOKEN",
+        amount: amount /* update amount */,
+      },
+      payMode: {
+        labels: {},
+        filter: {
+          exclude: [],
+        },
+        order: ["CC", "DC", "NB", "UPI", "PPBL", "PPI", "BALANCE"],
+      },
+      website: "WEBSTAGING",
+      flow: "DEFAULT",
+      merchant: {
+        mid: mid,
+        redirect: false,
+      },
+      handler: {
+        transactionStatus: function transactionStatus(paymentStatus) {
+          console.log(paymentStatus);
+        },
+        notifyMerchant: function notifyMerchant(eventName, data) {
+          console.log("Closed");
+        },
+      },
+    };
+
+    if (window.Paytm && window.Paytm.CheckoutJS) {
+      // Initialize configuration using init method
+      window.Paytm.CheckoutJS.init(config)
+        .then(function onSuccess() {
+          // After successfully updating configuration, invoke checkoutjs
+          window.Paytm.CheckoutJS.invoke();
+        })
+        .catch(function onError(error) {
+          console.log("error => ", error);
+        });
+    }
+  };
+
+  useEffect(() => {
+    // Dynamically load the Paytm script
+    const script = document.createElement("script");
+    script.src = `https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/xoYxkw49209132372068.js`;
+    script.crossOrigin = "anonymous";
+    script.type = "application/javascript";
+    script.async = true;
+
+    script.onload = () => {
+      // The script has been loaded, now you can use the Paytm.CheckoutJS object
+      console.log("Paytm script loaded");
+    };
+
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup: remove the script when the component is unmounted
+      document.head.removeChild(script);
+    };
+  }, []); // Re-run effect when data.env or data.mid changes
+
+  const handleRazorPayment = async () => {
     try {
       const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
       const authToken = auth?.substring(1, auth.length - 1);
@@ -121,11 +228,12 @@ const ProductPayment = ({ totalAmount }) => {
                 alt="Razorpay Icon"
                 style={{ marginRight: "8px", height: "18px" }}
               />
-              Pay with Razorpay
+              Pay with Razor Pay
             </>
           }
           variant="outlined"
-          onClick={handleRazorpayPayment}
+          //   onClick={handlePaytmPayment}
+          onClick={handleRazorPayment}
           styleData={{
             display: "block",
             width: "300px",
