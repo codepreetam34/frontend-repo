@@ -203,7 +203,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     navigate(`/my-profile/${personLoggedInId}`);
   };
   const orderNavigation = () => {
-    navigate(`/my-order/${personLoggedInId}`);
+    navigate(`/my-orders`);
   };
 
   const logoutHandler = () => {

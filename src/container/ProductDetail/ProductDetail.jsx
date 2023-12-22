@@ -407,7 +407,7 @@ const ProductDetail = () => {
       top: 0,
       behavior: "smooth",
     });
-  }, [dispatch, pId]);
+  }, []);
 
   return (
     <>

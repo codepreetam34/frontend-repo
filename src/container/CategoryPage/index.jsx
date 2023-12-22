@@ -116,7 +116,7 @@ const CategoryPage = () => {
       top: 0,
       behavior: "smooth",
     });
-  }, [dispatch, params.id]);
+  }, []);
 
   return (
     <>
