@@ -17,7 +17,8 @@ import Footer from "../../components/Footer/Footer";
 import FMTypography from "components/FMTypography/FMTypography";
 import { getOrders } from "Redux/Slices/OrderSlice/Order";
 import ratingStart from "../../assets/ratingStart.svg";
-
+import { Row, Col } from "react-bootstrap";
+import FMButton from "components/FMButton/FMButton";
 const useStyles = makeStyles((theme) => ({}));
 
 const OrderPage = () => {
@@ -55,7 +56,22 @@ const OrderPage = () => {
       behavior: "smooth",
     });
   }, []);
+  const getFullAddress = (address) => {
+    const {
+      name,
+      mobileNumber,
+      pinCode,
+      locality,
+      address: streetAddress,
+      cityDistrictTown,
+      state,
+      landmark,
+      alternatePhone,
+      addressType,
+    } = address;
 
+    return `${streetAddress}, ${locality}, ${cityDistrictTown}, ${landmark}`;
+  };
   return (
     <>
       <Header />
@@ -76,7 +92,7 @@ const OrderPage = () => {
           }}
         >
           <FMTypography
-            displayText={`Orders`}
+            displayText={`My Orders`}
             styleData={{
               fontWeight: "500",
               fontSize: "40px",
@@ -107,7 +123,7 @@ const OrderPage = () => {
             flexBasis: "33.333333%",
             justifyContent: "space-evenly",
             gap: "2rem",
-            padding: "3rem 0",
+            padding: "1rem 0",
           }}
         >
           {isLoading ? (
@@ -157,7 +173,7 @@ const OrderPage = () => {
                     }}
                   />
                 </Box> */}
-                <Card sx={{ width: "283px", borderRadius: "20px" }}>
+                <Card sx={{ width: "400px", borderRadius: "20px" }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -185,6 +201,7 @@ const OrderPage = () => {
                       >
                         {elem?.items[0]?.productId?.name || "N/A"}
                       </Typography>
+
                       <Box
                         sx={{
                           display: "flex",
@@ -216,17 +233,77 @@ const OrderPage = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Typography
-                          sx={{
-                            fontSize: "12px",
-                            color: "#717171",
-                            fontWeight: "400",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          Payment Status{" "}
-                          <span
-                            style={{
+                        <Col>
+                          {" "}
+                          <Typography
+                            sx={{
+                              fontSize: "12px",
+                              color: "#717171",
+                              fontWeight: "400",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            Receiver Name{" "}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              color: "#008539",
+                              fontWeight: "500",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {elem?.address?.name || "N/A"}
+                          </Typography>
+                        </Col>
+                        <Col>
+                          {" "}
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontSize: "12px",
+                              color: "#717171",
+                              fontWeight: "400",
+                              textAlign: "end",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            Mobile Number
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              color: "#008539",
+                              fontWeight: "500",
+                              textAlign: "end",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {elem?.address?.mobileNumber || "N/A"}
+                          </Typography>
+                        </Col>
+                      </Box>
+                      <hr style={{ margin: "4px 0" }} />
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Col>
+                          {" "}
+                          <Typography
+                            sx={{
+                              fontSize: "12px",
+                              color: "#717171",
+                              fontWeight: "400",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            Payment Status{" "}
+                          </Typography>
+                          <Typography
+                            sx={{
                               fontSize: "14px",
                               color: "#008539",
                               fontWeight: "500",
@@ -234,33 +311,210 @@ const OrderPage = () => {
                             }}
                           >
                             {elem?.paymentStatus || "N/A"}
-                          </span>
-                        </Typography>
-
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            fontSize: "12px",
-                            color: "#717171",
-                            fontWeight: "400",
-                            textAlign: "end",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          Order Status{" "}
-                          <span
-                            style={{
-                              fontSize: "14px",
-                              color: "#008539",
-                              fontWeight: "500",
+                          </Typography>
+                        </Col>
+                        <Col>
+                          {" "}
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontSize: "12px",
+                              color: "#717171",
+                              fontWeight: "400",
+                              textAlign: "end",
                               textTransform: "capitalize",
                             }}
                           >
-                            {" "}
+                            Order Status{" "}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              color: "#008539",
+                              fontWeight: "500",
+                              textAlign: "end",
+                              textTransform: "capitalize",
+                            }}
+                          >
                             {elem?.orderStatus.find((ele) => ele.isCompleted)
                               ?.type || "N/A"}
-                          </span>
-                        </Typography>
+                          </Typography>
+                        </Col>
+                      </Box>
+
+                      <hr style={{ margin: "4px 0" }} />
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Col>
+                          {" "}
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontSize: "12px",
+                              color: "#717171",
+                              fontWeight: "400",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            Address Type{" "}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              color: "#008539",
+                              fontWeight: "500",
+
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {elem?.address?.addressType || "N/A"}
+                          </Typography>
+                        </Col>
+
+                        <Col>
+                          {" "}
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontSize: "12px",
+                              color: "#717171",
+                              fontWeight: "400",
+                              textAlign: "end",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            Delivery Pincode{" "}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              color: "#008539",
+                              fontWeight: "500",
+                              textAlign: "end",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {elem?.address?.pinCode || "N/A"}
+                          </Typography>
+                        </Col>
+                      </Box>
+                      <hr style={{ margin: "4px 0" }} />
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Col md={9}>
+                          {" "}
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontSize: "12px",
+                              color: "#717171",
+                              fontWeight: "400",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            Delivery Address{" "}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              color: "#008539",
+                              fontWeight: "500",
+
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {elem.address
+                              ? getFullAddress(elem.address)
+                              : "N/A"}
+                          </Typography>
+                        </Col>
+
+                        <Col>
+                          {" "}
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontSize: "12px",
+                              color: "#717171",
+                              fontWeight: "400",
+                              textAlign: "end",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            Delivery State{" "}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              color: "#008539",
+                              fontWeight: "500",
+                              textAlign: "end",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {elem?.address?.state || "N/A"}
+                          </Typography>
+                        </Col>
+                      </Box>
+
+                      <hr style={{ margin: "4px 0" }} />
+                      <Box
+                      className='pt-3'
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Col>
+                          {" "}
+                          <FMButton
+                            displayText={
+                              <>
+                                <i className="fa-solid fa-truck-fast"></i>
+                                Track Order
+                              </>
+                            }
+                            variant="outlined"
+                            styleData={{
+                              borderRadius: "10px",
+                              textTransform: "capitalize",
+                              color: "black",
+                              fontWeight: "600",
+                              fontSize: "14px",
+                            }}
+                            //   onClick={reviewNavHandler}
+                          />
+                        </Col>
+
+                        <Col style={{    textAlign:'end',}}>
+                          {" "}
+                          <FMButton
+                            displayText={
+                              <>
+                                <i className="fa-solid fa-truck-fast"></i>
+                                Return Order
+                              </>
+                            }
+                            variant="outlined"
+                            styleData={{
+                          
+                              borderRadius: "10px",
+                              textTransform: "capitalize",
+                              color: "black",
+                              fontWeight: "600",
+                              fontSize: "14px",
+                            }}
+                            //   onClick={reviewNavHandler}
+                          />
+                        </Col>
                       </Box>
                     </CardContent>
                   </CardActionArea>
