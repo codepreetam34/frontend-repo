@@ -482,7 +482,10 @@ const OrderPage = () => {
                             displayText={
                               <>
                                 <LocalShippingIcon
-                                  style={{ marginRight: "8px" }}
+                                  style={{
+                                    marginRight: "8px",
+                                    color: "#801317",
+                                  }}
                                 />
                                 Track Order
                               </>
@@ -505,7 +508,10 @@ const OrderPage = () => {
                             displayText={
                               <>
                                 <AssignmentReturnIcon
-                                  style={{ marginRight: "8px" }}
+                                  style={{
+                                    marginRight: "8px",
+                                    color: "#801317",
+                                  }}
                                 />
                                 Return Order
                               </>

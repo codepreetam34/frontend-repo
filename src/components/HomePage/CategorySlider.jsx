@@ -85,7 +85,7 @@ const CategorySlider = () => {
     <div className="category_slider">
       <Container fluid className="m-0 p-0">
         <Row>
-          <Col md={12}>
+          <Col md={12} className="m-0 p-0">
             <Slider {...category_settings}>
               {categoryList && categoryList ? (
                 categoryList?.map((elem) => {

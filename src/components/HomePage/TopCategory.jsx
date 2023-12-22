@@ -63,7 +63,7 @@ const TopCategory = () => {
 
 
     <div className="bestseller samecard ">
-      <Container fluid >
+      <Container fluid className="m-0 p-0">
         <Row>
           <Col md={12}>
             <div className="heading_text">
@@ -71,7 +71,7 @@ const TopCategory = () => {
             </div>
           </Col>
 
-          <Col md={12}>
+          <Col md={12} className="m-0 p-0">
             <Slider  {...settings}>
               {finalData && finalData?.map((elem) => (
                 <div key={elem?._id}
