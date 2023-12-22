@@ -19,6 +19,9 @@ import { getOrders } from "Redux/Slices/OrderSlice/Order";
 import ratingStart from "../../assets/ratingStart.svg";
 import { Row, Col } from "react-bootstrap";
 import FMButton from "components/FMButton/FMButton";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
+
 const useStyles = makeStyles((theme) => ({}));
 
 const OrderPage = () => {
@@ -70,7 +73,7 @@ const OrderPage = () => {
       addressType,
     } = address;
 
-    return `${streetAddress}, ${locality}, ${cityDistrictTown}, ${landmark}`;
+    return `${streetAddress}, ${locality}, ${cityDistrictTown}, near ${landmark}`;
   };
   return (
     <>
@@ -420,7 +423,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                             }}
                           >
-                            Delivery Address{" "}
+                            Shipping Address{" "}
                           </Typography>
                           <Typography
                             sx={{
@@ -467,7 +470,7 @@ const OrderPage = () => {
 
                       <hr style={{ margin: "4px 0" }} />
                       <Box
-                      className='pt-3'
+                        className="pt-3"
                         sx={{
                           display: "flex",
                           justifyContent: "space-between",
@@ -478,7 +481,9 @@ const OrderPage = () => {
                           <FMButton
                             displayText={
                               <>
-                                <i className="fa-solid fa-truck-fast"></i>
+                                <LocalShippingIcon
+                                  style={{ marginRight: "8px" }}
+                                />
                                 Track Order
                               </>
                             }
@@ -494,18 +499,19 @@ const OrderPage = () => {
                           />
                         </Col>
 
-                        <Col style={{    textAlign:'end',}}>
+                        <Col style={{ textAlign: "end" }}>
                           {" "}
                           <FMButton
                             displayText={
                               <>
-                                <i className="fa-solid fa-truck-fast"></i>
+                                <AssignmentReturnIcon
+                                  style={{ marginRight: "8px" }}
+                                />
                                 Return Order
                               </>
                             }
                             variant="outlined"
                             styleData={{
-                          
                               borderRadius: "10px",
                               textTransform: "capitalize",
                               color: "black",

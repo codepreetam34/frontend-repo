@@ -94,7 +94,7 @@ const AddToCart = ({ handleNext }) => {
                   <img
                     src={addedData[elem]?.img}
                     alt="img"
-                    style={{ width: "150px", height: "150px" }}
+                    style={{ width: "150px", height: "150px", borderRadius:"10px" }}
                   />
                 </Box>
                 <Box sx={{ marginLeft: "1rem", width: "100%" }}>
