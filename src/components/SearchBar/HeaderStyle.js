@@ -3,7 +3,7 @@ export const HeaderStyle = {
   iconGridContainer: {
     display: "flex",
     justifyContent: "space-between",
-    padding: "0 50px",
+    padding: "2px 50px",
     background:"rgb(252, 237, 238)",
   },
   monkeyLogoStyle: { width: "45px", height: "45px" },

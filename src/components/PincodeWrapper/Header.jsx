@@ -1,23 +1,15 @@
-import {
-  Avatar,
-  Box,
-  Grid,
-  IconButton,
-  Typography,
-  Modal,
-} from "@mui/material";
+import { Avatar, Box, Grid } from "@mui/material";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import React, { useEffect, useState } from "react";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 import cart from "../../assets/cart.svg";
 import profileIcon from "../../assets/profileIcon.svg";
-import headerLocationIcon from "../../assets/headerLocationIcon.svg";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { styled, alpha } from "@mui/material/styles";
-import { HeaderStyle } from "./HeaderStyle";
+import { HeaderStyle } from "../SearchBar/HeaderStyle";
 import { commonStyle } from "../../Styles/commonStyles";
 import { Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import "./HeaderBootstrapMenu.css";
@@ -31,7 +23,7 @@ import FMTypography from "../../components/FMTypography/FMTypography";
 import { Stack } from "@mui/system";
 import FMButton from "../../components/FMButton/FMButton";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FAQ, LOGIN, MY_PROFILE } from "../../Routes/Routes";
+import { FAQ, LOGIN, MY_PROFILE, ORDER_PAGE } from "../../Routes/Routes";
 import { logout } from "../../Redux/Slices/Login/auth.slice";
 import { makeStyles } from "@mui/styles";
 import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
@@ -65,12 +57,14 @@ const StyledMenu = styled((props) => (
     "& .MuiMenu-list": {
       padding: "4px 0",
     },
+
     "& .MuiMenuItem-root": {
       "& .MuiSvgIcon-root": {
         fontSize: 18,
         color: theme.palette.text.secondary,
         marginRight: theme.spacing(1.5),
       },
+
       "&:active": {
         backgroundColor: alpha(
           theme.palette.primary.main,
@@ -82,6 +76,7 @@ const StyledMenu = styled((props) => (
 }));
 
 const useStyles = makeStyles((theme) => ({
+
   commonStyle: {
     [theme.breakpoints.down("xs")]: {
       gap: "2rem",
@@ -99,19 +94,23 @@ const useStyles = makeStyles((theme) => ({
       gap: "7rem",
     },
   },
+
   link: {
     "&:hover": {
       textDecoration: "none",
     },
   },
+
   profileIconStyle: {
     width: "30px",
     height: "30px",
   },
+
   locationIconStyle: {
     width: "30px",
     height: "30px",
   },
+
   cartItemCountStyle: {
     position: "absolute",
     top: "-2px",
@@ -122,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "2px 10px",
     fontSize: "12px",
   },
+
   pincodeItemCountStyle: {
     color: "white",
     fontSize: "12px",
@@ -129,6 +129,7 @@ const useStyles = makeStyles((theme) => ({
       color: "#801317",
     },
   },
+
   tagDesign: {
     fontSize: "0.9rem",
     cursor: "pointer",
@@ -137,8 +138,11 @@ const useStyles = makeStyles((theme) => ({
       color: "#801317",
     },
   },
+
 }));
+
 const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -149,61 +153,46 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const showToastMessage = location?.state?.showToastMessage;
   const [isHovered, setIsHovered] = useState(false);
   const [headerPageModalOpen, setHeaderPageModalOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const [show, setShow] = useState("");
+  const [pincodeData, setPincodeData] = useState("");
+  const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
 
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  const addedData = useSelector(
+    (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
+  );
+
+  const categoryList = useSelector(
+    (state) => state?.menuList?.getMenuOptionsData?.categoryList
+  );
 
   const personLoggedIn = JSON.parse(
     localStorage.getItem("Sidebar_Module_Assigned")
   )?.fullName;
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorElSec, setAnchorElSec] = React.useState(null);
-  const [openFilter, setOpenFilter] = useState(false);
+  const personLoggedInId = JSON.parse(
+    localStorage.getItem("Sidebar_Module_Assigned")
+  )?._id;
 
-  const open = Boolean(anchorEl);
-  const openSec = Boolean(anchorElSec);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleClickSec = (event) => {
-    setAnchorElSec(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const handleCloseSec = () => {
-    setAnchorElSec(null);
-  };
-
-  useEffect(() => {
-    dispatch(getMenuBarList());
-  }, [dispatch]);
-
-  const categoryList = useSelector(
-    (state) => state?.menuList?.getMenuOptionsData?.categoryList
-  );
-
   const navigateToLogin = () => {
     navigate(LOGIN);
   };
 
-  const personLoggedInId = JSON.parse(
-    localStorage.getItem("Sidebar_Module_Assigned")
-  )?._id;
   const profileNavigation = () => {
-    navigate(`/my-profile/${personLoggedInId}`);
+    navigate(`/${MY_PROFILE}/${personLoggedInId}`);
   };
+
   const orderNavigation = () => {
-    navigate(`/my-orders`);
+    navigate(`/${ORDER_PAGE}`);
   };
 
   const logoutHandler = () => {
@@ -233,17 +222,10 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
       });
   };
 
-  const [hoverMenu, setHoverMenu] = useState(false);
-  const menuOpenedOnHover = () => {
-    setHoverMenu(true);
-    // const element = document.getElementsByClassName("rowOnHover");
-  };
-
-  const [show, setShow] = useState("");
-  const [pincodeData, setPincodeData] = useState("");
   const showDropdown = (id) => {
     setShow(id);
   };
+
   const hideDropdown = () => {
     setShow("");
   };
@@ -252,6 +234,11 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     navigate(FAQ);
   };
 
+  const handleModalOpenController = () => {
+    setPincodeModalOpen(true);
+    setHeaderPageModalOpen(true);
+  };
+  
   const handleTag = (tagName, categoryId) => {
     const payload = {
       tagName,
@@ -260,6 +247,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     };
     navigate(`/product-page/${tagName}`, { state: { payload: payload } });
   };
+
   const handleCategoryClick = (categoryId) => {
     navigate(`/category-page/${categoryId}`);
   };
@@ -267,16 +255,10 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   useEffect(() => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
-  const addedData = useSelector(
-    (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
-  );
 
-  const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
-
-  const handleModalOpenController = () => {
-    setPincodeModalOpen(true);
-    setHeaderPageModalOpen(true);
-  };
+  useEffect(() => {
+    dispatch(getMenuBarList());
+  }, [dispatch]);
 
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
@@ -295,14 +277,16 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             />
           </a>
         </Col>
+
         <Col className="searchBar-col">
           <SearchBar placeholder={"Search gifts, experiences and more..."} />
         </Col>
+
         <Col
           style={{
-            marginTop: ".5rem",
             display: "flex",
             justifyContent: "flex-end",
+            alignItems: "center",
             gap: "1rem",
           }}
         >
@@ -325,7 +309,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               </Button>
             </Link>
           </Box>
-          {/* profile below */}
+
           <Box>
             <Button onClick={handleClick}>
               <img
@@ -542,7 +526,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
         >
           <Container
             fluid
-            className="d-flex flex-wrap n-0 p-0 justify-content-start"
+            className="d-flex flex-wrap m-0 p-0 justify-content-start"
           >
             <Navbar.Toggle
               aria-controls="navbarScroll"
