@@ -2,9 +2,6 @@ import {
   Avatar,
   Box,
   Grid,
-  IconButton,
-  Typography,
-  Modal,
 } from "@mui/material";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import React, { useEffect, useState } from "react";
@@ -12,7 +9,6 @@ import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 import cart from "../../assets/cart.svg";
 import profileIcon from "../../assets/profileIcon.svg";
-import headerLocationIcon from "../../assets/headerLocationIcon.svg";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -149,56 +145,30 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const showToastMessage = location?.state?.showToastMessage;
   const [isHovered, setIsHovered] = useState(false);
   const [headerPageModalOpen, setHeaderPageModalOpen] = useState(false);
-
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElSec, setAnchorElSec] = React.useState(null);
+  const [show, setShow] = useState("");
+  const [pincodeData, setPincodeData] = useState("");  
+  const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
 
   const personLoggedIn = JSON.parse(
     localStorage.getItem("Sidebar_Module_Assigned")
   )?.fullName;
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorElSec, setAnchorElSec] = React.useState(null);
-  const [openFilter, setOpenFilter] = useState(false);
-
   const open = Boolean(anchorEl);
-  const openSec = Boolean(anchorElSec);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClickSec = (event) => {
-    setAnchorElSec(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleCloseSec = () => {
-    setAnchorElSec(null);
-  };
-
-  useEffect(() => {
-    dispatch(getMenuBarList());
-  }, [dispatch]);
 
   const categoryList = useSelector(
     (state) => state?.menuList?.getMenuOptionsData?.categoryList
   );
 
-  const navigateToLogin = () => {
-    navigate(LOGIN);
-  };
+  const addedData = useSelector(
+    (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
+  );
 
   const personLoggedInId = JSON.parse(
     localStorage.getItem("Sidebar_Module_Assigned")
   )?._id;
+
   const profileNavigation = () => {
     navigate(`/my-profile/${personLoggedInId}`);
   };
@@ -233,14 +203,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
       });
   };
 
-  const [hoverMenu, setHoverMenu] = useState(false);
-  const menuOpenedOnHover = () => {
-    setHoverMenu(true);
-    // const element = document.getElementsByClassName("rowOnHover");
-  };
-
-  const [show, setShow] = useState("");
-  const [pincodeData, setPincodeData] = useState("");
   const showDropdown = (id) => {
     setShow(id);
   };
@@ -260,23 +222,34 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     };
     navigate(`/product-page/${tagName}`, { state: { payload: payload } });
   };
+  
   const handleCategoryClick = (categoryId) => {
     navigate(`/category-page/${categoryId}`);
   };
 
-  useEffect(() => {
-    dispatch(addToCartProductsFinal());
-  }, [dispatch]);
-  const addedData = useSelector(
-    (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
-  );
+  const navigateToLogin = () => {
+    navigate(LOGIN);
+  };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleModalOpenController = () => {
     setPincodeModalOpen(true);
     setHeaderPageModalOpen(true);
   };
+
+  useEffect(() => {
+    dispatch(getMenuBarList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(addToCartProductsFinal());
+  }, [dispatch]);
 
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
@@ -286,7 +259,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             <img
               src={monkeyLogo}
               alt="monkeyLogo"
-              style={HeaderStyle.monkeyLogFoStyle}
+              style={HeaderStyle.monkeyLogoStyle}
             />
             <img
               src={VibezterLogo}
