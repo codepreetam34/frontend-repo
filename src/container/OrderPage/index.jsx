@@ -370,7 +370,6 @@ const OrderPage = () => {
                               fontSize: "14px",
                               color: "#008539",
                               fontWeight: "500",
-
                               textTransform: "capitalize",
                             }}
                           >

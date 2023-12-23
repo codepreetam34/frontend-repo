@@ -273,9 +273,9 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
         </Col>
         <Col
           style={{
-            marginTop: ".5rem",
             display: "flex",
             justifyContent: "flex-end",
+            alignItems:"center",
             gap: "1rem",
           }}
         >
