@@ -51,7 +51,6 @@ const OrderPage = () => {
     (state) => state?.myOrders?.getOrderDetails?.orders
   );
 
-  console.log("order data ", orderData);
 
   useEffect(() => {
     window.scrollTo({
@@ -59,6 +58,7 @@ const OrderPage = () => {
       behavior: "smooth",
     });
   }, []);
+
   const getFullAddress = (address) => {
     const {
       name,

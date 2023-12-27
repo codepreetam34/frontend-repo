@@ -146,7 +146,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [headerPageModalOpen, setHeaderPageModalOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorElSec, setAnchorElSec] = React.useState(null);
+  // const [anchorElSec, setAnchorElSec] = React.useState(null);
   const [show, setShow] = useState("");
   const [pincodeData, setPincodeData] = useState("");  
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);

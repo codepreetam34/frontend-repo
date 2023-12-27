@@ -65,7 +65,7 @@ const App = () => {
             <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
             {/* private routes below */}
             <Route path={CATEGORY_PAGE} element={<CategoryPage />} />
-            {/* <Route path={ORDER_PAGE} element={<OrderPage />} /> */}
+            <Route path={ORDER_PAGE} element={<OrderPage />} />
             <Route
               path={PRODUCT_PAGE}
               element={<ProductPage />}

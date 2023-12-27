@@ -1,79 +1,17 @@
-import { Avatar, Box, Grid, Menu, MenuItem } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
-import { Button, Col, Row, Stack } from "react-bootstrap";
-
-import SearchBar from "../../components/SearchBar/SearchBar";
+import { Col, Row } from "react-bootstrap";
 import { HeaderStyle } from "../SearchBar/HeaderStyle";
 import { commonStyle } from "../../Styles/commonStyles";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
-import FMTypography from "../../components/FMTypography/FMTypography";
-import FMButton from "../../components/FMButton/FMButton";
-import cart from "../../assets/cart.svg";
-import profileIcon from "../../assets/profileIcon.svg";
-import orderIcon from "../../assets/orderIcon.svg";
-import contactIcon from "../../assets/contactIcon.svg";
-import faqIcon from "../../assets/faqIcon.svg";
-import logoutIcon from "../../assets/logoutIcon.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { FAQ, LOGIN } from "../../Routes/Routes";
-import { logout } from "../../Redux/Slices/Login/auth.slice";
-import { useDispatch } from "react-redux";
 
 const HeaderWithoutNav = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const personLoggedIn = JSON.parse(
-    localStorage.getItem("Sidebar_Module_Assigned")
-  )?.fullName;
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorElSec, setAnchorElSec] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const openSec = Boolean(anchorElSec);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClickSec = (event) => {
-    setAnchorElSec(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleCloseSec = () => {
-    setAnchorElSec(null);
-  };
-  const navigateToLogin = () => {
-    navigate(LOGIN);
-  };
-
-  const faqsHandler = () => {
-    navigate(FAQ);
-  };
-  const logoutHandler = () => {
-    dispatch(logout())
-      .then((response) => {
-        if (response.payload.data.code === 200) {
-          setAnchorEl(null);
-          localStorage.clear();
-          navigate(LOGIN);
-        } else {
-          // setDisabledLogout(false);
-        }
-      })
-      .catch((rejectedWithValue) => {
-        // setDisabledLogout(false);
-        localStorage.clear();
-        navigate(LOGIN);
-        // notify({ type: "success", content: "Logged out successfully" });
-        throw new Error("Logout failed");
-      });
-  };
   return (
     <>
       <Grid sx={HeaderStyle.headerFullStyle}>
         <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
-          <Col style={commonStyle.flexDisplayStyle}>
+          {/* <Col style={commonStyle.flexDisplayStyle}>
             <Link to={"/"}>
               <img
                 src={monkeyLogo}
@@ -89,8 +27,22 @@ const HeaderWithoutNav = () => {
                 }}
               />{" "}
             </Link>
+          </Col> */}
+          <Col style={commonStyle.flexDisplayStyle}>
+            <a href={"/"} style={{ display: "flex", alignItems: "center" }}>
+              <img
+                src={monkeyLogo}
+                alt="monkeyLogo"
+                style={HeaderStyle.monkeyLogoStyle}
+              />
+              <img
+                src={VibezterLogo}
+                alt="VibezterLogo"
+                style={{ ...HeaderStyle.vibezterLogoStyle }}
+              />
+            </a>
           </Col>
-          <Col className="searchBar-col">
+          {/* <Col className="searchBar-col">
             <SearchBar placeholder={"Search gifts, experiences and more..."} />
           </Col>
           <Col
@@ -106,7 +58,6 @@ const HeaderWithoutNav = () => {
               style={{ ...HeaderStyle.cartStyle, marginTop: "0" }}
             />
 
-            {/* profile below */}
             <Button
               id="basic-button"
               aria-controls={open ? "basic-menu" : undefined}
@@ -254,7 +205,7 @@ const HeaderWithoutNav = () => {
                 </MenuItem>
               )}
             </Menu>
-          </Col>
+          </Col> */}
         </Row>
       </Grid>
     </>
