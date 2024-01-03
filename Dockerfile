@@ -4,21 +4,36 @@ FROM node:14
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy only the package.json and package-lock.json first
+# Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
-# Install frontend dependencies
+# Install admin dependencies
 RUN npm install
 
-# Copy the rest of the frontend application code to the container
+# Copy the rest of the admin application code to the container
 COPY . .
 
-# Expose port 80 for the NGINX server (Note: This is more of a documentation than a functional change)
+# Add a command to run the clean script before starting the server
+#RUN npm run clean
+
+# Expose port 3000 for the admin service
 EXPOSE 80
 
-# Start the application
+# Command to start the admin service
 CMD ["npm", "start"]
 
 
-# Start NGINX in the foreground
- # ["npm", "-g", "daemon off;"]
+# Build stage
+# FROM node:14 AS build
+
+# WORKDIR /app
+# COPY package*.json ./
+# RUN npm install
+# COPY . .
+# RUN npm run build
+
+# # Production stage
+# FROM nginx:alpine
+# COPY --from=build /app/build /usr/share/nginx/html
+# EXPOSE 3000
+# CMD ["nginx", "-g", "daemon off;"]
