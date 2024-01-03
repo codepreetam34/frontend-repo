@@ -101,8 +101,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   profileIconStyle: {
-    width: "30px",
-    height: "30px",
+    width: "30px !important",
+    height: "30px !important",
   },
   locationIconStyle: {
     width: "30px",
