@@ -1,35 +1,9 @@
-# # Build stage
-# FROM node:14 AS build
-
-# WORKDIR /app
-
-# COPY package*.json ./
-# RUN npm install
-# COPY . .
-# RUN npm run build
-
-# # Production stage
-# FROM nginx:alpine
-
-# WORKDIR /usr/share/nginx/html
-
-# # Remove default Nginx static files
-# RUN rm -rf ./*
-
-# # Copy built React app files
-# COPY --from=build /app/build .
-
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
-
-
 # Use an official Node.js runtime as the base image
 FROM node:14
 
-RUN apt-get update
-RUN apt-get install nginx -y
-#RUN service nginx start 
-RUN apt-get install nano -y
+# Install NGINX
+RUN apt-get update && apt-get install -y nginx nano
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -39,23 +13,21 @@ COPY package*.json ./
 # Install frontend dependencies
 RUN npm install
 
-#Create a build
-#RUN npm build
-
-#RUN cp -r ./build /var/www/html/
 # Copy the rest of the frontend application code to the container
 COPY . .
 
-# Add a command to run the clean script before starting the server
-#RUN npm run clean
+# Build the frontend
+RUN npm run build
 
+# Remove the default NGINX configuration
+RUN rm /etc/nginx/sites-enabled/default
 
-# Expose port 3000 for the frontend servic
-EXPOSE 3000
-# Command to start the frontend service
-CMD ["npm", "start"]
-RUN cp /app/nginx/default.conf /etc/nginx/sites-available/
-RUN mv /app/nginx/nginx.conf /etc/nginx/
-RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.com.conf
-RUN service nginx stop
-RUN service nginx start
+# Copy custom NGINX configuration
+COPY nginx/default.conf /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
+
+# Expose port 80 for the NGINX server
+EXPOSE 80
+
+# Start NGINX in the foreground
+CMD ["nginx", "-g", "daemon off;"]
