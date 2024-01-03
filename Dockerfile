@@ -17,8 +17,8 @@ COPY . .
 EXPOSE 80
 
 # Start the application
-#CMD ["npm", "start"]
+CMD ["npm", "start"]
 
 
 # Start NGINX in the foreground
- CMD ["npm", "-g", "daemon off;"]
+ # ["npm", "-g", "daemon off;"]
