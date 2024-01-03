@@ -54,10 +54,8 @@ COPY . .
 EXPOSE 3000
 # Command to start the frontend service
 CMD ["npm", "start"]
-RUN cp /app/nginx/colstonconcepts.com.conf /etc/nginx/sites-available/
+RUN cp /app/nginx/default.conf /etc/nginx/sites-available/
 RUN mv /app/nginx/nginx.conf /etc/nginx/
-RUN mv /app/nginx/cert.conf /etc/nginx/snippets/
-RUN mv /app/nginx/ssl-params.conf /etc/nginx/snippets
-RUN ln -s /etc/nginx/sites-available/colstonconcepts.com.conf /etc/nginx/sites-enabled/colstonconcepts.com.conf
+RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.com.conf
 RUN service nginx stop
 RUN service nginx start
