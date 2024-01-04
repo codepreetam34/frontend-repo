@@ -104,13 +104,6 @@ p {
   position: relative;
 }
 
-.slick-slide img {
-  width: 190px;
-  height: 190px;
-  border-radius: 104px;
-  object-fit: cover;
-}
-
 .slick-slide h4 {
   font-size: 1.125rem;
   font-weight: 400;
@@ -168,6 +161,7 @@ p {
 /* start css for two banner section */
 .twobannersection {
   padding: 50px 80px 0;
+  position: relative;
 }
 
 .twobannersection img {
@@ -308,6 +302,7 @@ p {
 /* start css for shop by occasions section */
 .shopbyocca {
   padding: 50px 80px 0;
+  position: relative;
 }
 
 .shopbyocca img {

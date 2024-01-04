@@ -5,35 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getMenuBarList } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-// Create a makeStyles hook
-const useStyles = makeStyles((theme) => ({
-  imgStyle: {
-    width: "100%",
-    height: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "150px !important",
-      height: "150px !important",
-    },
-    [theme.breakpoints.up("md")]: {
-      width: "150px !important",
-      height: "150px !important",
-    },
-    [theme.breakpoints.up("lg")]: {
-      width: "190px",
-      height: "190px",
-    },
-    [theme.breakpoints.up("xl")]: {
-      width: "190px",
-      height: "190px",
-    },
-  },
-}));
-
 const CategorySlider = () => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   useEffect(() => {
     dispatch(getMenuBarList());
   }, [dispatch]);
@@ -103,9 +76,15 @@ const CategorySlider = () => {
                     >
                       <a href={`/category-page/${elem?._id}`}>
                         <img
-                          className={`zoomin img-fluid ${classes.imgStyle}`}
                           alt="categoryImg"
                           src={elem?.categoryImage}
+                          className={`zoomin img-fluid`}
+                          style={{
+                            width: "150px",
+                            height: "150px",
+                            borderRadius: "104px",
+                            objectFit: "cover",
+                          }}
                         />
                       </a>
                       <h4 className="text-center">{elem?.name}</h4>
