@@ -4,39 +4,8 @@ import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomePagePamperZone } from "Redux/Slices/PamperZone/PamperZoneSlice";
-import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  rowGap: {
-    [theme.breakpoints.down('xs')]: {
-      display: 'flex',
-      gap: '2rem',
-      justifyContent: 'center'
-    }, [theme.breakpoints.down('sm')]: {
-      display: 'flex',
-      gap: '2rem',
-      justifyContent: 'center'
-    },
-    [theme.breakpoints.down('md')]: {
-      display: 'flex',
-      gap: '2rem',
-      justifyContent: 'center'
-    },
-  },
-
-  containerSize: {
-    [theme.breakpoints.down('xs')]: {
-      width: '100%',
-    }, [theme.breakpoints.down('sm')]: {
-      width: '100%',
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '100%',
-    },
-  },
-}));
 const PamperZone = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,9 +27,9 @@ const PamperZone = () => {
             </div>
           </Col>
         </Row>
-        <Row className={classes.rowGap}>
+        <Row>
           <Col md={6}>
-            <div className={`position-relative ${classes.containerSize}`}>
+            <div className={`position-relative`}>
               <Box>
                 <img
                   src={pamperZoneData && pamperZoneData[0]?.banner}
@@ -88,7 +57,7 @@ const PamperZone = () => {
             </div>
           </Col>
           <Col md={6}>
-            <div className={`position-relative ${classes.containerSize}`}>
+            <div className={`position-relative`}>
               <Box>
                 <img
                   src={pamperZoneData && pamperZoneData[1]?.banner}
