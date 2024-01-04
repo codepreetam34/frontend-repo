@@ -2,10 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   CircularProgress,
   Grid,
   InputBase,
@@ -23,7 +19,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
 import { addToCartSchema } from "../../validationSchema/addToCartSchema";
 import { Col, Container, Row } from "react-bootstrap";
@@ -127,7 +123,7 @@ const ProductDetail = () => {
   const todaysDate = moment(new Date()).format("DDMMYY");
   const [date, setDate] = useState(null);
   const [isTodaysDate, setIsTodaysDate] = useState(true);
-  const [selectedTime, setSelectedTime] = useState(""); // State to track selected time
+  const [selectedTime, setSelectedTime] = useState(""); 
   const [filterFixedOptions, setFilterFixedOptions] = useState([]);
   const [filterStandardOptions, setFilterStandardOptions] = useState([]);
   const [insertDate, setInsertDate] = useState(false);
@@ -144,6 +140,7 @@ const ProductDetail = () => {
   const productDetailedData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product
   );
+
   const title =
     (productDetailedData && productDetailedData?.name) || "Vibezter";
   const description = "This is the home page of our MERN application.";
