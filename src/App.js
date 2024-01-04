@@ -1,11 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import LandingPage from "./container/LandingPage";
-import { ThemeProvider } from "@mui/material/styles";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./LandingPage.css";
-import theme from "./theme";
 import {
   ADD_REVIEW,
   ADD_TO_CART,
@@ -46,6 +40,13 @@ import PageNotFound from "./container/PageNotFound/PageNotFound";
 import CategoryPage from "./container/CategoryPage";
 import OrderPage from "container/OrderPage";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./LandingPage.css";
+
+import theme from "./theme";
+import { ThemeProvider } from "@mui/material/styles";
 const App = () => {
   return (
     <>
