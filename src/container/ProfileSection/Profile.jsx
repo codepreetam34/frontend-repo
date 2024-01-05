@@ -213,7 +213,7 @@ const Profile = () => {
 
               </Box>
 
-              <Box sx={{ marginTop: "1rem" }}>
+              <Box>
                 <PincodeInputWrapper setPincodeData={setPincodeData} pincodeData={pincodeData} />
               </Box>
             </Box>

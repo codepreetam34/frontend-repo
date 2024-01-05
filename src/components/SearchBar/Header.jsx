@@ -1,8 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Grid,
-} from "@mui/material";
+import { Avatar, Box, Grid } from "@mui/material";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import React, { useEffect, useState } from "react";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
@@ -148,7 +144,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   // const [anchorElSec, setAnchorElSec] = React.useState(null);
   const [show, setShow] = useState("");
-  const [pincodeData, setPincodeData] = useState("");  
+  const [pincodeData, setPincodeData] = useState("");
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
 
   const personLoggedIn = JSON.parse(
@@ -222,7 +218,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     };
     navigate(`/product-page/${tagName}`, { state: { payload: payload } });
   };
-  
+
   const handleCategoryClick = (categoryId) => {
     navigate(`/category-page/${categoryId}`);
   };
@@ -275,7 +271,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           style={{
             display: "flex",
             justifyContent: "flex-end",
-            alignItems:"center",
+            alignItems: "center",
             gap: "1rem",
           }}
         >
@@ -519,7 +515,11 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           >
             <Navbar.Toggle
               aria-controls="navbarScroll"
-              style={{ margin: "5px 8px", background: "#FFF" }}
+              style={{
+                margin: "5px 8px",
+                background: "#FFF",
+
+              }}
             />
             <Navbar.Collapse id="navbarScroll">
               <Nav navbarScroll style={{ padding: "0px 60px" }}>

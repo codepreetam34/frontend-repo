@@ -12,6 +12,7 @@ import {
   Alert,
 } from "@mui/material";
 import StartupScreen from "components/StartpScreen";
+import FMTypography from "components/FMTypography/FMTypography";
 const PincodeWrapper = ({
   setHeaderPageModalOpen,
   headerPageModalOpen,
@@ -136,7 +137,18 @@ const PincodeWrapper = ({
               </Box>
 
               {/* Content */}
-              <Box sx={{ padding: "2rem" }}>
+              <Box sx={{ padding: "1rem 2rem 0" }}>
+                <FMTypography
+                  displayText={
+                    "Please enter the correct delivery location or pincode to view available products and delivery options"
+                  }
+                  styleData={{
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    textAlign: "center",
+                    marginBottom: "1rem"
+                  }}
+                />
                 <Box sx={containerStyle}>
                   <TextField
                     fullWidth
