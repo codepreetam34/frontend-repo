@@ -45,9 +45,10 @@ const EmailVerify = () => {
                 ...commonStyle.buttonStyles,
                 width: "247px",
                 marginTop: "32px",
-
               }}
-              onClick={navigate('/login')}
+              onClick={() => {
+                navigate("/login");
+              }}
             />
           </Box>
         </Grid>

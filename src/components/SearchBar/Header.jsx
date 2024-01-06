@@ -247,6 +247,17 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
 
+  const items = [1, 2, 3];
+
+
+    useEffect(() => {
+      // Some effect code using item
+      items.forEach((item) => {
+      console.log("item", item);
+    });
+    }, []);
+
+
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
       <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
@@ -518,7 +529,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               style={{
                 margin: "5px 8px",
                 background: "#FFF",
-
               }}
             />
             <Navbar.Collapse id="navbarScroll">
