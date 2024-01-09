@@ -137,7 +137,7 @@ const PincodeWrapper = ({
               </Box>
 
               {/* Content */}
-              <Box sx={{ padding: "1rem 2rem 0" }}>
+              <Box sx={{ padding: "1rem 2rem" }}>
                 <FMTypography
                   displayText={
                     "Please enter the correct delivery location or pincode to view available products and delivery options"

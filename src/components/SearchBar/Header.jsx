@@ -150,6 +150,9 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const personLoggedIn = JSON.parse(
     localStorage.getItem("Sidebar_Module_Assigned")
   )?.fullName;
+  const personLoggedData = JSON.parse(
+    localStorage.getItem("Sidebar_Module_Assigned")
+  );
 
   const open = Boolean(anchorEl);
 
@@ -249,14 +252,12 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
 
   const items = [1, 2, 3];
 
-
-    useEffect(() => {
-      // Some effect code using item
-      items.forEach((item) => {
+  useEffect(() => {
+    // Some effect code using item
+    items.forEach((item) => {
       console.log("item", item);
     });
-    }, []);
-
+  }, []);
 
   return (
     <Grid sx={HeaderStyle.headerFullStyle}>
@@ -326,7 +327,13 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             >
               <Box sx={{ display: "flex", marginBottom: ".5rem" }}>
                 <Stack direction="row" spacing={2} sx={{ marginLeft: "1rem" }}>
-                  <Avatar src="/broken-image.jpg" />
+                  <Avatar
+                    src={
+                      personLoggedData?.profilePicture
+                        ? personLoggedData?.profilePicture
+                        : "/broken-image.jpg"
+                    }
+                  />
                 </Stack>
                 {personLoggedIn ? (
                   <Box sx={{ marginLeft: "12px" }}>

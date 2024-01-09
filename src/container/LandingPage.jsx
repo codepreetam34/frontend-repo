@@ -12,24 +12,23 @@ import Footer from "../components/Footer/Footer";
 import { Box } from "@mui/material";
 import Layout from "../components/Layout";
 import StartupScreen from "../components/StartpScreen";
-
 import adsBanner from "assets/LandingPage/adsBanner.png";
 import { Col, Container, Row } from "react-bootstrap";
 
 const LandingPage = () => {
+
   const [loading, setLoading] = useState(true);
   const [landingPageModalOpen, setLandingPageModalOpen] = useState(true);
 
   useEffect(() => {
-    // Simulate an asynchronous operation (e.g., fetching data) that takes some time
     const simulateAsyncOperation = () => {
       setTimeout(() => {
         setLoading(false);
-      }, 1000); // Adjust the duration as needed
+      }, 1000); 
     };
-
     simulateAsyncOperation();
   }, []);
+
   const title = "Home Page";
   const description = "This is the home page of our MERN application.";
 

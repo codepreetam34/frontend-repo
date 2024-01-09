@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../services/AxiosInstance";
-import { MY_PROFILE } from "./type";
+import { MY_PROFILE, EDIT_USER_BY_ID } from "./type";
 
 export const getProfileDetail = createAsyncThunk(
   MY_PROFILE,
@@ -13,7 +13,17 @@ export const getProfileDetail = createAsyncThunk(
     }
   }
 );
-
+export const editUserById = createAsyncThunk(
+  EDIT_USER_BY_ID,
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axiosInstance.patch("api/user/update", payload);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
 const myProfileSlice = createSlice({
   name: "profileSlice",
   initialState: {
