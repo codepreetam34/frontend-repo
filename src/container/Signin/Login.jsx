@@ -26,6 +26,7 @@ import { notify } from "../../components/FMToaster/FMToaster";
 import { ErrorToaster, SuccessToaster } from "constants/util";
 import googleButtonIcon from "../../assets/googleButtonIcon.png";
 import messageButtonIcon from "../../assets/messageButtonIcon.png";
+import { GoogleLogin } from "react-google-login";
 const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,6 +46,11 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
     mode: "onChange",
   });
 
+  const responseGoogle = (response) => {
+    console.log(response);
+    // Handle the response, e.g., send it to your server
+  };
+
   const forgotPasswordNavigate = () => {
     navigate(FORGOTPASSWORD);
   };
@@ -59,23 +65,22 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
         .then((res) => {
           if (res?.user) {
             setShowLoginPageModal(false);
-            setShowToast(true)
-            showToastMessage(`${res?.user?.fullName} login successfully`)
-
+            setShowToast(true);
+            showToastMessage(`${res?.user?.fullName} login successfully`);
           }
         })
         .catch((err) => {
           setShowErrorToast(true);
           setShowErrorToastMessage(err?.error?.response?.data?.message);
         });
-
-    }
-    else {
+    } else {
       dispatch(login(data))
         .unwrap()
         .then((res) => {
           if (res) {
-            navigate(LANDING_PAGE, { state: { showToastMessage: res?.user?.fullName } });
+            navigate(LANDING_PAGE, {
+              state: { showToastMessage: res?.user?.fullName },
+            });
             notify({ type: "success", content: "Logged in successfully" });
           }
         })
@@ -83,9 +88,8 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
           setShowErrorToast(true);
           setShowErrorToastMessage(err?.error?.response?.data?.message);
         });
-    };
-  }
-
+    }
+  };
 
   return (
     <>
@@ -93,141 +97,43 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
         sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
       >
         <a href={"/"}>
-        <img
-          src={monkeyLogo}
-          alt="monkeyLogo"
-          style={HeaderStyle.monkeyLogoStyle}
-        />
-        <img
-          src={VibezterLogo}
-          alt="VibezterLogo"
-          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-        />
+          <img
+            src={monkeyLogo}
+            alt="monkeyLogo"
+            style={HeaderStyle.monkeyLogoStyle}
+          />
+          <img
+            src={VibezterLogo}
+            alt="VibezterLogo"
+            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
+          />
         </a>
       </Box>
-      <Grid container sx={{
-        display: "flex",
-        alignItems: "center",
-        background: "white",
-        justifyContent: "center",
-      }}>
-        <Grid item sx={{
+      <Grid
+        container
+        sx={{
           display: "flex",
-          flexDirection: "column",
+          alignItems: "center",
+          background: "white",
           justifyContent: "center",
-          padding: "2rem",
-          marginTop: "3rem",
-          marginBottom: '3rem',
-          borderRadius: "20px",
-          boxShadow:
-            " 0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-        }}>
-
-          {showLoginPageModal ? <>
-            <Box sx={commonStyle.formOuterBoxStyle}>
-              <Box component="form" xs={12} onSubmit={handleSubmit(onSubmit)}>
-                <Box sx={commonStyle.flexStyle}>
-                  <InputBase
-                    required
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    sx={{
-                      ...commonStyle.inputFieldStyle,
-
-                      ...(errors.email && commonStyle.errorStyle),
-                    }}
-                    {...register("email")}
-                    error={errors.email ? true : false}
-                  />
-                  {errors.email?.message &&
-                    <FMTypography
-                      styleData={commonStyle.errorText}
-                      displayText={errors.email?.message}
-                    />
-                  }
-                  <OutlinedInput
-                    placeholder="Enter your password"
-                    type={passwordType ? "password" : "text"}
-                    sx={{
-                      ...commonStyle.inputFieldStyle,
-                      ...commonStyle.paddingZero,
-                      ...(errors.password && commonStyle.errorStyle),
-                    }}
-                    {...register("password")}
-                    error={errors.password ? true : false}
-                    endAdornment={
-                      <InputAdornment position="start">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={passwordToggle}
-                          edge="end"
-                          disableRipple={true}
-                        >
-                          {passwordType ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                  {errors.password?.message &&
-                    <FMTypography
-                      styleData={commonStyle.errorText}
-                      displayText={errors.password?.message}
-                    />}
-                  <Box sx={commonStyle.buttonBox}>
-                    <FMButton
-                      displayText={"Forgot Password?"}
-                      variant={"text"}
-                      styleData={{
-                        ...commonStyle.textTransformStyle,
-                        ...commonStyle.disableRippleStyle,
-                      }}
-                      onClick={forgotPasswordNavigate}
-                    />
-                  </Box>
-                  <FMButton
-                    displayText={"Login"}
-                    variant={"contained"}
-                    styleData={{
-                      ...commonStyle.buttonStyles,
-                    }}
-                    onClick={handleSubmit(onSubmit)}
-                  />
-                  <input type={"submit"} hidden />
-
-                </Box>
-                <Box sx={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-                  <FMTypography displayText={"Don’t have an account?"} />
-                  <FMButton
-                    variant={"outlined"}
-                    displayText={"Sign Up"}
-                    styleData={{
-                      color: "#222222",
-                      padding: "0",
-                      fontSize: "1rem",
-                      fontWeight: "600",
-                      border: "none",
-                      marginLeft: ".5rem",
-                      marginTop: "-.1rem",
-                      "&:hover": {
-                        backgroundColor: "white",
-                        border: "none",
-                      },
-                    }}
-                    onClick={() => navigate(SIGNUP)}
-                  />
-                </Box>
-              </Box>
-            </Box>
-          </>
-            :
+        }}
+      >
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "2rem",
+            marginTop: "3rem",
+            marginBottom: "3rem",
+            borderRadius: "20px",
+            boxShadow:
+              " 0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+          }}
+        >
+          {showLoginPageModal ? (
             <>
-              <Box sx={commonStyle.formDetailsContainer}>
-                <FMTypography
-                  displayText="Log In"
-                  styleData={commonStyle.headingStyle}
-                />
-              </Box>
               <Box sx={commonStyle.formOuterBoxStyle}>
                 <Box component="form" xs={12} onSubmit={handleSubmit(onSubmit)}>
                   <Box sx={commonStyle.flexStyle}>
@@ -244,12 +150,12 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                       {...register("email")}
                       error={errors.email ? true : false}
                     />
-                    {errors.email?.message &&
+                    {errors.email?.message && (
                       <FMTypography
                         styleData={commonStyle.errorText}
                         displayText={errors.email?.message}
                       />
-                    }
+                    )}
                     <OutlinedInput
                       placeholder="Enter your password"
                       type={passwordType ? "password" : "text"}
@@ -273,11 +179,122 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                         </InputAdornment>
                       }
                     />
-                    {errors.password?.message &&
+                    {errors.password?.message && (
                       <FMTypography
                         styleData={commonStyle.errorText}
                         displayText={errors.password?.message}
-                      />}
+                      />
+                    )}
+                    <Box sx={commonStyle.buttonBox}>
+                      <FMButton
+                        displayText={"Forgot Password?"}
+                        variant={"text"}
+                        styleData={{
+                          ...commonStyle.textTransformStyle,
+                          ...commonStyle.disableRippleStyle,
+                        }}
+                        onClick={forgotPasswordNavigate}
+                      />
+                    </Box>
+                    <FMButton
+                      displayText={"Login"}
+                      variant={"contained"}
+                      styleData={{
+                        ...commonStyle.buttonStyles,
+                      }}
+                      onClick={handleSubmit(onSubmit)}
+                    />
+                    <input type={"submit"} hidden />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "1rem",
+                    }}
+                  >
+                    <FMTypography displayText={"Don’t have an account?"} />
+                    <FMButton
+                      variant={"outlined"}
+                      displayText={"Sign Up"}
+                      styleData={{
+                        color: "#222222",
+                        padding: "0",
+                        fontSize: "1rem",
+                        fontWeight: "600",
+                        border: "none",
+                        marginLeft: ".5rem",
+                        marginTop: "-.1rem",
+                        "&:hover": {
+                          backgroundColor: "white",
+                          border: "none",
+                        },
+                      }}
+                      onClick={() => navigate(SIGNUP)}
+                    />
+                  </Box>
+                </Box>
+              </Box>
+            </>
+          ) : (
+            <>
+              <Box sx={commonStyle.formDetailsContainer}>
+                <FMTypography
+                  displayText="Log In"
+                  styleData={commonStyle.headingStyle}
+                />
+              </Box>
+              <Box sx={commonStyle.formOuterBoxStyle}>
+                <Box component="form" xs={12} onSubmit={handleSubmit(onSubmit)}>
+                  <Box sx={commonStyle.flexStyle}>
+                    <InputBase
+                      required
+                      id="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      sx={{
+                        ...commonStyle.inputFieldStyle,
+
+                        ...(errors.email && commonStyle.errorStyle),
+                      }}
+                      {...register("email")}
+                      error={errors.email ? true : false}
+                    />
+                    {errors.email?.message && (
+                      <FMTypography
+                        styleData={commonStyle.errorText}
+                        displayText={errors.email?.message}
+                      />
+                    )}
+                    <OutlinedInput
+                      placeholder="Enter your password"
+                      type={passwordType ? "password" : "text"}
+                      sx={{
+                        ...commonStyle.inputFieldStyle,
+                        ...commonStyle.paddingZero,
+                        ...(errors.password && commonStyle.errorStyle),
+                      }}
+                      {...register("password")}
+                      error={errors.password ? true : false}
+                      endAdornment={
+                        <InputAdornment position="start">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={passwordToggle}
+                            edge="end"
+                            disableRipple={true}
+                          >
+                            {passwordType ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                    {errors.password?.message && (
+                      <FMTypography
+                        styleData={commonStyle.errorText}
+                        displayText={errors.password?.message}
+                      />
+                    )}
                     <Box sx={commonStyle.buttonBox}>
                       <FMButton
                         displayText={"Forgot Password?"}
@@ -305,7 +322,8 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                     <FMButton
                       displayText={
                         <>
-                          <img src={messageButtonIcon} alt="Message Button" />&nbsp;
+                          <img src={messageButtonIcon} alt="Message Button" />
+                          &nbsp;
                           {" Log In Via OTP"}
                         </>
                       }
@@ -317,14 +335,23 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                         color: "#222222",
                       }}
                     />
-
-
+                    <GoogleLogin
+                      clientId="176099467818-mldpn8ctg1dj320ocpre0dhjisi6gvit.apps.googleusercontent.com"
+                      buttonText="Continue with Google"
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                      cookiePolicy={"single_host_origin"}
+                    />
                     <FMButton
                       displayText={
                         <>
-                          <img src={googleButtonIcon} alt="Google Button" /> &nbsp;
+                          <img src={googleButtonIcon} alt="Google Button" />{" "}
+                          &nbsp;
                           {" Continue with Google"}
                         </>
+                      }
+                      onClick={() =>
+                        navigate("http://localhost:3000/auth/google/callback")
                       }
                       variant={"outlined"}
                       styleData={{
@@ -334,10 +361,18 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                         color: "#222222",
                       }}
                     />
-
                   </Box>
-                  <Box sx={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-                    <FMTypography displayText={"Don’t have an account?"}  styleData={{color:"#717171"} }/>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "1rem",
+                    }}
+                  >
+                    <FMTypography
+                      displayText={"Don’t have an account?"}
+                      styleData={{ color: "#717171" }}
+                    />
                     <FMButton
                       variant={"outlined"}
                       displayText={"Sign Up"}
@@ -359,9 +394,10 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                   </Box>
                 </Box>
               </Box>
-            </>}
+            </>
+          )}
         </Grid>
-        {showErrorToast &&
+        {showErrorToast && (
           <ErrorToaster
             showErrorToast={showErrorToast}
             setShowErrorToast={setShowErrorToast}
@@ -370,7 +406,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
               "Incorrect login credentials. Please verify and retry."
             }
           />
-        }
+        )}
         {showToast && (
           <SuccessToaster
             showToast={showToast}
