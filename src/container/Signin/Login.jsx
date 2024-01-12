@@ -27,16 +27,21 @@ import { ErrorToaster, SuccessToaster } from "constants/util";
 import googleButtonIcon from "../../assets/googleButtonIcon.png";
 import messageButtonIcon from "../../assets/messageButtonIcon.png";
 import { GoogleLogin } from "react-google-login";
+
 const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const location = useLocation();
+
   const showToastMessage = location?.state?.showToastMessage;
+
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [showErrorToastMessage, setShowErrorToastMessage] = useState();
   const [showToast, setShowToast] = useState(false);
 
   const [passwordType, setPasswordType] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -48,7 +53,6 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
 
   const responseGoogle = (response) => {
     console.log(response);
-    // Handle the response, e.g., send it to your server
   };
 
   const forgotPasswordNavigate = () => {
@@ -109,6 +113,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
           />
         </a>
       </Box>
+
       <Grid
         container
         sx={{
@@ -244,6 +249,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                   styleData={commonStyle.headingStyle}
                 />
               </Box>
+
               <Box sx={commonStyle.formOuterBoxStyle}>
                 <Box component="form" xs={12} onSubmit={handleSubmit(onSubmit)}>
                   <Box sx={commonStyle.flexStyle}>
@@ -335,13 +341,13 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                         color: "#222222",
                       }}
                     />
-                    <GoogleLogin
+                    {/* <GoogleLogin
                       clientId="176099467818-mldpn8ctg1dj320ocpre0dhjisi6gvit.apps.googleusercontent.com"
                       buttonText="Continue with Google"
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
                       cookiePolicy={"single_host_origin"}
-                    />
+                    /> */}
                     <FMButton
                       displayText={
                         <>
@@ -350,9 +356,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                           {" Continue with Google"}
                         </>
                       }
-                      onClick={() =>
-                        navigate("http://localhost:3000/auth/google/callback")
-                      }
+                      onClick={() => navigate("/auth/google/callback")}
                       variant={"outlined"}
                       styleData={{
                         ...commonStyle.buttonStyles,
@@ -397,6 +401,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
             </>
           )}
         </Grid>
+
         {showErrorToast && (
           <ErrorToaster
             showErrorToast={showErrorToast}

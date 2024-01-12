@@ -38,6 +38,7 @@ const LandingPage = () => {
       behavior: "smooth",
     });
   }, []);
+  
   return (
     <>
       <Layout title={title} description={description}>

@@ -10,7 +10,6 @@ import {
   EMAIL_VERIFY_OTP,
   FAQ,
   FORGOTPASSWORD,
-  // LANDING_PAGE,
   LOGIN,
   MY_PROFILE,
   ORDER_PAGE,
@@ -47,6 +46,7 @@ import "./LandingPage.css";
 
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
+
 const App = () => {
   return (
     <>
@@ -64,24 +64,18 @@ const App = () => {
             <Route path={FAQ} element={<Faq />} />
             <Route path={BLOGS} element={<Blogs />} />
             <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
-            {/* private routes below */}
             <Route path={CATEGORY_PAGE} element={<CategoryPage />} />
-            <Route path={ORDER_PAGE} element={<OrderPage />} />
+            <Route path={PRODUCT_PAGE} element={<ProductPage />} />
+            <Route path={PRODUCT_DETAIL} element={<ProductDetail />} />
+            <Route path={ADD_TO_CART} element={<HorizontalLinearStepper />} />
+            {/* private routes below */}
             <Route
-              path={PRODUCT_PAGE}
-              element={<ProductPage />}
-            />
-            <Route
-              path={PRODUCT_DETAIL}
-              element={<ProductDetail />}
-            />
-            <Route
-              path={ADD_TO_CART}
-              element={<HorizontalLinearStepper />}
+              path={ORDER_PAGE}
+              element={<PrivateRoutes Component={OrderPage} />}
             />
             <Route
               path={ADD_REVIEW}
-              element={<AddReview />}
+              element={<PrivateRoutes Component={AddReview} />}
             />
             <Route
               path={MY_PROFILE}

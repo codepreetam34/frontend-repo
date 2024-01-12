@@ -1,4 +1,4 @@
-import { decrypt, encrypt } from "./localStorageServices";
+import { encrypt } from "./localStorageServices";
 import * as _ from "lodash";
 
 export const getItem = (key) => {
