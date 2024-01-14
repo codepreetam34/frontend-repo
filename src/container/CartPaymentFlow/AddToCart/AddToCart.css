@@ -1,0 +1,37 @@
+@media screen and (max-width: 500px) {
+  .cartItemContainer {
+    padding: 0 15px !important;
+  }
+  .cartItemTypo {
+    font-size: 20px !important;
+  }
+  .cartAllItems {
+    padding: 0 !important;
+  }
+  .priceContainer {
+    margin: 0 !important;
+  }
+  .stepperBackContainer {
+    flex-direction: column !important;
+  }
+  .backBtnContainer {
+    display: flex;
+    justify-content: center;
+  }
+  .cardItemBox {
+    padding: 32px 18px !important;
+  }
+  .stepperContainer {
+    display: flex;
+    justify-content: end;
+  }
+  .applyBtn {
+    margin-left: 20px !important;
+  }
+  .newAddressBtn {
+    margin-bottom: 20px !important;
+  }
+  .saveDeliveryBtn {
+    font-size: 15px !important;
+  }
+}

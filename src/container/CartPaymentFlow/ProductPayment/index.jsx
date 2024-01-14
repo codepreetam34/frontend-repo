@@ -213,7 +213,7 @@ const ProductPayment = ({ totalAmount, addressId }) => {
   };
 
   return (
-    <Row style={{ padding: "10px 120px 0 120px" }}>
+    <Row style={{ padding: "10px 120px 0 120px" }} className="cartAllItems">
       <Col
         style={{
           padding: "1rem 1rem",

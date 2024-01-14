@@ -1,0 +1,12 @@
+@media screen and (max-width: 500px) {
+  .categoryTitle {
+    font-size: 20px !important;
+  }
+  .pageGrid {
+    padding: 0 20px !important;
+  }
+  .btnsClass {
+    font-size: 10px !important;
+    margin-bottom: 20px !important;
+  }
+}

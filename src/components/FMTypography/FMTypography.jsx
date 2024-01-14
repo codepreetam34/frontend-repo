@@ -5,9 +5,13 @@ const style = {
     color: "black",
   },
 };
-const FMTypography = ({ displayText, styleData, ...restProps }) => {
+const FMTypography = ({ displayText, styleData, className, ...restProps }) => {
   return (
-    <Typography sx={{ ...style.typographyStyle, ...styleData }} {...restProps}>
+    <Typography
+      sx={{ ...style.typographyStyle, ...styleData }}
+      {...restProps}
+      className={className}
+    >
       {displayText}
     </Typography>
   );

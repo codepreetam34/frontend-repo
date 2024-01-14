@@ -19,6 +19,7 @@ import { addToCartAddAddress } from "../../../Redux/Slices/AddToCart/AddToCartAd
 import AllAddressComponent from "./AllAddressComponent";
 import PriceDetails from "../AddToCart/PriceDetails";
 import { addToCartProductsFinal } from "../../../Redux/Slices/AddToCart/AddToCartSlice";
+import "../AddToCart/AddToCart.css";
 
 const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
   const dispatch = useDispatch();
@@ -85,7 +86,7 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
 
   return (
     <>
-      <Row style={{ padding: "10px 120px 0 120px" }}>
+      <Row style={{ padding: "10px 120px 0 120px" }} className="cartAllItems">
         <Col>
           <AllAddressComponent
             addressDetailsAdded={addressDetailsAdded}
@@ -109,7 +110,7 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
               component="form"
               xs={12}
 
-            // onSubmit={handleSubmit(onSubmit)}
+              // onSubmit={handleSubmit(onSubmit)}
             >
               <Box sx={commonStyle.flexStyle}>
                 <Box sx={{ display: "flex" }}>
@@ -345,7 +346,7 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                     fontWeight: "500 !important",
                   }}
                   value={homeOfficeLocation}
-                // required={true}
+                  // required={true}
                 />
               </Box>
               <Box
@@ -356,7 +357,9 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                 }}
               ></Box>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "center", gap: '1rem' }}>
+            <Box
+              sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}
+            >
               <FMButton
                 displayText={"Save & Delivery here"}
                 variant={"contained"}
@@ -365,10 +368,13 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                   width: "247px",
                   marginTop: "32px",
                 }}
+                btnClass={"saveDeliveryBtn"}
                 onClick={handleSubmit(onSubmit)}
               />
 
-              <FMButton variant={'outlined'} displayText={"Cancel"}
+              <FMButton
+                variant={"outlined"}
+                displayText={"Cancel"}
                 onHover={"#801319"}
                 styleData={{
                   ...commonStyle.buttonStyles,
@@ -380,8 +386,8 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                   fontSize: "1rem",
                   fontStyle: "normal",
                   fontWeight: "500",
-
-                }} onClick={() => setDisplayFormData(false)}
+                }}
+                onClick={() => setDisplayFormData(false)}
               />
               {/* <FMButton
                 displayText={"Cancel"}
@@ -406,10 +412,12 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
           <Box
             sx={{
               display: displayFormData ? "none" : "grid",
-              justifyContent: 'center'
+              justifyContent: "center",
             }}
           >
-            <FMButton variant={'outlined'} displayText={"+ Add new Address"}
+            <FMButton
+              variant={"outlined"}
+              displayText={"+ Add new Address"}
               onHover={"#801319"}
               styleData={{
                 borderRadius: "10px",
@@ -418,18 +426,26 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                 fontSize: "1rem",
                 fontStyle: "normal",
                 fontWeight: "500",
-
-              }} onClick={displayForm}
+              }}
+              btnClass={"newAddressBtn"}
+              onClick={displayForm}
             />
           </Box>
         </Col>
-        <Col style={{ marginLeft: "87px", paddingBottom: '2rem' }}>
-
-
-
+        <Col
+          style={{ marginLeft: "87px", paddingBottom: "2rem" }}
+          className="priceContainer"
+        >
           {/* Render the PriceDetails component and pass the addedData prop */}
-          <PriceDetails addedData={addedData} handleNext={handleNext} cartList={addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : 0} />
-
+          <PriceDetails
+            addedData={addedData}
+            handleNext={handleNext}
+            cartList={
+              addedData && Object.keys(addedData)?.length > 0
+                ? Object.keys(addedData)?.length
+                : 0
+            }
+          />
         </Col>
       </Row>
     </>

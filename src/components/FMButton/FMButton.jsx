@@ -8,6 +8,7 @@ export default function FMButton({
   variant,
   onHover,
   background,
+  btnClass,
   ...restProps
 }) {
 
@@ -21,6 +22,7 @@ export default function FMButton({
   return (
     <Button
       variant={variant || "contained"}
+      className={btnClass}
       disableRipple
       disableElevation
       sx={{ ...styleData, ...hoverEffect }}

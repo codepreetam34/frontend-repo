@@ -6,6 +6,7 @@ import BlogsComponent from "../../components/BlogsComponent/BlogsComponent";
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { BLOGS_DETAIL } from "../../Routes/Routes";
+import "./Blogs.css";
 
 const Blogs = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Blogs = () => {
   return (
     <>
       <HeaderWithoutNav />
-      <Row style={{ marginTop: "40px" }}>
+      <Row style={{ marginTop: "40px", width:'95%' }}>
         <Col>
           <FMTypography
             displayText={"Blogs"}
@@ -24,6 +25,7 @@ const Blogs = () => {
               textAlign: "center",
               fontWeight: "600",
             }}
+            className={"blogMain"}
           />
           <FMTypography
             displayText={"Make every moment a celebration"}
@@ -32,25 +34,20 @@ const Blogs = () => {
               fontWeight: "400",
               textAlign: "center",
             }}
+            className={"blogSub"}
           />
         </Col>
       </Row>
-
       <Container>
         <Row>
-          <Col style={{ display: "flex", flexWrap: "wrap" }}>
-            <Box
-              sx={{ flex: "50%", marginTop: "1rem" }}
-              onClick={openBlogHandler}
-            >
-              <BlogsComponent />
-            </Box>
-            <Box sx={{ flex: "50%", marginTop: "1rem" }}>
-              <BlogsComponent />
-            </Box>
-            <Box sx={{ flex: "50%", marginTop: "1rem" }}>
-              <BlogsComponent />
-            </Box>
+          <Col sm={6} onClick={openBlogHandler}>
+            <BlogsComponent />
+          </Col>
+          <Col sm={6} onClick={openBlogHandler}>
+            <BlogsComponent />
+          </Col>
+          <Col sm={6} onClick={openBlogHandler}>
+            <BlogsComponent />
           </Col>
         </Row>
       </Container>

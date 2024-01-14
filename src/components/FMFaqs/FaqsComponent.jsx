@@ -14,7 +14,7 @@ import {
 } from "../../assets/FAQs/orderingFaqs";
 import { accordionStyles } from "./FaqsStyle";
 
-const FaqsComponent = ({ type, sx, defaultExpanded }) => {
+const FaqsComponent = ({ type, sx }) => {
   let faqsArray =
     type === "Ordering"
       ? orderingFaqs
@@ -28,6 +28,7 @@ const FaqsComponent = ({ type, sx, defaultExpanded }) => {
           key={index}
           sx={{ ...accordionStyles.boxAccordion, ...sx }}
           defaultExpanded={index === 0 ? true : false}
+          style={{padding:'0'}}
         >
           <AccordionSummary
             expandIcon={<ArrowDropDownIcon htmlColor={"black"} />}

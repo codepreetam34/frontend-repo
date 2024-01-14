@@ -68,7 +68,7 @@ const LandingPage = () => {
                 <TopCategory />
               </Box>
 
-              <div style={{ padding: "50px 80px 0" }}>
+              <div style={{ padding: "50px 30px 0" }}>
                 <Container fluid className="m-0 p-0">
                   <Row>
                     <Col md={12}>

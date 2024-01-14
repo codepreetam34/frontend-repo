@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box, Typography,
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Box, Typography, Card, CardContent } from "@mui/material";
 import closeCrossIcon from "../../../assets/closeCrossIcon.svg";
 import { Col, Row } from "react-bootstrap";
 import FMTypography from "../../../components/FMTypography/FMTypography";
@@ -14,9 +10,13 @@ import {
   addToCartProductsFinal,
   deleteAddToCartProducts,
 } from "../../../Redux/Slices/AddToCart/AddToCartSlice";
-import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "../../../constants/colors";
+import {
+  CANCEL_GREY_BORDER,
+  LIGHT_GREY_BORDER,
+} from "../../../constants/colors";
 import { addToCart } from "../../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 import PriceDetails from "./PriceDetails";
+import "./AddToCart.css";
 
 const AddToCart = ({ handleNext }) => {
   const dispatch = useDispatch();
@@ -64,22 +64,29 @@ const AddToCart = ({ handleNext }) => {
 
   return (
     <>
-      <Row style={{ padding: "1rem 8rem" }}>
+      <Row style={{ padding: "1rem 8rem" }} className="cartItemContainer">
         <Col>
           <FMTypography
-            displayText={`Cart Items (${addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : "0"
-              })`}
+            displayText={`Cart Items (${
+              addedData && Object.keys(addedData)?.length > 0
+                ? Object.keys(addedData)?.length
+                : "0"
+            })`}
+            className="cartItemTypo"
             styleData={{ fontSize: "40px", fontWeight: "500" }}
           />
         </Col>
       </Row>
 
-      <Row style={{ padding: "10px 120px 0 120px", marginBottom: "2rem" }}>
+      <Row
+        style={{ padding: "10px 120px 0 120px", marginBottom: "2rem" }}
+        className="cartAllItems"
+      >
         <Col>
-          {addedData && Object.keys(addedData)?.length > 0 ?
-            Object.keys(addedData)?.map((elem,index) => (
+          {addedData && Object.keys(addedData)?.length > 0 ? (
+            Object.keys(addedData)?.map((elem, index) => (
               <Box
-              key={index}
+                key={index}
                 sx={{
                   borderRadius: "20px",
                   boxShadow:
@@ -89,19 +96,27 @@ const AddToCart = ({ handleNext }) => {
                   padding: "32px",
                   marginBottom: "1rem",
                 }}
+                className="cardItemBox"
               >
                 <Box>
                   <img
                     src={addedData[elem]?.img}
                     alt="img"
-                    style={{ width: "150px", height: "150px", borderRadius:"10px" }}
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      borderRadius: "10px",
+                    }}
                   />
                 </Box>
                 <Box sx={{ marginLeft: "1rem", width: "100%" }}>
                   <Box
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <FMTypography displayText={addedData[elem]?.name} sx={{ textTransform: 'capitalize' }} />
+                    <FMTypography
+                      displayText={addedData[elem]?.name}
+                      sx={{ textTransform: "capitalize" }}
+                    />
                     <img
                       src={closeCrossIcon}
                       alt="close-icon"
@@ -178,9 +193,10 @@ const AddToCart = ({ handleNext }) => {
                   </Typography>
                 </Box>
               </Box>
-            )) : <Box className="d-flex justify-content-center pb-4">
+            ))
+          ) : (
+            <Box className="d-flex justify-content-center pb-4">
               <Card
-
                 sx={{
                   width: "280px",
                   borderRadius: "20px",
@@ -198,16 +214,26 @@ const AddToCart = ({ handleNext }) => {
                 </CardContent>
               </Card>
             </Box>
-          }
+          )}
         </Col>
-        {addedData && Object.keys(addedData)?.length > 0 ? <Col style={{ marginLeft: "87px" }}>
-          {/* Render the PriceDetails component and pass the addedData prop */}
-          <PriceDetails cartList={addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : 0} addedData={addedData} handleNext={handleNext} />
-        </Col> : <></>}
+        {addedData && Object.keys(addedData)?.length > 0 ? (
+          <Col style={{ marginLeft: "87px" }} className="priceContainer">
+            {/* Render the PriceDetails component and pass the addedData prop */}
+            <PriceDetails
+              cartList={
+                addedData && Object.keys(addedData)?.length > 0
+                  ? Object.keys(addedData)?.length
+                  : 0
+              }
+              addedData={addedData}
+              handleNext={handleNext}
+            />
+          </Col>
+        ) : (
+          <></>
+        )}
         {/* second col */}
-
       </Row>
-
     </>
   );
 };

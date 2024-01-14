@@ -10,6 +10,7 @@ import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 import { commonStyle } from "../../Styles/commonStyles";
 import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
+import './Faq.css'
 
 const Faq = () => {
   const [orderingActiveBtn, setOrderingActiveBtn] = useState(true);
@@ -36,34 +37,32 @@ const Faq = () => {
           <Col
             style={{
               backgroundColor: "#FCEDEE",
-              margin: "0 auto",
-              padding: "50px 0 20px 20%",
-              // display: "flex",
-              // justifyContent: "center",
-              // padding: "50px 0",
             }}
           >
             <FMTypography
               displayText={"Frequently Ask Questions"}
-              styleData={{ fontSize: "60px", fontWeight: "500" }}
+              styleData={{ fontSize: "60px", fontWeight: "500",textAlign:'center' }}
+              className="faqMain"
             />
             <FMTypography
               displayText={"Our FAQ’s"}
               styleData={{
                 fontSize: "20px",
                 fontWeight: "500",
-                marginTop: "20px",
-                padding: "0 0 0 30%",
+                marginTop: "20px"
+                ,textAlign:'center' 
               }}
+              className="faqSub"
             />
             <FMTypography
               displayText={"Have any questions?"}
               styleData={{
                 fontSize: "32px",
                 fontWeight: "500",
-                marginTop: "10px",
-                padding: "0 0 0 20%",
+                marginTop: "10px"
+                ,textAlign:'center' 
               }}
+              className="haveQues"
             />
           </Col>
         </Row>

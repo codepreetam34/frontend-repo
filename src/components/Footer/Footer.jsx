@@ -3,9 +3,11 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import androidIcon from "../../assets/androidIcon.svg";
 import appleIcon from "../../assets/appleIcon.svg";
-import footerLogo from "../../assets/FooterLogo.png"
+import footerLogo from "../../assets/FooterLogo.png";
 import { Box, InputBase } from "@mui/material";
 import FMButton from "../../components/FMButton/FMButton";
+import "./Footer.css";
+
 const Footer = () => {
   return (
     <Container fluid>
@@ -22,9 +24,8 @@ const Footer = () => {
         </Col>
       </Row> */}
       <Row style={{ background: "#FCEDEE", padding: "20px 50px 20px 50px" }}>
-        <Col md={12} style={{ display: 'flex', justifyContent: 'center' }}>
-
-          <div
+        <Col md={12} style={{ display: "flex", justifyContent: "center" }}>
+          {/* <div
             style={{
               fontSize: "14px",
               color: "#717171",
@@ -57,9 +58,12 @@ const Footer = () => {
                   flexShrink: "0",
                   borderRadius: "16px 0px 0px 16px",
                   background: "#FFF",
-                  padding: '5px 40px 5px'
+                  // padding: '5px 40px 5px'
+                  padding: '5px 20px', 
+                  
 
                 }}
+                className="subscribeClass"
 
               />
               <FMButton displayText={"Submit"} styleData={{
@@ -77,10 +81,8 @@ const Footer = () => {
                 style={{ textTransform: "capatilize !important", }}
               />
             </Box>
-          </div>
-          <div>
-
-          </div>
+          </div> */}
+          <div></div>
         </Col>
         <Col md={3}>
           <div
@@ -89,14 +91,14 @@ const Footer = () => {
               color: "#717171",
               fontWeight: "400",
               listStyle: "none",
-              marginLeft: "1.1rem", paddingBottom: "0.8rem"
+              marginLeft: "1.1rem",
+              paddingBottom: "0.8rem",
               // textAlign: "center",
             }}
           >
-            <img src={footerLogo} style={{ width: '100%' }} />
+            <img src={footerLogo} style={{ width: "100%" }} />
           </div>
           <div>
-
             <div
               style={{
                 fontSize: "14px",
@@ -107,7 +109,8 @@ const Footer = () => {
                 // textAlign: "center",
               }}
             >
-              319, Aggarwal Millennium Tower 1, above bittu tikki wala, Netaji Subhash Place, Pitam Pura, New Delhi, Delhi 110034
+              319, Aggarwal Millennium Tower 1, above bittu tikki wala, Netaji
+              Subhash Place, Pitam Pura, New Delhi, Delhi 110034
             </div>
             <div
               style={{
@@ -116,30 +119,47 @@ const Footer = () => {
                 fontWeight: "400",
                 listStyle: "none",
                 marginLeft: "1.1rem",
-                padding: "1rem 0"
+                padding: "1rem 0",
                 // textAlign: "center",
               }}
             >
-              hr@thewebgross.com</div>
-            <div style={{ listStyle: "none", padding: "0 1rem 0 1rem", display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{
-                fontSize: "14px",
-                color: "#717171",
-                fontWeight: "400"
-                // textAlign: "center",
-              }}>Available on:</div>
+              hr@thewebgross.com
+            </div>
+            <div
+              style={{
+                listStyle: "none",
+                padding: "0 1rem 0 1rem",
+                display: "flex",
+                alignItems: "center",
+                gap: "1rem",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "14px",
+                  color: "#717171",
+                  fontWeight: "400",
+                  // textAlign: "center",
+                }}
+              >
+                Available on:
+              </div>
               <div>
                 <img
                   src={androidIcon}
                   alt="android-icon"
-                  style={{ marginRight: "1rem", width: '25px' }}
+                  style={{ marginRight: "1rem", width: "25px" }}
                 />
-                <img src={appleIcon} alt="apple-icon" style={{ width: '25px' }} />
+                <img
+                  src={appleIcon}
+                  alt="apple-icon"
+                  style={{ width: "25px" }}
+                />
               </div>
             </div>
           </div>
         </Col>
-        <Col md={9} style={{ paddingTop: '1rem' }}>
+        <Col md={9} style={{ paddingTop: "1rem" }}>
           <Row>
             <Col>
               <div
@@ -148,7 +168,8 @@ const Footer = () => {
                   color: "#717171",
                   fontWeight: "400",
                   listStyle: "none",
-                  textAlign: "center", paddingBottom: "0.8rem"
+                  textAlign: "center",
+                  paddingBottom: "0.8rem",
                 }}
               >
                 <FMTypography
@@ -158,7 +179,8 @@ const Footer = () => {
                     fontWeight: "500",
                     textAlign: "center",
                   }}
-                /> </div>
+                />{" "}
+              </div>
               <div>
                 <div
                   style={{
@@ -167,7 +189,7 @@ const Footer = () => {
                     fontWeight: "400",
                     listStyle: "none",
                     textAlign: "center",
-                    paddingBottom: '5px'
+                    paddingBottom: "5px",
                   }}
                 >
                   About Us
@@ -180,7 +202,7 @@ const Footer = () => {
                     fontWeight: "400",
                     listStyle: "none",
                     textAlign: "center",
-                    paddingBottom: '5px'
+                    paddingBottom: "5px",
                   }}
                 >
                   Disclaimer
@@ -192,7 +214,7 @@ const Footer = () => {
                     fontWeight: "400",
                     listStyle: "none",
                     textAlign: "center",
-                    paddingBottom: '5px'
+                    paddingBottom: "5px",
                   }}
                 >
                   WebGross Team
@@ -200,7 +222,6 @@ const Footer = () => {
               </div>
             </Col>
             <Col>
-
               <div
                 style={{
                   fontSize: "14px",
@@ -208,7 +229,7 @@ const Footer = () => {
                   fontWeight: "400",
                   listStyle: "none",
                   textAlign: "center",
-                  paddingBottom: "0.8rem"
+                  paddingBottom: "0.8rem",
                 }}
               >
                 <FMTypography
@@ -221,14 +242,14 @@ const Footer = () => {
                 />
               </div>
               <div>
-
                 <div
                   style={{
                     fontSize: "14px",
                     color: "#717171",
                     fontWeight: "400",
                     listStyle: "none",
-                    textAlign: "center", paddingBottom: '5px'
+                    textAlign: "center",
+                    paddingBottom: "5px",
                   }}
                 >
                   Careers
@@ -240,7 +261,8 @@ const Footer = () => {
                     color: "#717171",
                     fontWeight: "400",
                     listStyle: "none",
-                    textAlign: "center", paddingBottom: '5px'
+                    textAlign: "center",
+                    paddingBottom: "5px",
                   }}
                 >
                   Franchise
@@ -251,7 +273,8 @@ const Footer = () => {
                     color: "#717171",
                     fontWeight: "400",
                     listStyle: "none",
-                    textAlign: "center", paddingBottom: '5px'
+                    textAlign: "center",
+                    paddingBottom: "5px",
                   }}
                 >
                   Terms & Policy
@@ -259,7 +282,6 @@ const Footer = () => {
               </div>
             </Col>
             <Col>
-
               <div
                 style={{
                   fontSize: "14px",
@@ -267,7 +289,7 @@ const Footer = () => {
                   fontWeight: "400",
                   listStyle: "none",
                   textAlign: "center",
-                  paddingBottom: "0.8rem"
+                  paddingBottom: "0.8rem",
                 }}
               >
                 <FMTypography
@@ -286,7 +308,8 @@ const Footer = () => {
                     color: "#717171",
                     fontWeight: "400",
                     listStyle: "none",
-                    textAlign: "center", paddingBottom: '5px'
+                    textAlign: "center",
+                    paddingBottom: "5px",
                   }}
                 >
                   Contact Us
@@ -297,7 +320,8 @@ const Footer = () => {
                     color: "#717171",
                     fontWeight: "400",
                     listStyle: "none",
-                    textAlign: "center", paddingBottom: '5px'
+                    textAlign: "center",
+                    paddingBottom: "5px",
                   }}
                 >
                   Privacy Policy
@@ -308,7 +332,8 @@ const Footer = () => {
                     color: "#717171",
                     fontWeight: "400",
                     listStyle: "none",
-                    textAlign: "center", paddingBottom: '5px'
+                    textAlign: "center",
+                    paddingBottom: "5px",
                   }}
                 >
                   Terms & Conditions
@@ -318,10 +343,12 @@ const Footer = () => {
           </Row>
         </Col>
       </Row>
-      <Row style={{ background: "#EAB6B8", padding: "15px 50px 15px 50px" }}>
-        <Col style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ fontSize: '12px', color: "#801317", fontWeight: "700" }}>
-            All Copyrght reserved by © Webgross Pvt Ltd.
+      <Row style={{ background: "#EAB6B8", padding: "15px 35px 15px 35px" }}>
+        <Col style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{ fontSize: "12px", color: "#801317", fontWeight: "700" }}
+          >
+            All Copyright reserved by ©Webgross Pvt Ltd.
           </div>
         </Col>
       </Row>

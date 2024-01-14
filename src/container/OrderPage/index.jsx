@@ -11,16 +11,16 @@ import {
 import { makeStyles } from "@mui/styles";
 import Header from "../../components/SearchBar/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
 import FMTypography from "components/FMTypography/FMTypography";
 import { getOrders } from "Redux/Slices/OrderSlice/Order";
-import ratingStart from "../../assets/ratingStart.svg";
-import { Row, Col } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import FMButton from "components/FMButton/FMButton";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
+import "./OrderPage.css";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -50,7 +50,6 @@ const OrderPage = () => {
   const orderData = useSelector(
     (state) => state?.myOrders?.getOrderDetails?.orders
   );
-
 
   useEffect(() => {
     window.scrollTo({
@@ -86,6 +85,7 @@ const OrderPage = () => {
             "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
           marginTop: "40px",
         }}
+        className="paddingZero"
       >
         <Box
           sx={{
@@ -102,6 +102,7 @@ const OrderPage = () => {
               textTransform: "capitalize",
               paddingBottom: "1rem",
             }}
+            className={"myOrderClass"}
           />
 
           <Box

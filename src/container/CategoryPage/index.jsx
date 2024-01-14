@@ -12,12 +12,17 @@ import { makeStyles } from "@mui/styles";
 import FMTypography from "../../components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import Header from "../../components/SearchBar/Header";
-import { getProductByCategoryId } from "../../Redux/Slices/ProductPage/ProductsPageSlice";
+import {
+  getProductByCategoryId,
+  getProductByCategoryIdAndTags,
+} from "../../Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FMFilter from "../../components/FMFilters/FMFilter";
 import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
+import "./CategoryPage.css";
+import FMButton from "components/FMButton/FMButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,10 +76,24 @@ const CategoryPage = () => {
   const params = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState();
+  const [sortingValue, setSortingValue] = useState("Sort By");
   const pincodeData = sessionStorage.getItem("pincode");
   const [pageTitle, setPageTitle] = useState();
+  const [activeTag, setActiveTag] = useState("");
+
+  // useEffect(() => {
+  //   setActiveTag(tagName);
+  // }, [tagName]);
+
   const classes = useStyles();
   const textRef = useRef(null);
+
+  const TagOptions = [
+    "Best Sellers",
+    "Birthday Cakes",
+    "Anniversary Cakes",
+    "Same Day Delivery",
+  ];
 
   useEffect(() => {
     const element = textRef.current;
@@ -118,6 +137,27 @@ const CategoryPage = () => {
     });
   }, []);
 
+  const tagOptionsChangeHandler = (tag) => {
+    setIsLoading(true);
+    const payload = {
+      tagName: tag,
+      categoryId: params.id,
+      pincodeData,
+      sort: sortingValue,
+    };
+    dispatch(getProductByCategoryIdAndTags(payload))
+      .then((response) => {
+        const updatedActiveTag = response?.payload?.tagName;
+        setActiveTag(updatedActiveTag);
+        setPageTitle(response?.payload?.pageTitle);
+        setDisplayedProducts(response?.payload?.products);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
   return (
     <>
       <Header />
@@ -129,6 +169,7 @@ const CategoryPage = () => {
             "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
           marginTop: "40px",
         }}
+        className="pageGrid"
       >
         {pageTitle && (
           <Box
@@ -138,19 +179,21 @@ const CategoryPage = () => {
                 "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
             }}
           >
-            <FMTypography
-              displayText={pageTitle ? `${pageTitle} Products` : `No Products`}
-              styleData={{
-                fontWeight: "500",
-                fontSize: "40px",
-                textTransform: "capitalize",
-                paddingBottom: "1rem",
-              }}
-            />
-
             <Box
               sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
             >
+              <FMTypography
+                displayText={
+                  pageTitle ? `${pageTitle} Products` : `No Products`
+                }
+                styleData={{
+                  fontWeight: "500",
+                  fontSize: "40px",
+                  textTransform: "capitalize",
+                }}
+                className="categoryTitle"
+              />
+
               <FMTypography
                 displayText={
                   displayedProducts && `| ${displayedProducts?.length} Products`
@@ -174,6 +217,38 @@ const CategoryPage = () => {
             setIsLoading={setIsLoading}
             setDisplayedProducts={setDisplayedProducts}
           />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: "20px",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            {TagOptions &&
+              TagOptions?.map((tag) => {
+                return (
+                  <FMButton
+                    key={tag}
+                    onClick={() => tagOptionsChangeHandler(tag)}
+                    displayText={tag}
+                    variant={"outlined"}
+                    styleData={{
+                      fontWeight: "600",
+                      color: "#801317",
+                      marginRight: "10px",
+                      background:
+                        activeTag != "" && activeTag == tag
+                          ? "#f8d7da"
+                          : "transparent",
+                      borderRadius: "19px",
+                    }}
+                    btnClass={"btnsClass"}
+                  />
+                );
+              })}
+          </div>
         </Box>
 
         <Grid

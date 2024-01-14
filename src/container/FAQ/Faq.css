@@ -1,0 +1,15 @@
+@media screen and (max-width: 500px) {
+.faqMain{
+    font-size: 20px;
+    margin-top: 10px;
+}
+.faqSub{
+    font-size: 14px;
+    margin-top: 10px;
+}
+.haveQues{
+    font-size: 17px;
+    margin-top: 10px;
+    margin-bottom:  10px;
+}
+}

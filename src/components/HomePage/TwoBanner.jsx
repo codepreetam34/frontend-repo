@@ -18,7 +18,7 @@ const TwoBanner = () => {
     <div className="twobannersection">
       <Container fluid className="m-0 p-0">
         <Row>
-          <Col md={6}>
+            <Col md={6}>
             <div className="position-relative">
               <div class="two-banner-background-overlay"></div>
               <img
@@ -47,7 +47,7 @@ const TwoBanner = () => {
               </div>
             </div>
           </Col>
-          <Col md={6}>
+          <Col md={6} className="secondPamperCont" >
             <div className="position-relative">
               <div class="two-banner-background-overlay"></div>
               <img

@@ -123,7 +123,7 @@ const ProductDetail = () => {
   const todaysDate = moment(new Date()).format("DDMMYY");
   const [date, setDate] = useState(null);
   const [isTodaysDate, setIsTodaysDate] = useState(true);
-  const [selectedTime, setSelectedTime] = useState(""); 
+  const [selectedTime, setSelectedTime] = useState("");
   const [filterFixedOptions, setFilterFixedOptions] = useState([]);
   const [filterStandardOptions, setFilterStandardOptions] = useState([]);
   const [insertDate, setInsertDate] = useState(false);
@@ -426,7 +426,7 @@ const ProductDetail = () => {
             <div className={classes.root} style={{ marginTop: "40px" }}>
               <Container>
                 <Grid container spacing={0}>
-                  <Grid item xs={6} className={classes.customScrollColumn}>
+                  <Grid item md={6} className={classes.customScrollColumn}>
                     <ImageGallery
                       ref={imageGalleryRef}
                       {...properties}
@@ -435,7 +435,7 @@ const ProductDetail = () => {
                   </Grid>
                   <Grid
                     item
-                    xs={6}
+                    sm={6}
                     className={`${classes.rightInfoBox} right-info-box`}
                   >
                     <Col
@@ -447,6 +447,7 @@ const ProductDetail = () => {
                       <FMTypography
                         displayText={productDetailedData?.name}
                         styleData={{ fontSize: "40px", fontWeight: "600" }}
+                        className={"productNameClass"}
                       />
 
                       <Box sx={{ display: "flex" }}>
@@ -887,7 +888,7 @@ const ProductDetail = () => {
                       ) : (
                         <></>
                       )}
-                      <Box sx={{ marginTop: "50px" }}>
+                      <Box sx={{ marginTop: "50px" }} className="carttBuyBtns">
                         <FMButton
                           disabled={disabledDate}
                           displayText={"Add To Cart"}
@@ -951,7 +952,7 @@ const ProductDetail = () => {
                 </Grid>
               </Container>
             </div>
-            <Grid sx={{ padding: "20px 100px" }}>
+            <Grid sx={{ padding: "20px 100px" }} className="ratingStarClass">
               <Box>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Box sx={{ display: "flex" }}>
@@ -1000,6 +1001,7 @@ const ProductDetail = () => {
                         color: "black",
                         fontWeight: "600",
                       }}
+                      btnClass={"rateProductClass"}
                       onClick={reviewNavHandler}
                     />
                   </Box>

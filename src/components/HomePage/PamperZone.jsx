@@ -42,12 +42,13 @@ const PamperZone = () => {
                 <h4>{pamperZoneData && pamperZoneData[0]?.title}</h4>
                 {/* <a href="/">Shop Now</a> */}
                 <FMButton
+                btnClass={'btnClass'}
                   displayText={"Shop Now"}
                   styleData={{
                     backgroundColor: "#801319",
                     color: "#ffffff",
                     border: "1px solid #801319",
-                    padding: "10px 25px",
+                    padding: "10px 15px",
                     fontSize: "1.25rem",
                     textTransform: "capitalize",
                     fontWeight: "600",
@@ -56,7 +57,7 @@ const PamperZone = () => {
               </div>
             </div>
           </Col>
-          <Col md={6}>
+          <Col md={6} className="secondPamperCont" >
             <div className={`position-relative`}>
               <Box>
                 <img
@@ -69,6 +70,7 @@ const PamperZone = () => {
               <div className="twobandata">
                 <h4>{pamperZoneData && pamperZoneData[1]?.title}</h4>
                 <FMButton
+                btnClass={'btnClass'}
                   displayText={"Shop Now"}
                   styleData={{
                     backgroundColor: "#801319",

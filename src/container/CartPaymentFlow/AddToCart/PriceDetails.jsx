@@ -148,6 +148,7 @@ const PriceDetails = ({
               borderRadius: "10px",
               color: "black",
             }}
+            btnClass={"applyBtn"}
             onClick={handleApplyCoupon}
           />
         </Box>

@@ -543,6 +543,34 @@ p {
     height: 62vw;
     transition: 0.5s all ease-in-out;
   }
+
+  .category_slider{
+    padding: 20px 50px 0;
+  }
+  .twobannersection{
+    padding: 20px 35px 0;
+  }
+  .bestseller {
+    padding: 20px 35px 0;
+  }
+  .shopbyocca {
+    padding: 20px 35px 0;
+  }
+  .pamperzone {
+    padding: 20px 35px 0;
+  }
+  .secondPamperCont{
+    margin-top: 20px;
+  }
+  .twobandata > h4{
+    font-size: 1.5rem !important;
+  }
+  .btnClass {
+    padding: 10px !important;
+  }
+  .threepoint {
+    padding: 50px 70px;
+  }
 }
 
 a {
@@ -552,3 +580,4 @@ a {
 .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
   background-color: rgba(0, 0, 0, 0.8) !important;
 }
+

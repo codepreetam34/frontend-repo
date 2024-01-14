@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Footer from '../../../components/Footer/Footer';
-import Header from '../../../components/SearchBar/Header';
+import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Footer from "../../../components/Footer/Footer";
+import Header from "../../../components/SearchBar/Header";
 import AddToCart from "../AddToCart";
 import ProductPayment from "../ProductPayment";
 import AddAddress from "../AddAddress";
 import { Col, Row } from "react-bootstrap";
-import FMButton from '../../../components/FMButton/FMButton';
-import { commonStyle } from '../../../Styles/commonStyles';
-import { ArrowBack } from '@material-ui/icons';
+import FMButton from "../../../components/FMButton/FMButton";
+import { commonStyle } from "../../../Styles/commonStyles";
+import { ArrowBack } from "@material-ui/icons";
 const steps = ["Cart", "Address", "Payment"];
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -30,9 +30,9 @@ export default function HorizontalLinearStepper() {
     return skipped.has(step);
   };
 
-  const handleNext = (totalAmt,discountCoupon) => {
-    setTotalAmount(totalAmt)
-    setDiscountCoupon(discountCoupon)
+  const handleNext = (totalAmt, discountCoupon) => {
+    setTotalAmount(totalAmt);
+    setDiscountCoupon(discountCoupon);
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -68,28 +68,45 @@ export default function HorizontalLinearStepper() {
 
   const dataOnStepper = () => {
     if (activeStep === 0) {
-      return (<AddToCart handleNext={handleNext} />);
+      return <AddToCart handleNext={handleNext} />;
     } else if (activeStep === 1) {
-      return (<AddAddress handleNext={handleNext} totalAmount={totalAmount} discountCoupon={discountCoupon} />);
+      return (
+        <AddAddress
+          handleNext={handleNext}
+          totalAmount={totalAmount}
+          discountCoupon={discountCoupon}
+        />
+      );
     } else if (activeStep === 2) {
-      return (<ProductPayment totalAmount={totalAmount} />);
+      return <ProductPayment totalAmount={totalAmount} />;
     }
-  }
+  };
 
   return (
     <>
       <Header />
-      <Row style={{ width: "100%",marginTop:'40px' }}>
-
-        <Col style={{ padding: "1rem 0", display: "flex", justifyContent: 'center', gap: "1rem" }}>
-          <Box>
-
-
-            <FMButton variant={'outlined'} displayText={
-              <>
-                <ArrowBack />&nbsp;Back
-              </>
-            }
+      <Row
+        style={{ width: "100%", marginTop: "40px" }}
+        className="stepperContainer"
+      >
+        <Col
+          style={{
+            padding: "1rem 0",
+            display: "flex",
+            justifyContent: "center",
+            gap: "1rem",
+          }}
+          className="stepperBackContainer"
+        >
+          <Box className="backBtnContainer">
+            <FMButton
+              variant={"outlined"}
+              displayText={
+                <>
+                  <ArrowBack />
+                  &nbsp;Back
+                </>
+              }
               disabled={activeStep === 0}
               onHover={"#801319"}
               styleData={{
@@ -101,42 +118,47 @@ export default function HorizontalLinearStepper() {
                 fontSize: "1rem",
                 fontStyle: "normal",
                 fontWeight: "500",
-
-              }} onClick={handleBack}
+              }}
+              onClick={handleBack}
             />
           </Box>
-          <Stepper activeStep={activeStep} sx={{
-            ".MuiStepConnector-root": {
-              top: 0,
-            },
-            ".MuiStepConnector-root span": {
-              borderColor: "transparent",
-            },
-            ".MuiStepConnector-root span::before": {
-              display: "flex",
-              justifyContent: "center",
-              alignItems: 'center',
-              content: '">"',
-            },
-          }}>
-            {steps.map((label, index) => {
-              const stepProps = {};
-              const labelProps = {};
-              // if (isStepOptional(index)) {
-              //   labelProps.optional = (
-              //     <Typography variant="caption">Optional</Typography>
-              //   );
-              // }
-              if (isStepSkipped(index)) {
-                stepProps.completed = false;
-              }
-              return (
-                <Step key={label} {...stepProps}>
-                  <StepLabel {...labelProps}>{label}</StepLabel>
-                </Step>
-              );
-            })}
-          </Stepper>
+          <Box className="backBtnContainer">
+            <Stepper
+              activeStep={activeStep}
+              sx={{
+                ".MuiStepConnector-root": {
+                  top: 0,
+                },
+                ".MuiStepConnector-root span": {
+                  borderColor: "transparent",
+                },
+                ".MuiStepConnector-root span::before": {
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  content: '">"',
+                },
+              }}
+            >
+              {steps.map((label, index) => {
+                const stepProps = {};
+                const labelProps = {};
+                // if (isStepOptional(index)) {
+                //   labelProps.optional = (
+                //     <Typography variant="caption">Optional</Typography>
+                //   );
+                // }
+                if (isStepSkipped(index)) {
+                  stepProps.completed = false;
+                }
+                return (
+                  <Step key={label} {...stepProps}>
+                    <StepLabel {...labelProps}>{label}</StepLabel>
+                  </Step>
+                );
+              })}
+            </Stepper>
+          </Box>
           {/* {activeStep === steps.length - 1 ?
             <Box>
 
@@ -158,24 +180,23 @@ export default function HorizontalLinearStepper() {
             : <>
             </>} */}
           {activeStep === steps.length ? (
-
             <Box>
               <FMButton
-                displayText={activeStep === steps.length ? 'Reset' : ""}
+                displayText={activeStep === steps.length ? "Reset" : ""}
                 variant={"contained"}
                 styleData={{
                   ...commonStyle.buttonStyles,
                   width: "100%",
-
                 }}
                 onClick={handleReset}
               />
             </Box>
-          ) : <></>
-          }
+          ) : (
+            <></>
+          )}
         </Col>
         {activeStep === steps.length ? (
-          <Col md={12} style={{ display: 'flex', justifyContent: 'center' }}>
+          <Col md={12} style={{ display: "flex", justifyContent: "center" }}>
             <Typography sx={{ mt: 2, mb: 2, color: "green" }}>
               Payment has been done Successfully.
             </Typography>
@@ -185,7 +206,10 @@ export default function HorizontalLinearStepper() {
             </Box> */}
           </Col>
         ) : (
-          <Col md={12} style={{ display: 'flex', justifyContent: 'center', gap: "1rem", }}>
+          <Col
+            md={12}
+            style={{ display: "flex", justifyContent: "center", gap: "1rem" }}
+          >
             {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
 
             {/* {isStepOptional(activeStep) && (
@@ -193,7 +217,6 @@ export default function HorizontalLinearStepper() {
                   Skip
                 </Button>
               )} */}
-
 
             {/* {activeStep === steps.length - 1 ?
               <Box>
@@ -221,8 +244,6 @@ export default function HorizontalLinearStepper() {
         {dataOnStepper()}
       </Row>
       <Footer />
-
     </>
-
   );
 }

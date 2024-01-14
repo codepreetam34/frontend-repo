@@ -11,7 +11,7 @@ import BlogDummy from "../../assets/BlogDummy.svg";
 const BlogsComponent = () => {
   return (
     <>
-      <Card sx={{ width: "500px", borderRadius: "20px" }}>
+      <Card sx={{  borderRadius: "20px" }}>
         <CardActionArea>
           <CardMedia
             component="img"
