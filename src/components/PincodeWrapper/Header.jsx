@@ -442,19 +442,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               <div>
                 <Button
                   onClick={handleModalOpenController}
-                  // sx={{
-                  //   color: isHovered ? "#801317" : "#fff",
-                  //   background: isHovered ? "#fff" : "#801317",
-                  //   borderRadius: "100px",
-                  //   padding: "5px 20px",
-                  //   transition: "color 0.3s, background 0.3s", // Added smooth transition
-                  //   border: '1px solid #801317',
-                  //   "&:hover": {
-                  //     background: "#fcedee",
-                  //     color: "#801317",
-                  //     border: '1px solid #801317'
-                  //   },
-                  // }}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
@@ -481,16 +468,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                   onClick={handleModalOpenController}
                   sx={{
                     color: "#801317",
-                    //     background: isHovered ? "#fff" : "#801317",
-                    //        borderRadius: "100px",
-                    //       padding: "5px 20px",
-                    transition: "color 0.3s, background 0.3s", // Added smooth transition
-                    //         border: '1px solid #801317',
-                    //      "&:hover": {
-                    //         background: "#fcedee",
-                    //         color: "#801317",
-                    //          border: '1px solid #801317'
-                    //     },
+                    transition: "color 0.3s, background 0.3s", 
                   }}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}

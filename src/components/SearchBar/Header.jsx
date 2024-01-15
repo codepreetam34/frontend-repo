@@ -8,9 +8,6 @@ import profileIcon from "../../assets/profileIcon.svg";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { styled, alpha } from "@mui/material/styles";
-import { HeaderStyle } from "./HeaderStyle";
-import { commonStyle } from "../../Styles/commonStyles";
 import { Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import "./HeaderBootstrapMenu.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,49 +26,6 @@ import { makeStyles } from "@mui/styles";
 import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
 import { ErrorToaster, SuccessToaster } from "constants/util";
 import PincodeWrapper from "components/PincodeWrapper";
-
-// const StyledMenu = styled((props) => (
-//   <Menu
-//     elevation={0}
-//     anchorOrigin={{
-//       vertical: "bottom",
-//       horizontal: "right",
-//     }}
-//     transformOrigin={{
-//       vertical: "top",
-//       horizontal: "right",
-//     }}
-//     {...props}
-//   />
-// ))(({ theme }) => ({
-//   "& .MuiPaper-root": {
-//     borderRadius: 6,
-//     marginTop: theme.spacing(1),
-//     minWidth: 180,
-//     color:
-//       theme.palette.mode === "light"
-//         ? "rgb(55, 65, 81)"
-//         : theme.palette.grey[300],
-//     boxShadow:
-//       "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-//     "& .MuiMenu-list": {
-//       padding: "4px 0",
-//     },
-//     "& .MuiMenuItem-root": {
-//       "& .MuiSvgIcon-root": {
-//         fontSize: 18,
-//         color: theme.palette.text.secondary,
-//         marginRight: theme.spacing(1.5),
-//       },
-//       "&:active": {
-//         backgroundColor: alpha(
-//           theme.palette.primary.main,
-//           theme.palette.action.selectedOpacity
-//         ),
-//       },
-//     },
-//   },
-// }));
 
 const useStyles = makeStyles((theme) => ({
   commonStyle: {
@@ -129,6 +83,99 @@ const useStyles = makeStyles((theme) => ({
       color: "#801317",
     },
   },
+
+  iconGridContainer: {
+    margin: "0",
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "3px 50px",
+    background: "rgb(252, 237, 238)",
+  },
+  headerFullStyle: {
+    backgroundColor: "white !important",
+    boxShadow: "0 2px 4px rgba(0,0,0,.2)",
+  },
+  flexDisplayStyle: {
+    display: "flex",
+  },
+  logoStyle: {
+    display: "flex",
+    alignItems: "center",
+  },
+  monkeyLogoStyle: {
+    width: "45px",
+    height: "45px",
+  },
+  logoStyle: {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    gap: "1rem",
+  },
+  menuStyle: {
+    padding: "2rem",
+    ".MuiMenu-list": {
+      width: "236px",
+    },
+    ".MuiPopover-paper": {
+      padding: "1rem 1rem 1rem 0",
+      borderRadius: "20px",
+      width: "236px",
+    },
+  },
+  menuDropdownStyle: {
+    display: "flex",
+    marginBottom: ".5rem",
+  },
+  profileStyle: {
+    marginLeft: "1rem",
+  },
+  menuFontSize: { fontSize: "14px" },
+  buttonStyle: {
+    color: "#717171",
+    padding: "0",
+    fontSize: "10px",
+    backgroundColor: "none",
+    border: "none",
+    "&:hover": {
+      backgroundColor: "white",
+      border: "none",
+    },
+  },
+  typoStyle: {
+    color: "#717171",
+    marginLeft: "12px",
+    fontSize: "10px",
+    color: "black",
+  },
+  menuItemStyle: {
+    padding: "1rem",
+  },
+
+  menuItemImg: {
+    marginRight: "12px",
+  },
+
+  navPadding: {
+    padding: "0px 60px",
+  },
+
+  navbarContainerPadding: {
+    display: "flex",
+    flexWrap: "nowrap",
+    margin: "0",
+    padding: "0",
+    justifyContent: "start",
+  },
+
+  navbarToggle: {
+    margin: "5px 8px",
+    background: "#FFF",
+  },
+  navbarTitle: {
+    color: "#fff",
+    fontWeight: "600",
+  },
 }));
 const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const dispatch = useDispatch();
@@ -142,7 +189,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [headerPageModalOpen, setHeaderPageModalOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  // const [anchorElSec, setAnchorElSec] = React.useState(null);
   const [show, setShow] = useState("");
   const [pincodeData, setPincodeData] = useState("");
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
@@ -219,11 +265,15 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
       categoryId,
       pincodeData,
     };
-    navigate(`/product-page/${tagName}`, { state: { payload: payload } });
+    navigate(
+      `/product-page/${tagName}`,
+      { forceRefresh: true },
+      { state: { payload: payload } }
+    );
   };
 
   const handleCategoryClick = (categoryId) => {
-    navigate(`/category-page/${categoryId}`);
+    navigate(`/category-page/${categoryId}`, { forceRefresh: true });
   };
 
   const navigateToLogin = () => {
@@ -250,49 +300,38 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
 
-  const items = [1, 2, 3];
+  // const items = [1, 2, 3];
 
-  useEffect(() => {
-    // Some effect code using item
-    items.forEach((item) => {
-      console.log("item", item);
-    });
-  }, []);
+  // useEffect(() => {
+  //   items.forEach((item) => {
+  //     console.log("item", item);
+  //   });
+  // }, []);
 
   return (
-    <Grid sx={HeaderStyle.headerFullStyle}>
-      <Row style={{ ...HeaderStyle.iconGridContainer, margin: "0" }}>
-        <Col style={commonStyle.flexDisplayStyle}>
-          <a href={"/"} style={{ display: "flex", alignItems: "center" }}>
+    <Grid className={`${classes.headerFullStyle}`}>
+      <Row className={`${classes.iconGridContainer}`}>
+        <Col className={`${classes.flexDisplayStyle}`}>
+          <a href={"/"} className={`${classes.logoStyle}`}>
             <img
               src={monkeyLogo}
               alt="monkeyLogo"
-              style={HeaderStyle.monkeyLogoStyle}
+              className={`${classes.monkeyLogoStyle}`}
             />
             <img
               src={VibezterLogo}
               alt="VibezterLogo"
-              style={{ ...HeaderStyle.vibezterLogoStyle }}
+              claasName={`${classes.vibezterLogoStyle}`}
             />
           </a>
         </Col>
         <Col className="searchBar-col">
           <SearchBar placeholder={"Search gifts, experiences and more..."} />
         </Col>
-        <Col
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            gap: "1rem",
-          }}
-        >
+        <Col className={`${classes.logoStyle}`}>
           <Box>
-            <Link to={`/add-to-cart`} style={{ textDecoration: "none" }}>
-              <Button
-                onClick={handleClick}
-                //     style={{ padding: '0' }}
-              >
+            <Link to={`/add-to-cart`}>
+              <Button onClick={handleClick}>
                 <img
                   src={cart}
                   alt="cart"
@@ -323,10 +362,14 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               MenuListProps={{
                 "aria-labelledby": "basic-button",
               }}
-              sx={{ padding: "2rem", ...HeaderStyle.lgjaStyle }}
+              className={`${classes.menuStyle}`}
             >
-              <Box sx={{ display: "flex", marginBottom: ".5rem" }}>
-                <Stack direction="row" spacing={2} sx={{ marginLeft: "1rem" }}>
+              <Box className={`${classes.menuDropdownStyle}`}>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  className={`${classes.profileStyle}`}
+                >
                   <Avatar
                     src={
                       personLoggedData?.profilePicture
@@ -339,23 +382,12 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                   <Box sx={{ marginLeft: "12px" }}>
                     <FMTypography
                       displayText={personLoggedIn}
-                      sx={{ fontSize: "14px" }}
+                      className={`${classes.menuFontSize}`}
                     />
                     <FMButton
                       displayText={"See your Profile"}
                       variant={"outlined"}
-                      styleData={{
-                        // ...commonStyle.buttonStyles,padd
-                        color: "#717171",
-                        padding: "0",
-                        fontSize: "10px",
-                        backgroundColor: "none",
-                        border: "none",
-                        "&:hover": {
-                          backgroundColor: "white",
-                          border: "none",
-                        },
-                      }}
+                      claasName={`${classes.buttonStyle}`}
                       onClick={profileNavigation}
                     />
                   </Box>
@@ -364,27 +396,12 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                     <FMButton
                       displayText={"Log in"}
                       variant={"outlined"}
-                      styleData={{
-                        textTransform: "capitalize",
-                        paddingTop: "0",
-                        color: "black",
-                        backgroundColor: "none",
-                        border: "none",
-                        "&:hover": {
-                          backgroundColor: "white",
-                          border: "none",
-                        },
-                      }}
+                      claasName={`${classes.buttonStyle}`}
                       onClick={navigateToLogin}
                     />
                     <FMTypography
                       displayText={"To access account"}
-                      sx={{
-                        color: "#717171",
-                        marginLeft: "12px",
-                        fontSize: "10px",
-                        color: "black",
-                      }}
+                      className={`${classes.typoStyle}`}
                     />
                   </Box>
                 )}
@@ -393,32 +410,38 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               <MenuItem
                 onClick={orderNavigation}
                 divider
-                sx={{
-                  padding: "1rem",
-                }}
+                className={`${classes.menuItemStyle}`}
               >
                 <img
                   src={orderIcon}
                   alt="order-icon"
-                  style={{ marginRight: "12px" }}
+                  className={`${classes.menuItemImg}`}
                 />
                 My Orders
               </MenuItem>
 
-              <MenuItem onHover={handleClose} divider sx={{ padding: "1rem" }}>
+              <MenuItem
+                onHover={handleClose}
+                divider
+                className={`${classes.menuItemStyle}`}
+              >
                 <img
                   src={contactIcon}
                   alt="contact-icon"
-                  style={{ marginRight: "12px" }}
+                  className={`${classes.menuItemImg}`}
                 />
                 Contact Us
               </MenuItem>
 
-              <MenuItem onClick={faqsHandler} divider sx={{ padding: "1rem" }}>
+              <MenuItem
+                onClick={faqsHandler}
+                divider
+                className={`${classes.menuItemStyle}`}
+              >
                 <img
                   src={faqIcon}
                   alt="faqIcon-icon"
-                  style={{ marginRight: "12px" }}
+                  className={`${classes.menuItemImg}`}
                 />
                 FAQ's
               </MenuItem>
@@ -427,12 +450,12 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                 <MenuItem
                   onClick={logoutHandler}
                   divider
-                  sx={{ padding: "1rem" }}
+                  className={`${classes.menuItemStyle}`}
                 >
                   <img
                     src={logoutIcon}
                     alt="logout-icon"
-                    style={{ marginRight: "12px" }}
+                    className={`${classes.menuItemImg}`}
                   />
                   Log Out
                 </MenuItem>
@@ -445,19 +468,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               <div>
                 <Button
                   onClick={handleModalOpenController}
-                  // sx={{
-                  //   color: isHovered ? "#801317" : "#fff",
-                  //   background: isHovered ? "#fff" : "#801317",
-                  //   borderRadius: "100px",
-                  //   padding: "5px 20px",
-                  //   transition: "color 0.3s, background 0.3s", // Added smooth transition
-                  //   border: '1px solid #801317',
-                  //   "&:hover": {
-                  //     background: "#fcedee",
-                  //     color: "#801317",
-                  //     border: '1px solid #801317'
-                  //   },
-                  // }}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
@@ -484,16 +494,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                   onClick={handleModalOpenController}
                   sx={{
                     color: "#801317",
-                    //     background: isHovered ? "#fff" : "#801317",
-                    //        borderRadius: "100px",
-                    //       padding: "5px 20px",
-                    transition: "color 0.3s, background 0.3s", // Added smooth transition
-                    //         border: '1px solid #801317',
-                    //      "&:hover": {
-                    //         background: "#fcedee",
-                    //         color: "#801317",
-                    //          border: '1px solid #801317'
-                    //     },
+                    transition: "color 0.3s, background 0.3s",
                   }}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
@@ -520,35 +521,23 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
         </Col>
       </Row>
 
-      <div className="main_header" style={{ padding: "0.25rem 0 0.25rem 0" }}>
-        <Navbar
-          bg=""
-          expand="lg"
-          className="p-0"
-          style={{ paddingBottom: "5px" }}
-        >
-          <Container
-            fluid
-            className="d-flex flex-wrap n-0 p-0 justify-content-start"
-          >
+      <div className={`main_header`}>
+        <Navbar bg="" expand="lg">
+          <Container fluid className={`${classes.navbarContainerPadding}`}>
             <Navbar.Toggle
               aria-controls="navbarScroll"
-              style={{
-                margin: "5px 8px",
-                background: "#FFF",
-              }}
+              className={`${classes.navbarToggle}`}
             />
             <Navbar.Collapse id="navbarScroll">
-              <Nav navbarScroll style={{ padding: "0px 60px" }}>
+              <Nav navbarScroll className={`${classes.navpadding}`}>
                 {categoryList &&
                   categoryList?.map((elem, index) => {
                     return (
                       <NavDropdown
                         title={
                           <div
-                            className="main-heading-clickable heading-text"
                             onClick={() => handleCategoryClick(elem?._id)}
-                            style={{ color: "#fff", fontWeight: "600" }}
+                            className={`main-heading-clickable heading-text ${classes.navbarTitle}`}
                           >
                             <span>{elem?.name}</span>
                             <i
