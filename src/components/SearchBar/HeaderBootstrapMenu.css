@@ -109,4 +109,18 @@
   margin-top: 0 !important;
 }
 
+.parentMenu .dropdown-menu.show {
+  width: 37.5vw;
+}
 
+.submenu .dropdown-menu.show {
+  width: 30vw;
+}
+
+.offcanvas-menu.offcanvas.offcanvas-start.show {
+  width: 30rem;
+}
+
+body.modal-open {
+  background: rgba(0, 0, 0, 0.5);
+}

@@ -14,9 +14,10 @@ import Layout from "../components/Layout";
 import StartupScreen from "../components/StartpScreen";
 import adsBanner from "assets/LandingPage/adsBanner.png";
 import { Col, Container, Row } from "react-bootstrap";
+import AutoCompleteChips from "components/inputListChip";
+import UserDropdown from "components/inputListChip";
 
 const LandingPage = () => {
-
   const [loading, setLoading] = useState(true);
   const [landingPageModalOpen, setLandingPageModalOpen] = useState(true);
 
@@ -24,7 +25,7 @@ const LandingPage = () => {
     const simulateAsyncOperation = () => {
       setTimeout(() => {
         setLoading(false);
-      }, 1000); 
+      }, 1000);
     };
     simulateAsyncOperation();
   }, []);
@@ -38,7 +39,7 @@ const LandingPage = () => {
       behavior: "smooth",
     });
   }, []);
-  
+
   return (
     <>
       <Layout title={title} description={description}>
@@ -93,6 +94,8 @@ const LandingPage = () => {
               <PamperZone />
               <ThreePoint />
             </div>
+
+            <UserDropdown />
 
             <Footer />
           </>

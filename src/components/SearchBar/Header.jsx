@@ -8,7 +8,16 @@ import profileIcon from "../../assets/profileIcon.svg";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
+import {
+  Col,
+  Container,
+  Form,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Offcanvas,
+  Row,
+} from "react-bootstrap";
 import "./HeaderBootstrapMenu.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getMenuBarList } from "../../Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
@@ -181,6 +190,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
+  const [menuVisible, setMenuVisible] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [showErrorToastMessage, setShowErrorToastMessage] = useState();
   const [showToast, setShowToast] = useState(false);
@@ -300,6 +310,12 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
 
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleToggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   // const items = [1, 2, 3];
 
   // useEffect(() => {
@@ -310,7 +326,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
 
   return (
     <Grid className={`${classes.headerFullStyle}`}>
-      <Row className={`${classes.iconGridContainer}`}>
+      <Row className={`d-none d-md-flex ${classes.iconGridContainer}`}>
         <Col className={`${classes.flexDisplayStyle}`}>
           <a href={"/"} className={`${classes.logoStyle}`}>
             <img
@@ -345,7 +361,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               </Button>
             </Link>
           </Box>
-          {/* profile below */}
           <Box>
             <Button onClick={handleClick}>
               <img
@@ -521,13 +536,78 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
         </Col>
       </Row>
 
-      <div className={`main_header`}>
+      <div className={`d-md-none`}>
+        <Navbar expand="lg" bg="light">
+          <Container fluid>
+            <Navbar.Toggle
+              aria-controls="basic-navbar-nav"
+              onClick={handleToggleMenu}
+            />
+          </Container>
+        </Navbar>
+
+        {/* Offcanvas menu content */}
+        <Offcanvas
+          className="offcanvas-menu"
+          show={showMenu}
+          onHide={() => setShowMenu(false)}
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Mobile Menu</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body className="px-3 py-2" style={{ width: "22rem" }}>
+            <Nav className="flex-column">
+              <NavDropdown
+                title="Parent Item 1"
+                id="parent-item-1"
+                className="parentMenu"
+              >
+                <NavDropdown.Item href="#child1">Child 1</NavDropdown.Item>
+                <NavDropdown.Item href="#child2">Child 2</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown
+                  title="Submenu 1"
+                  id="submenu-1"
+                  className="submenu"
+                >
+                  <NavDropdown.Item href="#subchild1">
+                    Subchild 1
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#subchild2">
+                    Subchild 2
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </NavDropdown>
+
+              <NavDropdown
+                title="Parent Item 2"
+                id="parent-item-2"
+                className="parentMenu"
+              >
+                <NavDropdown.Item href="#child3">Child 3</NavDropdown.Item>
+                <NavDropdown.Item href="#child4">Child 4</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown
+                  title="Submenu 2"
+                  id="submenu-2"
+                  className="submenu"
+                >
+                  <NavDropdown.Item href="#subchild3">
+                    Subchild 3
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#subchild4">
+                    Subchild 4
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </NavDropdown>
+            </Nav>
+          </Offcanvas.Body>
+        </Offcanvas>
+      </div>
+
+      <div className={`main_header d-none d-md-flex `}>
         <Navbar bg="" expand="lg">
           <Container fluid className={`${classes.navbarContainerPadding}`}>
-            <Navbar.Toggle
-              aria-controls="navbarScroll"
-              className={`${classes.navbarToggle}`}
-            />
             <Navbar.Collapse id="navbarScroll">
               <Nav navbarScroll className={`${classes.navpadding}`}>
                 {categoryList &&
@@ -623,6 +703,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+
         {showErrorToast && (
           <ErrorToaster
             showErrorToast={showErrorToast}
