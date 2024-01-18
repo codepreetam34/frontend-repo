@@ -21,13 +21,13 @@ const Banner = () => {
     infinite: true,
     speed: 300,
     draggable: true,
-    margin: responsiveMobile ? "50px" : "100px",
+    margin: responsiveMobile ? "20px" : "100px",
     autoplay: true,
     arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  const finalData = allCarousels && allCarousels || [];
+  const finalData = (allCarousels && allCarousels) || [];
 
   return (
     <div className="banner_slider">
@@ -42,7 +42,8 @@ const Banner = () => {
                     alt=""
                     style={{
                       width: "100%",
-                      height: "50vh",
+                      height: responsiveMobile ? "auto" : "50vh",
+                      objectFit: "cover",
                     }}
                   />
                 </Box>
