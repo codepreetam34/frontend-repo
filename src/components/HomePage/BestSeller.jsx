@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getBestSellerProducts } from "Redux/Slices/ProductPage/ProductsPageSlice";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({

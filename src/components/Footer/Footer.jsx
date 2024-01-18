@@ -6,45 +6,148 @@ import appleIcon from "../../assets/appleIcon.svg";
 import footerLogo from "../../assets/FooterLogo.png";
 import { Box, InputBase } from "@mui/material";
 import FMButton from "../../components/FMButton/FMButton";
+import { makeStyles } from "@material-ui/core/styles";
+const useStyles = makeStyles((theme) => ({
+  footerContainer: {
+    background: "#FCEDEE",
+    padding: "20px 40px",
+    [theme.breakpoints.down("sm")]: {
+      padding: "30px 20px 0",
+    },
+  },
+  centeredColumn: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  subscribeContainer: {
+    fontSize: "14px",
+    color: "#717171",
+    fontWeight: "400",
+    listStyle: "none",
+    textAlign: "center",
+    paddingBottom: "0.8rem",
+  },
+  subscribeTitle: {
+    fontSize: "20px",
+    fontWeight: "600",
+    textAlign: "center",
+    paddingBottom: "5px",
+  },
+  subscribeBox: {
+    display: "flex",
+    paddingTop: "10px",
+  },
+  subscribeInput: {
+    width: "279px",
+    height: "55px",
+    flexShrink: "0",
+    borderRadius: "16px 0px 0px 16px",
+    background: "#FFF",
+    padding: "5px 40px 5px",
+  },
+  subscribeButton: {
+    width: "120px",
+    height: "55px",
+    flexShrink: "0",
+    borderRadius: "0px 10px 10px 0px",
+    background: "#801317",
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    fontStyle: "normal",
+    fontWeight: "600",
+  },
+  logoContainer: {
+    fontSize: "14px",
+    color: "#717171",
+    fontWeight: "400",
+    listStyle: "none",
+    marginLeft: "1.1rem",
+    paddingBottom: "0.8rem",
+  },
+  logo: {
+    width: "100%",
+  },
+  addressContainer: {
+    fontSize: "14px",
+    color: "#717171",
+    fontWeight: "400",
+    listStyle: "none",
+    marginLeft: "1.1rem",
+  },
+  address: {
+    padding: "1rem 0",
+  },
+  availableOn: {
+    listStyle: "none",
+    display: "flex",
+    alignItems: "center",
+    gap: "1rem",
+  },
+  availableText: {
+    fontSize: "14px",
+    color: "#717171",
+    fontWeight: "400",
+  },
+  icon: {
+    marginRight: "1rem",
+    width: "25px",
+  },
+  linksColumn: {
+    paddingTop: "1rem",
+  },
+  sectionTitle: {
+    fontSize: "14px",
+    color: "#717171",
+    fontWeight: "400",
+    listStyle: "none",
+    textAlign: "center",
+    paddingBottom: "0.8rem",
+  },
+  sectionTitleText: {
+    fontSize: "20px",
+    fontWeight: "500",
+    textAlign: "center",
+  },
+  linksContainer: {
+    fontSize: "14px",
+    color: "#717171",
+    fontWeight: "400",
+    listStyle: "none",
+    textAlign: "center",
+    paddingBottom: "5px",
+  },
+  link: {
+    padding: "5px 0",
+  },
+  copyrightRow: {
+    background: "#EAB6B8",
+    padding: "15px 50px 15px 50px",
+  },
+  copyright: {
+    fontSize: "12px",
+    color: "#801317",
+    fontWeight: "700",
+  },
+}));
 const Footer = () => {
+  const classes = useStyles();
+
   return (
     <Container fluid>
-
-      <Row style={{ background: "#FCEDEE", padding: "20px 50px 20px 50px" }}>
-        <Col md={12} style={{ display: "flex", justifyContent: "center" }}>
-          <div
-            style={{
-              fontSize: "14px",
-              color: "#717171",
-              fontWeight: "400",
-              listStyle: "none",
-              textAlign: "center",
-              paddingBottom: "0.8rem",
-            }}
-          >
+      <Row className={classes.footerContainer}>
+        <Col md={12} className={classes.centeredColumn}>
+          <div className={classes.subscribeContainer}>
             <FMTypography
               displayText={"Subscribe"}
-              styleData={{
-                fontSize: "20px",
-                fontWeight: "600",
-                textAlign: "center",
-                paddingBottom: "5px",
-              }}
+              className={classes.subscribeTitle}
             />
-            <Box sx={{ display: "flex", paddingTop: "10px" }}>
+            <Box className={classes.subscribeBox}>
               <InputBase
                 required
                 id="text"
                 name="text"
                 placeholder="Enter Email"
-                sx={{
-                  width: "279px",
-                  height: "55px",
-                  flexShrink: "0",
-                  borderRadius: "16px 0px 0px 16px",
-                  background: "#FFF",
-                  padding: "5px 40px 5px",
-                }}
+                className={classes.subscribeInput}
               />
               <FMButton
                 displayText={"Submit"}
@@ -59,275 +162,86 @@ const Footer = () => {
                   fontStyle: "normal",
                   fontWeight: "600",
                 }}
-                style={{ textTransform: "capatilize !important" }}
+                style={{ textTransform: "capitalize !important" }}
               />
             </Box>
           </div>
           <div></div>
         </Col>
         <Col md={3}>
-          <div
-            style={{
-              fontSize: "14px",
-              color: "#717171",
-              fontWeight: "400",
-              listStyle: "none",
-              marginLeft: "1.1rem",
-              paddingBottom: "0.8rem",
-              // textAlign: "center",
-            }}
-          >
-            <img src={footerLogo} style={{ width: "100%" }} />
+          <div className={classes.logoContainer}>
+            <img src={footerLogo} className={classes.logo} alt="footer-logo" />
           </div>
-          <div>
-            <div
-              style={{
-                fontSize: "14px",
-                color: "#717171",
-                fontWeight: "400",
-                listStyle: "none",
-                marginLeft: "1.1rem",
-                // textAlign: "center",
-              }}
-            >
+          <div className={classes.addressContainer}>
+            <div className={classes.address}>
               319, Aggarwal Millennium Tower 1, above bittu tikki wala, Netaji
               Subhash Place, Pitam Pura, New Delhi, Delhi 110034
             </div>
-            <div
-              style={{
-                fontSize: "14px",
-                color: "#717171",
-                fontWeight: "400",
-                listStyle: "none",
-                marginLeft: "1.1rem",
-                padding: "1rem 0",
-                // textAlign: "center",
-              }}
-            >
-              hr@thewebgross.com
-            </div>
-            <div
-              style={{
-                listStyle: "none",
-                padding: "0 1rem 0 1rem",
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "14px",
-                  color: "#717171",
-                  fontWeight: "400",
-                }}
-              >
-                Available on:
-              </div>
+            <div className={classes.address}>hr@thewebgross.com</div>
+            <div className={classes.availableOn}>
+              <div className={classes.availableText}>Available on:</div>
               <div>
                 <img
                   src={androidIcon}
                   alt="android-icon"
-                  style={{ marginRight: "1rem", width: "25px" }}
+                  className={classes.icon}
                 />
                 <img
                   src={appleIcon}
                   alt="apple-icon"
-                  style={{ width: "25px" }}
+                  className={classes.icon}
                 />
               </div>
             </div>
           </div>
         </Col>
-        <Col md={9} style={{ paddingTop: "1rem" }}>
+        <Col md={9} className={classes.linksColumn}>
           <Row>
-            <Col>
-              <div
-                style={{
-                  fontSize: "14px",
-                  color: "#717171",
-                  fontWeight: "400",
-                  listStyle: "none",
-                  textAlign: "center",
-                  paddingBottom: "0.8rem",
-                }}
-              >
+            <Col className={classes.linksColumn}>
+              <div className={classes.sectionTitle}>
                 <FMTypography
                   displayText={"About Company"}
-                  styleData={{
-                    fontSize: "20px",
-                    fontWeight: "500",
-                    textAlign: "center",
-                  }}
-                />{" "}
+                  styleData={classes.sectionTitleText}
+                />
               </div>
-              <div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  About Us
-                </div>
-
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  Disclaimer
-                </div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  WebGross Team
-                </div>
+              <div className={classes.linksContainer}>
+                <div className={classes.link}>About Us</div>
+                <div className={classes.link}>Disclaimer</div>
+                <div className={classes.link}>WebGross Team</div>
               </div>
             </Col>
-            <Col>
-              <div
-                style={{
-                  fontSize: "14px",
-                  color: "#717171",
-                  fontWeight: "400",
-                  listStyle: "none",
-                  textAlign: "center",
-                  paddingBottom: "0.8rem",
-                }}
-              >
+            <Col className={classes.linksColumn}>
+              <div className={classes.sectionTitle}>
                 <FMTypography
                   displayText={"Policy Info"}
-                  styleData={{
-                    fontSize: "20px",
-                    fontWeight: "500",
-                    textAlign: "center",
-                  }}
+                  styleData={classes.sectionTitleText}
                 />
               </div>
-              <div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  Careers
-                </div>
-
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  Franchise
-                </div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  Terms & Policy
-                </div>
+              <div className={classes.linksContainer}>
+                <div className={classes.link}>Careers</div>
+                <div className={classes.link}>Franchise</div>
+                <div className={classes.link}>Terms & Policy</div>
               </div>
             </Col>
-            <Col>
-              <div
-                style={{
-                  fontSize: "14px",
-                  color: "#717171",
-                  fontWeight: "400",
-                  listStyle: "none",
-                  textAlign: "center",
-                  paddingBottom: "0.8rem",
-                }}
-              >
+            <Col className={classes.linksColumn}>
+              <div className={classes.sectionTitle}>
                 <FMTypography
                   displayText={"Help"}
-                  styleData={{
-                    fontSize: "20px",
-                    fontWeight: "500",
-                    textAlign: "center",
-                  }}
+                  styleData={classes.sectionTitleText}
                 />
               </div>
-              <div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  Contact Us
-                </div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  Privacy Policy
-                </div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#717171",
-                    fontWeight: "400",
-                    listStyle: "none",
-                    textAlign: "center",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  Terms & Conditions
-                </div>
+              <div className={classes.linksContainer}>
+                <div className={classes.link}>Contact Us</div>
+                <div className={classes.link}>Privacy Policy</div>
+                <div className={classes.link}>Terms & Conditions</div>
               </div>
             </Col>
           </Row>
         </Col>
       </Row>
-      <Row style={{ background: "#EAB6B8", padding: "15px 50px 15px 50px" }}>
-        <Col style={{ display: "flex", justifyContent: "center" }}>
-          <div
-            style={{ fontSize: "12px", color: "#801317", fontWeight: "700" }}
-          >
+      <Row className={classes.copyrightRow}>
+        <Col className={classes.centeredColumn}>
+          <div className={classes.copyright}>
             All Copyrght reserved by © Webgross Pvt Ltd.
           </div>
         </Col>
