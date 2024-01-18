@@ -3,10 +3,124 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomePageShopByOccasion } from "Redux/Slices/ShopByOccasion/ShopByOccasionSlice";
+import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
+const useStyles = makeStyles((theme) => ({
+  shopbyocca: {
+    "&  img": {
+      width: "100%",
+      height: "725px",
+      objectFit: "cover",
+      borderRadius: "20px",
+    },
+    padding: "50px 80px 0",
+    position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      padding: "30px 20px 0",
+    },
+  },
+
+  heighautoimgfirst: {
+    position: "relative",
+    overflow: "hidden",
+    marginBottom: "25px",
+    display: "block",
+    height: "260px",
+    "& a": {
+      position: "relative",
+      overflow: "hidden",
+      marginBottom: "25px",
+      display: "block",
+      height: "260px",
+    },
+    "& p": {
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50%, -50%)",
+      margin: 0,
+      color: "#fff",
+      fontSize: "1.25rem",
+      fontWeight: 500,
+      textAlign: "center",
+      width: "100%",
+    },
+  },
+  twobandatalowersection: {
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%)",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  twobandatalowersectionH4: {
+    fontSize: "3.125rem",
+    fontWeight: 600,
+    paddingBottom: "2rem",
+    color: "#fff",
+    textTransform: "capitalize",
+    margin: 0,
+    padding: 0,
+  },
+
+  heighautoimg: {
+    position: "relative",
+    overflow: "hidden",
+    marginBottom: "25px",
+    display: "block",
+    "& a img": {
+      width: "100%",
+      height: "260px",
+    },
+    "& a": {
+      position: "relative",
+      overflow: "hidden",
+      marginBbottom: "25px",
+      display: "block",
+      "& p": {
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+        margin: 0,
+        color: "#fff",
+        fontSize: "1.25rem",
+        fontWeight: 500,
+        textAlign: "center",
+        width: "100%",
+      },
+    },
+    "&:nth-child(2) a img": {
+      height: "220px",
+    },
+    "&:nth-child(3) a img": {
+      height: "195px",
+    },
+    "& .second_row:nth-child(1) a img": {
+      height: "190px",
+    },
+    "& .second_row:nth-child(2) a img": {
+      height: "220px",
+    },
+    "& .second_row:nth-child(3) a img": {
+      height: "265px",
+    },
+    "& .forth_row:nth-child(1) a img": {
+      height: "350px",
+    },
+    "& .forth_row:nth-child(2) a img": {
+      height: "350px",
+    },
+  },
+}));
 const ShopByOccasion = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState();
+  const classes = useStyles();
 
   const ShopByOccasionCarousels = useSelector(
     (state) => state.shopByOccasion?.shopByOccations?.homepageBanner
@@ -32,7 +146,7 @@ const ShopByOccasion = () => {
   }, [dispatch]);
 
   return (
-    <div className="shopbyocca">
+    <div className={`${classes.shopbyocca} shopbyocca`}>
       <Container fluid className="m-0 p-0">
         <Row>
           <Col md={12}>
@@ -43,8 +157,12 @@ const ShopByOccasion = () => {
           <Col md={6}>
             <Row>
               <Col md={4}>
-                <div className="heighautoimgfirst">
-                  <a href="/product-page" className="overlay">
+                <div className={classes.heighautoimgfirst}>
+                  <Link
+                    href="/product-page"
+                    className="overlay"
+                    style={{ borderRadius: "20px" }}
+                  >
                     <img
                       src={
                         ShopByOccasionCarousels &&
@@ -57,7 +175,7 @@ const ShopByOccasion = () => {
                       {ShopByOccasionCarousels &&
                         ShopByOccasionCarousels[8]?.title}
                     </p>
-                  </a>
+                  </Link>
                 </div>
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
@@ -181,7 +299,7 @@ const ShopByOccasion = () => {
             </Row>
           </Col>
           <Col md={6}>
-            <div className=" position-relative">
+            <div className="position-relative">
               <div className="overlay"></div>
               <img
                 src={
@@ -189,9 +307,9 @@ const ShopByOccasion = () => {
                 }
                 alt=""
               />
-              <div className="twobandatalowersection">
+              <div className={classes.twobandatalowersection}>
                 {/* <h4>Birthday</h4> */}
-                <h4 style={{ paddingBottom: "2rem" }}>
+                <h4 className={classes.twobandatalowersectionH4}>
                   {ShopByOccasionCarousels && ShopByOccasionCarousels[0]?.title}
                 </h4>
                 {/* <a href="/">Gift Now</a> */}

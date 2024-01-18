@@ -14,11 +14,27 @@ import Layout from "../components/Layout";
 import StartupScreen from "../components/StartpScreen";
 import adsBanner from "assets/LandingPage/adsBanner.png";
 import { Col, Container, Row } from "react-bootstrap";
-import AutoCompleteChips from "components/inputListChip";
-import UserDropdown from "components/inputListChip";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme) => ({
+  adsContainer: {
+    padding: "50px 80px 0",
+    [theme.breakpoints.down("sm")]: {
+      padding: "30px 20px 0",
+    },
+  },
+  adsImage: {
+    width: "100%",
+    height: "130px",
+    borderRadius: "20px",
+    [theme.breakpoints.down("sm")]: {
+      height: "60px",
+    },
+  },
+}));
 const LandingPage = () => {
   const [loading, setLoading] = useState(true);
+  const classes = useStyles();
   const [landingPageModalOpen, setLandingPageModalOpen] = useState(true);
 
   useEffect(() => {
@@ -69,20 +85,15 @@ const LandingPage = () => {
                 <TopCategory />
               </Box>
 
-              <div style={{ padding: "50px 80px 0" }}>
+              <div className={classes.adsContainer}>
                 <Container fluid className="m-0 p-0">
                   <Row>
                     <Col md={12}>
                       <div className="">
                         <img
                           src={adsBanner}
-                          className="img-fluid"
+                          className={`img-fluid ${classes.adsImage}`}
                           alt=""
-                          style={{
-                            width: "100%",
-                            height: "130px",
-                            borderRadius: "20px",
-                          }}
                         />
                       </div>
                     </Col>
@@ -94,9 +105,6 @@ const LandingPage = () => {
               <PamperZone />
               <ThreePoint />
             </div>
-
-            <UserDropdown />
-
             <Footer />
           </>
         )}
