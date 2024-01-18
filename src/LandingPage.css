@@ -169,28 +169,10 @@ p {
 .twobandata h4 {
   font-size: 1.875rem;
   font-weight: 600;
-  color: #fff;
+  color: #000;
   text-transform: capitalize;
   margin: 0;
   padding: 0;
-}
-
-.twobandata p {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #fff;
-  margin: 0;
-  padding: 15px 0;
-}
-
-.twobandata a {
-  border: 1px solid #fff;
-  border-radius: 6px;
-  text-decoration: none !important;
-  padding: 6px 20px;
-  font-size: 1.125rem;
-  display: inline-block;
-  color: #fff;
 }
 
 .heading_text h3 {

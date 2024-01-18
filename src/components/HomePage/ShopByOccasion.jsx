@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
       padding: "30px 20px 0",
     },
   },
-
   heighautoimgfirst: {
     position: "relative",
     overflow: "hidden",
@@ -62,11 +61,11 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     paddingBottom: "2rem",
     color: "#fff",
+    textAlign: "center",
     textTransform: "capitalize",
     margin: 0,
     padding: 0,
   },
-
   heighautoimg: {
     position: "relative",
     overflow: "hidden",
@@ -154,9 +153,9 @@ const ShopByOccasion = () => {
               <h3>Shop By Occasions</h3>
             </div>
           </Col>
-          <Col md={6}>
+          <Col xs={12} md={6} className="order-xs-2">
             <Row>
-              <Col md={4}>
+              <Col xs={4} md={4}>
                 <div className={classes.heighautoimgfirst}>
                   <Link
                     href="/product-page"
@@ -211,7 +210,7 @@ const ShopByOccasion = () => {
                 </div>
               </Col>
 
-              <Col md={4}>
+              <Col xs={4} md={4}>
                 <div className="heighautoimg forth_row">
                   <a href="/" className="overlay">
                     <img
@@ -246,7 +245,7 @@ const ShopByOccasion = () => {
                 </div>
               </Col>
 
-              <Col md={4}>
+              <Col xs={4} md={4}>
                 <div className="heighautoimg">
                   <a href="/" className="overlay">
                     <img
@@ -298,7 +297,7 @@ const ShopByOccasion = () => {
               </Col>
             </Row>
           </Col>
-          <Col md={6}>
+          <Col xs={12} md={6} className="order-xs-1">
             <div className="position-relative">
               <div className="overlay"></div>
               <img
@@ -308,11 +307,9 @@ const ShopByOccasion = () => {
                 alt=""
               />
               <div className={classes.twobandatalowersection}>
-                {/* <h4>Birthday</h4> */}
                 <h4 className={classes.twobandatalowersectionH4}>
                   {ShopByOccasionCarousels && ShopByOccasionCarousels[0]?.title}
                 </h4>
-                {/* <a href="/">Gift Now</a> */}
                 <FMButton
                   displayText={"Gift Now"}
                   onHover={"white"}
