@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
   },
   columnGap: {
     [theme.breakpoints.down("xs")]: {
-      gap: "1rem",
+      gap: "2rem",
     },
   },
 }));
@@ -190,7 +190,7 @@ const ShopByOccasion = () => {
                     </p>
                   </Link>
                 </div>
-                <div className="heighautoimg">
+                <div className={classes.heighautoimg}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -206,7 +206,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className="heighautoimg">
+                <div className={classes.heighautoimg}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -225,7 +225,7 @@ const ShopByOccasion = () => {
               </Col>
 
               <Col xs={4} md={4}>
-                <div className="heighautoimg forth_row">
+                <div className={`${classes.heighautoimg} forth_row`}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -241,7 +241,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className="heighautoimg forth_row">
+                <div className={`${classes.heighautoimg} forth_row `}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -260,7 +260,7 @@ const ShopByOccasion = () => {
               </Col>
 
               <Col xs={4} md={4}>
-                <div className="heighautoimg">
+                <div className={`${classes.heighautoimg} `}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -276,7 +276,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className="heighautoimg">
+                <div className={`${classes.heighautoimg} `}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -292,7 +292,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className="heighautoimg">
+                <div className={`${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={

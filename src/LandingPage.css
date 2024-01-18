@@ -226,15 +226,6 @@ p {
 }
 
 
-
-.shopbyocca img {
-  width: 100%;
-  height: 725px;
-  object-fit: cover;
-  border-radius: 20px;
-}
-
-
 .overlay::before {
   position: absolute;
   border-radius: 20px;
@@ -277,66 +268,6 @@ p {
   flex-shrink: 0;
 }
 
-.shopbyocca .heighautoimg a {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 25px;
-  display: block;
-}
-
-.shopbyocca .heighautoimgfirst a {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 25px;
-  display: block;
-  height: 260px;
-}
-
-.shopbyocca .heighautoimg a p {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 500;
-  text-align: center;
-  width: 100%;
-}
-
-.shopbyocca .heighautoimgfirst a p {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 500;
-  text-align: center;
-  width: 100%;
-}
-
-.shopbyocca .heighautoimg:nth-child(2) a img {
-  height: 220px;
-}
-
-.shopbyocca .heighautoimg:nth-child(3) a img {
-  height: 195px;
-}
-
-.shopbyocca .second_row:nth-child(1) a img {
-  height: 190px;
-}
-
-.shopbyocca .second_row:nth-child(2) a img {
-  height: 220px;
-}
-
-.shopbyocca .second_row:nth-child(3) a img {
-  height: 265px;
-}
 
 .shopbyocca .forth_row:nth-child(1) a img {
   height: 350px;
@@ -346,71 +277,7 @@ p {
   height: 350px;
 }
 
-/* close css for shop by occasions section */
 
-/* start css for pamper zone section */
-.pamperzone {
-  padding: 50px 80px 0;
-}
-
-.pamperzone .twobandata h4 {
-  color: #000;
-  font-size: 2.813rem;
-  padding: 0 0 20px;
-  font-weight: 600;
-}
-
-/* .pamperzone .twobandata a {
-  background-color: #801319;
-  color: #ffffff;
-  border: 1px solid #801319;
-  padding: 10px 25px;
-  font-size: 1.25rem;
-} */
-
-.pamperzone img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 20px;
-}
-
-/* close css for pamper zone section */
-
-/* start css for three point section */
-.threepoint {
-  padding: 50px 100px;
-}
-
-.threepoint img {
-  margin-bottom: 16px;
-}
-
-.threepoint h3 {
-  font-size: 16px;
-  font-weight: 500;
-  margin: 0;
-  padding-bottom: 4px;
-}
-
-.threepoint p {
-  margin: 0;
-  font-weight: 300;
-  font-size: 14px;
-}
-
-.shopbyocca .heighautoimg a img {
-  width: 100%;
-  height: 260px;
-}
-
-/* close css for three point section */
-.shopbyocca .heighautoimgfirst a img {
-  width: 100%;
-  height: 260px;
-}
-
-/* close css for three point section */
 
 .zoomin-img {
   overflow: hidden;
