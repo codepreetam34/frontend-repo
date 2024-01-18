@@ -115,6 +115,18 @@ const useStyles = makeStyles((theme) => ({
       height: "350px",
     },
   },
+  headingText: {
+    textAlign: "center",
+    fontSize: "2.1875rem",
+    fontWeight: 600,
+    margin: 0,
+    padding: "0 0 35px",
+  },
+  columnGap: {
+    [theme.breakpoints.down("xs")]: {
+      gap: "1rem",
+    },
+  },
 }));
 const ShopByOccasion = () => {
   const dispatch = useDispatch();
@@ -149,11 +161,13 @@ const ShopByOccasion = () => {
       <Container fluid className="m-0 p-0">
         <Row>
           <Col md={12}>
-            <div className="heading_text">
-              <h3>Shop By Occasions</h3>
+            <div>
+              <h3 className={classes.headingText}>Shop By Occasions</h3>
             </div>
           </Col>
-          <Col xs={12} md={6} className="order-xs-2">
+        </Row>
+        <Row className={classes.columnGap}>
+          <Col xs={12} md={6} className="order-md-1 order-2">
             <Row>
               <Col xs={4} md={4}>
                 <div className={classes.heighautoimgfirst}>
@@ -297,7 +311,7 @@ const ShopByOccasion = () => {
               </Col>
             </Row>
           </Col>
-          <Col xs={12} md={6} className="order-xs-1">
+          <Col xs={12} md={6} className="order-md-2 order-1">
             <div className="position-relative">
               <div className="overlay"></div>
               <img
