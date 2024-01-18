@@ -95,9 +95,6 @@ p {
 /* close css for banner slider section */
 
 /* start css for category slider section */
-.category_slider {
-  padding: 20px 80px 0;
-}
 
 .slick-slide a {
   text-decoration: none !important;
@@ -155,10 +152,6 @@ p {
   padding: 15px 15px 13px 20px;
   right: 0px;
 }
-
-/* close css for category slider section */
-
-
 
 .samecard .slick-slide img {
   width: 225px;

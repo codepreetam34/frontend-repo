@@ -63,7 +63,6 @@ const useStyles = makeStyles((theme) => ({
 const BestSeller = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const responsiveMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
     dispatch(getBestSellerProducts());
@@ -120,8 +119,8 @@ const BestSeller = () => {
       <Container fluid className="m-0 p-0">
         <Row>
           <Col md={12}>
-            <div className={classes.headingText}>
-              <h3>Best Seller</h3>
+            <div>
+              <h3 className={classes.headingText}>Best Seller</h3>
             </div>
           </Col>
           <Col md={12} className="m-0 p-0">

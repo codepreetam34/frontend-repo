@@ -9,18 +9,7 @@ import FMButton from "../../components/FMButton/FMButton";
 const Footer = () => {
   return (
     <Container fluid>
-      {/* <Row>
-        <Col>
-          <FMTypography
-            displayText={"Subscribe"}
-            styleData={{
-              textAlign: "center",
-              marginBottom: "20px",
-              fontSize: "32px",
-            }}
-          />
-        </Col>
-      </Row> */}
+
       <Row style={{ background: "#FCEDEE", padding: "20px 50px 20px 50px" }}>
         <Col md={12} style={{ display: "flex", justifyContent: "center" }}>
           <div
@@ -131,7 +120,6 @@ const Footer = () => {
                   fontSize: "14px",
                   color: "#717171",
                   fontWeight: "400",
-                  // textAlign: "center",
                 }}
               >
                 Available on:

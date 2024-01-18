@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     padding: "0 0 35px",
   },
+  
   slickSlideImg: {
     width: "225px",
     height: "300px",
@@ -115,8 +116,8 @@ const TopCategory = () => {
       <Container fluid className="m-0 p-0">
         <Row>
           <Col md={12}>
-            <div className={classes.headingText}>
-              <h3>Top Categories</h3>
+            <div>
+              <h3  className={classes.headingText}>Top Categories</h3>
             </div>
           </Col>
 

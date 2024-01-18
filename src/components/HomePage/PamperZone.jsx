@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: "5px",
     },
   },
+
   headingText: {
     textAlign: "center",
     fontSize: "2.1875rem",
