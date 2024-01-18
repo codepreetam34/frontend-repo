@@ -158,30 +158,7 @@ p {
 
 /* close css for category slider section */
 
-/* start css for two banner section */
 
-.twobandata {
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  transform: translateY(-50%);
-}
-.twobandata h4 {
-  font-size: 1.875rem;
-  font-weight: 600;
-  color: #000;
-  text-transform: capitalize;
-  margin: 0;
-  padding: 0;
-}
-
-.heading_text h3 {
-  text-align: center;
-  font-size: 2.1875rem;
-  font-weight: 600;
-  margin: 0;
-  padding: 0 0 35px;
-}
 
 .samecard .slick-slide img {
   width: 225px;
@@ -268,14 +245,6 @@ p {
   flex-shrink: 0;
 }
 
-
-.shopbyocca .forth_row:nth-child(1) a img {
-  height: 350px;
-}
-
-.shopbyocca .forth_row:nth-child(2) a img {
-  height: 350px;
-}
 
 
 

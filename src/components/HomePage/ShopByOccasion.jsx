@@ -1,10 +1,10 @@
-import FMButton from "components/FMButton/FMButton";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getHomePageShopByOccasion } from "Redux/Slices/ShopByOccasion/ShopByOccasionSlice";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import FMButton from "components/FMButton/FMButton";
+import { getHomePageShopByOccasion } from "Redux/Slices/ShopByOccasion/ShopByOccasionSlice";
 
 const useStyles = makeStyles((theme) => ({
   shopbyocca: {
@@ -157,7 +157,7 @@ const ShopByOccasion = () => {
   }, [dispatch]);
 
   return (
-    <div className={`${classes.shopbyocca} shopbyocca`}>
+    <div className={`${classes.shopbyocca} `}>
       <Container fluid className="m-0 p-0">
         <Row>
           <Col md={12}>
@@ -225,42 +225,44 @@ const ShopByOccasion = () => {
               </Col>
 
               <Col xs={4} md={4}>
-                <div className={`${classes.heighautoimg} forth_row`}>
-                  <a href="/" className="overlay">
-                    <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[5]?.banner
-                      }
-                      className="img-fluid"
-                      alt=""
-                    />
-                    <p>
-                      {ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[5]?.title}
-                    </p>
-                  </a>
-                </div>
-                <div className={`${classes.heighautoimg} forth_row `}>
-                  <a href="/" className="overlay">
-                    <img
-                      src={
-                        ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[4]?.banner
-                      }
-                      className="img-fluid"
-                      alt=""
-                    />
-                    <p>
-                      {ShopByOccasionCarousels &&
-                        ShopByOccasionCarousels[4]?.title}
-                    </p>
-                  </a>
+                <div className={`${classes.heighautoimg}`}>
+                  <div className={` forth_row`}  style={{paddingBottom:'2rem'}}>
+                    <a href="/" className="overlay">
+                      <img
+                        src={
+                          ShopByOccasionCarousels &&
+                          ShopByOccasionCarousels[5]?.banner
+                        }
+                        className="img-fluid"
+                        alt=""
+                      />
+                      <p>
+                        {ShopByOccasionCarousels &&
+                          ShopByOccasionCarousels[5]?.title}
+                      </p>
+                    </a>
+                  </div>
+                  <div className={`forth_row `}>
+                    <a href="/" className="overlay">
+                      <img
+                        src={
+                          ShopByOccasionCarousels &&
+                          ShopByOccasionCarousels[4]?.banner
+                        }
+                        className="img-fluid"
+                        alt=""
+                      />
+                      <p>
+                        {ShopByOccasionCarousels &&
+                          ShopByOccasionCarousels[4]?.title}
+                      </p>
+                    </a>
+                  </div>
                 </div>
               </Col>
 
               <Col xs={4} md={4}>
-                <div className={`${classes.heighautoimg} `}>
+                <div className={`${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={
