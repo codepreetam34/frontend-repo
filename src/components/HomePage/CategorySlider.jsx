@@ -2,11 +2,20 @@ import React, { useEffect } from "react";
 import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getMenuBarList } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme) => ({
+  categorySlider: {
+    padding: "20px 80px 0",
+    [theme.breakpoints.down("sm")]: {
+      padding: "30px 20px 0",
+    },
+  },
+}));
 const CategorySlider = () => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   useEffect(() => {
     dispatch(getMenuBarList());
   }, [dispatch]);
@@ -55,7 +64,7 @@ const CategorySlider = () => {
   };
 
   return (
-    <div className="category_slider">
+    <div className={classes.categorySlider}>
       <Container fluid className="m-0 p-0">
         <Row>
           <Col md={12} className="m-0 p-0">
