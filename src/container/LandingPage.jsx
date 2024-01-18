@@ -85,21 +85,23 @@ const LandingPage = () => {
                 <TopCategory />
               </Box>
 
-              <div className={classes.adsContainer}>
-                <Container fluid className="m-0 p-0">
-                  <Row>
-                    <Col md={12}>
-                      <div className="">
-                        <img
-                          src={adsBanner}
-                          className={`img-fluid ${classes.adsImage}`}
-                          alt=""
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-                </Container>
-              </div>
+              <Box>
+                <div className={classes.adsContainer}>
+                  <Container fluid className="m-0 p-0">
+                    <Row>
+                      <Col md={12}>
+                        <div className="">
+                          <img
+                            src={adsBanner}
+                            className={`img-fluid ${classes.adsImage}`}
+                            alt=""
+                          />
+                        </div>
+                      </Col>
+                    </Row>
+                  </Container>
+                </div>
+              </Box>
 
               <ShopByOccasion />
               <PamperZone />
