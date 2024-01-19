@@ -8,66 +8,61 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from "@mui/styles";
 import FMTypography from "../../components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import Header from "../../components/SearchBar/Header";
-import {
-  getProductByCategoryIdAndTags,
-} from "../../Redux/Slices/ProductPage/ProductsPageSlice";
+import { getProductByCategoryIdAndTags } from "../../Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FMFilter from "../../components/FMFilters/FMFilter";
 import { useLocation, useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   customScrollColumn: {
-    overflowY: 'scroll',
-    scrollbarWidth: 'thin',
-    '&::-webkit-scrollbar': {
-      width: '0.4rem',
+    overflowY: "scroll",
+    scrollbarWidth: "thin",
+    "&::-webkit-scrollbar": {
+      width: "0.4rem",
     },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: 'transparent',
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "transparent",
     },
-    '&::-webkit-scrollbar-track': {
-      display: 'none',
+    "&::-webkit-scrollbar-track": {
+      display: "none",
     },
   },
 
   rightInfoBox: {
-    overflowY: 'scroll',
-    scrollbarWidth: 'thin',
-    '&::-webkit-scrollbar': {
-      width: '0.4rem',
+    overflowY: "scroll",
+    scrollbarWidth: "thin",
+    "&::-webkit-scrollbar": {
+      width: "0.4rem",
     },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: 'transparent',
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "transparent",
     },
-    '&::-webkit-scrollbar-track': {
-      display: 'none',
+    "&::-webkit-scrollbar-track": {
+      display: "none",
     },
-    '&::-webkit-scrollbar': {
-      display: 'none',
+    "&::-webkit-scrollbar": {
+      display: "none",
     },
-    height: '100%',
+    height: "100%",
   },
 
   textLimit: {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    display: '-webkit-box',
-    '-webkit-line-clamp': 2,
-    '-webkit-box-orient': 'vertical',
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    display: "-webkit-box",
+    "-webkit-line-clamp": 2,
+    "-webkit-box-orient": "vertical",
   },
-
 }));
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -79,12 +74,15 @@ const ProductPage = () => {
   const payload = location?.state?.payload;
   const classes = useStyles();
   const textRef = useRef(null);
-
+  console.log("payload ",payload);
   useEffect(() => {
     const element = textRef.current;
     if (element) {
-      if (element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth) {
-        element.classList.add('ellipsis'); // Add ellipsis class if overflow
+      if (
+        element.scrollHeight > element.clientHeight ||
+        element.scrollWidth > element.clientWidth
+      ) {
+        element.classList.add("ellipsis"); // Add ellipsis class if overflow
       }
     }
   }, []);
@@ -99,7 +97,7 @@ const ProductPage = () => {
       .then((response) => {
         setIsLoading(false);
         setPageTitle(response?.payload?.pageTitle);
-        setDisplayedProducts(response?.payload?.products)
+        setDisplayedProducts(response?.payload?.products);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -118,16 +116,25 @@ const ProductPage = () => {
 
   return (
     <>
-      <Header/>
-      <Grid sx={{ padding: "0 100px", marginTop:'40px',transition: "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)", }}>
-
-        {pageTitle &&
-          <Box sx={{ display: "flex", transition: "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)", }}>
-
+      <Header />
+      <Grid
+        sx={{
+          padding: "0 100px",
+          marginTop: "40px",
+          transition:
+            "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
+        }}
+      >
+        {pageTitle && (
+          <Box
+            sx={{
+              display: "flex",
+              transition:
+                "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
+            }}
+          >
             <FMTypography
-              displayText={
-                pageTitle ? `${pageTitle} Products` : `No Products`
-              }
+              displayText={pageTitle ? `${pageTitle} Products` : `No Products`}
               styleData={{
                 fontWeight: "500",
                 fontSize: "40px",
@@ -152,7 +159,7 @@ const ProductPage = () => {
               />
             </Box>
           </Box>
-        }
+        )}
 
         <Box>
           <FMFilter
@@ -188,9 +195,9 @@ const ProductPage = () => {
               <CircularProgress color="primary" />
             </div>
           ) : displayedProducts && displayedProducts.length > 0 ? (
-            displayedProducts?.map((elem,index) => (
+            displayedProducts?.map((elem, index) => (
               <Box
-              key={index}
+                key={index}
                 onClick={() => onCardClick(elem)}
                 style={{ position: "relative" }}
               >
@@ -216,10 +223,16 @@ const ProductPage = () => {
                   />
                   <FMTypography
                     displayText={Math.round(elem?.rating * 10) / 10}
-                    styleData={{ color: "#FFFFFF", fontSize: "12px", fontWeight: "600" }}
+                    styleData={{
+                      color: "#FFFFFF",
+                      fontSize: "12px",
+                      fontWeight: "600",
+                    }}
                   />
                 </Box>
-                <Card sx={{ width: "283px", borderRadius: "20px", height: 'auto' }}>
+                <Card
+                  sx={{ width: "283px", borderRadius: "20px", height: "auto" }}
+                >
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -235,7 +248,13 @@ const ProductPage = () => {
                         gutterBottom
                         variant="h5"
                         component="div"
-                        sx={{ marginBottom: "0", fontSize: "18px", color: "#222222", fontWeight: "500", textTransform: 'capitalize' }}
+                        sx={{
+                          marginBottom: "0",
+                          fontSize: "18px",
+                          color: "#222222",
+                          fontWeight: "500",
+                          textTransform: "capitalize",
+                        }}
                       >
                         {elem?.name}
                       </Typography>
@@ -248,7 +267,8 @@ const ProductPage = () => {
                           sx={{
                             fontSize: "14px",
                             color: "#000000",
-                            marginLeft: ".5rem", fontWeight: "600"
+                            marginLeft: ".5rem",
+                            fontWeight: "600",
                           }}
                         >
                           ₹ {elem?.discountPrice}
@@ -260,10 +280,21 @@ const ProductPage = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Typography variant="body2" sx={{ color: "#717171", fontWeight: "300", textTransform: 'capitalize', padding: "2px 0" }}>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "#717171",
+                            fontWeight: "300",
+                            textTransform: "capitalize",
+                            padding: "2px 0",
+                          }}
+                        >
                           {elem?.deliveryDay}
                         </Typography>
-                        <Typography variant="body2" sx={{ color: "#008539", fontWeight: "400" }}>
+                        <Typography
+                          variant="body2"
+                          sx={{ color: "#008539", fontWeight: "400" }}
+                        >
                           Reviews {elem?.numReviews}
                         </Typography>
                       </Box>
@@ -294,9 +325,7 @@ const ProductPage = () => {
             </Box>
           )}
         </Grid>
-
-
-      </Grid >
+      </Grid>
       <Footer />
     </>
   );

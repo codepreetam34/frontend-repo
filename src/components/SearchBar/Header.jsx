@@ -275,10 +275,11 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
       categoryId,
       pincodeData,
     };
+    console.log("state ", payload);
     navigate(
       `/product-page/${tagName}`,
-      { forceRefresh: true },
-      { state: { payload: payload } }
+      { state: { payload: payload } },
+      { forceRefresh: true }
     );
   };
 
