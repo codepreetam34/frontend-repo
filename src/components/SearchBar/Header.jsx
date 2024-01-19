@@ -278,8 +278,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     console.log("state ", payload);
     navigate(
       `/product-page/${tagName}`,
-      { state: { payload: payload } },
-      { forceRefresh: true }
+      { state: { payload: payload } }
     );
   };
 
