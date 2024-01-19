@@ -157,9 +157,9 @@ const ProductPage = () => {
         <Box>
           <FMFilter
             setPageTitle={setPageTitle}
-            pincodeData={payload.pincodeData}
-            tagName={payload.tagName}
-            sendCategoryId={payload.categoryId}
+            pincodeData={payload?.pincodeData}
+            tagName={payload?.tagName}
+            sendCategoryId={payload?.categoryId}
             pageInfo={"productPage"}
             setIsLoading={setIsLoading}
             setDisplayedProducts={setDisplayedProducts}
