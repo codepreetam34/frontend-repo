@@ -195,7 +195,6 @@ p {
   padding: 3px 0px;
 }
 
-
 .overlay::before {
   position: absolute;
   border-radius: 20px;
@@ -238,9 +237,6 @@ p {
   flex-shrink: 0;
 }
 
-
-
-
 .zoomin-img {
   overflow: hidden;
   margin: 0 auto;
@@ -274,4 +270,12 @@ a {
 
 .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
   background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.MuiMenu-paper.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  border-radius: 20px;
+}
+
+li.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-divider.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-divider.makeStyles-menuItemStyle-19.css-11mk5ly-MuiButtonBase-root-MuiMenuItem-root {
+  padding: 1rem;
 }

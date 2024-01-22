@@ -25,6 +25,7 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
   const [pincodeData, setPincodeData] = useState("");
   const [homeOfficeLocation, setHomeOfficeLocation] = useState("Home");
   const [displayFormData, setDisplayFormData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     dispatch(addToCartAddress());
@@ -50,7 +51,7 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
     }
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const payload = {
       address: {
         name: data?.firstName,
@@ -65,10 +66,17 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
         addressType: homeOfficeLocation,
       },
     };
-    dispatch(addToCartAddAddress(payload));
-    dispatch(addToCartProductsFinal());
-    setDisplayFormData(false);
-    dispatch(addToCartAddress());
+    setIsLoading(true);
+    await dispatch(addToCartAddAddress(payload))
+      .then((response) => {
+        dispatch(addToCartProductsFinal());
+        setDisplayFormData(false);
+        dispatch(addToCartAddress());
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error adding address:", error);
+      });
   };
 
   const displayForm = () => {
@@ -83,11 +91,18 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
     dispatch(addToCartProductsFinal());
   }, [dispatch]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <Row style={{ padding: "10px 120px 0 120px" }}>
         <Col>
           <AllAddressComponent
+            isLoading={isLoading}
             addressDetailsAdded={addressDetailsAdded}
             styleData={{ display: displayFormData ? "none" : "block" }}
           />
@@ -109,7 +124,7 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
               component="form"
               xs={12}
 
-            // onSubmit={handleSubmit(onSubmit)}
+              // onSubmit={handleSubmit(onSubmit)}
             >
               <Box sx={commonStyle.flexStyle}>
                 <Box sx={{ display: "flex" }}>
@@ -345,7 +360,7 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                     fontWeight: "500 !important",
                   }}
                   value={homeOfficeLocation}
-                // required={true}
+                  // required={true}
                 />
               </Box>
               <Box
@@ -356,7 +371,9 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                 }}
               ></Box>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "center", gap: '1rem' }}>
+            <Box
+              sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}
+            >
               <FMButton
                 displayText={"Save & Delivery here"}
                 variant={"contained"}
@@ -368,7 +385,9 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                 onClick={handleSubmit(onSubmit)}
               />
 
-              <FMButton variant={'outlined'} displayText={"Cancel"}
+              <FMButton
+                variant={"outlined"}
+                displayText={"Cancel"}
                 onHover={"#801319"}
                 styleData={{
                   ...commonStyle.buttonStyles,
@@ -380,8 +399,8 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                   fontSize: "1rem",
                   fontStyle: "normal",
                   fontWeight: "500",
-
-                }} onClick={() => setDisplayFormData(false)}
+                }}
+                onClick={() => setDisplayFormData(false)}
               />
               {/* <FMButton
                 displayText={"Cancel"}
@@ -406,10 +425,12 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
           <Box
             sx={{
               display: displayFormData ? "none" : "grid",
-              justifyContent: 'center'
+              justifyContent: "center",
             }}
           >
-            <FMButton variant={'outlined'} displayText={"+ Add new Address"}
+            <FMButton
+              variant={"outlined"}
+              displayText={"+ Add new Address"}
               onHover={"#801319"}
               styleData={{
                 borderRadius: "10px",
@@ -418,18 +439,22 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                 fontSize: "1rem",
                 fontStyle: "normal",
                 fontWeight: "500",
-
-              }} onClick={displayForm}
+              }}
+              onClick={displayForm}
             />
           </Box>
         </Col>
-        <Col style={{ marginLeft: "87px", paddingBottom: '2rem' }}>
-
-
-
+        <Col style={{ marginLeft: "87px", paddingBottom: "2rem" }}>
           {/* Render the PriceDetails component and pass the addedData prop */}
-          <PriceDetails addedData={addedData} handleNext={handleNext} cartList={addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : 0} />
-
+          <PriceDetails
+            addedData={addedData}
+            handleNext={handleNext}
+            cartList={
+              addedData && Object.keys(addedData)?.length > 0
+                ? Object.keys(addedData)?.length
+                : 0
+            }
+          />
         </Col>
       </Row>
     </>

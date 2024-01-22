@@ -275,20 +275,18 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
       categoryId,
       pincodeData,
     };
-    console.log("state ", payload);
-    navigate(
-      `/product-page/${tagName}`,
-      { state: { payload: payload } }
-    );
+    const productPageUrl = `/product-page/${payload.categoryId}/${payload.pincodeData}/${payload.tagName}`;
+    window.location.href = productPageUrl;
   };
 
   const handleCategoryClick = (categoryId) => {
-    navigate(`/category-page/${categoryId}`, { forceRefresh: true });
+    const categoryPageUrl = `/category-page/${categoryId}`;
+    window.location.href = categoryPageUrl;
   };
 
-  const navigateToLogin = () => {
-    navigate(LOGIN);
-  };
+  // const navigateToLogin = () => {
+  //   navigate(LOGIN);
+  // };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -346,7 +344,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
         </Col>
         <Col className={`${classes.logoStyle}`}>
           <Box>
-            <Link to={`/add-to-cart`}>
+            <a href={`/add-to-cart`}>
               <Button onClick={handleClick}>
                 <img
                   src={cart}
@@ -359,7 +357,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                   </div>
                 )}
               </Button>
-            </Link>
+            </a>
           </Box>
           <Box>
             <Button onClick={handleClick}>
@@ -379,7 +377,10 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               }}
               className={`${classes.menuStyle}`}
             >
-              <Box className={`${classes.menuDropdownStyle}`}>
+              <Box
+                className={`${classes.menuDropdownStyle}`}
+                style={{ width: "15rem" }}
+              >
                 <Stack
                   direction="row"
                   spacing={2}
@@ -403,7 +404,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                       displayText={"See your Profile"}
                       variant={"outlined"}
                       claasName={`${classes.buttonStyle}`}
-                      onClick={profileNavigation}
+                      href={`/my-profile/${personLoggedInId}`}
                     />
                   </Box>
                 ) : (
@@ -412,7 +413,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                       displayText={"Log in"}
                       variant={"outlined"}
                       claasName={`${classes.buttonStyle}`}
-                      onClick={navigateToLogin}
+                      href={LOGIN}
                     />
                     <FMTypography
                       displayText={"To access account"}

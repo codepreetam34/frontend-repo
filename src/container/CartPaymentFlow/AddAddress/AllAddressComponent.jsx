@@ -17,14 +17,12 @@ import { deleteAddress } from "../../../Redux/Slices/AddToCart/DeleteAddress";
 import { notify } from "../../../components/FMToaster/FMToaster";
 //import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
 import { addToCartAddress } from "../../../Redux/Slices/AddToCart/AddAddress";
-const AllAddressComponent = ({ styleData, addressDetailsAdded }) => {
+const AllAddressComponent = ({ styleData, addressDetailsAdded, isLoading }) => {
   const dispatch = useDispatch();
   const [selectedAddress, setSelectedAddress] = useState(() => {
     const storedSelectedAddress = localStorage.getItem("selectedAddress");
     return storedSelectedAddress || getInitialSelectedAddress();
   });
-  const [isLoading, setIsLoading] = useState(true);
-
   const handleRemoveAddress = (addressId) => {
     dispatch(deleteAddress(addressId)).then((resultAction) => {
       if (deleteAddress.fulfilled.match(resultAction)) {
@@ -62,7 +60,6 @@ const AllAddressComponent = ({ styleData, addressDetailsAdded }) => {
     if (addressDetailsAdded && addressDetailsAdded.length > 0) {
       const storedSelectedAddress = localStorage.getItem("selectedAddress");
       setSelectedAddress(storedSelectedAddress || getInitialSelectedAddress());
-      setIsLoading(false);
     }
   }, [addressDetailsAdded]);
 

@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import StartupScreen from "components/StartpScreen";
 import FMTypography from "components/FMTypography/FMTypography";
+import { LocationOn } from "@material-ui/icons";
 const PincodeWrapper = ({
   setHeaderPageModalOpen,
   headerPageModalOpen,
@@ -146,7 +147,7 @@ const PincodeWrapper = ({
                     fontSize: "14px",
                     fontWeight: "600",
                     textAlign: "center",
-                    marginBottom: "1rem"
+                    marginBottom: "1rem",
                   }}
                 />
                 <Box sx={containerStyle}>
@@ -160,6 +161,11 @@ const PincodeWrapper = ({
                     sx={{ marginBottom: "1rem" }}
                     error={error !== ""}
                     InputProps={{
+                      startAdornment: (
+                        <IconButton disabled>
+                          <LocationOn />
+                        </IconButton>
+                      ),
                       endAdornment: pincodeData ? (
                         <IconButton
                           onClick={() => {

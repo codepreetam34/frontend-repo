@@ -24,7 +24,22 @@ const AllAddresses = () => {
   const displayForm = () => {
     setDisplayFormData(true);
   };
+  const getFullAddress = (address) => {
+    const {
+      name,
+      mobileNumber,
+      pinCode,
+      locality,
+      address: streetAddress,
+      cityDistrictTown,
+      state,
+      landmark,
+      alternatePhone,
+      addressType,
+    } = address;
 
+    return `${streetAddress}, ${locality}, ${cityDistrictTown}, near ${landmark}`;
+  };
   return (
     <>
       <Container>
@@ -90,9 +105,7 @@ const AllAddresses = () => {
                     />
                   </Box>
                   <FMTypography
-                    displayText={
-                      "319, Netaji Subhash Place, New Delhi,Delhi 110034"
-                    }
+                    displayText={elem ? getFullAddress(elem) : "N/A"}
                     styleData={{
                       fontSize: "1rem",
                       color: "#717171",

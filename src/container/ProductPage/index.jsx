@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   Box,
   Card,
@@ -15,7 +15,7 @@ import Header from "../../components/SearchBar/Header";
 import { getProductByCategoryIdAndTags } from "../../Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FMFilter from "../../components/FMFilters/FMFilter";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
 
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     overflow: "hidden",
   },
+
   customScrollColumn: {
     overflowY: "scroll",
     scrollbarWidth: "thin",
@@ -70,11 +71,16 @@ const ProductPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [displayedProducts, setDisplayedProducts] = useState();
   const [pageTitle, setPageTitle] = useState();
-  const location = useLocation();
-  const payload = location?.state?.payload;
   const classes = useStyles();
   const textRef = useRef(null);
-  console.log("payload ",payload);
+  const { categoryId, pincodeData, tagName } = useParams();
+
+  const payload = {
+    categoryId,
+    pincodeData,
+    tagName,
+  };
+
   useEffect(() => {
     const element = textRef.current;
     if (element) {
@@ -91,21 +97,32 @@ const ProductPage = () => {
     let pId = element?._id;
     navigate(`/product-detail/${pId}`);
   };
+  const [cleanup, setCleanup] = useState(false);
+  const fetchData = useCallback(async () => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    try {
+      const response = await dispatch(
+        getProductByCategoryIdAndTags(payload, { signal })
+      );
 
-  useEffect(() => {
-    dispatch(getProductByCategoryIdAndTags(payload))
-      .then((response) => {
+      if (!cleanup || response) {
         setIsLoading(false);
         setPageTitle(response?.payload?.pageTitle);
         setDisplayedProducts(response?.payload?.products);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [payload]);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+    controller.abort();
+    setCleanup(true);
+  }, [payload, dispatch, cleanup]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     window.scrollTo({

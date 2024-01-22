@@ -40,11 +40,10 @@ const Profile = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // Handle the form submission
-    console.log("Form data:", data);
-
     try {
+      const controller = new AbortController();
       const formData = new FormData();
 
       if (myProfileData?._id) {
@@ -62,7 +61,9 @@ const Profile = () => {
         formData.append("profilePicture", profileImage);
       }
 
-      dispatch(editUserById(formData)).then((res) => {
+      await dispatch(
+        editUserById(formData, { signal: controller.signal })
+      ).then((res) => {
         if (
           res?.payload?.error?.response?.status === 400 ||
           res?.payload?.error?.response?.status === 404 ||
@@ -85,9 +86,22 @@ const Profile = () => {
   );
 
   useEffect(() => {
-    dispatch(getProfileDetail());
-  }, [dispatch]);
+    const controller = new AbortController();
 
+    const fetchData = async () => {
+      try {
+        await dispatch(getProfileDetail({ signal: controller.signal }));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      controller.abort();
+    };
+  }, [dispatch]);
   useEffect(() => {
     reset({
       firstName: myProfileData?.firstName || "",
