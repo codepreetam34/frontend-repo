@@ -97,32 +97,21 @@ const ProductPage = () => {
     let pId = element?._id;
     navigate(`/product-detail/${pId}`);
   };
-  const [cleanup, setCleanup] = useState(false);
-  const fetchData = useCallback(async () => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    try {
-      const response = await dispatch(
-        getProductByCategoryIdAndTags(payload, { signal })
-      );
 
-      if (!cleanup || response) {
+  useEffect(() => {
+    setIsLoading(true);
+    dispatch(getProductByCategoryIdAndTags(payload))
+      .then((response) => {
         setIsLoading(false);
         setPageTitle(response?.payload?.pageTitle);
         setDisplayedProducts(response?.payload?.products);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-    controller.abort();
-    setCleanup(true);
-  }, [payload, dispatch, cleanup]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error("Error fetching data:", error);
+      });
+    setIsLoading(false);
+  }, [dispatch]);
 
   useEffect(() => {
     window.scrollTo({

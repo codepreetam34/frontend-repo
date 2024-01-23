@@ -10,6 +10,7 @@ import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
 import { commonStyle } from "../../Styles/commonStyles";
 import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
+import Header from "components/SearchBar/Header";
 
 const Faq = () => {
   const [orderingActiveBtn, setOrderingActiveBtn] = useState(true);
@@ -17,20 +18,7 @@ const Faq = () => {
   const [productsActiveBtn, setProductsActiveBtn] = useState(false);
   return (
     <>
-      <Box
-        sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
-      >
-        <img
-          src={monkeyLogo}
-          alt="monkeyLogo"
-          style={HeaderStyle.monkeyLogoStyle}
-        />
-        <img
-          src={VibezterLogo}
-          alt="VibezterLogo"
-          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-        />
-      </Box>
+      <Header />
       <Container fluid style={{ padding: "0" }}>
         <Row style={{ width: "100%", margin: "0" }}>
           <Col

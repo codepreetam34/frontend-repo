@@ -7,8 +7,7 @@ import {
   GET_PRODUCTS_LIST_BY_CATEGORY_ID_AND_TAGS,
   GET_PRODUCTS_LIST_BY_SORTING,
   GET_BEST_SELLER_PRODUCTS_LIST,
-  GET_TOP_CATEGORY_PRODUCTS_LIST
-
+  GET_TOP_CATEGORY_PRODUCTS_LIST,
 } from "./type";
 
 export const getProductPageDetail = createAsyncThunk(
@@ -79,7 +78,9 @@ export const getBestSellerProducts = createAsyncThunk(
   GET_BEST_SELLER_PRODUCTS_LIST,
   async (payload, thunkAPI) => {
     try {
-      const response = await axiosInstance.post(`api/product/getBestSellerProducts`);
+      const response = await axiosInstance.post(
+        `api/product/getBestSellerProducts`
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -90,7 +91,9 @@ export const getTopCategoryProducts = createAsyncThunk(
   GET_TOP_CATEGORY_PRODUCTS_LIST,
   async (payload, thunkAPI) => {
     try {
-      const response = await axiosInstance.post(`api/product/getTopCategoryProducts`);
+      const response = await axiosInstance.post(
+        `api/product/getTopCategoryProducts`
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -176,14 +179,11 @@ const productListSlice = createSlice({
       state.isError = false;
     });
 
-    builder.addCase(
-      getProductsBySorting.fulfilled,
-      (state, action) => {
-        state.getSortedProducts = action.payload;
-        state.isFetching = false;
-        state.isError = false;
-      }
-    );
+    builder.addCase(getProductsBySorting.fulfilled, (state, action) => {
+      state.getSortedProducts = action.payload;
+      state.isFetching = false;
+      state.isError = false;
+    });
 
     builder.addCase(getProductsBySorting.rejected, (state, action) => {
       state.getSortedProducts = {};
@@ -209,7 +209,6 @@ const productListSlice = createSlice({
       state.isError = true;
     });
 
-
     builder.addCase(getBestSellerProducts.pending, (state) => {
       state.getBestSellerProducts = {};
       state.isFetching = true;
@@ -228,7 +227,6 @@ const productListSlice = createSlice({
       state.isError = true;
     });
 
-
     builder.addCase(getTopCategoryProducts.pending, (state) => {
       state.getTopCategoryProducts = {};
       state.isFetching = true;
@@ -246,8 +244,6 @@ const productListSlice = createSlice({
       state.isFetching = false;
       state.isError = true;
     });
-
-
   },
 });
 

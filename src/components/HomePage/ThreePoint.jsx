@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   columnGap: {
     [theme.breakpoints.down("xs")]: {
-      gap: "2rem",
+      gap: "1rem",
     },
   },
 }));

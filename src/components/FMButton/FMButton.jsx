@@ -5,6 +5,7 @@ export default function FMButton({
   displayText,
   onClick,
   styleData,
+  buttonType,
   variant,
   onHover,
   componentClass,
@@ -20,6 +21,7 @@ export default function FMButton({
 
   return (
     <Button
+      type={buttonType}
       variant={variant || "contained"}
       disableRipple
       disableElevation

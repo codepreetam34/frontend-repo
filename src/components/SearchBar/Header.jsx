@@ -145,6 +145,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0",
     fontSize: "10px",
     backgroundColor: "none",
+    borderRadius: "10px !important",
     border: "none",
     "&:hover": {
       backgroundColor: "white",
@@ -157,10 +158,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "10px",
     color: "black",
   },
-  menuItemStyle: {
-    padding: "1rem",
-  },
-
   menuItemImg: {
     marginRight: "12px",
   },
@@ -184,6 +181,9 @@ const useStyles = makeStyles((theme) => ({
   navbarTitle: {
     color: "#fff",
     fontWeight: "600",
+  },
+  menuItemStyle: {
+    padding: "1rem !important",
   },
 }));
 const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
@@ -345,7 +345,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
         <Col className={`${classes.logoStyle}`}>
           <Box>
             <a href={`/add-to-cart`}>
-              <Button onClick={handleClick}>
+              <Button>
                 <img
                   src={cart}
                   alt="cart"
@@ -403,7 +403,12 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                     <FMButton
                       displayText={"See your Profile"}
                       variant={"outlined"}
-                      claasName={`${classes.buttonStyle}`}
+                      styleData={{
+                        color: "black",
+                        fontWeight: "600",
+                        borderRadius: "10px",
+                        backgroundColor: "white",
+                      }}
                       href={`/my-profile/${personLoggedInId}`}
                     />
                   </Box>
@@ -412,7 +417,12 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                     <FMButton
                       displayText={"Log in"}
                       variant={"outlined"}
-                      claasName={`${classes.buttonStyle}`}
+                      styleData={{
+                        color: "black",
+                        fontWeight: "600",
+                        borderRadius: "10px",
+                        backgroundColor: "white",
+                      }}
                       href={LOGIN}
                     />
                     <FMTypography

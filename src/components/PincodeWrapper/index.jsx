@@ -77,6 +77,7 @@ const PincodeWrapper = ({
       axios
         .get(`https://api.postalpincode.in/pincode/${pincodeData}`)
         .then((res) => {
+          console.log("res ", res);
           const data = res.data[0].PostOffice[0];
           setArea(data.Name); // Change to data.City if you want to display the city instead
           setError("");

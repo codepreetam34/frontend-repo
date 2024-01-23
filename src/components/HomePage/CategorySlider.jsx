@@ -89,8 +89,8 @@ const CategorySlider = () => {
                           src={elem?.categoryImage}
                           className={`zoomin img-fluid`}
                           style={{
-                            width: "150px",
-                            height: "150px",
+                            width: "170px",
+                            height: "170px",
                             borderRadius: "104px",
                             objectFit: "cover",
                           }}

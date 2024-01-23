@@ -73,7 +73,7 @@ const OrderPage = () => {
       addressType,
     } = address;
 
-    return `${streetAddress}, ${locality}, ${cityDistrictTown}, near ${landmark}`;
+    return `${streetAddress}, ${locality}, ${cityDistrictTown}, ${landmark}`;
   };
   return (
     <>
@@ -433,8 +433,8 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                             }}
                           >
-                            {elem.address
-                              ? getFullAddress(elem.address)
+                            {elem?.address
+                              ? getFullAddress(elem?.address)
                               : "N/A"}
                           </Typography>
                         </Col>

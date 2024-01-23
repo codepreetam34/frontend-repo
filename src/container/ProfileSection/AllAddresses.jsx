@@ -1,169 +1,439 @@
-import { Box } from "@material-ui/core";
-import { Container } from "@mui/system";
-import FMButton from "../../components/FMButton/FMButton";
-import FMDetailTypography from "../../components/FMDetailTypography/FMDetailTypography";
-import FMTypography from "../../components/FMTypography/FMTypography";
 import React, { useEffect, useState } from "react";
+import { Box, InputBase } from "@mui/material";
 import { Col, Row } from "react-bootstrap";
+import Pincode from "react-pincode";
+
+import FMButton from "components/FMButton/FMButton";
+import FMTypography from "components/FMTypography/FMTypography";
+import FMRadioButtons from "components/FMRadioButton/FMRadioButton";
+
+import { commonStyle } from "Styles/commonStyles";
+import { locationHomeOrOffice } from "constants/AppConstant";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { addAddressSchema } from "validationSchema/addAddressSchema";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartAddress } from "../../Redux/Slices/AddToCart/AddAddress";
+import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
+import { addToCartAddAddress } from "Redux/Slices/AddToCart/AddToCartAddAddressSlice";
+import AllAddressComponent from "container/CartPaymentFlow/AddAddress/AllAddressComponent";
 
 const AllAddresses = () => {
   const dispatch = useDispatch();
+  const [pincodeData, setPincodeData] = useState("");
+  const [homeOfficeLocation, setHomeOfficeLocation] = useState("Home");
   const [displayFormData, setDisplayFormData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     dispatch(addToCartAddress());
-  }, []);
+  }, [dispatch]);
 
   const addressDetailsAdded = useSelector(
     (state) =>
       state?.addToCartAddress?.getAddToCartAddress?.userAddress?.address
   );
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(addAddressSchema),
+    mode: "onChange",
+  });
+
+  const getDataFunc = (data) => {
+    setPincodeData(data);
+    if (data?.pincode.length === 6) {
+    }
+  };
+
+  const onSubmit = async (data) => {
+    const payload = {
+      address: {
+        name: data?.firstName,
+        mobileNumber: data?.contactNumber,
+        pinCode: pincodeData?.pincode,
+        locality: data?.location,
+        address: data?.address,
+        cityDistrictTown: data?.cityDistrict,
+        state: data?.state,
+        landmark: data?.landmark,
+        alternatePhone: data?.alternateNum,
+        addressType: homeOfficeLocation,
+      },
+    };
+    setIsLoading(true);
+    await dispatch(addToCartAddAddress(payload))
+      .then((response) => {
+        setDisplayFormData(false);
+        dispatch(addToCartAddress());
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error adding address:", error);
+      });
+  };
+
   const displayForm = () => {
     setDisplayFormData(true);
   };
-  const getFullAddress = (address) => {
-    const {
-      name,
-      mobileNumber,
-      pinCode,
-      locality,
-      address: streetAddress,
-      cityDistrictTown,
-      state,
-      landmark,
-      alternatePhone,
-      addressType,
-    } = address;
 
-    return `${streetAddress}, ${locality}, ${cityDistrictTown}, near ${landmark}`;
-  };
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
-      <Container>
-        <Row
-          style={{
-            boxShadow:
-              "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-            borderRadius: "20px",
-            marginTop: "24px",
-            marginBottom: "24px",
-            padding: "32px",
+      <Row style={{ padding: "10px 120px 0 120px" }}>
+        <Box
+          sx={{
+            display: displayFormData ? "none" : "grid",
+            justifyContent: "center",
           }}
         >
-          <Col
-            className="col-md-6"
-            style={{
+          <FMButton
+            variant={"outlined"}
+            displayText={"+ Add new Address"}
+            onHover={"#801319"}
+            styleData={{
+              borderRadius: "10px",
+              fontFamily: "Poppins",
+              color: "#000",
+              fontSize: "1rem",
+              fontStyle: "normal",
+              fontWeight: "500",
+              marginBottom: "1rem",
+            }}
+            onClick={displayForm}
+          />
+        </Box>
+        <Col>
+          <AllAddressComponent
+            isLoading={isLoading}
+            addressDetailsAdded={addressDetailsAdded}
+            styleData={{ display: displayFormData ? "none" : "block" }}
+          />
+
+          {/* form below */}
+
+          <Box
+            sx={{
               boxShadow:
                 "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
               borderRadius: "20px",
               marginTop: "24px",
               marginBottom: "24px",
               padding: "32px",
+              display: displayFormData ? "block" : "none",
             }}
           >
-            {addressDetailsAdded ? (
-              addressDetailsAdded?.map((elem, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    boxShadow:
-                      "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-                    borderRadius: "20px",
-                    padding: "40px",
-                    //   ...styleData,
-                  }}
-                >
-                  <Box sx={{ marginBottom: "2rem" }}>
+            <Box
+              component="form"
+              xs={12}
+
+              // onSubmit={handleSubmit(onSubmit)}
+            >
+              <Box sx={commonStyle.flexStyle}>
+                <Box sx={{ display: "flex" }}>
+                  <Box sx={{ marginRight: "1rem" }}>
+                    <InputBase
+                      required
+                      id="firstName"
+                      name="firstName"
+                      placeholder="Name"
+                      sx={{
+                        ...commonStyle.inputFieldStyle,
+
+                        ...(errors.firstName && commonStyle.errorStyle),
+                      }}
+                      {...register("firstName")}
+                      error={errors.firstName ? true : false}
+                    />
                     <FMTypography
-                      displayText={"Default Address"}
-                      styleData={{ fontSize: "20px", fontWeight: "400" }}
+                      styleData={{
+                        ...commonStyle.errorText,
+                        fontSize: "11px",
+                      }}
+                      displayText={errors.firstName?.message}
                     />
                   </Box>
-                  <Box
-                    sx={{
-                      display: "flex !important",
-                      marginBottom: "1rem",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <FMTypography
-                      displayText={elem?.name}
-                      styleData={{ fontSize: "1rem", fontWeight: "500" }}
+                  <Box>
+                    <InputBase
+                      required
+                      id="contactNumber"
+                      name="contactNumber"
+                      placeholder="Contact Number"
+                      sx={{
+                        ...commonStyle.inputFieldStyle,
+
+                        ...(errors.contactNumber && commonStyle.errorStyle),
+                      }}
+                      {...register("contactNumber")}
+                      error={errors.contactNumber ? true : false}
                     />
                     <FMTypography
-                      displayText={`(${elem?.addressType})`}
-                      styleData={{
+                      styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
+                      displayText={errors.contactNumber?.message}
+                    />
+                  </Box>
+                </Box>
+
+                {/* pincode below */}
+                <Box sx={{ display: "flex" }}>
+                  <Box sx={{ marginRight: "2rem" }}>
+                    <Pincode
+                      showCity={false}
+                      showDistrict={false}
+                      showState={false}
+                      invalidError="Please check pincode"
+                      // lengthError="check length"
+                      getData={getDataFunc}
+                      showArea={pincodeData ? true : false}
+                      pincodeInput={{
+                        borderRadius: "10px",
+                        width: "110%",
+                        border: "1px solid grey",
+                        height: "40px",
+                        padding: "16.5px 14px",
+                        marginRight: "1.7rem",
+                        marginBottom: !pincodeData && "1.1rem",
+                      }}
+                      areaInput={{
+                        backgroundColor: "white",
+                        border: "none",
+                        color: "red",
                         fontSize: "12px",
-                        fontWeight: "500",
-                        marginTop: ".2rem",
-                        marginBottom: ".2rem",
-                        color: "#222222",
                       }}
                     />
                   </Box>
-                  <FMTypography
-                    displayText={elem ? getFullAddress(elem) : "N/A"}
-                    styleData={{
-                      fontSize: "1rem",
-                      color: "#717171",
-                      fontWeight: "400",
-                      marginBottom: "1rem",
-                    }}
-                  />
+                  <Box>
+                    <InputBase
+                      required
+                      id="location"
+                      name="location"
+                      placeholder="location/Town"
+                      sx={{
+                        ...commonStyle.inputFieldStyle,
+                        marginTop: "-.1rem",
+
+                        ...(errors.location && commonStyle.errorStyle),
+                      }}
+                      {...register("location")}
+                      error={errors.location ? true : false}
+                    />
+                    <FMTypography
+                      styleData={{ ...commonStyle.errorText, fontSize: "11px" }}
+                      displayText={errors.location?.message}
+                    />
+                  </Box>
                 </Box>
-              ))
-            ) : (
+                {/* pincode aboe */}
+
+                <InputBase
+                  required
+                  id="address"
+                  name="address"
+                  placeholder="Enter your address"
+                  sx={{
+                    ...commonStyle.inputFieldStyle,
+
+                    ...(errors.address && commonStyle.errorStyle),
+                  }}
+                  {...register("address")}
+                  error={errors.address ? true : false}
+                />
+                <FMTypography
+                  styleData={commonStyle.errorText}
+                  displayText={errors.address?.message}
+                />
+
+                <Box sx={commonStyle.flexStyle}>
+                  <Box sx={{ display: "flex" }}>
+                    <Box sx={{ marginRight: "1rem" }}>
+                      <InputBase
+                        required
+                        id="cityDistrict"
+                        name="cityDistrict"
+                        placeholder="city/District"
+                        sx={{
+                          ...commonStyle.inputFieldStyle,
+
+                          ...(errors.cityDistrict && commonStyle.errorStyle),
+                        }}
+                        {...register("cityDistrict")}
+                        error={errors.cityDistrict ? true : false}
+                      />
+                      <FMTypography
+                        styleData={{
+                          ...commonStyle.errorText,
+                          fontSize: "11px",
+                        }}
+                        displayText={errors.cityDistrict?.message}
+                      />
+                    </Box>
+                    <Box>
+                      <InputBase
+                        required
+                        id="state"
+                        name="state"
+                        placeholder="State"
+                        sx={{
+                          ...commonStyle.inputFieldStyle,
+
+                          ...(errors.state && commonStyle.errorStyle),
+                        }}
+                        {...register("state")}
+                        error={errors.state ? true : false}
+                      />
+                      <FMTypography
+                        styleData={{
+                          ...commonStyle.errorText,
+                          fontSize: "11px",
+                        }}
+                        displayText={errors.state?.message}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+
+                <Box sx={commonStyle.flexStyle}>
+                  <Box sx={{ display: "flex" }}>
+                    <Box sx={{ marginRight: "1rem" }}>
+                      <InputBase
+                        // required
+                        id="landmark"
+                        name="landmark"
+                        placeholder="Landmark"
+                        sx={{
+                          ...commonStyle.inputFieldStyle,
+
+                          ...(errors.landmark && commonStyle.errorStyle),
+                        }}
+                        {...register("landmark")}
+                        error={errors.landmark ? true : false}
+                      />
+                      <FMTypography
+                        styleData={{
+                          ...commonStyle.errorText,
+                          fontSize: "11px",
+                        }}
+                        displayText={errors.landmark?.message}
+                      />
+                    </Box>
+                    <Box>
+                      <InputBase
+                        required
+                        id="alternateNum"
+                        name="alternateNum"
+                        placeholder="Alternate Num"
+                        sx={{
+                          ...commonStyle.inputFieldStyle,
+
+                          ...(errors.alternateNum && commonStyle.errorStyle),
+                        }}
+                        {...register("alternateNum")}
+                        error={errors.alternateNum ? true : false}
+                      />
+                      <FMTypography
+                        styleData={{
+                          ...commonStyle.errorText,
+                          fontSize: "11px",
+                        }}
+                        displayText={errors.alternateNum?.message}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+
+                <FMRadioButtons
+                  radioButtons={locationHomeOrOffice}
+                  onChecked={(option) =>
+                    option === "Office"
+                      ? setHomeOfficeLocation("Office")
+                      : setHomeOfficeLocation("Home")
+                  }
+                  formLabelStyling={{
+                    radioButtonStyle: {
+                      fontWeight: "600",
+                      lineHeight: "1.3125rem",
+                      fontSize: "0.875rem",
+                      // color: `BLACK !important`,
+                      color: "black !important",
+                    },
+                  }}
+                  labelStyle={{
+                    color: "black !important",
+                    fontSize: "20px !important",
+                    fontWeight: "500 !important",
+                  }}
+                  value={homeOfficeLocation}
+                  // required={true}
+                />
+              </Box>
               <Box
                 sx={{
-                  boxShadow:
-                    "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-                  borderRadius: "20px",
-                  padding: "40px",
-                  //   ...styleData,
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "1rem",
                 }}
-              >
-                <Box sx={{ marginBottom: "2rem" }}>
-                  <FMTypography
-                    displayText={"No address found !"}
-                    styleData={{ fontSize: "20px", fontWeight: "400" }}
-                  />
-                </Box>
-              </Box>
-            )}
-          </Col>
-          <Col
-            className="col-md-6"
-            style={{
-              marginTop: "24px",
-              marginBottom: "24px",
-              display: "flex",
-              justifyContent: "end",
-              height: "100px",
-            }}
-          >
-            <FMButton
-              displayText={"+ Add new Address"}
-              variant="outlined"
-              styleData={{
-                fontSize: "1rem",
-                fontWeight: "500",
-                border: "1px solid #801317",
-                backgroundColor: "white",
-                color: "#000000",
-                width: "278px",
-                padding: "32px",
-                boxShadow:
-                  "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-                borderRadius: "20px",
-              }}
-              onClick={displayForm}
-            />
-          </Col>
-        </Row>
-      </Container>
+              ></Box>
+            </Box>
+            <Box
+              sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}
+            >
+              <FMButton
+                displayText={"Save & Delivery here"}
+                variant={"contained"}
+                styleData={{
+                  ...commonStyle.buttonStyles,
+                  width: "247px",
+                  marginTop: "32px",
+                }}
+                onClick={handleSubmit(onSubmit)}
+              />
+
+              <FMButton
+                variant={"outlined"}
+                displayText={"Cancel"}
+                onHover={"#801319"}
+                styleData={{
+                  ...commonStyle.buttonStyles,
+                  backgroundColor: "none",
+                  borderRadius: "10px",
+                  marginTop: "32px",
+                  fontFamily: "Poppins",
+                  color: "#000",
+                  fontSize: "1rem",
+                  fontStyle: "normal",
+                  fontWeight: "500",
+                }}
+                onClick={() => setDisplayFormData(false)}
+              />
+              {/* <FMButton
+                displayText={"Cancel"}
+                variant={"outlined"}
+                styleData={{
+                  ...commonStyle.buttonStyles,
+                  // width: "100%",
+                  marginTop: "32px",
+                  backgroundColor: "white",
+                  border: "none",
+                  color: "black",
+                  "&:hover": {
+                    backgroundColor: "white",
+                    border: "none",
+                    color: "black",
+                  },
+                }}
+                onClick={() => setDisplayFormData(false)}
+              /> */}
+            </Box>
+          </Box>
+        </Col>
+      </Row>
     </>
   );
 };

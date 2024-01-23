@@ -90,8 +90,19 @@ export default function VerticalTabs() {
                   marginBottom: "1rem",
                 }}
               />
-              <Tab
+              {/* <Tab
                 label="Orders"
+                {...a11yProps(1)}
+                sx={{
+                  border: "1px solid #E6E6E6",
+                  borderRadius: "100px",
+                  boxShadow:
+                    "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+                  marginBottom: "1rem",
+                }}
+              /> */}
+              <Tab
+                label="Addresses"
                 {...a11yProps(1)}
                 sx={{
                   border: "1px solid #E6E6E6",
@@ -102,19 +113,8 @@ export default function VerticalTabs() {
                 }}
               />
               <Tab
-                label="Addresses"
-                {...a11yProps(2)}
-                sx={{
-                  border: "1px solid #E6E6E6",
-                  borderRadius: "100px",
-                  boxShadow:
-                    "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-                  marginBottom: "1rem",
-                }}
-              />
-              <Tab
                 label="Reminders"
-                {...a11yProps(3)}
+                {...a11yProps(2)}
                 sx={{
                   border: "1px solid #E6E6E6",
                   borderRadius: "100px",
@@ -133,13 +133,13 @@ export default function VerticalTabs() {
             >
               <Profile />
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            {/* <TabPanel value={value} index={1}>
               Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
+            </TabPanel> */}
+            <TabPanel value={value} index={1}>
               <AllAddresses />
             </TabPanel>
-            <TabPanel value={value} index={3}>
+            <TabPanel value={value} index={2}>
               <Reminder />
             </TabPanel>
           </Col>

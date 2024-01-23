@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
   },
   columnGap: {
     [theme.breakpoints.down("xs")]: {
-      gap: "2rem",
+      gap: "1rem",
     },
   },
 }));
@@ -226,7 +226,7 @@ const ShopByOccasion = () => {
 
               <Col xs={4} md={4}>
                 <div className={`${classes.heighautoimg}`}>
-                  <div className={` forth_row`}  style={{paddingBottom:'2rem'}}>
+                  <div className={` forth_row`}  style={{paddingBottom:'1.5rem'}}>
                     <a href="/" className="overlay">
                       <img
                         src={

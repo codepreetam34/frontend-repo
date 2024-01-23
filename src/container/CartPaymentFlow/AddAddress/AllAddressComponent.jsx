@@ -10,33 +10,30 @@ import {
 } from "@mui/material";
 import FMDetailTypography from "../../../components/FMDetailTypography/FMDetailTypography";
 import FMTypography from "../../../components/FMTypography/FMTypography";
-import { useSelector, useDispatch } from "react-redux";
-
+import { useDispatch } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteAddress } from "../../../Redux/Slices/AddToCart/DeleteAddress";
 import { notify } from "../../../components/FMToaster/FMToaster";
-//import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
-import { addToCartAddress } from "../../../Redux/Slices/AddToCart/AddAddress";
+import { addToCartAddress, setDefaultAddress } from "../../../Redux/Slices/AddToCart/AddAddress";
+
 const AllAddressComponent = ({ styleData, addressDetailsAdded, isLoading }) => {
   const dispatch = useDispatch();
-  const [selectedAddress, setSelectedAddress] = useState(() => {
-    const storedSelectedAddress = localStorage.getItem("selectedAddress");
-    return storedSelectedAddress || getInitialSelectedAddress();
-  });
+  const [selectedAddress, setSelectedAddress] = useState(() => getInitialSelectedAddress());
+
   const handleRemoveAddress = (addressId) => {
     dispatch(deleteAddress(addressId)).then((resultAction) => {
       if (deleteAddress.fulfilled.match(resultAction)) {
         if (selectedAddress === addressId) {
-          localStorage.removeItem("selectedAddress");
+          setSelectedAddress(getInitialSelectedAddress());
         }
-        const deletedAddress = resultAction.payload; // Assuming the action payload contains information about the deleted address
+        const deletedAddress = resultAction.payload;
         notify({
           type: "success",
           content: `Address for ${deletedAddress.address} deleted successfully`,
         });
         dispatch(addToCartAddress());
       } else if (deleteAddress.rejected.match(resultAction)) {
-        const error = resultAction.payload; // Access the error message from the payload
+        const error = resultAction.payload;
         notify({
           type: "error",
           content: `Failed to delete the address: ${error}`,
@@ -46,22 +43,20 @@ const AllAddressComponent = ({ styleData, addressDetailsAdded, isLoading }) => {
   };
 
   function getInitialSelectedAddress() {
-    if (addressDetailsAdded && addressDetailsAdded.length > 0) {
-      localStorage.setItem("selectedAddress", addressDetailsAdded[0]?._id);
-      return addressDetailsAdded[0]?._id;
-    }
+    const defaultAddress =
+      (addressDetailsAdded ?? []).find((address) => address.isDefault) ||
+      (addressDetailsAdded ?? [])[0];
+    return defaultAddress?._id || null;
   }
+
   const handleRadioChange = (id) => {
     setSelectedAddress(id);
-    localStorage.setItem("selectedAddress", id);
+    dispatch(setDefaultAddress(id));
   };
 
   useEffect(() => {
-    if (addressDetailsAdded && addressDetailsAdded.length > 0) {
-      const storedSelectedAddress = localStorage.getItem("selectedAddress");
-      setSelectedAddress(storedSelectedAddress || getInitialSelectedAddress());
-    }
-  }, [addressDetailsAdded]);
+    dispatch(addToCartAddress());
+  }, [dispatch]);
 
   if (isLoading) {
     return (
@@ -70,6 +65,7 @@ const AllAddressComponent = ({ styleData, addressDetailsAdded, isLoading }) => {
       </Grid>
     );
   }
+
   return (
     <>
       <Grid>
@@ -78,7 +74,7 @@ const AllAddressComponent = ({ styleData, addressDetailsAdded, isLoading }) => {
           onChange={(event) => handleRadioChange(event.target.value)}
         >
           {addressDetailsAdded && addressDetailsAdded.length > 0 ? (
-            addressDetailsAdded?.map((elem, index) => (
+            addressDetailsAdded.map((elem) => (
               <Box
                 key={elem?._id}
                 sx={{
@@ -105,20 +101,10 @@ const AllAddressComponent = ({ styleData, addressDetailsAdded, isLoading }) => {
                   </IconButton>
                 </Box>
 
-                {/* {addressDetailsAdded[0] && (
-                <Box sx={{ marginBottom: "2rem" }}>
-                  <FMTypography
-                    displayText={"Default Address"}
-                    styleData={{ fontSize: "20px", fontWeight: "400" }}
-                  />
-                </Box>
-              )} */}
-
                 <FormControlLabel
                   value={elem?._id}
                   control={<Radio />}
                   label={`${elem?.name} (${elem?.addressType})`}
-                  // No need to pass elem?._id here, it's already set in the value prop
                 />
 
                 <FMTypography

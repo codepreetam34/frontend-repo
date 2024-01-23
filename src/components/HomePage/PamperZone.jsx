@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   pamperzone: {
-    padding: "50px 80px 0",
+    padding: "20px 80px 0",
     [theme.breakpoints.down("sm")]: {
       padding: "30px 20px 0",
     },
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   columnGap: {
     [theme.breakpoints.down("xs")]: {
-      gap: "2rem",
+      gap: "1rem",
     },
   },
 }));

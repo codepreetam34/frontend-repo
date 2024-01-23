@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../services/AxiosInstance";
-import { ADD_ADDRESS } from "./type";
+import { ADD_ADDRESS, SET_DEFAULT_ADDRESS } from "./type";
 
 export const addToCartAddress = createAsyncThunk(
   ADD_ADDRESS,
@@ -13,7 +13,19 @@ export const addToCartAddress = createAsyncThunk(
     }
   }
 );
-
+export const setDefaultAddress = createAsyncThunk(
+  SET_DEFAULT_ADDRESS,
+  async (addressId, thunkAPI) => {
+    try {
+      const response = await axiosInstance.put(
+        `api/user/address/setDefaultAddress/${addressId}`
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
 const addToCartAddressSlice = createSlice({
   name: "addAddressSlice",
   initialState: {

@@ -1,6 +1,14 @@
-import { Avatar, Box, InputBase } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  FormControlLabel,
+  InputBase,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
 import FMTypography from "../../components/FMTypography/FMTypography";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
 import mailIcon from "../../assets/mailIcon.svg";
 import telephoneIcon from "../../assets/telephoneIcon.svg";
@@ -13,9 +21,10 @@ import {
 } from "../../Redux/Slices/MyProfileSlice/MyProfile";
 import FMButton from "../../components/FMButton/FMButton";
 import PincodeInputWrapper from "./PincodeInputWrapper";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"; // Add this import statement
 import * as yup from "yup";
+import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
 
 // Define the validation schema
 const profileSchema = yup.object().shape({
@@ -27,6 +36,10 @@ const profileSchema = yup.object().shape({
     .email("Invalid email address")
     .required("Email is required"),
   gender: yup.string().required("Gender is required"),
+  contactNumber: yup
+    .string()
+    .matches(/^(0\d{10}|[1-9]\d{9})$/, "Invalid contact number")
+    .required("Contact number is required"),
 });
 
 const Profile = () => {
@@ -39,11 +52,85 @@ const Profile = () => {
     resolver: yupResolver(profileSchema),
     mode: "onChange",
   });
+  const dispatch = useDispatch();
+  const [newProfilePicture, setNewProfilePicture] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [profilePicture, setProfilePicture] = useState("");
+  const [pincodeData, setPincodeData] = useState(
+    sessionStorage.getItem("pincode")
+  );
+
+  const myProfileData = useSelector(
+    (state) => state?.myProfile?.getProfileData?.user
+  );
+
+  const fetchData = useCallback(async () => {
+    try {
+      await dispatch(getProfileDetail());
+      await dispatch(addToCartAddress());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    // Check if myProfileData is not available
+    if (!myProfileData) {
+      // Fetch profile data
+      fetchData();
+    }
+
+    return () => {
+      controller.abort();
+    };
+  }, [fetchData, myProfileData]);
+
+  const addressDetailsAdded = useSelector(
+    (state) =>
+      state?.addToCartAddress?.getAddToCartAddress?.userAddress?.address
+  );
+
+  useEffect(() => {
+    reset({
+      firstName: myProfileData?.firstName || "",
+      lastName: myProfileData?.lastName || "",
+      dob: myProfileData?.dob
+        ? new Date(myProfileData.dob).toISOString().split("T")[0]
+        : "",
+      email: myProfileData?.email || "",
+      gender: myProfileData?.gender || "",
+      contactNumber: myProfileData?.contactNumber || "",
+    });
+    setProfilePicture(myProfileData?.profilePicture);
+  }, [myProfileData, reset]);
+
+  const getFullAddress = (addresses) => {
+    const filteredAddresses = addresses.filter((address) => !address.isDefault);
+
+    const defaultAddress =
+      addresses.find((address) => address.isDefault) || filteredAddresses[0];
+
+    const defaultAddressString = defaultAddress
+      ? `${defaultAddress.address}, ${defaultAddress.locality}, ${defaultAddress.cityDistrictTown}, ${defaultAddress.landmark}`
+      : "";
+
+    return defaultAddressString;
+  };
+
+  const onProfilePictureChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      setNewProfilePicture(file);
+      const previewURL = URL.createObjectURL(file);
+      setPreviewImage(previewURL);
+    }
+  };
 
   const onSubmit = async (data) => {
-    // Handle the form submission
     try {
-      const controller = new AbortController();
       const formData = new FormData();
 
       if (myProfileData?._id) {
@@ -55,63 +142,27 @@ const Profile = () => {
       formData.append("email", data?.email?.toString());
       formData.append("contactNumber", data?.contactNumber?.toString());
       formData.append("dob", data?.dob?.toString());
-      formData.append("role", data?.role?.toString());
       formData.append("gender", data?.gender?.toString());
-      if (profileImage) {
-        formData.append("profilePicture", profileImage);
+      if (newProfilePicture) {
+        formData.append("profilePicture", newProfilePicture);
       }
-
-      await dispatch(
-        editUserById(formData, { signal: controller.signal })
-      ).then((res) => {
+      await dispatch(editUserById(formData)).then((res) => {
         if (
           res?.payload?.error?.response?.status === 400 ||
           res?.payload?.error?.response?.status === 404 ||
           res?.payload?.error?.response?.status === 500
         ) {
+          dispatch(getProfileDetail());
+          dispatch(addToCartAddress());
         } else {
+          dispatch(getProfileDetail());
+          dispatch(addToCartAddress());
         }
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  const dispatch = useDispatch();
-  const [profilePicture, setProfilePicture] = useState("");
-  const [pincodeData, setPincodeData] = useState(
-    sessionStorage.getItem("pincode")
-  );
-
-  const myProfileData = useSelector(
-    (state) => state?.myProfile?.getProfileData?.user
-  );
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    const fetchData = async () => {
-      try {
-        await dispatch(getProfileDetail({ signal: controller.signal }));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      controller.abort();
-    };
-  }, [dispatch]);
-  useEffect(() => {
-    reset({
-      firstName: myProfileData?.firstName || "",
-      lastName: myProfileData?.lastName || "",
-      dob: myProfileData?.dob || "",
-      email: myProfileData?.email || "",
-      gender: myProfileData?.gender || "",
-    });
-    setProfilePicture(myProfileData?.profilePicture);
-  }, [myProfileData, reset]);
 
   return (
     <>
@@ -126,11 +177,51 @@ const Profile = () => {
         }}
       >
         <Col className="col-md-4">
-          <Stack direction="row" spacing={2} sx={{ marginLeft: "1rem" }}>
-            <Avatar
-              src={profilePicture ? profilePicture : "/broken-image.jpg"}
-              sx={{ width: "170px", height: "170px" }}
-            />
+          <Stack
+            direction="row"
+            spacing={2}
+            style={{ marginLeft: "1rem", position: "relative" }}
+          >
+            <label htmlFor="profile-picture-input">
+              <Avatar
+                src={previewImage || profilePicture || "/broken-image.jpg"}
+                style={{ width: "170px", height: "170px", cursor: "pointer" }}
+              />
+              <input
+                type="file"
+                id="profile-picture-input"
+                style={{ display: "none" }}
+                onChange={onProfilePictureChange}
+              />
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  right: "40%",
+                  backgroundColor: "#fff",
+                  width: "25px",
+                  height: "25px",
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                  border: "1px solid #801317",
+                  display: "flex",
+                  background: "#801317",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  style={{
+                    color: "#fff",
+                    fontWeight: "400",
+                    fontSize: "2rem",
+                  }}
+                >
+                  +
+                </Typography>
+              </Box>
+            </label>
           </Stack>
         </Col>
 
@@ -179,7 +270,11 @@ const Profile = () => {
           <Box sx={{ display: "flex" }}>
             <img src={locationIcon} alt="location-icon" />
             <FMTypography
-              displayText={"East Delhi, Delhi"}
+              displayText={
+                addressDetailsAdded
+                  ? getFullAddress(addressDetailsAdded)
+                  : "N/A"
+              }
               styleData={{
                 marginLeft: "1rem",
                 fontSize: "1rem",
@@ -275,18 +370,64 @@ const Profile = () => {
                 />
                 {errors.email && <span>{errors.email.message}</span>}
               </Box>
+              <Box
+                style={{
+                  border: "1px solid grey",
+                  borderRadius: "10px",
+                  padding: "0 10px",
+                  marginBottom: "10px",
+                }}
+              >
+                <RadioGroup
+                  row
+                  aria-label="gender"
+                  name="gender"
+                  value={myProfileData?.gender || ""}
+                  onChange={(e) => setValue("gender", e.target.value)}
+                >
+                  <FormControlLabel
+                    value="Male"
+                    control={<Radio />}
+                    label="Male"
+            
+                  />
+                  <FormControlLabel
+                    value="Female"
+                    control={<Radio />}
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    value="Prefer Not To Say"
+                    control={<Radio />}
+                    label="Prefer Not To Say"
+                  />
+                </RadioGroup>
+
+                {errors.gender && <span>{errors.gender.message}</span>}
+              </Box>
+
               <Box>
                 <InputBase
                   required
-                  id="gender*"
-                  name="gender*"
-                  placeholder="gender*"
+                  id="contactNumber"
+                  name="contactNumber"
+                  placeholder="Enter Contact Number"
                   sx={{
                     ...commonStyle.inputFieldStyle,
                   }}
-                  {...register("gender")}
+                  {...register("contactNumber")}
                 />
-                {errors.gender && <span>{errors.gender.message}</span>}
+                {errors.contactNumber && (
+                  <div
+                    style={{
+                      color: "red",
+                      fontSize: "0.8rem",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    {errors.contactNumber.message}
+                  </div>
+                )}
               </Box>
 
               <Box>
@@ -309,6 +450,7 @@ const Profile = () => {
                 }}
               />
               <FMButton
+                buttonType={"submit"}
                 displayText={"Update Profile"}
                 styleData={{
                   color: "#fff",
