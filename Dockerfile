@@ -27,7 +27,7 @@ RUN npm run build
 EXPOSE 80
 
 # Command to start NGINX
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
 
 
 # RUN cp /app/nginx/vibezter.com.conf /etc/nginx/sites-available/
