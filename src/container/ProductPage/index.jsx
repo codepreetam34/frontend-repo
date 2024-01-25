@@ -64,6 +64,15 @@ const useStyles = makeStyles((theme) => ({
     "-webkit-line-clamp": 2,
     "-webkit-box-orient": "vertical",
   },
+  padding80px: {
+    padding: "0 80px",
+    transition:
+      "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
+    marginTop: "40px",
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 30px",
+    },
+  },
 }));
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -123,14 +132,7 @@ const ProductPage = () => {
   return (
     <>
       <Header />
-      <Grid
-        sx={{
-          padding: "0 100px",
-          marginTop: "40px",
-          transition:
-            "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
-        }}
-      >
+      <Grid className={classes.padding80px}>
         {pageTitle && (
           <Box
             sx={{
