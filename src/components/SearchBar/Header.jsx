@@ -433,17 +433,21 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                 )}
               </Box>
               <hr style={{ margin: "0" }} />
-              <MenuItem
-                onClick={orderNavigation}
-                divider
-                className={`${classes.menuItemStyle}`}
-              >
-                <img
-                  src={orderIcon}
-                  alt="order-icon"
-                  className={`${classes.menuItemImg}`}
-                />
-                My Orders
+              <MenuItem divider className={`${classes.menuItemStyle}`}>
+                <a
+                  href="/my-orders"
+                  style={{
+                    textDecoration: "none",
+                    color: "rgba(0, 0, 0, 0.87)",
+                  }}
+                >
+                  <img
+                    src={orderIcon}
+                    alt="order-icon"
+                    className={`${classes.menuItemImg}`}
+                  />
+                  My Orders
+                </a>
               </MenuItem>
 
               <MenuItem

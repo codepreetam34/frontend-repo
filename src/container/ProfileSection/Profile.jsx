@@ -22,11 +22,10 @@ import {
 import FMButton from "../../components/FMButton/FMButton";
 import PincodeInputWrapper from "./PincodeInputWrapper";
 import { useForm, useFormContext } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup"; // Add this import statement
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
 
-// Define the validation schema
 const profileSchema = yup.object().shape({
   firstName: yup.string().required("First name is required"),
   lastName: yup.string().required("Last name is required"),
@@ -35,7 +34,6 @@ const profileSchema = yup.object().shape({
     .string()
     .email("Invalid email address")
     .required("Email is required"),
-  gender: yup.string().required("Gender is required"),
   contactNumber: yup
     .string()
     .matches(/^(0\d{10}|[1-9]\d{9})$/, "Invalid contact number")
@@ -75,10 +73,7 @@ const Profile = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-
-    // Check if myProfileData is not available
     if (!myProfileData) {
-      // Fetch profile data
       fetchData();
     }
 
@@ -100,7 +95,7 @@ const Profile = () => {
         ? new Date(myProfileData.dob).toISOString().split("T")[0]
         : "",
       email: myProfileData?.email || "",
-      gender: myProfileData?.gender || "",
+      gender: setGenderChange(myProfileData?.gender) || "",
       contactNumber: myProfileData?.contactNumber || "",
     });
     setProfilePicture(myProfileData?.profilePicture);
@@ -130,6 +125,7 @@ const Profile = () => {
   };
 
   const onSubmit = async (data) => {
+    console.log("data ", data);
     try {
       const formData = new FormData();
 
@@ -142,7 +138,7 @@ const Profile = () => {
       formData.append("email", data?.email?.toString());
       formData.append("contactNumber", data?.contactNumber?.toString());
       formData.append("dob", data?.dob?.toString());
-      formData.append("gender", data?.gender?.toString());
+      formData.append("gender", genderChange?.toString());
       if (newProfilePicture) {
         formData.append("profilePicture", newProfilePicture);
       }
@@ -162,6 +158,13 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const [genderChange, setGenderChange] = useState();
+
+  const handleGenderChange = (event) => {
+    console.log("Gender change ", event.target.value);
+    setGenderChange(event.target.value);
   };
 
   return (
@@ -382,14 +385,13 @@ const Profile = () => {
                   row
                   aria-label="gender"
                   name="gender"
-                  value={myProfileData?.gender || ""}
-                  onChange={(e) => setValue("gender", e.target.value)}
+                  value={genderChange || ""}
+                  onChange={handleGenderChange}
                 >
                   <FormControlLabel
                     value="Male"
                     control={<Radio />}
                     label="Male"
-            
                   />
                   <FormControlLabel
                     value="Female"
@@ -437,7 +439,13 @@ const Profile = () => {
                 />
               </Box>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "1rem",
+              }}
+            >
               <FMButton
                 displayText={"Change Password"}
                 variant="outlined"

@@ -18,7 +18,7 @@ const ProductPayment = ({ totalAmount, addressId }) => {
     try {
       // Make an API call to your server to initiate the Paytm transaction
       const response = await axios.post(
-        "http://localhost:5000/api/paytm/initiateTransaction",
+        "http://165.22.222.7:5000/api/paytm/initiateTransaction",
         {
           amount: totalAmount, // Pass the total amount to be paid
         }
@@ -40,7 +40,6 @@ const ProductPayment = ({ totalAmount, addressId }) => {
   };
 
   const openJsCheckoutPopup = (orderId, txnToken, amount, mid) => {
-    console.log("orderId ", orderId);
     var config = {
       root: "",
       style: {
@@ -87,10 +86,8 @@ const ProductPayment = ({ totalAmount, addressId }) => {
     };
 
     if (window.Paytm && window.Paytm.CheckoutJS) {
-      // Initialize configuration using init method
       window.Paytm.CheckoutJS.init(config)
         .then(function onSuccess() {
-          // After successfully updating configuration, invoke checkoutjs
           window.Paytm.CheckoutJS.invoke();
         })
         .catch(function onError(error) {
@@ -100,7 +97,6 @@ const ProductPayment = ({ totalAmount, addressId }) => {
   };
 
   useEffect(() => {
-    // Dynamically load the Paytm script
     const script = document.createElement("script");
     script.src = `https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/xoYxkw49209132372068.js`;
     script.crossOrigin = "anonymous";
@@ -108,17 +104,15 @@ const ProductPayment = ({ totalAmount, addressId }) => {
     script.async = true;
 
     script.onload = () => {
-      // The script has been loaded, now you can use the Paytm.CheckoutJS object
       console.log("Paytm script loaded");
     };
 
     document.head.appendChild(script);
 
     return () => {
-      // Cleanup: remove the script when the component is unmounted
       document.head.removeChild(script);
     };
-  }, []); // Re-run effect when data.env or data.mid changes
+  }, []);
 
   const addedData = useSelector(
     (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
@@ -133,7 +127,7 @@ const ProductPayment = ({ totalAmount, addressId }) => {
       const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
       const authToken = auth?.substring(1, auth.length - 1);
       const response = await axios.post(
-        "http://localhost:5000/api/create-order",
+        "http://165.22.222.7:5000/api/create-order",
         {
           totalAmount,
         },
@@ -159,12 +153,9 @@ const ProductPayment = ({ totalAmount, addressId }) => {
           description: "Purchase description",
           order_id: order.id,
           handler: function (response) {
-            console.log("response Razor ", response);
             alert(JSON.stringify(response));
-            // Check if the payment was successful
 
             if (response.razorpay_payment_id) {
-              // Make an API call to add the order
               const itemsArray = [];
 
               addedData &&
@@ -178,8 +169,8 @@ const ProductPayment = ({ totalAmount, addressId }) => {
 
               try {
                 const orderData = {
-                  addressId: localStorage.getItem("selectedAddress"), // Replace with the actual address ID
-                  totalAmount: totalAmount, // The total amount from your React component
+                  addressId: localStorage.getItem("selectedAddress"),
+                  totalAmount: totalAmount,
                   paymentStatus: "completed",
                   paymentType: "card",
                   items: itemsArray,
@@ -194,10 +185,8 @@ const ProductPayment = ({ totalAmount, addressId }) => {
                   });
               } catch (error) {
                 console.error("Error adding order:", error);
-                // Handle error or redirect to an error page
               }
             } else {
-              // Handle payment failure or other scenarios
               console.error("Payment failed:", response.error_description);
             }
           },
@@ -234,7 +223,6 @@ const ProductPayment = ({ totalAmount, addressId }) => {
             </>
           }
           variant="outlined"
-          //   onClick={handlePaytmPayment}
           onClick={handleRazorPayment}
           styleData={{
             display: "block",
