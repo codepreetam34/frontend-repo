@@ -1,7 +1,7 @@
 # Use an official Node.js runtime as the base image
 FROM node:14
 
-# Install NGINX and nano (for debugging purposes)
+# Install NGINX
 RUN apt-get update && \
     apt-get install -y nginx nano
 
@@ -17,15 +17,19 @@ RUN npm install
 # Copy the rest of the frontend application code to the container
 COPY . .
 
-# Uncomment the following lines if there is a build step
-# RUN npm build
-# RUN cp -r ./build /var/www/html/
+# Build the frontend application
+RUN npm run build
 
-# Expose port 3000 for the frontend service
-EXPOSE 3000
+# Copy NGINX configuration file
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Command to start the frontend service
-CMD ["npm", "start"]
+# Expose port 80 for NGINX
+EXPOSE 80
+
+# Command to start NGINX
+CMD ["nginx", "-g", "daemon off;"]
+
+
 # RUN cp /app/nginx/vibezter.com.conf /etc/nginx/sites-available/
 # RUN mv /app/nginx/nginx.conf /etc/nginx/
 # RUN mv /app/nginx/cert.conf /etc/nginx/snippets/
@@ -33,4 +37,3 @@ CMD ["npm", "start"]
 # RUN ln -s /etc/nginx/sites-available/vibezter.com.conf /etc/nginx/sites-enabled/vibezter.com.conf
 # RUN service nginx stop
 # RUN service nginx start
-
