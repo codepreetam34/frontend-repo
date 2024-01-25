@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   textLimitTitle: {
-    fontSize: "18px",
+    fontSize: "14px",
     color: "#222222",
     fontWeight: "500",
     textTransform: "capitalize",
@@ -256,7 +256,18 @@ const CategoryPage = () => {
                         variant="h5"
                         component="div"
                         ref={textRef}
-                        className={`${classes.textLimitTitle}`}
+                        sx={{
+                          fontSize: "18px",
+                          color: "#222222",
+                          fontWeight: "500",
+                          textTransform: "capitalize",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                          display: "-webkit-box",
+                          "-webkit-line-clamp": 2,
+                          "-webkit-box-orient": "vertical",
+                        }}
                       >
                         {elem?.name}
                       </Typography>
@@ -264,7 +275,14 @@ const CategoryPage = () => {
                         <del style={{ fontSize: "14px", color: "#717171" }}>
                           ₹ {elem?.actualPrice}
                         </del>
-                        <Typography className={classes.textLimitContent}>
+                        <Typography
+                          sx={{
+                            fontSize: "14px",
+                            color: "#000000",
+                            marginLeft: ".5rem",
+                            fontWeight: "600",
+                          }}
+                        >
                           ₹ {elem?.discountPrice}
                         </Typography>
                       </span>
