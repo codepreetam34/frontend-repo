@@ -21,13 +21,12 @@ COPY . .
 RUN npm run build
 
 # Copy NGINX configuration file
-COPY app/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80 for NGINX
 EXPOSE 80
 
 # Command to start NGINX
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
 
 
 # RUN cp /app/nginx/vibezter.com.conf /etc/nginx/sites-available/
