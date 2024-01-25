@@ -13,7 +13,7 @@ import FMTypography from "../../components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import Header from "../../components/SearchBar/Header";
 import { getProductByCategoryId } from "../../Redux/Slices/ProductPage/ProductsPageSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import FMFilter from "../../components/FMFilters/FMFilter";
 import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -22,6 +22,10 @@ import Footer from "../../components/Footer/Footer";
 const useStyles = makeStyles((theme) => ({
   root: {
     overflow: "hidden",
+  },
+  cardContainer: {
+    width: "283px",
+    borderRadius: "20px",
   },
   customScrollColumn: {
     overflowY: "scroll",
@@ -36,25 +40,19 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-
   rightInfoBox: {
-    overflowY: "scroll",
-    scrollbarWidth: "thin",
-    "&::-webkit-scrollbar": {
-      width: "0.4rem",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      backgroundColor: "transparent",
-    },
-    "&::-webkit-scrollbar-track": {
-      display: "none",
-    },
-    "&::-webkit-scrollbar": {
-      display: "none",
-    },
-    height: "100%",
+    backgroundColor: "#008539",
+    top: "3%",
+    display: "flex",
+    alignItems: "center",
+    width: "40px",
+    height: "30px",
+    justifyContent: "center",
+    position: "absolute",
+    left: "83%",
+    zIndex: "111",
+    borderRadius: "4px",
   },
-
   textLimit: {
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -62,6 +60,47 @@ const useStyles = makeStyles((theme) => ({
     display: "-webkit-box",
     "-webkit-line-clamp": 2,
     "-webkit-box-orient": "vertical",
+  },
+
+  textLimitTitle: {
+    fontSize: "18px",
+    color: "#222222",
+    fontWeight: "500",
+    textTransform: "capitalize",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    display: "-webkit-box",
+    "-webkit-line-clamp": 2,
+    "-webkit-box-orient": "vertical",
+  },
+  textLimitContent: {
+    fontSize: "14px",
+    color: "#000000",
+    marginLeft: ".5rem",
+    fontWeight: "600",
+  },
+  padding100px: {
+    padding: "0 80px",
+    transition:
+      "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
+    marginTop: "40px",
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 30px",
+    },
+  },
+  productList: {
+    display: "flex",
+    flexWrap: "wrap",
+    flexBasis: "33.333333%",
+    justifyContent: "space-evenly",
+    gap: "2rem",
+    padding: "3rem 0",
+  },
+  boxContainer: {
+    display: "flex",
+    alignItems: "center",
+    marginLeft: "1rem",
   },
 }));
 
@@ -122,14 +161,7 @@ const CategoryPage = () => {
     <>
       <Header />
 
-      <Grid
-        sx={{
-          padding: "0 100px",
-          transition:
-            "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
-          marginTop: "40px",
-        }}
-      >
+      <Grid className={classes.padding100px}>
         {pageTitle && (
           <Box
             sx={{
@@ -148,9 +180,7 @@ const CategoryPage = () => {
               }}
             />
 
-            <Box
-              sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
-            >
+            <Box className={classes.boxContainer}>
               <FMTypography
                 displayText={
                   displayedProducts && `| ${displayedProducts?.length} Products`
@@ -165,6 +195,7 @@ const CategoryPage = () => {
             </Box>
           </Box>
         )}
+
         <Box>
           <FMFilter
             setPageTitle={setPageTitle}
@@ -176,16 +207,7 @@ const CategoryPage = () => {
           />
         </Box>
 
-        <Grid
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            flexBasis: "33.333333%",
-            justifyContent: "space-evenly",
-            gap: "2rem",
-            padding: "3rem 0",
-          }}
-        >
+        <Grid className={classes.productList}>
           {isLoading ? (
             <div
               style={{
@@ -204,21 +226,7 @@ const CategoryPage = () => {
                 onClick={() => onCardClick(elem._id)}
                 style={{ position: "relative" }}
               >
-                <Box
-                  sx={{
-                    backgroundColor: "#008539",
-                    top: "3%",
-                    display: "flex",
-                    alignItems: "center",
-                    width: "40px",
-                    height: "30px",
-                    justifyContent: "center",
-                    position: "absolute",
-                    left: "83%",
-                    zIndex: "111",
-                    borderRadius: "4px",
-                  }}
-                >
+                <Box className={classes.rightInfoBox}>
                   <img
                     src={ratingStart}
                     alt="rating-star"
@@ -233,7 +241,7 @@ const CategoryPage = () => {
                     }}
                   />
                 </Box>
-                <Card sx={{ width: "283px", borderRadius: "20px" }}>
+                <Card className={classes.cardContainer}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -248,13 +256,7 @@ const CategoryPage = () => {
                         variant="h5"
                         component="div"
                         ref={textRef}
-                        className={`${classes.textLimit}`}
-                        sx={{
-                          fontSize: "18px",
-                          color: "#222222",
-                          fontWeight: "500",
-                          textTransform: "capitalize",
-                        }}
+                        className={`${classes.textLimitTitle}`}
                       >
                         {elem?.name}
                       </Typography>
@@ -262,15 +264,7 @@ const CategoryPage = () => {
                         <del style={{ fontSize: "14px", color: "#717171" }}>
                           ₹ {elem?.actualPrice}
                         </del>
-
-                        <Typography
-                          sx={{
-                            fontSize: "14px",
-                            color: "#000000",
-                            marginLeft: ".5rem",
-                            fontWeight: "600",
-                          }}
-                        >
+                        <Typography className={classes.textLimitContent}>
                           ₹ {elem?.discountPrice}
                         </Typography>
                       </span>
@@ -282,7 +276,7 @@ const CategoryPage = () => {
                       >
                         <Typography
                           variant="body2"
-                          sx={{
+                          style={{
                             color: "#717171",
                             fontWeight: "300",
                             textTransform: "capitalize",
@@ -304,12 +298,7 @@ const CategoryPage = () => {
             ))
           ) : (
             <Box>
-              <Card
-                sx={{
-                  width: "280px",
-                  borderRadius: "20px",
-                }}
-              >
+              <Card className={classes.cardContainer}>
                 <CardContent style={{ height: "4rem", textAlign: "center" }}>
                   <Typography
                     gutterBottom
@@ -317,7 +306,7 @@ const CategoryPage = () => {
                     component="div"
                     sx={{ fontSize: "18px", color: "#801317" }}
                   >
-                    No data available !
+                    No data available!
                   </Typography>
                 </CardContent>
               </Card>
