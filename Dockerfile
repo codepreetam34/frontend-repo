@@ -21,7 +21,7 @@ COPY . .
 RUN npm run build
 
 # Copy NGINX configuration file
- COPY app/nginx /etc/nginx
+# COPY app/nginx /etc/nginx
 
 # Expose port 80 for NGINX
 EXPOSE 80
