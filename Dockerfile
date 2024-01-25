@@ -22,7 +22,7 @@ COPY . .
 # RUN cp -r ./build /var/www/html/
 
 # Expose port 3000 for the frontend service
-EXPOSE 3000
+EXPOSE 80
 
 # Command to start the frontend service
 CMD ["npm", "start"]
