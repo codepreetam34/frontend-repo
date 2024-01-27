@@ -100,6 +100,12 @@ const useStyles = makeStyles((theme) => ({
     "-webkit-line-clamp": 2, // Adjust the number of lines accordingly
     "-webkit-box-orient": "vertical",
   },
+  gridPadding:{
+    padding: "20px 80px",
+    [theme.breakpoints.down("sm")]: {
+      padding: "30px 20px 0",
+    },
+  }
 }));
 
 const ProductDetail = () => {
@@ -123,7 +129,7 @@ const ProductDetail = () => {
   const todaysDate = moment(new Date()).format("DDMMYY");
   const [date, setDate] = useState(null);
   const [isTodaysDate, setIsTodaysDate] = useState(true);
-  const [selectedTime, setSelectedTime] = useState(""); 
+  const [selectedTime, setSelectedTime] = useState("");
   const [filterFixedOptions, setFilterFixedOptions] = useState([]);
   const [filterStandardOptions, setFilterStandardOptions] = useState([]);
   const [insertDate, setInsertDate] = useState(false);
@@ -404,7 +410,7 @@ const ProductDetail = () => {
       top: 0,
       behavior: "smooth",
     });
-  }, []);
+  }, [pId]);
 
   return (
     <>
@@ -426,7 +432,12 @@ const ProductDetail = () => {
             <div className={classes.root} style={{ marginTop: "40px" }}>
               <Container>
                 <Grid container spacing={0}>
-                  <Grid item xs={6} className={classes.customScrollColumn}>
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className={classes.customScrollColumn}
+                  >
                     <ImageGallery
                       ref={imageGalleryRef}
                       {...properties}
@@ -435,7 +446,8 @@ const ProductDetail = () => {
                   </Grid>
                   <Grid
                     item
-                    xs={6}
+                    xs={12}
+                    md={6}
                     className={`${classes.rightInfoBox} right-info-box`}
                   >
                     <Col
@@ -448,7 +460,6 @@ const ProductDetail = () => {
                         displayText={productDetailedData?.name}
                         styleData={{ fontSize: "40px", fontWeight: "600" }}
                       />
-
                       <Box sx={{ display: "flex" }}>
                         <Box
                           sx={{
@@ -629,7 +640,6 @@ const ProductDetail = () => {
                       ) : (
                         <></>
                       )}
-
                       {insertDate ? (
                         <Row className="my-2">
                           <Col md={12}>
@@ -887,7 +897,7 @@ const ProductDetail = () => {
                       ) : (
                         <></>
                       )}
-                      <Box sx={{ marginTop: "50px" }}>
+                      <Box sx={{ marginTop: "50px", display: "flex" }}>
                         <FMButton
                           disabled={disabledDate}
                           displayText={"Add To Cart"}
@@ -916,42 +926,45 @@ const ProductDetail = () => {
                         <input type={"submit"} hidden />
                       </Box>
                       {/* prod desc */}
-                      <Box sx={{ marginTop: "50px" }}>
+                      <Box sx={{ marginTop: "50px",display:"block" }}>
                         <FMTypography
                           displayText={"Product Description"}
                           styleData={{ fontSize: "20px", fontWeight: "500" }}
                         />
-                        <p
+                        <div
                           style={{
                             fontSize: "16px",
                             fontWeight: "300",
                             color: "#717171",
                           }}
-                        >
-                          {productDetailedData?.description}
-                        </p>
+                          dangerouslySetInnerHTML={{
+                            __html: productDetailedData?.description,
+                          }}
+                        />
                       </Box>
+
                       <Box sx={{ marginTop: "50px", marginBottom: "50px" }}>
                         <FMTypography
                           displayText={"Product Specifications"}
                           styleData={{ fontSize: "20px", fontWeight: "500" }}
                         />
-                        <p
+                        <div
                           style={{
                             fontSize: "16px",
                             fontWeight: "300",
                             color: "#717171",
                           }}
-                        >
-                          {productDetailedData?.specifications}
-                        </p>
+                          dangerouslySetInnerHTML={{
+                            __html: productDetailedData?.specifications,
+                          }}
+                        />
                       </Box>
                     </Col>
                   </Grid>
                 </Grid>
               </Container>
             </div>
-            <Grid sx={{ padding: "20px 100px" }}>
+            <Grid className={classes.gridPadding}>
               <Box>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Box sx={{ display: "flex" }}>

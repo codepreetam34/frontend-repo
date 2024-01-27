@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   subscribeTitle: {
     fontSize: "20px",
-    fontWeight: "600",
+    fontWeight: "600 !important",
     textAlign: "center",
     paddingBottom: "5px",
   },

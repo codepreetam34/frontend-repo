@@ -17,7 +17,7 @@ const FMFilter = ({
   setDisplayedProducts,
 }) => {
   const dispatch = useDispatch();
-  const [sortingValue, setSortingValue] = useState("Sort By"); // Default to "Sort By"
+  const [sortingValue, setSortingValue] = useState("Sort By");
   const [activeTag, setActiveTag] = useState("");
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const FMFilter = ({
     dispatch(getProductsBySorting(payload))
       .then((response) => {
         const updatedActiveTag = response?.payload?.tagName;
-        setSortingValue(newSortingValue); // Move this line here
+        setSortingValue(newSortingValue); 
         setActiveTag(updatedActiveTag);
         setPageTitle(response?.payload?.pageTitle);
         setDisplayedProducts(response?.payload?.sortedProducts);
@@ -124,9 +124,9 @@ const FMFilter = ({
                       ? "#f8d7da"
                       : "transparent",
                   borderRadius: "19px",
-                  width: { xs: "46%", sm: "auto" }, // Adjust width for mobile devices
-                  fontSize: { xs: "12px", sm: "inherit" }, // Adjust font size for mobile devices
-                  padding: { xs: "12px", sm: "8px 16px" }, // Adjust padding for mobile devices
+                  width: { xs: "46%", sm: "auto" }, 
+                  fontSize: { xs: "12px", sm: "inherit" }, 
+                  padding: { xs: "12px", sm: "8px 16px" }, 
                 }}
               />
             ))}

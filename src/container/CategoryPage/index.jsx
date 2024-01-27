@@ -241,7 +241,9 @@ const CategoryPage = () => {
                     }}
                   />
                 </Box>
-                <Card className={classes.cardContainer}>
+                <Card
+                  sx={{ width: "283px", borderRadius: "20px", height: "auto" }}
+                >
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -316,7 +318,9 @@ const CategoryPage = () => {
             ))
           ) : (
             <Box>
-              <Card className={classes.cardContainer}>
+              <Card
+                sx={{ width: "283px", borderRadius: "20px", height: "auto" }}
+              >
                 <CardContent style={{ height: "4rem", textAlign: "center" }}>
                   <Typography
                     gutterBottom
