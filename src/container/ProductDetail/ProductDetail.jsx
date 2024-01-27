@@ -100,12 +100,12 @@ const useStyles = makeStyles((theme) => ({
     "-webkit-line-clamp": 2, // Adjust the number of lines accordingly
     "-webkit-box-orient": "vertical",
   },
-  gridPadding:{
+  gridPadding: {
     padding: "20px 80px",
     [theme.breakpoints.down("sm")]: {
       padding: "30px 20px 0",
     },
-  }
+  },
 }));
 
 const ProductDetail = () => {
@@ -429,7 +429,10 @@ const ProductDetail = () => {
           </div>
         ) : (
           <>
-            <div className={classes.root} style={{ marginTop: "40px" }}>
+            <div
+              className={`${classes.gridPadding} ${classes.root}`}
+              style={{ marginTop: "40px" }}
+            >
               <Container>
                 <Grid container spacing={0}>
                   <Grid
@@ -926,7 +929,7 @@ const ProductDetail = () => {
                         <input type={"submit"} hidden />
                       </Box>
                       {/* prod desc */}
-                      <Box sx={{ marginTop: "50px",display:"block" }}>
+                      <Box sx={{ marginTop: "50px", display: "block" }}>
                         <FMTypography
                           displayText={"Product Description"}
                           styleData={{ fontSize: "20px", fontWeight: "500" }}
@@ -971,7 +974,7 @@ const ProductDetail = () => {
                     <img
                       src={reviewBlackStar}
                       alt="star"
-                      style={{ paddingBottom: "19px" }}
+                      style={{ paddingBottom: "20px" }}
                     />
                     <FMTypography
                       displayText={

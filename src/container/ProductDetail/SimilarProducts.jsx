@@ -297,12 +297,13 @@ import {
 import FMTypography from "components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import { getProductsDetail } from "Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
+import { theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   bestseller: {
-    padding: "50px 80px 0",
+    padding: "50px 80px 20px",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 20px 0",
+      padding: "30px 20px 20px 20px",
     },
   },
   textLimit: {
@@ -409,8 +410,8 @@ const SimilarProducts = ({ setIsLoading, pId }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           infinite: true,
           dots: true,
         },
@@ -477,6 +478,9 @@ const SimilarProducts = ({ setIsLoading, pId }) => {
                             left: "81%",
                             zIndex: "111",
                             borderRadius: "4px",
+                            "@media (max-width: 600px)": {
+                              left: "73%", // Adjusted left position for mobile devices
+                            },
                           }}
                         >
                           <img
@@ -494,20 +498,29 @@ const SimilarProducts = ({ setIsLoading, pId }) => {
                           />
                         </Box>
                         <Card
-                          sx={{
+                          style={{
                             width: "250px",
                             borderRadius: "20px",
                             height: "auto",
+                            ...(window.innerWidth <= 600 && {
+                              borderRadius: "20px",
+                              height: "auto",
+                              width: "180px",
+                            }),
                           }}
                         >
                           <CardActionArea>
                             <CardMedia
-                              className="not"
                               component="img"
                               style={{
                                 height: "250px",
                                 width: "100%",
                                 borderRadius: "0",
+                                ...(window.innerWidth <= 600 && {
+                                  height: "180px",
+                                  width: "100%",
+                                  borderRadius: "0",
+                                }),
                               }}
                               image={elem?.productPictures[0]?.img}
                               alt={elem?.productPictures[0]?.imageAltText}
