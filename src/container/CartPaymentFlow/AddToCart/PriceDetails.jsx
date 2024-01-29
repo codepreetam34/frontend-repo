@@ -91,9 +91,9 @@ const PriceDetails = ({
   addedData &&
     Object.keys(addedData)?.map(
       (elem, index) =>
-        (resultDiscount +=
-          addedData[elem]?.actualPrice * addedData[elem]?.qty -
-          addedData[elem]?.discountPrice * addedData[elem]?.qty)
+      (resultDiscount +=
+        addedData[elem]?.actualPrice * addedData[elem]?.qty -
+        addedData[elem]?.discountPrice * addedData[elem]?.qty)
     );
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const PriceDetails = ({
     >
       <FMTypography
         displayText={"Apply Coupons"}
-        sx={{ paddingBottom: "10px" }}
+        styleData={{ paddingBottom: "10px", fontWeight: "600" }}
       />
 
       <Box
@@ -123,6 +123,7 @@ const PriceDetails = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          gap: "1rem",
         }}
       >
         <Box>
@@ -163,13 +164,13 @@ const PriceDetails = ({
       <hr />
       <Box>
         <FMTypography
-          displayText={`Price Details ${
-            addedData && Object.keys(addedData)?.length > 0
-              ? Object.keys(addedData).length + " Items"
-              : addedData && Object.keys(addedData)?.length === 1
+          displayText={`Price Details ${addedData && Object.keys(addedData)?.length > 0
+            ? Object.keys(addedData).length + " Items"
+            : addedData && Object.keys(addedData)?.length === 1
               ? "1 Item"
               : " 0 Item"
-          }`}
+            }`}
+          styleData={{ fontWeight: "600" }}
         />
       </Box>
       <hr />
@@ -183,10 +184,9 @@ const PriceDetails = ({
             key={elem}
           >
             <FMTypography
-              displayText={`${index + 1}. ${
-                addedData[elem]?.name.slice(0, 10) +
+              displayText={`${index + 1}. ${addedData[elem]?.name.slice(0, 10) +
                 (addedData[elem]?.name.length > 10 ? "..." : "")
-              }`}
+                }`}
               styleData={{ color: "#717171" }}
             />
             <FMTypography
@@ -224,8 +224,9 @@ const PriceDetails = ({
       <hr />
       <Box>
         <FMTypography
-          styleData={{ color: "#000" }}
+          styleData={{ color: "#000", fontWeight: '600' }}
           displayText={`Discount on MRP`}
+
         />
         <hr />
         {addedData &&
@@ -236,10 +237,9 @@ const PriceDetails = ({
             >
               <FMTypography
                 styleData={{ color: "#717171" }}
-                displayText={`${
-                  addedData[elem]?.name.slice(0, 10) +
+                displayText={`${addedData[elem]?.name.slice(0, 10) +
                   (addedData[elem]?.name.length > 10 ? "..." : "")
-                }`}
+                  }`}
               />
               <FMTypography
                 displayText={`${(
@@ -297,8 +297,8 @@ const PriceDetails = ({
       </Box>
       <hr />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <FMTypography displayText={`Total Amount`} />
-        <FMTypography displayText={`₹${calculateTotalAmount()}`} />
+        <FMTypography displayText={`Total Amount`} styleData={{ fontWeight: "600" }} />
+        <FMTypography     styleData={{ fontWeight: "600" }} displayText={`₹${calculateTotalAmount()}`} />
       </Box>
       <Box>
         {discountMessage && (

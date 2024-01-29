@@ -193,8 +193,8 @@ const ProductDetail = () => {
       apiImgs && apiImgs.length > 0
         ? apiImgs
         : firstImgs && firstImgs.length > 0
-        ? firstImgs
-        : [],
+          ? firstImgs
+          : [],
   };
 
   const responsive = {
@@ -305,6 +305,7 @@ const ProductDetail = () => {
   };
 
   const handleWeightChange = (option) => {
+    console.log("option ", option)
     setProductQuantity(option);
   };
 
@@ -444,7 +445,7 @@ const ProductDetail = () => {
                     <ImageGallery
                       ref={imageGalleryRef}
                       {...properties}
-                      onThumbnailClick={(e, index) => {}}
+                      onThumbnailClick={(e, index) => { }}
                     />
                   </Grid>
                   <Grid
@@ -526,10 +527,10 @@ const ProductDetail = () => {
                           {productQuantity == "0.5 Kg"
                             ? productDetailedData?.halfkgprice
                             : productQuantity == "1 Kg"
-                            ? productDetailedData?.onekgprice
-                            : productQuantity == "2 Kg"
-                            ? productDetailedData?.twokgprice
-                            : productDetailedData?.discountPrice}
+                              ? productDetailedData?.onekgprice
+                              : productQuantity == "2 Kg"
+                                ? productDetailedData?.twokgprice
+                                : productDetailedData?.discountPrice}
                         </Typography>
 
                         <FMTypography
@@ -543,7 +544,7 @@ const ProductDetail = () => {
                         />
                       </Box>
                       {categoryName &&
-                      categoryName?.toLowerCase() === "cakes" ? (
+                        categoryName?.toLowerCase() === "cakes" ? (
                         <Box sx={{ marginTop: "17px" }}>
                           <FMRadioButtons
                             formLabel="Select Weight"

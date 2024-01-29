@@ -209,6 +209,10 @@ const ProductPayment = ({ totalAmount, addressId }) => {
           display: "flex",
           justifyContent: "center",
           gap: "2rem",
+          '@media (max-width: 600px)': {
+            padding: "0", // Set padding to 0 for screens smaller than 600px (adjust breakpoint as needed)
+            gap: "0", // Set gap to 0 for screens smaller than 600px
+          },
         }}
       >
         <FMButton

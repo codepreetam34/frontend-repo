@@ -19,9 +19,20 @@ import { addToCartAddAddress } from "../../../Redux/Slices/AddToCart/AddToCartAd
 import AllAddressComponent from "./AllAddressComponent";
 import PriceDetails from "../AddToCart/PriceDetails";
 import { addToCartProductsFinal } from "../../../Redux/Slices/AddToCart/AddToCartSlice";
+import { makeStyles } from '@mui/styles';
 
+const useStyles = makeStyles((theme) => ({
+
+  columnContainer: {
+    padding: "10px 80px",
+    [theme.breakpoints.down('sm')]: {
+      padding: "10px 20px"
+    }
+  },
+}));
 const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const [pincodeData, setPincodeData] = useState("");
   const [homeOfficeLocation, setHomeOfficeLocation] = useState("Home");
   const [displayFormData, setDisplayFormData] = useState(false);
@@ -99,15 +110,37 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
   }, []);
   return (
     <>
-      <Row style={{ padding: "10px 120px 0 120px" }}>
-        <Col>
+      <Row className="m-0">
+        <Col className={classes.columnContainer}>
           <AllAddressComponent
             isLoading={isLoading}
             addressDetailsAdded={addressDetailsAdded}
             styleData={{ display: displayFormData ? "none" : "block" }}
           />
-
           {/* form below */}
+          <Box
+            sx={{
+              display: displayFormData ? "none" : "grid",
+              justifyContent: "center",
+              paddingBottom: '1rem'
+            }}
+          >
+            <FMButton
+              variant={"outlined"}
+              displayText={"+ Add new Address"}
+              onHover={"#801319"}
+              styleData={{
+                borderRadius: "10px",
+                fontFamily: "Poppins",
+                color: "#000",
+                fontSize: "1rem",
+                fontStyle: "normal",
+                fontWeight: "500",
+              }}
+              onClick={displayForm}
+            />
+          </Box>
+
 
           <Box
             sx={{
@@ -123,8 +156,7 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
             <Box
               component="form"
               xs={12}
-
-              // onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={handleSubmit(onSubmit)}
             >
               <Box sx={commonStyle.flexStyle}>
                 <Box sx={{ display: "flex" }}>
@@ -136,7 +168,6 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                       placeholder="Name"
                       sx={{
                         ...commonStyle.inputFieldStyle,
-
                         ...(errors.firstName && commonStyle.errorStyle),
                       }}
                       {...register("firstName")}
@@ -360,7 +391,7 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                     fontWeight: "500 !important",
                   }}
                   value={homeOfficeLocation}
-                  // required={true}
+                // required={true}
                 />
               </Box>
               <Box
@@ -381,6 +412,9 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
                   ...commonStyle.buttonStyles,
                   width: "247px",
                   marginTop: "32px",
+                  '@media (max-width: 600px)': { // Adjust breakpoint as needed
+                    padding: "0", // Set padding to 0 for screens smaller than 600px (adjust as needed)
+                  },
                 }}
                 onClick={handleSubmit(onSubmit)}
               />
@@ -422,29 +456,9 @@ const AddAddress = ({ handleNext, totalAmount, discountCoupon }) => {
               /> */}
             </Box>
           </Box>
-          <Box
-            sx={{
-              display: displayFormData ? "none" : "grid",
-              justifyContent: "center",
-            }}
-          >
-            <FMButton
-              variant={"outlined"}
-              displayText={"+ Add new Address"}
-              onHover={"#801319"}
-              styleData={{
-                borderRadius: "10px",
-                fontFamily: "Poppins",
-                color: "#000",
-                fontSize: "1rem",
-                fontStyle: "normal",
-                fontWeight: "500",
-              }}
-              onClick={displayForm}
-            />
-          </Box>
+
         </Col>
-        <Col style={{ marginLeft: "87px", paddingBottom: "2rem" }}>
+        <Col className={classes.columnContainer}>
           {/* Render the PriceDetails component and pass the addedData prop */}
           <PriceDetails
             addedData={addedData}

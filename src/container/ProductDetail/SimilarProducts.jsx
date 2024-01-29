@@ -479,7 +479,7 @@ const SimilarProducts = ({ setIsLoading, pId }) => {
                             zIndex: "111",
                             borderRadius: "4px",
                             "@media (max-width: 600px)": {
-                              left: "73%", // Adjusted left position for mobile devices
+                              left: "73%",
                             },
                           }}
                         >

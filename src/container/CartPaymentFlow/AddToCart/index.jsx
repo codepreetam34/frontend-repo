@@ -5,7 +5,7 @@ import {
   CardContent,
 } from "@mui/material";
 import closeCrossIcon from "../../../assets/closeCrossIcon.svg";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import FMTypography from "../../../components/FMTypography/FMTypography";
 import FMDropdown from "../../../components/FMDropdown/FMDropdown";
 import { quantityOpt } from "../../../constants/AppConstant";
@@ -17,8 +17,30 @@ import {
 import { BLACK, CANCEL_GREY_BORDER, LIGHT_GREY_BORDER } from "../../../constants/colors";
 import { addToCart } from "../../../Redux/Slices/ProductDetailPage/ProductDetailPageSlice";
 import PriceDetails from "./PriceDetails";
+import { makeStyles } from '@mui/styles';
 
+const useStyles = makeStyles((theme) => ({
+  boxContainer: {
+    borderRadius: "20px",
+    boxShadow:
+      "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+    display: "flex",
+    width: "auto",
+    padding: "32px",
+    marginBottom: "1rem",
+    [theme.breakpoints.down('sm')]: {
+      padding: "1rem", // Change padding to 1rem for screens smaller than 'sm'
+    },
+  },
+  columnContainer: {
+    padding: "10px 80px",
+    [theme.breakpoints.down('sm')]: {
+      padding: "10px 20px"
+    }
+  },
+}));
 const AddToCart = ({ handleNext }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const addedData = useSelector(
@@ -64,37 +86,37 @@ const AddToCart = ({ handleNext }) => {
 
   return (
     <>
-      <Row style={{ padding: "1rem 8rem" }}>
+
+      <Row className="m-0" style={{
+        padding: "1rem 8rem", ...(window.innerWidth <= 600 && {
+          padding: "1rem 0"
+        })
+      }} >
         <Col>
           <FMTypography
             displayText={`Cart Items (${addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : "0"
               })`}
-            styleData={{ fontSize: "40px", fontWeight: "500" }}
+            styleData={{ fontSize: "40px", fontWeight: "500", textAlign: "center" }}
           />
         </Col>
-      </Row>
+      </Row >
 
-      <Row style={{ padding: "10px 120px 0 120px", marginBottom: "2rem" }}>
-        <Col>
+      <Row className="m-0 p-0" style={{
+        marginBottom: "2rem",
+      }}>
+        <Col className={classes.columnContainer
+        }>
           {addedData && Object.keys(addedData)?.length > 0 ?
-            Object.keys(addedData)?.map((elem,index) => (
+            Object.keys(addedData)?.map((elem, index) => (
               <Box
-              key={index}
-                sx={{
-                  borderRadius: "20px",
-                  boxShadow:
-                    "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-                  display: "flex",
-                  width: "auto",
-                  padding: "32px",
-                  marginBottom: "1rem",
-                }}
+                key={index}
+                className={classes.boxContainer}
               >
                 <Box>
                   <img
                     src={addedData[elem]?.img}
                     alt="img"
-                    style={{ width: "150px", height: "150px", borderRadius:"10px" }}
+                    style={{ width: "150px", height: "150px", borderRadius: "10px" }}
                   />
                 </Box>
                 <Box sx={{ marginLeft: "1rem", width: "100%" }}>
@@ -200,14 +222,14 @@ const AddToCart = ({ handleNext }) => {
             </Box>
           }
         </Col>
-        {addedData && Object.keys(addedData)?.length > 0 ? <Col style={{ marginLeft: "87px" }}>
-          {/* Render the PriceDetails component and pass the addedData prop */}
+        {addedData && Object.keys(addedData)?.length > 0 ? <Col
+          className={classes.columnContainer
+          }
+        >
           <PriceDetails cartList={addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : 0} addedData={addedData} handleNext={handleNext} />
         </Col> : <></>}
-        {/* second col */}
 
       </Row>
-
     </>
   );
 };

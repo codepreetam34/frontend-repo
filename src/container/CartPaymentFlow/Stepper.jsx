@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
@@ -10,10 +11,24 @@ import Header from '../../components/SearchBar/Header';
 import AddToCart from "./AddToCart";
 import ProductPayment from "./ProductPayment";
 import AddAddress from "./AddAddress";
+
 const steps = ["Cart", "Address", "Payment"];
+
 export default function HorizontalLinearStepper() {
-    const [activeStep, setActiveStep] = React.useState(0);
-    const [skipped, setSkipped] = React.useState(new Set());
+    const [activeStep, setActiveStep] = useState(0);
+    const [skipped, setSkipped] = useState(new Set());
+    const [pincodeData, setPincodeData] = useState("");
+
+    useEffect(() => {
+        const storedPincode = sessionStorage.getItem("pincode");
+        if (storedPincode) {
+            setPincodeData(storedPincode);
+        }
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }, []);
 
     const isStepOptional = (step) => {
         return step === 1;
@@ -29,7 +44,6 @@ export default function HorizontalLinearStepper() {
             newSkipped = new Set(newSkipped.values());
             newSkipped.delete(activeStep);
         }
-
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
     };
@@ -40,11 +54,8 @@ export default function HorizontalLinearStepper() {
 
     const handleSkip = () => {
         if (!isStepOptional(activeStep)) {
-            // You probably want to guard against something like this,
-            // it should never occur unless someone's actively trying to break something.
             throw new Error("You can't skip a step that isn't optional.");
         }
-
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped((prevSkipped) => {
             const newSkipped = new Set(prevSkipped.values());
@@ -57,35 +68,19 @@ export default function HorizontalLinearStepper() {
         setActiveStep(0);
     };
 
-
-
     let dataOnStepper;
     if (activeStep === 0 || activeStep === 1) {
         dataOnStepper = <AddToCart handleNext={handleNext} />;
     } else if (activeStep === 2) {
-        dataOnStepper = (
-            <AddAddress handleNext={handleNext} />
-        );
+        dataOnStepper = <AddAddress handleNext={handleNext} />;
     } else if (activeStep === 3) {
         dataOnStepper = <ProductPayment />;
     }
-    const [pincodeData, setPincodeData] = useState("");
-    useEffect(() => {
-        const storedPincode = sessionStorage.getItem("pincode");
-        if (storedPincode) {
-            setPincodeData(storedPincode);
-        }
-    }, []);
-    useEffect(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }, []);
+
     return (
         <>
-            <Header pincodeData={pincodeData} setPincodeData={setPincodeData}/>
-            <Box sx={{ width: '100%',marginTop:'40px' }}>
+            <Header pincodeData={pincodeData} setPincodeData={setPincodeData} />
+            <Box sx={{ width: '100%', marginTop: '40px', fontSize: '16px' }}>
                 <Stepper activeStep={activeStep}>
                     {steps.map((label, index) => {
                         const stepProps = {};
@@ -118,34 +113,39 @@ export default function HorizontalLinearStepper() {
                 ) : (
                     <React.Fragment>
                         <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                            <Button
-                                color="inherit"
-                                disabled={activeStep === 0}
-                                onClick={handleBack}
-                                sx={{ mr: 1 }}
-                            >
-                                Back
-                            </Button>
-                            <Box sx={{ flex: '1 1 auto' }} />
-                            {isStepOptional(activeStep) && (
-                                <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                                    Skip
-                                </Button>
-                            )}
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} md={6}>
 
-                            <Button onClick={handleNext}>
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
-                        </Box>
+                                <Button
+                                    color="inherit"
+                                    disabled={activeStep === 0}
+                                    onClick={handleBack}
+                                    fullWidth
+                                    sx={{
+                                        mr: { xs: 0, md: 1 },
+                                        fontSize: { xs: '10px !important', md: 'inherit' } // Decrease font size on mobile
+                                    }}
+                                >
+                                    Back
+                                </Button>
+
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                {isStepOptional(activeStep) && (
+                                    <Button color="inherit" onClick={handleSkip} fullWidth>
+                                        Skip
+                                    </Button>
+                                )}
+                                <Button onClick={handleNext} fullWidth>
+                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </React.Fragment>
                 )}
-
                 {dataOnStepper}
             </Box>
             <Footer />
-
         </>
-
     );
 }
