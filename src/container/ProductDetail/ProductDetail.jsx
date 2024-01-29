@@ -37,7 +37,6 @@ import FMRadioButtons from "../../components/FMRadioButton/FMRadioButton";
 import ratingStart from "../../assets/ratingStart.svg";
 import reviewBlackStar from "../../assets/reviewBlackStar.svg";
 import {
-  createUserOptions,
   egglessOrNot,
   ExpressDelivery,
   FixedDelivery,
@@ -117,7 +116,6 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const responsiveMobile = useMediaQuery("(max-width: 600px)");
   const imageGalleryRef = useRef(null);
-  const [productQuantity, setProductQuantity] = useState(createUserOptions);
   const [eggOrNot, setEggOrNot] = useState(egglessOrNot);
   const [pincodeData, setPincodeData] = useState(
     sessionStorage.getItem("pincode")
@@ -146,6 +144,22 @@ const ProductDetail = () => {
   const productDetailedData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product
   );
+
+  const createUserOptions = [
+    productDetailedData?.halfkgprice && {
+      label: "0.5 Kg",
+      value: "0.5 Kg",
+    },
+    productDetailedData?.onekgprice && {
+      label: "1 Kg",
+      value: "1 Kg",
+    },
+    productDetailedData?.twokgprice && {
+      label: "2 Kg",
+      value: "2 Kg",
+    },
+  ].filter(Boolean);
+  const [productQuantity, setProductQuantity] = useState(createUserOptions);
 
   const title =
     (productDetailedData && productDetailedData?.name) || "Vibezter";
@@ -305,7 +319,6 @@ const ProductDetail = () => {
   };
 
   const handleWeightChange = (option) => {
-    console.log("option ", option)
     setProductQuantity(option);
   };
 
