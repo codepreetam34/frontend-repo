@@ -7,6 +7,7 @@ import {
   CardMedia,
   Grid,
   Typography,
+  useMediaQuery
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import FMTypography from "../../components/FMTypography/FMTypography";
@@ -52,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
     left: "83%",
     zIndex: "111",
     borderRadius: "4px",
+    [theme.breakpoints.down("sm")]: {
+      left: "72%",
+      top: "5%",
+    },
   },
   textLimit: {
     overflow: "hidden",
@@ -86,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
       "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
     marginTop: "40px",
     [theme.breakpoints.down("sm")]: {
-      padding: "0 30px",
+      padding: "0 20px",
     },
   },
   productList: {
@@ -96,6 +101,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     gap: "2rem",
     padding: "3rem 0",
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      gap: '0px',
+      justifyContent: "start",
+    },
+
   },
   boxContainer: {
     display: "flex",
@@ -114,7 +125,7 @@ const CategoryPage = () => {
   const [pageTitle, setPageTitle] = useState();
   const classes = useStyles();
   const textRef = useRef(null);
-
+  const isMobile = useMediaQuery("(max-width:600px)");
   useEffect(() => {
     const element = textRef.current;
     if (element) {
@@ -206,8 +217,7 @@ const CategoryPage = () => {
             setDisplayedProducts={setDisplayedProducts}
           />
         </Box>
-
-        <Grid className={classes.productList}>
+        <Grid className={classes.productList} container spacing={2}>
           {isLoading ? (
             <div
               style={{
@@ -221,100 +231,106 @@ const CategoryPage = () => {
             </div>
           ) : displayedProducts && displayedProducts?.length > 0 ? (
             displayedProducts?.map((elem, index) => (
-              <Box
-                key={index}
-                onClick={() => onCardClick(elem._id)}
-                style={{ position: "relative" }}
-              >
-                <Box className={classes.rightInfoBox}>
-                  <img
-                    src={ratingStart}
-                    alt="rating-star"
-                    style={{ width: "14px" }}
-                  />
-                  <FMTypography
-                    displayText={Math.round(elem?.rating * 10) / 10}
-                    styleData={{
-                      color: "#FFFFFF",
-                      fontSize: "12px",
-                      fontWeight: "600",
-                    }}
-                  />
-                </Box>
-                <Card
-                  sx={{ width: "283px", borderRadius: "20px", height: "auto" }}
+              <Grid key={index} item xs={6} sm={4} md={3}>
+                <Box
+                  key={index}
+                  onClick={() => onCardClick(elem._id)}
+                  style={{ position: "relative" }}
                 >
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="283"
-                      width="283"
-                      image={elem?.productPictures[0]?.img}
-                      alt="green iguana"
+                  <Box className={classes.rightInfoBox}>
+                    <img
+                      src={ratingStart}
+                      alt="rating-star"
+                      style={{ width: "14px" }}
                     />
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="div"
-                        ref={textRef}
-                        sx={{
-                          fontSize: "18px",
-                          color: "#222222",
-                          fontWeight: "500",
-                          textTransform: "capitalize",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                          display: "-webkit-box",
-                          "-webkit-line-clamp": 2,
-                          "-webkit-box-orient": "vertical",
-                        }}
-                      >
-                        {elem?.name}
-                      </Typography>
-                      <span style={{ display: "flex" }}>
-                        <del style={{ fontSize: "14px", color: "#717171" }}>
-                          ₹ {elem?.actualPrice}
-                        </del>
+                    <FMTypography
+                      displayText={Math.round(elem?.rating * 10) / 10}
+                      styleData={{
+                        color: "#FFFFFF",
+                        fontSize: "12px",
+                        fontWeight: "600",
+                      }}
+                    />
+                  </Box>
+                  <Card
+                    sx={{
+                      width: isMobile ? "180px" : "283px", // Adjusted width
+                      borderRadius: "20px",
+                      height: "auto",
+                    }}
+                  >
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height={isMobile ? "180px" : "283px"} // Adjusted height
+                        width={isMobile ? "180px" : "283px"} // Adjusted width
+                        image={elem?.productPictures[0]?.img}
+                        alt="Product Image"
+                      />
+                      <CardContent>
                         <Typography
+                          gutterBottom
+                          variant="h5"
+                          component="div"
+                          ref={textRef}
                           sx={{
-                            fontSize: "14px",
-                            color: "#000000",
-                            marginLeft: ".5rem",
-                            fontWeight: "600",
-                          }}
-                        >
-                          ₹ {elem?.discountPrice}
-                        </Typography>
-                      </span>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Typography
-                          variant="body2"
-                          style={{
-                            color: "#717171",
-                            fontWeight: "300",
+                            fontSize: "18px",
+                            color: "#222222",
+                            fontWeight: "500",
                             textTransform: "capitalize",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            display: "-webkit-box",
+                            "-webkit-line-clamp": 2,
+                            "-webkit-box-orient": "vertical",
                           }}
                         >
-                          {elem?.deliveryDay}
+                          {elem?.name}
                         </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{ color: "#008539", fontWeight: "400" }}
+                        <span style={{ display: "flex" }}>
+                          <del style={{ fontSize: "14px", color: "#717171" }}>
+                            ₹ {elem?.actualPrice}
+                          </del>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              color: "#000000",
+                              marginLeft: ".5rem",
+                              fontWeight: "600",
+                            }}
+                          >
+                            ₹ {elem?.discountPrice}
+                          </Typography>
+                        </span>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
                         >
-                          Reviews {elem?.numReviews}
-                        </Typography>
-                      </Box>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Box>
+                          <Typography
+                            variant="body2"
+                            style={{
+                              color: "#717171",
+                              fontWeight: "300",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {elem?.deliveryDay}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{ color: "#008539", fontWeight: "400" }}
+                          >
+                            Reviews {elem?.numReviews}
+                          </Typography>
+                        </Box>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Box>
+              </Grid>
             ))
           ) : (
             <Box>
@@ -335,6 +351,7 @@ const CategoryPage = () => {
             </Box>
           )}
         </Grid>
+
       </Grid>
       <Footer />
     </>

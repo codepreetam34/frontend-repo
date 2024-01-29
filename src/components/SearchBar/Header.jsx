@@ -209,7 +209,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const personLoggedData = JSON.parse(
     localStorage.getItem("Sidebar_Module_Assigned")
   );
-  console.log("person data ", personLoggedData);
+  
   const open = Boolean(anchorEl);
 
   const categoryList = useSelector(
