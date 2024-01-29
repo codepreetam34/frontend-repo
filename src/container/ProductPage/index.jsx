@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Card,
@@ -13,7 +13,7 @@ import FMTypography from "../../components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import Header from "../../components/SearchBar/Header";
 import { getProductByCategoryIdAndTags } from "../../Redux/Slices/ProductPage/ProductsPageSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import FMFilter from "../../components/FMFilters/FMFilter";
 import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -40,14 +40,14 @@ const useStyles = makeStyles((theme) => ({
 
   rightInfoBox: {
     backgroundColor: "#008539",
-    top: "5%",
+    top: "4%",
     display: "flex",
     alignItems: "center",
     width: "40px",
     height: "30px",
     justifyContent: "center",
     position: "absolute",
-    left: "86%",
+    left: "87%",
     zIndex: "111",
     borderRadius: "4px",
     [theme.breakpoints.down("sm")]: {
@@ -111,7 +111,7 @@ const ProductPage = () => {
         element.scrollHeight > element.clientHeight ||
         element.scrollWidth > element.clientWidth
       ) {
-        element.classList.add("ellipsis"); // Add ellipsis class if overflow
+        element.classList.add("ellipsis"); 
       }
     }
   }, []);
@@ -236,7 +236,7 @@ const ProductPage = () => {
                   </Box>
                   <Card
                     sx={{
-                      width: isMobile ? "180px" : "283px", // Adjusted width
+                      width: isMobile ? "180px" : "283px",
                       borderRadius: "20px",
                       height: "auto",
                     }}
@@ -244,8 +244,8 @@ const ProductPage = () => {
                     <CardActionArea>
                       <CardMedia
                         component="img"
-                        height={isMobile ? "180px" : "283px"} // Adjusted height
-                        width={isMobile ? "180px" : "283px"} // Adjusted width
+                        height={isMobile ? "180px" : "283px"}
+                        width={isMobile ? "180px" : "283px"}
                         image={elem?.productPictures[0]?.img}
                         alt="Product Image"
                       />

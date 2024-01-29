@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     height: "30px",
     justifyContent: "center",
     position: "absolute",
-    left: "83%",
+    left: "87%",
     zIndex: "111",
     borderRadius: "4px",
     [theme.breakpoints.down("sm")]: {
