@@ -269,13 +269,9 @@ const Login = () => {
                       padding: "0",
                       fontSize: "1rem",
                       fontWeight: "600",
-                      border: "none",
                       marginLeft: ".5rem",
                       marginTop: "-.1rem",
-                      "&:hover": {
-                        backgroundColor: "white",
-                        border: "none",
-                      },
+
                     }}
                   />
                 </Link>

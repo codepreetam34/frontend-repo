@@ -112,7 +112,7 @@ export default function VerticalTabs() {
                   marginBottom: "1rem",
                 }}
               />
-              <Tab
+              {/* <Tab
                 label="Reminders"
                 {...a11yProps(2)}
                 sx={{
@@ -122,7 +122,7 @@ export default function VerticalTabs() {
                     "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
                   marginBottom: "1rem",
                 }}
-              />
+              /> */}
             </Tabs>
           </Col>
           <Col className="col-md-10">

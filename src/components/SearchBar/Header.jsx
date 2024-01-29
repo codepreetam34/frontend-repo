@@ -135,6 +135,7 @@ const useStyles = makeStyles((theme) => ({
   menuDropdownStyle: {
     display: "flex",
     marginBottom: ".5rem",
+    gap: "5px"
   },
   profileStyle: {
     marginLeft: "1rem",

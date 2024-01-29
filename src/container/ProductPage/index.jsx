@@ -40,14 +40,14 @@ const useStyles = makeStyles((theme) => ({
 
   rightInfoBox: {
     backgroundColor: "#008539",
-    top: "3%",
+    top: "5%",
     display: "flex",
     alignItems: "center",
     width: "40px",
     height: "30px",
     justifyContent: "center",
     position: "absolute",
-    left: "83%",
+    left: "86%",
     zIndex: "111",
     borderRadius: "4px",
     [theme.breakpoints.down("sm")]: {

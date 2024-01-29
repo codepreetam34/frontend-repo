@@ -17,6 +17,7 @@ import {
   PRODUCT_DETAIL,
   PRODUCT_PAGE,
   SETUP_NEW_PASSWORD,
+  SET_UP_NEW_PASSWORD,
   SIGNUP,
 } from "./Routes/Routes";
 import Login from "./container/Signin/Login";
@@ -68,6 +69,7 @@ const App = () => {
             <Route path={PRODUCT_PAGE} element={<ProductPage />} />
             <Route path={PRODUCT_DETAIL} element={<ProductDetail />} />
             <Route path={ADD_TO_CART} element={<HorizontalLinearStepper />} />
+            <Route patht={SET_UP_NEW_PASSWORD} element={<SetupNewPassword />} />
             {/* private routes below */}
             <Route
               path={ORDER_PAGE}

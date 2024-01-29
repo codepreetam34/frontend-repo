@@ -12,7 +12,7 @@ import VibezterLogo from "../../assets/VibezterLogo.svg";
 import { commonStyle } from "../../Styles/commonStyles";
 import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { LOGIN } from "../../Routes/Routes";
+import { LANDING_PAGE, LOGIN } from "../../Routes/Routes";
 import FMOutlinedInput from "../../components/FMOutlinedInput/FMOutlinedInput";
 import { tests } from "../../constants/AppConstant";
 import { setupPassword } from "../../Redux/Slices/Login/setupPassword";
@@ -96,22 +96,24 @@ const SetupNewPassword = () => {
       <Box
         sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
       >
-        <img
-          src={monkeyLogo}
-          alt="monkeyLogo"
-          style={HeaderStyle.monkeyLogoStyle}
-        />
-        <img
-          src={VibezterLogo}
-          alt="VibezterLogo"
-          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-        />
+        <a href={LANDING_PAGE}>
+          <img
+            src={monkeyLogo}
+            alt="monkeyLogo"
+            style={HeaderStyle.monkeyLogoStyle}
+          />
+          <img
+            src={VibezterLogo}
+            alt="VibezterLogo"
+            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
+          />
+        </a>
       </Box>
       <Grid container sx={commonStyle.mainGridContainer}>
         <Grid item sx={commonStyle.innerGrid}>
           <Box sx={commonStyle.formDetailsContainer}>
             <FMTypography
-              displayText="Reset Password"
+              displayText="Change Password"
               styleData={commonStyle.headingStyle}
             />
           </Box>
@@ -147,14 +149,14 @@ const SetupNewPassword = () => {
                 </Box>
 
                 <FMButton
-                  displayText={"Reset Password"}
+                  displayText={"Update Password"}
                   variant={"contained"}
                   styleData={{
                     ...commonStyle.buttonStyles,
                     marginTop: "24px",
                   }}
                   onClick={handleSubmit(onSubmit)}
-                  // onClick={afterResetPasswordNavigate}
+                // onClick={afterResetPasswordNavigate}
                 />
                 <input type={"submit"} hidden />
               </Box>

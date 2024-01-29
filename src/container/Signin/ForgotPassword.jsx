@@ -11,7 +11,7 @@ import VibezterLogo from "../../assets/VibezterLogo.svg";
 import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
 import { commonStyle } from "../../Styles/commonStyles";
 
-import { SETUP_NEW_PASSWORD } from "../../Routes/Routes";
+import { LANDING_PAGE, SETUP_NEW_PASSWORD } from "../../Routes/Routes";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { forgotOtpSchema } from "../../validationSchema/forgotOtpSchema";
@@ -43,16 +43,17 @@ const ForgotPassword = () => {
       <Box
         sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
       >
-        <img
-          src={monkeyLogo}
-          alt="monkeyLogo"
-          style={HeaderStyle.monkeyLogoStyle}
-        />
-        <img
-          src={VibezterLogo}
-          alt="VibezterLogo"
-          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-        />
+        <a href={LANDING_PAGE}>
+          <img
+            src={monkeyLogo}
+            alt="monkeyLogo"
+            style={HeaderStyle.monkeyLogoStyle}
+          />
+          <img
+            src={VibezterLogo}
+            alt="VibezterLogo"
+            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
+          /></a>
       </Box>
       <Grid container sx={commonStyle.mainGridContainer}>
         <Grid item sx={commonStyle.innerGrid}>

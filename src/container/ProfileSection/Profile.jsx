@@ -25,6 +25,8 @@ import { useForm, useFormContext } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
+import { SETUP_NEW_PASSWORD } from "Routes/Routes";
+import { useNavigate } from "react-router";
 
 const profileSchema = yup.object().shape({
   firstName: yup.string().required("First name is required"),
@@ -51,6 +53,7 @@ const Profile = () => {
     mode: "onChange",
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [newProfilePicture, setNewProfilePicture] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [profilePicture, setProfilePicture] = useState("");
@@ -244,7 +247,7 @@ const Profile = () => {
             <img
               src={mailIcon}
               alt="mail-icon"
-              // style={{ marginTop: "-1rem" }}
+            // style={{ marginTop: "-1rem" }}
             />
             <FMTypography
               displayText={myProfileData?.email}
@@ -448,6 +451,7 @@ const Profile = () => {
             >
               <FMButton
                 displayText={"Change Password"}
+                onClick={() => { navigate(SETUP_NEW_PASSWORD) }}
                 variant="outlined"
                 styleData={{
                   color: "black",
