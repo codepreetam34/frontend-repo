@@ -527,7 +527,14 @@ const ProductDetail = () => {
                             paddingTop: ".5rem",
                           }}
                         >
-                          ₹ {productDetailedData?.actualPrice}
+                          ₹ {productQuantity == "0.5 Kg" ?
+                            parseFloat(productDetailedData?.halfkgprice) + (parseFloat(productDetailedData?.halfkgprice) * (parseFloat(productDetailedData?.offer) / 100))
+                            : productQuantity == "1 Kg"
+                              ? parseFloat(productDetailedData?.onekgprice) + (parseFloat(productDetailedData?.onekgprice) * (parseFloat(productDetailedData?.offer) / 100))
+                              : productQuantity == "2 Kg"
+                                ? parseFloat(productDetailedData?.twokgprice) + (parseFloat(productDetailedData?.twokgprice) * (parseFloat(productDetailedData?.offer) / 100)) :
+                                parseFloat(productDetailedData?.actualPrice)
+                          }
                         </del>
                         <Typography
                           sx={{
@@ -561,6 +568,7 @@ const ProductDetail = () => {
                         <Box sx={{ marginTop: "17px" }}>
                           <FMRadioButtons
                             formLabel="Select Weight"
+                            imageIcon={productDetailedData?.productPictures[0].img}
                             radioButtons={createUserOptions}
                             onChecked={(option) => handleWeightChange(option)}
                             formLabelStyling={{

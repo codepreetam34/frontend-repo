@@ -6,6 +6,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { BORDER_GREY, BLACK } from "../../constants/colors";
+import VegIcon from "./icons8-veg-48.png"; // Import the vegetable icon
+import NonVegIcon from "./icon-nonveg.png"; // Import the non-vegetable icon
+
+import otherIcon from "./Icon-Veg.svg"; // Import the non-vegetable icon
 
 const styles = {
   formLabelStyles: {
@@ -42,6 +46,7 @@ export default function FMRadioButtons(props) {
     formLabelStyling,
     disabled,
     required,
+    imageIcon,
     labelStyle,
     customRadioBoxStyle,
     customRadioStyle,
@@ -90,7 +95,12 @@ export default function FMRadioButtons(props) {
                 ...styles.formControlLabelStyles,
                 ...customFormControlLabelStyles,
               }}
-              label={radio.label}
+              label={
+                <>
+                  {radio.label === "Eggless" ? <img src={VegIcon} alt="" style={{ width: '30px', height: "30px" }} /> : radio.label === "With Egg" ? <img src={NonVegIcon} alt="" style={{ width: '30px', height: "30px" }} /> : <img src={imageIcon}style={{ width: '30px', height: "30px", marginRight:'10px' }}  alt="" />}
+                  {radio.label}
+                </>
+              }
               onChange={onChangeHandler}
             />
           </Box>

@@ -42,3 +42,34 @@
 .googleButton{
   border-radius: 10px;
 }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+.cake-types_iconEat__1DvYW{
+  position: relative;
+    border: 2px solid #e03131;
+    width: 20px;
+    height: 20px;
+
+}
+
+
+.cake-types_iconEat__1DvYW:after{
+  
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #e03131;
+}
+
+ .cake-types_redIcon__1Gu77 {
+  border-color: #e03131;
+  margin-left: 10px;
+}
