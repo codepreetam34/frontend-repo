@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Profile from "../Profile";
 import Header from "../../../components/SearchBar/Header";
 import { Col, Container, Row } from "react-bootstrap";
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { AllViewsFileStyle } from "./AllViewsFileStyle";
 import Reminder from "../Reminder";
 import AllAddresses from "../AllAddresses";
@@ -46,14 +46,25 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   indicator: {
     backgroundColor: "transparent",
   },
+  tabsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "0rem",
+      display: 'flex',
+      justifyContent: "center",
+      gap: "1rem",
+    },
+
+  }
   //   MuiButtonBase-root-MuiTab-root.Mui-selected: {
 
   //   }
-});
+}));
 
 export default function VerticalTabs() {
   const classes = useStyles();
@@ -64,11 +75,25 @@ export default function VerticalTabs() {
     setValue(newValue);
   };
 
+  const styles = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      gap: '1rem',
+    },
+    '@media (max-width: 600px)': {
+      container: {
+        justifyContent: 'center',
+        flexDirection: 'row',
+      },
+    },
+  };
   return (
     <>
       <Header />
 
-      <Container style={{marginTop:'40px'}}>
+      <Container style={{ marginTop: '40px' }}>
         <Row>
           <Col className="col-md-2">
             <Tabs
@@ -79,18 +104,22 @@ export default function VerticalTabs() {
               aria-label="Vertical tabs example"
               sx={AllViewsFileStyle.tabSideLine}
             >
-              <Tab
-                label="Profile"
-                {...a11yProps(0)}
-                sx={{
-                  border: "1px solid #E6E6E6",
-                  borderRadius: "100px",
-                  boxShadow:
-                    "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-                  marginBottom: "1rem",
-                }}
-              />
-              {/* <Tab
+              <div style={{
+                ...styles.container,
+                ...(window.innerWidth <= 600 && styles['@media (max-width: 600px)'].container),
+              }}>
+                <Tab
+                  label="Profile"
+                  {...a11yProps(0)}
+                  sx={{
+                    border: "1px solid #E6E6E6",
+                    borderRadius: "100px",
+                    boxShadow:
+                      "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+                    marginBottom: "1rem",
+                  }}
+                />
+                {/* <Tab
                 label="Orders"
                 {...a11yProps(1)}
                 sx={{
@@ -101,18 +130,18 @@ export default function VerticalTabs() {
                   marginBottom: "1rem",
                 }}
               /> */}
-              <Tab
-                label="Addresses"
-                {...a11yProps(1)}
-                sx={{
-                  border: "1px solid #E6E6E6",
-                  borderRadius: "100px",
-                  boxShadow:
-                    "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-                  marginBottom: "1rem",
-                }}
-              />
-              {/* <Tab
+                <Tab
+                  label="Addresses"
+                  {...a11yProps(1)}
+                  sx={{
+                    border: "1px solid #E6E6E6",
+                    borderRadius: "100px",
+                    boxShadow:
+                      "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+                    marginBottom: "1rem",
+                  }}
+                />
+                {/* <Tab
                 label="Reminders"
                 {...a11yProps(2)}
                 sx={{
@@ -123,13 +152,14 @@ export default function VerticalTabs() {
                   marginBottom: "1rem",
                 }}
               /> */}
+              </div>
             </Tabs>
           </Col>
           <Col className="col-md-10">
             <TabPanel
               value={value}
               index={0}
-              sx={{ "MuiTabs-indicator": { display: "none" } }}
+              sx={{ "MuiTabs-indicator": { display: "none !important" } }}
             >
               <Profile />
             </TabPanel>
@@ -144,7 +174,7 @@ export default function VerticalTabs() {
             </TabPanel>
           </Col>
         </Row>
-      </Container>
+      </Container >
       <Footer />
     </>
   );

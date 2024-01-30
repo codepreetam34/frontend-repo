@@ -7,5 +7,8 @@ export const AllViewsFileStyle = {
     "& .MuiTab-root.Mui-selected": {
       color: "black ",
     },
+    "@media (max-width: 600px)": { 
+      marginTop: "0", 
+    },
   },
 };

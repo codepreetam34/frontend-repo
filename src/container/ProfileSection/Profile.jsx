@@ -243,6 +243,7 @@ const Profile = () => {
               marginBottom: "1rem",
             }}
           />
+          
           <Box sx={{ display: "flex", marginBottom: ".5rem" }}>
             <img
               src={mailIcon}
@@ -290,6 +291,7 @@ const Profile = () => {
           </Box>
         </Col>
       </Row>
+      
       <Row
         style={{
           boxShadow:
