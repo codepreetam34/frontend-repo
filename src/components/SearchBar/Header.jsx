@@ -35,6 +35,7 @@ import { makeStyles } from "@mui/styles";
 import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
 import { ErrorToaster, SuccessToaster } from "constants/util";
 import PincodeWrapper from "components/PincodeWrapper";
+import mobileMenuToggleBar from "assets/mobileMenuToggleBar.png"
 
 const useStyles = makeStyles((theme) => ({
   commonStyle: {
@@ -99,6 +100,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     padding: "3px 50px",
     background: "rgb(252, 237, 238)",
+  },
+  mobileBackground: {
+    background: "rgb(252, 237, 238) !important",
   },
   headerFullStyle: {
     backgroundColor: "white !important",
@@ -210,7 +214,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const personLoggedData = JSON.parse(
     localStorage.getItem("Sidebar_Module_Assigned")
   );
-  
+
   const open = Boolean(anchorEl);
 
   const categoryList = useSelector(
@@ -553,12 +557,76 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
       </Row>
 
       <div className={`d-md-none`}>
-        <Navbar expand="lg" bg="light">
+        <Navbar expand="lg" bg="light" className={classes.mobileBackground}>
           <Container fluid>
-            <Navbar.Toggle
-              aria-controls="basic-navbar-nav"
-              onClick={handleToggleMenu}
-            />
+            <Row>
+              <div style={{
+                display: "flex",
+                paddingBottom: "5px"
+              }}>
+                <Col xs={6} className={`${classes.flexDisplayStyle}`}>
+                  <a href={"/"} className={`${classes.logoStyle}`}>
+                    <img
+                      src={monkeyLogo}
+                      alt="monkeyLogo"
+                      className={`${classes.monkeyLogoStyle}`}
+                    />
+                    <img
+                      src={VibezterLogo}
+                      alt="VibezterLogo"
+                      style={{
+                        width: "100px",
+                        height: "40px",
+                      }}
+                    />
+                  </a>
+                </Col>
+
+                <Col xs={6} className={`${classes.logoStyle}`}>
+                  <Box>
+                    <a href={`/add-to-cart`}>
+                      <Button>
+                        <img
+                          src={cart}
+                          alt="cart"
+                          className={classes.profileIconStyle}
+                        />
+                        {addedData && Object.keys(addedData)?.length > 0 && (
+                          <div class={classes.cartItemCountStyle}>
+                            {Object.keys(addedData)?.length}
+                          </div>
+                        )}
+                      </Button>
+                    </a>
+                  </Box>
+
+                </Col>
+              </div>
+              <div style={{
+                display: "flex",
+              }}>
+                <Col xs={2}>
+                  <img
+                    src={mobileMenuToggleBar}
+                    alt=""
+                    aria-controls="basic-navbar-nav"
+                    onClick={handleToggleMenu}
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      cursor: "pointer",
+                      transition: "transform 0.3s ease",
+                      ":hover": {
+                        transform: "scale(1.1)",
+                      }
+                    }}
+                  />
+                </Col>
+                <Col xs={10}>
+                  <SearchBar placeholder={"Search gifts, experiences and more..."} />
+                </Col>
+              </div>
+            </Row>
           </Container>
         </Navbar>
 

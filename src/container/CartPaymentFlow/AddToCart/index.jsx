@@ -88,10 +88,12 @@ const AddToCart = ({ handleNext }) => {
     <>
 
       <Row className="m-0" style={{
-        padding: "1rem 8rem", ...(window.innerWidth <= 600 && {
+        padding: "1rem 8rem",
+        ...(window.innerWidth <= 600 && {
           padding: "1rem 0"
         })
-      }} >
+      }}>
+
         <Col>
           <FMTypography
             displayText={`Cart Items (${addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : "0"
