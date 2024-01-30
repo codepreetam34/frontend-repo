@@ -93,8 +93,12 @@ const CategorySlider = () => {
                             height: "170px",
                             borderRadius: "104px",
                             objectFit: "cover",
+                            ...(window.innerWidth <= 600 && {
+                              width: "150px", height: "150px",
+                            })
                           }}
                         />
+
                       </a>
                       <h4 className="text-center">{elem?.name}</h4>
                     </div>

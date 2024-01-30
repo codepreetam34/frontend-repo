@@ -42,7 +42,7 @@ const Banner = () => {
                     alt=""
                     style={{
                       width: "100%",
-                      height: responsiveMobile ? "auto" : "50vh",
+                      height: responsiveMobile ? "200px" : "50vh",
                       objectFit: "cover",
                     }}
                   />

@@ -145,6 +145,14 @@ const BestSeller = () => {
                           src={elem?.productPictures[0].img}
                           className="img-fluid"
                           alt=""
+                          style={{
+                            width: "225px",
+                            height: "300px",
+                            objectFit: "cover",
+                            ...(window.innerWidth <= 600 && {
+                              width: "180px", height: "250px",
+                            })
+                          }}
                         />
                         <div className="card_name">
                           <h4>{elem?.name}</h4>
