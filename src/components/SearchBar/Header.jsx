@@ -124,6 +124,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     alignItems: "center",
     gap: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      gap: "0.5rem",
+    },
   },
   menuStyle: {
     padding: "2rem",
