@@ -173,6 +173,10 @@ const ProductDetail = () => {
     (state) => state?.getProductsDetail?.getProductsListData?.categoryName
   );
 
+  const personLoggedData = JSON.parse(
+    localStorage.getItem("Sidebar_Module_Assigned")
+  );
+
   const onClickHandler = () => {
     imageGalleryRef.current.toggleFullScreen();
   };
@@ -1072,7 +1076,13 @@ const ProductDetail = () => {
                             spacing={2}
                             sx={{ margin: " 0 12px" }}
                           >
-                            <Avatar src="/broken-image.jpg" />
+                            <Avatar
+                              src={
+                                reviewsCarouselData?.profilePicture
+                                  ? reviewsCarouselData?.profilePicture
+                                  : "/broken-image.jpg"
+                              }
+                            />
                           </Stack>
                           <Box>
                             <FMTypography displayText={elem?.name} />
@@ -1133,5 +1143,10 @@ const ProductDetail = () => {
     </>
   );
 };
+
+// remove arrow
+// footer subscribe
+// 
+
 
 export default ProductDetail;

@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       display: "flex",
       gap: '0px',
-      justifyContent: "start",
+      justifyContent: "center",
     },
 
   },

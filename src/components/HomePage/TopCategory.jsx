@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme) => ({
   headingText: {
     textAlign: "center",
     fontSize: "2.1875rem",
-    fontWeight: 600,
-    margin: 0,
+    fontWeight: "600",
+    margin: "0",
     padding: "0 0 35px",
   },
-  
+
   slickSlideImg: {
     width: "225px",
     height: "300px",
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "cover",
   },
   slickPrev: {
-    left: 0,
+    left: "0",
   },
   slickNext: {
     right: "0px",
@@ -45,15 +45,19 @@ const useStyles = makeStyles((theme) => ({
   },
   cardNameH4: {
     color: "#fff",
-    padding: "0 10px",
-    fontSize: "1rem",
-    fontWeight: 500,
+    padding: "0 !important",
+    margin: "0 10px !important",
+    fontSize: "1rem !important",
+    fontWeight: "500 !important",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "0.7rem !important",
+    },
   },
   cardNameP: {
     color: "#fff",
-    padding: 0,
+    padding: "0",
     fontSize: "1rem",
-    fontWeight: 400,
+    fontWeight: "500",
     padding: "3px 0px",
   },
 }));
@@ -61,6 +65,18 @@ const useStyles = makeStyles((theme) => ({
 const TopCategory = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const textRef = useRef(null);
+  useEffect(() => {
+    const element = textRef.current;
+    if (element) {
+      if (
+        element.scrollHeight > element.clientHeight ||
+        element.scrollWidth > element.clientWidth
+      ) {
+        element.classList.add("ellipsis"); // Add ellipsis class if overflow
+      }
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(getTopCategoryProducts());
@@ -92,8 +108,8 @@ const TopCategory = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           initialSlide: 2,
           infinite: true,
         },
@@ -101,8 +117,8 @@ const TopCategory = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: true,
         },
       },
@@ -117,7 +133,7 @@ const TopCategory = () => {
         <Row>
           <Col md={12}>
             <div>
-              <h3  className={classes.headingText}>Top Categories</h3>
+              <h3 className={classes.headingText}>Top Categories</h3>
             </div>
           </Col>
 
@@ -127,9 +143,9 @@ const TopCategory = () => {
                 finalData.map((elem) => (
                   <div
                     key={elem?._id}
-                    className={`banner_img text-center zoomin-img-hover ${classes.slickSlideImg}`}
+                    className={`text-center`}
                     style={{
-                      padding: "0 8px",
+                      padding: "0 4px",
                       display: "flex",
                       justifyContent: "center",
                       flexDirection: "column",
@@ -146,9 +162,24 @@ const TopCategory = () => {
                           src={elem?.productPictures[0].img}
                           className="img-fluid"
                           alt=""
+                          style={{
+                            width: "225px",
+                            height: "300px",
+                            objectFit: "cover",
+                            ...(window.innerWidth <= 600 && {
+                              width: "125px", height: "160px",
+                            })
+                          }}
                         />
                         <div className={classes.cardName}>
-                          <h4 className={classes.cardNameH4}>{elem?.name}</h4>
+                          <h4 className={classes.cardNameH4} ref={textRef} style={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            display: "-webkit-box",
+                            "-webkit-line-clamp": 2,
+                            "-webkit-box-orient": "vertical",
+                          }}>{elem?.name}</h4>
                           <p className={classes.cardNameP}>
                             ₹ {elem?.discountPrice}
                           </p>

@@ -2,7 +2,7 @@ import axios from "axios";
 import { LOGIN } from "../Routes/Routes";
 //165.22.222.7
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "http://165.22.222.7:5000/",
   headers: {
     "Content-Type": "application/json",
   },

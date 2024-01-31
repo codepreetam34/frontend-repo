@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick-slider";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getBestSellerProducts } from "Redux/Slices/ProductPage/ProductsPageSlice";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,23 +46,45 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .slick-slide .card_name h4": {
       color: "#fff",
-      padding: "0 10px",
-      fontSize: "1rem",
+      padding: "0",
+      margin: "0 10px",
+      fontSize: "0.7rem",
       fontWeight: 500,
     },
     "& .slick-slide .card_name p": {
       color: "#fff",
       padding: 0,
       fontSize: "1rem",
-      fontWeight: 400,
+      fontWeight: 500,
       padding: "3px 0px",
     },
   },
+  textLimit: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    display: "-webkit-box",
+    "-webkit-line-clamp": 2,
+    "-webkit-box-orient": "vertical",
+  },
+
 }));
 
 const BestSeller = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const textRef = useRef(null);
+  useEffect(() => {
+    const element = textRef.current;
+    if (element) {
+      if (
+        element.scrollHeight > element.clientHeight ||
+        element.scrollWidth > element.clientWidth
+      ) {
+        element.classList.add("ellipsis"); // Add ellipsis class if overflow
+      }
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(getBestSellerProducts());
@@ -95,8 +117,8 @@ const BestSeller = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 1,
           initialSlide: 2,
           infinite: true,
         },
@@ -104,8 +126,8 @@ const BestSeller = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 1,
           infinite: true,
         },
       },
@@ -129,9 +151,9 @@ const BestSeller = () => {
                 finalData?.map((elem) => (
                   <div
                     key={elem?._id}
-                    className={`${classes.bannerImg} text-center`}
+                    className={`text-center`}
                     style={{
-                      padding: "0 8px",
+                      padding: "0 4px",
                       display: "flex",
                       justifyContent: "center",
                       flexDirection: "column",
@@ -150,12 +172,14 @@ const BestSeller = () => {
                             height: "300px",
                             objectFit: "cover",
                             ...(window.innerWidth <= 600 && {
-                              width: "180px", height: "250px",
+                              width: "125px", height: "160px",
                             })
                           }}
                         />
                         <div className="card_name">
-                          <h4>{elem?.name}</h4>
+                          <h4 ref={textRef}
+                            className={`${classes.textLimit}`}>
+                            {elem?.name}</h4>
                           <p>₹ {elem?.discountPrice}</p>
                         </div>
                       </Box>

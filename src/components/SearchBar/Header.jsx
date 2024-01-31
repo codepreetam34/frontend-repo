@@ -36,7 +36,7 @@ import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSl
 import { ErrorToaster, SuccessToaster } from "constants/util";
 import PincodeWrapper from "components/PincodeWrapper";
 import mobileMenuToggleBar from "assets/mobileMenuToggleBar.png"
-
+import MenuIcon from '@mui/icons-material/Menu';
 const useStyles = makeStyles((theme) => ({
   commonStyle: {
     [theme.breakpoints.down("xs")]: {
@@ -63,10 +63,18 @@ const useStyles = makeStyles((theme) => ({
   profileIconStyle: {
     width: "30px !important",
     height: "30px !important",
+    [theme.breakpoints.down("sm")]: {
+      width: "25px !important",
+      height: "25px !important",
+    },
   },
   locationIconStyle: {
     width: "30px !important",
     height: "30px !important",
+    [theme.breakpoints.down("sm")]: {
+      width: "25px !important",
+      height: "25px !important",
+    },
   },
   cartItemCountStyle: {
     position: "absolute",
@@ -77,6 +85,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
     padding: "2px 10px",
     fontSize: "12px",
+    [theme.breakpoints.down("sm")]: {
+      position: "absolute",
+      padding: "2px 8px",
+      fontSize: "10px",
+      top:"-25%"
+    },
   },
   pincodeItemCountStyle: {
     color: "white",
@@ -121,14 +135,18 @@ const useStyles = makeStyles((theme) => ({
   monkeyLogoStyle: {
     width: "45px",
     height: "45px",
+    [theme.breakpoints.down("sm")]: {
+      width: "40px",
+      height: "40px",
+    },
   },
   logoStyle: {
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
-    gap: "1rem",
+    gap: "0.5rem",
     [theme.breakpoints.down("sm")]: {
-      gap: "0.5rem",
+      gap: "0.1rem",
     },
   },
   menuStyle: {
@@ -196,6 +214,12 @@ const useStyles = makeStyles((theme) => ({
   menuItemStyle: {
     padding: "1rem !important",
   },
+  vibezterLogoStyle: {
+    [theme.breakpoints.down("sm")]: {
+      width: "85px",
+      height: "40px"
+    },
+  }
 }));
 const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const dispatch = useDispatch();
@@ -346,7 +370,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             <img
               src={VibezterLogo}
               alt="VibezterLogo"
-              claasName={`${classes.vibezterLogoStyle}`}
+              className={`${classes.vibezterLogoStyle}`}
             />
           </a>
         </Col>
@@ -568,7 +592,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
             <Row>
               <div style={{
                 display: "flex",
-                paddingBottom: "5px"
               }}>
                 <Col xs={6} className={`${classes.flexDisplayStyle}`}>
                   <a href={"/"} className={`${classes.logoStyle}`}>
@@ -580,10 +603,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                     <img
                       src={VibezterLogo}
                       alt="VibezterLogo"
-                      style={{
-                        width: "100px",
-                        height: "40px",
-                      }}
+                      className={`${classes.vibezterLogoStyle}`}
                     />
                   </a>
                 </Col>
@@ -591,7 +611,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                 <Col xs={6} className={`${classes.logoStyle}`}>
                   <Box>
                     <a href={`/add-to-cart`}>
-                      <Button>
+                      <Button style={{ padding: "0" }}>
                         <img
                           src={cart}
                           alt="cart"
@@ -609,6 +629,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                     {pincodeData && pincodeData ? (
                       <div>
                         <Button
+                          style={{ padding: "0" }}
                           onClick={handleModalOpenController}
                           onMouseEnter={() => setIsHovered(true)}
                           onMouseLeave={() => setIsHovered(false)}
@@ -664,9 +685,34 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               </div>
               <div style={{
                 display: "flex",
+                gap: "1rem",
+                alignItems: "center",
+                justifyContent: "start",
               }}>
-                <Col xs={2}>
-                  <img
+                <Box>
+
+                  <MenuIcon style={{
+                    width: "35px",
+                    height: "35px",
+                    cursor: "pointer",
+                    color: "#801317",
+                    transition: "transform 0.3s ease",
+                    ":hover": {
+                      transform: "scale(1.1)",
+                    }
+                  }}
+
+                    aria-controls="basic-navbar-nav"
+                    onClick={handleToggleMenu}
+
+                  />
+
+
+
+
+
+
+                  {/* <img
                     src={mobileMenuToggleBar}
                     alt=""
                     aria-controls="basic-navbar-nav"
@@ -680,11 +726,11 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                         transform: "scale(1.1)",
                       }
                     }}
-                  />
-                </Col>
-                <Col xs={10}>
+                  /> */}
+                </Box>
+                <Box style={{ marginLeft: "-5px" }}>
                   <SearchBar placeholder={"Search gifts, experiences and more..."} />
-                </Col>
+                </Box>
               </div>
             </Row>
           </Container>
@@ -758,7 +804,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                   <FMButton
                     displayText={">"}
                     variant={"outlined"}
-                    
                     styleData={{
                       color: "#fff",
                       border: "none",
@@ -779,7 +824,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                       color: "#801317",
                       fontWeight: "600",
                       borderRadius: "10px",
-                  
+
                       backgroundColor: "white",
                     }}
                     href={LOGIN}

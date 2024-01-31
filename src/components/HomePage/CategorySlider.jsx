@@ -46,17 +46,19 @@ const CategorySlider = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 4,
+          slidesToScroll: 4,
           initialSlide: 2,
+          arrows: false,
           infinite: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          arrows: false,
           infinite: true,
         },
       },
@@ -76,7 +78,7 @@ const CategorySlider = () => {
                       key={elem?._id}
                       className="zoomin-img"
                       style={{
-                        padding: "0 8px",
+                        padding: "0 4px",
                         display: "flex",
                         justifyContent: "center",
                         flexDirection: "column",
@@ -94,13 +96,18 @@ const CategorySlider = () => {
                             borderRadius: "104px",
                             objectFit: "cover",
                             ...(window.innerWidth <= 600 && {
-                              width: "150px", height: "150px",
+                              width: "80px", height: "80px",
                             })
                           }}
                         />
 
                       </a>
-                      <h4 className="text-center">{elem?.name}</h4>
+                      <h4 className="text-center" style={{
+                        ...(window.innerWidth <= 600 && {
+                         fontSize:"14px",
+                         fontWeight:"500"
+                        })
+                      }}>{elem?.name}</h4>
                     </div>
                   );
                 })

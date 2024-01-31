@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     height: "130px",
     borderRadius: "20px",
     [theme.breakpoints.down("sm")]: {
-      height: "60px",
+      height: "auto",
     },
   },
 }));

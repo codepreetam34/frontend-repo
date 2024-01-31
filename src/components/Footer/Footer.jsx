@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "16px 0px 0px 16px",
     background: "#FFF",
     padding: "5px 40px 5px",
+    [theme.breakpoints.down("sm")]: {
+      width: "240px",
+    },
   },
   subscribeButton: {
     width: "120px",
@@ -118,6 +121,9 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     padding: "5px 0",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px 0",
+    },
   },
   copyrightRow: {
     background: "#EAB6B8",
@@ -127,6 +133,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "12px",
     color: "#801317",
     fontWeight: "700",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "10px",
+      fontWeight: "700",
+    },
   },
 }));
 const Footer = () => {
@@ -200,12 +210,12 @@ const Footer = () => {
             <Col className={classes.linksColumn}>
               <div className={classes.sectionTitle}>
                 <FMTypography
-                  displayText={"About Company"}
+                  displayText={"About Us"}
                   styleData={classes.sectionTitleText}
                 />
               </div>
               <div className={classes.linksContainer}>
-                <div className={classes.link}>About Us</div>
+                <div className={classes.link}>Info Page</div>
                 <div className={classes.link}>Disclaimer</div>
                 <div className={classes.link}>WebGross Team</div>
               </div>

@@ -10,9 +10,12 @@ const useStyles = makeStyles((theme) => ({
   shopbyocca: {
     "&  img": {
       width: "100%",
-      height: "725px",
+      height: "700px",
       objectFit: "cover",
       borderRadius: "20px",
+      [theme.breakpoints.down("sm")]: {
+        height: "345px",
+      },
     },
     padding: "50px 80px 0",
     position: "relative",
@@ -23,15 +26,24 @@ const useStyles = makeStyles((theme) => ({
   heighautoimgfirst: {
     position: "relative",
     overflow: "hidden",
-    marginBottom: "25px",
+    marginBottom: "10px",
     display: "block",
     height: "260px",
+    [theme.breakpoints.down("sm")]: {
+      height: "160px",
+      marginBottom: "10px",
+    },
     "& a": {
       position: "relative",
       overflow: "hidden",
       marginBottom: "25px",
       display: "block",
       height: "260px",
+      [theme.breakpoints.down("sm")]: {
+        width:"105px",
+        height: "160px",
+        marginBottom: "0",
+      },
     },
     "& p": {
       position: "absolute",
@@ -44,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 500,
       textAlign: "center",
       width: "100%",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "1rem",
+      },
     },
   },
   twobandatalowersection: {
@@ -69,17 +84,29 @@ const useStyles = makeStyles((theme) => ({
   heighautoimg: {
     position: "relative",
     overflow: "hidden",
-    marginBottom: "25px",
+    marginBottom: "10px",
     display: "block",
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: "10px",
+    },
     "& a img": {
       width: "100%",
       height: "260px",
+      [theme.breakpoints.down("sm")]: {
+        width: "100%",
+        height: "160px",
+
+      },
     },
     "& a": {
       position: "relative",
       overflow: "hidden",
       marginBbottom: "25px",
       display: "block",
+      [theme.breakpoints.down("sm")]: {
+        width: "105px",
+        marginBottom: "0"
+      },
       "& p": {
         position: "absolute",
         left: "50%",
@@ -91,28 +118,55 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 500,
         textAlign: "center",
         width: "100%",
+        [theme.breakpoints.down("sm")]: {
+          fontSize: "1rem",
+        },
       },
     },
+
     "&:nth-child(2) a img": {
       height: "220px",
+      [theme.breakpoints.down("sm")]: {
+        height: "190px",
+        width: "105px"
+      },
     },
     "&:nth-child(3) a img": {
-      height: "195px",
+      height: "200px",
+      [theme.breakpoints.down("sm")]: {
+        height: "160px", width: "105px"
+      },
     },
     "& .second_row:nth-child(1) a img": {
       height: "190px",
+      [theme.breakpoints.down("sm")]: {
+        height: "140px", width: "105px"
+      },
+      
     },
     "& .second_row:nth-child(2) a img": {
       height: "220px",
+      [theme.breakpoints.down("sm")]: {
+        height: "190px", width: "105px"
+      },
     },
     "& .second_row:nth-child(3) a img": {
       height: "265px",
+      [theme.breakpoints.down("sm")]: {
+        height: "220px", width: "105px"
+      },
     },
     "& .forth_row:nth-child(1) a img": {
-      height: "350px",
+      height: "345px",
+      [theme.breakpoints.down("sm")]: {
+        height: "260px", width: "105px"
+      },
     },
     "& .forth_row:nth-child(2) a img": {
-      height: "350px",
+      height: "345px",
+      [theme.breakpoints.down("sm")]: {
+        height: "260px", width: "105px"
+      },
     },
   },
   headingText: {
@@ -127,6 +181,15 @@ const useStyles = makeStyles((theme) => ({
       gap: "1rem",
     },
   },
+  imgMargin: {
+    marginBottom: '10px',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '10px',
+    }
+  },
+  columnPadding: {
+    padding: "0px 20px 0px 10px"
+  }
 }));
 const ShopByOccasion = () => {
   const dispatch = useDispatch();
@@ -167,9 +230,9 @@ const ShopByOccasion = () => {
           </Col>
         </Row>
         <Row className={classes.columnGap}>
-          <Col xs={12} md={6} className="order-md-1 order-2">
+          <Col xs={12} md={6} className={`order-md-1 order-2 ${classes.columnPadding}`} >
             <Row>
-              <Col xs={4} md={4}>
+              <Col xs={4} md={4} className="pe-0">
                 <div className={classes.heighautoimgfirst}>
                   <Link
                     href="/product-page"
@@ -224,9 +287,9 @@ const ShopByOccasion = () => {
                 </div>
               </Col>
 
-              <Col xs={4} md={4}>
+              <Col xs={4} md={4} className="pe-0">
                 <div className={`${classes.heighautoimg}`}>
-                  <div className={` forth_row`}  style={{paddingBottom:'1.5rem'}}>
+                  <div className={` forth_row ${classes.imgMargin}`} >
                     <a href="/" className="overlay">
                       <img
                         src={
@@ -261,7 +324,7 @@ const ShopByOccasion = () => {
                 </div>
               </Col>
 
-              <Col xs={4} md={4}>
+              <Col xs={4} md={4} className="pe-0">
                 <div className={`${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
@@ -313,7 +376,7 @@ const ShopByOccasion = () => {
               </Col>
             </Row>
           </Col>
-          <Col xs={12} md={6} className="order-md-2 order-1">
+          <Col xs={12} md={6} className="shopSecondSection order-md-2 order-1">
             <div className="position-relative">
               <div className="overlay"></div>
               <img
