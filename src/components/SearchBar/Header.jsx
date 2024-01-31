@@ -728,7 +728,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                     }}
                   /> */}
                 </Box>
-                <Box style={{ marginLeft: "-5px" }}>
+                <Box style={{ marginLeft: "5px" }}>
                   <SearchBar placeholder={"Search gifts, experiences and more..."} />
                 </Box>
               </div>

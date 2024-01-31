@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import androidIcon from "../../assets/androidIcon.svg";
 import appleIcon from "../../assets/appleIcon.svg";
 import footerLogo from "../../assets/FooterLogo.png";
-import { Box, InputBase } from "@mui/material";
+import { Box, InputBase, useMediaQuery } from "@mui/material";
 import FMButton from "../../components/FMButton/FMButton";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
     background: "#FFF",
     padding: "5px 40px 5px",
     [theme.breakpoints.down("sm")]: {
-      width: "240px",
+      width: "220px",
+      height: "50px",
     },
   },
   subscribeButton: {
@@ -58,6 +59,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
     fontStyle: "normal",
     fontWeight: "600",
+    [theme.breakpoints.down("sm")]: {
+      width: "110px",
+      height: "50px !important",
+    },
   },
   logoContainer: {
     fontSize: "14px",
@@ -141,6 +146,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Footer = () => {
   const classes = useStyles();
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
     <Container fluid>
@@ -163,7 +169,7 @@ const Footer = () => {
                 displayText={"Submit"}
                 styleData={{
                   width: "120px",
-                  height: "55px",
+                  height:isMobile ? "50px":"55px",
                   flexShrink: "0",
                   borderRadius: "0px 10px 10px 0px",
                   background: "#801317",

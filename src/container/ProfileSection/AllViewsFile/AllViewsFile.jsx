@@ -12,6 +12,7 @@ import { AllViewsFileStyle } from "./AllViewsFileStyle";
 import Reminder from "../Reminder";
 import AllAddresses from "../AllAddresses";
 import Footer from "components/Footer/Footer";
+import { useMediaQuery } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -68,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VerticalTabs() {
   const classes = useStyles();
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const [value, setValue] = React.useState(0);
 
@@ -93,7 +95,7 @@ export default function VerticalTabs() {
     <>
       <Header />
 
-      <Container style={{ marginTop: '40px' }}>
+      <Container style={{ marginTop: isMobile ? '25px' : '40px' }}>
         <Row>
           <Col className="col-md-2">
             <Tabs
@@ -112,11 +114,12 @@ export default function VerticalTabs() {
                   label="Profile"
                   {...a11yProps(0)}
                   sx={{
-                    border: "1px solid #E6E6E6",
+                    border: "1px solid #801317",
                     borderRadius: "100px",
                     boxShadow:
                       "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-                    marginBottom: "1rem",
+                    marginBottom: isMobile ? 0 : "1rem",
+                    background: "#fff",
                   }}
                 />
                 {/* <Tab
@@ -128,17 +131,20 @@ export default function VerticalTabs() {
                   boxShadow:
                     "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
                   marginBottom: "1rem",
+
+                  E6E6E6
                 }}
               /> */}
                 <Tab
                   label="Addresses"
                   {...a11yProps(1)}
                   sx={{
-                    border: "1px solid #E6E6E6",
+                    border: "1px solid #801317",
                     borderRadius: "100px",
                     boxShadow:
                       "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
-                    marginBottom: "1rem",
+                    marginBottom: isMobile ? 0 : "1rem",
+                    background: "#fff",
                   }}
                 />
                 {/* <Tab

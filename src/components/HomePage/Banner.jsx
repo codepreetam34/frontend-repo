@@ -4,30 +4,53 @@ import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCarousel } from "../../Redux/Slices/LandingPageSlice/LandingPageSlice";
 import { Box, useMediaQuery } from "@mui/material";
-
+import mobile1 from "./Ram-Mandir_Msite_01_01.jpg";
+import mobile2 from "./VALENTINE_Mobile-Banner_19jan.jpg";
 const Banner = () => {
   const dispatch = useDispatch();
-  const responsiveMobile = useMediaQuery("(max-width: 600px)");
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
-  const allCarousels = useSelector(
+  const allCarouselsDesktop = useSelector(
     (state) => state?.getCarousel?.getCarouselData?.homePageBanners
   );
+  const allCarouselsMobile = [
+    {
+      "title": "First Banner",
+      "slug": "first-banner",
+      "banner": mobile1,
+      "imageAltText": "First Banner Alt Text",
+      "createdBy": "<User ObjectId>",
+      "createdAt": "<Creation Timestamp>",
+      "updatedAt": "<Update Timestamp>"
+    },
+    {
+      "title": "Second Banner",
+      "slug": "second-banner",
+      "banner": mobile2,
+      "imageAltText": "Second Banner Alt Text",
+      "createdBy": "<User ObjectId>",
+      "createdAt": "<Creation Timestamp>",
+      "updatedAt": "<Update Timestamp>"
+    }
+  ]
+
+
   useEffect(() => {
     dispatch(getCarousel());
   }, [dispatch]);
 
   const settings = {
-    dots: responsiveMobile ? false : true,
+    dots: !isMobile,
     infinite: true,
     speed: 300,
     draggable: true,
-    margin: responsiveMobile ? "20px" : "100px",
+    margin: isMobile ? "20px" : "100px",
     autoplay: true,
     arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  const finalData = (allCarousels && allCarousels) || [];
+  const finalData = isMobile ? allCarouselsMobile : allCarouselsDesktop || [];
 
   return (
     <div className="banner_slider">
@@ -42,7 +65,7 @@ const Banner = () => {
                     alt=""
                     style={{
                       width: "100%",
-                      height: responsiveMobile ? "200px" : "50vh",
+                      height: isMobile ? "200px" : "50vh",
                       objectFit: "cover",
                     }}
                   />

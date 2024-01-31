@@ -6,6 +6,7 @@ import {
   Radio,
   RadioGroup,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import FMTypography from "../../components/FMTypography/FMTypography";
 import React, { useCallback, useEffect, useState } from "react";
@@ -57,6 +58,9 @@ const Profile = () => {
   const [newProfilePicture, setNewProfilePicture] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [profilePicture, setProfilePicture] = useState("");
+  const isMobile = useMediaQuery("(max-width:600px)");
+
+
   const [pincodeData, setPincodeData] = useState(
     sessionStorage.getItem("pincode")
   );
@@ -128,7 +132,6 @@ const Profile = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log("data ", data);
     try {
       const formData = new FormData();
 
@@ -166,7 +169,6 @@ const Profile = () => {
   const [genderChange, setGenderChange] = useState();
 
   const handleGenderChange = (event) => {
-    console.log("Gender change ", event.target.value);
     setGenderChange(event.target.value);
   };
 
@@ -180,15 +182,20 @@ const Profile = () => {
           marginTop: "24px",
           marginBottom: "24px",
           padding: "32px",
+
+          background: "#fff",
         }}
       >
         <Col className="col-md-4">
           <Stack
             direction="row"
             spacing={2}
-            style={{ marginLeft: "1rem", position: "relative" }}
+            style={{ marginLeft: isMobile ? "" : "1rem", position: "relative" }}
           >
-            <label htmlFor="profile-picture-input">
+            <label htmlFor="profile-picture-input" style={{
+              display: "flex",
+              justifyContent: "center"
+            }}>
               <Avatar
                 src={previewImage || profilePicture || "/broken-image.jpg"}
                 style={{ width: "170px", height: "170px", cursor: "pointer" }}
@@ -214,6 +221,7 @@ const Profile = () => {
                   background: "#801317",
                   alignItems: "center",
                   justifyContent: "center",
+
                 }}
               >
                 <Typography
@@ -241,9 +249,12 @@ const Profile = () => {
               fontSize: "32px",
               fontWeight: "500",
               marginBottom: "1rem",
+              ...(window.innerWidth <= 600 && {
+                fontSize: "30px",
+              })
             }}
           />
-          
+
           <Box sx={{ display: "flex", marginBottom: ".5rem" }}>
             <img
               src={mailIcon}
@@ -254,7 +265,7 @@ const Profile = () => {
               displayText={myProfileData?.email}
               styleData={{
                 marginLeft: "1rem",
-                fontSize: "1rem",
+                fontSize: "14px",
                 color: "#717171",
               }}
             />
@@ -269,7 +280,7 @@ const Profile = () => {
               }
               styleData={{
                 marginLeft: "1rem",
-                fontSize: "1rem",
+                fontSize: "14px",
                 color: "#717171",
               }}
             />
@@ -284,14 +295,14 @@ const Profile = () => {
               }
               styleData={{
                 marginLeft: "1rem",
-                fontSize: "1rem",
+                fontSize: "14px",
                 color: "#717171",
               }}
             />
           </Box>
         </Col>
       </Row>
-      
+
       <Row
         style={{
           boxShadow:
@@ -299,7 +310,7 @@ const Profile = () => {
           borderRadius: "20px",
           marginTop: "24px",
           marginBottom: "24px",
-          padding: "32px",
+          padding: "32px", background: "#fff",
         }}
       >
         <Col style={{ display: "flex", justifyContent: "center" }}>
