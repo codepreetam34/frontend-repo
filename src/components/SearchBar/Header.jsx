@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       padding: "2px 8px",
       fontSize: "10px",
-      top:"-25%"
+      top: "-25%"
     },
   },
   pincodeItemCountStyle: {
@@ -357,6 +357,14 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   //   });
   // }, []);
 
+  const placeholders = [
+    "Search flowers,cakes,gifts,etc.",
+    "Explore experiences",
+    "Birthday gifts",
+    "Anniversary gifts",
+    "Wedding gifts and more...",
+  ];
+
   return (
     <Grid className={`${classes.headerFullStyle}`}>
       <Row className={`d-none d-md-flex ${classes.iconGridContainer}`}>
@@ -375,7 +383,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           </a>
         </Col>
         <Col className="searchBar-col">
-          <SearchBar placeholder={"Search gifts, experiences and more..."} />
+          <SearchBar placeholders={placeholders} />
         </Col>
         <Col className={`${classes.logoStyle}`}>
           <Box>
@@ -729,7 +737,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                   /> */}
                 </Box>
                 <Box style={{ marginLeft: "5px" }}>
-                  <SearchBar placeholder={"Search gifts, experiences and more..."} />
+                  <SearchBar placeholders={placeholders} />
                 </Box>
               </div>
             </Row>
@@ -792,7 +800,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                     </Box>
                   ) : <FMTypography
                     displayText={"Hi Guest"}
-                    styleData={{ fontWeight: '600', fontSize: "14px", color: "#fff" }}
+                    styleData={{ fontWeight: '600', marginLeft: "0.5rem", fontSize: "14px", color: "#fff" }}
                   />}
                 </Col>
 

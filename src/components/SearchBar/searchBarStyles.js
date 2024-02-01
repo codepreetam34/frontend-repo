@@ -16,7 +16,8 @@ export const SearchStyle = {
 
   searchIcon: {
     marginRight: "0.625rem",
-    color: "#1a1a1a66",
+    color:"#801317"
+    // color: "#1a1a1a66",
   },
   inputField: {
     "&.MuiInput-input": {
