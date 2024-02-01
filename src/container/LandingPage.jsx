@@ -9,10 +9,11 @@ import ShopByOccasion from "../components/HomePage/ShopByOccasion";
 import PamperZone from "../components/HomePage/PamperZone";
 import ThreePoint from "../components/HomePage/ThreePoint";
 import Footer from "../components/Footer/Footer";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import Layout from "../components/Layout";
 import StartupScreen from "../components/StartpScreen";
 import adsBanner from "assets/LandingPage/adsBanner.png";
+import adsBannerMobile from "assets/LandingPage/adsBannerMobile.png";
 import { Col, Container, Row } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -36,6 +37,7 @@ const LandingPage = () => {
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
   const [landingPageModalOpen, setLandingPageModalOpen] = useState(true);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     const simulateAsyncOperation = () => {
@@ -92,7 +94,7 @@ const LandingPage = () => {
                       <Col md={12}>
                         <div className="">
                           <img
-                            src={adsBanner}
+                            src={isMobile ? adsBannerMobile : adsBanner}
                             className={`img-fluid ${classes.adsImage}`}
                             alt=""
                           />

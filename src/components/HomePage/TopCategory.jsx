@@ -158,7 +158,7 @@ const TopCategory = () => {
                       href={`/product-detail/${elem?._id}`}
                       className={classes.slickSlideA}
                     >
-                      <Box className="banner_img zoomin-img">
+                      <div className="banner_img zoomin-img">
                         <div className="background-overlay"></div>
                         <img
                           src={elem?.productPictures[0].img}
@@ -169,7 +169,7 @@ const TopCategory = () => {
                             height: "300px",
                             objectFit: "cover",
                             ...(window.innerWidth <= 600 && {
-                              width: "125px", height: "160px",
+                              width: "110px", height: "150px",
                             })
                           }}
                         />
@@ -186,7 +186,7 @@ const TopCategory = () => {
                             ₹ {elem?.discountPrice}
                           </p>
                         </div>
-                      </Box>
+                      </div>
                     </a>
                   </div>
                 ))}

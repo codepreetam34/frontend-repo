@@ -37,6 +37,8 @@ import { ErrorToaster, SuccessToaster } from "constants/util";
 import PincodeWrapper from "components/PincodeWrapper";
 import mobileMenuToggleBar from "assets/mobileMenuToggleBar.png"
 import MenuIcon from '@mui/icons-material/Menu';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+
 const useStyles = makeStyles((theme) => ({
   commonStyle: {
     [theme.breakpoints.down("xs")]: {
@@ -810,13 +812,14 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               {personLoggedIn ? (
                 <Box>
                   <FMButton
-                    displayText={">"}
+                    displayText={<>
+                      <KeyboardArrowRightIcon sx={{ fontSize: '2rem' }} />
+                    </>}
                     variant={"outlined"}
                     styleData={{
                       color: "#fff",
                       border: "none",
                       fontWeight: "600",
-                      fontSize: "1.5rem",
                       borderRadius: "10px",
 
                     }}

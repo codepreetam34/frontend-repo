@@ -45,7 +45,7 @@ const SearchBar = ({
               setPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholders.length);
             }
           }, 100);
-        }, 1500);
+        }, 1000);
       }
     }, 100);
 

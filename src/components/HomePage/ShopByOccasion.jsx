@@ -6,18 +6,10 @@ import { Link } from "react-router-dom";
 import FMButton from "components/FMButton/FMButton";
 import { getHomePageShopByOccasion } from "Redux/Slices/ShopByOccasion/ShopByOccasionSlice";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useMediaQuery } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   shopbyocca: {
-    "&  img": {
-      width: "100%",
-      height: "580px",
-      objectFit: "cover",
-      borderRadius: "20px",
-      [theme.breakpoints.down("sm")]: {
-        height: "345px",
-      },
-    },
     padding: "50px 80px 0",
     position: "relative",
     [theme.breakpoints.down("sm")]: {
@@ -32,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
     height: "210px",
     [theme.breakpoints.down("sm")]: {
       height: "160px",
-      marginBottom: "10px",
     },
     "& a": {
       position: "relative",
@@ -196,6 +187,7 @@ const ShopByOccasion = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState();
   const classes = useStyles();
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const ShopByOccasionCarousels = useSelector(
     (state) => state.shopByOccasion?.shopByOccations?.homepageBanner
@@ -247,6 +239,9 @@ const ShopByOccasion = () => {
                       }
                       className="img-fluid"
                       alt=""
+                      style={{
+                        height: isMobile ? "160px" : "210px",
+                      }}
                     />
                     <p>
                       {ShopByOccasionCarousels &&
@@ -384,6 +379,12 @@ const ShopByOccasion = () => {
                 src={
                   ShopByOccasionCarousels && ShopByOccasionCarousels[0]?.banner
                 }
+                style={{
+                  width: "100%",
+                  height: isMobile ? "345px" : "580px",
+                  objectFit: "cover",
+                  borderRadius: "20px",
+                }}
                 alt=""
               />
               <div className={classes.twobandatalowersection}>
