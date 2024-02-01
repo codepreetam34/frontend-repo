@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomePagePamperZone } from "Redux/Slices/PamperZone/PamperZoneSlice";
 import { makeStyles } from "@material-ui/core/styles";
+import { useMediaQuery } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   pamperzone: {
@@ -19,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     left: "20px",
     transform: "translateY(-50%)",
     "& h4": {
-      fontSize: "1.875rem",
       fontWeight: 600,
       color: "#000",
       textTransform: "capitalize",
@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: "5px",
     },
   },
-
   headingText: {
     textAlign: "center",
     fontSize: "2.1875rem",
@@ -47,6 +46,8 @@ const PamperZone = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const classes = useStyles(theme);
+  const isMobile = useMediaQuery("(max-width:600px)");
+
 
   useEffect(() => {
     dispatch(getHomePagePamperZone());
@@ -74,7 +75,7 @@ const PamperZone = () => {
                   <img src={data?.banner} className="img-fluid" alt="" />
                 </Box>
                 <div className={`${classes.twoBanData}`}>
-                  <h4>{data?.title}</h4>
+                  <h4 style={{ fontSize: isMobile ? "1.5rem" : "1.875rem", }}>{data?.title}</h4>
                   <FMButton
                     displayText={"Shop Now"}
                     styleData={{
@@ -82,7 +83,7 @@ const PamperZone = () => {
                       color: "#ffffff",
                       border: "1px solid #801319",
                       padding: "10px 25px",
-                      fontSize: "1.25rem",
+                      fontSize: isMobile ? "1rem" : "1.25rem",
                       textTransform: "capitalize",
                       fontWeight: 600,
                     }}

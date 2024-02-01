@@ -17,6 +17,7 @@ import { ArrowBack } from '@material-ui/icons';
 const steps = ["Cart", "Address", "Payment"];
 
 import { makeStyles } from '@mui/styles';
+import { useMediaQuery } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   arrowBack: {
@@ -32,6 +33,7 @@ export default function HorizontalLinearStepper() {
   const [skipped, setSkipped] = React.useState(new Set());
   const classes = useStyles();
 
+  const isMobile = useMediaQuery("(max-width:600px)");
   const [totalAmount, setTotalAmount] = React.useState();
   const [discountCoupon, setDiscountCoupon] = React.useState();
 
@@ -108,7 +110,7 @@ export default function HorizontalLinearStepper() {
                 variant={'outlined'}
                 displayText={
                   <>
-                    <ArrowBack className={classes.arrowBack} />&nbsp;Back
+                    <ArrowBack className={classes.arrowBack} />&nbsp;{isMobile ? "" : "Back"}
                   </>
 
                 }
@@ -122,9 +124,10 @@ export default function HorizontalLinearStepper() {
                   color: "#000",
                   fontSize: "1rem",
                   fontStyle: "normal",
+                  padding: isMobile ? "0" : "5px 15px",
                   fontWeight: "500",
                   '@media (max-width: 600px)': {
-                    fontSize: "10px", 
+                    fontSize: "10px",
                   }
                 }}
                 onClick={handleBack}
@@ -158,7 +161,7 @@ export default function HorizontalLinearStepper() {
                 }
                 return (
                   <Step key={label} {...stepProps}>
-                    <StepLabel {...labelProps}>{label}</StepLabel>
+                    <StepLabel {...labelProps}><span style={{ fontSize: isMobile ? "0.7rem" : "0.8rem" }}>{label}</span></StepLabel>
                   </Step>
                 );
               })}

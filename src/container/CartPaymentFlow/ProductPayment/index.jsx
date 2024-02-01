@@ -9,11 +9,12 @@ import { addOrder } from "Redux/Slices/OrderSlice/Order";
 import { useNavigate } from "react-router";
 import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
 import { ORDER_PAGE } from "Routes/Routes";
+import { useMediaQuery } from "@mui/material";
 
 const ProductPayment = ({ totalAmount, addressId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const isMobile = useMediaQuery("(max-width:600px)");
   const handlePaytmPayment = async () => {
     try {
       // Make an API call to your server to initiate the Paytm transaction
@@ -202,7 +203,7 @@ const ProductPayment = ({ totalAmount, addressId }) => {
   };
 
   return (
-    <Row style={{ padding: "10px 120px 0 120px" }}>
+    <div style={{ padding: isMobile ? "0px" : "10px 120px 0 120px" }}>
       <Col
         style={{
           padding: "1rem 1rem",
@@ -223,7 +224,7 @@ const ProductPayment = ({ totalAmount, addressId }) => {
                 alt="Razorpay Icon"
                 style={{ marginRight: "8px", height: "18px" }}
               />
-              Pay with Razor Pay
+              <div>Pay with Razor Pay</div>
             </>
           }
           variant="outlined"
@@ -236,11 +237,13 @@ const ProductPayment = ({ totalAmount, addressId }) => {
             borderRadius: "100px",
             textTransform: "capitalize",
             color: "#222222",
+            fontSize: isMobile ? "0.8rem" : "0.8rem",
+            fontWeight:"600",
             marginBottom: "1.5rem",
           }}
         />
       </Col>
-    </Row>
+    </div>
   );
 };
 

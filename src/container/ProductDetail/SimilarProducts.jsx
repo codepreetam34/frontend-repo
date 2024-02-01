@@ -320,6 +320,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     margin: 0,
     padding: "0 0 35px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "2rem",
+    },
   },
   samecard: {
     "& .slick-slide img": {
@@ -423,6 +426,7 @@ const SimilarProducts = ({ setIsLoading, pId }) => {
           slidesToScroll: 2,
           initialSlide: 2,
           infinite: true,
+          arrows: false,
         },
       },
       {
@@ -430,7 +434,8 @@ const SimilarProducts = ({ setIsLoading, pId }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          infinite: true,
+          infinite: true, 
+          arrows: false,
         },
       },
     ],
@@ -505,7 +510,7 @@ const SimilarProducts = ({ setIsLoading, pId }) => {
                             ...(window.innerWidth <= 600 && {
                               borderRadius: "20px",
                               height: "auto",
-                              width: "180px",
+                              width: "170px",
                             }),
                           }}
                         >
@@ -517,8 +522,8 @@ const SimilarProducts = ({ setIsLoading, pId }) => {
                                 width: "100%",
                                 borderRadius: "0",
                                 ...(window.innerWidth <= 600 && {
-                                  height: "180px",
-                                  width: "100%",
+                                  height: "170px",
+                                  width: "170px",
                                   borderRadius: "0",
                                 }),
                               }}

@@ -141,6 +141,7 @@ const ProductDetail = () => {
   const [showLoginPageModal, setShowLoginPageModal] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
+  const isMobile = useMediaQuery("(max-width:600px)");
   const productDetailedData = useSelector(
     (state) => state?.getProductsDetail?.getProductsListData?.product
   );
@@ -449,7 +450,7 @@ const ProductDetail = () => {
           <>
             <div
               className={`${classes.gridPadding} ${classes.root}`}
-              style={{ marginTop: "40px" }}
+              style={{ marginTop: isMobile ? "0px" : "40px" }}
             >
               <Container>
                 <Grid container spacing={0}>
@@ -479,7 +480,7 @@ const ProductDetail = () => {
                     >
                       <FMTypography
                         displayText={productDetailedData?.name}
-                        styleData={{ fontSize: "40px", fontWeight: "600" }}
+                        styleData={{ fontSize: isMobile ? "2rem" : "40px", fontWeight: "600" }}
                       />
                       <Box sx={{ display: "flex" }}>
                         <Box
