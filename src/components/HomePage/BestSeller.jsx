@@ -121,6 +121,7 @@ const BestSeller = () => {
           slidesToScroll: 1,
           initialSlide: 2,
           infinite: true,
+          arrows: false,
         },
       },
       {
@@ -129,6 +130,7 @@ const BestSeller = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
+          arrows: false,
         },
       },
     ],

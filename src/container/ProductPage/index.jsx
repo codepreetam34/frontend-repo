@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "40px",
     [theme.breakpoints.down("sm")]: {
       padding: "0 20px",
+      marginTop: "20px",
     },
   },
   productList: {
@@ -153,15 +154,15 @@ const ProductPage = () => {
               display: "flex",
               transition:
                 "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
+                marginBottom:'1rem'
             }}
           >
             <FMTypography
               displayText={pageTitle ? `${pageTitle} Products` : `No Products`}
               styleData={{
-                fontWeight: "500",
-                fontSize: "40px",
+                fontWeight: "600",
+                fontSize: isMobile ? "18px" :"40px",
                 textTransform: "capitalize",
-                paddingBottom: "1rem",
               }}
             />
 
@@ -236,7 +237,7 @@ const ProductPage = () => {
                   </Box>
                   <Card
                     sx={{
-                      width: isMobile ? "180px" : "283px",
+                      width: isMobile ? "170px" : "283px",
                       borderRadius: "20px",
                       height: "auto",
                     }}
@@ -244,8 +245,8 @@ const ProductPage = () => {
                     <CardActionArea>
                       <CardMedia
                         component="img"
-                        height={isMobile ? "180px" : "283px"}
-                        width={isMobile ? "180px" : "283px"}
+                        height={isMobile ? "170px" : "283px"}
+                        width={isMobile ? "170px" : "283px"}
                         image={elem?.productPictures[0]?.img}
                         alt="Product Image"
                       />

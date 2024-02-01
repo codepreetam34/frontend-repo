@@ -10,6 +10,7 @@ import {
   Typography,
   Modal,
   Alert,
+  useMediaQuery,
 } from "@mui/material";
 import StartupScreen from "components/StartpScreen";
 import FMTypography from "components/FMTypography/FMTypography";
@@ -28,13 +29,13 @@ const PincodeWrapper = ({
   const [error, setError] = useState("");
   const [checkedStoredPincode, setCheckedStoredPincode] = useState(true);
   const [loading, setLoading] = useState(true);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
-    // Simulate an asynchronous operation (e.g., fetching data) that takes some time
     const simulateAsyncOperation = () => {
       setTimeout(() => {
         setLoading(false);
-      }, 1000); // Adjust the duration as needed
+      }, 1000); 
     };
 
     simulateAsyncOperation();
@@ -45,10 +46,8 @@ const PincodeWrapper = ({
 
     if (storedPincode) {
       setPincodeData(storedPincode);
-      // Set pincodeModalOpen to false after processing stored pincode
       setPincodeModalOpen(false);
     } else if (checkedStoredPincode) {
-      // Set pincodeModalOpen to true only during the initial render
       setCheckedStoredPincode(false);
       setPincodeData("");
     } else {
@@ -67,8 +66,8 @@ const PincodeWrapper = ({
     padding: "20px",
     border: "1px solid #ccc",
     borderRadius: "5px",
-    maxWidth: "400px", // Adjust the maximum width as needed
-    margin: "auto", // Center the component
+    maxWidth: "400px", 
+    margin: "auto",
   };
 
   useEffect(() => {
@@ -115,7 +114,7 @@ const PincodeWrapper = ({
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                width: "30rem",
+                width: isMobile ? "22rem" : "30rem",
                 bgcolor: "white",
 
                 borderRadius: 4,
@@ -139,13 +138,13 @@ const PincodeWrapper = ({
               </Box>
 
               {/* Content */}
-              <Box sx={{ padding: "1rem 2rem" }}>
+              <Box sx={{ padding: isMobile ? "1rem 1rem" : "1rem 2rem" }}>
                 <FMTypography
                   displayText={
                     "Please enter the correct delivery location or pincode to view available products and delivery options"
                   }
                   styleData={{
-                    fontSize: "14px",
+                    fontSize: isMobile ? "12px" : "14px",
                     fontWeight: "600",
                     textAlign: "center",
                     marginBottom: "1rem",
@@ -180,7 +179,7 @@ const PincodeWrapper = ({
                     }}
                   />
 
-                  {error && <Alert severity="error">{error}</Alert>}
+                  {error && <Alert severity="error" style={{ fontSize: isMobile ? "0.7rem" : "0.8rem" }}>{error}</Alert>}
                   {area && (
                     <Box sx={{ marginTop: "20px" }}>
                       <TextField

@@ -112,6 +112,7 @@ const TopCategory = () => {
           slidesToScroll: 3,
           initialSlide: 2,
           infinite: true,
+          arrows: false,
         },
       },
       {
@@ -120,6 +121,7 @@ const TopCategory = () => {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
+          arrows: false,
         },
       },
     ],

@@ -358,11 +358,11 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   // }, []);
 
   const placeholders = [
-    "Search flowers,cakes,gifts,etc.",
+    "Search flowers,cakes,gifts...",
     "Explore experiences",
     "Birthday gifts",
     "Anniversary gifts",
-    "Wedding gifts and more...",
+    "Wedding gifts & more...",
   ];
 
   return (
