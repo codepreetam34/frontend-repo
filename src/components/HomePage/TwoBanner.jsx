@@ -1,9 +1,10 @@
-import FMButton from "../../components/FMButton/FMButton";
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomePageTwoAdsBanner } from "Redux/Slices/TwoAdsBanner/TwoAdsBannerSlice";
 import { makeStyles } from "@material-ui/core/styles";
+import FMButton from "../../components/FMButton/FMButton";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const useStyles = makeStyles((theme) => ({
   twobannersection: {
@@ -16,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
   twobannersectionImg: {
     width: "100%",
     borderRadius: "20px",
+    height: "180px",
+    [theme.breakpoints.down("sm")]: {
+      height: "120px",
+    },
   },
   twobandata: {
     position: "absolute",
@@ -59,71 +64,46 @@ const useStyles = makeStyles((theme) => ({
 const TwoBanner = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const twoBannerData = useSelector((state) => state?.twoAdsBanner?.twoAdsBanners?.homepageBanner);
 
   useEffect(() => {
     dispatch(getHomePageTwoAdsBanner());
   }, [dispatch]);
 
-  const twoBannerData = useSelector(
-    (state) => state?.twoAdsBanner?.twoAdsBanners?.homepageBanner
-  );
+  const renderBanner = (bannerIndex) => {
+    const banner = twoBannerData && twoBannerData[bannerIndex];
+    return (
+      <Col md={6}>
+        <div className="position-relative">
+          <div className={classes.twoBannerBackgroundOverlay}></div>
+          <img src={banner?.banner} className={classes.twobannersectionImg} alt="" />
+          <div className={classes.twobandata}>
+            <h4 className={classes.titleStyle}>{banner?.title}</h4>
+            <p className={classes.paragraphStyle}>{banner?.subTitle}</p>
+            <FMButton
+              displayText={"Gift Now "}
+              onHover={"white"}
+              styleData={{
+                backgroundColor: "white",
+                color: "#801317",
+                textTransform: "capitalize",
+                fontWeight: "600",
+              }}
+            >
+              <KeyboardArrowRightIcon />
+            </FMButton>
+          </div>
+        </div>
+      </Col>
+    );
+  };
 
   return (
     <div className={classes.twobannersection}>
       <Container fluid className="m-0 p-0">
         <Row className={classes.columnGap}>
-          <Col md={6}>
-            <div className="position-relative">
-              <div className={classes.twoBannerBackgroundOverlay}></div>
-              <img
-                src={twoBannerData && twoBannerData[0]?.banner}
-                className={classes.twobannersectionImg}
-                alt=""
-              />
-              <div className={classes.twobandata}>
-                <h4 className={classes.titleStyle}>The Anniversary</h4>
-                <p className={classes.paragraphStyle}>
-                  Send lots of blooms this anniversary
-                </p>
-                <FMButton
-                  displayText={"Gift Now"}
-                  onHover={"white"}
-                  styleData={{
-                    backgroundColor: "white",
-                    color: "black",
-                    textTransform: "capitalize",
-                    fontWeight: "600",
-                  }}
-                />
-              </div>
-            </div>
-          </Col>
-          <Col md={6}>
-            <div className="position-relative">
-              <div class="two-banner-background-overlay"></div>
-              <img
-                src={twoBannerData && twoBannerData[1]?.banner}
-                className={classes.twobannersectionImg}
-                alt=""
-              />
-              <div className={classes.twobandata}>
-                <h4 className={classes.titleStyle}>Bespoke Hampers</h4>
-                <p className={classes.paragraphStyle}>
-                  To elevate your gifting experience
-                </p>
-                <FMButton
-                  displayText={"Gift Now"}
-                  onHover={"white"}
-                  styleData={{
-                    backgroundColor: "white",
-                    color: "black",
-                    textTransform: "capitalize",
-                    fontWeight: "600",
-                  }}
-                />
-              </div>
-            </div>
-          </Col>
+          {renderBanner(0)}
+          {renderBanner(1)}
         </Row>
       </Container>
     </div>

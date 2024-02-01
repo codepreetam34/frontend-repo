@@ -67,7 +67,16 @@ const useStyles = makeStyles((theme) => ({
     "-webkit-line-clamp": 2,
     "-webkit-box-orient": "vertical",
   },
-
+  cardNameH4: {
+    color: "#fff",
+    padding: "0 !important",
+    margin: "0 10px !important",
+    fontSize: "1rem !important",
+    fontWeight: "500 !important",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "0.7rem !important",
+    },
+  },
 }));
 
 const BestSeller = () => {
@@ -153,7 +162,7 @@ const BestSeller = () => {
                 finalData?.map((elem) => (
                   <div
                     key={elem?._id}
-                    className={`text-center`}
+                    className={`text-center `}
                     style={{
                       padding: "0 4px",
                       display: "flex",
@@ -163,7 +172,7 @@ const BestSeller = () => {
                     }}
                   >
                     <a href={`/product-detail/${elem?._id}`}>
-                      <Box className="banner_img">
+                      <Box className="banner_img zoomin-img">
                         <div className="background-overlay"></div>
                         <img
                           src={elem?.productPictures[0].img}
@@ -179,9 +188,14 @@ const BestSeller = () => {
                           }}
                         />
                         <div className="card_name">
-                          <h4 ref={textRef}
-                            className={`${classes.textLimit}`}>
-                            {elem?.name}</h4>
+                        <h4 className={classes.cardNameH4} ref={textRef} style={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            display: "-webkit-box",
+                            "-webkit-line-clamp": 2,
+                            "-webkit-box-orient": "vertical",
+                          }}>{elem?.name}</h4>
                           <p>₹ {elem?.discountPrice}</p>
                         </div>
                       </Box>

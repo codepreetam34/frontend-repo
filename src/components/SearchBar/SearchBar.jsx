@@ -13,38 +13,45 @@ const SearchBar = ({
   clearText,
   cancelIconRight,
 }) => {
-
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [displayedPlaceholder, setDisplayedPlaceholder] = useState("");
 
   useEffect(() => {
     const placeholder = placeholders[placeholderIndex];
     if (!placeholder) return;
-  
+
     let currentIndex = 0;
-    let displayedText = '';
-  
+    let displayedText = "";
+
     const interval = setInterval(() => {
       if (currentIndex < placeholder.length) {
-        if (placeholder[currentIndex] === ' ') {
-          displayedText += ' '; // Add space directly without animation for word boundaries
+        if (placeholder[currentIndex] === " ") {
+          displayedText += " ";
         } else {
-          displayedText += placeholder[currentIndex]; // Add current character to displayed text
+          displayedText += placeholder[currentIndex];
         }
         setDisplayedPlaceholder(displayedText);
         currentIndex++;
       } else {
-        clearInterval(interval); // Clear the interval when the entire placeholder is displayed
+        clearInterval(interval);
         setTimeout(() => {
-          setDisplayedPlaceholder(''); // Clear displayed text after a delay
-          setPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholders.length); // Move to the next placeholder
-        }, 2000); // Delay before switching to the next placeholder
+          let eraseIndex = displayedText.length - 1;
+          const eraseInterval = setInterval(() => {
+            if (eraseIndex >= 0) {
+              setDisplayedPlaceholder((prev) => prev.slice(0, -1));
+              eraseIndex--;
+            } else {
+              clearInterval(eraseInterval);
+              setPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholders.length);
+            }
+          }, 100);
+        }, 1500);
       }
-    }, 100); // Typing speed
-  
+    }, 100);
+
     return () => clearInterval(interval);
   }, [placeholderIndex, placeholders]);
-  
+
   return (
     <Box sx={SearchStyle.searchBoxWrapper} className="searchBoxWrapper">
       <Input

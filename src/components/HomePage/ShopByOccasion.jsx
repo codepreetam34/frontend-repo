@@ -5,12 +5,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import FMButton from "components/FMButton/FMButton";
 import { getHomePageShopByOccasion } from "Redux/Slices/ShopByOccasion/ShopByOccasionSlice";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const useStyles = makeStyles((theme) => ({
   shopbyocca: {
     "&  img": {
       width: "100%",
-      height: "700px",
+      height: "580px",
       objectFit: "cover",
       borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     marginBottom: "10px",
     display: "block",
-    height: "260px",
+    height: "210px",
     [theme.breakpoints.down("sm")]: {
       height: "160px",
       marginBottom: "10px",
@@ -38,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
       overflow: "hidden",
       marginBottom: "25px",
       display: "block",
-      height: "260px",
+      height: "210px",
       [theme.breakpoints.down("sm")]: {
-        width:"105px",
+        width: "105px",
         height: "160px",
         marginBottom: "0",
       },
@@ -91,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& a img": {
       width: "100%",
-      height: "260px",
+      height: "210px",
       [theme.breakpoints.down("sm")]: {
         width: "100%",
         height: "160px",
@@ -125,14 +126,14 @@ const useStyles = makeStyles((theme) => ({
     },
 
     "&:nth-child(2) a img": {
-      height: "220px",
+      height: "170px",
       [theme.breakpoints.down("sm")]: {
         height: "190px",
         width: "105px"
       },
     },
     "&:nth-child(3) a img": {
-      height: "200px",
+      height: "180px",
       [theme.breakpoints.down("sm")]: {
         height: "160px", width: "105px"
       },
@@ -142,7 +143,7 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.down("sm")]: {
         height: "140px", width: "105px"
       },
-      
+
     },
     "& .second_row:nth-child(2) a img": {
       height: "220px",
@@ -157,13 +158,13 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     "& .forth_row:nth-child(1) a img": {
-      height: "345px",
+      height: "285px",
       [theme.breakpoints.down("sm")]: {
         height: "260px", width: "105px"
       },
     },
     "& .forth_row:nth-child(2) a img": {
-      height: "345px",
+      height: "285px",
       [theme.breakpoints.down("sm")]: {
         height: "260px", width: "105px"
       },
@@ -233,7 +234,7 @@ const ShopByOccasion = () => {
           <Col xs={12} md={6} className={`order-md-1 order-2 ${classes.columnPadding}`} >
             <Row>
               <Col xs={4} md={4} className="pe-0">
-                <div className={classes.heighautoimgfirst}>
+                <div className={`zoomin-img ${classes.heighautoimgfirst}`}>
                   <Link
                     href="/product-page"
                     className="overlay"
@@ -253,7 +254,7 @@ const ShopByOccasion = () => {
                     </p>
                   </Link>
                 </div>
-                <div className={classes.heighautoimg}>
+                <div className={`zoomin-img ${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -269,7 +270,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className={classes.heighautoimg}>
+                <div className={`zoomin-img ${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -289,7 +290,7 @@ const ShopByOccasion = () => {
 
               <Col xs={4} md={4} className="pe-0">
                 <div className={`${classes.heighautoimg}`}>
-                  <div className={` forth_row ${classes.imgMargin}`} >
+                  <div className={`zoomin-img forth_row ${classes.imgMargin}`} >
                     <a href="/" className="overlay">
                       <img
                         src={
@@ -305,7 +306,7 @@ const ShopByOccasion = () => {
                       </p>
                     </a>
                   </div>
-                  <div className={`forth_row `}>
+                  <div className={`zoomin-img forth_row `}>
                     <a href="/" className="overlay">
                       <img
                         src={
@@ -325,7 +326,7 @@ const ShopByOccasion = () => {
               </Col>
 
               <Col xs={4} md={4} className="pe-0">
-                <div className={`${classes.heighautoimg}`}>
+                <div className={`zoomin-img ${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -341,7 +342,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className={`${classes.heighautoimg} `}>
+                <div className={`zoomin-img ${classes.heighautoimg} `}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -357,7 +358,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className={`${classes.heighautoimg}`}>
+                <div className={`zoomin-img ${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -390,11 +391,15 @@ const ShopByOccasion = () => {
                   {ShopByOccasionCarousels && ShopByOccasionCarousels[0]?.title}
                 </h4>
                 <FMButton
-                  displayText={"Gift Now"}
+                  displayText={
+                    <>
+                      Explore <KeyboardArrowRightIcon />
+                    </>
+                  }
                   onHover={"white"}
                   styleData={{
                     backgroundColor: "white",
-                    color: "black",
+                    color: "#801317",
                     textTransform: "capitalize",
                     fontWeight: "600",
                   }}
@@ -403,8 +408,8 @@ const ShopByOccasion = () => {
             </div>
           </Col>
         </Row>
-      </Container>
-    </div>
+      </Container >
+    </div >
   );
 };
 

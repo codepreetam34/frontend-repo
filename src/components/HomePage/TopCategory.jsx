@@ -158,7 +158,7 @@ const TopCategory = () => {
                       href={`/product-detail/${elem?._id}`}
                       className={classes.slickSlideA}
                     >
-                      <Box className="banner_img">
+                      <Box className="banner_img zoomin-img">
                         <div className="background-overlay"></div>
                         <img
                           src={elem?.productPictures[0].img}
