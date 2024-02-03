@@ -368,6 +368,33 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
     "Wedding gifts & more...",
   ];
 
+  const menuData = [
+    {
+        label: 'Shop By Category',
+        children: [
+            {
+                label: 'Cakes',
+                children: [
+                    { label: 'By Featured', children: [
+                        { label: 'All Cake', href: '/all-cakes-lp?promo=cakesmenu_hm' },
+                        { label: 'Best Sellers', href: '/cakes-bestsellers-lp?promo=cakesmenu_hm' },
+                    ]},
+                ],
+            },
+            {
+                label: 'Flowers',
+                children: [
+                    { label: 'By Featured', children: [
+                        { label: 'All Flowers', href: '/all-flowers-lp?promo=flowersmenu_hm' },
+                        { label: 'Best Sellers', href: '/flowers-bestsellers-lp?promo=flowersmenu_hm' },
+                    ]},
+                ],
+            },
+        ],
+    },
+];
+
+
   return (
     <Grid className={`${classes.headerFullStyle}`}>
       <Row className={`d-none d-md-flex ${classes.iconGridContainer}`}>
@@ -836,7 +863,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           </Offcanvas.Header>
           <Offcanvas.Body className="" style={{ width: "80vw" }}>
             <Nav className="flex-column">
-              <DynamicMobileMenu />
+              <DynamicMobileMenu  />
               {/* <NavDropdown
                 title="Parent Item 1"
                 id="parent-item-1"
