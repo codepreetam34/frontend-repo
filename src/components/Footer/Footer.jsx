@@ -4,9 +4,10 @@ import { Col, Container, Row } from "react-bootstrap";
 import androidIcon from "../../assets/androidIcon.svg";
 import appleIcon from "../../assets/appleIcon.svg";
 import footerLogo from "../../assets/FooterLogo.png";
-import { Box, InputBase, useMediaQuery } from "@mui/material";
+import { Box, InputAdornment, InputBase, useMediaQuery } from "@mui/material";
 import FMButton from "../../components/FMButton/FMButton";
 import { makeStyles } from "@material-ui/core/styles";
+import EmailIcon from '@mui/icons-material/Email';
 const useStyles = makeStyles((theme) => ({
   footerContainer: {
     background: "#FCEDEE",
@@ -41,9 +42,10 @@ const useStyles = makeStyles((theme) => ({
     width: "279px",
     height: "55px",
     flexShrink: "0",
-    borderRadius: "16px 0px 0px 16px",
+    borderRadius: "10px 0px 0px 10px",
     background: "#FFF",
-    padding: "5px 40px 5px",
+    padding: "5px 20px 5px",
+    border:"1px solid #801317",
     [theme.breakpoints.down("sm")]: {
       width: "220px",
       height: "50px",
@@ -83,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "1.1rem",
   },
   address: {
-    padding: "1rem 0",
+    padding: "0rem 0 1rem 0",
   },
   availableOn: {
     listStyle: "none",
@@ -163,6 +165,11 @@ const Footer = () => {
                 id="text"
                 name="text"
                 placeholder="Enter Email"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <EmailIcon />
+                  </InputAdornment>
+                }
                 className={classes.subscribeInput}
               />
               <FMButton
@@ -171,6 +178,7 @@ const Footer = () => {
                   width: "120px",
                   height:isMobile ? "50px":"55px",
                   flexShrink: "0",
+                  border:"1px solid #801317",
                   borderRadius: "0px 10px 10px 0px",
                   background: "#801317",
                   fontFamily: "Poppins",
@@ -267,3 +275,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
+

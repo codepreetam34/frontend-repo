@@ -90,7 +90,7 @@ const AddToCart = ({ handleNext }) => {
       <Row className="m-0" style={{
         padding: "1rem 8rem",
         ...(window.innerWidth <= 600 && {
-          padding: "1rem 0"
+          padding: "0"
         })
       }}>
 

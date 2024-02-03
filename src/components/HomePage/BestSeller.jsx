@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getBestSellerProducts } from "Redux/Slices/ProductPage/ProductsPageSlice";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .slick-slide .card_name": {
       position: "absolute",
-      bottom: "-5px",
+      bottom: "-4px",
       left: "50%",
       transform: "translateX(-50%)",
       width: "100%",
@@ -83,6 +83,8 @@ const BestSeller = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const textRef = useRef(null);
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   useEffect(() => {
     const element = textRef.current;
     if (element) {
@@ -172,8 +174,8 @@ const BestSeller = () => {
                     }}
                   >
                     <a href={`/product-detail/${elem?._id}`}>
-                      <Box className="banner_img zoomin-img">
-                      
+                      <Box className={`banner_img ${isMobile ? "" : "zoomin-img"}`}>
+
                         <img
                           src={elem?.productPictures[0].img}
                           className="img-fluid"
@@ -188,8 +190,8 @@ const BestSeller = () => {
                           }}
                         />
                         <div className="card_name">
-                        <div className="background-overlay-image"></div>
-                        <h4 className={classes.cardNameH4} ref={textRef} style={{
+                          <div className="background-overlay-image"></div>
+                          <h4 className={classes.cardNameH4} ref={textRef} style={{
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",

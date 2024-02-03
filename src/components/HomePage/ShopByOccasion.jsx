@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& a img": {
       width: "100%",
-      height: "210px",
+      height: "210px", borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
         width: "100%",
         height: "160px",
@@ -117,20 +117,21 @@ const useStyles = makeStyles((theme) => ({
     },
 
     "&:nth-child(2) a img": {
-      height: "170px",
+      height: "170px", borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
         height: "190px",
         width: "105px"
       },
     },
     "&:nth-child(3) a img": {
-      height: "180px",
+      height: "180px", borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
         height: "160px", width: "105px"
       },
     },
     "& .second_row:nth-child(1) a img": {
       height: "190px",
+      borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
         height: "140px", width: "105px"
       },
@@ -138,26 +139,30 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .second_row:nth-child(2) a img": {
       height: "220px",
+      borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
         height: "190px", width: "105px"
       },
     },
     "& .second_row:nth-child(3) a img": {
       height: "265px",
+      borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
         height: "220px", width: "105px"
       },
     },
     "& .forth_row:nth-child(1) a img": {
       height: "285px",
+      borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
-        height: "260px", width: "105px"
+        height: "260px", width: "105px",
       },
     },
     "& .forth_row:nth-child(2) a img": {
       height: "285px",
+      borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
-        height: "260px", width: "105px"
+        height: "260px", width: "105px",
       },
     },
   },
@@ -226,7 +231,7 @@ const ShopByOccasion = () => {
           <Col xs={12} md={6} className={`order-md-1 order-2 ${classes.columnPadding}`} >
             <Row>
               <Col xs={4} md={4} className="pe-0">
-                <div className={`zoomin-img ${classes.heighautoimgfirst}`}>
+                <div className={`${isMobile ? "" : "zoomin-img"} ${classes.heighautoimgfirst}`}>
                   <Link
                     href="/product-page"
                     className="overlay"
@@ -249,7 +254,7 @@ const ShopByOccasion = () => {
                     </p>
                   </Link>
                 </div>
-                <div className={`zoomin-img ${classes.heighautoimg}`}>
+                <div className={`${isMobile ? "" : "zoomin-img"} ${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -265,7 +270,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className={`zoomin-img ${classes.heighautoimg}`}>
+                <div className={`${isMobile ? "" : "zoomin-img"} ${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -285,7 +290,7 @@ const ShopByOccasion = () => {
 
               <Col xs={4} md={4} className="pe-0">
                 <div className={`${classes.heighautoimg}`}>
-                  <div className={`zoomin-img forth_row ${classes.imgMargin}`} >
+                  <div className={`${isMobile ? "" : "zoomin-img"} forth_row ${classes.imgMargin}`}>
                     <a href="/" className="overlay">
                       <img
                         src={
@@ -301,7 +306,7 @@ const ShopByOccasion = () => {
                       </p>
                     </a>
                   </div>
-                  <div className={`zoomin-img forth_row `}>
+                  <div className={`${isMobile ? "" : "zoomin-img"} forth_row `}>
                     <a href="/" className="overlay">
                       <img
                         src={
@@ -321,7 +326,7 @@ const ShopByOccasion = () => {
               </Col>
 
               <Col xs={4} md={4} className="pe-0">
-                <div className={`zoomin-img ${classes.heighautoimg}`}>
+                <div className={`${isMobile ? "" : "zoomin-img"} ${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -337,7 +342,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className={`zoomin-img ${classes.heighautoimg} `}>
+                <div className={`${isMobile ? "" : "zoomin-img"} ${classes.heighautoimg} `}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -353,7 +358,7 @@ const ShopByOccasion = () => {
                     </p>
                   </a>
                 </div>
-                <div className={`zoomin-img ${classes.heighautoimg}`}>
+                <div className={`${isMobile ? "" : "zoomin-img"} ${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
                     <img
                       src={
@@ -409,7 +414,7 @@ const ShopByOccasion = () => {
             </div>
           </Col>
         </Row>
-      </Container >
+      </Container>
     </div >
   );
 };

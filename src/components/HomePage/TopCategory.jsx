@@ -66,6 +66,8 @@ const TopCategory = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const textRef = useRef(null);
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   useEffect(() => {
     const element = textRef.current;
     if (element) {
@@ -158,8 +160,7 @@ const TopCategory = () => {
                       href={`/product-detail/${elem?._id}`}
                       className={classes.slickSlideA}
                     >
-                      <div className="banner_img zoomin-img">
-                        <div className="background-overlay"></div>
+                      <div className={`banner_img ${isMobile ? "":"zoomin-img"}`}>
                         <img
                           src={elem?.productPictures[0].img}
                           className="img-fluid"
@@ -174,6 +175,7 @@ const TopCategory = () => {
                           }}
                         />
                         <div className={classes.cardName}>
+                        <div className="background-overlay"></div>
                           <h4 className={classes.cardNameH4} ref={textRef} style={{
                             overflow: "hidden",
                             textOverflow: "ellipsis",

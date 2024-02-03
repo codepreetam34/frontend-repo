@@ -38,6 +38,7 @@ import PincodeWrapper from "components/PincodeWrapper";
 import mobileMenuToggleBar from "assets/mobileMenuToggleBar.png"
 import MenuIcon from '@mui/icons-material/Menu';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import DynamicMobileMenu from "components/DynamicMobileMenu";
 
 const useStyles = makeStyles((theme) => ({
   commonStyle: {
@@ -752,80 +753,69 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           show={showMenu}
           onHide={() => setShowMenu(false)}
         >
-          <Offcanvas.Header closeButton={false} className={classes.mobileInnerBackground} style={{ padding: "0.5rem 1rem" }}>
+          <Offcanvas.Header closeButton={false} className={classes.mobileInnerBackground} style={{ padding: "1rem 10px 1rem 1rem" }}>
             <Offcanvas.Title>
-              <Row>
-                <Col className="d-flex align-items-center">
-                  <div style={{
-                    width: "48px",
-                    height: "48px",
-                    background: "#f8f8f8",
-                    display: "flex",
-                    overflow: "hidden",
-                    position: "relative",
-                    fontSize: "1.25rem",
-                    alignItems: "center",
-                    flexShrink: " 0",
-                    borderRadius: "50%",
-                    justifyContent: "center",
-                  }}>
+              <div className="d-flex align-items-center">
+                <div style={{
+                  width: "48px",
+                  height: "48px",
+                  background: "#f8f8f8",
+                  display: "flex",
+                  overflow: "hidden",
+                  position: "relative",
+                  fontSize: "1.25rem",
+                  alignItems: "center",
+                  flexShrink: " 0",
+                  borderRadius: "50%",
+                  justifyContent: "center",
+                }}>
 
-                    <Stack
-                      direction="row"
-                      spacing={2}
-                    >
-                      <Avatar
-                        src={
-                          personLoggedData?.profilePicture
-                            ? personLoggedData?.profilePicture
-                            : "/broken-image.jpg"
-                        }
-                      />
-                    </Stack>
+                  <Stack
+                    direction="row"
+                    spacing={2}
+                  >
+                    <Avatar
+                      src={
+                        personLoggedData?.profilePicture
+                          ? personLoggedData?.profilePicture
+                          : "/broken-image.jpg"
+                      }
+                    />
+                  </Stack>
 
-                  </div>
-                  {personLoggedIn ? (
-                    <Box>
-                      <FMButton
-                        displayText={personLoggedIn}
-                        variant={"outlined"}
-                        styleData={{
-                          color: "#fff",
-                          border: "none",
-                          fontWeight: "600",
-                          fontSize: "14px",
-                          borderRadius: "10px",
-
-                        }}
-                        href={`/my-profile/${personLoggedInId}`}
-                      />
-                    </Box>
-                  ) : <FMTypography
-                    displayText={"Hi Guest"}
-                    styleData={{ fontWeight: '600', marginLeft: "0.5rem", fontSize: "14px", color: "#fff" }}
-                  />}
-                </Col>
-
-              </Row>
-            </Offcanvas.Title>
-            <div style={{ marginLeft: 'auto' }}>
-              {personLoggedIn ? (
-                <Box>
-                  <FMButton
-                    displayText={<>
-                      <KeyboardArrowRightIcon sx={{ fontSize: '2rem' }} />
-                    </>}
-                    variant={"outlined"}
-                    styleData={{
+                </div>
+                {personLoggedIn ? (
+                  <a
+                    style={{
                       color: "#fff",
                       border: "none",
                       fontWeight: "600",
+                      fontSize: "1rem",
                       borderRadius: "10px",
+                      paddingLeft: "10px",
+
 
                     }}
-                    href={`/my-profile/${personLoggedInId}`}
-                  />
-                </Box>
+                    href={`/my-profile/${personLoggedInId}`}>
+                    {personLoggedIn}
+                  </a>
+                ) : <FMTypography
+                  displayText={"Hi Guest"}
+                  styleData={{ fontWeight: '600', marginLeft: "0.5rem", fontSize: "14px", color: "#fff" }}
+                />}
+              </div>
+            </Offcanvas.Title>
+            <div style={{ marginLeft: 'auto' }}>
+              {personLoggedIn ? (
+                <a href={`/my-profile/${personLoggedInId}`} style={{
+                  color: "#fff",
+                  border: "none",
+                  fontWeight: "600",
+                  borderRadius: "10px",
+
+                }}>
+                  <KeyboardArrowRightIcon sx={{ fontSize: '1.7rem' }} />
+                </a>
               ) : (
                 <Box>
                   <FMButton
@@ -844,9 +834,10 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               )}
             </div>
           </Offcanvas.Header>
-          <Offcanvas.Body className="px-3 py-2" style={{ width: "22rem" }}>
+          <Offcanvas.Body className="" style={{ width: "80vw" }}>
             <Nav className="flex-column">
-              <NavDropdown
+              <DynamicMobileMenu />
+              {/* <NavDropdown
                 title="Parent Item 1"
                 id="parent-item-1"
                 className="parentMenu"
@@ -888,7 +879,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                     Subchild 4
                   </NavDropdown.Item>
                 </NavDropdown>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>

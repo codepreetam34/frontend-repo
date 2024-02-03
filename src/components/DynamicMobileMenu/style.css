@@ -1,0 +1,135 @@
+ul {
+  list-style: none;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+ol,
+ul {
+  padding-left: 0 !important;
+}
+.nav-bar-divider {
+  border: none;
+  height: 1px;
+  margin: 0;
+  flex-shrink: 0;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.customLeftNav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-transform: capitalize;
+  font-size: 0.875rem;
+  font-family: "Poppins";
+  line-height: 1.5;
+}
+
+.customLeftNav li {
+  width: 100%;
+}
+
+.offcanvas-body {
+  padding: 0 !important;
+}
+
+.customLeftNav li span.toggle {
+  padding: 12px 12px 12px 16px;
+  width: 100%;
+  display: flex;
+  position: relative;
+  font-weight: 600;
+  color: #222;
+}
+
+.customLeftNav li span.toggle::after {
+  content: "+"; 
+  font-family: "Poppins"; 
+  transition: all ease-in-out 0.25s;
+  position: absolute;
+  right: 0;
+  width: 44px;
+  height: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: all ease-in-out 0.25s;
+  font-size: 1.7rem; /* Adjusted font size */
+  color: #801317; /* Color for the arrow */
+}
+
+
+.customLeftNav li span.toggle.open::after {
+  transform: rotate(180deg);
+  content: "-"; 
+}
+.customLeftNav li span.toggle.parent.open {
+  background-color: #f2f2f2;
+  font-size: 14px;
+  font-weight: 600;
+}
+.customLeftNav li span.toggle.parent {
+  background-color: #f2f2f2;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+ul.inner {
+  padding-left: 15px !important;
+  display: inherit;
+  position: unset;
+  top: unset;
+  left: unset;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  max-height: 0;
+  -webkit-transition: max-height 0.6s ease-out;
+  transition: max-height 0.6s ease-out;
+  overflow: hidden;
+  width: auto !important;
+  height: auto !important;
+}
+
+ul.inner.innerDisplay {
+  max-height: 1500px;
+  -webkit-transition: max-height 0.6s ease-in;
+  transition: max-height 0.6s ease-in;
+}
+
+.customLeftNav li span.toggle.firstChild,
+.customLeftNav li span.toggle.secondChild {
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.customLeftNav li span.toggle.firstChild.open,
+.customLeftNav li span.toggle.secondChild.open {
+  font-weight: 600;
+  color: #222;
+  font-size: 14px;
+}
+
+ul a {
+  color: #222 !important;
+}
+
+a {
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+.customLeftNav li a {
+  display: block;
+  width: 100%;
+  padding: 10px;
+}
