@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import MenuItem from './MenuItem';
 import "./style.css";
 import LogoutIcon from '@mui/icons-material/Logout';
+import { FAQ, ORDER_PAGE } from 'Routes/Routes';
 
-const DynamicMobileMenu = ({ categoryList, pincodeData }) => {
+const DynamicMobileMenu = ({ categoryList, pincodeData, logoutHandler }) => {
     const [openParentState, setOpenParentState] = useState({});
     const [openFirstChildState, setOpenFirstChildState] = useState({});
     const [openSecondChildState, setOpenSecondChildState] = useState({});
@@ -57,36 +58,23 @@ const DynamicMobileMenu = ({ categoryList, pincodeData }) => {
                 }))
             })),
         },
-        {
-            label: "Shop By",
-            children: categoryList.map(category => ({
-                label: category.name,
-                href: `/category-page/${category._id}`,
-                children: category.tags.map(tag => ({
-                    label: tag.tagType,
-                    children: tag.names.map(name => ({
-                        label: name,
-                        href: `/product-page/${category._id}/${pincodeData}/${name}`
-                    }))
-                }))
-            })),
-        },
+
         {
             label: "My Orders",
-            href: "/my-orders",
+            href: ORDER_PAGE,
         },
         {
             label: "Contact Us",
-            href: "/contact",
+            href: "/contact-us",
         },
         {
             label: "FAQ",
-            href: "/faq",
+            href: FAQ,
         },
         {
             label: "Log Out",
             icon: <LogoutIcon />,
-            href: "/logout",
+            handleClick: logoutHandler,
         },
     ];
 

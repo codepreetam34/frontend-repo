@@ -27,6 +27,7 @@ import { ErrorToaster, SuccessToaster } from "constants/util";
 import googleButtonIcon from "../../assets/googleButtonIcon.png";
 import messageButtonIcon from "../../assets/messageButtonIcon.png";
 import { GoogleLogin } from "react-google-login";
+import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
 
 const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
   const dispatch = useDispatch();
@@ -104,22 +105,8 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
 
   return (
     <>
-      <Box
-        sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
-      >
-        <a href={"/"}>
-          <img
-            src={monkeyLogo}
-            alt="monkeyLogo"
-            style={HeaderStyle.monkeyLogoStyle}
-          />
-          <img
-            src={VibezterLogo}
-            alt="VibezterLogo"
-            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-          />
-        </a>
-      </Box>
+      <HeaderWithoutNav />
+
 
       <Grid
         container

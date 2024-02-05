@@ -325,7 +325,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   // const navigateToLogin = () => {
   //   navigate(LOGIN);
   // };
-  
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -371,29 +371,33 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
 
   const menuData = [
     {
-        label: 'Shop By Category',
-        children: [
+      label: 'Shop By Category',
+      children: [
+        {
+          label: 'Cakes',
+          children: [
             {
-                label: 'Cakes',
-                children: [
-                    { label: 'By Featured', children: [
-                        { label: 'All Cake', href: '/all-cakes-lp?promo=cakesmenu_hm' },
-                        { label: 'Best Sellers', href: '/cakes-bestsellers-lp?promo=cakesmenu_hm' },
-                    ]},
-                ],
+              label: 'By Featured', children: [
+                { label: 'All Cake', href: '/all-cakes-lp?promo=cakesmenu_hm' },
+                { label: 'Best Sellers', href: '/cakes-bestsellers-lp?promo=cakesmenu_hm' },
+              ]
             },
+          ],
+        },
+        {
+          label: 'Flowers',
+          children: [
             {
-                label: 'Flowers',
-                children: [
-                    { label: 'By Featured', children: [
-                        { label: 'All Flowers', href: '/all-flowers-lp?promo=flowersmenu_hm' },
-                        { label: 'Best Sellers', href: '/flowers-bestsellers-lp?promo=flowersmenu_hm' },
-                    ]},
-                ],
+              label: 'By Featured', children: [
+                { label: 'All Flowers', href: '/all-flowers-lp?promo=flowersmenu_hm' },
+                { label: 'Best Sellers', href: '/flowers-bestsellers-lp?promo=flowersmenu_hm' },
+              ]
             },
-        ],
+          ],
+        },
+      ],
     },
-];
+  ];
 
 
   return (
@@ -808,7 +812,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                           ? personLoggedData?.profilePicture
                           : "/broken-image.jpg"
                       }
-                      style={{background:"#801317"}}
+                      style={{ background: "#801317" }}
                     />
                   </Stack>
 
@@ -865,7 +869,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           </Offcanvas.Header>
           <Offcanvas.Body className="" style={{ width: "80vw" }}>
             <Nav className="flex-column">
-              <DynamicMobileMenu  categoryList={categoryList} pincodeData={pincodeData}/>
+              <DynamicMobileMenu logoutHandler={logoutHandler} categoryList={categoryList} pincodeData={pincodeData} />
               {/* <NavDropdown
                 title="Parent Item 1"
                 id="parent-item-1"

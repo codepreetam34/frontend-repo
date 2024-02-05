@@ -16,7 +16,7 @@ const MenuItem = ({ item, depth, isOpen, handleToggle }) => {
                 </span>
             )}
             {!hasChildren && (
-                <a href={item.href} data-sbnavmenu={item.label} className="anchor">
+                <a href={item.href} data-sbnavmenu={item.label} className="anchor" onClick={item.handleClick}>
                     {item.label}
                     {item.icon && <span className='ps-2' style={{ color: "#801317" }}>{item.icon}</span>}
                 </a>
