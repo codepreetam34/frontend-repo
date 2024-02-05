@@ -2,18 +2,16 @@ import React from 'react';
 
 const MenuItem = ({ item, depth, isOpen, handleToggle }) => {
     const hasChildren = item.children && item.children.length > 0;
-
-    // Check if the current item is open
     const isCurrentOpen = isOpen && isOpen[item.label];
 
-    const toggleOpen = () => {
-        handleToggle(item.label);
+    const toggleOpen = (level) => {
+        handleToggle(item.label, level);
     };
 
     return (
         <li key={item.label} aria-label={item.label}>
             {hasChildren && (
-                <span className={`toggle ${depth === 0 ? "parent" : (depth === 1 ? "firstChild" : "secondChild")} ${isCurrentOpen ? "open" : ""}`} ga-data-title={item.label} onClick={toggleOpen}>
+                <span className={`toggle ${depth === 0 ? "parent" : (depth === 1 ? "firstChild" : "secondChild")} ${isCurrentOpen ? "open" : ""}`} onClick={() => toggleOpen(depth === 0 ? 'parent' : (depth === 1 ? 'firstChild' : 'secondChild'))}>
                     {item.label}
                 </span>
             )}

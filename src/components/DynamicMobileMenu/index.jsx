@@ -4,34 +4,61 @@ import "./style.css";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const DynamicMobileMenu = ({ categoryList, pincodeData }) => {
-    // Initialize open state for the entire menu
-    const [openState, setOpenState] = useState({});
+    const [openParentState, setOpenParentState] = useState({});
+    const [openFirstChildState, setOpenFirstChildState] = useState({});
+    const [openSecondChildState, setOpenSecondChildState] = useState({});
 
-    // Toggle the open state of a specific menu item// Toggle the open state of a specific menu item
-// Toggle the open state of a specific menu item
-const handleToggle = (label) => {
-    setOpenState(prevOpenState => {
-        const newState = { ...prevOpenState };
+    const handleToggle = (label, level) => {
+        if (level === 'parent') {
+            setOpenParentState(prevState => {
+                const newState = { [label]: !prevState[label] };
 
-        // Close all items at the same depth level
-        Object.keys(prevOpenState).forEach(itemLabel => {
-            if (itemLabel !== label && itemLabel.startsWith(label.split('.')[0])) {
-                newState[itemLabel] = false;
-            }
-        });
+                Object.keys(prevState).forEach(key => {
+                    if (key !== label) {
+                        newState[key] = false;
+                    }
+                });
 
-        // Toggle the state of the clicked menu item
-        newState[label] = !prevOpenState[label];
+                setOpenFirstChildState({});
+                setOpenSecondChildState({});
+                return newState;
+            });
+        } else if (level === 'firstChild') {
+            setOpenFirstChildState(prevState => ({ ...prevState, [label]: !prevState[label] }));
+            setOpenSecondChildState({});
+            Object.keys(openFirstChildState).forEach(key => {
+                if (key !== label) {
+                    setOpenFirstChildState(prevState => ({ ...prevState, [key]: false }));
+                }
+            });
+        } else if (level === 'secondChild') {
+            setOpenSecondChildState(prevState => ({ ...prevState, [label]: !prevState[label] }));
+            Object.keys(openSecondChildState).forEach(key => {
+                if (key !== label) {
+                    setOpenSecondChildState(prevState => ({ ...prevState, [key]: false }));
+                }
+            });
+        }
+    };
 
-        return newState;
-    });
-};
 
-
-    // Define menu items
     const menuItems = [
         {
             label: "Shop By Category",
+            children: categoryList.map(category => ({
+                label: category.name,
+                href: `/category-page/${category._id}`,
+                children: category.tags.map(tag => ({
+                    label: tag.tagType,
+                    children: tag.names.map(name => ({
+                        label: name,
+                        href: `/product-page/${category._id}/${pincodeData}/${name}`
+                    }))
+                }))
+            })),
+        },
+        {
+            label: "Shop By",
             children: categoryList.map(category => ({
                 label: category.name,
                 href: `/category-page/${category._id}`,
@@ -63,14 +90,17 @@ const handleToggle = (label) => {
         },
     ];
 
-    // Render menu items
-    console.log("Open state:", openState);
     return (
         <ul className="customLeftNav" data-ga-category="Header_Left_CategoryMenu">
             {menuItems.map((item, index) => (
-                <MenuItem key={index} item={item} depth={0} isOpen={openState} handleToggle={handleToggle} />
+                <MenuItem
+                    key={index}
+                    item={item}
+                    depth={0}
+                    isOpen={{ ...openParentState, ...openFirstChildState, ...openSecondChildState }}
+                    handleToggle={handleToggle}
+                />
             ))}
-
         </ul>
     );
 }
