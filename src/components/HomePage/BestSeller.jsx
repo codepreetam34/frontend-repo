@@ -114,7 +114,7 @@ const BestSeller = () => {
     autoplay: false,
     arrows: true,
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 5,
     responsive: [
       {
         breakpoint: 1024,
@@ -122,15 +122,14 @@ const BestSeller = () => {
           slidesToShow: 4,
           slidesToScroll: 4,
           infinite: true,
-          dots: true,
+          dots: false,
         },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 2,
+          slidesToScroll: 3,
           infinite: true,
           arrows: false,
         },
@@ -139,7 +138,7 @@ const BestSeller = () => {
         breakpoint: 480,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
           infinite: true,
           arrows: false,
         },

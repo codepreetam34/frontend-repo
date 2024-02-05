@@ -32,7 +32,7 @@ const CategorySlider = () => {
     autoplay: false,
     arrows: true,
     slidesToShow: 6,
-    slidesToScroll: 1,
+    slidesToScroll: 6,
     responsive: [
       {
         breakpoint: 1024,
@@ -40,7 +40,7 @@ const CategorySlider = () => {
           slidesToShow: 6,
           slidesToScroll: 6,
           infinite: true,
-          dots: true,
+          dots: false,
         },
       },
       {
@@ -48,7 +48,6 @@ const CategorySlider = () => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 4,
-          initialSlide: 2,
           arrows: false,
           infinite: true,
         },

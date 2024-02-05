@@ -325,6 +325,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   // const navigateToLogin = () => {
   //   navigate(LOGIN);
   // };
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -863,7 +864,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
           </Offcanvas.Header>
           <Offcanvas.Body className="" style={{ width: "80vw" }}>
             <Nav className="flex-column">
-              <DynamicMobileMenu  />
+              <DynamicMobileMenu  categoryList={categoryList} pincodeData={pincodeData}/>
               {/* <NavDropdown
                 title="Parent Item 1"
                 id="parent-item-1"

@@ -1,44 +1,61 @@
+// DynamicMobileMenu.jsx
 import React, { useState } from 'react';
-import MenuItem from './MenuItem'; // Assuming MenuItem component is defined in a separate file
+import MenuItem from './MenuItem';
 import "./style.css";
+import LogoutIcon from '@mui/icons-material/Logout';
 
-const DynamicMobileMenu = () => {
-    const [openStates, setOpenStates] = useState([false, false, false]);
+const DynamicMobileMenu = ({ categoryList, pincodeData }) => {
+    // Initialize open state for the entire menu
+    const [openState, setOpenState] = useState({});
 
-    const handleToggle = (index) => {
-        const newOpenStates = [...openStates];
-        newOpenStates[index] = !newOpenStates[index];
-        setOpenStates(newOpenStates);
+    // Toggle the open state of a specific menu item
+    const handleToggle = (label) => {
+        setOpenState(prevOpenState => ({
+            ...prevOpenState,
+            [label]: !prevOpenState[label] // Toggle the state of the clicked menu item
+        }));
     };
 
+    // Define menu items
     const menuItems = [
         {
             label: "Shop By Category",
-            children: [
-                {
-                    label: "Cakes",
-                    children: [
-                        {
-                            label: "By Featured",
-                            children: [
-                                { label: "All Cake", href: "/all-cakes-lp?promo=cakesmenu_hm" },
-                                { label: "Best Sellers", href: "/cakes-bestsellers-lp?promo=cakesmenu_hm" },
-                                { label: "Same Day Delivery", href: "/cakes-same-day-delivery-lp?promo=cakesmenu_hm" },
-                                { label: "New Arrivals", href: "/new-arrival-cakes-lp?promo=cakesmenu_hm" },
-                                { label: "Midnight Delivery", href: "/cakes-midnight-delivery-lp?promo=cakesmenu_hm" },
-                                { label: "Flowers N Cakes", href: "/flowers-n-cakes-lp?promo=cakesmenu_hm" }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
+            children: categoryList.map(category => ({
+                label: category.name,
+                href: `/category-page/${category._id}`,
+                children: category.tags.map(tag => ({
+                    label: tag.tagType,
+                    children: tag.names.map(name => ({
+                        label: name,
+                        href: `/product-page/${category._id}/${pincodeData}/${name}`
+                    }))
+                }))
+            })),
+        },
+        {
+            label: "My Orders",
+            href: "/my-orders",
+        },
+        {
+            label: "Contact Us",
+            href: "/contact",
+        },
+        {
+            label: "FAQ",
+            href: "/faq",
+        },
+        {
+            label: "Log Out",
+            icon: <LogoutIcon />,
+            href: "/logout",
+        },
     ];
 
+    // Render menu items
     return (
         <ul className="customLeftNav" data-ga-category="Header_Left_CategoryMenu">
             {menuItems.map((item, index) => (
-                <MenuItem key={index} item={item} depth={0} openStates={openStates} handleToggle={handleToggle} />
+                <MenuItem key={index} item={item} depth={0} isOpen={openState[item.label]} handleToggle={handleToggle} />
             ))}
         </ul>
     );

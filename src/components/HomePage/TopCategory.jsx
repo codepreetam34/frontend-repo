@@ -96,7 +96,7 @@ const TopCategory = () => {
     autoplay: false,
     arrows: true,
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 5,
     responsive: [
       {
         breakpoint: 1024,
@@ -104,7 +104,7 @@ const TopCategory = () => {
           slidesToShow: 4,
           slidesToScroll: 4,
           infinite: true,
-          dots: true,
+          dots: false,
         },
       },
       {
@@ -112,7 +112,6 @@ const TopCategory = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          initialSlide: 2,
           infinite: true,
           arrows: false,
         },
