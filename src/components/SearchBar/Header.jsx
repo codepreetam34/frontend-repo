@@ -808,6 +808,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                           ? personLoggedData?.profilePicture
                           : "/broken-image.jpg"
                       }
+                      style={{background:"#801317"}}
                     />
                   </Stack>
 

@@ -1,18 +1,19 @@
-// MenuItem.jsx
-import React, { useState } from 'react';
+import React from 'react';
 
-const MenuItem = ({ item, depth, handleToggle }) => {
-    const [isOpen, setIsOpen] = useState(false); // Local state for each menu item
+const MenuItem = ({ item, depth, isOpen, handleToggle }) => {
     const hasChildren = item.children && item.children.length > 0;
 
+    // Check if the current item is open
+    const isCurrentOpen = isOpen && isOpen[item.label];
+
     const toggleOpen = () => {
-        setIsOpen(prevOpen => !prevOpen);
+        handleToggle(item.label);
     };
 
     return (
         <li key={item.label} aria-label={item.label}>
             {hasChildren && (
-                <span className={`toggle ${depth === 0 ? "parent" : (depth === 1 ? "firstChild" : "secondChild")} ${isOpen ? "open" : ""}`} ga-data-title={item.label} onClick={() => {toggleOpen(); handleToggle(item.label)}}>
+                <span className={`toggle ${depth === 0 ? "parent" : (depth === 1 ? "firstChild" : "secondChild")} ${isCurrentOpen ? "open" : ""}`} ga-data-title={item.label} onClick={toggleOpen}>
                     {item.label}
                 </span>
             )}
@@ -22,10 +23,10 @@ const MenuItem = ({ item, depth, handleToggle }) => {
                     {item.icon && <span className='ps-2' style={{ color: "#801317" }}>{item.icon}</span>}
                 </a>
             )}
-            {hasChildren && isOpen && (
-                <ul className={`inner ${isOpen ? "innerDisplay" : ""}`} data-ga-category={`Header_Left_CategoryMenu_Level_${depth}`}>
+            {hasChildren && isCurrentOpen && (
+                <ul className={`inner ${isCurrentOpen ? "innerDisplay" : ""}`} data-ga-category={`Header_Left_CategoryMenu_Level_${depth}`}>
                     {item.children.map((childItem, index) => (
-                        <MenuItem key={index} item={childItem} depth={depth + 1} handleToggle={handleToggle} />
+                        <MenuItem key={index} item={childItem} depth={depth + 1} isOpen={isOpen} handleToggle={handleToggle} />
                     ))}
                 </ul>
             )}
