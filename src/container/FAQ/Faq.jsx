@@ -1,21 +1,17 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { Col, Container, Row } from "react-bootstrap";
-
 import FMTypography from "../../components/FMTypography/FMTypography";
 import FMButton from "../../components/FMButton/FMButton";
 import FaqsComponent from "../../components/FMFaqs/FaqsComponent";
-
-import monkeyLogo from "../../assets/monkeyLogo.svg";
-import VibezterLogo from "../../assets/VibezterLogo.svg";
-import { commonStyle } from "../../Styles/commonStyles";
-import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
 import Header from "components/SearchBar/Header";
+import Footer from "components/Footer/Footer";
 
 const Faq = () => {
   const [orderingActiveBtn, setOrderingActiveBtn] = useState(true);
   const [deliveriesActiveBtn, setDeliveriesActiveBtn] = useState(false);
   const [productsActiveBtn, setProductsActiveBtn] = useState(false);
+  const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <>
       <Header />
@@ -25,7 +21,7 @@ const Faq = () => {
             style={{
               backgroundColor: "#FCEDEE",
               margin: "0 auto",
-              padding: "50px 0 20px 20%",
+              padding: isMobile ? "0px 20px 20px" : "50px 0 20px 20%",
               // display: "flex",
               // justifyContent: "center",
               // padding: "50px 0",
@@ -33,31 +29,33 @@ const Faq = () => {
           >
             <FMTypography
               displayText={"Frequently Ask Questions"}
-              styleData={{ fontSize: "60px", fontWeight: "500" }}
+              styleData={{ fontSize: isMobile ? "1.5rem" : "60px", fontWeight: "500", textAlign: "center", }}
             />
             <FMTypography
               displayText={"Our FAQ’s"}
               styleData={{
-                fontSize: "20px",
+                fontSize: isMobile ? "1rem" : "20px",
                 fontWeight: "500",
-                marginTop: "20px",
-                padding: "0 0 0 30%",
+                textAlign: "center",
+                marginTop: isMobile ? "10px" : "20px",
+                padding: isMobile ? "0" : "0 0 0 30%",
               }}
             />
             <FMTypography
               displayText={"Have any questions?"}
               styleData={{
-                fontSize: "32px",
+                fontSize: isMobile ? "1rem" : "32px",
                 fontWeight: "500",
                 marginTop: "10px",
-                padding: "0 0 0 20%",
+                textAlign: "center",
+                padding: isMobile ? "0" : "0 0 0 20%",
               }}
             />
           </Col>
         </Row>
       </Container>
       <Container>
-        <Row style={{ marginTop: "32px" }}>
+        <Row style={{ marginTop: "30px" }}>
           <Col
             style={{
               display: "flex",
@@ -68,13 +66,13 @@ const Faq = () => {
               displayText={"Ordering"}
               variant="outlined"
               styleData={{
-                border: " 1px solid #E6E6E6",
+                border: orderingActiveBtn ? "1px solid #801317" : "1px solid #E6E6E6",
                 borderRadius: "19px",
                 marginRight: "10px",
                 color: "#717171",
                 backgroundColor: orderingActiveBtn ? "#E6E6E6" : "white",
                 "&:hover": {
-                  backgroundColor: orderingActiveBtn ? "#E6E6E6" : "white",
+                  backgroundColor: orderingActiveBtn ? "#fcedee" : "white",
                   border: " 1px solid #E6E6E6",
                 },
               }}
@@ -89,13 +87,13 @@ const Faq = () => {
               displayText={"Deliveries"}
               variant="outlined"
               styleData={{
-                border: " 1px solid #E6E6E6",
+                border: deliveriesActiveBtn ? "1px solid #801317" : "1px solid #E6E6E6",
                 borderRadius: "19px",
                 marginRight: "10px",
                 color: "#717171",
-                backgroundColor: deliveriesActiveBtn ? "#E6E6E6" : "white",
+                background: deliveriesActiveBtn ? "#fcedee" : "white",
                 "&:hover": {
-                  backgroundColor: deliveriesActiveBtn ? "#E6E6E6" : "white",
+                  background: deliveriesActiveBtn ? "#fcedee" : "white",
                   border: " 1px solid #E6E6E6",
                 },
               }}
@@ -116,7 +114,7 @@ const Faq = () => {
                 marginRight: "10px",
                 color: "#717171",
                 "&:hover": {
-                  backgroundColor: productsActiveBtn ? "#E6E6E6" : "white",
+                  backgroundColor: productsActiveBtn ? "#801317" : "white",
                   border: " 1px solid #E6E6E6",
                 },
               }}
@@ -136,13 +134,14 @@ const Faq = () => {
                 orderingActiveBtn
                   ? "Ordering"
                   : deliveriesActiveBtn
-                  ? "Delivery"
-                  : "Products"
+                    ? "Delivery"
+                    : "Products"
               }
             />
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };

@@ -7,6 +7,7 @@ import {
   CardMedia,
   Grid,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Header from "../../components/SearchBar/Header";
@@ -31,6 +32,7 @@ const OrderPage = () => {
   const pincodeData = sessionStorage.getItem("pincode");
   const classes = useStyles();
   const textRef = useRef(null);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     const element = textRef.current;
@@ -39,7 +41,7 @@ const OrderPage = () => {
         element.scrollHeight > element.clientHeight ||
         element.scrollWidth > element.clientWidth
       ) {
-        element.classList.add("ellipsis"); // Add ellipsis class if overflow
+        element.classList.add("ellipsis");
       }
     }
   }, []);
@@ -81,10 +83,10 @@ const OrderPage = () => {
 
       <Grid
         sx={{
-          padding: "0 100px",
+          padding: isMobile ? "0 30px" : "0 100px",
           transition:
             "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
-          marginTop: "40px",
+          marginTop: isMobile ? "20px" : "40px",
         }}
       >
         <Box
@@ -98,9 +100,8 @@ const OrderPage = () => {
             displayText={`My Orders`}
             styleData={{
               fontWeight: "500",
-              fontSize: "40px",
+              fontSize: isMobile ? "24px" : "40px",
               textTransform: "capitalize",
-              paddingBottom: "1rem",
             }}
           />
 
@@ -497,7 +498,7 @@ const OrderPage = () => {
                               fontWeight: "600",
                               fontSize: "14px",
                             }}
-                            //   onClick={reviewNavHandler}
+                          //   onClick={reviewNavHandler}
                           />
                         </Col>
 
@@ -523,7 +524,7 @@ const OrderPage = () => {
                               fontWeight: "600",
                               fontSize: "14px",
                             }}
-                            //   onClick={reviewNavHandler}
+                          //   onClick={reviewNavHandler}
                           />
                         </Col>
                       </Box>

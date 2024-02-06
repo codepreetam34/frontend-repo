@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   adsContainer: {
     padding: "50px 80px 0",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 20px 0",
+      padding: "30px 15px 0",
     },
   },
   adsImage: {

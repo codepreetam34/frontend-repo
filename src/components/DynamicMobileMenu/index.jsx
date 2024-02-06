@@ -3,11 +3,26 @@ import MenuItem from './MenuItem';
 import "./style.css";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { FAQ, ORDER_PAGE } from 'Routes/Routes';
+import { CircularProgress } from '@mui/material';
 
 const DynamicMobileMenu = ({ categoryList, pincodeData, logoutHandler }) => {
     const [openParentState, setOpenParentState] = useState({});
     const [openFirstChildState, setOpenFirstChildState] = useState({});
     const [openSecondChildState, setOpenSecondChildState] = useState({});
+
+
+    if (!categoryList || categoryList == undefined || categoryList == "") {
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "300px",
+            }}
+        >
+            <CircularProgress color="primary" />
+        </div>
+    }
 
     const handleToggle = (label, level) => {
         if (level === 'parent') {
@@ -45,50 +60,69 @@ const DynamicMobileMenu = ({ categoryList, pincodeData, logoutHandler }) => {
 
     const menuItems = [
         {
-            label: "Shop By Category",
-            children: categoryList.map(category => ({
+            label: "Shop By Category & Tags",
+            
+            className: "parent-name",
+            children: categoryList?.map(category => ({
                 label: category.name,
-                href: `/category-page/${category._id}`,
-                children: category.tags.map(tag => ({
-                    label: tag.tagType,
-                    children: tag.names.map(name => ({
+                href: `/category-page/${category?._id}`,
+                children: category?.tags.map(tag => ({
+                    label: tag?.tagType,
+                    children: tag?.names?.map(name => ({
                         label: name,
-                        href: `/product-page/${category._id}/${pincodeData}/${name}`
+                        href: `/product-page/${category?._id}/${pincodeData}/${name}`
                     }))
                 }))
+            })),
+        },
+        {
+            label: "Shop By Category",
+            
+            className: "parent-name",
+            children: categoryList?.map(category => ({
+                label: category?.name,
+                href: `/category-page/${category?._id}`,
             })),
         },
 
         {
             label: "My Orders",
             href: ORDER_PAGE,
+            className: "parent-name"
         },
         {
             label: "Contact Us",
             href: "/contact-us",
+            className: "parent-name"
         },
         {
             label: "FAQ",
             href: FAQ,
+            className: "parent-name"
         },
         {
             label: "Log Out",
             icon: <LogoutIcon />,
             handleClick: logoutHandler,
+            className: "parent-name"
         },
     ];
 
     return (
         <ul className="customLeftNav" data-ga-category="Header_Left_CategoryMenu">
             {menuItems.map((item, index) => (
-                <MenuItem
-                    key={index}
-                    item={item}
-                    depth={0}
-                    isOpen={{ ...openParentState, ...openFirstChildState, ...openSecondChildState }}
-                    handleToggle={handleToggle}
-                />
+                <>
+                    <MenuItem
+                        key={index}
+                        item={item}
+                        depth={0}
+                        isOpen={{ ...openParentState, ...openFirstChildState, ...openSecondChildState }}
+                        handleToggle={handleToggle}
+                    />
+                    {/* <div className='nav-bar-divider'/> */}
+                </>
             ))}
+
         </ul>
     );
 }

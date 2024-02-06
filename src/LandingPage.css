@@ -302,3 +302,19 @@ a {
   padding: 0 24px !important;
 }
 
+.css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
+  margin: 20px 0;
+}
+
+.css-15v22id-MuiAccordionDetails-root {
+  padding: 8px 16px 16px;
+}
+
+@media (max-width: 767px) {
+  .css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
+    margin: 0 !important;
+  }
+  .css-15v22id-MuiAccordionDetails-root {
+    padding: 0px 16px 16px !important;
+  }
+}

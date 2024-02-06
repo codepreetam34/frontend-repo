@@ -728,7 +728,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               </div>
               <div style={{
                 display: "flex",
-                gap: "1rem",
                 alignItems: "center",
                 justifyContent: "start",
               }}>
@@ -812,7 +811,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                           ? personLoggedData?.profilePicture
                           : "/broken-image.jpg"
                       }
-                      style={{ background: "#801317" }}
+                      style={{ background: !personLoggedData?.profilePicture ? "#801317":"" }}
                     />
                   </Stack>
 

@@ -7,3 +7,4 @@ export const GET_PRODUCTS_LIST_BY_SORTING = "get-products-list-by-sorting";
 
 export const GET_BEST_SELLER_PRODUCTS_LIST = "get-best-seller-products-list";
 export const GET_TOP_CATEGORY_PRODUCTS_LIST = "get-top-category-products-list";
+export const GET_PRODUCTS_LIST_BY_TAGS_ONLY = "get-products-list-by-tags-only";

@@ -12,7 +12,7 @@ import { makeStyles } from "@mui/styles";
 import FMTypography from "../../components/FMTypography/FMTypography";
 import ratingStart from "../../assets/ratingStart.svg";
 import Header from "../../components/SearchBar/Header";
-import { getProductByCategoryIdAndTags } from "../../Redux/Slices/ProductPage/ProductsPageSlice";
+import { getProductByCategoryIdAndTags, getProductsByTagOnly } from "../../Redux/Slices/ProductPage/ProductsPageSlice";
 import { useDispatch } from "react-redux";
 import FMFilter from "../../components/FMFilters/FMFilter";
 import { useNavigate, useParams } from "react-router-dom";
@@ -49,10 +49,12 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     left: "87%",
     zIndex: "111",
-    borderRadius: "4px",
+    borderRadius: "10px",
     [theme.breakpoints.down("sm")]: {
-      left: "72%",
-      top: "5%",
+      left: "74%",
+      top: "4%",
+      width: "35px",
+      height: "25px",
     },
   },
 
@@ -84,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       display: "flex",
       gap: '0px',
+      padding:'1rem 0 0 0',
       justifyContent: "center",
     },
 
@@ -99,6 +102,7 @@ const ProductPage = () => {
   const textRef = useRef(null);
   const { categoryId, pincodeData, tagName } = useParams();
   const isMobile = useMediaQuery("(max-width:600px)");
+
   const payload = {
     categoryId,
     pincodeData,
@@ -112,7 +116,7 @@ const ProductPage = () => {
         element.scrollHeight > element.clientHeight ||
         element.scrollWidth > element.clientWidth
       ) {
-        element.classList.add("ellipsis"); 
+        element.classList.add("ellipsis");
       }
     }
   }, []);
@@ -124,16 +128,33 @@ const ProductPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    dispatch(getProductByCategoryIdAndTags(payload))
-      .then((response) => {
-        setIsLoading(false);
-        setPageTitle(response?.payload?.pageTitle);
-        setDisplayedProducts(response?.payload?.products);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.error("Error fetching data:", error);
-      });
+    if (categoryId === "all-category") {
+      const payload = {
+        tagName, pincodeData
+      }
+      dispatch(getProductsByTagOnly(payload))
+        .then((response) => {
+          setIsLoading(false);
+          setPageTitle(response?.payload?.pageTitle);
+          setDisplayedProducts(response?.payload?.products);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          console.error("Error fetching data:", error);
+        });
+    }
+    else {
+      dispatch(getProductByCategoryIdAndTags(payload))
+        .then((response) => {
+          setIsLoading(false);
+          setPageTitle(response?.payload?.pageTitle);
+          setDisplayedProducts(response?.payload?.products);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          console.error("Error fetching data:", error);
+        });
+    }
     setIsLoading(false);
   }, [dispatch]);
 
@@ -154,20 +175,20 @@ const ProductPage = () => {
               display: "flex",
               transition:
                 "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
-                marginBottom:'1rem'
+              marginBottom: '1rem'
             }}
           >
             <FMTypography
               displayText={pageTitle ? `${pageTitle} Products` : `No Products`}
               styleData={{
                 fontWeight: "600",
-                fontSize: isMobile ? "18px" :"40px",
+                fontSize: isMobile ? "1rem" : "40px",
                 textTransform: "capitalize",
               }}
             />
 
             <Box
-              sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
+              sx={{ display: "flex", alignItems: "center", marginLeft: "10px" }}
             >
               <FMTypography
                 displayText={
@@ -175,7 +196,7 @@ const ProductPage = () => {
                 }
                 styleData={{
                   fontWeight: "300",
-                  fontSize: "20px",
+                  fontSize: "1rem",
                   lineHeight: "30px",
                   color: "#717171",
                 }}
@@ -237,7 +258,7 @@ const ProductPage = () => {
                   </Box>
                   <Card
                     sx={{
-                      width: isMobile ? "170px" : "283px",
+                      width: isMobile ? "160px" : "283px",
                       borderRadius: "20px",
                       height: "auto",
                     }}
@@ -245,8 +266,8 @@ const ProductPage = () => {
                     <CardActionArea>
                       <CardMedia
                         component="img"
-                        height={isMobile ? "170px" : "283px"}
-                        width={isMobile ? "170px" : "283px"}
+                        height={isMobile ? "150px" : "283px"}
+                        width={isMobile ? "160px" : "283px"}
                         image={elem?.productPictures[0]?.img}
                         alt="Product Image"
                       />
@@ -259,7 +280,7 @@ const ProductPage = () => {
                           component="div"
                           sx={{
                             marginBottom: "0",
-                            fontSize: "18px",
+                            fontSize: isMobile ? "14px" : "18px",
                             color: "#222222",
                             fontWeight: "500",
                             textTransform: "capitalize",
@@ -296,13 +317,14 @@ const ProductPage = () => {
                               fontWeight: "300",
                               textTransform: "capitalize",
                               padding: "2px 0",
+                              fontSize: isMobile ? "12px" : "0.875rem",
                             }}
                           >
                             {elem?.deliveryDay}
                           </Typography>
                           <Typography
                             variant="body2"
-                            sx={{ color: "#008539", fontWeight: "400" }}
+                            sx={{ color: "#008539", fontWeight: "400", fontSize: isMobile ? "12px" : "0.875rem", }}
                           >
                             Reviews {elem?.numReviews}
                           </Typography>

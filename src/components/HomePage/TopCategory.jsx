@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   topCategory: {
     padding: "50px 80px 0",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 20px 0",
+      padding: "20px 20px 0",
     },
   },
   headingText: {
@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
     margin: "0",
     padding: "0 0 35px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.7rem",
+      padding: "0 0 20px",
+    },
   },
 
   slickSlideImg: {

@@ -5,6 +5,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {
@@ -15,6 +16,9 @@ import {
 import { accordionStyles } from "./FaqsStyle";
 
 const FaqsComponent = ({ type, sx, defaultExpanded }) => {
+
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   let faqsArray =
     type === "Ordering"
       ? orderingFaqs
@@ -22,7 +26,7 @@ const FaqsComponent = ({ type, sx, defaultExpanded }) => {
         ? deliveriesFaqs
         : productsFaqs;
   return (
-    <Container style={{ marginTop: "50px" }}>
+    <Container style={{ marginTop: isMobile ? "30px":"50px" }}>
       {faqsArray?.map((elem, index) => (
         <Accordion
           key={index}

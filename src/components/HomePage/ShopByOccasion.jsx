@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "50px 80px 0",
     position: "relative",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 20px 0",
+      padding: "20px 15px 0",
     },
   },
   heighautoimgfirst: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
       margin: 0,
       color: "#fff",
       fontSize: "1.25rem",
-      fontWeight: 500,
+      fontWeight: 600,
       textAlign: "center",
       width: "100%",
       [theme.breakpoints.down("sm")]: {
@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
         margin: 0,
         color: "#fff",
         fontSize: "1.25rem",
-        fontWeight: 500,
+        fontWeight: 600,
         textAlign: "center",
         width: "100%",
         [theme.breakpoints.down("sm")]: {
@@ -172,6 +172,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     margin: 0,
     padding: "0 0 35px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.7rem",
+      padding: "0 0 20px",
+    },
   },
   columnGap: {
     [theme.breakpoints.down("xs")]: {
@@ -193,7 +197,7 @@ const ShopByOccasion = () => {
   const [isLoading, setIsLoading] = useState();
   const classes = useStyles();
   const isMobile = useMediaQuery("(max-width:600px)");
-
+  const pincodeData = sessionStorage.getItem("pincode");
   const ShopByOccasionCarousels = useSelector(
     (state) => state.shopByOccasion?.shopByOccations?.homepageBanner
   );
@@ -232,8 +236,8 @@ const ShopByOccasion = () => {
             <Row>
               <Col xs={4} md={4} className="pe-0">
                 <div className={`${isMobile ? "" : "zoomin-img"} ${classes.heighautoimgfirst}`}>
-                  <Link
-                    href="/product-page"
+                  <a
+                    href={`/product-page/all-category/${pincodeData}/${ShopByOccasionCarousels && ShopByOccasionCarousels[8]?.title}`}
                     className="overlay"
                     style={{ borderRadius: "20px" }}
                   >
@@ -252,7 +256,7 @@ const ShopByOccasion = () => {
                       {ShopByOccasionCarousels &&
                         ShopByOccasionCarousels[8]?.title}
                     </p>
-                  </Link>
+                  </a>
                 </div>
                 <div className={`${isMobile ? "" : "zoomin-img"} ${classes.heighautoimg}`}>
                   <a href="/" className="overlay">
@@ -414,7 +418,7 @@ const ShopByOccasion = () => {
             </div>
           </Col>
         </Row>
-      </Container>
+      </Container >
     </div >
   );
 };

@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   pamperzone: {
     padding: "20px 80px 0",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 20px 0",
+      padding: "20px 20px 0",
     },
   },
   twoBanData: {
@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     margin: 0,
     padding: "0 0 35px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.7rem",
+      padding: "0 0 20px",
+    },
   },
   columnGap: {
     [theme.breakpoints.down("xs")]: {

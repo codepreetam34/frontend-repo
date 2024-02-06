@@ -52,10 +52,12 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     left: "87%",
     zIndex: "111",
-    borderRadius: "4px",
+    borderRadius: "10px",
     [theme.breakpoints.down("sm")]: {
-      left: "72%",
-      top: "5%",
+      left: "74%",
+      top: "4%",
+      width: "35px",
+      height: "25px",
     },
   },
   textLimit: {
@@ -105,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       display: "flex",
       gap: '0px',
+      padding:'1rem 0 0 0',
       justifyContent: "center",
     },
 
@@ -112,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
   boxContainer: {
     display: "flex",
     alignItems: "center",
-    marginLeft: "1rem",
+    marginLeft: "10px",
   },
 }));
 
@@ -187,7 +190,7 @@ const CategoryPage = () => {
               displayText={pageTitle ? `${pageTitle} Products` : `No Products`}
               styleData={{
                 fontWeight: "600",
-                fontSize: isMobile ? "18px" : "40px",
+                fontSize: isMobile ? "1rem" : "40px",
                 textTransform: "capitalize",
               }}
             />
@@ -199,7 +202,7 @@ const CategoryPage = () => {
                 }
                 styleData={{
                   fontWeight: "300",
-                  fontSize: "20px",
+                  fontSize: "1rem",
                   lineHeight: "30px",
                   color: "#717171",
                 }}
@@ -255,7 +258,7 @@ const CategoryPage = () => {
                   </Box>
                   <Card
                     sx={{
-                      width: isMobile ? "170px" : "283px", // Adjusted width
+                      width: isMobile ? "160px" : "283px", // Adjusted width
                       borderRadius: "20px",
                       height: "auto",
                     }}
@@ -263,8 +266,8 @@ const CategoryPage = () => {
                     <CardActionArea>
                       <CardMedia
                         component="img"
-                        height={isMobile ? "170px" : "283px"} // Adjusted height
-                        width={isMobile ? "170px" : "283px"} // Adjusted width
+                        height={isMobile ? "150px" : "283px"} // Adjusted height
+                        width={isMobile ? "160px" : "283px"} // Adjusted width
                         image={elem?.productPictures[0]?.img}
                         alt="Product Image"
                       />
@@ -275,7 +278,7 @@ const CategoryPage = () => {
                           component="div"
                           ref={textRef}
                           sx={{
-                            fontSize: "18px",
+                            fontSize: isMobile ? "14px" : "18px",
                             color: "#222222",
                             fontWeight: "500",
                             textTransform: "capitalize",
@@ -315,6 +318,7 @@ const CategoryPage = () => {
                             style={{
                               color: "#717171",
                               fontWeight: "300",
+                              fontSize: isMobile ? "12px" : "0.875rem",
                               textTransform: "capitalize",
                             }}
                           >
@@ -322,7 +326,7 @@ const CategoryPage = () => {
                           </Typography>
                           <Typography
                             variant="body2"
-                            sx={{ color: "#008539", fontWeight: "400" }}
+                            sx={{ color: "#008539", fontWeight: "400", fontSize: isMobile ? "12px" : "0.875rem", }}
                           >
                             Reviews {elem?.numReviews}
                           </Typography>

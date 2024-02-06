@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#FCEDEE",
     padding: "20px 40px",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 20px 0",
+      padding: "20px 15px 0",
     },
   },
   centeredColumn: {
@@ -45,9 +45,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px 0px 0px 10px",
     background: "#FFF",
     padding: "5px 20px 5px",
-    border:"1px solid #801317",
+    border: "1px solid #801317",
     [theme.breakpoints.down("sm")]: {
-      width: "220px",
+      width: "200px",
       height: "50px",
     },
   },
@@ -73,6 +73,10 @@ const useStyles = makeStyles((theme) => ({
     listStyle: "none",
     marginLeft: "1.1rem",
     paddingBottom: "0.8rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: "0.2rem",
+      marginLeft: "0rem",
+    },
   },
   logo: {
     width: "100%",
@@ -83,6 +87,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "400",
     listStyle: "none",
     marginLeft: "1.1rem",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "0rem",
+    },
   },
   address: {
     padding: "0rem 0 1rem 0",
@@ -104,6 +111,10 @@ const useStyles = makeStyles((theme) => ({
   },
   linksColumn: {
     paddingTop: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "10px"
+    },
+
   },
   sectionTitle: {
     fontSize: "14px",
@@ -112,11 +123,17 @@ const useStyles = makeStyles((theme) => ({
     listStyle: "none",
     textAlign: "center",
     paddingBottom: "0.8rem",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "start",
+    },
   },
   sectionTitleText: {
     fontSize: "20px",
-    fontWeight: "500",
+    fontWeight: "500 !important",
     textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "start",
+    },
   },
   linksContainer: {
     fontSize: "14px",
@@ -125,6 +142,10 @@ const useStyles = makeStyles((theme) => ({
     listStyle: "none",
     textAlign: "center",
     paddingBottom: "5px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "12px",
+      textAlign: "start",
+    },
   },
   link: {
     padding: "5px 0",
@@ -176,9 +197,9 @@ const Footer = () => {
                 displayText={"Submit"}
                 styleData={{
                   width: "120px",
-                  height:isMobile ? "50px":"55px",
+                  height: isMobile ? "50px" : "55px",
                   flexShrink: "0",
-                  border:"1px solid #801317",
+                  border: "1px solid #801317",
                   borderRadius: "0px 10px 10px 0px",
                   background: "#801317",
                   fontFamily: "Poppins",

@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   threepoint: {
     padding: "50px 80px",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 20px",
+      padding: "30px 15px",
     },
   },
   icon: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     fontSize: "16px",
-    fontWeight: 500,
+    fontWeight: 600,
     margin: 0,
     paddingBottom: "4px",
   },

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const MenuItem = ({ item, depth, isOpen, handleToggle }) => {
+
     const hasChildren = item.children && item.children.length > 0;
     const isCurrentOpen = isOpen && isOpen[item.label];
 
@@ -8,6 +9,8 @@ const MenuItem = ({ item, depth, isOpen, handleToggle }) => {
         handleToggle(item.label, level);
     };
 
+
+    
     return (
         <li key={item.label} aria-label={item.label}>
             {hasChildren && (
@@ -16,7 +19,7 @@ const MenuItem = ({ item, depth, isOpen, handleToggle }) => {
                 </span>
             )}
             {!hasChildren && (
-                <a href={item.href} data-sbnavmenu={item.label} className="anchor" onClick={item.handleClick}>
+                <a href={item.href} data-sbnavmenu={item.label} className={`${item.className}`} onClick={item.handleClick}>
                     {item.label}
                     {item.icon && <span className='ps-2' style={{ color: "#801317" }}>{item.icon}</span>}
                 </a>

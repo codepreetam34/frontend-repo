@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "50px 80px 0",
     position: "relative",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 20px 0",
+      padding: "30px 15px 0",
     },
   },
   twobannersectionImg: {
@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   titleStyle: {
     fontSize: "24px",
     color: "#FFC72C",
+    fontWeight:"600",
     [theme.breakpoints.down("sm")]: {
       fontSize: "20px",
     },
