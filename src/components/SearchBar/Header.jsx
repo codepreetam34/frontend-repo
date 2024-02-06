@@ -857,7 +857,6 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                       color: "#801317",
                       fontWeight: "600",
                       borderRadius: "10px",
-
                       backgroundColor: "white",
                     }}
                     href={LOGIN}

@@ -99,8 +99,8 @@ const OrderPage = () => {
           <FMTypography
             displayText={`My Orders`}
             styleData={{
-              fontWeight: "500",
-              fontSize: isMobile ? "24px" : "40px",
+              fontWeight: isMobile ? "600" : "600",
+              fontSize: isMobile ? "14px" : "2rem",
               textTransform: "capitalize",
             }}
           />
@@ -112,8 +112,7 @@ const OrderPage = () => {
               displayText={orderData && `| ${orderData?.length} Orders`}
               styleData={{
                 fontWeight: "300",
-                fontSize: "20px",
-                lineHeight: "30px",
+                fontSize: isMobile ? "14px" : "2rem",
                 color: "#717171",
               }}
             />
