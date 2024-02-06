@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "1.25rem",
       fontWeight: 600,
       textAlign: "center",
+      textTransform: "capitalize",
       width: "100%",
       [theme.breakpoints.down("sm")]: {
         fontSize: "1rem",
@@ -108,6 +109,7 @@ const useStyles = makeStyles((theme) => ({
         color: "#fff",
         fontSize: "1.25rem",
         fontWeight: 600,
+        textTransform: "capitalize",
         textAlign: "center",
         width: "100%",
         [theme.breakpoints.down("sm")]: {

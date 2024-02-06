@@ -91,10 +91,10 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 80px",
     transition:
       "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
-    marginTop: "40px",
+    marginTop: "20px",
     [theme.breakpoints.down("sm")]: {
-      padding: "0 20px",
-      marginTop: "20px",
+      padding: "0 20px 20px",
+      marginTop: "10px",
     },
   },
   productList: {
@@ -181,16 +181,17 @@ const CategoryPage = () => {
           <Box
             sx={{
               display: "flex",
+              alignItems:"center",
               transition:
                 "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
-              marginBottom: '1rem'
+                marginBottom: isMobile ? "10px" : '1rem'
             }}
           >
             <FMTypography
               displayText={pageTitle ? `${pageTitle} Products` : `No Products`}
               styleData={{
                 fontWeight: "600",
-                fontSize: isMobile ? "1rem" : "40px",
+                fontSize: isMobile ? "14px" : "2rem",
                 textTransform: "capitalize",
               }}
             />
@@ -202,7 +203,7 @@ const CategoryPage = () => {
                 }
                 styleData={{
                   fontWeight: "300",
-                  fontSize: "1rem",
+                  fontSize: isMobile ? "14px":"2rem",
                   lineHeight: "30px",
                   color: "#717171",
                 }}

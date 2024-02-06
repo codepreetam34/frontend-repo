@@ -450,7 +450,7 @@ const ProductDetail = () => {
           <>
             <div
               className={`${classes.gridPadding} ${classes.root}`}
-              style={{ marginTop: isMobile ? "0px" : "40px" }}
+              style={{ marginTop: isMobile ? "0px" : "20px" }}
             >
               <Container>
                 <Grid container spacing={0}>

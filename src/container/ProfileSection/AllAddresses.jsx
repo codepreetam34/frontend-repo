@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, InputBase } from "@mui/material";
+import { Box, InputBase, useMediaQuery } from "@mui/material";
 import { Col, Row } from "react-bootstrap";
 import Pincode from "react-pincode";
 
@@ -23,6 +23,7 @@ const AllAddresses = () => {
   const [homeOfficeLocation, setHomeOfficeLocation] = useState("Home");
   const [displayFormData, setDisplayFormData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     dispatch(addToCartAddress());
@@ -87,7 +88,7 @@ const AllAddresses = () => {
   }, []);
   return (
     <>
-      <Row style={{ padding: "10px 120px 0 120px" }}>
+      <Row style={{ padding: isMobile ? "0" : "10px 120px 0 120px" }}>
         <Box
           sx={{
             display: displayFormData ? "none" : "grid",
@@ -134,7 +135,7 @@ const AllAddresses = () => {
               component="form"
               xs={12}
 
-              // onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={handleSubmit(onSubmit)}
             >
               <Box sx={commonStyle.flexStyle}>
                 <Box sx={{ display: "flex" }}>
@@ -370,7 +371,7 @@ const AllAddresses = () => {
                     fontWeight: "500 !important",
                   }}
                   value={homeOfficeLocation}
-                  // required={true}
+                // required={true}
                 />
               </Box>
               <Box
@@ -433,7 +434,7 @@ const AllAddresses = () => {
             </Box>
           </Box>
         </Col>
-      </Row>
+      </Row >
     </>
   );
 };

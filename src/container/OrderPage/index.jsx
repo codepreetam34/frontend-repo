@@ -86,7 +86,7 @@ const OrderPage = () => {
           padding: isMobile ? "0 30px" : "0 100px",
           transition:
             "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
-          marginTop: isMobile ? "20px" : "40px",
+          marginTop: isMobile ? "20px" : "20px",
         }}
       >
         <Box
@@ -177,7 +177,7 @@ const OrderPage = () => {
                     }}
                   />
                 </Box> */}
-                <Card sx={{ width: "400px", borderRadius: "20px" }}>
+                <Card sx={{ width: isMobile ? "320px" : "400px", borderRadius: "20px" }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -238,7 +238,6 @@ const OrderPage = () => {
                         }}
                       >
                         <Col>
-                          {" "}
                           <Typography
                             sx={{
                               fontSize: "12px",
@@ -496,7 +495,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                               color: "black",
                               fontWeight: "600",
-                              fontSize: "14px",
+                              fontSize: isMobile ? "12px" : "14px",
                             }}
                           //   onClick={reviewNavHandler}
                           />
@@ -522,7 +521,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                               color: "black",
                               fontWeight: "600",
-                              fontSize: "14px",
+                              fontSize: isMobile ? "12px" : "14px",
                             }}
                           //   onClick={reviewNavHandler}
                           />

@@ -179,9 +179,9 @@ const Profile = () => {
           boxShadow:
             "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
           borderRadius: "20px",
-          marginTop: "24px",
-          marginBottom: "24px",
-          padding: "32px",
+          marginTop: "20px",
+          marginBottom: "20px",
+          padding: isMobile ? "15px" : "32px",
 
           background: "#fff",
         }}
@@ -310,7 +310,7 @@ const Profile = () => {
           borderRadius: "20px",
           marginTop: "24px",
           marginBottom: "24px",
-          padding: "32px", background: "#fff",
+          padding: isMobile ? "15px" : "32px", background: "#fff",
         }}
       >
         <Col style={{ display: "flex", justifyContent: "center" }}>
@@ -471,7 +471,7 @@ const Profile = () => {
                   fontWeight: "600",
                   borderRadius: "10px",
                   backgroundColor: "white",
-                  marginTop: "2rem",
+                  marginTop: "1rem",
                 }}
               />
               <FMButton
@@ -482,7 +482,7 @@ const Profile = () => {
                   fontWeight: "600",
                   borderRadius: "10px",
                   background: "#801317",
-                  marginTop: "2rem",
+                  marginTop: "1rem",
                 }}
               />
             </Box>
