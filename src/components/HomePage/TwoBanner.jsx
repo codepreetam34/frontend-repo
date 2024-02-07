@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "50px 80px 0",
     position: "relative",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 15px 0",
+      padding: "20px 15px 0",
     },
   },
   twobannersectionImg: {
@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
     color: "#FFC72C",
     fontWeight: "600",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "20px",
+      fontSize: "14px",
+      marginBottom:"2px"
     },
   },
   paragraphStyle: {
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     [theme.breakpoints.down("sm")]: {
       marginBottom: "5px",
+      fontSize: "12px",
     },
   },
   columnGap: {
@@ -96,6 +98,7 @@ const TwoBanner = () => {
                 color: "#801317",
                 textTransform: "capitalize",
                 fontWeight: "600",
+                fontSize:"12px"
               }}
               onClick={() => handleGiftNow(banner?.title)}
             >

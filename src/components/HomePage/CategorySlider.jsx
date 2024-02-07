@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   categorySlider: {
     padding: "20px 80px 0",
     [theme.breakpoints.down("sm")]: {
-      padding: "30px 20px 0",
+      padding: "20px 20px 0",
     },
   },
 }));
