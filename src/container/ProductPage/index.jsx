@@ -272,7 +272,7 @@ const ProductPage = () => {
                         image={elem?.productPictures[0]?.img}
                         alt="Product Image"
                       />
-                      <CardContent>
+                      <CardContent style={{ padding: isMobile ? "12px" : "16px" }}>
                         <Typography
                           ref={textRef}
                           className={`${classes.textLimit}`}
@@ -342,6 +342,7 @@ const ProductPage = () => {
                 sx={{
                   width: "260px",
                   borderRadius: "20px",
+                  marginTop: "1rem"
                 }}
               >
                 <CardContent style={{ height: "4rem", textAlign: "center" }}>

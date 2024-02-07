@@ -5,6 +5,7 @@ import { getHomePageTwoAdsBanner } from "Redux/Slices/TwoAdsBanner/TwoAdsBannerS
 import { makeStyles } from "@material-ui/core/styles";
 import FMButton from "../../components/FMButton/FMButton";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useNavigate } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   twobannersection: {
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   titleStyle: {
     fontSize: "24px",
     color: "#FFC72C",
-    fontWeight:"600",
+    fontWeight: "600",
     [theme.breakpoints.down("sm")]: {
       fontSize: "20px",
     },
@@ -65,11 +66,17 @@ const useStyles = makeStyles((theme) => ({
 const TwoBanner = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const pincodeData = sessionStorage.getItem("pincode");
+  const navigate = useNavigate();
   const twoBannerData = useSelector((state) => state?.twoAdsBanner?.twoAdsBanners?.homepageBanner);
 
   useEffect(() => {
     dispatch(getHomePageTwoAdsBanner());
   }, [dispatch]);
+
+  const handleGiftNow = (tagName) => {
+    navigate(`/product-page/all-category/${pincodeData}/${tagName}`)
+  }
 
   const renderBanner = (bannerIndex) => {
     const banner = twoBannerData && twoBannerData[bannerIndex];
@@ -90,6 +97,7 @@ const TwoBanner = () => {
                 textTransform: "capitalize",
                 fontWeight: "600",
               }}
+              onClick={() => handleGiftNow(banner?.title)}
             >
               <KeyboardArrowRightIcon />
             </FMButton>

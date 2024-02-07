@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, useMediaQuery } from "@mui/material";
 import FMTypography from "../../../components/FMTypography/FMTypography";
 import FMButton from "../../../components/FMButton/FMButton";
 import { commonStyle } from "../../../Styles/commonStyles";
@@ -17,11 +17,12 @@ const PriceDetails = ({
   steps,
 }) => {
   const dispatch = useDispatch();
-  const [couponCode, setCouponCode] = useState(""); // State to store entered coupon code
-  const [discountCoupon, setDiscountCoupon] = useState(0); // State to store coupon discount value
-  const [discountMessage, setDiscountMessage] = useState(""); // State to store coupon discount value
+  const [couponCode, setCouponCode] = useState("");
+  const [discountCoupon, setDiscountCoupon] = useState(0);
+  const [discountMessage, setDiscountMessage] = useState("");
+  const isMobile = useMediaQuery("(max-width:600px)");
   const [discountCouponResponseMessage, setDiscountCouponResponseMessage] =
-    useState(""); // State to store coupon discount value
+    useState("");
   const auth = localStorage.getItem("AUTH_ACCESS_TOKEN");
   const result = auth?.substring(1, auth.length - 1);
 
@@ -58,13 +59,11 @@ const PriceDetails = ({
   };
 
   const calculateDiscountOnCoupon = () => {
-    return discountCoupon ? discountCoupon : 0; // Use the discount value from the API
+    return discountCoupon ? discountCoupon : 0; 
   };
 
   const calculateConvenienceFee = () => {
-    // Calculate the convenience fee based on your logic
-    // You may need to fetch it from an API or calculate it in a different way
-    const fee = cartList && cartList > 0 ? 40 : 0; // Example value, replace with your logic
+    const fee = cartList && cartList > 0 ? 40 : 0; 
     return fee;
   };
 
@@ -81,7 +80,6 @@ const PriceDetails = ({
   };
 
   const clearCouponCode = () => {
-    // Function to clear the coupon code
     setCouponCode("");
     setDiscountCoupon("");
   };
@@ -110,7 +108,7 @@ const PriceDetails = ({
         boxShadow:
           "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
         borderRadius: "20px",
-        padding: "40px",
+        padding: isMobile ? "20px" : "40px",
       }}
     >
       <FMTypography
@@ -298,8 +296,9 @@ const PriceDetails = ({
       <hr />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <FMTypography displayText={`Total Amount`} styleData={{ fontWeight: "600" }} />
-        <FMTypography     styleData={{ fontWeight: "600" }} displayText={`₹${calculateTotalAmount()}`} />
+        <FMTypography styleData={{ fontWeight: "600" }} displayText={`₹${calculateTotalAmount()}`} />
       </Box>
+      <hr />
       <Box>
         {discountMessage && (
           <FMTypography

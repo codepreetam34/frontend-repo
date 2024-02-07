@@ -3,6 +3,7 @@ import {
   Box, Typography,
   Card,
   CardContent,
+  useMediaQuery,
 } from "@mui/material";
 import closeCrossIcon from "../../../assets/closeCrossIcon.svg";
 import { Col, Container, Row } from "react-bootstrap";
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 const AddToCart = ({ handleNext }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const addedData = useSelector(
     (state) => state?.addToCartProducts?.getAddToCartProductsListData?.cartItems
@@ -98,7 +100,7 @@ const AddToCart = ({ handleNext }) => {
           <FMTypography
             displayText={`Cart Items (${addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : "0"
               })`}
-            styleData={{ fontSize: "40px", fontWeight: "500", textAlign: "center" }}
+            styleData={{ fontSize: isMobile ? "2rem" : "40px", fontWeight: "500", textAlign: "center" }}
           />
         </Col>
       </Row >
@@ -114,11 +116,11 @@ const AddToCart = ({ handleNext }) => {
                 key={index}
                 className={classes.boxContainer}
               >
-                <Box>
+                <Box style={{ display: "flex", alignItems: "center" }}>
                   <img
                     src={addedData[elem]?.img}
                     alt="img"
-                    style={{ width: "150px", height: "150px", borderRadius: "10px" }}
+                    style={{ width: isMobile ? "110px" : "150px", height: isMobile ? "110px" : "150px", borderRadius: "10px" }}
                   />
                 </Box>
                 <Box sx={{ marginLeft: "1rem", width: "100%" }}>
@@ -144,7 +146,7 @@ const AddToCart = ({ handleNext }) => {
                         sx={{
                           boxShadow: `0rem 0.0625rem 0.125rem ${LIGHT_GREY_BORDER}`,
                           borderRadius: "0.5rem",
-                          height: "2.75rem",
+                          height: isMobile ? "1.5rem" : "2.75rem",
                           "& .MuiOutlinedInput-notchedOutline": {
                             border: `0.0625rem solid ${CANCEL_GREY_BORDER}`,
                           },
@@ -153,7 +155,7 @@ const AddToCart = ({ handleNext }) => {
                               border: `0.0625rem solid ${CANCEL_GREY_BORDER}`,
                             },
                           },
-                          width: "10rem",
+                          width: isMobile ? "100%" : "10rem",
                           background: "#E6E6E6",
                         }}
                         onChange={(e) => {
@@ -166,7 +168,7 @@ const AddToCart = ({ handleNext }) => {
                   <Box sx={{ display: "flex" }}>
                     <del
                       style={{
-                        fontSize: "1rem",
+                        fontSize: isMobile ? "12px" : "1rem",
                         color: "#717171",
                         paddingTop: ".3rem",
                       }}
@@ -175,7 +177,7 @@ const AddToCart = ({ handleNext }) => {
                     </del>
                     <Typography
                       sx={{
-                        fontSize: "18px",
+                        fontSize: isMobile ? "14px" : "18px",
                         color: "#000000",
                         marginLeft: "10px",
                         paddingTop: ".4rem",

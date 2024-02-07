@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getHomePagePamperZone } from "Redux/Slices/PamperZone/PamperZoneSlice";
 import { makeStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from "@mui/material";
+import { useNavigate } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   pamperzone: {
@@ -51,7 +52,8 @@ const PamperZone = () => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const isMobile = useMediaQuery("(max-width:600px)");
-
+  const pincodeData = sessionStorage.getItem("pincode");
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getHomePagePamperZone());
@@ -60,6 +62,11 @@ const PamperZone = () => {
   const pamperZoneData = useSelector(
     (state) => state?.pamperZone?.pamperZoneData?.homepageBanner
   );
+
+  const handleShopNow = (tagName) => {
+    navigate(`/product-page/all-category/${pincodeData}/${tagName}`)
+  }
+
 
   return (
     <div className={`${classes.pamperzone}`}>
@@ -91,6 +98,7 @@ const PamperZone = () => {
                       textTransform: "capitalize",
                       fontWeight: 600,
                     }}
+                    onClick={() => handleShopNow(data?.title)}
                   />
                 </div>
               </div>

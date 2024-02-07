@@ -272,7 +272,7 @@ const CategoryPage = () => {
                         image={elem?.productPictures[0]?.img}
                         alt="Product Image"
                       />
-                      <CardContent>
+                      <CardContent style={{padding:isMobile?"12px":"16px"}}>
                         <Typography
                           gutterBottom
                           variant="h5"
@@ -341,7 +341,7 @@ const CategoryPage = () => {
           ) : (
             <Box>
               <Card
-                sx={{ width: "283px", borderRadius: "20px", height: "auto" }}
+                sx={{ width: "283px",marginTop:"1rem", borderRadius: "20px", height: "auto" }}
               >
                 <CardContent style={{ height: "4rem", textAlign: "center" }}>
                   <Typography

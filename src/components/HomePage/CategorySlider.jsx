@@ -40,7 +40,6 @@ const CategorySlider = () => {
           slidesToShow: 6,
           slidesToScroll: 6,
           infinite: true,
-          dots: false,
         },
       },
       {
@@ -99,12 +98,12 @@ const CategorySlider = () => {
                             })
                           }}
                         />
-
                       </a>
                       <h4 className="text-center" style={{
+                        fontSize: "14px",
                         ...(window.innerWidth <= 600 && {
-                         fontSize:"14px",
-                         fontWeight:"500"
+                          fontSize: "12px",
+                          fontWeight: "500"
                         })
                       }}>{elem?.name}</h4>
                     </div>
