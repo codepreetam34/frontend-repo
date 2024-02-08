@@ -22,3 +22,4 @@ export const PRODUCT_PAGE = "/product-page/:categoryId/:pincodeData/:tagName";
 export const PRODUCT_DETAIL = "/product-detail/:pId";
 export const ORDER_PAGE = "/my-orders";
 export const SET_UP_NEW_PASSWORD = "/set-up-new-password";
+export const BECOME_A_MEMBER = "/become-a-member";

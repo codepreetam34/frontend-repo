@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
       [theme.breakpoints.down("sm")]: {
         fontSize: "1rem",
+        padding: "2px",
       },
     },
   },
@@ -114,6 +115,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         [theme.breakpoints.down("sm")]: {
           fontSize: "1rem",
+          padding: "1px",
         },
       },
     },

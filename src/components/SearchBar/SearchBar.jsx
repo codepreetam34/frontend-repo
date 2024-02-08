@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { SearchStyle } from "./searchBarStyles";
 import "./searchBarMedia.css";
+import { useMediaQuery } from "@mui/material";
 
 const SearchBar = ({
   placeholders,
@@ -15,6 +16,7 @@ const SearchBar = ({
 }) => {
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [displayedPlaceholder, setDisplayedPlaceholder] = useState("");
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     const placeholder = placeholders[placeholderIndex];
@@ -60,7 +62,7 @@ const SearchBar = ({
         value={value}
         sx={SearchStyle.inputField}
         disableUnderline
-        style={{ width: "100%" }}
+        style={{ width: isMobile ? "11rem" : "100%", fontSize: isMobile ? "14px" : "1rem" }}
       />
       <SearchIcon sx={SearchStyle.searchIcon} />
       {cancelIconRight && value.length !== 0 && (

@@ -42,7 +42,7 @@ const DynamicMobileMenu = ({ categoryList, pincodeData, logoutHandler }) => {
         } else if (level === 'firstChild') {
             setOpenFirstChildState(prevState => ({ ...prevState, [label]: !prevState[label] }));
             setOpenSecondChildState({});
-            Object.keys(openFirstChildState).forEach(key => {
+            Object.keys(openSecondChildState).forEach(key => {
                 if (key !== label) {
                     setOpenFirstChildState(prevState => ({ ...prevState, [key]: false }));
                 }

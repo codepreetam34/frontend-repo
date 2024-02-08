@@ -8,6 +8,8 @@ import { Box, InputAdornment, InputBase, useMediaQuery } from "@mui/material";
 import FMButton from "../../components/FMButton/FMButton";
 import { makeStyles } from "@material-ui/core/styles";
 import EmailIcon from '@mui/icons-material/Email';
+import { Link } from "react-router-dom";
+import { BECOME_A_MEMBER, PRIVACY_POLICY } from "Routes/Routes";
 const useStyles = makeStyles((theme) => ({
   footerContainer: {
     background: "#FCEDEE",
@@ -149,6 +151,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     padding: "5px 0",
+    cursor: "pointer",
     [theme.breakpoints.down("sm")]: {
       padding: "2px 0",
     },
@@ -252,7 +255,7 @@ const Footer = () => {
               <div className={classes.linksContainer}>
                 <div className={classes.link}>Info Page</div>
                 <div className={classes.link}>Disclaimer</div>
-                <div className={classes.link}>WebGross Team</div>
+                <div className={classes.link}><a href={BECOME_A_MEMBER}>Become a Vendor</a></div>
               </div>
             </Col>
             <Col className={classes.linksColumn}>
@@ -277,7 +280,9 @@ const Footer = () => {
               </div>
               <div className={classes.linksContainer}>
                 <div className={classes.link}>Contact Us</div>
-                <div className={classes.link}>Privacy Policy</div>
+                <div className={classes.link}>
+                  <Link to={PRIVACY_POLICY}>Privacy Policy</Link>
+                </div>
                 <div className={classes.link}>Terms & Conditions</div>
               </div>
             </Col>
@@ -287,7 +292,7 @@ const Footer = () => {
       <Row className={classes.copyrightRow}>
         <Col className={classes.centeredColumn}>
           <div className={classes.copyright}>
-            All Copyrght reserved by © Webgross Pvt Ltd.
+            All Copyright reserved by © Webgross Pvt Ltd.
           </div>
         </Col>
       </Row>

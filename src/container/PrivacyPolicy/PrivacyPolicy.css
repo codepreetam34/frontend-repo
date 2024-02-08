@@ -1,0 +1,44 @@
+.maintitle {
+  font-size: 26px;
+  text-align: center;
+  margin: 10px 0 15px 0;
+  font-weight: 300;
+}
+
+h1::before,
+h1::after {
+  content: "";
+  display: inline-block;
+  height: 1px;
+  vertical-align: middle;
+  width: 137px;
+}
+
+h1 > .highlight {
+  color: #d62863 !important;
+}
+
+h1::before,
+h1::after {
+  content: "";
+  display: inline-block;
+  height: 1px;
+  vertical-align: middle;
+  width: 137px;
+}
+
+
+h1::before, h1::after {
+    content: "";
+    height: 1px;
+    width: 141px;
+    display: inline-block;
+    height: 1px;
+    width: 137px;
+    background: url(./iconSpriteBg.png) no-repeat -6px -542px;
+    vertical-align: middle;
+}
+
+h1::after {
+    background-position: -144px -542px;
+  }

@@ -19,6 +19,7 @@ import {
   SETUP_NEW_PASSWORD,
   SET_UP_NEW_PASSWORD,
   SIGNUP,
+  BECOME_A_MEMBER,
 } from "./Routes/Routes";
 import Login from "./container/Signin/Login";
 import SignUp from "./container/SignUp/SignUp";
@@ -47,6 +48,7 @@ import "./LandingPage.css";
 
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
+import BecomeAMember from "container/BecomeAMember";
 
 const App = () => {
   return (
@@ -61,7 +63,12 @@ const App = () => {
             <Route path={SETUP_NEW_PASSWORD} element={<SetupNewPassword />} />
             <Route path={EMAIL_VERIFY} element={<EmailVerify />} />
             <Route path={EMAIL_VERIFY_OTP} element={<EmailVerifyOtp />} />
+
             <Route path={PRIVACY_POLICY} element={<PrivacyPolicy />} />
+
+            <Route path={BECOME_A_MEMBER} element={<BecomeAMember />} />
+
+
             <Route path={FAQ} element={<Faq />} />
             <Route path={BLOGS} element={<Blogs />} />
             <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
@@ -69,8 +76,8 @@ const App = () => {
             <Route path={PRODUCT_PAGE} element={<ProductPage />} />
             <Route path={PRODUCT_DETAIL} element={<ProductDetail />} />
             <Route path={ADD_TO_CART} element={<HorizontalLinearStepper />} />
-            <Route patht={SET_UP_NEW_PASSWORD} element={<SetupNewPassword />} />
-            {/* private routes below */}
+            <Route path={SET_UP_NEW_PASSWORD} element={<SetupNewPassword />} />
+               {/* private routes below */}
             <Route
               path={ORDER_PAGE}
               element={<PrivateRoutes Component={OrderPage} />}
