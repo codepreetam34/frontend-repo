@@ -75,15 +75,6 @@ const DynamicMobileMenu = ({ categoryList, pincodeData, logoutHandler }) => {
                 }))
             })),
         },
-        {
-            label: "Shop By Category",
-            
-            className: "parent-name",
-            children: categoryList?.map(category => ({
-                label: category?.name,
-                href: `/category-page/${category?._id}`,
-            })),
-        },
 
         {
             label: "My Orders",
