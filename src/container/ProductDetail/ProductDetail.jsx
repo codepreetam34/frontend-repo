@@ -1022,13 +1022,16 @@ const ProductDetail = () => {
                         textTransform: "capitalize",
                         color: "#222222",
                         border: "none",
+                        transitionDuration: "0.4s",
                         fontSize: "20px",
+                        transition: "background-color 0.4s ease",
                         marginBottom: "1rem",
                         "&:hover": {
                           border: "none",
                           color: "#fff",
                           backgroundColor: "#801317",
                           textDecoration: "none",
+                        transition: "background-color 0.4s ease",
                         },
                       }}
                     />

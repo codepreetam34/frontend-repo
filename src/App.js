@@ -20,6 +20,7 @@ import {
   SET_UP_NEW_PASSWORD,
   SIGNUP,
   BECOME_A_MEMBER,
+  CONTACT_US,
 } from "./Routes/Routes";
 import Login from "./container/Signin/Login";
 import SignUp from "./container/SignUp/SignUp";
@@ -49,6 +50,7 @@ import "./LandingPage.css";
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
 import BecomeAMember from "container/BecomeAMember";
+import ContactUs from "container/ContactUs";
 
 const App = () => {
   return (
@@ -77,6 +79,7 @@ const App = () => {
             <Route path={PRODUCT_DETAIL} element={<ProductDetail />} />
             <Route path={ADD_TO_CART} element={<HorizontalLinearStepper />} />
             <Route path={SET_UP_NEW_PASSWORD} element={<SetupNewPassword />} />
+            <Route path={CONTACT_US} element={<ContactUs />} />
                {/* private routes below */}
             <Route
               path={ORDER_PAGE}

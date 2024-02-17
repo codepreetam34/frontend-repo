@@ -30,12 +30,14 @@ const styles = {
     },
   },
   radioStyles: {
-    // marginLeft: "0.625rem",
-    // color: GREY,
-    color: "#000000",
-    // "&.Mui-checked": { color: PDSL_BLUE },
-    "&.Mui-checked": { color: "#000000" },
+    color: "#ccc",
+    "&.Mui-checked": { color: "#801317" },
+    "&:hover": {
+      color: "#801317",
+      // Add any other hover styles you want here
+    },
   },
+  
 };
 
 export default function FMRadioButtons(props) {

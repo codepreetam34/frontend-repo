@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid } from "@mui/material";
+import { Avatar, Box, Grid, useMediaQuery } from "@mui/material";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import React, { useEffect, useState } from "react";
 import monkeyLogo from "../../assets/monkeyLogo.svg";
@@ -240,6 +240,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
   const [show, setShow] = useState("");
   const [pincodeData, setPincodeData] = useState("");
   const [pincodeModalOpen, setPincodeModalOpen] = useState(true);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const personLoggedIn = JSON.parse(
     localStorage.getItem("Sidebar_Module_Assigned")
@@ -647,6 +648,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                       src={VibezterLogo}
                       alt="VibezterLogo"
                       className={`${classes.vibezterLogoStyle}`}
+                      style={{ marginLeft: isMobile ? "5px" : '' }}
                     />
                   </a>
                 </Col>
@@ -770,7 +772,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                     }}
                   /> */}
                 </Box>
-                <Box style={{ marginLeft: "5px" }}>
+                <Box style={{ marginLeft: "10px" }}>
                   <SearchBar placeholders={placeholders} />
                 </Box>
               </div>
@@ -811,7 +813,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                           ? personLoggedData?.profilePicture
                           : "/broken-image.jpg"
                       }
-                      style={{ background: !personLoggedData?.profilePicture ? "#801317":"" }}
+                      style={{ background: !personLoggedData?.profilePicture ? "#801317" : "" }}
                     />
                   </Stack>
 
@@ -1003,6 +1005,11 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                                   />
                                   <h4>{elem?.name}</h4>
                                 </div>
+
+
+
+
+                                
                               </Col>
                             </Row>
                           </Col>

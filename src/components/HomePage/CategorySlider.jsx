@@ -31,14 +31,14 @@ const CategorySlider = () => {
     centerPadding: "0px",
     autoplay: false,
     arrows: true,
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: 7,
+    slidesToScroll: 7,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 6,
-          slidesToScroll: 6,
+          slidesToShow: 7,
+          slidesToScroll: 7,
           infinite: true,
         },
       },
@@ -89,8 +89,8 @@ const CategorySlider = () => {
                           src={elem?.categoryImage}
                           className={`zoomin img-fluid`}
                           style={{
-                            width: "170px",
-                            height: "170px",
+                            width: "150px",
+                            height: "150px",
                             borderRadius: "104px",
                             objectFit: "cover",
                             ...(window.innerWidth <= 600 && {

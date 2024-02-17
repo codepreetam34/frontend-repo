@@ -90,7 +90,7 @@ const FMFilter = ({
       <Grid
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", sm: "row" },
+          flexDirection: { xs: "column", sm: "column" },
           gap: "1rem",
            }}
       >
@@ -98,7 +98,7 @@ const FMFilter = ({
           name="department_id"
           value={sortingValue}
           options={sortByOptions}
-          sx={{ width: { xs: "100%", sm: "10rem" } }}
+          sx={{ width: { xs: "100%", sm: "13rem" } }}
           placeholder="Please select department"
           onChange={sortByOptionsChangeHandler}
         />
@@ -124,7 +124,7 @@ const FMFilter = ({
                       ? "#f8d7da"
                       : "transparent",
                   borderRadius: "19px",
-                  width: { xs: "46%", sm: "auto" }, 
+                  width: { xs: "46%", sm: "100%" }, 
                   fontSize: { xs: "12px", sm: "inherit" }, 
                   padding: { xs: "12px", sm: "8px 16px" }, 
                 }}

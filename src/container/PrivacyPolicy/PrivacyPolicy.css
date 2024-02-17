@@ -27,18 +27,32 @@ h1::after {
   width: 137px;
 }
 
-
-h1::before, h1::after {
-    content: "";
-    height: 1px;
-    width: 141px;
-    display: inline-block;
-    height: 1px;
-    width: 137px;
-    background: url(./iconSpriteBg.png) no-repeat -6px -542px;
-    vertical-align: middle;
+h1::before,
+h1::after {
+  content: "";
+  height: 1px;
+  width: 141px;
+  display: inline-block;
+  height: 1px;
+  width: 137px;
+  background: url(./iconSpriteBg.png) no-repeat -6px -542px;
+  vertical-align: middle;
 }
 
 h1::after {
-    background-position: -144px -542px;
+  background-position: -144px -542px;
+}
+
+@media screen and (max-width: 768px) {
+  .maintitle {
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0 15px 0;
+    font-weight: 600;
   }
+
+  
+h2 > .highlight {
+  color: #d62863 !important;
+}
+}

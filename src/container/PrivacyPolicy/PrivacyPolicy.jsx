@@ -55,7 +55,9 @@ const PrivacyPolicy = () => {
         <Row className={classes.privacyPolicyContainer}>
           <Col className={classes.privacyPolicyContent}>
             <div className="columns">
-              <h1 className="maintitle"><span className="highlight"> Privacy </span> Policy </h1>
+              {isMobile ? <h2 className="maintitle"><span className="highlight"> Privacy</span> Policy </h2> : <h1 className="maintitle"><span className="highlight"> Privacy </span> Policy </h1>
+
+              }
               <div className="content-design">
                 <p><strong>Last updated: February 03, 2024</strong></p>
                 <p>
@@ -64,7 +66,7 @@ const PrivacyPolicy = () => {
                 <p>
                   We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the Privacy Policy Generator.
                 </p>
-                <h1 className="maintitle"><span className="highlight"> Interpretation and </span> Definitions </h1>
+                {isMobile ? <h2 className="maintitle"><span className="highlight"> Interpretation and</span> Definitions </h2> : <h1 className="maintitle"><span className="highlight"> Interpretation and </span> Definitions </h1>}
                 <h6 className={classes.privacyPolicyHeading}>Interpretation</h6>
                 <p>
                   The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
@@ -90,7 +92,10 @@ const PrivacyPolicy = () => {
                 </ul>
 
 
-                <h1 className="maintitle"><span className="highlight"> Collecting and Using </span>Your Personal Data  </h1>
+
+                {isMobile ? <h2 className="maintitle"> <span className="highlight"> Collecting and Using </span>Your Personal Data</h2> : <h1 className="maintitle"><span className="highlight"> Collecting and Using </span>Your Personal Data  </h1>
+
+                }
                 <h5 className={classes.privacyPolicyTitle}>
                   Types of Data Collected
                 </h5>

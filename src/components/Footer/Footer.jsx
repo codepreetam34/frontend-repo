@@ -9,7 +9,7 @@ import FMButton from "../../components/FMButton/FMButton";
 import { makeStyles } from "@material-ui/core/styles";
 import EmailIcon from '@mui/icons-material/Email';
 import { Link } from "react-router-dom";
-import { BECOME_A_MEMBER, PRIVACY_POLICY } from "Routes/Routes";
+import { BECOME_A_MEMBER, CONTACT_US, PRIVACY_POLICY } from "Routes/Routes";
 const useStyles = makeStyles((theme) => ({
   footerContainer: {
     background: "#FCEDEE",
@@ -169,6 +169,15 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: "700",
     },
   },
+
+  anchorLink: {
+    color: "#717171",
+    textDecoration: "none",
+    transition: "color 0.3s",
+    "&:hover": { // Use "&:hover" to apply hover effect
+      color: "#333", // Change color on hover
+    },
+  },
 }));
 const Footer = () => {
   const classes = useStyles();
@@ -255,7 +264,7 @@ const Footer = () => {
               <div className={classes.linksContainer}>
                 <div className={classes.link}>Info Page</div>
                 <div className={classes.link}>Disclaimer</div>
-                <div className={classes.link}><a href={BECOME_A_MEMBER}>Become a Vendor</a></div>
+                <div className={classes.link}><a href={BECOME_A_MEMBER} className={classes.anchorLink}>Become a Vendor</a></div>
               </div>
             </Col>
             <Col className={classes.linksColumn}>
@@ -279,9 +288,9 @@ const Footer = () => {
                 />
               </div>
               <div className={classes.linksContainer}>
-                <div className={classes.link}>Contact Us</div>
+                <div className={classes.link}><a href={CONTACT_US} className={classes.anchorLink}>Contact Us</a></div>
                 <div className={classes.link}>
-                  <Link to={PRIVACY_POLICY}>Privacy Policy</Link>
+                  <Link to={PRIVACY_POLICY} className={classes.anchorLink}>Privacy Policy</Link>
                 </div>
                 <div className={classes.link}>Terms & Conditions</div>
               </div>
