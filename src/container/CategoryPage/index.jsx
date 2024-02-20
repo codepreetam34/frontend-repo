@@ -56,12 +56,12 @@ const useStyles = makeStyles((theme) => ({
   rightColumn: {
     flex: "1",
     overflowY: "auto",
-    padding: "20px",
+    padding: "10px",
   },
   productList: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "1rem",
+    gap: "0",
 
     [theme.breakpoints.down("sm")]: {
 
@@ -120,7 +120,7 @@ const CategoryPage = () => {
 
         <aside item className={`${classes.leftColumn} d-none  d-md-block`}>
           <Box style={{
-            background: "#fff", margin: '2rem 1rem',
+            background: "#fff", margin: '20px 1rem',
             padding: '1rem', borderRadius: "4px",
             boxShadow: "0px 3px 6px 0 rgb(212 212 212 / 35%)", height: "77vh"
           }}>
@@ -236,7 +236,7 @@ const CategoryPage = () => {
                 <Box style={{
                   display: 'flex', justifyContent: "space-between", padding: "1rem",
                   alignItems: 'center', background: "#fff", marginTop: "10px",
-                  marginBottom: isMobile ? "10px" : "2rem", borderRadius: "4px",
+                  marginBottom: isMobile ? "10px" : "1rem", borderRadius: "4px",
                   boxShadow: "0px 3px 6px 0 rgb(212 212 212 / 35%)",
                 }}>
                   <Box
@@ -320,7 +320,7 @@ const CategoryPage = () => {
                       </Box>
                       <Card
                         sx={{
-                          width: isMobile ? "170px" : "210px",
+                          width: isMobile ? "170px" : "225px",
                           borderRadius: "20px",
                           height: "auto",
                         }}
@@ -330,7 +330,7 @@ const CategoryPage = () => {
                             className="zoomin-img"
                             component="img"
                             height={isMobile ? "170px" : "210px"}
-                            width={isMobile ? "170px" : "200px"}
+                            width={isMobile ? "170px" : "225px"}
                             image={elem?.productPictures[0]?.img}
                             alt="Product Image"
                           />

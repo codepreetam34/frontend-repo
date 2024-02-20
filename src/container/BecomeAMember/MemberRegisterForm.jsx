@@ -47,7 +47,7 @@ const MemberRegisterForm = () => {
 
 
     const handleCheckboxChange = (event) => {
-        setAgreeTerms(event.target.checked); // Step 2: Handle checkbox state change
+        setAgreeTerms(event.target.checked); 
     };
 
     return (

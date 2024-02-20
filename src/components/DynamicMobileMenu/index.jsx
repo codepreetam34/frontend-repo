@@ -61,7 +61,7 @@ const DynamicMobileMenu = ({ categoryList, pincodeData, logoutHandler }) => {
     const menuItems = [
         {
             label: "Shop By Category & Tags",
-            
+
             className: "parent-name",
             children: categoryList?.map(category => ({
                 label: category.name,
@@ -75,18 +75,17 @@ const DynamicMobileMenu = ({ categoryList, pincodeData, logoutHandler }) => {
                 }))
             })),
         },
-<<<<<<< HEAD
+
         // {
         //     label: "Shop By Category",
-            
+
         //     className: "parent-name",
         //     children: categoryList?.map(category => ({
         //         label: category?.name,
         //         href: `/category-page/${category?._id}`,
         //     })),
         // },
-=======
->>>>>>> ccf574029e75a70f9acf9a64a419d06757411b62
+
 
         {
             label: "My Orders",
