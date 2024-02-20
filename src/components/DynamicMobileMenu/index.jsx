@@ -75,6 +75,7 @@ const DynamicMobileMenu = ({ categoryList, pincodeData, logoutHandler }) => {
                 }))
             })),
         },
+<<<<<<< HEAD
         // {
         //     label: "Shop By Category",
             
@@ -84,6 +85,8 @@ const DynamicMobileMenu = ({ categoryList, pincodeData, logoutHandler }) => {
         //         href: `/category-page/${category?._id}`,
         //     })),
         // },
+=======
+>>>>>>> ccf574029e75a70f9acf9a64a419d06757411b62
 
         {
             label: "My Orders",

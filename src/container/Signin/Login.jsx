@@ -26,7 +26,6 @@ import { notify } from "../../components/FMToaster/FMToaster";
 import { ErrorToaster, SuccessToaster } from "constants/util";
 import googleButtonIcon from "../../assets/googleButtonIcon.png";
 import messageButtonIcon from "../../assets/messageButtonIcon.png";
-import { GoogleLogin } from "react-google-login";
 import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
 
 const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
