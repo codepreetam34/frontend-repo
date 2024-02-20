@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "50px 80px 0",
     position: "relative",
     [theme.breakpoints.down("sm")]: {
-      padding: "20px 15px 0",
+      padding: "20px 20px 0",
     },
   },
   heighautoimgfirst: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
       height: "210px",
       [theme.breakpoints.down("sm")]: {
-        width: "105px",
+        width: "100%",
         height: "160px",
         marginBottom: "0",
       },
@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
       marginBbottom: "25px",
       display: "block",
       [theme.breakpoints.down("sm")]: {
-        width: "105px",
+        width: "100%",
         marginBottom: "0"
       },
       "& p": {
@@ -124,20 +124,20 @@ const useStyles = makeStyles((theme) => ({
       height: "170px", borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
         height: "190px",
-        width: "105px"
+        width: "100%"
       },
     },
     "&:nth-child(3) a img": {
       height: "180px", borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
-        height: "160px", width: "105px"
+        height: "160px", width: "100%"
       },
     },
     "& .second_row:nth-child(1) a img": {
       height: "190px",
       borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
-        height: "140px", width: "105px"
+        height: "140px", width: "100%"
       },
 
     },
@@ -145,28 +145,28 @@ const useStyles = makeStyles((theme) => ({
       height: "220px",
       borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
-        height: "190px", width: "105px"
+        height: "190px", width: "100%"
       },
     },
     "& .second_row:nth-child(3) a img": {
       height: "265px",
       borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
-        height: "220px", width: "105px"
+        height: "220px", width: "100%"
       },
     },
     "& .forth_row:nth-child(1) a img": {
       height: "285px",
       borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
-        height: "260px", width: "105px",
+        height: "260px", width: "100%",
       },
     },
     "& .forth_row:nth-child(2) a img": {
       height: "285px",
       borderRadius: "20px",
       [theme.breakpoints.down("sm")]: {
-        height: "260px", width: "105px",
+        height: "260px", width: "100%",
       },
     },
   },
@@ -193,7 +193,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   columnPadding: {
-    padding: "0px 20px 0px 10px"
+    padding: "0px 25px 0px 10px"
   }
 }));
 const ShopByOccasion = () => {
