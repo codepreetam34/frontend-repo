@@ -45,7 +45,7 @@ const Banner = () => {
     speed: 300,
     draggable: true,
     margin: isMobile ? "20px" : "100px",
-   // autoplay: true,
+    autoplay: true,
     arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,

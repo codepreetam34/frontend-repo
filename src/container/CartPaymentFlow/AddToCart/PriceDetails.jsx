@@ -109,6 +109,7 @@ const PriceDetails = ({
           "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
         borderRadius: "20px",
         padding: isMobile ? "20px" : "40px",
+        background: "#fff"
       }}
     >
       <FMTypography

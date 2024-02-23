@@ -7,6 +7,8 @@ import { makeStyles } from "@mui/styles";
 import { memberRegisterFormSchema } from "validationSchema/memberRegisterFormSchema";
 import FMTypography from "components/FMTypography/FMTypography";
 import { PRIVACY_POLICY } from "Routes/Routes";
+import { addAVendor } from "Redux/Slices/RegisterAVendor/RegisterAVendorSlice";
+import { Form } from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
     containerPadding: {
@@ -36,19 +38,64 @@ const MemberRegisterForm = () => {
 
     const onSubmit = (data) => {
 
-        if (agreeTerms) { // Step 3: Check if terms are agreed upon
-            dispatch(registerAVendor(data)).then((res) => {
-                // handle response if needed
+        if (agreeTerms) {
+
+            const formData = new FormData();
+            formData.append("shopName", data.shopName);
+            formData.append("vendorName", data.vendorName);
+            formData.append("panNumber", data.panNumber);
+            formData.append("gstNumber", data.gstNumber);
+            formData.append("aadharCard", aadharCardFile);
+            formData.append("gstCertificate", gstCertificateFile);
+            formData.append("officeAddress1", data.officeAddress1);
+            formData.append("officeAddress2", data.officeAddress2);
+            formData.append("officeCity", data.officeCity);
+            formData.append("officeState", data.officeState);
+            formData.append("officePincode", data.officePincode);
+            formData.append("officePhone", data.officePhone);
+            formData.append("officeEmail", data.officeEmail);
+            formData.append("homeAddress1", data.homeAddress1);
+            formData.append("homeAddress2", data.homeAddress2);
+            formData.append("homeCity", data.homeCity);
+            formData.append("homeState", data.homeState);
+            formData.append("homePincode", data.homePincode);
+            formData.append("homePhone", data.homePhone);
+            formData.append("homeEmail", data.homeEmail);
+
+            dispatch(addAVendor(formData)).then((res) => {
+
+                if (
+                    res?.paylaod?.error?.response?.status === 400 ||
+                    res?.paylaod?.error?.response?.status === 500
+                ) {
+                } else {
+
+                }
             });
+
+
+
         } else {
+
             // Display an error message or handle the case where terms are not agreed upon
+
         }
     };
 
 
     const handleCheckboxChange = (event) => {
-        setAgreeTerms(event.target.checked); 
+        setAgreeTerms(event.target.checked);
     };
+
+    const handleFileChange = (e, fileType) => {
+        const file = e.target.files[0];
+        if (fileType === "aadharCard") {
+            setAadharCardFile(file);
+        } else if (fileType === "gstCertificate") {
+            setGstCertificateFile(file);
+        }
+    };
+
 
     return (
         <div className={classes.containerPadding}>
@@ -71,9 +118,9 @@ const MemberRegisterForm = () => {
                                 <TextField
                                     fullWidth
                                     label="Company Name"
-                                    {...register("referenceNumber")}
-                                    error={!!errors.referenceNumber}
-                                    helperText={errors.referenceNumber?.message}
+                                    {...register("shopName")}
+                                    error={!!errors.shopName}
+                                    helperText={errors.shopName?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -103,6 +150,49 @@ const MemberRegisterForm = () => {
                                     helperText={errors.gstNumber?.message}
                                 />
                             </Grid>
+
+                            {/* <Grid item xs={12} sm={6}>
+                                <TextField
+                                    fullWidth
+                                    label="GST No."
+                                    {...register("attachAadharCard")}
+                                    error={!!errors.gstNumber}
+                                    helperText={errors.gstNumber?.message}
+                                />
+                            </Grid>
+              
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    fullWidth
+                                    label="GST No."
+                                    {...register("attachGstCertificate")}
+                                    error={!!errors.gstNumber}
+                                    helperText={errors.gstNumber?.message}
+                                />
+                            </Grid> */}
+
+                            <Grid item md={6}>
+                                <Form.Group controlId="aadharCard">
+                                    <Form.Label>Aadhar Card Upload</Form.Label>
+                                    <Form.Control
+                                        type="file"
+                                        name="aadharCard"
+                                        onChange={(e) => handleFileChange(e, "aadharCard")}
+                                    />
+                                </Form.Group>
+                            </Grid>
+
+                            <Grid item md={6}>
+                                <Form.Group controlId="gstCertificate">
+                                    <Form.Label>GST Number Certificate Upload</Form.Label>
+                                    <Form.Control
+                                        type="file"
+                                        name="gstCertificate"
+                                        onChange={(e) => handleFileChange(e, "gstCertificate")}
+                                    />
+                                </Form.Group>
+                            </Grid>
+
                         </Grid>
 
                         <Typography variant="h6" gutterBottom sx={{ marginTop: 2 }}>
@@ -274,7 +364,7 @@ const MemberRegisterForm = () => {
                 </CardContent>
             </Card>
 
-        </div>
+        </div >
     );
 };
 

@@ -78,7 +78,7 @@ const AllAddressComponent = React.memo(
 
     return (
       <>
-        <Grid>
+        <Grid >
           <RadioGroup
             value={selectedAddress}
             onChange={(event) => handleRadioChange(event.target.value)}
@@ -91,6 +91,7 @@ const AllAddressComponent = React.memo(
                     position: "relative",
                     boxShadow:
                       "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+                    background: "#fff",
                     borderRadius: "20px",
                     padding: "40px",
                     marginBottom: "2rem",

@@ -112,10 +112,13 @@ const CategoryPage = () => {
     navigate(`/product-detail/${id}`);
   };
 
+
   return (
     <>
       <Header />
+
       <Grid container>
+
         {/* Left column - fixed */}
 
         <aside item className={`${classes.leftColumn} d-none  d-md-block`}>
@@ -131,7 +134,7 @@ const CategoryPage = () => {
               justifyContent: "space-between"
             }}><span style={{
               padding: "15px",
-              fontSize: "18px",
+              fontSize: "1rem",
               fontFamily: "Poppins",
               fontWeight: "600"
             }}>Filters</span></div>
@@ -171,7 +174,7 @@ const CategoryPage = () => {
                   displayText={pageTitle ? `${pageTitle} Products` : `No Products`}
                   styleData={{
                     fontWeight: "600",
-                    fontSize: isMobile ? "14px" : "2rem",
+                    fontSize: isMobile ? "14px" : "1rem",
                     textTransform: "capitalize",
                   }}
                 />
@@ -183,7 +186,7 @@ const CategoryPage = () => {
                     }
                     styleData={{
                       fontWeight: "300",
-                      fontSize: isMobile ? "14px" : "2rem",
+                      fontSize: isMobile ? "14px" : "1rem",
                       lineHeight: "30px",
                       color: "#717171",
                     }}
@@ -229,9 +232,11 @@ const CategoryPage = () => {
         </div>
 
         {/* Right column - scrollable */}
+
         <Grid item className={classes.rightColumn}>
+
           <Box>
-            <div className="d-none d-md-block">
+            <div className="d-none d-md-block" style={{ paddingRight: "1rem" }}>
               {pageTitle && (
                 <Box style={{
                   display: 'flex', justifyContent: "space-between", padding: "1rem",
@@ -249,7 +254,7 @@ const CategoryPage = () => {
                       displayText={pageTitle ? `${pageTitle} Products ` : `No Products`}
                       styleData={{
                         fontWeight: "600",
-                        fontSize: isMobile ? "14px" : "1.5rem",
+                        fontSize: isMobile ? "14px" : "1rem",
                         textTransform: "capitalize",
                       }}
                     />
@@ -261,7 +266,7 @@ const CategoryPage = () => {
                         }
                         styleData={{
                           fontWeight: "300",
-                          fontSize: isMobile ? "14px" : "1.5rem",
+                          fontSize: isMobile ? "14px" : "1rem",
                           lineHeight: "30px",
                           color: "#717171",
                         }}
@@ -343,7 +348,7 @@ const CategoryPage = () => {
                               component="div"
                               ref={textRef}
                               sx={{
-                                fontSize: isMobile ? "14px" : "18px",
+                                fontSize: isMobile ? "14px" : "14px",
                                 color: "#222222",
                                 fontWeight: "500",
                                 textTransform: "capitalize",
@@ -368,7 +373,7 @@ const CategoryPage = () => {
                               </del>
                               <Typography
                                 sx={{
-                                  fontSize: "14px",
+                                  fontSize: "16px",
                                   color: "#000000",
                                   marginLeft: ".5rem",
                                   fontWeight: "600",
@@ -388,7 +393,7 @@ const CategoryPage = () => {
                                 style={{
                                   color: "#717171",
                                   fontWeight: "300",
-                                  fontSize: isMobile ? "12px" : "0.875rem",
+                                  fontSize: isMobile ? "12px" : "12px",
                                   textTransform: "capitalize",
                                 }}
                               >
@@ -399,7 +404,7 @@ const CategoryPage = () => {
                                 sx={{
                                   color: "#008539",
                                   fontWeight: "400",
-                                  fontSize: isMobile ? "12px" : "0.875rem",
+                                  fontSize: isMobile ? "12px" : "12px",
                                 }}
                               >
                                 Reviews {elem?.numReviews}
@@ -429,7 +434,7 @@ const CategoryPage = () => {
                         gutterBottom
                         variant="h5"
                         component="div"
-                        sx={{ fontSize: "18px", color: "#801317" }}
+                        sx={{ fontSize: "1rem", color: "#801317" }}
                       >
                         No data available!
                       </Typography>
@@ -439,8 +444,11 @@ const CategoryPage = () => {
               )}
             </Grid>
           </Box>
+
         </Grid>
+
       </Grid >
+
       <Footer />
     </>
   );

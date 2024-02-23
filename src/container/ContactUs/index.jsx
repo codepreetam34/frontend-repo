@@ -1,86 +1,267 @@
-import React, { useEffect } from "react";
-import { Card, CardContent, useMediaQuery } from "@mui/material";
-import { Col, Container, Row } from "react-bootstrap";
-import Header from "components/SearchBar/Header";
-import Footer from "components/Footer/Footer";
+import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
+import {
+    Typography,
+    Grid,
+    TextField,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    Button,
+    Card,
+    CardContent,
+    Box,
+} from '@mui/material';
+import Footer from 'components/Footer/Footer';
+import Header from 'components/SearchBar/Header';
+import {
+
+    Facebook, // Add this import for Facebook icon
+    Twitter, // Add this import for Twitter icon
+    Instagram, // Add this import for Instagram icon
+    LinkedIn, // Add this import for LinkedIn iconOpenInNew
+    OpenInNew,
+} from '@mui/icons-material'; // Change the import statement to use @mui/icons-material
 
 const useStyles = makeStyles((theme) => ({
-    contactUsContainer: {
-        padding: "40px 100px",
-        [theme.breakpoints.down("sm")]: {
-          padding: "20px 20px",
-        }
-      },
-}));
+    root: {
+        flexGrow: 1,
+        padding: theme.spacing(4),
+        paddingBottom: "1rem",
+    },
+    contactDetails: {
+        paddingRight: theme.spacing(4),
+    },
+    contactHeading: {
+        marginBottom: theme.spacing(2),
+    },
+    contactText: {
+        marginBottom: theme.spacing(4),
+    },
+    formControl: {
+        marginBottom: theme.spacing(2),
+    },
+    contactBtn: {
+        marginTop: theme.spacing(2),
+    },
+    socialLinksContainer: {
+        marginTop: 'auto',
+    },
+    socialLink: {
+        marginRight: theme.spacing(2),
+        transition: 'color 0.3s ease',
+        cursor:"pointer",
+        '&:hover': {
+            color: '#801317',  
+        },
+    },
 
+}));
 
 const ContactUs = () => {
     const classes = useStyles();
-    const isMobile = useMediaQuery("(max-width:600px)");
+    const [query, setQuery] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [message, setMessage] = useState('');
+    const [submitted, setSubmitted] = useState(false);
 
+    const handleQueryChange = (event) => {
+        setQuery(event.target.value);
+    };
 
-    useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    }, []);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Handle form submission, e.g., sending data to backend
+        // For demonstration purpose, just console.log the data
+        console.log({ query, name, email, mobile, message });
+        // Reset form fields and show confirmation message
+        setQuery('');
+        setName('');
+        setEmail('');
+        setMobile('');
+        setMessage('');
+        setSubmitted(true);
+    };
+
+    const handleNewRequest = () => {
+        setSubmitted(false);
+    };
 
     return (
-        <>
-            <Header />
-            <Container fluid>
-                <Row className={classes.contactUsContainer}>
-                    <Card variant="outlined">
-                        <CardContent sx={{ padding: isMobile ? "1rem" : "1rem 2rem" }}>
+        <>  <Header />
+            <div className={classes.root}>
 
-                            <div className="form-section">
+                <Grid container spacing={4}>
+                    <Grid item xs={12} sm={6} className={classes.contactDetails}>
+                        <Card>
+                            <CardContent>
+                                <Typography variant="h4" className={classes.contactHeading}>Contact Info</Typography>
+                                <Typography variant="body1" className={classes.contactText}>
+                                    It is very important to us to keep in touch with you, so we are always ready to answer any question that interests you. Shoot!
+                                </Typography>
 
-                                <div className="left-sections">
-                                    <h2>Contact Details</h2>
+                                <div style={{
+                                    paddingLeft: "20px",
+                                    borderLeft: "4px solid rgb(221, 39, 69)",
+                                    color: "rgb(0, 0, 0)",
+                                    margin: "1rem 0"
+                                }}>
+                                    <Typography variant="body1">
+                                        <strong>Email:</strong> support@vibezter.com
+                                    </Typography>
+                                </div>
 
-                                    <div className="contact-details phone">
-                                        +917827291387 
-                                        <span>&nbsp; Timings: 7:00 AM to 1:00 AM</span>
-                                    </div>
-                                    <div className="contact-details email">
-                                        <a href="mailto:info@thewebgross.com">info@thewebgross.com</a>
-                                        <br />
-                                        <a href="mailto:thewebgross@gmail.com">thewebgross@gmail.com</a>
-                                    </div>
-                                    <div className="wedding-enquiry">
-                                        <h2>For Media Enquiries</h2>
+                                <div style={{
+                                    paddingLeft: "20px",
+                                    borderLeft: "4px solid rgb(221, 39, 69)",
+                                    color: "rgb(0, 0, 0)",
+                                    margin: "1rem 0"
+                                }}>
+                                    <Typography variant="body1">
+                                        <strong>Phone:</strong> +91-(22)4343-3333, +91-(22) 3965-0300
+                                    </Typography>
+                                </div>
+                                <div className="addresses">
+                                    <h4>Our Offices</h4>
+                                    <div style={{
+                                        paddingLeft: "20px",
+                                        borderLeft: "4px solid rgb(221, 39, 69)",
+                                        color: "rgb(0, 0, 0)",
+                                        margin: "1rem 0"
+                                    }}>
                                         <div className="address">
-                                            <p><a href="mailto:pr@vibezter.com">pr@vibezter.com</a></p>
-                                        </div>
-                                    </div>
-                                    <div className="wedding-enquiry">
-                                        <h2>For Corporate Bulk Orders</h2>
-                                        <div className="address">
-                                            <p><a href="mailto:sale@vibezter.com">sale@vibezter.com</a></p>
-                                        </div>
-                                    </div>
-                                    <div className="addresses">
-                                        <h2>Our Offices</h2>
-                                        <div className="address">
-                                            <h4>Gurugram Branch</h4>
+                                            <Typography variant="body1">
+                                                <strong>Grugram Branch</strong></Typography>
                                             <p>2nd Floor, Plot No. 4, Minarch Tower, Sector-44, Haryana-122003</p>
-                                            <p><a href="https://maps.app.goo.gl/hRVdTKwaXqFo8RSK6" target="_blank">View on map</a></p>
                                         </div>
+                                    </div>
+                                    <p><a href="https://maps.app.goo.gl/hRVdTKwaXqFo8RSK6" target="_blank">View on map <OpenInNew/></a></p>
+                                    <div style={{
+                                        paddingLeft: "20px",
+                                        borderLeft: "4px solid rgb(221, 39, 69)",
+                                        color: "rgb(0, 0, 0)",
+                                        margin: "1rem 0"
+                                    }}>
                                         <div className="address">
-                                            <h4>Delhi Branch (HQ)</h4>
+                                            <Typography variant="body1">
+                                                <strong>Delhi Branch (HQ)</strong></Typography>
                                             <p>319, Aggarwal Millennium Tower 1, above bittu tikki wala, Netaji Subhash Place, Pitam Pura, New Delhi, Delhi 110034</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </Row>
-            </Container >
+
+                                <Box className={classes.socialLinksContainer}>
+                                    <Typography variant="h6" className={classes.contactHeading}>Socials:</Typography>
+                                    <div>
+                                        <Facebook className={classes.socialLink} />
+                                        <Twitter className={classes.socialLink} />
+                                        <Instagram className={classes.socialLink} />
+                                        <LinkedIn className={classes.socialLink} />
+                                    </div>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Card>
+                            <CardContent>
+                                {submitted ? (
+                                    <div>
+                                        <Typography variant="h5">Thanks for contacting us.</Typography>
+                                        <Typography variant="body1">Your message has been received and our customer care team will reach out to you soon.</Typography>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            className={classes.contactBtn}
+                                            onClick={handleNewRequest}
+                                        >
+                                            Send a new Request
+                                        </Button>
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleSubmit} style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "1rem"
+                                    }}>
+                                        <Typography variant="h4" className={classes.contactHeading}>Send us a message</Typography>
+                                        <FormControl variant="outlined" fullWidth className={classes.formControl}>
+                                            <InputLabel>Type of Query *</InputLabel>
+                                            <Select
+                                                value={query}
+                                                onChange={handleQueryChange}
+                                                label="Type of Query *"
+                                            >
+                                                <MenuItem value="">Please select an option</MenuItem>
+                                                <MenuItem value="Payment Related">Payment Related</MenuItem>
+                                                <MenuItem value="I want to place a new order">I want to place a new order</MenuItem>
+                                                <MenuItem value="Complaint">Complaint</MenuItem>
+                                                <MenuItem value="Other">Other</MenuItem>
+                                                <MenuItem value="Website Tech Issues">Website Tech Issues</MenuItem>
+                                                <MenuItem value="Order Related">Order Related</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        <TextField
+                                            required
+                                            label="Full Name"
+                                            variant="outlined"
+                                            fullWidth
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            className={classes.formControl}
+                                        />
+                                        <TextField
+                                            required
+                                            label="Email"
+                                            type="email"
+                                            variant="outlined"
+                                            fullWidth
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className={classes.formControl}
+                                        />
+                                        <TextField
+                                            required
+                                            label="Mobile Number"
+                                            variant="outlined"
+                                            fullWidth
+                                            value={mobile}
+                                            onChange={(e) => setMobile(e.target.value)}
+                                            className={classes.formControl}
+                                        />
+                                        <TextField
+                                            required
+                                            label="Message"
+                                            multiline
+                                            rows={4}
+                                            variant="outlined"
+                                            fullWidth
+                                            value={message}
+                                            onChange={(e) => setMessage(e.target.value)}
+                                            className={classes.formControl}
+                                        />
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            className={classes.contactBtn}
+                                        >
+                                            Send request
+                                        </Button>
+                                    </form>
+                                )}
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+
+            </div>
             <Footer />
         </>
+
     );
 };
 

@@ -28,13 +28,25 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     width: "auto",
     padding: "32px",
+    background: "#fff",
     marginBottom: "1rem",
     [theme.breakpoints.down('sm')]: {
       padding: "1rem", // Change padding to 1rem for screens smaller than 'sm'
     },
   },
+  boxContainer2: {
+    borderRadius: "20px",
+    // boxShadow:
+    //   "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+    display: "flex",
+    width: "auto",
+    padding: "2rem 1rem",
+    [theme.breakpoints.down('sm')]: {
+      padding: "1rem", // Change padding to 1rem for screens smaller than 'sm'
+    },
+  },
   columnContainer: {
-    padding: "10px 80px",
+    padding: "10px 50px",
     [theme.breakpoints.down('sm')]: {
       padding: "10px 20px"
     }
@@ -90,18 +102,59 @@ const AddToCart = ({ handleNext }) => {
     <>
 
       <Row className="m-0" style={{
-        padding: "0rem 0rem 1rem",
+        padding: "0rem ",
         ...(window.innerWidth <= 600 && {
           padding: "0"
         })
       }}>
 
-        <Col>
-          <FMTypography
+        <Col style={{ padding: "0 3rem" }}>
+          {/* <FMTypography
             displayText={`Cart Items (${addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : "0"
               })`}
             styleData={{ fontSize: isMobile ? "2rem" : "40px", fontWeight: "500", textAlign: "center" }}
-          />
+          /> */}
+
+
+          <Box style={{
+            display: 'flex', justifyContent: "space-between",
+            alignItems: 'center', background: "#fff", marginTop: "10px",
+            marginBottom: isMobile ? "10px" : "1rem", borderRadius: "4px",
+            boxShadow: "0px 3px 6px 0 rgb(212 212 212 / 35%)",
+          }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                padding: "0 1rem",
+              }}
+            >
+              <FMTypography
+                displayText={`Your Cart
+                `}
+                styleData={{
+                  fontWeight: "600",
+                  fontSize: isMobile ? "14px" : "1.5rem",
+                  textTransform: "capitalize",
+                }}
+              />
+              <Box className={classes.boxContainer2}>
+                <FMTypography
+                  displayText={`| ${addedData && Object.keys(addedData)?.length > 0 ? Object.keys(addedData)?.length : "0"
+                    } Items`}
+                  styleData={{
+                    fontWeight: "300",
+                    fontSize: isMobile ? "14px" : "1.5rem",
+                    lineHeight: "30px",
+                    color: "#717171",
+                  }}
+                />
+              </Box>
+
+            </Box>
+
+
+          </Box>
         </Col>
       </Row >
 
@@ -204,7 +257,8 @@ const AddToCart = ({ handleNext }) => {
                   </Typography>
                 </Box>
               </Box>
-            )) : <Box className="d-flex justify-content-center pb-4">
+            )) :
+            <Box className="d-flex justify-content-center pb-4">
               <Card
 
                 sx={{

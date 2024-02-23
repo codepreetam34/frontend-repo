@@ -77,6 +77,7 @@ const FMFilter = ({
                 displayText={tag}
                 variant={"outlined"}
                 styleData={{
+                  fontSize:"14px",
                   fontWeight: "600",
                   color: "#801317",
                   background:
@@ -86,7 +87,7 @@ const FMFilter = ({
                   borderRadius: "19px",
                   width: { xs: "46%", sm: "100%" }, 
                   fontSize: { xs: "12px", sm: "inherit" }, 
-                  padding: { xs: "12px", sm: "16px 16px" }, 
+                  padding: { xs: "12px", sm: "12px 12px" }, 
                 }}
               />
             ))}
