@@ -27,6 +27,7 @@ import { ErrorToaster, SuccessToaster } from "constants/util";
 import googleButtonIcon from "../../assets/googleButtonIcon.png";
 import messageButtonIcon from "../../assets/messageButtonIcon.png";
 import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
+import GoogleLogin from "react-google-login";
 
 const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
 
   const responseGoogle = (response) => {
     if (response.error === "popup_closed_by_user") {
-      console.log("User closed the login popup");
+      console.log("User closed the login popup",response);
       // Optionally, you can display a message to the user indicating that the login process was cancelled
       // You can also trigger any additional actions or UI updates as needed
     } else {
@@ -335,18 +336,14 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                         color: "#222222",
                       }}
                     /> */}
-                    {/* <GoogleLogin
-                      clientId="588273200979-d1e9fqubp0ncbh5ltg84igidvqastg8t.apps.googleusercontent.com"
+                    <GoogleLogin
+                      clientId="549863240167-8pvjfkjnpr9souug98crekt96mcm6jn1.apps.googleusercontent.com"
                       buttonText="Continue with Google"
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
                       cookiePolicy={"single_host_origin"}
                       className="googleButton"
-
-                    /> */}
-
-
-
+                    /> 
 
                     {/* <FMButton
                       displayText={

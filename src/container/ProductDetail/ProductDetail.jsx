@@ -480,7 +480,7 @@ const ProductDetail = () => {
                     >
                       <FMTypography
                         displayText={productDetailedData?.name}
-                        styleData={{ fontSize: isMobile ? "2rem" : "40px", fontWeight: "600" }}
+                        styleData={{ fontSize: isMobile ? "2rem" : "2.2rem", fontWeight: "600" }}
                       />
                       <Box sx={{ display: "flex" }}>
                         <Box

@@ -6,7 +6,7 @@ export const addAVendor = createAsyncThunk(
   ADD_A_VENDOR,
   async (payload, thunkAPI) => {
     try {
-      const response = await axiosInstance.post(`api/vendor/createVendor`,payload);
+      const response = await axiosInstance.post(`api/vendor/create`,payload);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });

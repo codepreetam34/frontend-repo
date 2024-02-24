@@ -9,7 +9,38 @@ import FMButton from "../../components/FMButton/FMButton";
 import { makeStyles } from "@material-ui/core/styles";
 import EmailIcon from '@mui/icons-material/Email';
 import { Link } from "react-router-dom";
-import { BECOME_A_MEMBER, CONTACT_US, PRIVACY_POLICY } from "Routes/Routes";
+
+// const fs = require("fs");
+// const { SitemapStream, streamToPromise } = require("sitemap");
+// const { createGzip } = require("zlib");
+
+// Import your routes
+import {
+  ROOT,
+  LOGIN,
+  SIGNUP,
+  EMAIL_VERIFY,
+  EMAIL_VERIFY_OTP,
+  FORGOTPASSWORD,
+  SETUP_NEW_PASSWORD,
+  LANDING_PAGE,
+  TEST,
+  ADD_TO_CART,
+  PRIVACY_POLICY,
+  FAQ,
+  BLOGS,
+  BLOGS_DETAIL,
+  ADD_REVIEW,
+  MY_PROFILE,
+  CATEGORY_PAGE,
+  PRODUCT_PAGE,
+  PRODUCT_DETAIL,
+  ORDER_PAGE,
+  SET_UP_NEW_PASSWORD,
+  BECOME_A_MEMBER,
+  CONTACT_US,
+} from "../../Routes/Routes";
+
 const useStyles = makeStyles((theme) => ({
   footerContainer: {
     background: "#FCEDEE",
@@ -174,14 +205,65 @@ const useStyles = makeStyles((theme) => ({
     color: "#717171",
     textDecoration: "none",
     transition: "color 0.3s",
-    "&:hover": { // Use "&:hover" to apply hover effect
-      color: "#333", // Change color on hover
+    "&:hover": {
+      color: "#333",
     },
   },
 }));
 const Footer = () => {
   const classes = useStyles();
   const isMobile = useMediaQuery("(max-width:600px)");
+
+
+  // const generateSitemap = async () => {
+  //   const routes = [
+  //     ROOT,
+  //     LOGIN,
+  //     SIGNUP,
+  //     EMAIL_VERIFY,
+  //     EMAIL_VERIFY_OTP,
+  //     FORGOTPASSWORD,
+  //     SETUP_NEW_PASSWORD,
+  //     LANDING_PAGE,
+  //     TEST,
+  //     ADD_TO_CART,
+  //     PRIVACY_POLICY,
+  //     FAQ,
+  //     BLOGS,
+  //     BLOGS_DETAIL,
+  //     ADD_REVIEW,
+  //     MY_PROFILE,
+  //     CATEGORY_PAGE,
+  //     PRODUCT_PAGE,
+  //     PRODUCT_DETAIL,
+  //     ORDER_PAGE,
+  //     SET_UP_NEW_PASSWORD,
+  //     BECOME_A_MEMBER,
+  //     CONTACT_US,
+  //   ];
+
+  //   (async () => {
+  //     try {
+  //       const smStream = new SitemapStream({ hostname: "http://vibezter.com" });
+  //       const pipeline = smStream.pipe(createGzip());
+
+  //       routes.forEach((route) => {
+  //         smStream.write({ url: route, changefreq: "daily", priority: 0.7 });
+  //       });
+
+  //       smStream.end();
+
+  //       const data = await streamToPromise(pipeline);
+  //       fs.writeFileSync("./public/sitemap.xml.gz", data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   })();
+
+
+
+
+  // };
 
   return (
     <Container fluid>
@@ -276,7 +358,7 @@ const Footer = () => {
               </div>
               <div className={classes.linksContainer}>
                 <div className={classes.link}>Careers</div>
-                <div className={classes.link}>Franchise</div>
+                <div className={classes.link}>Site Map</div>
                 <div className={classes.link}>Terms & Policy</div>
               </div>
             </Col>

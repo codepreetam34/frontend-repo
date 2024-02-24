@@ -46,12 +46,15 @@
     "react-slick-slider": "^0.15.10",
     "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
+    "sitemap": "^7.1.1",
     "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zlib": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "generate-sitemap": "node generateSitemap.js",
     "test": "react-scripts test"
   },
   "browserslist": {

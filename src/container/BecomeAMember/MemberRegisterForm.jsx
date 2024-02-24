@@ -9,6 +9,7 @@ import FMTypography from "components/FMTypography/FMTypography";
 import { PRIVACY_POLICY } from "Routes/Routes";
 import { addAVendor } from "Redux/Slices/RegisterAVendor/RegisterAVendorSlice";
 import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     containerPadding: {
@@ -24,8 +25,12 @@ const useStyles = makeStyles((theme) => ({
 const MemberRegisterForm = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isMobile = useMediaQuery("(max-width:600px)");
     const [agreeTerms, setAgreeTerms] = useState(false);
+    const [aadharCardFile, setAadharCardFile] = useState();
+    const [gstCertificateFile, setGstCertificateFile] = useState();
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false); // Step 2
 
     const {
         register,
@@ -69,7 +74,11 @@ const MemberRegisterForm = () => {
                     res?.paylaod?.error?.response?.status === 500
                 ) {
                 } else {
-
+                    setShowSuccessMessage(true);
+                    setTimeout(() => {
+                        navigate("/"); // Redirect to home page
+                    }, 3000); // 3 seconds delay before redirecting
+        
                 }
             });
 
@@ -204,8 +213,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="Enter Address 1"
                                     {...register("officeAddress1")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.officeAddress1}
+                                    helperText={errors.officeAddress1?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
@@ -213,8 +222,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="Enter Address 2"
                                     {...register("officeAddress2")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.officeAddress2}
+                                    helperText={errors.officeAddress?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
@@ -222,8 +231,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="City"
                                     {...register("officeCity")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.officeAddress}
+                                    helperText={errors.officeAddress?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
@@ -231,8 +240,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="State"
                                     {...register("officeState")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.officeState}
+                                    helperText={errors.homeState?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
@@ -240,8 +249,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="Pincode"
                                     {...register("officePincode")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.homePincode}
+                                    helperText={errors.homePincode?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -249,8 +258,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="Phone"
                                     {...register("officePhone")}
-                                    error={!!errors.registeredOfficePhone}
-                                    helperText={errors.registeredOfficePhone?.message}
+                                    error={!!errors.officePhone}
+                                    helperText={errors.officePhone?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -258,8 +267,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="E-mail Address"
                                     {...register("officeEmail")}
-                                    error={!!errors.registeredOfficeEmail}
-                                    helperText={errors.registeredOfficeEmail?.message}
+                                    error={!!errors.officeEmail}
+                                    helperText={errors.officeEmail?.message}
                                 />
                             </Grid>
 
@@ -273,8 +282,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="Enter Address 1"
                                     {...register("homeAddress1")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.homeAddress1}
+                                    helperText={errors.homeAddress1?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
@@ -282,8 +291,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="Enter Address 2"
                                     {...register("homeAddress2")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.homeAddress2}
+                                    helperText={errors.homeAddress2?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
@@ -291,8 +300,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="City"
                                     {...register("homeCity")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.homeCity}
+                                    helperText={errors.homeCity?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
@@ -300,8 +309,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="State"
                                     {...register("homeState")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.homeState}
+                                    helperText={errors.homeState?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
@@ -309,8 +318,8 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="Pincode"
                                     {...register("homePincode")}
-                                    error={!!errors.homeAddress}
-                                    helperText={errors.homeAddress?.message}
+                                    error={!!errors.homePincode}
+                                    helperText={errors.homePincode?.message}
                                 />
                             </Grid>
 
@@ -319,17 +328,17 @@ const MemberRegisterForm = () => {
                                     fullWidth
                                     label="Phone"
                                     {...register("homePhone")}
-                                    error={!!errors.localOfficePhone}
-                                    helperText={errors.localOfficePhone?.message}
+                                    error={!!errors.homePhone}
+                                    helperText={errors.homePhone?.message}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     fullWidth
                                     label="E-mail Address"
-                                    {...register("localOfficeEmail")}
-                                    error={!!errors.localOfficeEmail}
-                                    helperText={errors.localOfficeEmail?.message}
+                                    {...register("homeEmail")}
+                                    error={!!errors.homeEmail}
+                                    helperText={errors.homeEmail?.message}
                                 />
                             </Grid>
 
@@ -361,6 +370,11 @@ const MemberRegisterForm = () => {
                             Submit
                         </Button>
                     </form>
+                    {showSuccessMessage && (
+                        <Typography variant="body1" color="success">
+                            Form submitted successfully! Redirecting to home...
+                        </Typography>
+                    )}
                 </CardContent>
             </Card>
 
