@@ -428,7 +428,7 @@ const CategoryPage = () => {
                     }}
                   >
                     <CardContent
-                      style={{ height: "4rem", textAlign: "center" }}
+                      style={{ height: "4rem", textAlign: "center", marginTop: "1rem" }}
                     >
                       <Typography
                         gutterBottom
