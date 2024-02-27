@@ -28,6 +28,7 @@ import googleButtonIcon from "../../assets/googleButtonIcon.png";
 import messageButtonIcon from "../../assets/messageButtonIcon.png";
 import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
 import GoogleLogin from "react-google-login";
+import axios from 'axios'; // Step 1
 
 const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
   const dispatch = useDispatch();
@@ -53,15 +54,37 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
   });
 
   const responseGoogle = (response) => {
+    console.log("response code ", response);
+
     if (response.error === "popup_closed_by_user") {
-      console.log("User closed the login popup",response);
-      // Optionally, you can display a message to the user indicating that the login process was cancelled
-      // You can also trigger any additional actions or UI updates as needed
+      // Handle the case where the popup was closed by the user
+      console.log("User closed the login popup", response);
+      // Display a message to the user indicating that the login process was cancelled
+      // You can also provide an option for the user to try logging in again
+      // Example: showMessage("Login cancelled. Please try again.");
     } else {
-      console.log("Unhandled error:", response.error);
-      // Handle other types of errors if needed
+      // Proceed with handling other types of responses
+      axios.post('http://localhost:5000/api/google', {
+        code: response['code'], // Assuming response contains a code
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => {
+        console.log("response ", res);
+        if (res.status === 200) {
+          // Handle successful response
+          return res.data;
+        } else {
+          return Promise.reject(res);
+        }
+      }).catch((error) => {
+        console.error("Error:", error);
+        return Promise.reject(error);
+      });
     }
   };
+
 
   const forgotPasswordNavigate = () => {
     navigate(FORGOTPASSWORD);
@@ -115,6 +138,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
           alignItems: "center",
           background: "white",
           justifyContent: "center",
+          padding:"1rem 3rem",
         }}
       >
         <Grid
@@ -127,8 +151,9 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
             marginTop: "3rem",
             marginBottom: "3rem",
             borderRadius: "20px",
-            boxShadow:
-              " 0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+            boxShadow: "rgba(11, 43, 158, 0.15) 0px 6px 20px -6px",
+            borderRadius: "24px",
+            border: "1px solid rgba(91, 105, 135, 0.22)",
           }}
         >
           {showLoginPageModal ? (
@@ -335,7 +360,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                         marginTop: "1rem",
                         color: "#222222",
                       }}
-                    /> */}
+                    /> 
                     <GoogleLogin
                       clientId="549863240167-8pvjfkjnpr9souug98crekt96mcm6jn1.apps.googleusercontent.com"
                       buttonText="Continue with Google"
@@ -343,7 +368,20 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
                       onFailure={responseGoogle}
                       cookiePolicy={"single_host_origin"}
                       className="googleButton"
-                    /> 
+                    />
+                  */}
+
+                    {/* <GoogleLogin
+                      // use your client id here
+                      clientId="588273200979-d1e9fqubp0ncbh5ltg84igidvqastg8t.apps.googleusercontent.com"
+                      buttonText="Login with google"
+                      responseType="code"
+                      redirectUri="postmessage"
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                      cookiePolicy={'single_host_origin'}
+                    /> */}
+
 
                     {/* <FMButton
                       displayText={
@@ -395,7 +433,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
             </>
           )}
         </Grid>
-
+ 
         {showErrorToast && (
           <ErrorToaster
             showErrorToast={showErrorToast}

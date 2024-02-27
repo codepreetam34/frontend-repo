@@ -828,13 +828,13 @@ const ProductPage = () => {
                       marginTop: "1rem",
                       borderRadius: "20px",
                       height: "auto",
-                      boxShadow: "rgba(212, 212, 212, 0.35) 0px 3px 6px 0px !important" 
+                      boxShadow: "rgba(212, 212, 212, 0.35) 0px 3px 6px 0px !important"
 
                     }}
                     style={{ boxShadow: "rgba(212, 212, 212, 0.35) 0px 3px 6px 0px !important" }}
                   >
                     <CardContent
-                      style={{ height: "4rem", textAlign: "center" }}
+                      style={{ height: "4rem", textAlign: "center", marginTop: "1rem" }}
                     >
                       <Typography
                         gutterBottom

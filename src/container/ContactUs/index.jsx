@@ -51,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
     socialLink: {
         marginRight: theme.spacing(2),
         transition: 'color 0.3s ease',
-        cursor:"pointer",
+        cursor: "pointer",
         '&:hover': {
-            color: '#801317',  
+            color: '#801317',
         },
     },
 
@@ -74,10 +74,7 @@ const ContactUs = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Handle form submission, e.g., sending data to backend
-        // For demonstration purpose, just console.log the data
-        console.log({ query, name, email, mobile, message });
-        // Reset form fields and show confirmation message
+
         setQuery('');
         setName('');
         setEmail('');
@@ -138,7 +135,7 @@ const ContactUs = () => {
                                             <p>2nd Floor, Plot No. 4, Minarch Tower, Sector-44, Haryana-122003</p>
                                         </div>
                                     </div>
-                                    <p><a href="https://maps.app.goo.gl/hRVdTKwaXqFo8RSK6" target="_blank">View on map <OpenInNew/></a></p>
+                                    <p><a href="https://maps.app.goo.gl/hRVdTKwaXqFo8RSK6" target="_blank">View on map <OpenInNew /></a></p>
                                     <div style={{
                                         paddingLeft: "20px",
                                         borderLeft: "4px solid rgb(221, 39, 69)",
@@ -158,7 +155,10 @@ const ContactUs = () => {
                                     <div>
                                         <Facebook className={classes.socialLink} />
                                         <Twitter className={classes.socialLink} />
-                                        <Instagram className={classes.socialLink} />
+                                        <a href='https://www.instagram.com/vibezterofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' target='_blank' style={{ color: "rgba(0, 0, 0, 0.87)" }}>
+                                            <Instagram className={classes.socialLink} />
+                                        </a>
+
                                         <LinkedIn className={classes.socialLink} />
                                     </div>
                                 </Box>
@@ -258,7 +258,7 @@ const ContactUs = () => {
                     </Grid>
                 </Grid>
 
-            </div>
+            </div >
             <Footer />
         </>
 

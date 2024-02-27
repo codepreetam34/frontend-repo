@@ -76,8 +76,8 @@ const MemberRegisterForm = () => {
                 } else {
                     setShowSuccessMessage(true);
                     setTimeout(() => {
-                        navigate("/"); // Redirect to home page
-                    }, 3000); // 3 seconds delay before redirecting
+                        navigate("/"); 
+                    }, 3000); 
         
                 }
             });
