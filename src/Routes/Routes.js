@@ -24,3 +24,7 @@ export const ORDER_PAGE = "/my-orders";
 export const SET_UP_NEW_PASSWORD = "/set-up-new-password";
 export const BECOME_A_MEMBER = "/become-a-member";
 export const CONTACT_US = "/contact-us";
+export const VENDOR_JOURNEY = "/vendor-journey";
+export const VENDOR_SIGN_UP = "/vendor-sign-up";
+export const VENDOR_REGISTRATION = "/vendor-registration";
+export const VENDOR_HOME = "/vendor-home";

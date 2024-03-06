@@ -20,6 +20,7 @@ import { setupPassword } from "../../Redux/Slices/Login/setupPassword";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { setupPasswordSchema } from "../../validationSchema/setUpNewPassword";
+import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
 
 const SetupNewPassword = () => {
   const [searchParams] = useSearchParams();
@@ -93,22 +94,7 @@ const SetupNewPassword = () => {
 
   return (
     <>
-      <Box
-        sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
-      >
-        <a href={LANDING_PAGE}>
-          <img
-            src={monkeyLogo}
-            alt="monkeyLogo"
-            style={HeaderStyle.monkeyLogoStyle}
-          />
-          <img
-            src={VibezterLogo}
-            alt="VibezterLogo"
-            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-          />
-        </a>
-      </Box>
+    <HeaderWithoutNav  />
       <Grid container sx={commonStyle.mainGridContainer}>
         <Grid item sx={commonStyle.innerGrid}>
           <Box sx={commonStyle.formDetailsContainer}>

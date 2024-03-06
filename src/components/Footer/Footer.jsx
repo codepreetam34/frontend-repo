@@ -39,6 +39,7 @@ import {
   SET_UP_NEW_PASSWORD,
   BECOME_A_MEMBER,
   CONTACT_US,
+  VENDOR_JOURNEY,
 } from "../../Routes/Routes";
 
 const useStyles = makeStyles((theme) => ({
@@ -345,7 +346,7 @@ const Footer = () => {
               </div>
               <div className={classes.linksContainer}>
                 <div className={classes.link}>Info Page</div>
-                <div className={classes.link}>Disclaimer</div>
+                <div className={classes.link}><a href={VENDOR_JOURNEY} className={classes.anchorLink}>Vendor Journey</a></div>
                 <div className={classes.link}><a href={BECOME_A_MEMBER} className={classes.anchorLink}>Become a Vendor</a></div>
               </div>
             </Col>

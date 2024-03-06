@@ -23,7 +23,19 @@ import FMButton from "components/FMButton/FMButton";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  boxContainer2: {
+    borderRadius: "20px",
+    // boxShadow:
+    //   "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)",
+    display: "flex",
+    width: "auto",
+    padding: "2rem 1rem",
+    [theme.breakpoints.down('sm')]: {
+      padding: "1rem", // Change padding to 1rem for screens smaller than 'sm'
+    },
+  },
+}));
 
 const OrderPage = () => {
   const navigate = useNavigate();
@@ -89,7 +101,7 @@ const OrderPage = () => {
           marginTop: isMobile ? "20px" : "20px",
         }}
       >
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             transition:
@@ -117,7 +129,52 @@ const OrderPage = () => {
               }}
             />
           </Box>
-        </Box>
+        </Box> */}
+
+
+        <Col style={{ padding: "0 3rem" }}>
+
+          <Box style={{
+            display: 'flex', justifyContent: "space-between",
+            alignItems: 'center', background: "#fff", marginTop: "10px",
+            marginBottom: isMobile ? "10px" : "1rem", borderRadius: "4px",
+            boxShadow: "0px 3px 6px 0 rgb(212 212 212 / 35%)",
+          }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                padding: "0 1rem",
+              }}
+            >
+              <FMTypography
+                displayText={`Your Order
+                `}
+                styleData={{
+                  fontWeight: "600",
+                  fontSize: isMobile ? "14px" : "1.5rem",
+                  textTransform: "capitalize",
+                }}
+              />
+              <Box className={classes.boxContainer2}>
+                <FMTypography
+                  displayText={orderData && `| ${orderData?.length} Orders`}
+                  styleData={{
+                    fontWeight: "300",
+                    fontSize: isMobile ? "14px" : "1.5rem",
+                    lineHeight: "30px",
+                    color: "#717171",
+                  }}
+                />
+              </Box>
+
+            </Box>
+
+
+          </Box>
+
+
+        </Col>
 
         <Grid
           sx={{

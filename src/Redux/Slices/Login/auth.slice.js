@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-//import { notify } from "components/FMToaster/FMToaster";
+// import { notify } from "components/FMToaster/FMToaster";
 import axiosInstance from "../../../services/AxiosInstance";
 import { FETCH_ACTION, LOGOUT } from "./type";
 
 export const login = createAsyncThunk(FETCH_ACTION, async (data, thunkAPI) => {
   try {
-    const response = await axiosInstance.post("api/signin", data);
-    
+    const response = await axiosInstance.post("api/signin", data);    
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue({ error: error });

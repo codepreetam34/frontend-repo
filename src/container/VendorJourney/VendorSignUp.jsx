@@ -4,27 +4,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { Box, Grid, InputBase } from "@mui/material";
 
 import { tests } from "../../constants/AppConstant";
-import { EMAIL_VERIFY, FORGOTPASSWORD, LOGIN } from "../../Routes/Routes";
+import { EMAIL_VERIFY, FORGOTPASSWORD, LOGIN, VENDOR_JOURNEY } from "../../Routes/Routes";
 
 import FMButton from "../../components/FMButton/FMButton";
 import FMTypography from "../../components/FMTypography/FMTypography";
 
 import monkeyLogo from "../../assets/monkeyLogo.svg";
 import VibezterLogo from "../../assets/VibezterLogo.svg";
-import { login } from "../../Redux/Slices/Login/auth.slice";
 
 import { commonStyle } from "../../Styles/commonStyles";
 import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
-import { setItem } from "../../services/commonService";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "../../validationSchema/loginSchema";
 import FMOutlinedInput from "../../components/FMOutlinedInput/FMOutlinedInput";
 import { signUpSchema } from "../../validationSchema/signupSchema";
-import { signUpUser } from "../../Redux/Slices/SignUp/SignUp";
+import { vendorSignUpUser } from "../../Redux/Slices/RegisterAVendor/RegisterAVendorSlice";
 import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
 
-const SignUp = () => {
+const VendorSignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -86,23 +83,23 @@ const SignUp = () => {
       password: data?.password,
       contactNumber: data?.contactNumber,
     };
-    dispatch(signUpUser(postData))
+    dispatch(vendorSignUpUser(postData))
       .unwrap()
       .then((res) => {
         if (res) {
-          navigate(EMAIL_VERIFY);
+      //    navigate(EMAIL_VERIFY);
         }
       });
   };
 
   return (
     <>
-      <HeaderWithoutNav />
+      <HeaderWithoutNav  />
       <Grid container sx={commonStyle.mainGridContainer}>
-        <Grid item sx={{ ...commonStyle.innerGrid, width: "25rem" }}>
+        <Grid item sx={{ ...commonStyle.innerGrid, width: "30rem" }}>
           <Box sx={commonStyle.formDetailsContainer}>
             <FMTypography
-              displayText="Sign Up"
+              displayText="Vendor Sign Up"
               styleData={commonStyle.headingStyle}
             />
           </Box>
@@ -115,7 +112,7 @@ const SignUp = () => {
                       required
                       id="firstName"
                       name="firstName"
-                      placeholder="Name"
+                      placeholder="First Name"
                       sx={{
                         ...commonStyle.inputFieldStyle,
 
@@ -134,6 +131,7 @@ const SignUp = () => {
                       />
                     )}
                   </Box>
+
                   <Box>
                     <InputBase
                       required
@@ -157,8 +155,8 @@ const SignUp = () => {
                       />
                     )}
                   </Box>
-                </Box>
 
+                </Box>
                 <InputBase
                   required
                   id="contactNumber"
@@ -187,7 +185,6 @@ const SignUp = () => {
                   placeholder="Enter your email"
                   sx={{
                     ...commonStyle.inputFieldStyle,
-
                     ...(errors.email && commonStyle.errorStyle),
                   }}
                   {...register("email")}
@@ -227,7 +224,7 @@ const SignUp = () => {
                 />
 
                 <FMButton
-                  displayText={"Sign up"}
+                  displayText={"Vendor Sign up"}
                   variant={"contained"}
                   styleData={{
                     ...commonStyle.buttonStyles,
@@ -245,7 +242,7 @@ const SignUp = () => {
                 }}
               >
                 <FMTypography displayText={"Already have an acoount?"} />
-                <Link to={"/login"}>
+                <Link to={VENDOR_JOURNEY}>
                   <FMButton
                     variant={"outlined"}
                     displayText={"Log in"}
@@ -270,4 +267,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default VendorSignUp;

@@ -13,6 +13,7 @@ import { verifyOtp } from "../../Redux/Slices/SignUp/SignUp";
 import { useDispatch } from "react-redux";
 import { verifyEmailSchema } from "../../validationSchema/verifyemailSchema";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
 
 const EmailOtpVerification = () => {
   const dispatch = useDispatch();
@@ -54,20 +55,7 @@ const EmailOtpVerification = () => {
   });
   return (
     <>
-      <Box
-        sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
-      >
-        <img
-          src={monkeyLogo}
-          alt="monkeyLogo"
-          style={HeaderStyle.monkeyLogoStyle}
-        />
-        <img
-          src={VibezterLogo}
-          alt="VibezterLogo"
-          style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-        />
-      </Box>
+   <HeaderWithoutNav  />
       <Grid container sx={commonStyle.mainGridContainer}>
         <Grid item sx={commonStyle.innerGrid}>
           <Box sx={commonStyle.formDetailsContainer}>

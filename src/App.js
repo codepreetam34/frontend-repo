@@ -21,6 +21,10 @@ import {
   SIGNUP,
   BECOME_A_MEMBER,
   CONTACT_US,
+  VENDOR_JOURNEY,
+  VENDOR_SIGN_UP,
+  VENDOR_REGISTRATION,
+  VENDOR_HOME,
 } from "./Routes/Routes";
 import Login from "./container/Signin/Login";
 import SignUp from "./container/SignUp/SignUp";
@@ -51,6 +55,10 @@ import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
 import BecomeAMember from "container/BecomeAMember";
 import ContactUs from "container/ContactUs";
+import VendorJourney from "container/VendorJourney";
+import VendorSignUp from "container/VendorJourney/VendorSignUp";
+import VendorRegistration from "container/VendorJourney/VendorRegistration";
+import VendorHome from "container/VendorJourney/VendorHome";
 
 const App = () => {
   return (
@@ -65,10 +73,14 @@ const App = () => {
             <Route path={SETUP_NEW_PASSWORD} element={<SetupNewPassword />} />
             <Route path={EMAIL_VERIFY} element={<EmailVerify />} />
             <Route path={EMAIL_VERIFY_OTP} element={<EmailVerifyOtp />} />
-
             <Route path={PRIVACY_POLICY} element={<PrivacyPolicy />} />
-
             <Route path={BECOME_A_MEMBER} element={<BecomeAMember />} />
+
+
+            <Route path={VENDOR_SIGN_UP} element={<VendorSignUp />} />
+            <Route path={VENDOR_JOURNEY} element={<VendorJourney />} />
+            <Route path={VENDOR_REGISTRATION} element={<VendorRegistration />} />
+            <Route path={VENDOR_HOME} element={<VendorHome />} />
 
 
             <Route path={FAQ} element={<Faq />} />
@@ -80,7 +92,9 @@ const App = () => {
             <Route path={ADD_TO_CART} element={<HorizontalLinearStepper />} />
             <Route path={SET_UP_NEW_PASSWORD} element={<SetupNewPassword />} />
             <Route path={CONTACT_US} element={<ContactUs />} />
-               {/* private routes below */}
+
+            {/* private routes below */}
+
             <Route
               path={ORDER_PAGE}
               element={<PrivateRoutes Component={OrderPage} />}
@@ -94,6 +108,7 @@ const App = () => {
               element={<PrivateRoutes Component={Profile} />}
             />
             <Route path="*" element={<PageNotFound />} />
+
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

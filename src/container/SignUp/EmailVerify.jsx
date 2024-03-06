@@ -8,27 +8,13 @@ import { commonStyle } from "../../Styles/commonStyles";
 import { Box } from "@mui/system";
 import { Link, useNavigate } from "react-router-dom";
 import FMButton from "../../components/FMButton/FMButton";
+import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
 
 const EmailVerify = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Box
-        sx={{ ...commonStyle.flexDisplayStyle, padding: "1rem 50px 0 50px" }}
-      >
-        <Link to={"/"}>
-          <img
-            src={monkeyLogo}
-            alt="monkeyLogo"
-            style={HeaderStyle.monkeyLogoStyle}
-          />
-          <img
-            src={VibezterLogo}
-            alt="VibezterLogo"
-            style={{ ...HeaderStyle.vibezterLogoStyle, marginTop: "0.6rem" }}
-          />
-        </Link>
-      </Box>
+   <HeaderWithoutNav  />
       <Grid container sx={{ display: "flex", justifyContent: "center" }}>
         <Grid item sx={{ ...commonStyle.innerGrid }}>
           <FMTypography

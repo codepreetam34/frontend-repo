@@ -1,15 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../services/AxiosInstance";
-import { SIGN_UP, VERIFY_OTP } from "./type";
+import { SIGN_UP, VERIFY_OTP,} from "./type";
 
-export const signUpUser = createAsyncThunk(SIGN_UP, async (data, thunkAPI) => {
-  try {
-    const response = await axiosInstance.post("api/signup", data);
-    return response.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue({ error: error });
+export const signUpUser = createAsyncThunk(
+  SIGN_UP,
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post("api/vendor/signUp", data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
   }
-});
+);
 
 export const verifyOtp = createAsyncThunk(
   VERIFY_OTP,

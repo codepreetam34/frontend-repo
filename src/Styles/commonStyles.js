@@ -12,6 +12,7 @@ export const commonStyle = {
   innerGrid: {
     display: "flex",
     flexDirection: "column",
+    border: "1px solid rgba(91, 105, 135, 0.22)",
     justifyContent: "center",
     padding: "2rem",
     marginTop: "1rem",
@@ -25,6 +26,7 @@ export const commonStyle = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    
   },
   flexStyle: {
     display: "flex",
