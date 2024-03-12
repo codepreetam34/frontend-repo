@@ -96,7 +96,7 @@ const MultiStepForm = ({ steps, onFinish }) => {
 
                 <div>
                   {activeStep === 0 && <Step1 taxOption={taxOption} setTaxOption={setTaxOption} inputValue={inputValue} setInputValue={setInputValue} />}
-                  {activeStep === 1 && <Step2 taxOption={taxOption} setTaxOption={setTaxOption} inputValue={inputValue} setInputValue={setInputValue} />}
+                  {activeStep === 1 && <Step2  />}
                   {activeStep === 2 && <Step3 taxOption={taxOption} setTaxOption={setTaxOption} inputValue={inputValue} setInputValue={setInputValue} />}
                   {activeStep === 3 && <Step4 taxOption={taxOption} setTaxOption={setTaxOption} inputValue={inputValue} setInputValue={setInputValue} />}
                 </div>

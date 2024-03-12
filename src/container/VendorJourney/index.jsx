@@ -73,7 +73,6 @@ const VendorJourney = ({ showLoginPageModal, setShowLoginPageModal }) => {
     return (
         <>
             <HeaderWithoutNav />
-
             <Grid
                 container
                 sx={{
@@ -284,8 +283,6 @@ const VendorJourney = ({ showLoginPageModal, setShowLoginPageModal }) => {
                                             onClick={handleSubmit(onSubmit)}
                                         />
                                         <input type={"submit"} hidden />
-
-
                                     </Box>
                                     <Box
                                         sx={{

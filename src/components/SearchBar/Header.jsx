@@ -29,7 +29,7 @@ import FMTypography from "../../components/FMTypography/FMTypography";
 import { Stack } from "@mui/system";
 import FMButton from "../../components/FMButton/FMButton";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FAQ, LOGIN, MY_PROFILE } from "../../Routes/Routes";
+import { FAQ, LOGIN, MY_PROFILE, ORDER_PAGE } from "../../Routes/Routes";
 import { logout } from "../../Redux/Slices/Login/auth.slice";
 import { makeStyles } from "@mui/styles";
 import { addToCartProductsFinal } from "../../Redux/Slices/AddToCart/AddToCartSlice";
@@ -514,7 +514,7 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
               <hr style={{ margin: "0" }} />
               <MenuItem divider className={`${classes.menuItemStyle}`}>
                 <a
-                  href="/my-orders"
+                  href={ORDER_PAGE}
                   style={{
                     textDecoration: "none",
                     color: "rgba(0, 0, 0, 0.87)",
@@ -534,12 +534,20 @@ const Header = ({ setLandingPageModalOpen, landingPageModalOpen }) => {
                 divider
                 className={`${classes.menuItemStyle}`}
               >
+                                <a
+                  href={ORDER_PAGE}
+                  style={{
+                    textDecoration: "none",
+                    color: "rgba(0, 0, 0, 0.87)",
+                  }}
+                >
                 <img
                   src={contactIcon}
                   alt="contact-icon"
                   className={`${classes.menuItemImg}`}
                 />
                 Contact Us
+                </a>
               </MenuItem>
 
               <MenuItem

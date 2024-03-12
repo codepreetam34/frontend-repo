@@ -1,81 +1,258 @@
-import React from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Box } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+    Avatar,
+    Box,
+    Grid,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    MenuItem,
+    Stack,
+    useMediaQuery,
+} from "@mui/material";
+import { Button, Col, Container, Offcanvas, Row } from "react-bootstrap";
+import { makeStyles } from "@mui/styles";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PeopleIcon from '@mui/icons-material/People';
+
+import InventoryIcon from '@mui/icons-material/Inventory';
+import PaymentIcon from '@mui/icons-material/Payment';
+import AssignmentReturnedIcon from '@mui/icons-material/AssignmentReturned';
+import Dashboard from "./Pages/Dashboard";
+import Orders from "./Pages/Orders";
+import Returns from "./Pages/Returns";
+import Customers from "./Pages/Customers";
+import Inventory from "./Pages/Inventory";
+import Payment from "./Pages/Payment";
+import FMTypography from "components/FMTypography/FMTypography";
+
+
+const useStyles = makeStyles((theme) => ({
+
+    profileIconStyle: {
+        width: "30px !important",
+        height: "30px !important",
+        [theme.breakpoints.down("sm")]: {
+            width: "25px !important",
+            height: "25px !important",
+        },
+    },
+
+    mobileBackground: {
+        background: "rgb(252, 237, 238) !important",
+    },
+    mobileInnerBackground: {
+        background: "#801317 !important",
+    },
+
+    flexDisplayStyle: {
+        display: "flex",
+    },
+    logoStyle: {
+        display: "flex",
+        alignItems: "center",
+    },
+    monkeyLogoStyle: {
+        width: "45px",
+        height: "45px",
+        [theme.breakpoints.down("sm")]: {
+            width: "40px",
+            height: "40px",
+        },
+    },
+    logoStyle: {
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        gap: "0.5rem",
+        [theme.breakpoints.down("sm")]: {
+            gap: "0.1rem",
+        },
+    },
+
+    vibezterLogoStyle: {
+        [theme.breakpoints.down("sm")]: {
+            width: "85px",
+            height: "40px"
+        },
+    }
+}));
 const VendorHome = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [showErrorToast, setShowErrorToast] = useState(false);
+    const [showErrorToastMessage, setShowErrorToastMessage] = useState();
+    const [showToast, setShowToast] = useState(false);
+    const classes = useStyles();
+    const [showMenu, setShowMenu] = useState(false);
+    const [selectedMenu, setSelectedMenu] = useState('Dashboard');
+    const isMobile = useMediaQuery("(max-width:600px)");
+
+    const personLoggedIn = JSON.parse(
+        localStorage.getItem("Sidebar_Module_Assigned")
+    )?.fullName;
+    const personLoggedData = JSON.parse(
+        localStorage.getItem("Sidebar_Module_Assigned")
+    );
+
+    const personLoggedInId = JSON.parse(
+        localStorage.getItem("Sidebar_Module_Assigned")
+    )?._id;
+    const handleToggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
+
+    const menuOptions = {
+        Dashboard: <Dashboard />,
+        Orders: <Orders />,
+        Customers: <Customers />,
+        Inventory: <Inventory />,
+        Payment: <Payment />,
+        Returns: <Returns />
+    };
+
+    const handleMenuClick = (menuOption) => {
+        setSelectedMenu(menuOption);
+    };
+
+    const onSubmit = (data) => {
+        dispatch()
+            .unwrap()
+            .then((res) => {
+                if (res) {
+                    navigate(VENDOR_REGISTRATION);
+                    //              notify({ type: "success", content: "Logged in successfully" });
+                }
+            })
+            .catch((err) => {
+                setShowErrorToast(true);
+                setShowErrorToastMessage(err?.error?.response?.data?.message);
+            });
+    };
+
     return (
-        <div style={{ margin: '30px 20px' }}>
-            <div style={{ marginBottom: '1rem' }}>
-                {/* <Box>
-                    <p style={{ fontWeight: "600" }}>Frequently Asked Question</p>
-                </Box> */}
-                <Accordion style={{ boxShadow: "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)" }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>       <strong>Question 1:</strong> What is Lorem Ipsum?</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
+        <Grid container>
+            {/* Sidebar */}
+            <Grid item xs={3}>
+                {/* Sidebar content */}
+                <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100vh">
 
-                            <strong>Answer:</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-                <Accordion style={{ boxShadow: "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)" }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>                  <strong>Question 2:</strong> Why do we use it?
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
+                    <Container fluid>
+                        <Offcanvas.Title>
+                            <div className="d-flex align-items-center" style={{
+                                padding: "1rem 0rem 0 0",
+                            }}>
+                                <div style={{
+                                    width: "48px",
+                                    height: "48px",
+                                    background: "#f8f8f8",
+                                    display: "flex",
+                                    overflow: "hidden",
+                                    position: "relative",
+                                    fontSize: "1.25rem",
+                                    alignItems: "center",
+                                    flexShrink: " 0",
+                                    borderRadius: "50%",
+                                    justifyContent: "center",
+                                }}>
 
-                            <strong>Answer:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-                <Accordion style={{ boxShadow: "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)" }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>                <strong>Question 3:</strong> Where does it come from?
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
+                                    <Stack
+                                        direction="row"
+                                        spacing={2}
+                                    >
+                                        <Avatar
+                                            src={
+                                                personLoggedData?.profilePicture
+                                                    ? personLoggedData?.profilePicture
+                                                    : "/broken-image.jpg"
+                                            }
+                                            style={{ background: !personLoggedData?.profilePicture ? "#801317" : "" }}
+                                        />
+                                    </Stack>
 
-                            <strong>Answer:</strong> Contrary to popular belief, Lorem Ipsum is not simply random text.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-                <Accordion style={{ boxShadow: "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)" }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>                 <strong>Question 4:</strong> What is Lorem Ipsum?
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
+                                </div>
+                                {personLoggedIn ? (
+                                    <a
+                                        style={{
+                                            color: "#fff",
+                                            border: "none",
+                                            fontWeight: "500",
+                                            fontSize: "1rem",
+                                            borderRadius: "10px",
+                                            paddingLeft: "10px",
+                                            marginRight: "5rem",
 
-                            <strong>Answer:</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-                <Accordion style={{ boxShadow: "0px -1px 12px rgba(181, 180, 180, 0.12), 0px 1px 12px rgba(181, 180, 180, 0.12)" }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography><strong>Question 5:</strong> Why do we use it?</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            <strong>Answer:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-            </div>
-        </div>
+
+                                        }}
+                                    // href={`/my-profile/${personLoggedInId}`}
+                                    >
+                                        {personLoggedIn}
+                                    </a>
+                                ) : <FMTypography
+                                    displayText={"Hi Guest"}
+                                    styleData={{ fontWeight: '600', marginLeft: "0.5rem", fontSize: "14px", color: "#fff" }}
+                                />}
+
+                                <ExitToAppIcon />
+
+                            </div>
+                        </Offcanvas.Title>
+                        <hr />
+
+                        <Box>
+                            {/* Sidebar menu items */}
+                            <ListItem button selected={selectedMenu === 'Dashboard'} onClick={() => handleMenuClick('Dashboard')}>
+                                <ListItemIcon>
+                                    <DashboardIcon style={{ color: "#fff" }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Dashboard" />
+                            </ListItem>
+                            <ListItem button selected={selectedMenu === 'Orders'} onClick={() => handleMenuClick('Orders')}>
+                                <ListItemIcon>
+                                    <ShoppingCartIcon style={{ color: "#fff" }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Orders" />
+                            </ListItem>
+                            <ListItem button selected={selectedMenu === 'Customers'} onClick={() => handleMenuClick('Customers')}>
+                                <ListItemIcon>
+                                    <PeopleIcon style={{ color: "#fff" }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Customers" />
+                            </ListItem>
+                            <ListItem button selected={selectedMenu === 'Inventory'} onClick={() => handleMenuClick('Inventory')}>
+                                <ListItemIcon>
+                                    <InventoryIcon style={{ color: "#fff" }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Inventory" />
+                            </ListItem>
+                            <ListItem button selected={selectedMenu === 'Payment'} onClick={() => handleMenuClick('Payment')}>
+                                <ListItemIcon>
+                                    <PaymentIcon style={{ color: "#fff" }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Payment" />
+                            </ListItem>
+                            <ListItem button selected={selectedMenu === 'Returns'} onClick={() => handleMenuClick('Returns')}>
+                                <ListItemIcon>
+                                    <AssignmentReturnedIcon style={{ color: "#fff" }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Returns" />
+                            </ListItem>
+                        </Box>
+                    </Container>
+                </Box>
+            </Grid>
+            {/* View Page */}
+            <Grid item xs={9}>
+                <Box bgcolor="background.default" height="100vh" p={2}>
+                    {menuOptions[selectedMenu]}
+                </Box>
+            </Grid>
+        </Grid>
     );
 };
 

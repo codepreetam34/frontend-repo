@@ -101,35 +101,6 @@ const OrderPage = () => {
           marginTop: isMobile ? "20px" : "20px",
         }}
       >
-        {/* <Box
-          sx={{
-            display: "flex",
-            transition:
-              "color 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.5s cubic-bezier(0.645, 0.045, 0.355, 1)",
-          }}
-        >
-          <FMTypography
-            displayText={`My Orders`}
-            styleData={{
-              fontWeight: isMobile ? "600" : "600",
-              fontSize: isMobile ? "14px" : "2rem",
-              textTransform: "capitalize",
-            }}
-          />
-
-          <Box
-            sx={{ display: "flex", alignItems: "center", marginLeft: "1rem" }}
-          >
-            <FMTypography
-              displayText={orderData && `| ${orderData?.length} Orders`}
-              styleData={{
-                fontWeight: "300",
-                fontSize: isMobile ? "14px" : "2rem",
-                color: "#717171",
-              }}
-            />
-          </Box>
-        </Box> */}
 
 
         <Col style={{ padding: "0 3rem" }}>
@@ -204,35 +175,7 @@ const OrderPage = () => {
                 //     onClick={() => onCardClick(elem._id)}
                 style={{ position: "relative" }}
               >
-                {/* <Box
-                  sx={{
-                    backgroundColor: "#008539",
-                    top: "3%",
-                    display: "flex",
-                    alignItems: "center",
-                    width: "40px",
-                    height: "30px",
-                    justifyContent: "center",
-                    position: "absolute",
-                    left: "83%",
-                    zIndex: "111",
-                    borderRadius: "4px",
-                  }}
-                >
-                  <img
-                    src={ratingStart}
-                    alt="rating-star"
-                    style={{ width: "14px" }}
-                  />
-                  <FMTypography
-                    //      displayText={Math.round(elem?.rating * 10) / 10}
-                    styleData={{
-                      color: "#FFFFFF",
-                      fontSize: "12px",
-                      fontWeight: "600",
-                    }}
-                  />
-                </Box> */}
+              
                 <Card sx={{ width: isMobile ? "320px" : "400px", borderRadius: "20px" }}>
                   <CardActionArea>
                     <CardMedia
