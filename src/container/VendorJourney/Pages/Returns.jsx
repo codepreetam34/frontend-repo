@@ -5,25 +5,25 @@ import { Card, CardContent, Typography } from '@mui/material';
 // Separate components for each tab's content
 const Overview = () => (
     <div>
-        <Typography variant="body1">This is the On Overview tab content.</Typography>
+        <Typography variant="body1">This is the Overview tab content.</Typography>
     </div>
 );
 
 const ReturnTracking = () => (
     <div>
-        <Typography variant="body1">This is the ReturnTracking tab content.</Typography>
+        <Typography variant="body1">This is the Return Tracking tab content.</Typography>
     </div>
 );
 
 const ClaimTracking = () => (
     <div>
-        <Typography variant="body1">This is the ClaimTracking tab content.</Typography>
+        <Typography variant="body1">This is the Claim Tracking tab content.</Typography>
     </div>
 );
 
 const CourierPartner = () => (
     <div>
-        <Typography variant="body1">This is the CourierPartner tab content.</Typography>
+        <Typography variant="body1">This is the Courier Partner tab content.</Typography>
     </div>
 );
 

@@ -26,7 +26,7 @@ import AssignmentReturnedIcon from '@mui/icons-material/AssignmentReturned';
 import Dashboard from "./Pages/Dashboard";
 import Orders from "./Pages/Orders";
 import Returns from "./Pages/Returns";
-import Customers from "./Pages/Customers";
+
 import Inventory from "./Pages/Inventory";
 import Payment from "./Pages/Payment";
 import FMTypography from "components/FMTypography/FMTypography";
@@ -110,7 +110,6 @@ const VendorHome = () => {
     const menuOptions = {
         Dashboard: <Dashboard />,
         Orders: <Orders />,
-        Customers: <Customers />,
         Inventory: <Inventory />,
         Payment: <Payment />,
         Returns: <Returns />
@@ -218,13 +217,7 @@ const VendorHome = () => {
                                 </ListItemIcon>
                                 <ListItemText primary="Orders" />
                             </ListItem>
-                            <ListItem button selected={selectedMenu === 'Customers'} onClick={() => handleMenuClick('Customers')}>
-                                <ListItemIcon>
-                                    <PeopleIcon style={{ color: "#fff" }} />
-                                </ListItemIcon>
-                                <ListItemText primary="Customers" />
-                            </ListItem>
-                            <ListItem button selected={selectedMenu === 'Inventory'} onClick={() => handleMenuClick('Inventory')}>
+                               <ListItem button selected={selectedMenu === 'Inventory'} onClick={() => handleMenuClick('Inventory')}>
                                 <ListItemIcon>
                                     <InventoryIcon style={{ color: "#fff" }} />
                                 </ListItemIcon>
