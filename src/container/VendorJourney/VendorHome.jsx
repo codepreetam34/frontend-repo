@@ -27,9 +27,12 @@ import Dashboard from "./Pages/Dashboard";
 import Orders from "./Pages/Orders";
 import Returns from "./Pages/Returns";
 
+import CategoryIcon from '@mui/icons-material/Category';
+
 import Inventory from "./Pages/Inventory";
 import Payment from "./Pages/Payment";
 import FMTypography from "components/FMTypography/FMTypography";
+import VendorProducts from "./Pages/VendorProducts";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -94,25 +97,26 @@ const VendorHome = () => {
     const isMobile = useMediaQuery("(max-width:600px)");
 
     const personLoggedIn = JSON.parse(
-        localStorage.getItem("Sidebar_Module_Assigned")
+        localStorage.getItem("Sidebar_Module_Assigned_Vendor")
     )?.fullName;
     const personLoggedData = JSON.parse(
-        localStorage.getItem("Sidebar_Module_Assigned")
+        localStorage.getItem("Sidebar_Module_Assigned_Vendor")
     );
 
     const personLoggedInId = JSON.parse(
-        localStorage.getItem("Sidebar_Module_Assigned")
+        localStorage.getItem("Sidebar_Module_Assigned_Vendor")
     )?._id;
     const handleToggleMenu = () => {
         setShowMenu(!showMenu);
     };
 
     const menuOptions = {
-        Dashboard: <Dashboard />,
+        Dashboard: <Dashboard personLoggedInId={personLoggedInId}/>,
         Orders: <Orders />,
         Inventory: <Inventory />,
         Payment: <Payment />,
-        Returns: <Returns />
+        Returns: <Returns />,
+        Products: <VendorProducts />
     };
 
     const handleMenuClick = (menuOption) => {
@@ -139,7 +143,7 @@ const VendorHome = () => {
             {/* Sidebar */}
             <Grid item xs={3}>
                 {/* Sidebar content */}
-                <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100vh">
+                <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100%">
 
                     <Container fluid>
                         <Offcanvas.Title>
@@ -235,13 +239,19 @@ const VendorHome = () => {
                                 </ListItemIcon>
                                 <ListItemText primary="Returns" />
                             </ListItem>
+                            <ListItem button selected={selectedMenu === 'Products'} onClick={() => handleMenuClick('Products')}>
+                                <ListItemIcon>
+                                    <CategoryIcon style={{ color: "#fff" }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Products" />
+                            </ListItem>
                         </Box>
                     </Container>
                 </Box>
             </Grid>
             {/* View Page */}
             <Grid item xs={9}>
-                <Box bgcolor="background.default" height="100vh" p={2}>
+                <Box bgcolor="background.default" p={2}>
                     {menuOptions[selectedMenu]}
                 </Box>
             </Grid>

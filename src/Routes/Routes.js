@@ -28,3 +28,4 @@ export const VENDOR_JOURNEY = "/vendor-journey";
 export const VENDOR_SIGN_UP = "/vendor-sign-up";
 export const VENDOR_REGISTRATION = "/vendor-registration";
 export const VENDOR_HOME = "/vendor-home";
+export const ADD_SINGLE_CATALOG = "/add-single-catalog";

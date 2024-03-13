@@ -25,6 +25,7 @@ import {
   VENDOR_SIGN_UP,
   VENDOR_REGISTRATION,
   VENDOR_HOME,
+  ADD_SINGLE_CATALOG,
 } from "./Routes/Routes";
 import Login from "./container/Signin/Login";
 import SignUp from "./container/SignUp/SignUp";
@@ -59,6 +60,7 @@ import VendorJourney from "container/VendorJourney";
 import VendorSignUp from "container/VendorJourney/VendorSignUp";
 import VendorRegistration from "container/VendorJourney/VendorRegistration";
 import VendorHome from "container/VendorJourney/VendorHome";
+import AddSingleCatalog from "container/VendorJourney/Pages/AddSingleCatalog";
 
 const App = () => {
   return (
@@ -81,6 +83,7 @@ const App = () => {
             <Route path={VENDOR_JOURNEY} element={<VendorJourney />} />
             <Route path={VENDOR_REGISTRATION} element={<VendorRegistration />} />
             <Route path={VENDOR_HOME} element={<VendorHome />} />
+            <Route path={ADD_SINGLE_CATALOG} element={<AddSingleCatalog />} />
 
 
             <Route path={FAQ} element={<Faq />} />

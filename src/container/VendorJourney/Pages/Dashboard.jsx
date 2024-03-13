@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Card, CardContent, Typography, Button, Box } from '@mui/material';
+import { useNavigate } from "react-router";
+import { ADD_SINGLE_CATALOG } from "Routes/Routes";
 
-const Dashboard = () => {
+const Dashboard = ({personLoggedInId}) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     // Function to handle adding a single catalog
     const handleAddSingleCatalog = () => {
         // Implement the logic to add a single catalog here
         console.log("Adding a single catalog...");
+        navigate(ADD_SINGLE_CATALOG)
     };
 
     // Function to handle adding catalogs in bulk
@@ -34,9 +38,9 @@ const Dashboard = () => {
                 <Button variant="contained" color="primary" onClick={handleAddSingleCatalog}>
                     Add a Single Catalog
                 </Button>
-                <Button variant="contained" color="secondary" onClick={handleAddBulkCatalog}>
+                {/* <Button variant="contained" color="secondary" onClick={handleAddBulkCatalog}>
                     Add Catalogs in Bulk
-                </Button>
+                </Button> */}
             </Box>
         </>
     );

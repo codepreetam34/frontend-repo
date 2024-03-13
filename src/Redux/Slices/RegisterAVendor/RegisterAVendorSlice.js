@@ -31,6 +31,7 @@ export const vendorSignInUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axiosInstance.post("api/vendor/signIn", data);
+      console.log("response ",response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });
@@ -41,9 +42,9 @@ export const vendorSignInUser = createAsyncThunk(
 export const VendorSlice = createSlice({
   name: "VendorSlice",
   initialState: {
-    vendorData: [],
-    loading: false,
-    error: null,
+    isLoggedIn: false,
+    isFetching: false,
+    data: {},
   },
   reducers: {},
   extraReducers: (builder) => {

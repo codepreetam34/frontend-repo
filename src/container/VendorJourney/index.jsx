@@ -11,20 +11,18 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { FORGOTPASSWORD, LANDING_PAGE, SIGNUP, VENDOR_REGISTRATION, VENDOR_SIGN_UP } from "../../Routes/Routes";
+import { FORGOTPASSWORD, VENDOR_REGISTRATION, VENDOR_SIGN_UP } from "../../Routes/Routes";
 import FMButton from "../../components/FMButton/FMButton";
 import FMTypography from "../../components/FMTypography/FMTypography";
-import { login } from "../../Redux/Slices/Login/auth.slice";
 import { commonStyle } from "../../Styles/commonStyles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validationSchema/loginSchema";
-import { notify } from "../../components/FMToaster/FMToaster";
 import { ErrorToaster, SuccessToaster } from "constants/util";
 import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
 import { vendorSignInUser } from "Redux/Slices/RegisterAVendor/RegisterAVendorSlice";
 
-const VendorJourney = ({ showLoginPageModal, setShowLoginPageModal }) => {
+const VendorJourney = ({ showLoginPageModal }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -52,22 +50,27 @@ const VendorJourney = ({ showLoginPageModal, setShowLoginPageModal }) => {
 
     const onSubmit = (data) => {
 
-        console.log("data ", data)
-
         dispatch(vendorSignInUser(data))
             .unwrap()
             .then((res) => {
                 if (res) {
-                    console.log("res ", res)
+                    console.log("res data ",res)
+                    localStorage.setItem(
+                        "Sidebar_Module_Assigned_Vendor",
+                        JSON.stringify(res.user)
+                      );
+                      localStorage.setItem(
+                        "AUTH_ACCESS_TOKEN_VENDOR",
+                        JSON.stringify(res.token)
+                      );
                     navigate(VENDOR_REGISTRATION);
-      //              notify({ type: "success", content: "Logged in successfully" });
+                    // notify({ type: "success", content: "Logged in successfully" });
                 }
             })
             .catch((err) => {
                 setShowErrorToast(true);
                 setShowErrorToastMessage(err?.error?.response?.data?.message);
             });
-
     };
 
     return (
@@ -110,7 +113,6 @@ const VendorJourney = ({ showLoginPageModal, setShowLoginPageModal }) => {
                                             placeholder="Enter your email"
                                             sx={{
                                                 ...commonStyle.inputFieldStyle,
-
                                                 ...(errors.email && commonStyle.errorStyle),
                                             }}
                                             {...register("email")}
@@ -221,7 +223,6 @@ const VendorJourney = ({ showLoginPageModal, setShowLoginPageModal }) => {
                                             placeholder="Enter your email"
                                             sx={{
                                                 ...commonStyle.inputFieldStyle,
-
                                                 ...(errors.email && commonStyle.errorStyle),
                                             }}
                                             {...register("email")}

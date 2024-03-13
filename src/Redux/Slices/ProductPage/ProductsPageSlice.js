@@ -9,7 +9,10 @@ import {
   GET_BEST_SELLER_PRODUCTS_LIST,
   GET_TOP_CATEGORY_PRODUCTS_LIST,
   GET_PRODUCTS_LIST_BY_TAGS_ONLY,
+  GET_VENDOR_PRODUCTS,
+  ADD_VENDOR_PRODUCTS,
 } from "./type";
+import axiosVendorInstance from "services/AxiosVendorInstance";
 
 export const getProductPageDetail = createAsyncThunk(
   GET_PRODUCT_DETAIL,
@@ -116,10 +119,40 @@ export const getTopCategoryProducts = createAsyncThunk(
   }
 );
 
+export const addVendorProducts = createAsyncThunk(
+  ADD_VENDOR_PRODUCTS,
+  async (addProductData, thunkAPI) => {
+    try {
+      const response = await axiosVendorInstance.post(
+        `api/product/vendor/create`,
+        addProductData
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
+export const getVendorProducts = createAsyncThunk(
+  GET_VENDOR_PRODUCTS,
+  async (addProductData, thunkAPI) => {
+    try {
+      const response = await axiosVendorInstance.post(
+        `api/product/vendor/get`,
+        addProductData
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
+
 const productListSlice = createSlice({
   name: "productListSlice",
   initialState: {
     getProductsListData: [],
+    getVendorProductsListData: [],
     getProductsListByCategoryId: [],
     getProductsListByCategoryIdAndTags: [],
     getProductDetails: [],
@@ -132,6 +165,22 @@ const productListSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getVendorProducts.pending, (state) => {
+      state.getVendorProductsListData = [];
+      state.isFetching = true;
+      state.isError = false;
+    });
+
+    builder.addCase(getVendorProducts.fulfilled, (state, action) => {
+      state.getVendorProductsListData = action.payload;
+      state.isFetching = false;
+      state.isError = false;
+    });
+    builder.addCase(getVendorProducts.rejected, (state, action) => {
+      state.getVendorProductsListData = [];
+      state.isFetching = false;
+      state.isError = true;
+    });
     builder.addCase(getProductsList.pending, (state) => {
       state.getProductsListData = [];
       state.isFetching = true;
