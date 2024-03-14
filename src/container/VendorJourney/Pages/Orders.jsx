@@ -34,7 +34,7 @@ const CancelledContent = () => (
 );
 
 const Orders = () => {
-    const [value, setValue] = React.useState(1); // Set the initial selected tab index to 1 (Pending)
+    const [value, setValue] = React.useState(0); // Set the initial selected tab index to 1 (Pending)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

@@ -27,16 +27,12 @@ const Paused = () => (
     </div>
 );
 
-
-
 const Inventory = () => {
-    const [value, setValue] = React.useState(1); // Set the initial selected tab index to 1 (Pending)
+    const [value, setValue] = React.useState(0); // Set the initial selected tab index to 1 (Pending)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    // Function to render the content of the selected tab
     const renderTabContent = () => {
         switch (value) {
             case 0:

@@ -29,7 +29,7 @@ const CourierPartner = () => (
 
 
 const Returns = () => {
-    const [value, setValue] = React.useState(1); // Set the initial selected tab index to 1 (Pending)
+    const [value, setValue] = React.useState(0); 
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -74,7 +74,6 @@ const Returns = () => {
 
                 </Tabs>
             </Box>
-            {/* Render the content of the selected tab */}
             {renderTabContent()}
         </>
     );

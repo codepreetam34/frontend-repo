@@ -13,7 +13,6 @@ const ProductsPage = () => {
     const [modalData, setModalData] = useState({ type: null, data: null });
     const [isLoading, setIsLoading] = useState(true);
     const [openViewProductPage, setOpenViewProductPage] = useState(false);
-
     const [defaultCategory, setDefaultCategory] = useState();
     const [searchInput, setSearchInput] = useState("");
 
@@ -24,15 +23,12 @@ const ProductsPage = () => {
     );
 
     useEffect(() => {
-
         if (!productsList || productsList?.length === 0) {
-
             dispatch(getVendorProducts())
                 .then((res) => {
                     setIsLoading(false);
                 })
                 .catch(() => setIsLoading(false));
-
         } else {
             setIsLoading(false);
         }
@@ -279,9 +275,10 @@ const ProductsPage = () => {
                             </Row>
                         </Container>
                         {openViewProductPage && openViewProductPage ? (
-                            <ViewProductForm
-                                productData={modalData?.data}
-                            />
+                            // <ViewProductForm
+                            //     productData={modalData?.data}
+                            // />
+                            <>This is Vendor Product view Page</>
                         ) : (
                             <RenderTable />
                         )

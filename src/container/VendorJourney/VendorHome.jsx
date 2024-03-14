@@ -26,15 +26,11 @@ import AssignmentReturnedIcon from '@mui/icons-material/AssignmentReturned';
 import Dashboard from "./Pages/Dashboard";
 import Orders from "./Pages/Orders";
 import Returns from "./Pages/Returns";
-
 import CategoryIcon from '@mui/icons-material/Category';
-
 import Inventory from "./Pages/Inventory";
 import Payment from "./Pages/Payment";
 import FMTypography from "components/FMTypography/FMTypography";
-import VendorProducts from "./Pages/VendorProducts";
 import ProductsPage from "./Pages/VendorProductPage";
-
 import vibezterLogo from "./vibezterLogo.png";
 
 const useStyles = makeStyles((theme) => ({
@@ -47,14 +43,12 @@ const useStyles = makeStyles((theme) => ({
             height: "25px !important",
         },
     },
-
     mobileBackground: {
         background: "rgb(252, 237, 238) !important",
     },
     mobileInnerBackground: {
         background: "#801317 !important",
     },
-
     flexDisplayStyle: {
         display: "flex",
     },
@@ -79,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
             gap: "0.1rem",
         },
     },
-
     vibezterLogoStyle: {
         [theme.breakpoints.down("sm")]: {
             width: "85px",
@@ -92,7 +85,6 @@ const VendorHome = () => {
     const navigate = useNavigate();
     const [showErrorToast, setShowErrorToast] = useState(false);
     const [showErrorToastMessage, setShowErrorToastMessage] = useState();
-    const [showToast, setShowToast] = useState(false);
     const classes = useStyles();
     const [showMenu, setShowMenu] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState('Dashboard');
@@ -142,11 +134,8 @@ const VendorHome = () => {
 
     return (
         <Grid container>
-            {/* Sidebar */}
             <Grid item xs={3}>
-                {/* Sidebar content */}
                 <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100%">
-
                     <Container fluid>
                         <Offcanvas.Title>
                             <div className="d-flex align-items-center" style={{
@@ -190,9 +179,7 @@ const VendorHome = () => {
                                             fontSize: "1rem",
                                             borderRadius: "10px",
                                             paddingLeft: "10px",
-                                            marginRight: "5rem",
-
-
+                                            marginRight: "9rem",
                                         }}
                                     // href={`/my-profile/${personLoggedInId}`}
                                     >
@@ -202,15 +189,11 @@ const VendorHome = () => {
                                     displayText={"Hi Guest"}
                                     styleData={{ fontWeight: '600', marginLeft: "0.5rem", fontSize: "14px", color: "#fff" }}
                                 />}
-
                                 <ExitToAppIcon />
-
                             </div>
                         </Offcanvas.Title>
                         <hr />
-
                         <Box>
-                            {/* Sidebar menu items */}
                             <ListItem button selected={selectedMenu === 'Dashboard'} onClick={() => handleMenuClick('Dashboard')}>
                                 <ListItemIcon>
                                     <DashboardIcon style={{ color: "#fff" }} />
@@ -248,7 +231,6 @@ const VendorHome = () => {
                                 <ListItemText primary="Products" />
                             </ListItem>
                         </Box>
-
                         <hr />
                         <Box>
                             <img src={vibezterLogo} alt="" style={{ width: "100%" }} />
@@ -257,7 +239,6 @@ const VendorHome = () => {
                     </Container>
                 </Box>
             </Grid>
-            {/* View Page */}
             <Grid item xs={9}>
                 <Box p={2}>
                     {menuOptions[selectedMenu]}
