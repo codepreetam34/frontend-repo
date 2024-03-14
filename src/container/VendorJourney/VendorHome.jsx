@@ -33,6 +33,7 @@ import Inventory from "./Pages/Inventory";
 import Payment from "./Pages/Payment";
 import FMTypography from "components/FMTypography/FMTypography";
 import VendorProducts from "./Pages/VendorProducts";
+import ProductsPage from "./Pages/VendorProductPage";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -116,7 +117,7 @@ const VendorHome = () => {
         Inventory: <Inventory />,
         Payment: <Payment />,
         Returns: <Returns />,
-        Products: <VendorProducts />
+        Products: <ProductsPage/>
     };
 
     const handleMenuClick = (menuOption) => {
@@ -143,7 +144,7 @@ const VendorHome = () => {
             {/* Sidebar */}
             <Grid item xs={3}>
                 {/* Sidebar content */}
-                <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100%">
+                <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100vh">
 
                     <Container fluid>
                         <Offcanvas.Title>
@@ -251,7 +252,7 @@ const VendorHome = () => {
             </Grid>
             {/* View Page */}
             <Grid item xs={9}>
-                <Box bgcolor="background.default" p={2}>
+                <Box  p={2}>
                     {menuOptions[selectedMenu]}
                 </Box>
             </Grid>

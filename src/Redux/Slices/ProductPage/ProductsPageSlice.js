@@ -137,10 +137,11 @@ export const getVendorProducts = createAsyncThunk(
   GET_VENDOR_PRODUCTS,
   async (addProductData, thunkAPI) => {
     try {
-      const response = await axiosVendorInstance.post(
+      const response = await axiosVendorInstance.get(
         `api/product/vendor/get`,
         addProductData
       );
+      console.log("response by redux ", response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error });

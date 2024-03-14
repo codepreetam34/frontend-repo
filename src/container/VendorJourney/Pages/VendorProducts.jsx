@@ -9,24 +9,24 @@ const VendorProducts = () => {
 
     const productData = useSelector(
         (state) => state?.ProductsByCatId?.productsList?.products
-    );
+      );
     useEffect(() => {
 
         if (!productData || productData?.length === 0) {
-
-            dispatch(getVendorProducts())
-                .then(() => {
-                    //   setIsLoading(false);
-                })
-                .catch(() =>
-                    //setIsLoading(false)
-                    console.log("err")
-                );
-
-        } else {
+    
+          dispatch(getVendorProducts())
+            .then(() => {
             //   setIsLoading(false);
+            })
+            .catch(() =>
+            //setIsLoading(false)
+            console.log("err")
+            );
+    
+        } else {
+        //   setIsLoading(false);
         }
-    }, [dispatch]);
+      }, [dispatch]);
 
     return (
         <>
@@ -40,12 +40,14 @@ const VendorProducts = () => {
             </Card>
 
 
-            <Box sx={{ mt: 2 }}>
+            <Box sx={{ mt: 2 }} style={{height:"100vh"}}>
                 <Row>
                     <Col>
                         <Card variant="outlined" sx={{ mb: 2 }}>
                             <CardContent>
-                                <ViewProductForm productData={productData} />
+
+
+                            <VendorProducts productData={productData} />
                             </CardContent>
 
                         </Card>

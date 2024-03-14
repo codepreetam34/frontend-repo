@@ -101,6 +101,7 @@ const AddProductForm = ({
     }, [dispatch]);
 
     const onSubmit = (data) => {
+        console.log("data ", data);
         const formData = new FormData();
         if (data?.name) formData.append("name", data?.name?.toString());
         if (descriptionData) formData.append("description", descriptionData);
@@ -445,14 +446,14 @@ const AddProductForm = ({
 
     return (
         <div className="container">
-           
+
             <Form
                 className="user_form"
                 onSubmit={handleSubmit(onSubmit)}
                 style={{ padding: "2rem" }}
             >
                 <Row>
-                    
+
                     <Col md={12} className="product-detail-design mb-3" style={{
                         border: "0.0625rem solid rgba(26, 26, 26, 0.12)",
                         borderRadius: "0.5rem",
@@ -643,7 +644,7 @@ const AddProductForm = ({
                             </Col>
                         </Row>
                     </Col>
-                    
+
                     {defaultCategoryName &&
                         (defaultCategoryName.toLowerCase() === "cake" ||
                             defaultCategoryName.toLowerCase() === "cakes") ? (
@@ -702,7 +703,7 @@ const AddProductForm = ({
                     ) : (
                         <></>
                     )}
-                    
+
                     <Col className="product-detail-design" style={{
                         border: "0.0625rem solid rgba(26, 26, 26, 0.12)",
                         borderRadius: "0.5rem",
@@ -905,7 +906,7 @@ const AddProductForm = ({
                             </div>
                         </div>
                     </Col>
-                    
+
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <Button
                             type="submit"
@@ -922,7 +923,7 @@ const AddProductForm = ({
                             Submit
                         </Button>
                     </div>
-             
+
                 </Row>
             </Form>
         </div>

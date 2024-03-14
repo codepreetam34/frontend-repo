@@ -6,6 +6,7 @@ import { getMenuBarList } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice"
 import axios from "axios";
 
 const ViewProductForm = ({ productData }) => {
+
   const [isLoading, setIsLoading] = useState(true);
   const [defaultCategoryName, setDefaultCategoryName] = useState();
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const ViewProductForm = ({ productData }) => {
 
 useEffect(() => {
   if (categoryList && categoryList.length > 0) {
-    const categoryIdToFind = productData?.category; // Replace 'your_target_id' with the actual id you want to find
+    const categoryIdToFind = productData?.category; 
 
     const foundCategory = categoryList.find(
       (item) => item._id === categoryIdToFind
@@ -25,7 +26,6 @@ useEffect(() => {
     if (foundCategory) {
       setDefaultCategoryName(foundCategory?.name);
     } else {
-      // If not found in the main categoryList, check in children arrays
       const foundInChildren = categoryList
         .map((category) =>
           category?.children.find((child) => child?._id === categoryIdToFind)
@@ -38,7 +38,6 @@ useEffect(() => {
       }
     }
   } else {
-    // Handle case when categoryList is empty or undefined
     console.log("Category list is empty or undefined");
   }
 }, [dispatch, categoryList]);
@@ -46,8 +45,7 @@ useEffect(() => {
 
   useEffect(() => {
     if ((categoryList && categoryList) || categoryList?.length > 0) {
-      const categoryIdToFind = productData?.category; // Replace 'your_target_id' with the actual id you want to find
-
+      const categoryIdToFind = productData?.category; 
       const foundCategory = categoryList.find(
         (item) => item._id === categoryIdToFind
       );
@@ -55,7 +53,6 @@ useEffect(() => {
       if (foundCategory) {
         setDefaultCategoryName(foundCategory?.name);
       } else {
-        // If not found in the main categoryList, check in children arrays
         const foundInChildren = categoryList
           .map((category) =>
             category?.children.find((child) => child?._id === categoryIdToFind)
@@ -71,19 +68,10 @@ useEffect(() => {
     }
   }, [dispatch, categoryList]);
 
-  const handleTag = async (tagName) => {
-    const payload = {
-      tagName,
-      categoryId: productData?.category,
-    };
-    const response = await axios.post(`http://165.22.222.7:5000/api/product/getProductsByTagName`, payload);
-    console.log("response ", response);
-  };
 
   return (
-    <Form className="user_form" style={{ padding: "2rem" }}>
+    <Form className="user_form" style={{ padding: "2rem 2rem 0 2rem" }}>
       <Row>
-        {" "}
         <div className="view-details-heading pb-2 text-center">
           <strong>Product Details</strong>
           <div className="d-flex justify-content-center gap-3">
