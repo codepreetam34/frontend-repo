@@ -315,7 +315,7 @@ const VendorJourney = ({ showLoginPageModal }) => {
                         </>
                     )}
                 </Grid>
-
+ 
                 {showErrorToast && (
                     <ErrorToaster
                         showErrorToast={showErrorToast}

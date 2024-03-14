@@ -26,6 +26,7 @@ import {
   VENDOR_REGISTRATION,
   VENDOR_HOME,
   ADD_SINGLE_CATALOG,
+  VENDOR_PROFILE,
 } from "./Routes/Routes";
 import Login from "./container/Signin/Login";
 import SignUp from "./container/SignUp/SignUp";
@@ -46,12 +47,6 @@ import Profile from "./container/ProfileSection/AllViewsFile/AllViewsFile";
 import PageNotFound from "./container/PageNotFound/PageNotFound";
 import CategoryPage from "./container/CategoryPage";
 import OrderPage from "container/OrderPage";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./LandingPage.css";
-
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
 import BecomeAMember from "container/BecomeAMember";
@@ -61,6 +56,12 @@ import VendorSignUp from "container/VendorJourney/VendorSignUp";
 import VendorRegistration from "container/VendorJourney/VendorRegistration";
 import VendorHome from "container/VendorJourney/VendorHome";
 import AddSingleCatalog from "container/VendorJourney/Pages/AddSingleCatalog";
+import VendorProfile from "container/VendorJourney/Pages/VendorProfile";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./LandingPage.css";
 
 const App = () => {
   return (
@@ -77,15 +78,12 @@ const App = () => {
             <Route path={EMAIL_VERIFY_OTP} element={<EmailVerifyOtp />} />
             <Route path={PRIVACY_POLICY} element={<PrivacyPolicy />} />
             <Route path={BECOME_A_MEMBER} element={<BecomeAMember />} />
-
-
             <Route path={VENDOR_SIGN_UP} element={<VendorSignUp />} />
             <Route path={VENDOR_JOURNEY} element={<VendorJourney />} />
             <Route path={VENDOR_REGISTRATION} element={<VendorRegistration />} />
             <Route path={VENDOR_HOME} element={<VendorHome />} />
             <Route path={ADD_SINGLE_CATALOG} element={<AddSingleCatalog />} />
-
-
+            <Route path={VENDOR_PROFILE} element={<VendorProfile />} />
             <Route path={FAQ} element={<Faq />} />
             <Route path={BLOGS} element={<Blogs />} />
             <Route path={BLOGS_DETAIL} element={<BlogDetailedPage />} />
@@ -95,9 +93,7 @@ const App = () => {
             <Route path={ADD_TO_CART} element={<HorizontalLinearStepper />} />
             <Route path={SET_UP_NEW_PASSWORD} element={<SetupNewPassword />} />
             <Route path={CONTACT_US} element={<ContactUs />} />
-
             {/* private routes below */}
-
             <Route
               path={ORDER_PAGE}
               element={<PrivateRoutes Component={OrderPage} />}
@@ -111,7 +107,6 @@ const App = () => {
               element={<PrivateRoutes Component={Profile} />}
             />
             <Route path="*" element={<PageNotFound />} />
-
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
