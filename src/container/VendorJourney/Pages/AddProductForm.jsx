@@ -26,6 +26,39 @@ const AddProductForm = ({
             picturePreview: "",
         },
     ]);
+    const [tagType, setTagType] = useState("");
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [additionalTags, setAdditionalTags] = useState([]);
+    const [descriptionData, setDescriptionData] = useState("");
+    const [specificationData, setSpecificationData] = useState("");
+
+    const categoryList = useSelector(
+        (state) => state?.menuList?.getMenuOptionsData?.categoryList
+    );
+
+    useEffect(() => {
+        if (!categoryList || categoryList.length === 0) {
+            dispatch(getMenuBarList())
+                .then(() => {
+                    setIsLoading(false);
+                })
+                .catch(() => setIsLoading(false));
+        } else {
+            setIsLoading(false);
+        }
+    }, [dispatch]);
+
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        setValue,
+    } = useForm({
+        resolver: yupResolver(addProductSchema),
+        mode: "onChange",
+    });
+
     const handleImageAltText = (event, i) => {
         setBannerPicture((bannerPicture) => {
             const newBannerPicture = [...bannerPicture];
@@ -54,16 +87,6 @@ const AddProductForm = ({
         ]);
     };
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        setValue,
-    } = useForm({
-        resolver: yupResolver(addProductSchema),
-        mode: "onChange",
-    });
-
     const handleInputChange = async (e, index) => {
         const value = e;
         const list = [...pinCode];
@@ -78,22 +101,6 @@ const AddProductForm = ({
         updatedPinCode.splice(indexToRemove, 1);
         setPinCode(updatedPinCode);
     };
-
-    const categoryList = useSelector(
-        (state) => state?.menuList?.getMenuOptionsData?.categoryList
-    );
-
-    useEffect(() => {
-        if (!categoryList || categoryList.length === 0) {
-            dispatch(getMenuBarList())
-                .then(() => {
-                    setIsLoading(false);
-                })
-                .catch(() => setIsLoading(false));
-        } else {
-            setIsLoading(false);
-        }
-    }, [dispatch]);
 
     const onSubmit = (data) => {
         const formData = new FormData();
@@ -300,10 +307,6 @@ const AddProductForm = ({
         },
     ];
 
-    const [tagType, setTagType] = useState("");
-    const [selectedTags, setSelectedTags] = useState([]);
-    const [additionalTags, setAdditionalTags] = useState([]);
-
     const renderTagCheckboxes = () => {
         if (defaultCategoryName && tagType) {
             const category = combinedOptions.find(
@@ -428,8 +431,6 @@ const AddProductForm = ({
         // list2.splice(, 1);Plan
         // setImageAltText(list2);
     };
-    const [descriptionData, setDescriptionData] = useState("");
-    const [specificationData, setSpecificationData] = useState("");
 
     const handleDescriptionData = (descriptionData) => {
         setDescriptionData(descriptionData);
@@ -440,7 +441,6 @@ const AddProductForm = ({
 
     return (
         <div className="container">
-
             <Form
                 className="user_form"
                 onSubmit={handleSubmit(onSubmit)}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
     Avatar,
     Box,
@@ -15,11 +15,8 @@ import {
 import { Button, Col, Container, Offcanvas, Row } from "react-bootstrap";
 import { makeStyles } from "@mui/styles";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PaymentIcon from '@mui/icons-material/Payment';
 import AssignmentReturnedIcon from '@mui/icons-material/AssignmentReturned';
@@ -43,19 +40,24 @@ const useStyles = makeStyles((theme) => ({
             height: "25px !important",
         },
     },
+
     mobileBackground: {
         background: "rgb(252, 237, 238) !important",
     },
+
     mobileInnerBackground: {
         background: "#801317 !important",
     },
+
     flexDisplayStyle: {
         display: "flex",
     },
+
     logoStyle: {
         display: "flex",
         alignItems: "center",
     },
+
     monkeyLogoStyle: {
         width: "45px",
         height: "45px",
@@ -64,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
             height: "40px",
         },
     },
+
     logoStyle: {
         display: "flex",
         justifyContent: "flex-end",
@@ -73,18 +76,18 @@ const useStyles = makeStyles((theme) => ({
             gap: "0.1rem",
         },
     },
+
     vibezterLogoStyle: {
         [theme.breakpoints.down("sm")]: {
             width: "85px",
             height: "40px"
         },
     }
+
 }));
 const VendorHome = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [showErrorToast, setShowErrorToast] = useState(false);
-    const [showErrorToastMessage, setShowErrorToastMessage] = useState();
     const classes = useStyles();
     const [showMenu, setShowMenu] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState('Dashboard');
@@ -93,6 +96,7 @@ const VendorHome = () => {
     const personLoggedIn = JSON.parse(
         localStorage.getItem("Sidebar_Module_Assigned_Vendor")
     )?.fullName;
+
     const personLoggedData = JSON.parse(
         localStorage.getItem("Sidebar_Module_Assigned_Vendor")
     );
@@ -100,6 +104,7 @@ const VendorHome = () => {
     const personLoggedInId = JSON.parse(
         localStorage.getItem("Sidebar_Module_Assigned_Vendor")
     )?._id;
+
     const handleToggleMenu = () => {
         setShowMenu(!showMenu);
     };
@@ -123,18 +128,17 @@ const VendorHome = () => {
             .then((res) => {
                 if (res) {
                     navigate(VENDOR_REGISTRATION);
-                    //              notify({ type: "success", content: "Logged in successfully" });
+                    // notify({ type: "success", content: "Logged in successfully" });
                 }
             })
             .catch((err) => {
-                setShowErrorToast(true);
-                setShowErrorToastMessage(err?.error?.response?.data?.message);
+                console.log("error")
             });
     };
 
     return (
         <Grid container>
-            <Grid item xs={3}>
+            <Grid item xs={3} style={{ boxShadow: "2px 0px 12px 0px rgba(0, 0, 0, 0.5), 9px 2px 9px rgba(0, 0, 0, 0.05)" }}>
                 <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100%">
                     <Container fluid>
                         <Offcanvas.Title>
@@ -232,8 +236,10 @@ const VendorHome = () => {
                             </ListItem>
                         </Box>
                         <hr />
-                        <Box>
-                            <img src={vibezterLogo} alt="" style={{ width: "100%" }} />
+                        <Box style={{ background: "#fff" }}>
+                            <Link to="/">
+                                <img src={vibezterLogo} alt="" style={{ width: "100%" }} />
+                            </Link>
                         </Box>
                         <hr />
                     </Container>
