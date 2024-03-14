@@ -35,6 +35,7 @@ import FMTypography from "components/FMTypography/FMTypography";
 import VendorProducts from "./Pages/VendorProducts";
 import ProductsPage from "./Pages/VendorProductPage";
 
+import vibezterLogo from "./vibezterLogo.png";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -112,12 +113,12 @@ const VendorHome = () => {
     };
 
     const menuOptions = {
-        Dashboard: <Dashboard personLoggedInId={personLoggedInId}/>,
+        Dashboard: <Dashboard personLoggedInId={personLoggedInId} />,
         Orders: <Orders />,
         Inventory: <Inventory />,
         Payment: <Payment />,
         Returns: <Returns />,
-        Products: <ProductsPage/>
+        Products: <ProductsPage />
     };
 
     const handleMenuClick = (menuOption) => {
@@ -144,7 +145,7 @@ const VendorHome = () => {
             {/* Sidebar */}
             <Grid item xs={3}>
                 {/* Sidebar content */}
-                <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100vh">
+                <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100%">
 
                     <Container fluid>
                         <Offcanvas.Title>
@@ -222,7 +223,7 @@ const VendorHome = () => {
                                 </ListItemIcon>
                                 <ListItemText primary="Orders" />
                             </ListItem>
-                               <ListItem button selected={selectedMenu === 'Inventory'} onClick={() => handleMenuClick('Inventory')}>
+                            <ListItem button selected={selectedMenu === 'Inventory'} onClick={() => handleMenuClick('Inventory')}>
                                 <ListItemIcon>
                                     <InventoryIcon style={{ color: "#fff" }} />
                                 </ListItemIcon>
@@ -247,12 +248,18 @@ const VendorHome = () => {
                                 <ListItemText primary="Products" />
                             </ListItem>
                         </Box>
+
+                        <hr />
+                        <Box>
+                            <img src={vibezterLogo} alt="" style={{ width: "100%" }} />
+                        </Box>
+                        <hr />
                     </Container>
                 </Box>
             </Grid>
             {/* View Page */}
             <Grid item xs={9}>
-                <Box  p={2}>
+                <Box p={2}>
                     {menuOptions[selectedMenu]}
                 </Box>
             </Grid>

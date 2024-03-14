@@ -12,10 +12,7 @@ import { useNavigate } from "react-router";
 const AddProductForm = ({
     setAddShowErrorToast,
     setAddShowErrorToastMessage,
-    setAddShowToast,
-    setAddShowToastMessage,
     setIsLoading,
-    personLoggedInId,
 }) => {
     const dispatch = useDispatch();
     const [pinCode, setPinCode] = useState([""]);
@@ -29,7 +26,6 @@ const AddProductForm = ({
             picturePreview: "",
         },
     ]);
-
     const handleImageAltText = (event, i) => {
         setBannerPicture((bannerPicture) => {
             const newBannerPicture = [...bannerPicture];
@@ -47,7 +43,6 @@ const AddProductForm = ({
             return newBannerPicture;
         });
     };
-
     const addProductPicture = () => {
         setBannerPicture([
             ...bannerPicture,
@@ -101,7 +96,6 @@ const AddProductForm = ({
     }, [dispatch]);
 
     const onSubmit = (data) => {
-        console.log("data ", data);
         const formData = new FormData();
         if (data?.name) formData.append("name", data?.name?.toString());
         if (descriptionData) formData.append("description", descriptionData);

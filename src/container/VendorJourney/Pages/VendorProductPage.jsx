@@ -20,7 +20,7 @@ const ProductsPage = () => {
     const dispatch = useDispatch();
 
     const productsList = useSelector(
-        (state) => state?.getProductsList?.getVendorProductsListData
+        (state) => state?.getProductsList?.getVendorProductsListData?.products
     );
 
     useEffect(() => {
@@ -253,11 +253,8 @@ const ProductsPage = () => {
                 ) : (
                     <>
                         <Container>
-
                             <Row>
-
                                 <Col md={12}>
-
                                     <Card variant="outlined">
                                         <CardContent>
                                             <div className="user_heading">
@@ -269,7 +266,6 @@ const ProductsPage = () => {
                                                     <InputGroup.Text id="basic-addon1" className="">
                                                         <SearchIcon />
                                                     </InputGroup.Text>
-
                                                     <Form.Control
                                                         placeholder="Search Product"
                                                         value={searchInput}
@@ -280,14 +276,11 @@ const ProductsPage = () => {
                                         </CardContent>
                                     </Card>
                                 </Col>
-
                             </Row>
-
-
                         </Container>
                         {openViewProductPage && openViewProductPage ? (
                             <ViewProductForm
-                                productData={modalData}
+                                productData={modalData?.data}
                             />
                         ) : (
                             <RenderTable />
