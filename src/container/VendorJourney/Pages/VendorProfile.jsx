@@ -8,24 +8,20 @@ import {
     Typography,
     useMediaQuery,
 } from "@mui/material";
-import FMTypography from "../../components/FMTypography/FMTypography";
+import FMTypography from "components/FMTypography/FMTypography";
 import React, { useCallback, useEffect, useState } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
-import mailIcon from "../../assets/mailIcon.svg";
-import telephoneIcon from "../../assets/telephoneIcon.svg";
-import locationIcon from "../../assets/locationIcon.svg";
-import { commonStyle } from "../../Styles/commonStyles";
+import mailIcon from "assets/mailIcon.svg";
+import telephoneIcon from "assets/telephoneIcon.svg";
+import locationIcon from "assets/locationIcon.svg";
+import { commonStyle } from "Styles/commonStyles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    editUserById,
-    getProfileDetail,
-} from "../../Redux/Slices/MyProfileSlice/MyProfile";
-import FMButton from "../../components/FMButton/FMButton";
-import PincodeInputWrapper from "./PincodeInputWrapper";
+
+import FMButton from "components/FMButton/FMButton";
+import PincodeInputWrapper from "container/ProductDetail/PincodeInputWrapper";
 import { useForm, useFormContext } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { addToCartAddress } from "Redux/Slices/AddToCart/AddAddress";
 import { SETUP_NEW_PASSWORD } from "Routes/Routes";
 import { useNavigate } from "react-router";
 
@@ -71,7 +67,7 @@ const VendorProfile = () => {
 
     const fetchData = useCallback(async () => {
         try {
-            dispatch(getProfileDetail());
+     
         } catch (error) {
             console.log(error);
         }

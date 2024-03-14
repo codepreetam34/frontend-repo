@@ -208,7 +208,7 @@ const VendorJourney = ({ showLoginPageModal }) => {
                         <>
                             <Box sx={commonStyle.formDetailsContainer}>
                                 <FMTypography
-                                    displayText="Vendor Log In"
+                                    displayText="Vendor Access"
                                     styleData={commonStyle.headingStyle}
                                 />
                             </Box>
