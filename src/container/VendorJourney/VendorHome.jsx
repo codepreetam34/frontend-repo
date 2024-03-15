@@ -138,12 +138,13 @@ const VendorHome = () => {
 
     return (
         <Grid container>
-            <Grid item xs={3} style={{ boxShadow: "2px 0px 12px 0px rgba(0, 0, 0, 0.5), 9px 2px 9px rgba(0, 0, 0, 0.05)" }}>
-                <Box bgcolor="rgb(39, 40, 41)" color="primary.contrastText" height="100%">
-                    <Container fluid>
-                        <Offcanvas.Title>
+            <Grid item xs={3} style={{ boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05)" }}>
+                <Box bgcolor="#fff" color="primary.contrastText" height="100%" style={{ width:"100%" }}>
+                    <Container fluid className="m-0 p-0">
+                        <Offcanvas.Title style={{ background: "#801317" }}>
                             <div className="d-flex align-items-center" style={{
-                                padding: "1rem 0rem 0 0",
+                                padding: "1rem 0.5rem",
+
                             }}>
                                 <div style={{
                                     width: "48px",
@@ -183,7 +184,7 @@ const VendorHome = () => {
                                             fontSize: "1rem",
                                             borderRadius: "10px",
                                             paddingLeft: "10px",
-                                            marginRight: "9rem",
+                                            marginRight: "8rem",
                                         }}
                                     // href={`/my-profile/${personLoggedInId}`}
                                     >
@@ -196,57 +197,61 @@ const VendorHome = () => {
                                 <ExitToAppIcon />
                             </div>
                         </Offcanvas.Title>
-                        <hr />
+                        <hr style={{ color: "#000" }} />
                         <Box>
                             <ListItem button selected={selectedMenu === 'Dashboard'} onClick={() => handleMenuClick('Dashboard')}>
                                 <ListItemIcon>
-                                    <DashboardIcon style={{ color: "#fff" }} />
+                                    <DashboardIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Dashboard" />
+                                <ListItemText primary="Dashboard" style={{ color: "#000" }} />
                             </ListItem>
                             <ListItem button selected={selectedMenu === 'Orders'} onClick={() => handleMenuClick('Orders')}>
                                 <ListItemIcon>
-                                    <ShoppingCartIcon style={{ color: "#fff" }} />
+                                    <ShoppingCartIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Orders" />
+                                <ListItemText primary="Orders" style={{ color: "#000" }} />
                             </ListItem>
                             <ListItem button selected={selectedMenu === 'Inventory'} onClick={() => handleMenuClick('Inventory')}>
                                 <ListItemIcon>
-                                    <InventoryIcon style={{ color: "#fff" }} />
+                                    <InventoryIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Inventory" />
+                                <ListItemText primary="Inventory" style={{ color: "#000" }} />
                             </ListItem>
                             <ListItem button selected={selectedMenu === 'Payment'} onClick={() => handleMenuClick('Payment')}>
                                 <ListItemIcon>
-                                    <PaymentIcon style={{ color: "#fff" }} />
+                                    <PaymentIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Payment" />
+                                <ListItemText primary="Payment" style={{ color: "#000" }} />
                             </ListItem>
                             <ListItem button selected={selectedMenu === 'Returns'} onClick={() => handleMenuClick('Returns')}>
                                 <ListItemIcon>
-                                    <AssignmentReturnedIcon style={{ color: "#fff" }} />
+                                    <AssignmentReturnedIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Returns" />
+                                <ListItemText primary="Returns" style={{ color: "#000" }} />
                             </ListItem>
                             <ListItem button selected={selectedMenu === 'Products'} onClick={() => handleMenuClick('Products')}>
                                 <ListItemIcon>
-                                    <CategoryIcon style={{ color: "#fff" }} />
+                                    <CategoryIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Products" />
+                                <ListItemText primary="Products" style={{ color: "#000" }} />
                             </ListItem>
                         </Box>
-                        <hr />
-                        <Box style={{ background: "#fff" }}>
+                        <hr style={{ color: "#000" }} />
+                        <Box style={{
+                            display: "flex",
+                            justifyContent: "center"
+                        }}>
                             <Link to="/">
-                                <img src={vibezterLogo} alt="" style={{ width: "100%" }} />
+                                <img src={vibezterLogo} alt="" style={{ width: "14rem" }} />
                             </Link>
                         </Box>
-                        <hr />
+                        <hr style={{ color: "#000" }} />
                     </Container>
                 </Box>
             </Grid>
+
             <Grid item xs={9}>
-                <Box p={2}>
+                <Box p={2} bgcolor="rgb(242, 245, 250)" height="100%">
                     {menuOptions[selectedMenu]}
                 </Box>
             </Grid>

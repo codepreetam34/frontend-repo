@@ -129,8 +129,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
   return (
     <>
       <HeaderWithoutNav />
-
-
+      
       <Grid
         container
         sx={{
@@ -138,7 +137,7 @@ const Login = ({ showLoginPageModal, setShowLoginPageModal }) => {
           alignItems: "center",
           background: "white",
           justifyContent: "center",
-          padding:"1rem 3rem",
+          padding:"1rem 0rem",
         }}
       >
         <Grid

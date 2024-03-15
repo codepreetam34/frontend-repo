@@ -16,7 +16,6 @@ import telephoneIcon from "assets/telephoneIcon.svg";
 import locationIcon from "assets/locationIcon.svg";
 import { commonStyle } from "Styles/commonStyles";
 import { useDispatch, useSelector } from "react-redux";
-
 import FMButton from "components/FMButton/FMButton";
 import PincodeInputWrapper from "container/ProductDetail/PincodeInputWrapper";
 import { useForm, useFormContext } from "react-hook-form";
@@ -55,12 +54,10 @@ const VendorProfile = () => {
     const [previewImage, setPreviewImage] = useState(null);
     const [profilePicture, setProfilePicture] = useState("");
     const isMobile = useMediaQuery("(max-width:600px)");
-
-
+    const [genderChange, setGenderChange] = useState();
     const [pincodeData, setPincodeData] = useState(
         sessionStorage.getItem("pincode")
     );
-
     const myProfileData = useSelector(
         (state) => state?.myProfile?.getProfileData?.user
     );
@@ -159,8 +156,6 @@ const VendorProfile = () => {
             console.log(error);
         }
     };
-
-    const [genderChange, setGenderChange] = useState();
 
     const handleGenderChange = (event) => {
         setGenderChange(event.target.value);

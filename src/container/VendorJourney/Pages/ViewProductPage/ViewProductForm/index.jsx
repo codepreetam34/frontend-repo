@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Form, Col, Row } from "react-bootstrap";
 import DisplayTable from "../DisplayTable";
 import { useDispatch, useSelector } from "react-redux";
-import { getMenuBarList } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
-import axios from "axios";
-import { Card, CardContent } from "@mui/material";
-
-const ViewProductForm = ({ productData }) => {
+import { Card, CardContent, Typography } from "@mui/material";
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { useNavigate } from "react-router";
+const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
 
   const [defaultCategoryName, setDefaultCategoryName] = useState();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const categoryList = useSelector(
     (state) => state?.menuList?.getMenuOptionsData?.categoryList
@@ -70,12 +70,18 @@ const ViewProductForm = ({ productData }) => {
 
 
   return (
-    <Card style={{marginTop:"1rem"}}>
+    <Card style={{ marginTop: "1rem" }}>
       <CardContent>
-        <Form className="user_form" style={{ padding: "2rem 2rem 0 2rem" }}>
+        <Form className="user_form" style={{ padding: "0rem 2rem 0 2rem" }}>
           <Row>
             <div className="view-details-heading pb-2 text-center">
-              <strong>Product Details</strong>
+              <div style={{display:"flex",justifyContent:"start"}}>
+                <Typography variant="h5" component="h2" onClick={() => setOpenViewProductPage(false)} style={{ cursor: 'pointer' }}>
+                  <ChevronLeftIcon />Back
+                </Typography>
+                </div>
+                <strong>Product Details</strong>
+             
               <div className="d-flex justify-content-center gap-3">
                 <div style={{ fontSize: "1.2rem" }}>
                   Quantity - ({productData?.quantity})

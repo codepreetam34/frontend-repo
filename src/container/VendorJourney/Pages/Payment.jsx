@@ -30,7 +30,7 @@ const Payment = () => {
                                         ₹0
                                     </Typography>
                                     <Button variant="outlined" color="primary" size="small">
-                                        <Typography variant="button" color="primary" sx={{ '&:hover': { color: '#EDEAFF' } }}>
+                                        <Typography variant="button" color="secondary" sx={{ '&:hover': { color: '#801317' } }}>
                                             View Details
                                         </Typography>
                                     </Button>
@@ -56,7 +56,7 @@ const Payment = () => {
                                         ₹0
                                     </Typography>
                                     <Button variant="outlined" color="primary" size="small">
-                                        <Typography variant="button" color="primary" sx={{ '&:hover': { color: '#EDEAFF' } }}>
+                                        <Typography variant="button" color="secondary" sx={{ '&:hover': { color: '#801317' } }}>
                                             View Details
                                         </Typography>
                                     </Button>

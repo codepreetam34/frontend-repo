@@ -54,7 +54,6 @@ const VendorJourney = ({ showLoginPageModal }) => {
             .unwrap()
             .then((res) => {
                 if (res) {
-                    console.log("res data ",res)
                     localStorage.setItem(
                         "Sidebar_Module_Assigned_Vendor",
                         JSON.stringify(res.user)

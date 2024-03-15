@@ -143,73 +143,78 @@ const ProductsPage = () => {
 
         return (
             <Col md={12}>
-                <div className="user_table mt-4">
-                    <div className="nftstable">
-                        <div className="tablearea">
-                            <Table responsive className="m-0">
-                                <thead>
-                                    <tr>
-                                        {tableHeaders &&
-                                            tableHeaders?.map((header, index) => (
-                                                <th className={header?.class} key={index}>
-                                                    {header?.title}
-                                                </th>
-                                            ))}
-                                    </tr>
-                                </thead>
-                                <tbody >
-                                    {displayProducts && displayProducts?.length > 0 ? (
-                                        displayProducts?.map((product, index) => {
-                                            return (
-                                                <tr key={product?._id}>
-                                                    <td>{index + 1}</td>
-                                                    <td>{product?.name}</td>
-                                                    <td>{product?.categoryName}</td>
-                                                    <td>
-                                                        <img
-                                                            src={product?.productPictures[0]?.img}
-                                                            style={{ borderRadius: "10px" }}
-                                                            alt=""
-                                                            width={70}
-                                                            height={70}
-                                                            loading="lazy"
-                                                        />
-                                                    </td>
-                                                    <td>
-                                                        <div
-                                                            className="table_icons d-flex align-items-center justify-content-center"
-                                                            key={index}
-                                                        >
-                                                            {tableActions && tableActions?.map((action, index) => (
+                <Card variant="outlined" className="mt-3">
+                    <CardContent>
+                        <div className="user_table mt-4">
+                            <div className="nftstable">
+                                <div className="tablearea">
+                                    <Table responsive className="m-0">
+                                        <thead>
+                                            <tr>
+                                                {tableHeaders &&
+                                                    tableHeaders?.map((header, index) => (
+                                                        <th className={header?.class} key={index}>
+                                                            {header?.title}
+                                                        </th>
+                                                    ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            {displayProducts && displayProducts?.length > 0 ? (
+                                                displayProducts?.map((product, index) => {
+                                                    return (
+                                                        <tr key={product?._id}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{product?.name}</td>
+                                                            <td>{product?.categoryName}</td>
+                                                            <td>
+                                                                <img
+                                                                    src={product?.productPictures[0]?.img}
+                                                                    style={{ borderRadius: "10px" }}
+                                                                    alt=""
+                                                                    width={70}
+                                                                    height={70}
+                                                                    loading="lazy"
+                                                                />
+                                                            </td>
+                                                            <td>
                                                                 <div
-                                                                    className={action?.class?.toLowerCase()}
-                                                                    onClick={() => action?.onClick(product)}
+                                                                    className="table_icons d-flex align-items-center justify-content-center"
+                                                                    key={index}
                                                                 >
-                                                                    <Link to="#">
-                                                                        {action?.icon}
-                                                                    </Link>
+                                                                    {tableActions && tableActions?.map((action, index) => (
+                                                                        <div
+                                                                            className={action?.class?.toLowerCase()}
+                                                                            onClick={() => action?.onClick(product)}
+                                                                        >
+                                                                            <Link to="#">
+                                                                                {action?.icon}
+                                                                            </Link>
+                                                                        </div>
+                                                                    ))}
                                                                 </div>
-                                                            ))}
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            ) : (
+                                                <tr>
+                                                    <td>
+                                                        <div className="d-flex justify-content-center pt-4">
+                                                            <p className="text-red">Product list is empty !!</p>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            )
-                                        })
-                                    ) : (
-                                        <tr>
-                                            <td>
-                                                <div className="d-flex justify-content-center pt-4">
-                                                    <p className="text-red">Product list is empty !!</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </Table>
+                                            )}
+                                        </tbody>
+                                    </Table>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </CardContent>
+                </Card>
             </Col>
+
         );
     };
 
@@ -254,7 +259,7 @@ const ProductsPage = () => {
                                     <Card variant="outlined">
                                         <CardContent>
                                             <div className="user_heading">
-                                                <h3 style={{ textTransform: "capitalize" }}>{"All Products"}</h3>
+                                                <h4 style={{ textTransform: "capitalize" }}>{"All Products"}</h4>
                                                 <p>Welcome to All Products page</p>
                                             </div>
                                             <div className="manage_searchbar">
@@ -275,10 +280,18 @@ const ProductsPage = () => {
                             </Row>
                         </Container>
                         {openViewProductPage && openViewProductPage ? (
-                            // <ViewProductForm
-                            //     productData={modalData?.data}
-                            // />
-                            <>This is Vendor Product view Page</>
+                            <>
+                                <Container>
+                                    <Row>
+                                        <Col md={12}>
+                                            <ViewProductForm
+                                                productData={modalData?.data}
+                                                setOpenViewProductPage={setOpenViewProductPage}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </>
                         ) : (
                             <RenderTable />
                         )
