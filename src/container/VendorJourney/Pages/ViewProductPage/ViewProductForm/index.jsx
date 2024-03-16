@@ -171,8 +171,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                         style={{ paddingBottom: "0.7rem", paddingTop: "0.2rem" }}
                       >
                         <div className="fw-bold" style={{ fontSize: "0.9rem" }}>
-                          {" "}
-                          {tag?.tagType}{" "}
+                          {tag?.tagType}
                         </div>
                         <div>
                           {tag?.names?.map((name) => {
