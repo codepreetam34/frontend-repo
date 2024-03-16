@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Form, Table, InputGroup, Spinner, Container } from "react-bootstrap";
+import { Row, Col, Form, Table, InputGroup, Spinner, Container, Badge } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getMenuBarList } from "Redux/Slices/HeaderMenuList/HeaderMenuListSlice";
@@ -43,6 +43,7 @@ const ProductsPage = () => {
         { title: "Title", class: "" },
         { title: "Category", class: "" },
         { title: "Image", class: "" },
+        { title: "Status", class: "" },
         { title: "Action", class: "text-center" },
     ];
 
@@ -176,6 +177,13 @@ const ProductsPage = () => {
                                                                     height={70}
                                                                     loading="lazy"
                                                                 />
+                                                            </td>
+                                                            <td>
+                                                                {product?.approvedBySuperAdmin ? (
+                                                                    <Badge bg="success">Approved</Badge>
+                                                                ) : (
+                                                                    <Badge bg="warning">Pending</Badge>
+                                                                )}
                                                             </td>
                                                             <td>
                                                                 <div

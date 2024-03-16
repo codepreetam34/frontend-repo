@@ -75,13 +75,13 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
         <Form className="user_form" style={{ padding: "0rem 2rem 0 2rem" }}>
           <Row>
             <div className="view-details-heading pb-2 text-center">
-              <div style={{display:"flex",justifyContent:"start"}}>
+              <div style={{ display: "flex", justifyContent: "start" }}>
                 <Typography variant="h5" component="h2" onClick={() => setOpenViewProductPage(false)} style={{ cursor: 'pointer' }}>
                   <ChevronLeftIcon />Back
                 </Typography>
-                </div>
-                <strong>Product Details</strong>
-             
+              </div>
+              <strong>Product Details</strong>
+
               <div className="d-flex justify-content-center gap-3">
                 <div style={{ fontSize: "1.2rem" }}>
                   Quantity - ({productData?.quantity})
@@ -188,7 +188,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 </Row>
               </div>
             </Col>
-            <Col md={12} className="product-detail-design">
+            <Col md={6} className="product-detail-design">
               <div className="view-details pb-2">
                 <strong>
                   Pincode ({productData?.pincode && productData?.pincode?.length})
@@ -214,6 +214,11 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                       </div>
                     ))}
                 </div>
+              </div>
+            </Col>
+            <Col md={6}>
+              <div className="view-details pb-2">
+                <strong>Vendor Name</strong> <br /> {productData?.vendorName}
               </div>
             </Col>
             {defaultCategoryName &&
