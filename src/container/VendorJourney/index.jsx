@@ -333,6 +333,7 @@ const VendorJourney = ({ showLoginPageModal }) => {
                         customMessage={`Logout successful. Have a great day! `}
                     />
                 )}
+                
             </Grid>
         </>
     );
