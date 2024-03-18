@@ -1148,9 +1148,5 @@ const ProductDetail = () => {
   );
 };
 
-// remove arrow
-// footer subscribe
-// 
-
 
 export default ProductDetail;

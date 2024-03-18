@@ -64,7 +64,7 @@ const VendorProfile = () => {
 
     const fetchData = useCallback(async () => {
         try {
-     
+
         } catch (error) {
             console.log(error);
         }
@@ -397,7 +397,6 @@ const VendorProfile = () => {
                                         label="Prefer Not To Say"
                                     />
                                 </RadioGroup>
-
                                 {errors.gender && <span>{errors.gender.message}</span>}
                             </Box>
 

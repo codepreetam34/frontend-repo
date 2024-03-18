@@ -106,7 +106,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
 
                 <Col md={6}>
                   <div className="view-details pb-2">
-                    <strong>Product Category</strong> <br />{" "}
+                    <strong>Product Category</strong> <br />
                     {productData?.categoryName}
                   </div>
                 </Col>
@@ -115,7 +115,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                     <strong>Delivery Day</strong>
                     <br />
                     {productData?.deliveryDay}
-                  </div>{" "}
+                  </div>
                 </Col>
               </Row>
             </Col>
@@ -229,14 +229,14 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 <Row className="pt-2">
                   <Col md={6}>
                     <div className="view-details pb-2">
-                      <strong>Discount Price</strong> <br />{" "}
+                      <strong>Discount Price</strong> <br />
                       {productData?.discountPrice}
                     </div>
                     <div className="view-details pb-2">
                       <strong>1/2kg Price</strong>
                       <br />
                       {productData?.halfkgprice}
-                    </div>{" "}
+                    </div>
                   </Col>
                   <Col md={6}>
                     <div className="view-details pb-2">

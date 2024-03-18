@@ -9,13 +9,11 @@ import { Card, CardContent } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ViewProductForm from "./ViewProductPage/ViewProductForm";
 const ProductsPage = () => {
-
     const [modalData, setModalData] = useState({ type: null, data: null });
     const [isLoading, setIsLoading] = useState(true);
     const [openViewProductPage, setOpenViewProductPage] = useState(false);
     const [defaultCategory, setDefaultCategory] = useState();
     const [searchInput, setSearchInput] = useState("");
-
     const dispatch = useDispatch();
 
     const productsList = useSelector(
@@ -225,7 +223,6 @@ const ProductsPage = () => {
 
         );
     };
-
 
     const categoryList = useSelector(
         (state) => state?.menuList?.getMenuOptionsData?.categoryList

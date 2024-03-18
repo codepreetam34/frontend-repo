@@ -15,8 +15,8 @@ const LoginPageModal = ({ showLoginPageModal, setShowLoginPageModal }) => {
         padding: "20px",
         border: "1px solid #ccc",
         borderRadius: "5px",
-        maxWidth: "400px", // Adjust the maximum width as needed
-        margin: "auto", // Center the component
+        maxWidth: "400px", 
+        margin: "auto", 
     };
 
     return (
@@ -34,7 +34,6 @@ const LoginPageModal = ({ showLoginPageModal, setShowLoginPageModal }) => {
                         transition: "0.5s all ease-in-out",
                     }}
                 >
-                    {/* Header */}
                     <Box
                         sx={{
                             display: "flex",
@@ -50,7 +49,6 @@ const LoginPageModal = ({ showLoginPageModal, setShowLoginPageModal }) => {
                         </IconButton>
                     </Box>
 
-                    {/* Content */}
                     <Box sx={{ padding: "2rem", overflowY: "scroll", height: "25rem" }}>
                         <Box sx={containerStyle}>
                             <Login setShowLoginPageModal={setShowLoginPageModal} showLoginPageModal={showLoginPageModal} />
@@ -59,7 +57,6 @@ const LoginPageModal = ({ showLoginPageModal, setShowLoginPageModal }) => {
                         </Box>
                     </Box>
 
-                    {/* Footer */}
                     <Box
                         sx={{
                             display: "flex",

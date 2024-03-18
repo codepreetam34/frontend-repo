@@ -139,7 +139,7 @@ const VendorHome = () => {
     return (
         <Grid container>
             <Grid item xs={3} style={{ boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05)" }}>
-                <Box bgcolor="#fff" color="primary.contrastText" height="100%" style={{ width:"100%" }}>
+                <Box bgcolor="#fff" color="primary.contrastText" height="100%" style={{ width: "100%" }}>
                     <Container fluid className="m-0 p-0">
                         <Offcanvas.Title style={{ background: "#801317" }}>
                             <div className="d-flex align-items-center" style={{
@@ -173,7 +173,6 @@ const VendorHome = () => {
                                             style={{ background: !personLoggedData?.profilePicture ? "#801317" : "" }}
                                         />
                                     </Stack>
-
                                 </div>
                                 {personLoggedIn ? (
                                     <a
