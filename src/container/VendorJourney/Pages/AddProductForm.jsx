@@ -122,6 +122,7 @@ const AddProductForm = ({
         Array.from(pinCode).forEach((item) => {
             formData.append("pincode", item);
         });
+        
         // Array.from(tags).forEach((item) => {
         //   formData.append("tags", item);
         // });
@@ -156,6 +157,7 @@ const AddProductForm = ({
                 setIsLoading(false);
                 setAddShowErrorToast(true);
                 setAddShowErrorToastMessage(res.paylaod.error.message);
+                navigate(-1)
             } else {
                 setIsLoading(false);
                 // setAddShowToast(true);

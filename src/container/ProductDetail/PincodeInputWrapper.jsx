@@ -14,7 +14,6 @@ const PincodeInputWrapper = ({ pincodeData, setPincodeData,setDisabledDate }) =>
             setPincodeData(storedPincode);
             setDisabledDate(false)
         } else if (checkedStoredPincode) {
-            // Set pincodeModalOpen to true only during the initial render
             setCheckedStoredPincode(false)
             setPincodeData('');
         }
@@ -31,7 +30,7 @@ const PincodeInputWrapper = ({ pincodeData, setPincodeData,setDisabledDate }) =>
                 .get(`https://api.postalpincode.in/pincode/${pincodeData}`)
                 .then((res) => {
                     const data = res.data[0].PostOffice[0];
-                    setArea(data.Name); // Change to data.City if you want to display the city instead
+                    setArea(data.Name); 
                     setError("");
                     setDisabledDate(false)
                     sessionStorage.setItem("pincode", pincodeData)

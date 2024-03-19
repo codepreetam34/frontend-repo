@@ -126,11 +126,9 @@ const VendorProfile = () => {
     const onSubmit = async (data) => {
         try {
             const formData = new FormData();
-
             if (myProfileData?._id) {
                 formData.append("_id", myProfileData?._id.toString());
             }
-
             formData.append("firstName", data?.firstName?.toString());
             formData.append("lastName", data?.lastName?.toString());
             formData.append("email", data?.email?.toString());

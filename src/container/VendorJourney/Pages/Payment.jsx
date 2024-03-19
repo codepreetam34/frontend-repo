@@ -14,7 +14,6 @@ const Payment = () => {
                     <Typography variant="h5" component="h2">
                         Payments
                     </Typography>
-
                 </CardContent>
             </Card>
 

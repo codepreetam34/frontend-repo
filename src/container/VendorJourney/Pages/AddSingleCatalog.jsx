@@ -30,7 +30,6 @@ const AddSingleCatalog = ({
             </Card>
 
             <Col md={12}>
-                {" "}
                 <Container className="pt-4">
                     <div className="user_table">
                         <div className="nftstable">
@@ -50,7 +49,7 @@ const AddSingleCatalog = ({
                                         />
                                     </CardContent>
                                 </Card>
-                            </div>{" "}
+                            </div>
                         </div>
                     </div>
                 </Container>
