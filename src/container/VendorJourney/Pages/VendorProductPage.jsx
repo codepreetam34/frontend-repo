@@ -8,7 +8,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Card, CardContent } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ViewProductForm from "./ViewProductPage/ViewProductForm";
-const ProductsPage = () => {
+const VendorProductPage = () => {
+
     const [modalData, setModalData] = useState({ type: null, data: null });
     const [isLoading, setIsLoading] = useState(true);
     const [openViewProductPage, setOpenViewProductPage] = useState(false);
@@ -310,4 +311,4 @@ const ProductsPage = () => {
     );
 };
 
-export default ProductsPage;
+export default VendorProductPage;

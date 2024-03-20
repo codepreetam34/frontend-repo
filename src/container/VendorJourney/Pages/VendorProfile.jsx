@@ -169,7 +169,6 @@ const VendorProfile = () => {
                     marginTop: "20px",
                     marginBottom: "20px",
                     padding: isMobile ? "15px" : "32px",
-
                     background: "#fff",
                 }}
             >
@@ -225,7 +224,6 @@ const VendorProfile = () => {
                         </label>
                     </Stack>
                 </Col>
-
                 <Col className="col-md-8">
                     <FMTypography
                         displayText={
@@ -241,7 +239,6 @@ const VendorProfile = () => {
                             })
                         }}
                     />
-
                     <Box sx={{ display: "flex", marginBottom: ".5rem" }}>
                         <img
                             src={mailIcon}
@@ -289,7 +286,6 @@ const VendorProfile = () => {
                     </Box>
                 </Col>
             </Row>
-
             <Row
                 style={{
                     boxShadow:
@@ -350,7 +346,6 @@ const VendorProfile = () => {
                                 />
                                 {errors.dob && <span>{errors.dob.message}</span>}
                             </Box>
-
                             <Box>
                                 <InputBase
                                     required
@@ -397,7 +392,6 @@ const VendorProfile = () => {
                                 </RadioGroup>
                                 {errors.gender && <span>{errors.gender.message}</span>}
                             </Box>
-
                             <Box>
                                 <InputBase
                                     required
@@ -421,7 +415,6 @@ const VendorProfile = () => {
                                     </div>
                                 )}
                             </Box>
-
                             <Box>
                                 <PincodeInputWrapper
                                     setPincodeData={setPincodeData}

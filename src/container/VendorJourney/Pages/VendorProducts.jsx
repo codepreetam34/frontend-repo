@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Card, CardContent, Typography, Button } from '@mui/material';
 import { Col, Row } from "react-bootstrap";
 import { getVendorProducts } from "Redux/Slices/ProductPage/ProductsPageSlice";
+import VendorProductPage from "./VendorProductPage";
 const VendorProducts = () => {
     const dispatch = useDispatch();
 
@@ -20,7 +21,6 @@ const VendorProducts = () => {
                     <Typography variant="h5" component="h2">
                         Vendor Products
                     </Typography>
-
                 </CardContent>
             </Card>
 
@@ -29,7 +29,7 @@ const VendorProducts = () => {
                     <Col>
                         <Card variant="outlined" sx={{ mb: 2 }}>
                             <CardContent>
-                                <VendorProducts productData={productData} />
+                                <VendorProductPage productData={productData} />
                             </CardContent>
                         </Card>
                     </Col>

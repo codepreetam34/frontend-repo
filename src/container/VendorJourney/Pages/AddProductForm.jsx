@@ -9,11 +9,13 @@ import { addProductSchema } from "../../../validationSchema/addProductSchema";
 import Editor from "../ReactQuill/Editor";
 import GenericEditor from "../ReactQuillSpecification/GenericEditor";
 import { useNavigate } from "react-router";
+
 const AddProductForm = ({
     setAddShowErrorToast,
     setAddShowErrorToastMessage,
     setIsLoading,
 }) => {
+
     const dispatch = useDispatch();
     const [pinCode, setPinCode] = useState([""]);
     const [defaultCategory, setDefaultCategory] = useState();
@@ -35,7 +37,6 @@ const AddProductForm = ({
     const categoryList = useSelector(
         (state) => state?.menuList?.getMenuOptionsData?.categoryList
     );
-
     useEffect(() => {
         if (!categoryList || categoryList.length === 0) {
             dispatch(getMenuBarList())
@@ -47,7 +48,6 @@ const AddProductForm = ({
             setIsLoading(false);
         }
     }, [dispatch]);
-
 
     const {
         register,
@@ -86,7 +86,6 @@ const AddProductForm = ({
             },
         ]);
     };
-
     const handleInputChange = async (e, index) => {
         const value = e;
         const list = [...pinCode];
@@ -101,7 +100,6 @@ const AddProductForm = ({
         updatedPinCode.splice(indexToRemove, 1);
         setPinCode(updatedPinCode);
     };
-
     const onSubmit = (data) => {
         const formData = new FormData();
         if (data?.name) formData.append("name", data?.name?.toString());
@@ -122,7 +120,7 @@ const AddProductForm = ({
         Array.from(pinCode).forEach((item) => {
             formData.append("pincode", item);
         });
-        
+
         // Array.from(tags).forEach((item) => {
         //   formData.append("tags", item);
         // });
@@ -167,7 +165,6 @@ const AddProductForm = ({
             }
         });
     };
-
     const handleSelectCategory = (e) => {
         setDefaultCategory(e.target.value);
         const categoryIdToFind = e.target.value;
@@ -181,7 +178,6 @@ const AddProductForm = ({
         }
         setTagType("");
     };
-
     const combinedOptions = [
         {
             name: "Cakes",
@@ -308,7 +304,6 @@ const AddProductForm = ({
             ],
         },
     ];
-
     const renderTagCheckboxes = () => {
         if (defaultCategoryName && tagType) {
             const category = combinedOptions.find(
@@ -346,7 +341,6 @@ const AddProductForm = ({
 
         return null;
     };
-
     const handleAddTag = () => {
         if (tagType && selectedTags.length > 0) {
             const newTag = { tagType, names: [...selectedTags] };
@@ -354,7 +348,6 @@ const AddProductForm = ({
             setSelectedTags([]);
         }
     };
-
     const renderAdditionalTags = () => {
         return additionalTags.map((tag, index) => (
             <Col md={6} key={index} className="mb-4">
@@ -418,13 +411,11 @@ const AddProductForm = ({
             </Col>
         ));
     };
-
     const onRemoveTags = (index) => {
         const updatedTags = [...additionalTags];
         updatedTags.splice(index, 1);
         setAdditionalTags(updatedTags);
     };
-
     const onRemoveBannerPicture = (index) => {
         const inputList = [...bannerPicture];
         inputList.splice(index, 1);
@@ -433,7 +424,6 @@ const AddProductForm = ({
         // list2.splice(, 1);Plan
         // setImageAltText(list2);
     };
-
     const handleDescriptionData = (descriptionData) => {
         setDescriptionData(descriptionData);
     };
@@ -449,7 +439,6 @@ const AddProductForm = ({
                 style={{ padding: "2rem" }}
             >
                 <Row>
-
                     <Col md={12} className="product-detail-design mb-3" style={{
                         border: "0.0625rem solid rgba(26, 26, 26, 0.12)",
                         borderRadius: "0.5rem",
@@ -459,7 +448,6 @@ const AddProductForm = ({
                             <Col md={6}>
                                 <Form.Group className="form-group-padding-bottom">
                                     <Form.Label>Name</Form.Label>
-
                                     <Form.Control
                                         id="name"
                                         type="text"
@@ -475,7 +463,6 @@ const AddProductForm = ({
                             <Col md={6}>
                                 <Form.Group className="form-group-padding-bottom">
                                     <Form.Label>Actual Price</Form.Label>
-
                                     <Form.Control
                                         id="actualPrice"
                                         type="text"
@@ -488,7 +475,6 @@ const AddProductForm = ({
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Col>
-
                             <Col md={6}>
                                 <Form.Group className="form-group-padding-bottom">
                                     <Form.Label>Select Category</Form.Label>
@@ -518,7 +504,6 @@ const AddProductForm = ({
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Col>
-
                             <Col md={6}>
                                 <Form.Group className="form-group-padding-bottom">
                                     <Form.Label>Delivery Day</Form.Label>
@@ -536,7 +521,6 @@ const AddProductForm = ({
                             </Col>
                         </Row>
                     </Col>
-
                     <Col md={12} className="product-detail-design" style={{
                         border: "0.0625rem solid rgba(26, 26, 26, 0.12)",
                         borderRadius: "0.5rem",
@@ -551,7 +535,6 @@ const AddProductForm = ({
                             />
                         </Form.Group>
                     </Col>
-
                     <Col md={12} className="product-detail-design" style={{
                         border: "0.0625rem solid rgba(26, 26, 26, 0.12)",
                         borderRadius: "0.5rem",
@@ -562,12 +545,11 @@ const AddProductForm = ({
                             <GenericEditor
                                 onData={handleSpecificationData}
                                 dataText={specificationData}
-                                editorId="uniqueEditorId" // Provide a unique ID
+                                editorId="uniqueEditorId"
                                 placeholder="Write something amazing..."
                             />
                         </Form.Group>
                     </Col>
-
                     <Col md={12} className="product-detail-design" style={{
                         border: "0.0625rem solid rgba(26, 26, 26, 0.12)",
                         borderRadius: "0.5rem",
@@ -609,7 +591,6 @@ const AddProductForm = ({
                                     </Button>
                                 </div>
                             </Col>
-
                             {tagType ? (
                                 <Col md={6}>
                                     <Form.Group className="pb-3" controlId="selectedTags">
@@ -628,7 +609,6 @@ const AddProductForm = ({
                                 <></>
                             )}
                         </Row>
-
                         <Row className="p-4">
                             <Col md={12} className="pb-3 product-detail-design">
                                 <Form.Group className="pb-3" controlId="selectedTags">
@@ -640,7 +620,6 @@ const AddProductForm = ({
                             </Col>
                         </Row>
                     </Col>
-
                     {defaultCategoryName &&
                         (defaultCategoryName.toLowerCase() === "cake" ||
                             defaultCategoryName.toLowerCase() === "cakes") ? (
@@ -649,7 +628,6 @@ const AddProductForm = ({
                                 <Col md={6}>
                                     <Form.Group className="form-group-padding-bottom">
                                         <Form.Label>Half Kg Price</Form.Label>
-
                                         <Form.Control
                                             type="text"
                                             id="halfkgprice"
@@ -665,7 +643,6 @@ const AddProductForm = ({
                                 <Col md={6}>
                                     <Form.Group className="form-group-padding-bottom">
                                         <Form.Label>One Kg Price</Form.Label>
-
                                         <Form.Control
                                             type="text"
                                             name="onekgprice"
@@ -681,7 +658,6 @@ const AddProductForm = ({
                                 <Col md={6}>
                                     <Form.Group className="form-group-padding-bottom">
                                         <Form.Label>Two Kg Price</Form.Label>
-
                                         <Form.Control
                                             type="text"
                                             name="twokgprice"
@@ -699,7 +675,6 @@ const AddProductForm = ({
                     ) : (
                         <></>
                     )}
-
                     <Col className="product-detail-design" style={{
                         border: "0.0625rem solid rgba(26, 26, 26, 0.12)",
                         borderRadius: "0.5rem",
@@ -739,7 +714,6 @@ const AddProductForm = ({
                                             </div>
                                         </div>
                                     ))}
-
                                     <div className="d-grid justify-content-center">
                                         <Button
                                             variant="secondary"
@@ -753,7 +727,6 @@ const AddProductForm = ({
                             <Col md={6}>
                                 <Form.Group className="form-group-padding-bottom">
                                     <Form.Label>Discount Price</Form.Label>
-
                                     <Form.Control
                                         type="text"
                                         id="discountPrice"
@@ -767,12 +740,10 @@ const AddProductForm = ({
                                 </Form.Group>
                             </Col>
                         </Row>
-
                         <Row>
                             <Col md={6}>
                                 <Form.Group className="form-group-padding-bottom">
                                     <Form.Label>Offer</Form.Label>
-
                                     <Form.Control
                                         type="text"
                                         id="offer"
@@ -788,7 +759,6 @@ const AddProductForm = ({
                             <Col md={6}>
                                 <Form.Group className="form-group-padding-bottom">
                                     <Form.Label>Quantity</Form.Label>
-
                                     <Form.Control
                                         type="text"
                                         id="quantity"
@@ -803,7 +773,6 @@ const AddProductForm = ({
                             </Col>
                         </Row>
                     </Col>
-
                     <Col
                         md={12}
                         style={{
@@ -832,7 +801,6 @@ const AddProductForm = ({
                                         ) : (
                                             <></>
                                         )}
-
                                         <Row>
                                             <Col md={6}>
                                                 <Form.Group>
@@ -848,7 +816,6 @@ const AddProductForm = ({
                                                     />
                                                 </Form.Group>
                                             </Col>
-
                                             <Col md={6}>
                                                 <Form.Group>
                                                     <Form.Label>Image Alt Text</Form.Label>
@@ -902,7 +869,6 @@ const AddProductForm = ({
                             </div>
                         </div>
                     </Col>
-
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <Button
                             type="submit"
@@ -919,7 +885,6 @@ const AddProductForm = ({
                             Submit
                         </Button>
                     </div>
-
                 </Row>
             </Form>
         </div>

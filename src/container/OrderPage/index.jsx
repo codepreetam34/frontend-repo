@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
     padding: "2rem 1rem",
     [theme.breakpoints.down('sm')]: {
-      padding: "1rem", // Change padding to 1rem for screens smaller than 'sm'
+      padding: "1rem", 
     },
   },
 }));
@@ -327,7 +327,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                             }}
                           >
-                            Order Status{" "}
+                            Order Status
                           </Typography>
                           <Typography
                             sx={{
@@ -377,7 +377,6 @@ const OrderPage = () => {
                         </Col>
 
                         <Col>
-                          {" "}
                           <Typography
                             variant="body2"
                             sx={{
@@ -388,7 +387,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                             }}
                           >
-                            Delivery Pincode{" "}
+                            Delivery Pincode
                           </Typography>
                           <Typography
                             sx={{
@@ -421,7 +420,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                             }}
                           >
-                            Shipping Address{" "}
+                            Shipping Address
                           </Typography>
                           <Typography
                             sx={{
@@ -439,7 +438,6 @@ const OrderPage = () => {
                         </Col>
 
                         <Col>
-                          {" "}
                           <Typography
                             variant="body2"
                             sx={{
@@ -450,7 +448,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                             }}
                           >
-                            Delivery State{" "}
+                            Delivery State
                           </Typography>
                           <Typography
                             sx={{
@@ -475,7 +473,6 @@ const OrderPage = () => {
                         }}
                       >
                         <Col>
-                          {" "}
                           <FMButton
                             displayText={
                               <>
@@ -501,7 +498,6 @@ const OrderPage = () => {
                         </Col>
 
                         <Col style={{ textAlign: "end" }}>
-                          {" "}
                           <FMButton
                             displayText={
                               <>

@@ -118,7 +118,7 @@ const ContactUs = () => {
                                     margin: "1rem 0"
                                 }}>
                                     <Typography variant="body1">
-                                        <strong>Phone:</strong> +91-(22)4343-3333, +91-(22) 3965-0300
+                                        <strong>Phone:</strong> +91 78272 91387, +91-(22) 3965-0300
                                     </Typography>
                                 </div>
                                 <div className="addresses">

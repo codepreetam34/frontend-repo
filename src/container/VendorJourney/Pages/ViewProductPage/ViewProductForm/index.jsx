@@ -42,7 +42,6 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
     }
   }, [dispatch, categoryList]);
 
-
   useEffect(() => {
     if ((categoryList && categoryList) || categoryList?.length > 0) {
       const categoryIdToFind = productData?.category;
@@ -68,7 +67,6 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
     }
   }, [dispatch, categoryList]);
 
-
   return (
     <Card style={{ marginTop: "1rem" }}>
       <CardContent>
@@ -81,7 +79,6 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 </Typography>
               </div>
               <strong>Product Details</strong>
-
               <div className="d-flex justify-content-center gap-3">
                 <div style={{ fontSize: "1.2rem" }}>
                   Quantity - ({productData?.quantity})
@@ -103,7 +100,6 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                     <strong>Price</strong> <br /> {productData?.actualPrice}
                   </div>
                 </Col>
-
                 <Col md={6}>
                   <div className="view-details pb-2">
                     <strong>Product Category</strong> <br />
@@ -136,7 +132,6 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
             <strong>
               Tags ({productData?.tags && productData?.tags?.length})
             </strong>
-
             <div className="d-flex flex-wrap gap-3 pt-2">
               {productData?.tags &&
                 productData?.tags.length > 0 &&
@@ -188,12 +183,11 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 </Row>
               </div>
             </Col>
-            <Col md={6} className="product-detail-design">
+            <Col md={12} className="product-detail-design">
               <div className="view-details pb-2">
                 <strong>
                   Pincode ({productData?.pincode && productData?.pincode?.length})
                 </strong>
-
                 <div className="d-flex flex-wrap gap-3 pt-2">
                   {productData?.pincode &&
                     productData?.pincode.length > 0 &&
@@ -214,11 +208,6 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                       </div>
                     ))}
                 </div>
-              </div>
-            </Col>
-            <Col md={6}>
-              <div className="view-details pb-2">
-                <strong>Vendor Name</strong> <br /> {productData?.vendorName}
               </div>
             </Col>
             {defaultCategoryName &&
@@ -263,7 +252,6 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                   productData?.productPictures?.length}
                 )
               </h3>
-
               <Row style={{ paddingTop: "10px" }}>
                 <Col md={12} className="image-detail-view d-flex gap-3">
                   {productData?.productPictures &&
