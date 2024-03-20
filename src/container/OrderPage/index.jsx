@@ -17,8 +17,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer/Footer";
 import FMTypography from "components/FMTypography/FMTypography";
 import { getOrders } from "Redux/Slices/OrderSlice/Order";
-import ratingStart from "../../assets/ratingStart.svg";
-import { Row, Col } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import FMButton from "components/FMButton/FMButton";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
@@ -32,12 +31,13 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
     padding: "2rem 1rem",
     [theme.breakpoints.down('sm')]: {
-      padding: "1rem", 
+      padding: "1rem",
     },
   },
 }));
 
 const OrderPage = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +65,6 @@ const OrderPage = () => {
     (state) => state?.myOrders?.getOrderDetails?.orders
   );
 
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -89,6 +88,7 @@ const OrderPage = () => {
 
     return `${streetAddress}, ${locality}, ${cityDistrictTown}, ${landmark}`;
   };
+
   return (
     <>
       <Header />
@@ -101,10 +101,7 @@ const OrderPage = () => {
           marginTop: isMobile ? "20px" : "20px",
         }}
       >
-
-
         <Col style={{ padding: "0 3rem" }}>
-
           <Box style={{
             display: 'flex', justifyContent: "space-between",
             alignItems: 'center', background: "#fff", marginTop: "10px",
@@ -138,13 +135,8 @@ const OrderPage = () => {
                   }}
                 />
               </Box>
-
             </Box>
-
-
           </Box>
-
-
         </Col>
 
         <Grid
@@ -175,7 +167,6 @@ const OrderPage = () => {
                 //     onClick={() => onCardClick(elem._id)}
                 style={{ position: "relative" }}
               >
-              
                 <Card sx={{ width: isMobile ? "320px" : "400px", borderRadius: "20px" }}>
                   <CardActionArea>
                     <CardMedia
@@ -245,7 +236,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                             }}
                           >
-                            Receiver Name{" "}
+                            Receiver Name
                           </Typography>
                           <Typography
                             sx={{
@@ -259,7 +250,6 @@ const OrderPage = () => {
                           </Typography>
                         </Col>
                         <Col>
-                          {" "}
                           <Typography
                             variant="body2"
                             sx={{
@@ -293,7 +283,6 @@ const OrderPage = () => {
                         }}
                       >
                         <Col>
-                          {" "}
                           <Typography
                             sx={{
                               fontSize: "12px",
@@ -302,7 +291,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                             }}
                           >
-                            Payment Status{" "}
+                            Payment Status
                           </Typography>
                           <Typography
                             sx={{
@@ -316,7 +305,6 @@ const OrderPage = () => {
                           </Typography>
                         </Col>
                         <Col>
-                          {" "}
                           <Typography
                             variant="body2"
                             sx={{
@@ -352,7 +340,6 @@ const OrderPage = () => {
                         }}
                       >
                         <Col>
-                          {" "}
                           <Typography
                             variant="body2"
                             sx={{
@@ -362,7 +349,7 @@ const OrderPage = () => {
                               textTransform: "capitalize",
                             }}
                           >
-                            Address Type{" "}
+                            Address Type
                           </Typography>
                           <Typography
                             sx={{
@@ -410,7 +397,6 @@ const OrderPage = () => {
                         }}
                       >
                         <Col md={9}>
-                          {" "}
                           <Typography
                             variant="body2"
                             sx={{
