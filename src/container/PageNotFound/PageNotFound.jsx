@@ -14,8 +14,8 @@ const PageNotFound = () => {
     <>
       <HeaderWithoutNav />
       <Container>
-        <div>
-          <div style={{ padding: isMobile ? "10px 20px 20px" : "100px" }}>
+        <div style={{ display: "flex" }}>
+          <div style={{ padding: isMobile ? "10px 20px 20px" : "30px" }}>
             <FMTypography
               displayText={"Sorry"}
               styleData={{ fontSize: isMobile ? "40px" : "90px", fontWeight: "600" }}
@@ -45,7 +45,7 @@ const PageNotFound = () => {
               />
             </Box>
           </div>
-          <div>
+          <div style={{ padding: isMobile ? "3px" : "5px" }}>
             <img src={notFoundDog} alt="dog-img" width={isMobile ? "100%" : "644px"} height="425px" />
           </div>
         </div>

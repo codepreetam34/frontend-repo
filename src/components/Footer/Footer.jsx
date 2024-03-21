@@ -16,30 +16,10 @@ import { Link } from "react-router-dom";
 
 // Import your routes
 import {
-  ROOT,
-  LOGIN,
-  SIGNUP,
-  EMAIL_VERIFY,
-  EMAIL_VERIFY_OTP,
-  FORGOTPASSWORD,
-  SETUP_NEW_PASSWORD,
-  LANDING_PAGE,
-  TEST,
-  ADD_TO_CART,
-  PRIVACY_POLICY,
-  FAQ,
-  BLOGS,
-  BLOGS_DETAIL,
-  ADD_REVIEW,
-  MY_PROFILE,
-  CATEGORY_PAGE,
-  PRODUCT_PAGE,
-  PRODUCT_DETAIL,
-  ORDER_PAGE,
-  SET_UP_NEW_PASSWORD,
   BECOME_A_MEMBER,
   CONTACT_US,
   VENDOR_JOURNEY,
+  PRIVACY_POLICY
 } from "../../Routes/Routes";
 
 const useStyles = makeStyles((theme) => ({
