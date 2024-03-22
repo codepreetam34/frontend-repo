@@ -53,21 +53,26 @@ const AllAddressComponent = React.memo(
       const defaultAddress =
         (addressDetailsAdded ?? []).find((address) => address.isDefault) ||
         (addressDetailsAdded ?? [])[0];
+      localStorage.setItem("selectedAddress", defaultAddress?._id);
       return defaultAddress?._id || null;
     }
+
+    useEffect(() => {
+      dispatch(addToCartAddress());
+    }, [dispatch]);
+
+
+
+
     const handleRadioChange = (id) => {
       setSelectedAddress(id);
       dispatch(setDefaultAddress(id));
     };
 
     useEffect(() => {
-      dispatch(addToCartAddress());
-    }, [dispatch]);
-
-    useEffect(() => {
       setSelectedAddress(getInitialSelectedAddress());
     }, [addressDetailsAdded]);
-
+    console.log("selected address ", selectedAddress)
     if (isLoading) {
       return (
         <Grid style={{ display: "flex", justifyContent: "center" }}>

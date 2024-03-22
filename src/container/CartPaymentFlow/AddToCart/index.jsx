@@ -86,6 +86,7 @@ const AddToCart = ({ handleNext }) => {
         {
           product: pId,
           quantity: quantity,
+          vendorName:value,
         },
       ],
     };

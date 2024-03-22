@@ -14,6 +14,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import FMButton from '../../../components/FMButton/FMButton';
 import { commonStyle } from '../../../Styles/commonStyles';
 import { ArrowBack } from '@material-ui/icons';
+import { useLocation } from 'react-router-dom';
+
 const steps = ["Cart", "Address", "Payment"];
 
 import { makeStyles } from '@mui/styles';
@@ -28,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function HorizontalLinearStepper() {
+  const { state } = useLocation();
+  const value = state && state.value;
+  
+  console.log("value card step", value)
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -87,7 +93,7 @@ export default function HorizontalLinearStepper() {
     } else if (activeStep === 1) {
       return (<AddAddress handleNext={handleNext} totalAmount={totalAmount} discountCoupon={discountCoupon} />);
     } else if (activeStep === 2) {
-      return (<ProductPayment totalAmount={totalAmount} />);
+      return (<ProductPayment totalAmount={totalAmount} vendorName={value} />);
     }
   }
 

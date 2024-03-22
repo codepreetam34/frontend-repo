@@ -11,7 +11,7 @@ import { addToCartProductsFinal } from "Redux/Slices/AddToCart/AddToCartSlice";
 import { ORDER_PAGE } from "Routes/Routes";
 import { useMediaQuery } from "@mui/material";
 
-const ProductPayment = ({ totalAmount, addressId }) => {
+const ProductPayment = ({ totalAmount, addressId, vendorName }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -40,7 +40,7 @@ const ProductPayment = ({ totalAmount, addressId }) => {
     }
   };
 
-  const openJsCheckoutPopup = (orderId, txnToken, amount, mid) => {
+  const openJsCheckoutPopup = (orderId, txnToken, amount, mid,) => {
     var config = {
       root: "",
       style: {
@@ -165,6 +165,7 @@ const ProductPayment = ({ totalAmount, addressId }) => {
                     productId: item?._id,
                     purchasedQty: item?.qty,
                     payablePrice: item?.discountPrice,
+                    vendorName: item?.vendorName
                   });
                 });
 
@@ -238,7 +239,7 @@ const ProductPayment = ({ totalAmount, addressId }) => {
             textTransform: "capitalize",
             color: "#222222",
             fontSize: isMobile ? "0.8rem" : "0.8rem",
-            fontWeight:"600",
+            fontWeight: "600",
             marginBottom: "1.5rem",
           }}
         />

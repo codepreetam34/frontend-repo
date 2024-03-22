@@ -178,6 +178,9 @@ const ProductDetail = () => {
     localStorage.getItem("Sidebar_Module_Assigned")
   );
 
+  console.log("productDetailedData ", productDetailedData)
+
+
   const onClickHandler = () => {
     imageGalleryRef.current.toggleFullScreen();
   };
@@ -307,7 +310,8 @@ const ProductDetail = () => {
             type: "success",
             content: `Items added successfully to cart`,
           });
-          navigate(`/add-to-cart`);
+          navigate(`/add-to-cart`, { state: { value: productDetailedData?.vendorName } });
+
         }
       });
     }
