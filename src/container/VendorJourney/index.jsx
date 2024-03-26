@@ -23,6 +23,7 @@ import HeaderWithoutNav from "components/HeaderWithoutNav/HeaderWithoutNav";
 import { vendorSignInUser } from "Redux/Slices/RegisterAVendor/RegisterAVendorSlice";
 
 const VendorJourney = ({ showLoginPageModal }) => {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -44,6 +45,7 @@ const VendorJourney = ({ showLoginPageModal }) => {
     const forgotPasswordNavigate = () => {
         navigate(FORGOTPASSWORD);
     };
+
     const passwordToggle = () => {
         setPasswordType(!passwordType);
     };
@@ -57,11 +59,11 @@ const VendorJourney = ({ showLoginPageModal }) => {
                     localStorage.setItem(
                         "Sidebar_Module_Assigned_Vendor",
                         JSON.stringify(res.user)
-                      );
-                      localStorage.setItem(
+                    );
+                    localStorage.setItem(
                         "AUTH_ACCESS_TOKEN_VENDOR",
                         JSON.stringify(res.token)
-                      );
+                    );
                     navigate(VENDOR_REGISTRATION);
                     // notify({ type: "success", content: "Logged in successfully" });
                 }
@@ -74,7 +76,9 @@ const VendorJourney = ({ showLoginPageModal }) => {
 
     return (
         <>
+
             <HeaderWithoutNav />
+
             <Grid
                 container
                 sx={{
@@ -85,6 +89,7 @@ const VendorJourney = ({ showLoginPageModal }) => {
                     padding: "1rem 3rem",
                 }}
             >
+
                 <Grid
                     item
                     sx={{
@@ -100,11 +105,17 @@ const VendorJourney = ({ showLoginPageModal }) => {
                         border: "1px solid rgba(91, 105, 135, 0.22)",
                     }}
                 >
+
                     {showLoginPageModal ? (
+
                         <>
+
                             <Box sx={commonStyle.formOuterBoxStyle}>
+
                                 <Box component="form" xs={12} onSubmit={handleSubmit(onSubmit)}>
+
                                     <Box sx={commonStyle.flexStyle}>
+
                                         <InputBase
                                             required
                                             id="email"
@@ -117,12 +128,15 @@ const VendorJourney = ({ showLoginPageModal }) => {
                                             {...register("email")}
                                             error={errors.email ? true : false}
                                         />
+
                                         {errors.email?.message && (
+
                                             <FMTypography
                                                 styleData={commonStyle.errorText}
                                                 displayText={errors.email?.message}
                                             />
                                         )}
+
                                         <OutlinedInput
                                             placeholder="Enter your password"
                                             type={passwordType ? "password" : "text"}
@@ -314,7 +328,7 @@ const VendorJourney = ({ showLoginPageModal }) => {
                         </>
                     )}
                 </Grid>
- 
+
                 {showErrorToast && (
                     <ErrorToaster
                         showErrorToast={showErrorToast}
@@ -333,7 +347,7 @@ const VendorJourney = ({ showLoginPageModal }) => {
                         customMessage={`Logout successful. Have a great day! `}
                     />
                 )}
-                
+
             </Grid>
         </>
     );

@@ -76,40 +76,51 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
           <Row>
 
             <div className="view-details-heading pb-2 text-center">
+
               <div style={{ display: "flex", justifyContent: "start" }}>
                 <Typography variant="h5" component="h2" onClick={() => setOpenViewProductPage(false)} style={{ cursor: 'pointer' }}>
                   <ChevronLeftIcon />Back
                 </Typography>
               </div>
+
               <strong>Product Details</strong>
+
               <div className="d-flex justify-content-center gap-3">
+
                 <div style={{ fontSize: "1.2rem" }}>
                   Quantity - ({productData?.quantity})
                 </div>
+
                 <div style={{ fontSize: "1.2rem" }}>
                   Offer - ({productData?.offer})
                 </div>
+
               </div>
+
             </div>
 
             <Col md={12} className="product-detail-design">
               <Row>
+
                 <Col md={6}>
                   <div className="view-details pb-2">
                     <strong>Name</strong> <br /> {productData?.name}
                   </div>
                 </Col>
+
                 <Col md={6}>
                   <div className="view-details pb-2">
                     <strong>Price</strong> <br /> {productData?.actualPrice}
                   </div>
                 </Col>
+
                 <Col md={6}>
                   <div className="view-details pb-2">
                     <strong>Product Category</strong> <br />
                     {productData?.categoryName}
                   </div>
                 </Col>
+
                 <Col md={6}>
                   <div className="view-details pb-2">
                     <strong>Delivery Day</strong>
@@ -117,7 +128,9 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                     {productData?.deliveryDay}
                   </div>
                 </Col>
+
               </Row>
+
             </Col>
 
             <Col md={12} className="product-detail-design">
@@ -163,12 +176,15 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
         </Col> */}
 
             <Col md={12} className="product-detail-design" >
+
               <div className="view-details pb-2">
                 <strong>Product Tags</strong>
                 <br />
+
                 <Row>
                   {productData?.tags?.map((tag) => {
                     return (
+
                       <Col
                         md={3}
                         style={{ paddingBottom: "0.7rem", paddingTop: "0.2rem" }}
@@ -186,18 +202,25 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                           })}
                         </div>
                       </Col>
+
                     );
                   })}
+
                 </Row>
+
               </div>
+
             </Col>
 
             <Col md={12} className="product-detail-design">
+
               <div className="view-details pb-2">
                 <strong>
                   Pincode ({productData?.pincode && productData?.pincode?.length})
                 </strong>
+
                 <div className="d-flex flex-wrap gap-3 pt-2">
+
                   {productData?.pincode &&
                     productData?.pincode.length > 0 &&
                     productData?.pincode?.map((pin, index) => (
@@ -216,16 +239,23 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                         {pin}
                       </div>
                     ))}
+
                 </div>
+
               </div>
+
             </Col>
 
             {defaultCategoryName &&
               (defaultCategoryName.toLowerCase() === "cake" ||
                 defaultCategoryName.toLowerCase() === "cakes") ? (
+
               <Col md={12} className="product-detail-design">
+
                 <h3>Price Variants</h3>
+
                 <Row className="pt-2">
+
                   <Col md={6}>
                     <div className="view-details pb-2">
                       <strong>Discount Price</strong> <br />
@@ -237,6 +267,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                       {productData?.halfkgprice}
                     </div>
                   </Col>
+
                   <Col md={6}>
                     <div className="view-details pb-2">
                       <strong>1kg Price</strong> <br />
@@ -251,20 +282,26 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                   </Col>
                 </Row>
               </Col>
+
             ) : (
+
               <></>
+
             )}
 
             <DisplayTable reviews={productData?.reviews} />
 
             <Col md={12} className="product-detail-design pt-2">
+
               <h3>
                 Product Pictures (
                 {productData?.productPictures &&
                   productData?.productPictures?.length}
                 )
               </h3>
+
               <Row style={{ paddingTop: "10px" }}>
+
                 <Col md={12} className="image-detail-view d-flex gap-3">
                   {productData?.productPictures &&
                     productData?.productPictures?.length > 0 &&
@@ -286,8 +323,11 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                         />
                       </div>
                     ))}
+
                 </Col>
+
               </Row>
+
             </Col>
 
           </Row>

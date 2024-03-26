@@ -57,6 +57,7 @@ const OrderPage = () => {
       }
     }
   }, []);
+
   useEffect(() => {
     dispatch(getOrders());
   }, [dispatch]);

@@ -14,6 +14,9 @@ const VendorProducts = () => {
         dispatch(getVendorProducts());
     }, [dispatch]);
 
+
+    console.log("produ   ", productData)
+    
     return (
         <>
             <Card variant="outlined">

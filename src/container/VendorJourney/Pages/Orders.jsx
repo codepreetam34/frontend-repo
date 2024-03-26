@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Table, InputGroup, Spinner, Container, Badge } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +16,7 @@ const OnHoldContent = () => {
     const [openViewProductPage, setOpenViewProductPage] = useState(false);
     const [defaultCategory, setDefaultCategory] = useState();
     const [searchInput, setSearchInput] = useState("");
+
     const dispatch = useDispatch();
 
     const orderData = useSelector(
@@ -51,7 +51,7 @@ const OnHoldContent = () => {
         {
             name: "View",
             class: "eye",
-            icon: "fa-solid fa-eye",
+            icon: <VisibilityIcon />,
             onClick: (data) => {
                 setModalData({ data: data });
             },
@@ -136,7 +136,7 @@ const OnHoldContent = () => {
                                                 tableActions?.map((action, index) => (
                                                     <div
                                                         className={action?.class?.toLowerCase()}
-                                                        onClick={() => action.onClick(order)}
+                                                        onClick={() => action.onClick(userOrder)}
                                                         key={index}
                                                     >
                                                         <Link to="#">
@@ -163,6 +163,7 @@ const OnHoldContent = () => {
             </>
         );
     };
+
     const RenderTable = () => {
         return (
             <Col md={12}>
@@ -196,12 +197,14 @@ const OnHoldContent = () => {
         }
     }, [dispatch]);
 
-
     return (
+
         <div>
 
             <div className="user_management_list">
+
                 <Row>
+
                     {isLoading && isLoading ? (
                         <div
                             style={{
@@ -214,8 +217,11 @@ const OnHoldContent = () => {
                             <Spinner animation="border" role="status"></Spinner>
                         </div>
                     ) : (
+
                         <>
+
                             <Container>
+
                                 <Row>
                                     <Col md={12}>
                                         <Card variant="outlined">
@@ -240,10 +246,15 @@ const OnHoldContent = () => {
                                         </Card>
                                     </Col>
                                 </Row>
+
                             </Container>
+
                             {openViewProductPage && openViewProductPage ? (
+
                                 <>
+
                                     <Container>
+
                                         <Row>
                                             <Col md={12}>
                                                 <ViewProductForm
@@ -252,19 +263,33 @@ const OnHoldContent = () => {
                                                 />
                                             </Col>
                                         </Row>
+
                                     </Container>
+
                                 </>
+
                             ) : (
+
                                 <RenderTable />
+
                             )
+
                             }
+
                         </>
+
                     )
+
                     }
+
                 </Row>
+
             </div>
+
         </div>
+
     )
+
 }
 
 const PendingContent = () => (
@@ -292,6 +317,7 @@ const CancelledContent = () => (
 );
 
 const Orders = () => {
+
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -317,6 +343,7 @@ const Orders = () => {
 
     return (
         <>
+
             <Card variant="outlined">
                 <CardContent>
                     <Typography variant="h5" component="h2">
@@ -324,6 +351,7 @@ const Orders = () => {
                     </Typography>
                 </CardContent>
             </Card>
+
             <Box mb={2}>
                 <Tabs
                     value={value}
@@ -338,7 +366,9 @@ const Orders = () => {
                     <Tab label="Cancelled" />
                 </Tabs>
             </Box>
+
             {renderTabContent()}
+
         </>
     );
 };

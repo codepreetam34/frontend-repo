@@ -14,7 +14,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from 'react-router';
 import { VENDOR_HOME } from 'Routes/Routes';
-// MultiStepForm Component
+
 const MultiStepForm = ({ steps, onFinish }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [isBackDisabled, setIsBackDisabled] = React.useState(true);
@@ -35,7 +35,7 @@ const MultiStepForm = ({ steps, onFinish }) => {
   };
 
   const handleFinish = () => {
-    onFinish(); // Perform another operation when Finish is clicked
+    onFinish();
     navigate(VENDOR_HOME)
   };
 
@@ -71,16 +71,13 @@ const MultiStepForm = ({ steps, onFinish }) => {
                   }}
                 />
 
-
               </Box>
-
 
             </Box>
           </div>
 
           <Col md={6}>
             <Box style={{ margin: '30px 30px' }}>
-
               <Card>
                 <CardContent>
                   <Stepper activeStep={activeStep} alternativeLabel>
@@ -96,7 +93,7 @@ const MultiStepForm = ({ steps, onFinish }) => {
 
                 <div>
                   {activeStep === 0 && <Step1 taxOption={taxOption} setTaxOption={setTaxOption} inputValue={inputValue} setInputValue={setInputValue} />}
-                  {activeStep === 1 && <Step2  />}
+                  {activeStep === 1 && <Step2 />}
                   {activeStep === 2 && <Step3 taxOption={taxOption} setTaxOption={setTaxOption} inputValue={inputValue} setInputValue={setInputValue} />}
                   {activeStep === 3 && <Step4 taxOption={taxOption} setTaxOption={setTaxOption} inputValue={inputValue} setInputValue={setInputValue} />}
                 </div>
@@ -168,12 +165,10 @@ const MultiStepForm = ({ steps, onFinish }) => {
   );
 };
 
-// Usage
 const MyForm = () => {
   const steps = ['Tax Details', 'Pick Up Details', 'Bank Details', 'Supplier Details'];
 
   const handleFinish = () => {
-    // Perform another operation when Finish is clicked
     console.log('Finish button clicked!');
   };
 

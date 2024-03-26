@@ -9,9 +9,6 @@ import { EMAIL_VERIFY, FORGOTPASSWORD, LOGIN, VENDOR_JOURNEY } from "../../Route
 import FMButton from "../../components/FMButton/FMButton";
 import FMTypography from "../../components/FMTypography/FMTypography";
 
-import monkeyLogo from "../../assets/monkeyLogo.svg";
-import VibezterLogo from "../../assets/VibezterLogo.svg";
-
 import { commonStyle } from "../../Styles/commonStyles";
 import { HeaderStyle } from "../../components/SearchBar/HeaderStyle";
 import { useForm } from "react-hook-form";
@@ -87,14 +84,16 @@ const VendorSignUp = () => {
       .unwrap()
       .then((res) => {
         if (res) {
-      //    navigate(EMAIL_VERIFY);
+          //    navigate(EMAIL_VERIFY);
         }
       });
   };
 
   return (
     <>
-      <HeaderWithoutNav  />
+
+      <HeaderWithoutNav />
+
       <Grid container sx={commonStyle.mainGridContainer}>
         <Grid item sx={{ ...commonStyle.innerGrid, width: "30rem" }}>
           <Box sx={commonStyle.formDetailsContainer}>
@@ -115,7 +114,6 @@ const VendorSignUp = () => {
                       placeholder="First Name"
                       sx={{
                         ...commonStyle.inputFieldStyle,
-
                         ...(errors.firstName && commonStyle.errorStyle),
                       }}
                       {...register("firstName")}
