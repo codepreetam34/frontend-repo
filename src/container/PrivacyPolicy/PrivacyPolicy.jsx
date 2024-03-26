@@ -53,9 +53,7 @@ const PrivacyPolicy = () => {
         <Row className={classes.privacyPolicyContainer}>
           <Col className={classes.privacyPolicyContent}>
             <div className="columns">
-              {isMobile ? <h2 className="maintitle"><span className="highlight"> Privacy</span> Policy </h2> : <h1 className="maintitle"><span className="highlight"> Privacy </span> Policy </h1>
-
-              }
+              {isMobile ? <h2 className="maintitle"><span className="highlight"> Privacy</span> Policy </h2> : <h1 className="maintitle"><span className="highlight"> Privacy </span> Policy </h1>}
               <div className="content-design">
                 <p><strong>Last updated: February 03, 2024</strong></p>
                 <p>

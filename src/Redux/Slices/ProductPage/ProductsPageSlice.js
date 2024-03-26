@@ -11,6 +11,7 @@ import {
   GET_PRODUCTS_LIST_BY_TAGS_ONLY,
   GET_VENDOR_PRODUCTS,
   ADD_VENDOR_PRODUCTS,
+  GET_VENDOR_ORDERS
 } from "./type";
 import axiosVendorInstance from "services/AxiosVendorInstance";
 
@@ -148,12 +149,26 @@ export const getVendorProducts = createAsyncThunk(
     }
   }
 );
+export const getVendorOrders = createAsyncThunk(
+  GET_VENDOR_ORDERS,
+  async (addProductData, thunkAPI) => {
+    try {
+      const response = await axiosVendorInstance.post(
+        `api/order/getVendorOrders`
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    }
+  }
+);
 
 const productListSlice = createSlice({
   name: "productListSlice",
   initialState: {
     getProductsListData: [],
     getVendorProductsListData: [],
+    getVendorOrdersListData: [],
     getProductsListByCategoryId: [],
     getProductsListByCategoryIdAndTags: [],
     getProductDetails: [],
@@ -176,12 +191,32 @@ const productListSlice = createSlice({
       state.getVendorProductsListData = action.payload;
       state.isFetching = false;
       state.isError = false;
-    });
+    }); 
     builder.addCase(getVendorProducts.rejected, (state, action) => {
       state.getVendorProductsListData = [];
       state.isFetching = false;
       state.isError = true;
     });
+
+    builder.addCase(getVendorOrders.pending, (state) => {
+      state.getVendorOrdersListData = [];
+      state.isFetching = true;
+      state.isError = false;
+    });
+
+    builder.addCase(getVendorOrders.fulfilled, (state, action) => {
+      state.getVendorOrdersListData = action.payload;
+      state.isFetching = false;
+      state.isError = false;
+    });
+    builder.addCase(getVendorOrders.rejected, (state, action) => {
+      state.getVendorOrdersListData = [];
+      state.isFetching = false;
+      state.isError = true;
+    });
+
+
+
     builder.addCase(getProductsList.pending, (state) => {
       state.getProductsListData = [];
       state.isFetching = true;

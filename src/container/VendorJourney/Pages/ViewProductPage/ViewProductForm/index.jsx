@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Card, CardContent, Typography } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useNavigate } from "react-router";
+
 const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
 
   const [defaultCategoryName, setDefaultCategoryName] = useState();
@@ -43,6 +44,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
   }, [dispatch, categoryList]);
 
   useEffect(() => {
+
     if ((categoryList && categoryList) || categoryList?.length > 0) {
       const categoryIdToFind = productData?.category;
       const foundCategory = categoryList.find(
@@ -72,6 +74,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
       <CardContent>
         <Form className="user_form" style={{ padding: "0rem 2rem 0 2rem" }}>
           <Row>
+
             <div className="view-details-heading pb-2 text-center">
               <div style={{ display: "flex", justifyContent: "start" }}>
                 <Typography variant="h5" component="h2" onClick={() => setOpenViewProductPage(false)} style={{ cursor: 'pointer' }}>
@@ -88,6 +91,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 </div>
               </div>
             </div>
+
             <Col md={12} className="product-detail-design">
               <Row>
                 <Col md={6}>
@@ -115,6 +119,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 </Col>
               </Row>
             </Col>
+
             <Col md={12} className="product-detail-design">
               <div className="view-details pb-2">
                 <strong>Description</strong>
@@ -122,11 +127,13 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 {productData?.description}
               </div>
             </Col>
+
             <Col md={12} className="product-detail-design">
               <div className="view-details pb-2">
                 <strong>Specifications</strong> <br /> {productData?.specifications}
               </div>
             </Col>
+
             {/* <Col md={12} className="product-detail-design">
           <div className="view-details pb-2">
             <strong>
@@ -154,6 +161,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
             </div>
           </div>
         </Col> */}
+
             <Col md={12} className="product-detail-design" >
               <div className="view-details pb-2">
                 <strong>Product Tags</strong>
@@ -183,6 +191,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 </Row>
               </div>
             </Col>
+
             <Col md={12} className="product-detail-design">
               <div className="view-details pb-2">
                 <strong>
@@ -210,6 +219,7 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 </div>
               </div>
             </Col>
+
             {defaultCategoryName &&
               (defaultCategoryName.toLowerCase() === "cake" ||
                 defaultCategoryName.toLowerCase() === "cakes") ? (
@@ -244,7 +254,9 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
             ) : (
               <></>
             )}
+
             <DisplayTable reviews={productData?.reviews} />
+
             <Col md={12} className="product-detail-design pt-2">
               <h3>
                 Product Pictures (
@@ -277,9 +289,13 @@ const ViewProductForm = ({ productData, setOpenViewProductPage }) => {
                 </Col>
               </Row>
             </Col>
+
           </Row>
+
         </Form>
+
       </CardContent>
+
     </Card>
   );
 };

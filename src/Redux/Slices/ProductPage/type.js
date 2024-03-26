@@ -11,3 +11,4 @@ export const GET_PRODUCTS_LIST_BY_TAGS_ONLY = "get-products-list-by-tags-only";
 export const ADD_PRODUCTS = "add-products";
 export const ADD_VENDOR_PRODUCTS = "add-vendor-products";
 export const GET_VENDOR_PRODUCTS = "get-vendor-products";
+export const GET_VENDOR_ORDERS = "get-vendor-orders";

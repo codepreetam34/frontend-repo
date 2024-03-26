@@ -141,7 +141,6 @@ const ProductPayment = ({ totalAmount, addressId, vendorName }) => {
       );
       const order = response.data;
 
-      // Dynamically create a script tag for Razorpay
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
       script.async = true;
@@ -212,8 +211,8 @@ const ProductPayment = ({ totalAmount, addressId, vendorName }) => {
           justifyContent: "center",
           gap: "2rem",
           '@media (max-width: 600px)': {
-            padding: "0", // Set padding to 0 for screens smaller than 600px (adjust breakpoint as needed)
-            gap: "0", // Set gap to 0 for screens smaller than 600px
+            padding: "0", 
+            gap: "0", 
           },
         }}
       >

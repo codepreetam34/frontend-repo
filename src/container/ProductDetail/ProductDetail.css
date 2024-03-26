@@ -8,8 +8,6 @@ input::-webkit-inner-spin-button {
     width: 215px;
     border: 1px solid grey !important;
     border-radius: 0.5rem;
-
-    
 }
 
 .datePickerStyle:hover{

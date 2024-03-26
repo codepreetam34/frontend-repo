@@ -8,10 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { BLOGS_DETAIL } from "../../Routes/Routes";
 
 const Blogs = () => {
+
   const navigate = useNavigate();
   const openBlogHandler = () => {
     navigate(BLOGS_DETAIL);
   };
+
   return (
     <>
       <HeaderWithoutNav />
